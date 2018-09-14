@@ -21,7 +21,7 @@ After cloning this repository, follow the steps below. If you're using the comma
 
 Run `$ php artisan key:generate` in your command line. 
 
-This this should set a value for the `APP_KEY` environment variable in the .env file that you created in **Step 1**.
+This should automatically set a value for the `APP_KEY` environment variable in the .env file that you created in **Step 1**.
 
 ### 3. Configure database
 
@@ -51,3 +51,5 @@ DB_PASSWORD=
 In your command line, assuming that you're the cloned repository's directory, run:
 
 `npm install && composer install`
+
+And that's about it!
