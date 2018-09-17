@@ -1,4 +1,4 @@
-import from './bootstrap';
+import './bootstrap';
 
 import vue from 'vue';
 window.Vue = vue;
