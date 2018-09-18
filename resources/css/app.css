@@ -11,6 +11,25 @@
  */
 @tailwind preflight;
 
+@import url('https://rsms.me/inter/inter-ui.css');
+
+* {
+    font-family: 'Inter UI', sans-serif;
+}
+
+body {
+    @apply tw-text-grey-darkest;
+}
+
+a {
+    text-decoration: none;
+    @apply tw-text-grey-darkest;
+}
+
+a:hover {
+    @apply tw-text-blue tw-underline;
+}
+
 /**
  * This injects any component classes registered by plugins.
  *
