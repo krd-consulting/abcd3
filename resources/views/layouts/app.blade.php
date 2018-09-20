@@ -22,6 +22,9 @@
         @section('main-nav')
         @show
 
+        @section('main-sidebar')
+        @show
+
         <main class="py-4">
             @yield('content')
         </main>
