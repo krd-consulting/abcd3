@@ -75,7 +75,7 @@
                         @click="forgotPasswordActive = false"
                         role="button"
                     >
-                        <i class="material-icons tw-text-sm tw-align-text-top">arrow_back</i>
+                        <base-icon class="tw-text-sm tw-align-text-top">arrow_back</base-icon>
                         Back
                     </a>
                     <h2 class="tw-text-2xl tw-mb-4">
@@ -120,19 +120,19 @@
                 <h2 class="tw-text-xl tw-mt-2">A Better Community Database</h2>
                 <ul class="tw-list-reset">
                     <li class="tw-mt-6 tw-font-semibold tw-text-blue-darker">
-                        <i class="material-icons tw-text-2xl tw-font tw-text-blue tw-align-middle tw-mr-2">check_circle</i>
+                        <base-icon class="tw-text-2xl tw-text-blue tw-mr-2">check_circle</base-icon>
                         A feature/description.
                     </li>
                     <li class="tw-mt-6 tw-font-semibold tw-text-blue-darker">
-                        <i class="material-icons tw-text-2xl tw-font tw-text-blue tw-align-middle tw-mr-2">check_circle</i>
+                        <base-icon class="tw-text-2xl tw-text-blue tw-mr-2">check_circle</base-icon>
                         B feature/description.
                     </li>
                     <li class="tw-mt-6 tw-font-semibold tw-text-blue-darker">
-                        <i class="material-icons tw-text-2xl tw-font tw-text-blue tw-align-middle tw-mr-2">check_circle</i>
+                        <base-icon class="tw-text-2xl tw-text-blue tw-mr-2">check_circle</base-icon>
                         C feature/description.
                     </li>
                     <li class="tw-mt-6 tw-font-semibold tw-text-blue-darker">
-                        <i class="material-icons tw-text-2xl tw-font tw-text-blue tw-align-middle tw-mr-2">check_circle</i>
+                        <base-icon class="tw-text-2xl tw-text-blue tw-mr-2">check_circle</base-icon>
                         D feature/description.
                     </li>
                 </ul>
