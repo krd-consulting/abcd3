@@ -18,6 +18,7 @@
                             <div class="tw-text-sm">
                                 <a @click="active = !active" role="button">
                                     {{ Auth::user()->name }}
+                                    <base-icon>@{{ icon }}</base-icon>
                                 </a>
                                 <nav v-if="active" class="tw-mt-4 tw-absolute tw-bg-white tw-border">
                                     <ul class="tw-list-reset">

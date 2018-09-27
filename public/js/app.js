@@ -34035,6 +34035,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             active: false
         };
+    },
+
+    computed: {
+        icon: function icon() {
+            if (this.active == true) return 'arrow_drop_up';
+
+            return 'arrow_drop_down';
+        }
     }
 });
 
