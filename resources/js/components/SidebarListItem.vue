@@ -1,6 +1,6 @@
 <template>
     <li
-        class="tw-block tw-py-2 tw-pl-8 hover:tw-bg-blue-lightest"
+        class="tw-block tw-py-2 hover:tw-bg-blue-lightest"
         :class="{ 'tw-bg-blue-lightest': active }"
         @mouseover="showOptions = true"
         @mouseout="showOptions = false"
@@ -8,12 +8,9 @@
         <span
             class="tw-w-5/6 tw-inline-block"
         >
-            <a href="#">{{ title }}</a>
+            <a href="#"><slot></slot></a>
         </span>
-        <records-list-item-options
-            :options="options"
-            :showOptions="showOptions"
-        ></records-list-item-options>
+        <slot name="options" :options="options" :showOptions="showOptions"></slot>
     </li>
 </template>
 <script>
