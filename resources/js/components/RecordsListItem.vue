@@ -1,6 +1,6 @@
 <template>
     <li
-        class="tw-block tw-py-2 tw-pl-8 tw-pr-4 hover:tw-bg-blue-lightest"
+        class="tw-block tw-py-2 tw-pl-8 hover:tw-bg-blue-lightest"
         :class="{ 'tw-bg-blue-lightest': active }"
         @mouseover="showOptions = true"
         @mouseout="showOptions = false"

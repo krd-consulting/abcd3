@@ -1,16 +1,13 @@
 <template>
-    <section>
-        <h1 class="tw-text-base tw-py-2 tw-pl-8 tw-pr-4">Records</h1>
-        <ul class="tw-list-reset">
-            <records-list-item
-                v-for="(record, index) in records"
-                :key="record.id"
-                :active="record.active"
-                :title="record.title"
-                :options="record.options"
-            ></records-list-item>
-        </ul>
-    </section>
+    <ul class="tw-list-reset">
+        <records-list-item
+            v-for="(record, index) in records"
+            :key="record.id"
+            :active="record.active"
+            :title="record.title"
+            :options="record.options"
+        ></records-list-item>
+    </ul>
 </template>
 <script>
     export default {

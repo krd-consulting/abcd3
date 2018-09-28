@@ -33299,9 +33299,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -33319,26 +33316,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [
-    _c("h1", { staticClass: "tw-text-base tw-py-2 tw-pl-8 tw-pr-4" }, [
-      _vm._v("Records")
-    ]),
-    _vm._v(" "),
-    _c(
-      "ul",
-      { staticClass: "tw-list-reset" },
-      _vm._l(_vm.records, function(record, index) {
-        return _c("records-list-item", {
-          key: record.id,
-          attrs: {
-            active: record.active,
-            title: record.title,
-            options: record.options
-          }
-        })
+  return _c(
+    "ul",
+    { staticClass: "tw-list-reset" },
+    _vm._l(_vm.records, function(record, index) {
+      return _c("records-list-item", {
+        key: record.id,
+        attrs: {
+          active: record.active,
+          title: record.title,
+          options: record.options
+        }
       })
-    )
-  ])
+    })
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -33837,7 +33828,7 @@ var render = function() {
   return _c(
     "li",
     {
-      staticClass: "tw-block tw-py-2 tw-pl-8 tw-pr-4 hover:tw-bg-blue-lightest",
+      staticClass: "tw-block tw-py-2 tw-pl-8 hover:tw-bg-blue-lightest",
       class: { "tw-bg-blue-lightest": _vm.active },
       on: {
         mouseover: function($event) {
