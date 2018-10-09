@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head-scripts')
+    <script src="{{ asset('js/app.js') }}" defer></script>
+@endsection
+
 @section('content')
 
 <div class="tw-bg-grey-lighter tw-h-screen tw-w-full tw-pin-t tw-absolute">

@@ -23,7 +23,7 @@
                                 <nav v-if="active" class="tw-mt-4 tw-absolute tw-bg-white tw-border">
                                     <ul class="tw-list-reset">
                                         <li class="tw-py-2 tw-pr-8 tw-pl-2">
-                                            <a>
+                                            <a href="/preferences">
                                                 Preferences
                                             </a>
                                         </li>

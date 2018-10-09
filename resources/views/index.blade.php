@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('head-scripts')
+    <script src="{{ asset('js/app.js') }}" defer></script>
+@endsection
+
 @section('main-nav')
     @include('layouts.nav')
 @endsection

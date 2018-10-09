@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,8 @@
     <title>{{ config('app.name', 'ABCD') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @section('head-scripts')
+    @show
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"

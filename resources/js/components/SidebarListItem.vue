@@ -1,15 +1,11 @@
 <template>
     <li
         class="tw-block tw-py-2 hover:tw-bg-blue-lightest"
-        :class="{ 'tw-bg-blue-lightest': active }"
+        :class="{ active }"
         @mouseover="showOptions = true"
         @mouseout="showOptions = false"
     >
-        <span
-            class="tw-w-5/6 tw-inline-block"
-        >
-            <a href="#"><slot></slot></a>
-        </span>
+        <slot></slot>
         <slot name="options" :options="options" :showOptions="showOptions"></slot>
     </li>
 </template>
@@ -40,5 +36,9 @@
     li {
         border-top-right-radius: 999px;
         border-bottom-right-radius: 999px;
+    }
+
+    li.active {
+        @apply tw-bg-blue-lighter;
     }
 </style>
