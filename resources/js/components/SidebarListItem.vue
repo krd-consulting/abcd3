@@ -1,26 +1,22 @@
 <template>
-    <li
-        class="tw-block tw-py-2 hover:tw-bg-blue-lightest"
+    <base-menu-item
+        v-bind="$attrs"
+        :index="index"
         :class="{ active }"
-        @mouseover="showOptions = true"
-        @mouseout="showOptions = false"
+        :route="route"
     >
-        <slot></slot>
-        <slot name="options" :options="options" :showOptions="showOptions"></slot>
-    </li>
+        <slot :class="{ active }"></slot>
+    </base-menu-item>
 </template>
 <script>
     export default {
+        inheritAttrs: false,
         props: {
             active: Boolean,
+            index: String,
             title: String,
-            options: Boolean
-        },
-
-        data() {
-            return {
-                showOptions: false
-            }
+            options: Boolean,
+            route: Object
         },
 
         methods: {
@@ -28,17 +24,3 @@
         }
     }
 </script>
-<style scoped>
-    a:hover{
-        text-decoration: none;
-    }
-
-    li {
-        border-top-right-radius: 999px;
-        border-bottom-right-radius: 999px;
-    }
-
-    li.active {
-        @apply tw-bg-blue-lighter;
-    }
-</style>

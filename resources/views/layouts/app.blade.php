@@ -19,16 +19,16 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        @section('main-nav')
-        @show
-
+    <base-container id="app">
         @section('main-sidebar')
         @show
 
-        <main class="py-4">
+        <base-container>
+            @section('main-nav')
+            @show
+
             @yield('content')
-        </main>
-    </div>
+        </base-container>
+    </base-container>
 </body>
 </html>

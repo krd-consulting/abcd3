@@ -1,20 +1,27 @@
-<nav class="tw-fixed tw-w-1/6 tw-h-screen tw-pt-20 tw-border-r">
+<base-sidebar>
     <sidebar-list>
-        <sidebar-list-item >
-            <a href="#" class="tw-pl-8">Dashboard</a>
+        <li class="tw-py-4">
+            <a class="tw-pl-8 tw-text-3xl tw-font-bold">ABCD</a>
+        </li>
+        <sidebar-list-item index="1" :route="{ path: '/dashboard' }">
+            <a class="tw-pl-8">Dashboard</a>
         </sidebar-list-item>
-        <li class="tw-py-2">
-            <a href="#" class="tw-pl-8">Records</a>
+        <base-submenu index="2">
+            <template slot="title">
+                <a href="#" class="tw-pl-8">Records</a>
+            </template>
             <sidebar-list-item
                 v-for="(record, index) in records"
                 :key="record.id"
+                :index="`2-${index}`"
                 :active="record.active"
                 :title="record.title"
                 :options="record.options"
+                :route="{ path:`/record/${record.id}` }"
             >
-                <a href="#" class="tw-pl-12">@{{ record.title }}</a>
-                <records-list-item-options slot="options" slot-scope="props" :options="props.options" :show-options="props.showOptions"></records-list-item-options>
+                <a class="tw-pl-8">@{{ record.title }}</a>
             </sidebar-list-item>
-        </li>
+
+        </base-submenu>
     </sidebar-list>
-</nav>
+</base-sidebar>

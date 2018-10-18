@@ -12,6 +12,7 @@
 @tailwind preflight;
 
 @import url('https://rsms.me/inter/inter-ui.css');
+@import '~element-ui/lib/theme-chalk/index.css'
 
 * {
     font-family: 'Inter UI', sans-serif;

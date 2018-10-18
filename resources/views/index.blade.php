@@ -11,3 +11,9 @@
 @section('main-sidebar')
     @include('layouts.sidebar')
 @endsection
+
+@section('content')
+    <el-main>
+         <router-view></router-view>
+    </el-main>
+@endsection

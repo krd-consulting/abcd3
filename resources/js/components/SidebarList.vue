@@ -1,5 +1,5 @@
 <template>
-    <ul class="tw-list-reset">
+    <base-menu :router="true">
         <slot></slot>
-    </ul>
+    </base-menu>
 </template>

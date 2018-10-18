@@ -1,6 +1,6 @@
 <template>
     <button v-if="options" v-show="showOptions">
-        <base-icon class="tw-text-blue">add_circle_outline</base-icon>
+        <base-icon>add_circle_outline</base-icon>
     </button>
 </template>
 <script>
@@ -11,3 +11,12 @@
         }
     }
 </script>
+<style scoped>
+    i {
+        @apply tw-text-blue;
+    }
+
+    .is-active i {
+        @apply tw-text-grey-darkest;
+    }
+</style>

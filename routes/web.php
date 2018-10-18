@@ -23,5 +23,7 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 Route::get('/', 'ShowHome');
+Route::get('/dashboard', 'ShowHome');
+Route::get('/record/{all}', 'ShowHome')->where('all', '(.*)');
 Route::get('/preferences', 'ShowPreferences');
 Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
