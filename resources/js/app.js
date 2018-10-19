@@ -9,6 +9,7 @@ Vue.use(VueRouter);
 
 import ElementUI from 'element-ui';
 
+// Components
 Vue.component('base-button', require('./components/BaseButton.vue'));
 Vue.component('base-container', require('./components/BaseContainer.vue'));
 Vue.component('base-header', require('./components/BaseHeader.vue'));
@@ -24,6 +25,9 @@ Vue.component('sidebar-list-item', require('./components/SidebarListItem.vue'));
 Vue.component('records-list-item-options', require('./components/RecordsListItemOptions.vue'));
 Vue.component('user-dropdown', require('./components/UserDropdown.vue'));
 
+// Views
+import AppFileList from './views/AppFileList';
+
 Vue.use(ElementUI);
 
 const routes = [
@@ -34,10 +38,10 @@ const routes = [
         path: '/dashboard', component: {template: '<h2>Dashboard</h2>'}
     },
     {
-        path: '/records', component: {template: '<h2>All Records</h2>'}
+        path: '/files', component: {template: '<h2>All Files</h2>'}
     },
     {
-        path: '/record/:id', component: {template: '<h2>Record {{ $route.params.id }}</h2>'},
+        path: '/files/:id', component: AppFileList,
     }
 ];
 
@@ -50,12 +54,5 @@ const app = new Vue({
     el: '#app',
     router,
     data: {
-        records: [
-            { id: 1, title: 'Record 1', active: true },
-            { id: 2, title: 'Record 2', options: true },
-            { id: 3, title: 'Record 3' },
-            { id: 4, title: 'Record 4', options: true },
-            { id: 5, title: 'Record 5' }
-        ]
     }
 });

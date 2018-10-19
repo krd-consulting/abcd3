@@ -8,19 +8,16 @@
         </sidebar-list-item>
         <base-submenu index="2">
             <template slot="title">
-                <a href="#" class="tw-pl-8">Records</a>
+                <a href="#" class="tw-pl-8">Files</a>
             </template>
-            <sidebar-list-item
-                v-for="(record, index) in records"
-                :key="record.id"
-                :index="`2-${index}`"
-                :active="record.active"
-                :title="record.title"
-                :options="record.options"
-                :route="{ path:`/record/${record.id}` }"
-            >
-                <a class="tw-pl-8">@{{ record.title }}</a>
-            </sidebar-list-item>
+            @foreach($fileTypes as $type)
+                <sidebar-list-item
+                    key="{{ $type->id }}"
+                    index="2-{{ $type->id }}"
+                    :route="{ path: '/files/{{ $type->id }}' }">
+                    <a class="tw-pl-8">{{ $type->name }}</a>
+                </sidebar-list-item>
+            @endforeach
 
         </base-submenu>
     </sidebar-list>

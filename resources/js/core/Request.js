@@ -1,0 +1,75 @@
+import Errors from './Errors.js';
+
+class Request {
+    constructor(fields) {
+        this.setFields(fields);
+    }
+
+    setFields(fields) {
+        this.fieldData = fields;
+
+        for(let field in fields) {
+            this[field] = fields[field];
+        }
+
+        this.errors = new Errors();
+    }
+
+    data() {
+        let data = {};
+
+        for(let field in this.fieldData) {
+            data[field] = this[field];
+        }
+
+        return data;
+    }
+
+    get(url){
+        return this.submit('get' , url);
+    }
+
+    patch(url){
+        return this.submit('patch' , url);
+    }
+
+    post(url){
+        return this.submit('post' , url);
+    }
+
+    put(url){
+        return this.submit('put' , url);
+    }
+
+    submit(request , url) {
+        return new Promise((resolve, reject) => {
+            axios[request](url , this.data())
+            .then(response => {
+                this.onSuccess();
+
+                resolve(response.data);
+            })
+            .catch(error => {
+                this.onFail(error.response.data.errors);
+            });
+        });
+    }
+
+    clear() {
+        for(let field in this.fieldData) {
+            this[field] = '';
+        }
+
+        this.errors.clear();
+    }
+
+    onSuccess() {
+        this.clear();
+    }
+
+    onFail(errors) {
+        this.errors.record(errors);
+    }
+}
+
+export default Request

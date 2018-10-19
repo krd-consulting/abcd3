@@ -29,10 +29,10 @@
                 <router-link
                     tag="sidebar-list-item"
                     class="tw-pl-2 tw-pr-4 tw-rounded-lg"
-                    to="/preferences/records"
+                    to="/preferences/files"
                     active-class="active"
                     exact>
-                    <a>Records</a>
+                    <a>Files</a>
                 </router-link>
                 <router-link
                     tag="sidebar-list-item"

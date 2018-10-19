@@ -22,8 +22,13 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
+// SPA Routes
 Route::get('/', 'ShowHome');
 Route::get('/dashboard', 'ShowHome');
-Route::get('/record/{all}', 'ShowHome')->where('all', '(.*)');
+Route::get('/files', 'ShowHome')->where('all', '(.*)');
+Route::get('/files/{all}', 'ShowHome')->where('all', '(.*)');
 Route::get('/preferences', 'ShowPreferences');
 Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
+
+// Private API Routes
+Route::get('/api/files/{fileType}', 'FileController@index');
