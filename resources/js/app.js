@@ -2,12 +2,15 @@ import './bootstrap';
 
 import vue from 'vue';
 import VueRouter from 'vue-router';
+import ElementUI from 'element-ui';
+import VueGoodTablePlugin from 'vue-good-table';
+import 'vue-good-table/dist/vue-good-table.css'
 
 window.Vue = vue;
 
 Vue.use(VueRouter);
-
-import ElementUI from 'element-ui';
+Vue.use(ElementUI);
+Vue.use(VueGoodTablePlugin);
 
 // Components
 Vue.component('base-button', require('./components/BaseButton.vue'));
@@ -27,8 +30,6 @@ Vue.component('user-dropdown', require('./components/UserDropdown.vue'));
 
 // Views
 import AppFileList from './views/AppFileList';
-
-Vue.use(ElementUI);
 
 const routes = [
     {

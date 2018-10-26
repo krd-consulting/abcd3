@@ -23,6 +23,7 @@
         "element-ui": "^2.4.8",
         "moment": "^2.22.2",
         "tailwindcss": "^0.6.6",
+        "vue-good-table": "^2.15.3",
         "vue-router": "^3.0.1"
     }
 }

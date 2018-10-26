@@ -19,7 +19,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <base-container id="app">
+    <base-container id="app" style="height: 100vh;">
         @section('main-sidebar')
         @show
 

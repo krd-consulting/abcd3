@@ -26,7 +26,7 @@ class AddForeignKeyConstraintsToFiles extends Migration
     public function down()
     {
         Schema::table('files', function (Blueprint $table) {
-            $table->dropForeign(['type_id']);
+            $table->dropForeign(['file_type_id']);
         });
     }
 }

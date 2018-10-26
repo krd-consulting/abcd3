@@ -1,20 +1,19 @@
 <template>
     <div>
-        <h1>File {{ fileId }}</h1>
-        <el-table :data="files" class="tw-w-full">
-            <el-table-column
-                label="Field 1"
-                prop="field_1_value"
-            ></el-table-column>
-            <el-table-column
-                label="Field 2"
-                prop="field_2_value"
-            ></el-table-column>
-            <el-table-column
-                label="Field 3"
-                prop="field_3_value"
-            ></el-table-column>
-        </el-table>
+        <h2>{{ type.name }}</h2>
+        <vue-good-table
+            :columns="prettyColumns"
+            max-height="500px"
+            :fixed-header="true"
+            mode="remote"
+            :pagination-options="{
+                enabled: true
+            }"
+            @on-per-page-change="onPerPageChange"
+            @on-page-change="onPageChange"
+            @on-sort-change="onSortChange"
+            :rows="files"
+            :totalRows="total"/>
     </div>
 </template>
 <script>
@@ -24,32 +23,71 @@
 
         data() {
             return {
+                columns: [],
                 files: [],
-                request: new FileRequest({})
+                request: new FileRequest({}),
+                params: {
+                    ascending: true,
+                    /*columnFilters: {
+                    },*/
+                    sortBy: 'field_1_value',
+                    page: 1,
+                    perPage: 10
+                },
+                total: 0,
+                type: {
+                    name: ''
+                },
             }
         },
 
         computed: {
-            fileId() {
-                return this.$route.params.id;
+            prettyColumns() {
+                let columns = this.columns;
+
+                return columns.map((column) => {
+                    return {
+                        field: column.field,
+                        label: _.startCase(column.label.split('_').join(' '))
+                    }
+                });
             },
-
-            fileType() {
-
-            }
         },
 
         watch: {
-            // call again the method if the route changes
-            '$route': 'retrieve'
-          },
+            '$route': function() {
+                this.params.page = 1;
+                this.params.perPage = 10;
+                this.retrieve();
+            }
+        },
 
         methods: {
+            onPageChange(params) {
+                this.params.page = params.currentPage;
+                this.retrieve();
+            },
+            onPerPageChange(params) {
+                this.params.perPage = params.currentPerPage;
+                this.retrieve();
+            },
+            onSortChange(params) {
+                this.params.sortBy = this.columns[params.columnIndex].field;
+                this.params.ascending = params.sortType == 'asc' ? true : false;
+                this.retrieve();
+            },
             retrieve() {
-                this.request.retrieve(this.$route.params.id).then((response) => {
-                    this.files = response.data;
+                this.request.setFields({
+                    params: {...this.params}
                 });
-            }
+
+                this.request.retrieve(this.$route.params.id).then((response) => {
+                    this.columns = response.fields;
+                    this.files = response.data;
+                    this.total = response.total;
+                    this.type = response.file_type;
+                });
+            },
         },
 
         created() {
