@@ -13979,6 +13979,118 @@ a:hover {
 }
 
 /**
+ * Theme Classes
+ *
+ */
+
+.main-nav,
+.main-nav .user-nav > *,
+.main-sidebar,
+.main-sidebar li,
+.main {
+  background-color: #f8fafc;
+}
+
+.main {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.main-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+/*
+ Styles for .vgt-inner-wrap which wraps the table headers and body.
+ */
+
+.vgt-inner-wrap {
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+}
+
+.base-table {
+  width: 100%;
+  background-color: #fff;
+}
+
+.base-table thead tr th {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: .75rem;
+  text-transform: uppercase;
+  background-color: #f1f5f8;
+  color: #606f7b;
+}
+
+.base-table th {
+  padding: .75em 1.5em .75em .75em;
+  vertical-align: middle;
+  position: relative;
+}
+
+.base-table th.sorting {
+  cursor: pointer;
+}
+
+.base-table th.sorting:after {
+  content: '';
+  display: none;
+  position: absolute;
+  height: 0px;
+  width: 0px;
+  right: 6px;
+  top: 50%;
+  margin-top: -3px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #3490dc;
+}
+
+.base-table thead th.sorting-asc,
+.base-table thead th.sorting-desc {
+  color: #3d4852;
+}
+
+.base-table thead th.sorting-asc:after,
+.base-table thead th.sorting-desc:after {
+  content: '';
+  display: block;
+}
+
+.base-table thead th.sorting-desc:after {
+  border-top: 6px solid #3490dc;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: none;
+}
+
+.base-table tr > td {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-bottom-width: 1px;
+  border-color: #f1f5f8;
+}
+
+.base-table tbody tr:last-child td {
+  border-style: none;
+}
+
+/**
  * This injects any component classes registered by plugins.
  *
  * If using `postcss-import`, use this import instead:

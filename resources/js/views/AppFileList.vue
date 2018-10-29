@@ -1,10 +1,8 @@
 <template>
     <div>
-        <h2>{{ type.name }}</h2>
+        <h1 class="tw-mb-4">{{ type.name }}</h1>
         <vue-good-table
             :columns="prettyColumns"
-            max-height="500px"
-            :fixed-header="true"
             mode="remote"
             :pagination-options="{
                 enabled: true
@@ -13,7 +11,18 @@
             @on-page-change="onPageChange"
             @on-sort-change="onSortChange"
             :rows="files"
-            :totalRows="total"/>
+            :totalRows="total"
+            styleClass="base-table">
+            <template slot="table-row" slot-scope="props">
+                <span v-if="props.column.field == 'options'">
+                  <base-icon>edit</base-icon>
+                  <base-icon>delete</base-icon>
+                </span>
+                <span v-else>
+                  {{ props.formattedRow[props.column.field] }}
+                </span>
+            </template>
+        </vue-good-table>
     </div>
 </template>
 <script>
@@ -43,12 +52,24 @@
 
         computed: {
             prettyColumns() {
-                let columns = this.columns;
+                this.columns = [
+                    {
+                        field: 'id',
+                        label: 'id'
+                    },
+                    ...this.columns,
+                    {
+                        field: 'options',
+                        label: '',
+                        sortable: false
+                    }
+                ];
 
-                return columns.map((column) => {
+                return this.columns.map((column) => {
                     return {
                         field: column.field,
-                        label: _.startCase(column.label.split('_').join(' '))
+                        label: _.startCase(column.label.split('_').join(' ')),
+                        sortable: column.sortable
                     }
                 });
             },

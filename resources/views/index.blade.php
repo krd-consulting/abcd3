@@ -13,7 +13,7 @@
 @endsection
 
 @section('content')
-    <el-main>
+    <el-main class="main">
          <router-view :key="$route.fullPath"></router-view>
     </el-main>
 @endsection

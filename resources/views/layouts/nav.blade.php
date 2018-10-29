@@ -1,11 +1,17 @@
-<el-header class="tw-flex tw-justify-between tw-items-center">
+<el-header class="main-nav">
+    <div class="tw-w-1/2">
+        <global-search></global-search>
+    </div>
     <div></div>
-    <div>
+    <div class="user-nav">
         <base-menu mode="horizontal">
-            <el-dropdown trigger="click" placement="top">
-                <el-button class="tw-border-none">
-                    {{ Auth::user()->name }}
-                </el-button>
+            <a class="tw-mr-2 tw-font-bold">
+                {{ Auth::user()->name }}
+            </a>
+            <el-dropdown class="main-nav-dropdown" trigger="click" placement="bottom-end">
+                <span>
+                    <profile-picture></profile-picture>
+                </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item>
                         <a href="/preferences">Preferences</a>

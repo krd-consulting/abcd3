@@ -53,11 +53,12 @@
 
                         <div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
                             <span>
-                                <base-input
+                                <base-checkbox
                                     type="checkbox"
                                     name="remember"
-                                    id="remember" {{ old('remember') ? 'checked' : '' }}
-                                ></base-input>
+                                    id="remember"
+                                    {{ old('remember') ? 'checked' : '' }}
+                                ></base-checkbox>
 
                                 <label for="remember" class="tw-text-xs">
                                     {{ __('Remember Me') }}
@@ -68,7 +69,7 @@
                             </a>
                         </div>
 
-                        <base-button type="submit" class="tw-py-2 tw-w-full tw-text-base tw-font-semibold">
+                        <base-button type="submit" class="tw-py-2 tw-w-full tw-text-base tw-text-white tw-font-semibold tw-bg-blue">
                             {{ __('Log in') }}
                         </base-button>
 
@@ -115,7 +116,7 @@
                             </span>
                         @endif
 
-                        <base-button type="submit" class="tw-py-2 tw-w-full tw-text-base tw-font-semibold">
+                        <base-button type="submit" class="tw-py-2 tw-w-full tw-text-base tw-text-white tw-font-semibold tw-bg-blue">
                             {{ __('Send Password Reset Link') }}
                         </base-button>
                     </form>

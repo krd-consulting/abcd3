@@ -1,3 +1,10 @@
 <template>
-    <input class="tw-p-1 tw-pl-2 tw-text-sm tw-border tw-rounded">
+    <el-input v-bind="$attrs">
+        <slot slot="prefix" name="prefix">sadad</slot>
+    </el-input>
 </template>
+<script>
+    export default {
+        inheritAttrs: false
+    }
+</script>

@@ -32,6 +32,105 @@ a:hover {
 }
 
 /**
+ * Theme Classes
+ *
+ */
+
+.main-nav,
+.main-nav .user-nav > *,
+.main-sidebar,
+.main-sidebar li,
+.main {
+    @apply tw-bg-grey-lightest;
+}
+
+.main {
+    @apply tw-px-12;
+}
+
+.main-nav {
+    @apply
+        tw-flex
+        tw-justify-between
+        tw-items-center
+        tw-px-12;
+}
+
+/*
+ Styles for .vgt-inner-wrap which wraps the table headers and body.
+ */
+.vgt-inner-wrap {
+    @apply
+        tw-shadow;
+}
+
+.base-table {
+    @apply
+        tw-w-full
+        tw-bg-white
+}
+
+.base-table thead tr th{
+    @apply
+        tw-py-4
+        tw-px-4
+        tw-text-xs
+        tw-uppercase
+        tw-bg-grey-lighter
+        tw-text-grey-darker;
+}
+.base-table th {
+  padding: .75em 1.5em .75em .75em;
+  vertical-align: middle;
+  position: relative; }
+
+.base-table th.sorting {
+    cursor: pointer;
+}
+
+.base-table th.sorting:after {
+    content: '';
+    display: none;
+    position: absolute;
+    height: 0px;
+    width: 0px;
+    right: 6px;
+    top: 50%;
+    margin-top: -3px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #3490DC;
+}
+
+.base-table thead th.sorting-asc, .base-table thead th.sorting-desc {
+    @apply tw-text-grey-darkest;
+}
+
+.base-table thead th.sorting-asc:after, .base-table thead th.sorting-desc:after {
+    content: '';
+    display: block;
+}
+
+.base-table thead th.sorting-desc:after {
+    border-top: 6px solid #3490DC;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: none;
+}
+
+.base-table tr > td {
+    @apply
+        tw-py-4
+        tw-px-4
+        tw-border-b
+        tw-border-grey-lighter;
+}
+
+.base-table tbody tr:last-child td {
+    @apply tw-border-none;
+}
+
+/**
  * This injects any component classes registered by plugins.
  *
  * If using `postcss-import`, use this import instead:
@@ -64,6 +163,7 @@ a:hover {
  *
  * @import "tailwindcss/utilities";
  */
+
 @tailwind utilities;
 
 /**

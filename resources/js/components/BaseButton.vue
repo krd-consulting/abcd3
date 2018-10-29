@@ -1,5 +1,13 @@
 <template>
-    <button class="tw-py-1 tw-px-2 tw-text-sm tw-bg-blue tw-text-white tw-rounded">
+    <el-button v-bind="$attrs" :native-type="type" class="tw-text-sm tw-rounded">
         <slot></slot>
-    </button>
+    </el-button>
 </template>
+<script>
+    export default {
+        props: {
+            type: String
+        },
+        inheritAttrs: false
+    }
+</script>
