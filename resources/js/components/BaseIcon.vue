@@ -1,5 +1,5 @@
 <template>
-    <i class="material-icons tw-text-base tw-align-middle">
+    <i class="material-icons">
         <slot></slot>
     </i>
 </template>

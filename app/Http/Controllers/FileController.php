@@ -32,18 +32,9 @@ class FileController extends Controller
             [
                 'file_type' => $fileType,
                 'fields'=> [
-                    0 => [
-                        'label' => $fileType->field1->name,
-                        'field' => 'field_1_value'
-                    ],
-                    1 => [
-                        'label' => $fileType->field2->name,
-                        'field' => 'field_2_value'
-                    ],
-                    2 => [
-                        'label' => $fileType->field3->name,
-                        'field' => 'field_3_value'
-                    ]
+                    $fileType->field1->name => 'field_1_value',
+                    $fileType->field2->name => 'field_2_value',
+                    $fileType->field3->name => 'field_3_value'
                 ]
             ]
         );

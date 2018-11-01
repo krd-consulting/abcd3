@@ -20,6 +20,9 @@ class FileType extends Model
 
     public function files()
     {
-        return $this->hasMany('App\File');
+        return $this->hasMany('App\File')
+        ->addSelect('field_1_value as ' . $this->field1->name )
+        ->addSelect('field_2_value as ' . $this->field2->name )
+        ->addSelect('field_3_value as ' . $this->field3->name );
     }
 }
