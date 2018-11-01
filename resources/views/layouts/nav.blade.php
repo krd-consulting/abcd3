@@ -14,7 +14,9 @@
                 </span>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item>
-                        <a href="/preferences">Preferences</a>
+                        <a href="/preferences">
+                            <base-icon>settings</base-icon> Preferences
+                        </a>
                     </el-dropdown-item>
                     <el-dropdown-item>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="tw-hidden">
@@ -24,6 +26,7 @@
                             href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                          document.getElementById('logout-form').submit();">
+                            <base-icon>exit_to_app</base-icon>
                             {{ __('Logout') }}
                         </a>
                     </el-dropdown-item>

@@ -1,6 +1,6 @@
 <template>
     <el-input v-bind="$attrs">
-        <slot slot="prefix" name="prefix">sadad</slot>
+        <slot slot="prefix" name="prefix"></slot>
     </el-input>
 </template>
 <script>

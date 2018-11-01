@@ -14,6 +14,7 @@ Vue.use(VueGoodTablePlugin);
 
 // Components
 Vue.component('base-button', require('./components/BaseButton.vue'));
+Vue.component('base-checkbox', require('./components/BaseCheckbox.vue'));
 Vue.component('base-container', require('./components/BaseContainer.vue'));
 Vue.component('base-header', require('./components/BaseHeader.vue'));
 Vue.component('base-icon', require('./components/BaseIcon.vue'));

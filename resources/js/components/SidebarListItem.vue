@@ -5,6 +5,7 @@
         :route="route"
     >
         <slot></slot>
+        <slot name="title"></slot>
     </base-menu-item>
 </template>
 <script>

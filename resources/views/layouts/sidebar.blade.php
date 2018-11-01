@@ -5,12 +5,12 @@
         </li>
         <sidebar-list-item index="1" :route="{ path: '/dashboard' }">
             <base-icon class="tw-text-xl tw-px-2">dashboard</base-icon>
-            Dashboard
+            <span slot="title">Dashboard</span>
         </sidebar-list-item>
         <base-submenu index="2">
             <template slot="title">
                 <base-icon class="tw-text-xl tw-px-2">folder</base-icon>
-                Files
+                <span slot="title">Files</span>
             </template>
             @foreach($fileTypes as $type)
                 <sidebar-list-item

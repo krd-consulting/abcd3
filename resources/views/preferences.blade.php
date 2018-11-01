@@ -19,16 +19,16 @@
         <nav>
             <sidebar-list>
                 <sidebar-list-item index="1" :route="{ path: '/preferences/' }">
-                    <base-icon class="tw-text-xl tw-pl-2">dashboard</base-icon>
-                    <a class="tw-pl-2">General</a>
+                    <base-icon class="tw-text-xl tw-px-2">dashboard</base-icon>
+                    General
                 </sidebar-list-item>
                 <sidebar-list-item index="2" :route="{ path: '/preferences/files' }">
-                    <base-icon class="tw-text-xl tw-pl-2">dashboard</base-icon>
-                    <a class="tw-pl-2">Files</a>
+                    <base-icon class="tw-text-xl tw-px-2">insert_drive_file</base-icon>
+                    Files
                 </sidebar-list-item>
                 <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
-                    <base-icon class="tw-text-xl tw-pl-2">dashboard</base-icon>
-                    <a class="tw-pl-2">Roles and Permissions</a>
+                    <base-icon class="tw-text-xl tw-px-2">people</base-icon>
+                    Roles and Permissions
                 </sidebar-list-item>
             </sidebar-list>
         </nav>

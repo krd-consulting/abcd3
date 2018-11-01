@@ -15,40 +15,40 @@
                 <tbody>
                     <tr>
                         <td class="tw-py-2 tw-font-bold">Functionality Group 1</td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
                     </tr>
                     <tr>
                         <td class="tw-py-2">Functionality/action 1</td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
                     </tr>
                     <tr>
                         <td class="tw-py-2">Functionality/action 2</td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
                     </tr>
 
                     <tr>
                         <td class="tw-py-2 tw-pt-4 tw-font-bold">Functionality Group 2</td>
-                        <td class="tw-py-2 tw-pt-4"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2 tw-pt-4"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2 tw-pt-4"><base-input type="checkbox"></base-input></td>
+                        <td class="tw-py-2 tw-pt-4"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2 tw-pt-4"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2 tw-pt-4"><base-checkbox type="checkbox"></base-checkbox></td>
                     </tr>
                     <tr>
                         <td class="tw-py-2">Functionality/action 1</td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
                     </tr>
                     <tr>
                         <td class="tw-py-2">Functionality/action 2</td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
-                        <td class="tw-py-2"><base-input type="checkbox"></base-input></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
+                        <td class="tw-py-2"><base-checkbox type="checkbox"></base-checkbox></td>
                     </tr>
                 </tbody>
             </table>
