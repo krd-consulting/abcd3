@@ -15,7 +15,7 @@ class FileTypesTableSeeder extends Seeder
     {
         $field1 = Field::where('name', 'first_name')->first();
         $field2 = Field::where('name', 'last_name')->first();
-        $field3 = Field::where('name', 'birth_date')->first();
+        $field3 = Field::where('name', 'email_address')->first();
 
         // Participants
         DB::table('file_types')->insert([

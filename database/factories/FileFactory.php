@@ -19,6 +19,6 @@ $factory->define(App\File::class, function (Faker $faker) {
         'file_type_id' => $type->id,
         'field_1_value' => $faker->firstName(),
         'field_2_value' => $faker->lastName(),
-        'field_3_value' => $faker->date()
+        'field_3_value' => $faker->companyEmail
     ];
 });

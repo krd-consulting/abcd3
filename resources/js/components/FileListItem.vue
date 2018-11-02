@@ -1,13 +1,12 @@
 <template>
     <div class="tw-flex tw-items-center tw-p-4 tw-bg-white hover:tw-bg-blue-lightest hover:tw-text-blue">
         <div class="tw-w-5/6">
-            <span class="tw-mb-2 tw-block tw-font-bold">
+            <span class="tw-mb-2 tw-block tw-font-bold tw-text-lg">
                 {{ primaryData }}
             </span>
-            <span class="tw-bg-blue-lightest tw-text-blue tw-rounded tw-p-1" v-for="(data, index) in secondaryData" :key="index">
-                <base-icon class="tw-text-xs">calendar_today</base-icon>
+            <secondary-data v-for="(data, index) in secondaryData" :key="index" :data="data">
                 {{ file[data] }}
-            </span>
+            </secondary-data>
         </div>
         <div class="tw-w-1/6 tw-text-right">
             <base-icon class="tw-text-base">edit</base-icon>
@@ -17,12 +16,17 @@
 </template>
 <script>
     import moment from 'moment';
+    import SecondaryData from './FileListItemPill';
 
     export default {
         props: {
             file: Object,
             primaryFields: Array,
             secondaryFields: Array
+        },
+
+        components: {
+            SecondaryData
         },
 
         computed: {

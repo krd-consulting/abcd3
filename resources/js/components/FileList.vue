@@ -44,8 +44,8 @@
                 if('contact_number' in this.fields)
                     fields.push('contact_number');
 
-                if('email' in this.fields)
-                    fields.push('email');
+                if('email_address' in this.fields)
+                    fields.push('email_address');
 
                 if('birth_date' in this.fields)
                     fields.push('birth_date');
