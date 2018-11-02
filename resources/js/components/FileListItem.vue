@@ -16,7 +16,7 @@
 </template>
 <script>
     import moment from 'moment';
-    import SecondaryData from './FileListItemPill';
+    import SecondaryData from './FileListItemSecondaryData';
 
     export default {
         props: {
