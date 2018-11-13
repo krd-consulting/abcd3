@@ -12,5 +12,9 @@ class FilesTableSeeder extends Seeder
     public function run()
     {
         factory(App\File::class, 50)->create();
+
+        App\File::all()->each(function ($file) {
+            $file->teams()->attach(rand(1,2));
+        });
     }
 }

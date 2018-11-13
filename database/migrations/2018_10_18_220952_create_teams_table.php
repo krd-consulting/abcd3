@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignKeyConstraintsToFiles extends Migration
+class CreateTeamsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddForeignKeyConstraintsToFiles extends Migration
      */
     public function up()
     {
-        Schema::table('files', function (Blueprint $table) {
-            $table->foreign('file_type_id')->references('id')->on('file_types');
+        Schema::create('teams', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 32);
+            $table->text('description')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +28,6 @@ class AddForeignKeyConstraintsToFiles extends Migration
      */
     public function down()
     {
-        Schema::table('files', function (Blueprint $table) {
-            $table->dropForeign(['file_type_id']);
-        });
+        Schema::dropIfExists('teams');
     }
 }

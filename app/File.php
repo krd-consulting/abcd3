@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class File extends Model
 {
-    // Relationships
+    public function teams() {
+        return $this->belongsToMany('App\Team');
+    }
 
-    public function type()
+    public function file_type()
     {
         return $this->belongsTo('App\FileType');
     }

@@ -3,6 +3,7 @@
 use Faker\Generator as Faker;
 
 use App\FileType as FileType;
+use App\Team as Team;
 
 $factory->define(App\File::class, function (Faker $faker) {
     $types = [
@@ -11,9 +12,10 @@ $factory->define(App\File::class, function (Faker $faker) {
         2 => 'Volunteers'
     ];
 
-    $index = rand(0, 2);
+    $typeId = rand(0, 2);
+    $type = FileType::where('name', $types[$typeId])->first();
 
-    $type = FileType::where('name', $types[$index])->first();
+    $teamId = rand(1, 2);
 
     return [
         'file_type_id' => $type->id,

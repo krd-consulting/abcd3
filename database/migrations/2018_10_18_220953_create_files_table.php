@@ -21,6 +21,8 @@ class CreateFilesTable extends Migration
             $table->string('field_2_value', 100);
             $table->string('field_3_value', 100);
             $table->timestamps();
+
+            $table->foreign('file_type_id')->references('id')->on('file_types');
         });
     }
 
@@ -31,6 +33,10 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
+        Schema::table('files', function (Blueprint $table) {
+            $table->dropForeign(['file_type_id']);
+        });
+
         Schema::dropIfExists('files');
     }
 }

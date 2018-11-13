@@ -27,6 +27,10 @@ class CreateFileTypesTable extends Migration
             $table->integer('field_3_id')->unsigned();
 
             $table->timestamps();
+
+            $table->foreign('field_1_id')->references('id')->on('fields');
+            $table->foreign('field_2_id')->references('id')->on('fields');
+            $table->foreign('field_3_id')->references('id')->on('fields');
         });
     }
 
@@ -37,6 +41,12 @@ class CreateFileTypesTable extends Migration
      */
     public function down()
     {
+        Schema::table('file_types', function (Blueprint $table) {
+            $table->dropForeign(['field_1_id']);
+            $table->dropForeign(['field_2_id']);
+            $table->dropForeign(['field_3_id']);
+        });
+
         Schema::dropIfExists('file_types');
     }
 }
