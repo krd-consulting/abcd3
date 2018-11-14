@@ -21,6 +21,7 @@ Vue.component('base-icon', require('./components/BaseIcon.vue'));
 Vue.component('base-input', require('./components/BaseInput.vue'));
 Vue.component('base-menu', require('./components/BaseMenu.vue'));
 Vue.component('base-menu-item', require('./components/BaseMenuItem.vue'));
+Vue.component('base-pagination', require('./components/BasePagination.vue'));
 Vue.component('base-sidebar', require('./components/BaseSidebar.vue'));
 Vue.component('base-submenu', require('./components/BaseSubmenu.vue'));
 Vue.component('file-list', require('./components/FileList.vue'));
