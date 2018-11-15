@@ -120844,7 +120844,7 @@ exports = module.exports = __webpack_require__(71)(false);
 
 
 // module
-exports.push([module.i, "\n.file-list-item[data-v-1ecf64a5] {\n  border-top-width: 1px;\n}\n.file-list-item[data-v-1ecf64a5]:first-child {\n  border-style: none;\n  border-top-right-radius: .5em;\n  border-top-left-radius: .5em;\n}\n.file-list-item[data-v-1ecf64a5]:last-child {\n  border-bottom-right-radius: .5em;\n  border-bottom-left-radius: .5em;\n}\n", ""]);
+exports.push([module.i, "\n.file-list-item[data-v-1ecf64a5] {\n  border-bottom-width: 1px;\n}\n", ""]);
 
 // exports
 
@@ -121447,16 +121447,16 @@ var render = function() {
         "div",
         { staticClass: "tw-w-5/6" },
         [
-          _c(
-            "span",
-            { staticClass: "tw-mb-2 tw-block tw-font-bold tw-text-lg" },
-            [_vm._v("\n            " + _vm._s(_vm.primaryData) + "\n        ")]
-          ),
+          _c("span", { staticClass: "tw-mb-2 tw-block tw-font-bold" }, [
+            _vm._v("\n            " + _vm._s(_vm.primaryData) + "\n        ")
+          ]),
           _vm._v(" "),
           _vm._l(_vm.secondaryData, function(data, index) {
-            return _c("secondary-data", { key: index, attrs: { data: data } }, [
-              _vm._v("\n            " + _vm._s(_vm.file[data]) + "\n        ")
-            ])
+            return _c(
+              "secondary-data",
+              { key: index, staticClass: "tw-text-sm", attrs: { data: data } },
+              [_vm._v("\n            " + _vm._s(_vm.file[data]) + "\n        ")]
+            )
           })
         ],
         2
@@ -121495,7 +121495,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "tw-shadow tw-rounded-lg" },
     _vm._l(_vm.files, function(file, index) {
       return _c("file-list-item", {
         key: index,
@@ -122040,6 +122039,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -122102,8 +122105,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 _this.files = response.data;
                 _this.total = response.total;
                 _this.type = response.file_type;
-
-                console.log(response);
             });
         }
     },
@@ -122317,66 +122318,85 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "tw-shadow tw-rounded tw-bg-white" },
     [
-      _c("div", { staticClass: "tw-flex tw-justify-between" }, [
-        _c("h1", { staticClass: "tw-mb-4" }, [_vm._v(_vm._s(_vm.type.name))]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "tw-flex-no-wrap" },
-          [
-            _c(
-              "span",
-              [
-                _vm._v("\n                Sort By:\n                "),
-                _c(
-                  "el-select",
-                  {
-                    on: { change: _vm.retrieve },
-                    model: {
-                      value: _vm.params.sortBy,
-                      callback: function($$v) {
-                        _vm.$set(_vm.params, "sortBy", $$v)
-                      },
-                      expression: "params.sortBy"
-                    }
+      _c(
+        "div",
+        {
+          staticClass:
+            "tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b-2"
+        },
+        [
+          _c("h2", { staticClass: "tw-font-bold tw-text-xl" }, [
+            _vm._v(_vm._s(_vm.type.name))
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "tw-flex-no-wrap" },
+            [
+              _c(
+                "el-select",
+                {
+                  attrs: {
+                    placeholder: "Sort By",
+                    clearable: "",
+                    size: "small"
                   },
-                  _vm._l(_vm.fields, function(field, index) {
-                    return _c("el-option", {
-                      key: field,
-                      attrs: { label: index, value: field }
-                    })
-                  })
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "base-pagination",
-              {
-                attrs: {
-                  "current-page": _vm.params.page,
-                  layout: "prev, slot, next",
-                  "pager-count": 5,
-                  "page-size": _vm.params.perPage,
-                  total: _vm.total
+                  on: { change: _vm.retrieve },
+                  model: {
+                    value: _vm.params.sortBy,
+                    callback: function($$v) {
+                      _vm.$set(_vm.params, "sortBy", $$v)
+                    },
+                    expression: "params.sortBy"
+                  }
                 },
-                on: {
-                  "update:currentPage": function($event) {
-                    _vm.$set(_vm.params, "page", $event)
-                  },
-                  "current-change": _vm.retrieve
-                }
-              },
-              [_c("span", [_vm._v(_vm._s(_vm.paginationInfo))])]
-            )
-          ],
-          1
-        )
-      ]),
+                _vm._l(_vm.fields, function(field, index) {
+                  return _c("el-option", {
+                    key: field,
+                    attrs: { label: index, value: field }
+                  })
+                })
+              )
+            ],
+            1
+          )
+        ]
+      ),
       _vm._v(" "),
-      _c("file-list", { attrs: { files: _vm.files, fields: _vm.fields } })
+      _c("file-list", { attrs: { files: _vm.files, fields: _vm.fields } }),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "tw-py-2" },
+        [
+          _c(
+            "base-pagination",
+            {
+              attrs: {
+                "current-page": _vm.params.page,
+                layout: "prev, slot, next",
+                "pager-count": 5,
+                "page-size": _vm.params.perPage,
+                total: _vm.total
+              },
+              on: {
+                "update:currentPage": function($event) {
+                  _vm.$set(_vm.params, "page", $event)
+                },
+                "current-change": _vm.retrieve
+              }
+            },
+            [
+              _c("span", { staticClass: "tw-text-grey-dark" }, [
+                _vm._v(_vm._s(_vm.paginationInfo))
+              ])
+            ]
+          )
+        ],
+        1
+      )
     ],
     1
   )

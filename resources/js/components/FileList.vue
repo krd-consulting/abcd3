@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-shadow tw-rounded-lg">
+    <div>
         <file-list-item
             v-for="(file, index) in files"
             :key="index"
@@ -57,17 +57,6 @@
 </script>
 <style scoped>
     .file-list-item {
-        @apply tw-border-t;
-    }
-
-    .file-list-item:first-child {
-        @apply tw-border-none;
-        border-top-right-radius: .5em;
-        border-top-left-radius: .5em
-    }
-
-    .file-list-item:last-child {
-        border-bottom-right-radius: .5em;
-        border-bottom-left-radius: .5em
+        @apply tw-border-b;
     }
 </style>

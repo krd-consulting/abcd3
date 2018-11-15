@@ -1,33 +1,37 @@
 <template>
-    <div>
-        <div class="tw-flex tw-justify-between">
-            <h1 class="tw-mb-4">{{ type.name }}</h1>
+    <div class="tw-shadow tw-rounded tw-bg-white">
+        <div class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b-2">
+            <h2 class="tw-font-bold tw-text-xl">{{ type.name }}</h2>
             <div class="tw-flex-no-wrap">
-                <span>
-                    Sort By:
-                    <el-select v-model="params.sortBy" @change="retrieve">
-                        <el-option
-                            v-for="(field, index) in fields"
-                            :key="field"
-                            :label="index"
-                            :value="field">
-                        </el-option>
-                    </el-select>
-                </span>
-                <base-pagination
-                    v-bind:current-page.sync="params.page"
-                    @current-change="retrieve"
-                    layout="prev, slot, next"
-                    :pager-count="5"
-                    :page-size="params.perPage"
-                    :total="total">
-                    <span>{{ paginationInfo }}</span>
-                </base-pagination>
+                <el-select
+                    v-model="params.sortBy"
+                    placeholder="Sort By"
+                    @change="retrieve"
+                    clearable
+                    size="small">
+                    <el-option
+                        v-for="(field, index) in fields"
+                        :key="field"
+                        :label="index"
+                        :value="field">
+                    </el-option>
+                </el-select>
             </div>
         </div>
         <file-list
             :files="files"
             :fields="fields"/>
+        <div class="tw-py-2">
+            <base-pagination
+                v-bind:current-page.sync="params.page"
+                @current-change="retrieve"
+                layout="prev, slot, next"
+                :pager-count="5"
+                :page-size="params.perPage"
+                :total="total">
+                <span class="tw-text-grey-dark">{{ paginationInfo }}</span>
+            </base-pagination>
+        </div>
     </div>
 </template>
 <script>
@@ -93,8 +97,6 @@
                     this.files = response.data;
                     this.total = response.total;
                     this.type = response.file_type;
-
-                    console.log(response);
                 });
             },
         },

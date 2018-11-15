@@ -1,10 +1,10 @@
 <template>
     <div class="tw-flex tw-items-center tw-p-4 tw-bg-white hover:tw-bg-blue-lightest hover:tw-text-blue">
         <div class="tw-w-5/6">
-            <span class="tw-mb-2 tw-block tw-font-bold tw-text-lg">
+            <span class="tw-mb-2 tw-block tw-font-bold">
                 {{ primaryData }}
             </span>
-            <secondary-data v-for="(data, index) in secondaryData" :key="index" :data="data">
+            <secondary-data class="tw-text-sm" v-for="(data, index) in secondaryData" :key="index" :data="data">
                 {{ file[data] }}
             </secondary-data>
         </div>
