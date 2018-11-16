@@ -17,6 +17,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@hellokrd.net',
             'password' => bcrypt('secret'),
             'remember_token' => str_random(10),
+            'scope_id' => 2
         ]);
 
         DB::table('users')->insert([
@@ -24,7 +25,8 @@ class UsersTableSeeder extends Seeder
             'name' => 'Rupert Amodia',
             'email' => 'rupert@hellokrd.net',
             'password' => bcrypt('secret'),
-            'remember_token' => str_random(10)
+            'remember_token' => str_random(10),
+            'scope_id' => 2
         ]);
     }
 }

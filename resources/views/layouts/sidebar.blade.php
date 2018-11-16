@@ -22,7 +22,22 @@
                     {{ $type->name }}
                 </sidebar-list-item>
             @endforeach
-
+        </base-submenu>
+        <base-submenu index="3">
+            <template slot="title">
+                <base-icon class="tw-text-xl tw-px-2">assignment</base-icon>
+                <span slot="title">Programs</span>
+            </template>
+            @foreach($programs as $type)
+                <sidebar-list-item
+                    key="{{ $type->id }}"
+                    index="3-{{ $type->id }}"
+                    :route="{ path: '/files/{{ $type->id }}' }"
+                    >
+                    <base-icon class="tw-text-xl tw-px-2">assignment</base-icon>
+                    {{ $type->name }}
+                </sidebar-list-item>
+            @endforeach
         </base-submenu>
     </sidebar-list>
 </base-sidebar>

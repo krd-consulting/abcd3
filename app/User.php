@@ -33,6 +33,10 @@ class User extends Authenticatable
         return $this->hasManyThrough('App\Files', 'App\User');
     }
 
+    public function scope() {
+        return $this->belongsTo('App\Scope');
+    }
+
     public function teams()
     {
         return $this->belongsToMany('App\Team');
