@@ -31,6 +31,36 @@ class File extends Model
             ->addSelect('field_3_value as ' . $fileType->field3->name);
     }
 
+    public function scopeAvailableFor($query, $user) {
+        $scope = $user->scope;
+
+        switch($scope) {
+            case 'universal':
+
+                $query;
+                break;
+
+            case 'team':
+
+                $teams = $user->teams;
+                $query = $query->inTeams($teams);
+
+                break;
+
+            case 'program':
+
+                $programs = $user->programs;
+                $query = $query->inPrograms($programs);
+
+                break;
+
+            default:
+                $query = $query->inCaseLoad($user);
+        }
+
+        return $query;
+    }
+
     public function scopeInPrograms($query, $programs)
     {
         return $query->whereHas('programs', function ($query) use ($programs) {

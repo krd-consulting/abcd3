@@ -16,7 +16,7 @@ class FileController extends Controller
 
     public function index(FileType $fileType)
     {
-        $files = $this->retrieveFiles($fileType, auth()->user())->as($fileType);
+        $files = $fileType->files()->availableFor(auth()->user())->as($fileType);
 
 
         // Sort.
@@ -44,55 +44,5 @@ class FileController extends Controller
         );
 
         return $collection->merge($files);
-    }
-
-    /**
-     *
-     * Retrieve files based on a given file type, and the user's scope.
-     *
-     * @param App\FileType $fileType
-     * @param App\User $user
-     * @return Illuminate\Database\Eloquent\Collection $files
-     */
-
-    protected function retrieveFiles(Filetype $fileType, User $user)
-    {
-        $files;
-
-        // Get user scope.
-        $scope = $user->scope;
-
-        // Get $fileType files based on $scope
-        switch($scope) {
-            case 'universal':
-                // Get all $fileType files
-                $files = $fileType->files();
-                break;
-
-            case 'team':
-                // Get $fileType files that belong to teams $teams
-                $teams = $user->teams;
-                $files = $fileType->files()->inTeams($teams);
-
-                break;
-
-            case 'program':
-                // Get $fileType files that belong to programs $programs
-                $programs = $user->programs;
-                $files = $fileType->files()->inPrograms($programs);
-
-                break;
-
-            case 'case load':
-                // Get $fileType files that belongs to the user.
-                $files = $fileType->files()->inCaseLoad($user);
-
-                break;
-
-            default:
-                $files = [];
-        }
-
-        return $files;
     }
 }
