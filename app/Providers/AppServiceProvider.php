@@ -17,13 +17,17 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(FileType $fileTypes, Program $programs )
+    public function boot(FileType $fileTypes, Program $programs)
     {
-        // TODO: Remove this when policies/guards are being implemented.
         View::composer('*', function($view) use ($fileTypes, $programs) {
-            if(Auth::check())
+            if(Auth::check()) {
                 $view->with('fileTypes', $fileTypes::all());
-                $view->with('programs', $programs::all());
+
+                $view->with(
+                    'programs',
+                    Auth::user()->availablePrograms
+                );
+            }
         });
     }
 

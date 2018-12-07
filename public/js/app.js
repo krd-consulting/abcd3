@@ -120594,6 +120594,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_good_table_dist_vue_good_table_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_good_table_dist_vue_good_table_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_AppFileList__ = __webpack_require__(545);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_AppFileList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_AppFileList__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_AppProgramList__ = __webpack_require__(564);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_AppProgramList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_AppProgramList__);
 
 
 
@@ -120632,6 +120634,7 @@ Vue.component('user-dropdown', __webpack_require__(543));
 // Views
 
 
+
 var routes = [{
     path: '/', component: { template: '<h2>Dashboard</h2>' }
 }, {
@@ -120640,6 +120643,8 @@ var routes = [{
     path: '/files', component: { template: '<h2>All Files</h2>' }
 }, {
     path: '/files/:id', component: __WEBPACK_IMPORTED_MODULE_6__views_AppFileList___default.a
+}, {
+    path: '/programs/:id', component: __WEBPACK_IMPORTED_MODULE_7__views_AppProgramList___default.a
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
@@ -122120,8 +122125,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_Request__ = __webpack_require__(548);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_moment__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -122129,7 +122132,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 
 
 
@@ -122416,6 +122418,227 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(565)
+/* template */
+var __vue_template__ = __webpack_require__(566)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/views/AppProgramList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3b660ac0", Component.options)
+  } else {
+    hotAPI.reload("data-v-3b660ac0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 565 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_ProgramRequest__ = __webpack_require__(567);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            program: [],
+            request: new __WEBPACK_IMPORTED_MODULE_0__api_ProgramRequest__["a" /* default */]({}),
+            params: {
+                ascending: true,
+                /*columnFilters: {
+                },*/
+                sortBy: 'field_1_value',
+                page: 1,
+                perPage: 5
+            },
+            total: 0,
+            type: {
+                name: ''
+            }
+        };
+    },
+
+
+    computed: {
+        firstItemNo: function firstItemNo() {
+            return this.params.perPage * (this.params.page - 1) + 1;
+        },
+        lastItemNo: function lastItemNo() {
+            var itemNo = this.params.page * this.params.perPage;
+
+            if (itemNo > this.total) return this.total;
+
+            return itemNo;
+        },
+        paginationInfo: function paginationInfo() {
+            return 'Showing ' + this.firstItemNo + '-' + this.lastItemNo + ' of ' + this.total;
+        }
+    },
+
+    watch: {
+        '$route': function $route() {
+            this.params.page = 1;
+            this.params.perPage = 5;
+            this.retrieve();
+        }
+    },
+
+    methods: {
+        retrieve: function retrieve() {
+            var _this = this;
+
+            this.request.setFields({
+                params: _extends({}, this.params)
+            });
+
+            this.request.retrieve(this.$route.params.id).then(function (response) {
+                _this.program = response;
+
+                console.log(_this.program);
+            });
+        }
+    },
+
+    created: function created() {
+        this.retrieve();
+    }
+});
+
+/***/ }),
+/* 566 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "tw-shadow tw-rounded tw-bg-white" }, [
+    _c(
+      "div",
+      {
+        staticClass:
+          "tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b-2"
+      },
+      [
+        _c("h2", { staticClass: "tw-font-bold tw-text-xl" }, [
+          _vm._v(_vm._s(_vm.program.name))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tw-flex-no-wrap" })
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3b660ac0", module.exports)
+  }
+}
+
+/***/ }),
+/* 567 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__core_Request__ = __webpack_require__(548);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+var ProgramRequest = function (_Request) {
+    _inherits(ProgramRequest, _Request);
+
+    function ProgramRequest() {
+        _classCallCheck(this, ProgramRequest);
+
+        return _possibleConstructorReturn(this, (ProgramRequest.__proto__ || Object.getPrototypeOf(ProgramRequest)).apply(this, arguments));
+    }
+
+    _createClass(ProgramRequest, [{
+        key: 'retrieve',
+        value: function retrieve(id) {
+            return this.get('/api/programs/' + id);
+        }
+    }, {
+        key: 'store',
+        value: function store() {}
+    }]);
+
+    return ProgramRequest;
+}(__WEBPACK_IMPORTED_MODULE_0__core_Request__["a" /* default */]);
+
+/* harmony default export */ __webpack_exports__["a"] = (ProgramRequest);
 
 /***/ })
 /******/ ]);

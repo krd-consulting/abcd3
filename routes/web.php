@@ -27,9 +27,11 @@ Route::get('/', 'ShowHome');
 Route::get('/dashboard', 'ShowHome');
 Route::get('/files', 'ShowHome')->where('all', '(.*)');
 Route::get('/files/{all}', 'ShowHome')->where('all', '(.*)');
+Route::get('/programs/{all}', 'ShowHome')->where('all', '(.*)');
 
 Route::get('/preferences', 'ShowPreferences');
 Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
 
 // Private API Routes
 Route::get('/api/files/{fileType}', 'FileController@index');
+Route::get('/api/programs/{id}', 'ProgramController@show');

@@ -32,7 +32,7 @@
                 <sidebar-list-item
                     key="{{ $type->id }}"
                     index="3-{{ $type->id }}"
-                    :route="{ path: '/files/{{ $type->id }}' }"
+                    :route="{ path: '/programs/{{ $type->id }}' }"
                     >
                     <base-icon class="tw-text-xl tw-px-2">assignment</base-icon>
                     {{ $type->name }}

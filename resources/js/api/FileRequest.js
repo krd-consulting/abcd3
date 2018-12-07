@@ -1,5 +1,4 @@
 import Request from '../core/Request';
-import moment from 'moment';
 
 class FileRequest extends Request{
     retrieve(id) {

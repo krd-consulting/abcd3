@@ -2,43 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\File;
 use App\FileType;
-use App\Team;
 use App\User;
 
 use Illuminate\Http\Request;
 
 class FileController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
-    public function index(FileType $fileType) {
+    public function index(FileType $fileType)
+    {
+        $files = $this->retrieveFiles($fileType, auth()->user())->as($fileType);
 
-        // Get Teams (id) that the logged in user belongs to.
-        $teamIds = auth()->user()
-        ->teams()
-        ->get()
-        ->pluck('id');
-
-        // Files query object
-        $files = $fileType->files()->whereHas('teams', function ($query) use ($teamIds) {
-            $query->whereIn('team_id', $teamIds);
-        });
-
-        // Rename generic File fields to File Type field names.
-        $files = $files
-        ->addSelect('field_1_value as ' . $fileType->field1->name )
-        ->addSelect('field_2_value as ' . $fileType->field2->name )
-        ->addSelect('field_3_value as ' . $fileType->field3->name );
 
         // Sort.
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $files->sort($sortBy, $ascending);
-
 
         // Paginate.
         $perPage = request('perPage');
@@ -60,5 +44,55 @@ class FileController extends Controller
         );
 
         return $collection->merge($files);
+    }
+
+    /**
+     *
+     * Retrieve files based on a given file type, and the user's scope.
+     *
+     * @param App\FileType $fileType
+     * @param App\User $user
+     * @return Illuminate\Database\Eloquent\Collection $files
+     */
+
+    protected function retrieveFiles(Filetype $fileType, User $user)
+    {
+        $files;
+
+        // Get user scope.
+        $scope = $user->scope;
+
+        // Get $fileType files based on $scope
+        switch($scope) {
+            case 'universal':
+                // Get all $fileType files
+                $files = $fileType->files();
+                break;
+
+            case 'team':
+                // Get $fileType files that belong to teams $teams
+                $teams = $user->teams;
+                $files = $fileType->files()->inTeams($teams);
+
+                break;
+
+            case 'program':
+                // Get $fileType files that belong to programs $programs
+                $programs = $user->programs;
+                $files = $fileType->files()->inPrograms($programs);
+
+                break;
+
+            case 'case load':
+                // Get $fileType files that belongs to the user.
+                $files = $fileType->files()->inCaseLoad($user);
+
+                break;
+
+            default:
+                $files = [];
+        }
+
+        return $files;
     }
 }

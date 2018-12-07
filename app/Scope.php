@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Scope extends Model
 {
-    public function users() {
-        return $this->hasMany('App\User');
+    public function roles()
+    {
+        return $this->hasMany('App\Role');
     }
 }

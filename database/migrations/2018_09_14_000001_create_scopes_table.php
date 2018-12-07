@@ -16,6 +16,7 @@ class CreateScopesTable extends Migration
         Schema::create('scopes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 32);
+            $table->integer('value')->unsigned();
         });
     }
 
