@@ -12,19 +12,30 @@ class FileController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware(['scope:case load'], ['only' => ['show']]);
+
+        // Next: permissions middleware for `functionality` - creating, updating, and deleting files.
+        // Should prevent users from sending requests that create, update, and delete files.
     }
 
+    /**
+     * Returns all $fileType files (sorted and paginated per request) available to the user
+     * with data about the files' file type and field names.
+     *
+     * @param  FileType $fileType
+     * @return Collection
+     */
     public function index(FileType $fileType)
     {
         $files = $fileType->files()->availableFor(auth()->user())->as($fileType);
 
 
-        // Sort.
+        // Sort per request.
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $files->sort($sortBy, $ascending);
 
-        // Paginate.
+        // Paginate per request.
         $perPage = request('perPage');
         $files = $files->paginate($perPage);
 

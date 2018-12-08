@@ -37,6 +37,35 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function files()
+    {
+        return $this->belongsToMany('App\File');
+    }
+
+    public function scopeHasTeam($query, $team): bool
+    {
+        return $this->teams()->where('team_id', $team)->exists();
+    }
+
+    public function scopeHasProgram($query, $program) : bool
+    {
+        return $this->programs()->where('program_id', $program)->exists() ||
+            $this->teamPrograms()->where('programs.id', $program)->exists();
+    }
+
+    public function scopeHasFile($query, $file) : bool
+    {
+        return $this->files()->where('file_id', $file)->exists() ||
+            $this->teamFiles()->where('files.id', $file)->exists() ||
+            $this->programFiles()->where('files.id', $file)->exists();
+    }
+
+
+    public function hasScopeOfAtleast($scope) : bool
+    {
+        return $this->scopeValue >= Scope::where('name', $scope)->first()->value;
+    }
+
     public function programs()
     {
         return $this->belongsToMany('App\Program');
@@ -73,6 +102,11 @@ class User extends Authenticatable
         return $this->scopes()->orderBy('value', 'desc')->limit(1)->get()[0]->name;
     }
 
+    public function getScopeValueAttribute()
+    {
+        return $this->scopes()->orderBy('value', 'desc')->limit(1)->get()[0]->value;
+    }
+
     public function scopes()
     {
         return $this->hasManyDeepFromRelations($this->roles(), (new Role)->scope());
@@ -83,8 +117,18 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Team');
     }
 
+    public function programFiles()
+    {
+        return $this->hasManyDeepFromRelations($this->programs(), (new Program)->files());
+    }
+
     public function teamPrograms()
     {
         return $this->hasManyDeepFromRelations($this->teams(), (new Team)->programs());
+    }
+
+    public function teamFiles()
+    {
+        return $this->hasManyDeepFromRelations($this->teams(), (new Team)->files());
     }
 }
