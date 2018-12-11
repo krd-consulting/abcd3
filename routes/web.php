@@ -34,4 +34,4 @@ Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
 
 // Private API Routes
 Route::get('/api/files/{fileType}', 'FileController@index');
-Route::get('/api/programs/{id}', 'ProgramController@show');
+Route::get('/api/programs/{program}', 'ProgramController@show');

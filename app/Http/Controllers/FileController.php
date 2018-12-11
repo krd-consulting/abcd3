@@ -12,10 +12,6 @@ class FileController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['scope:case load'], ['only' => ['show']]);
-
-        // Next: permissions middleware for `functionality` - creating, updating, and deleting files.
-        // Should prevent users from sending requests that create, update, and delete files.
     }
 
     /**
@@ -27,6 +23,7 @@ class FileController extends Controller
      */
     public function index(FileType $fileType)
     {
+
         $files = $fileType->files()->availableFor(auth()->user())->as($fileType);
 
 
@@ -55,5 +52,18 @@ class FileController extends Controller
         );
 
         return $collection->merge($files);
+    }
+
+    /**
+     * Show the profile of the selected user.
+     *
+     * @param  File  $file
+     * @return File
+     */
+    public function show(File $file)
+    {
+        $this->authorize('read', $file);
+
+        return $program->load('files');
     }
 }

@@ -37,39 +37,73 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // Relationships
+
     public function files()
     {
         return $this->belongsToMany('App\File');
-    }
-
-    public function scopeHasTeam($query, $team): bool
-    {
-        return $this->teams()->where('team_id', $team)->exists();
-    }
-
-    public function scopeHasProgram($query, $program) : bool
-    {
-        return $this->programs()->where('program_id', $program)->exists() ||
-            $this->teamPrograms()->where('programs.id', $program)->exists();
-    }
-
-    public function scopeHasFile($query, $file) : bool
-    {
-        return $this->files()->where('file_id', $file)->exists() ||
-            $this->teamFiles()->where('files.id', $file)->exists() ||
-            $this->programFiles()->where('files.id', $file)->exists();
-    }
-
-
-    public function hasScopeOfAtleast($scope) : bool
-    {
-        return $this->scopeValue >= Scope::where('name', $scope)->first()->value;
     }
 
     public function programs()
     {
         return $this->belongsToMany('App\Program');
     }
+
+    public function programFiles()
+    {
+        return $this->hasManyDeepFromRelations($this->programs(), (new Program)->files());
+    }
+
+    public function scopes()
+    {
+        return $this->hasManyDeepFromRelations($this->roles(), (new Role)->scope());
+    }
+
+    public function teamPrograms()
+    {
+        return $this->hasManyDeepFromRelations($this->teams(), (new Team)->programs());
+    }
+
+    public function teamFiles()
+    {
+        return $this->hasManyDeepFromRelations($this->teams(), (new Team)->files());
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany('App\Team');
+    }
+
+    // Query Scopes
+
+    public function scopeHasFile($query, $file) : bool
+    {
+        if(is_a($file, File::class))
+            return $this->hasProgram($file->id);
+
+        return $this->files()->where('file_id', $file)->exists() ||
+            $this->teamFiles()->where('files.id', $file)->exists() ||
+            $this->programFiles()->where('files.id', $file)->exists();
+    }
+
+    public function scopeHasProgram($query, $program) : bool
+    {
+        if(is_a($program, Program::class))
+            return $this->hasProgram($program->id);
+
+        return $this->programs()->where('program_id', $program)->exists() ||
+            $this->teamPrograms()->where('programs.id', $program)->exists();
+    }
+
+    public function scopeHasTeam($query, $team): bool
+    {
+        if(is_a($team, Team::class))
+            return $this->hasTeam($team->id);
+
+        return $this->teams()->where('team_id', $team)->exists();
+    }
+
+    // Getters
 
     public function getAvailableProgramsAttribute()
     {
@@ -107,28 +141,9 @@ class User extends Authenticatable
         return $this->scopes()->orderBy('value', 'desc')->limit(1)->get()[0]->value;
     }
 
-    public function scopes()
-    {
-        return $this->hasManyDeepFromRelations($this->roles(), (new Role)->scope());
-    }
 
-    public function teams()
+    public function hasScopeOfAtleast($scope) : bool
     {
-        return $this->belongsToMany('App\Team');
-    }
-
-    public function programFiles()
-    {
-        return $this->hasManyDeepFromRelations($this->programs(), (new Program)->files());
-    }
-
-    public function teamPrograms()
-    {
-        return $this->hasManyDeepFromRelations($this->teams(), (new Team)->programs());
-    }
-
-    public function teamFiles()
-    {
-        return $this->hasManyDeepFromRelations($this->teams(), (new Team)->files());
+        return $this->scopeValue >= Scope::where('name', $scope)->first()->value;
     }
 }

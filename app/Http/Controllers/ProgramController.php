@@ -5,16 +5,13 @@ namespace App\Http\Controllers;
 use App\Program;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ProgramController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware(['scope:program'], ['only' => 'show']);
-
-        // Next: permissions middleware for `functionality` - creating, updating, and deleting programs.
-        // Should prevent users from sending requests that create, update, and delete programs.
     }
 
     /**
@@ -30,11 +27,13 @@ class ProgramController extends Controller
     /**
      * Show the profile of the selected program.
      *
-     * @param  int  $id
-     * @return Collection
+     * @param  Program  $program
+     * @return File
      */
-    public function show($id)
+    public function show(Program $program)
     {
-        return Program::with('files')->where('id', $id)->first();
+        $this->authorize('read', $program);
+
+        return $program->load('files');
     }
 }

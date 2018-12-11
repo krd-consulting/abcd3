@@ -23,7 +23,8 @@ class FileTypesTableSeeder extends Seeder
             'description' => 'text',
             'field_1_id' => $field1->id,
             'field_2_id' => $field2->id,
-            'field_3_id' => $field3->id
+            'field_3_id' => $field3->id,
+            'slug' => 'participants'
         ]);
 
         // Staff
@@ -32,7 +33,8 @@ class FileTypesTableSeeder extends Seeder
             'description' => 'text',
             'field_1_id' => $field1->id,
             'field_2_id' => $field2->id,
-            'field_3_id' => $field3->id
+            'field_3_id' => $field3->id,
+            'slug' => 'staff'
         ]);
 
         // Volunteers
@@ -41,7 +43,8 @@ class FileTypesTableSeeder extends Seeder
             'description' => 'text',
             'field_1_id' => $field1->id,
             'field_2_id' => $field2->id,
-            'field_3_id' => $field3->id
+            'field_3_id' => $field3->id,
+            'slug' => 'volunteers'
         ]);
     }
 }
