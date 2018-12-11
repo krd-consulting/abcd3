@@ -35,7 +35,8 @@ Vue.component('user-dropdown', require('./components/UserDropdown.vue'));
 
 // Views
 import AppFileList from './views/AppFileList';
-import AppProgramList from './views/AppProgramList';
+import AppFileProfile from './views/AppFileProfile';
+import AppProgramProfile from './views/AppProgramProfile';
 
 const routes = [
     {
@@ -48,10 +49,13 @@ const routes = [
         path: '/files', component: {template: '<h2>All Files</h2>'}
     },
     {
-        path: '/files/:id', component: AppFileList,
+        path: '/files/:fileType', component: AppFileList,
     },
     {
-        path: '/programs/:id', component: AppProgramList
+        path: '/files/:fileType/:file', component: AppFileProfile,
+    },
+    {
+        path: '/programs/:id', component: AppProgramProfile
     }
 ];
 

@@ -11,9 +11,9 @@ class ProgramPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user, 'read')
+    public function before(User $user, $ability)
     {
-        if($user->scope == 'universal')
+        if($user->scope == 'universal' && $ability == 'read')
             return true;
     }
 
@@ -30,6 +30,6 @@ class ProgramPolicy
 
     public function write(User $user, Program $program)
     {
-        //
+
     }
 }

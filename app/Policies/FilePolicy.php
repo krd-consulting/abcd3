@@ -11,18 +11,29 @@ class FilePolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user, 'read')
+    public function before(User $user, $ability)
     {
-        if($user->scope == 'universal')
+        if($user->scope == 'universal' && $ability == 'read')
+            return true;
+
+        if($user->hasRole('Super User') && ( $ability == 'create' || $ability == 'write'))
             return true;
     }
 
     public function read(User $user, File $file) : bool
     {
+        if(!$user->hasScopeOfAtleast('case load'))
+            return false;
+
         if(!$user->hasFile($file))
             return false;
 
-        if(!$user->hasScopeOfAtleast('case load'))
+        return true;
+    }
+
+    public function create(User $user)
+    {
+        if(!$user->can('write files'))
             return false;
 
         return true;
@@ -30,6 +41,15 @@ class FilePolicy
 
     public function write(User $user, File $file)
     {
-        //
+        if(!$user->can('write files'))
+            return false;
+
+        if(!$user->hasScopeOfAtleast('case load'))
+            return false;
+
+        if(!$user->hasFile($file))
+            return false;
+
+        return true;
     }
 }

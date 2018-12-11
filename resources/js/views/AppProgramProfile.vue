@@ -66,8 +66,6 @@
 
                 this.request.retrieve(this.$route.params.id).then((response) => {
                     this.program = response;
-
-                    console.log(this.program);
                 });
             },
         },

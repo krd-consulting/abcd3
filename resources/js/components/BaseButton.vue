@@ -1,5 +1,9 @@
 <template>
-    <el-button v-bind="$attrs" :native-type="type" class="tw-text-sm tw-rounded">
+    <el-button
+        v-bind="$attrs"
+        :native-type="type"
+        @click="click"
+        class="tw-text-sm tw-rounded">
         <slot></slot>
     </el-button>
 </template>
@@ -8,6 +12,11 @@
         props: {
             type: String
         },
-        inheritAttrs: false
+        inheritAttrs: false,
+        methods: {
+            click(payload) {
+                this.$emit('click', payload);
+            }
+        }
     }
 </script>

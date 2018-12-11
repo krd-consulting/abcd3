@@ -79,7 +79,7 @@ class User extends Authenticatable
     public function scopeHasFile($query, $file) : bool
     {
         if(is_a($file, File::class))
-            return $this->hasProgram($file->id);
+            return $this->hasFile($file->id);
 
         return $this->files()->where('file_id', $file)->exists() ||
             $this->teamFiles()->where('files.id', $file)->exists() ||
@@ -133,17 +133,20 @@ class User extends Authenticatable
 
     public function getScopeAttribute()
     {
-        return $this->scopes()->orderBy('value', 'desc')->limit(1)->get()[0]->name;
+        return $this->scopes()->orderBy('value', 'desc')->first()->name;
     }
 
     public function getScopeValueAttribute()
     {
-        return $this->scopes()->orderBy('value', 'desc')->limit(1)->get()[0]->value;
+        return $this->scopes()->orderBy('value', 'desc')->first()->value;
     }
 
 
     public function hasScopeOfAtleast($scope) : bool
     {
+        if(is_numeric($scope))
+            return $this->scopeValue >= $scope;
+
         return $this->scopeValue >= Scope::where('name', $scope)->first()->value;
     }
 }

@@ -16,10 +16,12 @@
                         :value="field">
                     </el-option>
                 </el-select>
+                <base-button @click="create">Create File</base-button>
             </div>
         </div>
         <file-list
             :files="files"
+            :file-type="type.slug"
             :fields="fields"/>
         <div class="tw-py-2">
             <base-pagination
@@ -92,13 +94,17 @@
                     params: {...this.params}
                 });
 
-                this.request.retrieve(this.$route.params.id).then((response) => {
+                this.request.retrieve(this.$route.params.fileType).then((response) => {
                     this.fields = response.fields;
                     this.files = response.data;
                     this.total = response.total;
                     this.type = response.file_type;
                 });
             },
+
+            create() {
+                this.request.create();
+            }
         },
 
         created() {

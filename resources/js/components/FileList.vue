@@ -3,9 +3,11 @@
         <file-list-item
             v-for="(file, index) in files"
             :key="index"
+            index="index"
             :file="file"
-            :primaryFields="primaryFields"
-            :secondaryFields="secondaryFields"
+            :file-type="fileType"
+            :primary-fields="primaryFields"
+            :secondary-fields="secondaryFields"
             class="file-list-item"></file-list-item>
     </div>
 </template>
@@ -15,6 +17,7 @@
     export default {
         props: {
             files: Array,
+            fileType: String,
             fields: Object|Array
         },
 

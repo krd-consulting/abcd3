@@ -11,15 +11,15 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permissions')->insert(
+        DB::table('permissions')->insert([
             [
                 'name' => 'write files',
-                'guard' => 'web'
+                'guard_name' => 'web'
             ],
             [
-                'name' => 'write programs'
-                'guard' => 'web'
+                'name' => 'write programs',
+                'guard_name' => 'web'
             ]
-        );
+        ]);
     }
 }

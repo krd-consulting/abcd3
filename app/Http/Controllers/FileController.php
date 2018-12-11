@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\File;
 use App\FileType;
 use App\User;
 
@@ -60,10 +61,46 @@ class FileController extends Controller
      * @param  File  $file
      * @return File
      */
-    public function show(File $file)
+    public function show(FileType $fileType, File $file)
     {
         $this->authorize('read', $file);
 
-        return $program->load('files');
+        // Can be put into route service provider.
+        return $file->with('file_type')->where('id', $file->id)->where('file_type_id', $fileType->id)->firstOrFail();
+    }
+
+    public function create()
+    {
+        $this->authorize('create', File::class);
+
+        return auth()->user()->teams;
+    }
+
+    public function store()
+    {
+        $this->authorize('create', File::class);
+
+        // Store file when user is authorized.
+    }
+
+    public function edit(File $file)
+    {
+        $this->authorize('write', File::class);
+
+        // Return file after user is authorized.
+    }
+
+    public function update(File $file)
+    {
+        $this->authorize('write', File::class);
+
+        // Update file after user is authorized.
+    }
+
+    public function destroy(File $file)
+    {
+        $this->authorize('write', $file);
+
+        // Delete file after user is authorized.
     }
 }

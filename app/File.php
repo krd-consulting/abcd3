@@ -26,7 +26,8 @@ class File extends Model
     // Query Scopes
 
     public function scopeAs($query, $fileType) {
-        $query->addSelect('field_1_value as ' . $fileType->field1->name)
+        $query->addSelect('id')
+            ->addSelect('field_1_value as ' . $fileType->field1->name)
             ->addSelect('field_2_value as ' . $fileType->field2->name)
             ->addSelect('field_3_value as ' . $fileType->field3->name);
     }
