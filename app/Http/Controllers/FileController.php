@@ -59,7 +59,7 @@ class FileController extends Controller
     {
         $this->authorize('create', File::class);
 
-        return auth()->user()->teams;
+        return auth()->user()->availableTeams;
     }
 
     public function store()

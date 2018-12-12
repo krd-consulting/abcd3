@@ -27,6 +27,11 @@ class AppServiceProvider extends ServiceProvider
                     'programs',
                     Auth::user()->availablePrograms
                 );
+
+                $view->with(
+                    'teams',
+                    Auth::user()->availableTeams
+                );
             }
         });
     }

@@ -28,16 +28,36 @@
                 <base-icon class="tw-text-xl tw-px-2">assignment</base-icon>
                 <span slot="title">Programs</span>
             </template>
-            @foreach($programs as $type)
+            @forelse($programs as $program)
                 <sidebar-list-item
-                    key="{{ $type->id }}"
-                    index="3-{{ $type->id }}"
-                    :route="{ path: '/programs/{{ $type->id }}' }"
+                    key="{{ $program->id }}"
+                    index="3-{{ $program->id }}"
+                    :route="{ path: '/programs/{{ $program->id }}' }"
                     >
                     <base-icon class="tw-text-xl tw-px-2">assignment</base-icon>
-                    {{ $type->name }}
+                    {{ $program->name }}
                 </sidebar-list-item>
-            @endforeach
+            @empty
+                <li class="tw-py-4 tw-pl-8 tw-text-xs">You have no programs</li>
+            @endforelse
         </base-submenu>
+        @if(count($teams) > 0)
+            <base-submenu index="4">
+                <template slot="title">
+                    <base-icon class="tw-text-xl tw-px-2">people</base-icon>
+                    <span slot="title">Teams</span>
+                </template>
+                @foreach($teams as $team)
+                    <sidebar-list-item
+                        key="{{ $team->id }}"
+                        index="4-{{ $team->id }}"
+                        :route="{ path: '/teams/{{ $team->id }}' }"
+                        >
+                        <base-icon class="tw-text-xl tw-px-2">people</base-icon>
+                        {{ $team->name }}
+                    </sidebar-list-item>
+                @endforeach
+            </base-submenu>
+        @endif
     </sidebar-list>
 </base-sidebar>

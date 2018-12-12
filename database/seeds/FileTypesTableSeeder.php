@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Field as Field;
+use App\Field;
+use App\FileType;
 
 class FileTypesTableSeeder extends Seeder
 {
@@ -13,38 +14,38 @@ class FileTypesTableSeeder extends Seeder
      */
     public function run()
     {
-        $field1 = Field::where('name', 'first_name')->first();
-        $field2 = Field::where('name', 'last_name')->first();
-        $field3 = Field::where('name', 'email_address')->first();
+        $firstName = Field::where('name', 'first_name')->first();
+        $lastName = Field::where('name', 'last_name')->first();
+        $business = Field::where('name', 'business_name')->first();
+        $email = Field::where('name', 'email_address')->first();
+        $contact = Field::where('name', 'contact_number')->first();
+        $birth_date = Field::where('name', 'birth_date')->first();
 
         // Participants
-        DB::table('file_types')->insert([
-            'name' => 'Participants',
-            'description' => 'text',
-            'field_1_id' => $field1->id,
-            'field_2_id' => $field2->id,
-            'field_3_id' => $field3->id,
-            'slug' => 'participants'
-        ]);
+        $participants = new FileType;
+        $participants->name = 'Participants';
+        $participants->field_1_id = $firstName->id;
+        $participants->field_2_id = $lastName->id;
+        $participants->field_3_id = $birth_date->id;
+        $participants->slug = 'participants';
+        $participants->save();
 
         // Staff
-        DB::table('file_types')->insert([
-            'name' => 'Staff',
-            'description' => 'text',
-            'field_1_id' => $field1->id,
-            'field_2_id' => $field2->id,
-            'field_3_id' => $field3->id,
-            'slug' => 'staff'
-        ]);
+        $staff = new FileType;
+        $staff->name = 'Staff';
+        $staff->field_1_id = $firstName->id;
+        $staff->field_2_id = $lastName->id;
+        $staff->field_3_id = $email->id;
+        $staff->slug = 'staff';
+        $staff->save();
 
         // Volunteers
-        DB::table('file_types')->insert([
-            'name' => 'Volunteers',
-            'description' => 'text',
-            'field_1_id' => $field1->id,
-            'field_2_id' => $field2->id,
-            'field_3_id' => $field3->id,
-            'slug' => 'volunteers'
-        ]);
+        $volunteers = new FileType;
+        $volunteers->name = 'Volunteers';
+        $volunteers->field_1_id = $firstName->id;
+        $volunteers->field_2_id = $lastName->id;
+        $volunteers->field_3_id = $contact->id;
+        $volunteers->slug = 'volunteers';
+        $volunteers->save();
     }
 }

@@ -120,12 +120,8 @@ class User extends Authenticatable
                 $programs = $this->teamPrograms;
                 break;
 
-            case 'program':
-                $programs = $this->programs;
-                break;
-
             default:
-                $programs = [];
+                $programs = $this->programs;
         }
 
         return $programs;
@@ -139,6 +135,25 @@ class User extends Authenticatable
     public function getScopeValueAttribute()
     {
         return $this->scopes()->orderBy('value', 'desc')->first()->value;
+    }
+
+    public function getAvailableTeamsAttribute()
+    {
+        $teams;
+
+        $scope = $this->scope;
+
+        switch($scope) {
+            case 'universal':
+                $teams = Team::all();
+                break;
+
+            default:
+                $teams = $this->teamPrograms;
+                break;
+        }
+
+        return $teams;
     }
 
 

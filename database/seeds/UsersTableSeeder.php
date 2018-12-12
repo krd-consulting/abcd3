@@ -2,6 +2,10 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Role;
+use App\Team;
+use App\User;
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -11,35 +15,37 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            [
-                'id' => 1,
-                'name' => 'Super User',
-                'email' => 'admin@hellokrd.net',
-                'password' => bcrypt('secret'),
-                'remember_token' => str_random(10)
-            ],
-            [
-                'id' => 2,
-                'name' => 'Rupert Amodia',
-                'email' => 'rupert@hellokrd.net',
-                'password' => bcrypt('secret'),
-                'remember_token' => str_random(10)
-            ],
-            [
-                'id' => 3,
-                'name' => 'Gui Gramari',
-                'email' => 'gui@hellokrd.net',
-                'password' => bcrypt('secret'),
-                'remember_token' => str_random(10)
-            ],
-            [
-                'id' => 4,
-                'name' => 'Scott McCrae',
-                'email' => 'scott@hellokrd.net',
-                'password' => bcrypt('secret'),
-                'remember_token' => str_random(10)
-            ]
-        ]);
+        $admin = new User;
+        $admin->name = 'Super User';
+        $admin->email = 'admin@hellokrd.net';
+        $admin->password = bcrypt('secret');
+        $admin->remember_token = str_random(10);
+        $admin->save();
+        $admin->assignRole('Super User');
+
+        $rupert = new User;
+        $rupert->name = 'Rupert Amodia';
+        $rupert->email = 'rupert@hellokrd.net';
+        $rupert->password = bcrypt('secret');
+        $rupert->remember_token = str_random(10);
+        $rupert->save();
+        $rupert->teams()->attach(Team::inRandomOrder()->first());
+        $rupert->assignRole('Team Manager');
+
+        $gui = new User;
+        $gui->name = 'Guilherme Gramari';
+        $gui->email = 'gui@hellokrd.net';
+        $gui->password = bcrypt('secret');
+        $gui->remember_token = str_random(10);
+        $gui->save();
+        $gui->assignRole('Program Manager');
+
+        $scott = new User;
+        $scott->name = 'Scott McCrae';
+        $scott->email = 'scott@hellokrd.net';
+        $scott->password = bcrypt('secret');
+        $scott->remember_token = str_random(10);
+        $scott->save();
+        $scott->assignRole('Guidance Counselor');
     }
 }
