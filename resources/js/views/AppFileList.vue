@@ -97,7 +97,7 @@
                 this.request.retrieve(this.$route.params.fileType).then((response) => {
                     this.fields = response.fields;
                     this.files = response.data;
-                    this.total = response.total;
+                    this.total = response.meta.total;
                     this.type = response.file_type;
                 });
             },
