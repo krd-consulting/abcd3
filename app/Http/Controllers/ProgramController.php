@@ -28,12 +28,47 @@ class ProgramController extends Controller
      * Show the profile of the selected program.
      *
      * @param  Program  $program
-     * @return File
+     * @return Program
      */
     public function show(Program $program)
     {
         $this->authorize('read', $program);
 
         return $program->load('files');
+    }
+
+    public function create()
+    {
+        $this->authorize('create', File::class);
+
+        return auth()->user()->availableTeams;
+    }
+
+    public function store()
+    {
+        $this->authorize('create', File::class);
+
+        // Store program when user is authorized.
+    }
+
+    public function edit(Program $program)
+    {
+        $this->authorize('write', $program);
+
+        // Return program when user is authorized.
+    }
+
+    public function update(Program $program)
+    {
+        $this->authorize('write', $program);
+
+        // Update program when user is authorized.
+    }
+
+    public function destroy(Program $program)
+    {
+        $this->authorize('write', $program);
+
+        // Delete program when user is authorized.
     }
 }

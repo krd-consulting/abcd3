@@ -41,7 +41,7 @@
                 <li class="tw-py-4 tw-pl-8 tw-text-xs">You have no programs</li>
             @endforelse
         </base-submenu>
-        @if(count($teams) > 0)
+        @if(count($teams) > 1)
             <base-submenu index="4">
                 <template slot="title">
                     <base-icon class="tw-text-xl tw-px-2">people</base-icon>

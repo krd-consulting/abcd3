@@ -20,4 +20,9 @@ class Program extends Model
     public function scopeInTeams($query, $teams) {
         return $query->whereIn('team_id', $teams);
     }
+
+    public function assignToTeam($team)
+    {
+        return $this->team()->associate($team);
+    }
 }

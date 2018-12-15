@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Program;
+use App\Team;
+
 class ProgramsTableSeeder extends Seeder
 {
     /**
@@ -11,16 +14,18 @@ class ProgramsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('programs')->insert([
-            [
-                'name' => 'Program in Team One',
-                'team_id' => 1
-            ],
+        $programOne = new Program;
+        $programOne->name = 'Program in T1';
+        $programOne->assignToTeam(
+                Team::where('name', 'Team One')->first()
+            );
+        $programOne->save();
 
-            [
-                'name' => 'Program in Team Two',
-                'team_id' => 2
-            ]
-        ]);
+        $programTwo = new Program;
+        $programTwo->name = 'Program in T2';
+        $programTwo->assignToTeam(
+                Team::where('name', 'Team Two')->first()
+            );
+        $programTwo->save();
     }
 }

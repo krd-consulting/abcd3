@@ -16,7 +16,7 @@
 
 @section('content')
     <div class="tw-container tw-mx-auto tw-w-2/3 tw-flex tw-mt-8">
-        <nav>
+        <nav class="tw-w-1/4">
             <sidebar-list>
                 <sidebar-list-item index="1" :route="{ path: '/preferences/' }">
                     <base-icon class="tw-text-xl tw-px-2">dashboard</base-icon>
@@ -28,7 +28,7 @@
                 </sidebar-list-item>
                 <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
                     <base-icon class="tw-text-xl tw-px-2">people</base-icon>
-                    Roles and Permissions
+                    Roles
                 </sidebar-list-item>
             </sidebar-list>
         </nav>

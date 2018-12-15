@@ -149,7 +149,7 @@ class User extends Authenticatable
                 break;
 
             default:
-                $teams = $this->teamPrograms;
+                $teams = $this->teams;
                 break;
         }
 

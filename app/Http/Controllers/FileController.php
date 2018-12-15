@@ -71,22 +71,22 @@ class FileController extends Controller
 
     public function edit(File $file)
     {
-        $this->authorize('write', File::class);
+        $this->authorize('write', $file);
 
-        // Return file after user is authorized.
+        // Return file when user is authorized.
     }
 
     public function update(File $file)
     {
-        $this->authorize('write', File::class);
+        $this->authorize('write', $file);
 
-        // Update file after user is authorized.
+        // Update file when user is authorized.
     }
 
     public function destroy(File $file)
     {
         $this->authorize('write', $file);
 
-        // Delete file after user is authorized.
+        // Delete file when user is authorized.
     }
 }

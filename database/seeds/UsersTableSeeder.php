@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Program;
 use App\Role;
 use App\Team;
 use App\User;
@@ -38,6 +39,7 @@ class UsersTableSeeder extends Seeder
         $gui->password = bcrypt('secret');
         $gui->remember_token = str_random(10);
         $gui->save();
+        $gui->programs()->attach(Program::inRandomOrder()->first());
         $gui->assignRole('Program Manager');
 
         $scott = new User;

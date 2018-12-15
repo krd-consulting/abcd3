@@ -28,12 +28,12 @@ Vue.component('sidebar-list-item', require('./components/SidebarListItem.vue'));
 
 // Views
 import Files from './views/PreferencesFiles.vue';
-import PermissionsAndRoles from './views/PreferencesPermissionsAndRoles.vue';
+import Roles from './views/PreferencesRoles.vue';
 
 const routes = [
     { path: '/preferences', component: {template: '<h2>General</h2>'} },
     { path: '/preferences/files', component: Files },
-    { path: '/preferences/roles', component: PermissionsAndRoles }
+    { path: '/preferences/roles', component: Roles }
 ];
 
 const router = new VueRouter({

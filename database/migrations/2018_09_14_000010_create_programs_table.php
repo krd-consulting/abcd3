@@ -17,7 +17,7 @@ class CreateProgramsTable extends Migration
             $table->increments('id');
             $table->string('name', 32);
             $table->text('description')->nullable();
-            $table->integer('team_id')->unsigned();
+            $table->integer('team_id')->unsigned()->nullable();
             $table->timestamps();
 
             $table->foreign('team_id')->references('id')->on('teams');
