@@ -1,7 +1,7 @@
 import Request from '../core/Request';
 
 class ProgramRequest extends Request{
-    retrieve(id) {
+    view(id) {
         return this.get('/api/programs/' + id);
     }
 

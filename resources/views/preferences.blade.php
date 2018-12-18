@@ -15,26 +15,28 @@
 @endsection
 
 @section('content')
-    <div class="tw-container tw-mx-auto tw-w-2/3 tw-flex tw-mt-8">
-        <nav class="tw-w-1/4">
-            <sidebar-list>
-                <sidebar-list-item index="1" :route="{ path: '/preferences/' }">
-                    <base-icon class="tw-text-xl tw-px-2">dashboard</base-icon>
-                    General
-                </sidebar-list-item>
-                <sidebar-list-item index="2" :route="{ path: '/preferences/files' }">
-                    <base-icon class="tw-text-xl tw-px-2">insert_drive_file</base-icon>
-                    Files
-                </sidebar-list-item>
-                <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
-                    <base-icon class="tw-text-xl tw-px-2">people</base-icon>
-                    Roles
-                </sidebar-list-item>
-            </sidebar-list>
-        </nav>
-        <section class="tw-ml-8 tw-w-3/4">
-            <router-view></router-view>
-        </section>
+    <div class="tw-flex tw-py-8 tw-max-h-full tw-overflow-y-auto">
+        <div class="tw-container tw-mx-auto lg:tw-w-2/3 md:tw-w-2/3 tw-w-full tw-flex">
+            <nav class="tw-w-1/4">
+                <sidebar-list>
+                    <sidebar-list-item index="1" :route="{ path: '/preferences/' }">
+                        <base-icon class="tw-text-xl tw-px-2">dashboard</base-icon>
+                        General
+                    </sidebar-list-item>
+                    <sidebar-list-item index="2" :route="{ path: '/preferences/files' }">
+                        <base-icon class="tw-text-xl tw-px-2">insert_drive_file</base-icon>
+                        Files
+                    </sidebar-list-item>
+                    <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
+                        <base-icon class="tw-text-xl tw-px-2">people</base-icon>
+                        Roles
+                    </sidebar-list-item>
+                </sidebar-list>
+            </nav>
+            <section class="tw-ml-8 tw-w-3/4">
+                <router-view></router-view>
+            </section>
+        </div>
     </div>
 
 @endsection

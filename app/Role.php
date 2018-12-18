@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Spatie\Permission\Models\Role as SpatieRole;
+use Spatie\Permission\Models\Role as Model;
 
-class Role extends SpatieRole
+class Role extends Model
 {
     public function scope()
     {
@@ -16,5 +16,10 @@ class Role extends SpatieRole
         $this->scope()->associate($scope);
 
         return $this->load('scope');
+    }
+
+    public function availableFor($query, $user)
+    {
+
     }
 }

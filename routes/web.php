@@ -33,8 +33,14 @@ Route::get('/preferences', 'ShowPreferences');
 Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
 
 // Private API Routes
-Route::get('/api/files/create', 'FileController@create');
-Route::get('/api/files/{fileType}', 'FileController@index');
-Route::get('/api/files/{fileType}/{file}', 'FileController@show');
+Route::prefix('api')
+    ->middleware('auth')
+    ->group( function() {
+        Route::get('files/create', 'FileController@create');
+        Route::get('files/{fileType}', 'FileController@index');
+        Route::get('files/{fileType}/{file}', 'FileController@show');
 
-Route::get('/api/programs/{program}', 'ProgramController@show');
+        Route::get('programs/{program}', 'ProgramController@show');
+
+        Route::get('roles', 'RoleController@index');
+});

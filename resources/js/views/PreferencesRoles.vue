@@ -6,57 +6,22 @@
             </h2>
             <base-button>Create Role</base-button>
         </div>
-        <table class="tw-w-full tw-mt-4">
+        <table v-for="role in roles" class="tw-w-full tw-mt-8">
             <thead>
                 <tr class="tw-border-b-2">
                     <td colspan="2" class="tw-py-2">
-                        <span class="tw-inline-block tw-font-semibold">Administrator</span>
+                        <span class="tw-inline-block tw-font-semibold">{{ role.name }}</span>
                         <span class="tw-align-middle tw-px-2 tw-py-1 tw-rounded tw-bg-blue-lightest tw-font-semibold tw-text-xs tw-text-blue">
-                            <base-icon class="tw-text-xs tw-align-middle">star</base-icon> Universal
+                            <base-icon class="tw-text-xs tw-align-middle">star</base-icon> {{ role.scope.name }}
                         </span>
                     </td>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td width="90%" class="tw-py-4 tw-border-b">Write files</td>
+                <tr v-for="permission in role.all_permissions">
+                    <td width="90%" class="tw-py-4 tw-border-b">{{ permission.name }}</td>
                     <td class="tw-py-4 tw-border-b">
-                        <el-switch/>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="90%" class="tw-py-4 tw-border-b">Write programs</td>
-                    <td class="tw-py-4 tw-border-b">
-                        <el-switch/>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="tw-w-full tw-mt-8">
-            <thead>
-                <tr class="tw-border-b-2">
-                    <td colspan="2" class="tw-py-2">
-                        <span class="tw-inline-block tw-font-semibold">Program Manager</span>
-                        <span class="tw-align-middle tw-px-2 tw-py-1 tw-rounded tw-bg-orange-lightest tw-font-semibold tw-text-xs tw-text-orange">
-                            <base-icon class="tw-text-xs tw-align-middle">assignment</base-icon> Program
-                        </span>
-                    </td>
-                    <td>
-                        &nbsp;
-                    </td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td width="90%" class="tw-py-4 tw-border-b">Write files</td>
-                    <td class="tw-py-4 tw-border-b">
-                        <el-switch/>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="90%" class="tw-py-4 tw-border-b">Write programs</td>
-                    <td class="tw-py-4 tw-border-b">
-                        <el-switch/>
+                        <el-switch v-model="permission.permitted"/>
                     </td>
                 </tr>
             </tbody>
@@ -64,7 +29,41 @@
     </div>
 </template>
 <script>
-    export default {
+    import RoleRequest from '../api/RoleRequest';
 
+    export default {
+        data() {
+            return {
+                fields: [],
+                roles: [],
+                permissions: [],
+                request: new RoleRequest({}),
+                params: {
+                    ascending: true,
+                    /*columnFilters: {
+                    },*/
+                    sortBy: 'field_1_value',
+                    page: 1,
+                    perPage: 5
+                },
+                total: 0
+            }
+        },
+
+        methods: {
+            retrieve() {
+                this.request.setFields({
+                    params: {...this.params}
+                });
+
+                this.request.retrieve().then((response) => {
+                    this.roles = response.data.roles;
+                });
+            }
+        },
+
+        created() {
+            this.retrieve();
+        }
     }
 </script>
