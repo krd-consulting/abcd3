@@ -18,8 +18,17 @@ class Role extends Model
         return $this->load('scope');
     }
 
-    public function availableFor($query, $user)
+    public function giveOrRevokePermissionTo($permission, $give)
     {
+        if(!isset($give))
+            return $this;
 
+        if($give == false) {
+            $this->revokePermissionTo($permission);
+        }else {
+            $this->givePermissionTo($permission);
+        }
+
+        return $this;
     }
 }

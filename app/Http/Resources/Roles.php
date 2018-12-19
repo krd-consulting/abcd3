@@ -16,15 +16,16 @@ class Roles extends ResourceCollection
      */
     public function toArray($request)
     {
-        $permissions = Permission::all()->pluck('name');
-        $roles = $this->collection;
+        $permissions = Permission::all();
+        $roles = $this->collection->except([0]);
 
         $roles = $roles->map(function($role) use ($permissions) {
             $role['all_permissions'] = [];
 
             $role['all_permissions'] = $permissions->map(function($permission) use ($role) {
                 return [
-                    'name' => $permission,
+                    'id' => $permission->id,
+                    'name' => $permission->name,
                     'permitted' => $role->hasPermissionTo($permission)
                 ];
             });

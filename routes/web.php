@@ -42,5 +42,7 @@ Route::prefix('api')
 
         Route::get('programs/{program}', 'ProgramController@show');
 
+        Route::get('roles/create', 'RoleController@create');
         Route::get('roles', 'RoleController@index');
+        Route::patch('role-permission', 'UpdateRolePermission');
 });

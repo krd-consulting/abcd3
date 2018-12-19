@@ -24,6 +24,7 @@ Vue.component('base-menu-item', require('./components/BaseMenuItem.vue'));
 Vue.component('base-pagination', require('./components/BasePagination.vue'));
 Vue.component('base-sidebar', require('./components/BaseSidebar.vue'));
 Vue.component('base-submenu', require('./components/BaseSubmenu.vue'));
+Vue.component('base-switch', require('./components/BaseSwitch.vue'));
 Vue.component('file-list', require('./components/FileList.vue'));
 Vue.component('global-search', require('./components/GlobalSearch.vue'));
 Vue.component('login-form', require('./components/LoginForm.vue'));

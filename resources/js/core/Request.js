@@ -50,7 +50,10 @@ class Request {
                 resolve(response.data);
             })
             .catch(error => {
-                this.onFail(error.response.data.errors);
+                if(error.response) {
+                    this.onFail(error.response.data.errors);
+                }
+                reject(error);
             });
         });
     }

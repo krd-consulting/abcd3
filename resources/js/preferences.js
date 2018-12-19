@@ -23,6 +23,8 @@ Vue.component('base-menu', require('./components/BaseMenu.vue'));
 Vue.component('base-menu-item', require('./components/BaseMenuItem.vue'));
 Vue.component('base-sidebar', require('./components/BaseSidebar.vue'));
 Vue.component('base-submenu', require('./components/BaseSubmenu.vue'));
+Vue.component('base-switch', require('./components/BaseSwitch.vue'));
+Vue.component('live-edit-text', require('./components/LiveEditText.vue'));
 Vue.component('sidebar-list', require('./components/SidebarList.vue'));
 Vue.component('sidebar-list-item', require('./components/SidebarListItem.vue'));
 
