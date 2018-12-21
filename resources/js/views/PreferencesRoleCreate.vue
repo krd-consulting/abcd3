@@ -1,12 +1,12 @@
 <template>
-    <base-dialog title="Edit Role" :visible="active" @close="close">
+    <base-dialog title="Create Role" :visible="active" @close="close">
         <form>
             <div class="tw-flex tw-items-center tw-w-2/3 tw-mb-4">
                 <label class="tw-w-1/3 tw-text-right tw-px-4">
                     Name
                 </label>
                 <div class="tw-w-2/3">
-                    <el-input v-model="newRoleData.name">
+                    <el-input v-model="roleData.name">
                     </el-input>
                 </div>
             </div>
@@ -15,7 +15,7 @@
                     Scope
                 </label>
                 <div class="tw-w-2/3">
-                    <el-select v-model="newRoleData.scope">
+                    <el-select v-model="roleData.scope" placeholder="Select Scope">
                         <el-option
                             v-for="scope in scopes"
                             :key="scope.id"
@@ -29,7 +29,7 @@
         </form>
         <div slot="footer">
             <base-button @click="close">Cancel</base-button>
-            <base-button @click="update">Confirm</base-button>
+            <base-button @click="store">Confirm</base-button>
         </div>
     </base-dialog>
 </template>
@@ -39,29 +39,16 @@
     export default {
         props: {
             active: Boolean,
-            role: Object
+
         },
 
         data() {
             return {
-                newRoleData: {
+                roleData: {
                     name: '',
-                    scope_id: '',
-                    scope: {}
+                    scope_id: ''
                 },
-
                 scopes: []
-            }
-        },
-
-        watch: {
-            role: function() {
-                this.newRoleData = this.role;
-            },
-
-            active: function() {
-                if(this.active)
-                    this.editing = this.active;
             }
         },
 
@@ -69,30 +56,37 @@
             prepareScopes() {
                 let request = new Request({});
 
-                request.edit().then((response) => {
+                request.create().then((response) => {
                     this.scopes = response.scopes;
                 });
             },
 
-            close(updated) {
-                if(updated)
-                    this.$emit('update', this.newRoleData);
-
-                this.$emit('update:active', false);
-            },
-
-            update() {
+            store() {
                 let request = new Request({
                     'role': {
-                        'id': this.newRoleData.id,
-                        'name': this.newRoleData.name,
-                        'scope_id': this.newRoleData.scope.id
+                        'name': this.roleData.name,
+                        'scope_id': this.roleData.scope.id
                     }
                 });
 
-                request.update(this.newRoleData.id).then((response) => {
-                    this.close(true);
+                request.store().then((response) => {
+                    this.roleData = response.data;
+                    this.close(true)
                 });
+            },
+
+            close(saved) {
+                if(saved)
+                    this.$emit('save', this.roleData);
+
+                this.$emit('update:active', false);
+
+                this.roleData = {
+                    role: {
+                        scope: {
+                        }
+                    },
+                };
             },
         },
 

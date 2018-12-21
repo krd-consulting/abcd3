@@ -16,7 +16,7 @@
 
 @section('content')
     <div class="tw-flex tw-py-8 tw-max-h-full tw-overflow-y-auto">
-        <div class="tw-container tw-mx-auto lg:tw-w-2/3 md:tw-w-2/3 tw-w-full tw-flex">
+        <div class="tw-container tw-mx-auto tw-w-full tw-flex">
             <nav class="tw-w-1/4">
                 <sidebar-list>
                     <sidebar-list-item index="1" :route="{ path: '/preferences/' }">

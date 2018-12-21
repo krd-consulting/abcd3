@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Role;
 use App\Scope;
+use App\Http\Resources\Role as RoleResource;
 use App\Http\Resources\Roles;
 
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        return Scope::all();
+        return ['scopes' => Scope::all()];
     }
 
     public function edit()
@@ -31,7 +32,7 @@ class RoleController extends Controller
 
         // validate
         $validatedData = $request->validate([
-            'role.name' => 'required|string|unique',
+            'role.name' => 'required|string|unique:roles,name',
             'role.scope_id' => 'required|numeric|exists:scopes,id'
         ]);
         // store
@@ -40,7 +41,7 @@ class RoleController extends Controller
         $role->assignScope($validatedData['role']['scope_id']);
         $role->save();
 
-        return $role;
+        return new RoleResource($role);
     }
 
     public function update(Request $request)
