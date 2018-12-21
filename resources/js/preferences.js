@@ -16,6 +16,7 @@ Vue.use(VueGoodTablePlugin);
 Vue.component('base-button', require('./components/BaseButton.vue'));
 Vue.component('base-checkbox', require('./components/BaseCheckbox.vue'));
 Vue.component('base-container', require('./components/BaseContainer.vue'));
+Vue.component('base-dialog', require('./components/BaseDialog.vue'));
 Vue.component('base-header', require('./components/BaseHeader.vue'));
 Vue.component('base-icon', require('./components/BaseIcon.vue'));
 Vue.component('base-input', require('./components/BaseInput.vue'));
@@ -25,6 +26,7 @@ Vue.component('base-sidebar', require('./components/BaseSidebar.vue'));
 Vue.component('base-submenu', require('./components/BaseSubmenu.vue'));
 Vue.component('base-switch', require('./components/BaseSwitch.vue'));
 Vue.component('live-edit-text', require('./components/LiveEditText.vue'));
+Vue.component('scope-tag', require('./components/ScopeTag.vue'));
 Vue.component('sidebar-list', require('./components/SidebarList.vue'));
 Vue.component('sidebar-list-item', require('./components/SidebarListItem.vue'));
 

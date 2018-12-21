@@ -43,6 +43,10 @@ Route::prefix('api')
         Route::get('programs/{program}', 'ProgramController@show');
 
         Route::get('roles/create', 'RoleController@create');
+        Route::post('role', 'RoleController@store');
+        Route::get('roles/edit', 'RoleController@edit');
         Route::get('roles', 'RoleController@index');
         Route::patch('role-permission', 'UpdateRolePermission');
+        Route::patch('role/{role}', 'RoleController@update');
+        Route::delete('role/{role}', 'RoleController@delete');
 });

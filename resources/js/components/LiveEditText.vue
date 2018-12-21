@@ -1,7 +1,14 @@
 <template>
     <span @click="edit">
-        <input v-model="newValue" @blur="exit" @change="save" ref="edit" v-show="editing" type="text">
-        <span v-show="!editing">{{ value }}</span>
+        <input
+            v-model="newValue"
+            v-if="editing"
+            ref="edit"
+            @blur="exit"
+            @change="save"
+            type="text"
+            :size="newValue.length">
+        <span v-if="!editing">{{ value }}</span>
     </span>
 </template>
 <script>
@@ -19,8 +26,12 @@
 
         methods: {
             edit() {
+                this.newValue = this.value;
                 this.editing = true;
-                this.$refs.edit.focus();
+
+                this.$nextTick(() => {
+                    this.$refs.edit.focus();
+                });
             },
             exit() {
                 this.editing = false;

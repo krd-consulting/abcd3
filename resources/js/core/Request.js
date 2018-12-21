@@ -41,6 +41,10 @@ class Request {
         return this.submit('put' , url);
     }
 
+    delete(url){
+        return this.submit('delete' , url);
+    }
+
     submit(request , url) {
         return new Promise((resolve, reject) => {
             axios[request](url , this.data())

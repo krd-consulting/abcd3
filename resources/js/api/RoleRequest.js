@@ -9,8 +9,24 @@ class RoleRequest extends Request{
         return this.get('/api/roles/create');
     }
 
-    update() {
+    store() {
+        return this.post('/api/role');
+    }
+
+    edit() {
+        return this.get('/api/roles/edit');
+    }
+
+    update(role) {
+        return this.patch(`/api/role/${role}`);
+    }
+
+    updateRolePermission() {
         return this.patch('/api/role-permission');
+    }
+
+    destroy(role) {
+        return this.delete(`/api/role/${role}`);
     }
 }
 
