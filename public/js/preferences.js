@@ -104945,9 +104945,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_good_table__ = __webpack_require__(238);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_good_table_dist_vue_good_table_css__ = __webpack_require__(355);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_vue_good_table_dist_vue_good_table_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_vue_good_table_dist_vue_good_table_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_PreferencesFiles_vue__ = __webpack_require__(571);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_PreferencesFiles_vue__ = __webpack_require__(574);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__views_PreferencesFiles_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__views_PreferencesFiles_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_PreferencesRoles_vue__ = __webpack_require__(573);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_PreferencesRoles_vue__ = __webpack_require__(576);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_PreferencesRoles_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__views_PreferencesRoles_vue__);
 
 
@@ -104967,7 +104967,7 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_4_vue_good_table__["a" /* default */]);
 Vue.component('base-button', __webpack_require__(359));
 Vue.component('base-checkbox', __webpack_require__(364));
 Vue.component('base-container', __webpack_require__(362));
-Vue.component('base-dialog', __webpack_require__(582));
+Vue.component('base-dialog', __webpack_require__(565));
 Vue.component('base-header', __webpack_require__(367));
 Vue.component('base-icon', __webpack_require__(369));
 Vue.component('base-input', __webpack_require__(371));
@@ -104976,8 +104976,8 @@ Vue.component('base-menu-item', __webpack_require__(380));
 Vue.component('base-sidebar', __webpack_require__(383));
 Vue.component('base-submenu', __webpack_require__(385));
 Vue.component('base-switch', __webpack_require__(388));
-Vue.component('live-edit-text', __webpack_require__(565));
-Vue.component('scope-tag', __webpack_require__(568));
+Vue.component('live-edit-text', __webpack_require__(568));
+Vue.component('scope-tag', __webpack_require__(571));
 Vue.component('sidebar-list', __webpack_require__(391));
 Vue.component('sidebar-list-item', __webpack_require__(393));
 
@@ -105023,6 +105023,109 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+Component.options.__file = "resources/js/components/BaseDialog.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8d0bd0b8", Component.options)
+  } else {
+    hotAPI.reload("data-v-8d0bd0b8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 566 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    inheritAttrs: false,
+
+    methods: {
+        close: function close() {
+            this.$emit('update:visible', false);
+            this.$emit('close');
+        }
+    }
+});
+
+/***/ }),
+/* 567 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-dialog",
+    _vm._b({ on: { close: _vm.close } }, "el-dialog", _vm.$attrs, false),
+    [
+      _vm._t("title", null, { slot: "title" }),
+      _vm._v(" "),
+      _vm._t("default"),
+      _vm._v(" "),
+      _vm._t("footer", null, { slot: "footer" })
+    ],
+    2
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8d0bd0b8", module.exports)
+  }
+}
+
+/***/ }),
+/* 568 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(569)
+/* template */
+var __vue_template__ = __webpack_require__(570)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
 Component.options.__file = "resources/js/components/LiveEditText.vue"
 
 /* hot reload */
@@ -105045,7 +105148,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 566 */
+/* 569 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105099,7 +105202,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 567 */
+/* 570 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105147,15 +105250,15 @@ if (false) {
 }
 
 /***/ }),
-/* 568 */
+/* 571 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(569)
+var __vue_script__ = __webpack_require__(572)
 /* template */
-var __vue_template__ = __webpack_require__(570)
+var __vue_template__ = __webpack_require__(573)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -105194,7 +105297,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 569 */
+/* 572 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105253,7 +105356,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 570 */
+/* 573 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105283,7 +105386,7 @@ if (false) {
 }
 
 /***/ }),
-/* 571 */
+/* 574 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -105291,7 +105394,7 @@ var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(572)
+var __vue_template__ = __webpack_require__(575)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -105330,7 +105433,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 572 */
+/* 575 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105359,15 +105462,15 @@ if (false) {
 }
 
 /***/ }),
-/* 573 */
+/* 576 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(574)
+var __vue_script__ = __webpack_require__(577)
 /* template */
-var __vue_template__ = __webpack_require__(576)
+var __vue_template__ = __webpack_require__(582)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -105406,12 +105509,14 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 574 */
+/* 577 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_RoleRequest__ = __webpack_require__(575);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_RoleRequest__ = __webpack_require__(578);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PreferencesRoleEdit__ = __webpack_require__(579);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PreferencesRoleEdit___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__PreferencesRoleEdit__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -105494,43 +105599,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        EditRole: __WEBPACK_IMPORTED_MODULE_1__PreferencesRoleEdit___default.a
+    },
     data: function data() {
         return {
             create: {
@@ -105545,8 +105621,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 role: {
                     name: '',
                     scope: {}
-                },
-                scopes: []
+                }
             },
             fields: [],
             roles: [],
@@ -105606,53 +105681,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
         },
         editRole: function editRole(role, index) {
-            var _this3 = this;
-
-            var request = new __WEBPACK_IMPORTED_MODULE_0__api_RoleRequest__["a" /* default */]({});
-
-            request.edit().then(function (response) {
-                _this3.edit.active = true;
-                _this3.edit.role = role;
-                _this3.edit.scopes = response.scopes;
-                _this3.edit.roleIndex = index;
-            });
+            this.edit.active = true;
+            this.edit.role = role;
+            this.edit.roleIndex = index;
         },
-        closeEditRole: function closeEditRole() {
-            this.edit = {
-                active: false,
-                role: {
-                    scope: {
-                        name: ''
-                    }
-                },
-                scopes: []
-            };
-        },
-        updateRole: function updateRole() {
-            var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.edit.role.id;
-            var name = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.edit.role.name;
-
-            var _this4 = this;
-
-            var scopeId = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.edit.role.scope_id;
-            var roleIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.edit.roleIndex;
-
-            var request = new __WEBPACK_IMPORTED_MODULE_0__api_RoleRequest__["a" /* default */]({
-                'role': {
-                    'id': id,
-                    'name': name,
-                    'scope_id': scopeId
-                }
-            });
-
-            request.update(id).then(function (response) {
-                _this4.roles[roleIndex]['name'] = response.role.name;
-                _this4.roles[roleIndex]['scope_id'] = response.role.scope_id;
-                _this4.closeEditRole();
-            });
+        updateRole: function updateRole(role) {
+            this.roles[this.edit.roleIndex]['name'] = role.name;
+            this.roles[this.edit.roleIndex]['scope_id'] = role.scope.id;
         },
         updateRolePermission: function updateRolePermission(role, permission, permitted, roleIndex, permissionIndex) {
-            var _this5 = this;
+            var _this3 = this;
 
             var request = new __WEBPACK_IMPORTED_MODULE_0__api_RoleRequest__["a" /* default */]({
                 'role': {
@@ -105665,7 +105703,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             });
 
             request.updateRolePermission().then(function (response) {
-                _this5.roles[roleIndex]['all_permissions'][permissionIndex].permitted = response.permitted;
+                _this3.roles[roleIndex]['all_permissions'][permissionIndex].permitted = response.permitted;
             }).catch(function (error) {
                 //
             });
@@ -105689,7 +105727,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 575 */
+/* 578 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105756,7 +105794,275 @@ var RoleRequest = function (_Request) {
 /* harmony default export */ __webpack_exports__["a"] = (RoleRequest);
 
 /***/ }),
-/* 576 */
+/* 579 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(580)
+/* template */
+var __vue_template__ = __webpack_require__(581)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/views/PreferencesRoleEdit.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-ca92452e", Component.options)
+  } else {
+    hotAPI.reload("data-v-ca92452e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 580 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_RoleRequest__ = __webpack_require__(578);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: {
+        active: false,
+        role: Object
+    },
+
+    data: function data() {
+        return {
+            newRoleData: {
+                name: '',
+                scope_id: '',
+                scope: {}
+            },
+
+            scopes: []
+        };
+    },
+
+
+    watch: {
+        role: function role() {
+            this.newRoleData = this.role;
+        },
+
+        active: function active() {
+            if (this.active) this.editing = this.active;
+        }
+    },
+
+    methods: {
+        prepareScopes: function prepareScopes() {
+            var _this = this;
+
+            var request = new __WEBPACK_IMPORTED_MODULE_0__api_RoleRequest__["a" /* default */]({});
+
+            request.edit().then(function (response) {
+                _this.scopes = response.scopes;
+            });
+        },
+        closeEditRole: function closeEditRole(updated) {
+
+            if (updated) this.$emit('update', this.newRoleData);
+
+            this.$emit('update:active', false);
+        },
+        updateRole: function updateRole() {
+            var _this2 = this;
+
+            var request = new __WEBPACK_IMPORTED_MODULE_0__api_RoleRequest__["a" /* default */]({
+                'role': {
+                    'id': this.newRoleData.id,
+                    'name': this.newRoleData.name,
+                    'scope_id': this.newRoleData.scope.id
+                }
+            });
+
+            request.update(this.newRoleData.id).then(function (response) {
+                _this2.closeEditRole(true);
+            });
+        }
+    },
+
+    created: function created() {
+        this.prepareScopes();
+    }
+});
+
+/***/ }),
+/* 581 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "base-dialog",
+    {
+      attrs: { title: "Edit Role", visible: _vm.active },
+      on: { close: _vm.closeEditRole }
+    },
+    [
+      _c("form", [
+        _c("div", { staticClass: "tw-flex tw-items-center tw-w-2/3 tw-mb-4" }, [
+          _c("label", { staticClass: "tw-w-1/3 tw-text-right tw-px-4" }, [
+            _vm._v("\n                Name\n            ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "tw-w-2/3" },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.newRoleData.name,
+                  callback: function($$v) {
+                    _vm.$set(_vm.newRoleData, "name", $$v)
+                  },
+                  expression: "newRoleData.name"
+                }
+              })
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tw-flex tw-items-center tw-w-2/3 tw-mb-4" }, [
+          _c("label", { staticClass: "tw-w-1/3 tw-text-right tw-px-4" }, [
+            _vm._v("\n                Scope\n            ")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "tw-w-2/3" },
+            [
+              _c(
+                "el-select",
+                {
+                  model: {
+                    value: _vm.newRoleData.scope,
+                    callback: function($$v) {
+                      _vm.$set(_vm.newRoleData, "scope", $$v)
+                    },
+                    expression: "newRoleData.scope"
+                  }
+                },
+                _vm._l(_vm.scopes, function(scope) {
+                  return _c(
+                    "el-option",
+                    {
+                      key: scope.id,
+                      attrs: { label: scope.name, value: scope }
+                    },
+                    [
+                      _c("scope-tag", { attrs: { scope: scope.id } }, [
+                        _vm._v(_vm._s(scope.name))
+                      ])
+                    ],
+                    1
+                  )
+                }),
+                1
+              )
+            ],
+            1
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { attrs: { slot: "footer" }, slot: "footer" },
+        [
+          _c("base-button", { on: { click: _vm.closeEditRole } }, [
+            _vm._v("Cancel")
+          ]),
+          _vm._v(" "),
+          _c("base-button", { on: { click: _vm.updateRole } }, [
+            _vm._v("Confirm")
+          ])
+        ],
+        1
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-ca92452e", module.exports)
+  }
+}
+
+/***/ }),
+/* 582 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -105766,121 +106072,15 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "base-dialog",
-        {
-          attrs: { title: "Edit Role", visible: _vm.edit.active },
-          on: {
-            "update:visible": function($event) {
-              _vm.$set(_vm.edit, "active", $event)
-            }
-          }
-        },
-        [
-          _c("form", [
-            _c(
-              "div",
-              { staticClass: "tw-flex tw-items-center tw-w-2/3 tw-mb-4" },
-              [
-                _c("label", { staticClass: "tw-w-1/3 tw-text-right tw-px-4" }, [
-                  _vm._v("\n                    Name\n                ")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-w-2/3" },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.edit.role.name,
-                        callback: function($$v) {
-                          _vm.$set(_vm.edit.role, "name", $$v)
-                        },
-                        expression: "edit.role.name"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tw-flex tw-items-center tw-w-2/3 tw-mb-4" },
-              [
-                _c("label", { staticClass: "tw-w-1/3 tw-text-right tw-px-4" }, [
-                  _vm._v("\n                    Scope\n                ")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-w-2/3" },
-                  [
-                    _c(
-                      "el-select",
-                      {
-                        model: {
-                          value: _vm.edit.role.scope,
-                          callback: function($$v) {
-                            _vm.$set(_vm.edit.role, "scope", $$v)
-                          },
-                          expression: "edit.role.scope"
-                        }
-                      },
-                      _vm._l(_vm.edit.scopes, function(scope) {
-                        return _c(
-                          "el-option",
-                          {
-                            key: scope.id,
-                            attrs: { label: scope.name, value: scope }
-                          },
-                          [
-                            _c("scope-tag", { attrs: { scope: scope.id } }, [
-                              _vm._v(_vm._s(scope.name))
-                            ])
-                          ],
-                          1
-                        )
-                      }),
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { attrs: { slot: "footer" }, slot: "footer" },
-            [
-              _c("base-button", { on: { click: _vm.closeEditRole } }, [
-                _vm._v("Cancel")
-              ]),
-              _vm._v(" "),
-              _c(
-                "base-button",
-                {
-                  on: {
-                    click: function($event) {
-                      _vm.updateRole(
-                        _vm.edit.role.id,
-                        _vm.edit.role.name,
-                        _vm.edit.role.scope_id,
-                        _vm.edit.roleIndex
-                      )
-                    }
-                  }
-                },
-                [_vm._v("Confirm")]
-              )
-            ],
-            1
-          )
-        ]
-      ),
+      _c("edit-role", {
+        attrs: { active: _vm.edit.active, role: _vm.edit.role },
+        on: {
+          "update:active": function($event) {
+            _vm.$set(_vm.edit, "active", $event)
+          },
+          update: _vm.updateRole
+        }
+      }),
       _vm._v(" "),
       _c(
         "base-dialog",
@@ -106140,114 +106340,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-23b70d44", module.exports)
   }
 }
-
-/***/ }),
-/* 577 */,
-/* 578 */,
-/* 579 */,
-/* 580 */,
-/* 581 */,
-/* 582 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(2)
-/* script */
-var __vue_script__ = __webpack_require__(584)
-/* template */
-var __vue_template__ = __webpack_require__(583)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/js/components/BaseDialog.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-8d0bd0b8", Component.options)
-  } else {
-    hotAPI.reload("data-v-8d0bd0b8", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 583 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "el-dialog",
-    _vm._b({ on: { close: _vm.close } }, "el-dialog", _vm.$attrs, false),
-    [
-      _vm._t("title", null, { slot: "title" }),
-      _vm._v(" "),
-      _vm._t("default"),
-      _vm._v(" "),
-      _vm._t("footer", null, { slot: "footer" })
-    ],
-    2
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-8d0bd0b8", module.exports)
-  }
-}
-
-/***/ }),
-/* 584 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    inheritAttrs: false,
-
-    methods: {
-        close: function close() {
-            this.$emit('update:visible', false);
-            this.$emit('close');
-        }
-    }
-});
 
 /***/ })
 /******/ ]);

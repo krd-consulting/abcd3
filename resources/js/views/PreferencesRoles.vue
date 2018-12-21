@@ -1,42 +1,9 @@
 <template>
     <div>
-        <base-dialog title="Edit Role" :visible.sync="edit.active">
-            <form>
-                <div class="tw-flex tw-items-center tw-w-2/3 tw-mb-4">
-                    <label class="tw-w-1/3 tw-text-right tw-px-4">
-                        Name
-                    </label>
-                    <div class="tw-w-2/3">
-                        <el-input v-model="edit.role.name">
-                        </el-input>
-                    </div>
-                </div>
-                <div class="tw-flex tw-items-center tw-w-2/3 tw-mb-4">
-                    <label class="tw-w-1/3 tw-text-right tw-px-4">
-                        Scope
-                    </label>
-                    <div class="tw-w-2/3">
-                        <el-select v-model="edit.role.scope">
-                            <el-option
-                                v-for="scope in edit.scopes"
-                                :key="scope.id"
-                                :label="scope.name"
-                                :value="scope">
-                                <scope-tag :scope="scope.id">{{ scope.name }}</scope-tag>
-                            </el-option>
-                        </el-select>
-                    </div>
-                </div>
-            </form>
-            <div slot="footer">
-                <base-button @click="closeEditRole">Cancel</base-button>
-                <base-button
-                    @click="updateRole(edit.role.id, edit.role.name, edit.role.scope_id, edit.roleIndex)"
-                >Confirm</base-button>
-            </div>
-        </base-dialog>
-
-
+        <edit-role
+            :active.sync="edit.active"
+            :role="edit.role"
+            @update="updateRole"/>
 
         <base-dialog title="Create Role" :visible.sync="create.active">
             <form>
@@ -113,8 +80,12 @@
 </template>
 <script>
     import Request from '../api/RoleRequest';
+    import EditRole from './PreferencesRoleEdit';
 
     export default {
+        components: {
+            EditRole
+        },
         data() {
             return {
                 create: {
@@ -131,8 +102,7 @@
                         name: '',
                         scope: {
                         }
-                    },
-                    scopes: []
+                    }
                 },
                 fields: [],
                 roles: [],
@@ -192,47 +162,14 @@
             },
 
             editRole(role, index) {
-                let request = new Request({});
-
-                request.edit().then((response) => {
-                    this.edit.active = true;
-                    this.edit.role = role;
-                    this.edit.scopes = response.scopes;
-                    this.edit.roleIndex = index;
-                });
+                this.edit.active = true;
+                this.edit.role = role;
+                this.edit.roleIndex = index;
             },
 
-            closeEditRole() {
-                this.edit = {
-                    active: false,
-                    role: {
-                        scope: {
-                            name: ''
-                        }
-                    },
-                    scopes: []
-                };
-            },
-
-            updateRole(
-                id = this.edit.role.id,
-                name = this.edit.role.name,
-                scopeId = this.edit.role.scope_id,
-                roleIndex = this.edit.roleIndex
-            ) {
-                let request = new Request({
-                    'role': {
-                        'id': id,
-                        'name': name,
-                        'scope_id': scopeId
-                    }
-                });
-
-                request.update(id).then((response) => {
-                    this.roles[roleIndex]['name'] = response.role.name;
-                    this.roles[roleIndex]['scope_id'] = response.role.scope_id;
-                    this.closeEditRole();
-                });
+            updateRole(role) {
+                this.roles[this.edit.roleIndex]['name'] = role.name;
+                this.roles[this.edit.roleIndex]['scope_id'] = role.scope.id;
             },
 
             updateRolePermission(role, permission, permitted, roleIndex, permissionIndex) {
