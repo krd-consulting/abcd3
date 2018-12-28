@@ -49,5 +49,13 @@ class UsersTableSeeder extends Seeder
         $scott->remember_token = str_random(10);
         $scott->save();
         $scott->assignRole('Guidance Counselor');
+	
+	$roman = new User;
+        $roman->name = 'Roman Katsnelson';
+        $roman->email = 'roman@hellokrd.net';
+        $roman->password = bcrypt('secret');
+        $roman->remember_token = str_random(10);
+        $roman->save();
+        $roman->assignRole('Guidance Counselor');
     }
 }
