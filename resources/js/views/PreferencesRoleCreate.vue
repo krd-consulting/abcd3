@@ -1,35 +1,58 @@
 <template>
-    <base-dialog title="Create Role" :visible="active" @close="close">
+    <base-dialog :visible="active" @close="close">
+        <div slot="title">
+            <base-icon class="tw-align-middle">person_add</base-icon> Create Role
+        </div>
         <form>
-            <div class="tw-flex tw-items-center tw-w-2/3 tw-mb-4">
-                <label class="tw-w-1/3 tw-text-right tw-px-4">
-                    Name
-                </label>
-                <div class="tw-w-2/3">
-                    <el-input v-model="roleData.name">
-                    </el-input>
+            <div>
+                <div class="tw-flex tw-items-center tw-w-full">
+                    <label class="tw-w-1/5 tw-text-right tw-px-4">
+                        Name
+                    </label>
+                    <div class="tw-w-2/3">
+                            <el-input
+                                v-model="roleData.name"
+                                name="name"
+                                @keydown.native="request.errors.clear($event.target.name)"></el-input>
+                    </div>
+                </div>
+                <div v-if="request.errors.has('name')" class="tw-flex tw-justify-end">
+                    <div class="tw-w-4/5 tw-py-2">
+                        <span v-text="request.errors.get('name')[0]" class="tw-text-xs tw-text-red"></span>
+                    </div>
                 </div>
             </div>
-            <div class="tw-flex tw-items-center tw-w-2/3 tw-mb-4">
-                <label class="tw-w-1/3 tw-text-right tw-px-4">
-                    Scope
-                </label>
-                <div class="tw-w-2/3">
-                    <el-select v-model="roleData.scope" placeholder="Select Scope">
-                        <el-option
-                            v-for="scope in scopes"
-                            :key="scope.id"
-                            :label="scope.name"
-                            :value="scope">
-                            <scope-tag :scope="scope.id">{{ scope.name }}</scope-tag>
-                        </el-option>
-                    </el-select>
+            <div class="tw-mt-2">
+                <div class="tw-flex tw-items-center tw-w-full">
+                    <label class="tw-w-1/5 tw-text-right tw-px-4">
+                        Scope
+                    </label>
+                    <div class="tw-w-2/3">
+                        <el-select
+                            v-model="roleData.scope"
+                            name="scope_id"
+                            placeholder="Select Scope"
+                            @change="request.errors.clear($event.target.name)">
+                            <el-option
+                                v-for="scope in scopes"
+                                :key="scope.id"
+                                :label="scope.name"
+                                :value="scope">
+                                <scope-tag :scope="scope.id">{{ scope.name }}</scope-tag>
+                            </el-option>
+                        </el-select>
+                    </div>
+                </div>
+                <div v-if="request.errors.has('scope_id')" class="tw-flex tw-justify-end">
+                    <div class="tw-w-4/5 tw-py-2">
+                        <span v-text="request.errors.get('scope_id')[0]" class="tw-text-xs tw-text-red"></span>
+                    </div>
                 </div>
             </div>
         </form>
         <div slot="footer">
-            <base-button @click="close">Cancel</base-button>
-            <base-button @click="store">Confirm</base-button>
+            <base-button @click="close(false)">Cancel</base-button>
+            <base-button @click="store">Create</base-button>
         </div>
     </base-dialog>
 </template>
@@ -44,9 +67,15 @@
 
         data() {
             return {
-                roleData: {
+                request: new Request({
                     name: '',
                     scope_id: ''
+                }),
+                roleData: {
+                    name: '',
+                    scope: {
+                        id: ''
+                    }
                 },
                 scopes: []
             }
@@ -62,30 +91,34 @@
             },
 
             store() {
-                let request = new Request({
-                    'role': {
-                        'name': this.roleData.name,
-                        'scope_id': this.roleData.scope.id
-                    }
+                this.request = new Request({
+                    name: this.roleData.name,
+                    scope_id: this.roleData.scope.id
                 });
 
-                request.store().then((response) => {
-                    this.roleData = response.data;
-                    this.close(true)
-                });
+                this.request.store()
+                    .then((response) => {
+                        this.roleData = response.data;
+                        this.close(true)
+                    })
+                    .catch((error) => {
+                        //
+                    });
             },
 
-            close(saved) {
+            close(saved = false) {
                 if(saved)
                     this.$emit('save', this.roleData);
 
                 this.$emit('update:active', false);
 
+                this.request.errors.clear();
+
                 this.roleData = {
-                    role: {
-                        scope: {
-                        }
-                    },
+                    name: '',
+                    scope: {
+                        id: ''
+                    }
                 };
             },
         },

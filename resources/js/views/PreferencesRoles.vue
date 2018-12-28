@@ -108,8 +108,8 @@
             },
 
             editRole(role, index) {
-                this.edit.active = true;
                 this.edit.role = role;
+                this.edit.active = true;
                 this.edit.roleIndex = index;
             },
 

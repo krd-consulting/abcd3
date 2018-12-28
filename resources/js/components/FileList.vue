@@ -58,7 +58,7 @@
         }
     }
 </script>
-<style scoped>
+<style lang="css" scoped>
     .file-list-item {
         @apply tw-border-b;
     }

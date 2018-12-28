@@ -32,13 +32,13 @@ class RoleController extends Controller
 
         // validate
         $validatedData = $request->validate([
-            'role.name' => 'required|string|unique:roles,name',
-            'role.scope_id' => 'required|numeric|exists:scopes,id'
+            'name' => 'required|string|unique:roles,name',
+            'scope_id' => 'required|numeric|exists:scopes,id'
         ]);
         // store
         $role = new Role();
-        $role->name = $validatedData['role']['name'];
-        $role->assignScope($validatedData['role']['scope_id']);
+        $role->name = $validatedData['name'];
+        $role->assignScope($validata['scope_id']);
         $role->save();
 
         return new RoleResource($role);
@@ -50,17 +50,17 @@ class RoleController extends Controller
 
         // validate
         $validatedData = $request->validate([
-            'role.id' => 'required|numeric|exists:roles,id',
-            'role.name' => 'string',
-            'role.scope_id' => 'numeric|exists:scopes,id'
+            'id' => 'required|numeric|exists:roles,id',
+            'name' => 'required|string|unique:roles,name,' . $request->input('id'),
+            'scope_id' => 'numeric|exists:scopes,id'
         ]);
 
         // update
         $role = new Role();
         $role->exists = true;
-        $role->id=$validatedData['role']['id'];
-        $role->name = $validatedData['role']['name'];
-        $role->assignScope($validatedData['role']['scope_id']);
+        $role->id=$validatedData['id'];
+        $role->name = $validatedData['name'];
+        $role->assignScope($validatedData['scope_id']);
         $role->save();
 
         return $validatedData;

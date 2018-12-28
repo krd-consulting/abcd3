@@ -3,6 +3,10 @@ class Errors {
         this.errors = { };
     }
 
+    has(field) {
+        return this.errors.hasOwnProperty(field);
+    }
+
     get(field) {
         return this.errors[field];
     }

@@ -54,10 +54,9 @@ class Request {
                 resolve(response.data);
             })
             .catch(error => {
-                if(error.response) {
-                    this.onFail(error.response.data.errors);
-                }
-                reject(error);
+                this.onFail(error.response.data.errors);
+
+                reject(error.response.data);
             });
         });
     }

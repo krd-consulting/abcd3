@@ -947,6 +947,7 @@ module.exports = {
     prefix: 'tw-',
     important: false,
     separator: ':',
+    shadowLookup: true
   },
 
 }
