@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateRolePermission as Update;
 use App\Role;
 
 use Illuminate\Http\Request;
@@ -14,23 +15,17 @@ class UpdateRolePermission extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(Request $request)
+    public function __invoke(Update $request)
     {
-        // authorize
-
         // validate
-        $validatedData = $request->validate([
-            'role.id' => 'required|exists:roles,id',
-            'permission.id' => 'exists:permissions,id',
-            'permitted' => 'boolean'
-        ]);
+        $validated = $request->validated();
 
         // store
-        $role = Role::findOrFail($validatedData['role']['id']);
-        $permission = $validatedData['permission']['id'];
+        $role = Role::findOrFail($validated['role']['id']);
+        $permission = $validated['permission']['id'];
 
-        $role->giveOrRevokePermissionTo($permission, $validatedData['permitted']);
+        $role->giveOrRevokePermissionTo($permission, $validated['permitted']);
 
-        return $validatedData;
+        return $validated;
     }
 }

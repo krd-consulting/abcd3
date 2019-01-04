@@ -6,10 +6,10 @@
 
 @section('content')
 
-<div class="tw-bg-grey-lighter tw-h-screen tw-w-full tw-pin-t tw-absolute">
+<div class="tw-bg-grey-lighter tw-w-full tw-flex lg:tw-items-center tw-h-screen">
     <login-form inline-template>
-        <div class="tw-container tw-mx-auto tw-w-3/5 tw-flex tw-flex-wrap tw-bg-white tw-mt-32 tw-rounded-lg tw-shadow tw-border-t-8 tw-border-blue">
-            <div class="tw-w-1/2 tw-pt-16 tw-pb-24 tw-px-12" >
+        <div class="lg:tw-container lg:tw-mx-auto lg:tw-w-3/5 tw-w-full tw-flex tw-flex-wrap tw-bg-white lg:tw-rounded-lg tw-shadow tw-border-t-8 tw-border-blue">
+            <div class="lg:tw-w-1/2 tw-w-full tw-pt-16 tw-pb-16 tw-px-12" >
                 <div v-if="!forgotPasswordActive">
                     <h1 class="tw-text-3xl tw-mb-4">{{ __('Welcome Back!') }}</h1>
                     <form method="POST" action="{{ route('login') }}">
@@ -122,7 +122,7 @@
                     </form>
                 </div>
             </div>
-            <div class="tw-w-1/2 tw-pt-16 tw-px-12 tw-bg-blue-lightest">
+            <div class="lg:tw-w-1/2 tw-w-full tw-pt-16 tw-pb-16 tw-px-12 tw-bg-blue-lightest">
                 <h2 class="tw-text-xl tw-mt-2">A Better Community Database</h2>
                 <ul class="tw-list-reset">
                     <li class="tw-mt-6 tw-font-semibold tw-text-blue-darker">

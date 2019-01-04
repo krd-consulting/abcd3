@@ -10,10 +10,10 @@
                         Name
                     </label>
                     <div class="tw-w-2/3">
-                            <el-input
+                            <base-input
                                 v-model="roleData.name"
                                 name="name"
-                                @keydown.native="request.errors.clear($event.target.name)"></el-input>
+                                @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
                 </div>
                 <div v-if="request.errors.has('name')" class="tw-flex tw-justify-end">
@@ -28,11 +28,11 @@
                         Scope
                     </label>
                     <div class="tw-w-2/3">
-                        <el-select
+                        <base-select
                             v-model="roleData.scope"
                             name="scope_id"
                             placeholder="Select Scope"
-                            @change="request.errors.clear($event.target.name)">
+                            @change="request.errors.clear('scope_id')">
                             <el-option
                                 v-for="scope in scopes"
                                 :key="scope.id"
@@ -40,7 +40,7 @@
                                 :value="scope">
                                 <scope-tag :scope="scope.id">{{ scope.name }}</scope-tag>
                             </el-option>
-                        </el-select>
+                        </base-select>
                     </div>
                 </div>
                 <div v-if="request.errors.has('scope_id')" class="tw-flex tw-justify-end">

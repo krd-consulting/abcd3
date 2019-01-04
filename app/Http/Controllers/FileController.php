@@ -21,7 +21,7 @@ class FileController extends Controller
      * with data about the files' file type and field names.
      *
      * @param  FileType $fileType
-     * @return Collection
+     * @return ResourceCollection
      */
     public function index(FileType $fileType)
     {

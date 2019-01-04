@@ -2,68 +2,77 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\Scope;
 use App\Http\Resources\Role as RoleResource;
 use App\Http\Resources\Roles;
+use App\Http\Requests\StoreRole;
+use App\Http\Requests\UpdateRole;
+use App\Role;
+use App\Scope;
 
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+    /**
+     * Returns all roles (along with their scope) from the database.
+     *
+     *  @return ResourceCollection
+     */
     public function index()
     {
         return new Roles(Role::with('scope')->get());
     }
 
+    /**
+     * Returns essential form data for creating a role:
+     * 1. All scopes
+     *
+     * @return Collection
+     */
     public function create()
     {
         return ['scopes' => Scope::all()];
     }
 
+    /**
+     * Returns essential form data for editing a role:
+     * 1. All scopes
+     *
+     * @return Collection
+     */
     public function edit()
     {
         return ['scopes' => Scope::all()];
     }
 
-    public function store(Request $request)
+    public function store(StoreRole $request)
     {
-        // authorize
-
         // validate
-        $validatedData = $request->validate([
-            'name' => 'required|string|unique:roles,name',
-            'scope_id' => 'required|numeric|exists:scopes,id'
-        ]);
+        $validated = $request->validated();
+
         // store
         $role = new Role();
-        $role->name = $validatedData['name'];
-        $role->assignScope($validata['scope_id']);
+        $role->name = $validated['name'];
+        $role->assignScope($validated['scope_id']);
         $role->save();
 
         return new RoleResource($role);
     }
 
-    public function update(Request $request)
+    public function update(UpdateRole $request)
     {
-        // authorize
-
         // validate
-        $validatedData = $request->validate([
-            'id' => 'required|numeric|exists:roles,id',
-            'name' => 'required|string|unique:roles,name,' . $request->input('id'),
-            'scope_id' => 'numeric|exists:scopes,id'
-        ]);
+        $validated = $request->validated();
 
         // update
         $role = new Role();
         $role->exists = true;
-        $role->id=$validatedData['id'];
-        $role->name = $validatedData['name'];
-        $role->assignScope($validatedData['scope_id']);
+        $role->id=$validated['id'];
+        $role->name = $validated['name'];
+        $role->assignScope($validated['scope_id']);
         $role->save();
 
-        return $validatedData;
+        return new RoleResource($role);
     }
 
     public function delete(Role $role)

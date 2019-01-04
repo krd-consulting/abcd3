@@ -7,11 +7,10 @@
                         Name
                     </label>
                     <div class="tw-w-2/3">
-                            <input
-                                v-model="newRoleData.name"
-                                name="name"
-                                type="text"
-                                >
+                        <base-input
+                            v-model="newRoleData.name"
+                            :value="role.name"
+                            name="name"/>
                     </div>
                 </div>
                 <div v-if="request.errors.has('name')" class="tw-flex tw-justify-end">
@@ -26,7 +25,7 @@
                         Scope
                     </label>
                     <div class="tw-w-2/3">
-                        <el-select
+                        <base-select
                             v-model="newRoleData.scope"
                             name="scope_id"
                             placeholder="Select Scope">
@@ -37,7 +36,7 @@
                                 :value="scope">
                                 <scope-tag :scope="scope.id">{{ scope.name }}</scope-tag>
                             </el-option>
-                        </el-select>
+                        </base-select>
                     </div>
                 </div>
                 <div v-if="request.errors.has('scope_id')" class="tw-flex tw-justify-end">
@@ -105,7 +104,7 @@
 
             close(updated) {
                 if(updated)
-                    this.$emit('update', this.roleData);
+                    this.$emit('update', this.newRoleData);
 
                 this.$emit('update:active', false);
 

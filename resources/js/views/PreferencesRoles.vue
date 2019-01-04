@@ -108,7 +108,7 @@
             },
 
             editRole(role, index) {
-                this.edit.role = role;
+                this.edit.role = _.clone(role);
                 this.edit.active = true;
                 this.edit.roleIndex = index;
             },

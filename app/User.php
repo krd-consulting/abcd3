@@ -129,12 +129,12 @@ class User extends Authenticatable
 
     public function getScopeAttribute()
     {
-        return $this->scopes()->orderBy('value', 'desc')->first()->name;
+        return $this->getScope()->name;
     }
 
     public function getScopeValueAttribute()
     {
-        return $this->scopes()->orderBy('value', 'desc')->first()->value;
+        return $this->getScope()->value;
     }
 
     public function getAvailableTeamsAttribute()
@@ -154,6 +154,12 @@ class User extends Authenticatable
         }
 
         return $teams;
+    }
+
+    public function getScope() {
+        // TODO: Return default scope, if none.
+
+        return $this->scopes()->orderBy('value', 'desc')->first();
     }
 
 

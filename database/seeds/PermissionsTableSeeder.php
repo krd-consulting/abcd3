@@ -19,6 +19,10 @@ class PermissionsTableSeeder extends Seeder
             [
                 'name' => 'write programs',
                 'guard_name' => 'web'
+            ],
+            [
+                'name' => 'write roles',
+                'guard_name' => 'web'
             ]
         ]);
     }
