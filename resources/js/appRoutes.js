@@ -2,6 +2,7 @@ import VueRouter from 'vue-router';
 
 import AppFileList from './views/AppFileList';
 import AppFileProfile from './views/AppFileProfile';
+import AppProgramList from './views/AppProgramProfile';
 import AppProgramProfile from './views/AppProgramProfile';
 
 const routes = [
@@ -19,6 +20,9 @@ const routes = [
     },
     {
         path: '/files/:fileType/:file', component: AppFileProfile,
+    },
+    {
+        path: '/programs', component: AppProgramList,
     },
     {
         path: '/programs/:id', component: AppProgramProfile

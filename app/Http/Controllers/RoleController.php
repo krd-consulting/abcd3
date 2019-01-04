@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\Role as RoleResource;
 use App\Http\Resources\Roles;
+use App\Http\Requests\DeleteRole;
 use App\Http\Requests\StoreRole;
 use App\Http\Requests\UpdateRole;
 use App\Role;
@@ -31,6 +32,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+        // authorize
+
         return ['scopes' => Scope::all()];
     }
 
@@ -40,14 +43,16 @@ class RoleController extends Controller
      *
      * @return Collection
      */
-    public function edit()
+    public function edit(Role $role)
     {
+        $this->authorize('write', $role);
+
         return ['scopes' => Scope::all()];
     }
 
     public function store(StoreRole $request)
     {
-        // validate
+        // authorize and validate
         $validated = $request->validated();
 
         // store
@@ -61,7 +66,7 @@ class RoleController extends Controller
 
     public function update(UpdateRole $request)
     {
-        // validate
+        // authorize and validate
         $validated = $request->validated();
 
         // update
@@ -77,6 +82,8 @@ class RoleController extends Controller
 
     public function delete(Role $role)
     {
+        $this->authorize('write', $role);
+
         $role->delete();
     }
 }

@@ -27,10 +27,12 @@
                         <base-icon class="tw-text-xl tw-px-2">insert_drive_file</base-icon>
                         Files
                     </sidebar-list-item>
-                    <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
-                        <base-icon class="tw-text-xl tw-px-2">people</base-icon>
-                        Roles
-                    </sidebar-list-item>
+                    @can('write roles')
+                        <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
+                            <base-icon class="tw-text-xl tw-px-2">people</base-icon>
+                            Roles
+                        </sidebar-list-item>
+                    @endcan
                 </sidebar-list>
             </nav>
             <section class="tw-ml-8 tw-w-3/4">
