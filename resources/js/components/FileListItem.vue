@@ -1,21 +1,16 @@
 <template>
-    <div class="tw-flex tw-items-center tw-bg-white hover:tw-text-blue">
-        <router-link tag="div" class="tw-w-5/6 tw-py-4 tw-pl-4 tw-cursor-pointer" :to="`/files/${fileType}/${file.id}`">
-            <span class="tw-mb-2 tw-block tw-font-bold">
-                {{ primaryData }}
-            </span>
+    <list-item :to="`/files/${fileType}/${file.id}`">
+        <template slot="primary-data-text">{{ primaryData }}</template>
+        <template slot="secondary-data">
             <secondary-data class="tw-text-sm" v-for="(data, index) in secondaryData" :key="index" :data="data">
                 {{ file[data] }}
             </secondary-data>
-        </router-link tag="div">
-        <div class="tw-w-1/6 tw-py-4 tw-pr-4 tw-text-right">
-            <base-icon class="tw-text-base">edit</base-icon>
-            <base-icon class="tw-text-base">delete</base-icon>
-        </div>
-    </div>
+        </template>
+    </list-item>
 </template>
 <script>
     import moment from 'moment';
+    import ListItem from './AppListItem';
     import SecondaryData from './FileListItemSecondaryData';
 
     export default {
@@ -27,6 +22,7 @@
         },
 
         components: {
+            ListItem,
             SecondaryData
         },
 
