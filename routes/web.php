@@ -27,6 +27,7 @@ Route::get('/', 'ShowHome');
 Route::get('/dashboard', 'ShowHome');
 Route::get('/files', 'ShowHome')->where('all', '(.*)');
 Route::get('/files/{all}', 'ShowHome')->where('all', '(.*)');
+Route::get('/programs', 'ShowHome')->where('all', '(.*)');
 Route::get('/programs/{all}', 'ShowHome')->where('all', '(.*)');
 
 Route::get('/preferences', 'ShowPreferences');
@@ -40,6 +41,7 @@ Route::prefix('api')
         Route::get('files/{fileType}', 'FileController@index');
         Route::get('files/{fileType}/{file}', 'FileController@show');
 
+        Route::get('programs', 'ProgramController@index');
         Route::get('programs/{program}', 'ProgramController@show');
 
         Route::get('roles/create', 'RoleController@create');

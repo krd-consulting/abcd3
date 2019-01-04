@@ -2,7 +2,7 @@ import VueRouter from 'vue-router';
 
 import AppFileList from './views/AppFileList';
 import AppFileProfile from './views/AppFileProfile';
-import AppProgramList from './views/AppProgramProfile';
+import AppProgramList from './views/AppProgramList';
 import AppProgramProfile from './views/AppProgramProfile';
 
 const routes = [

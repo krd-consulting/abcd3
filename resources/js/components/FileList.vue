@@ -3,12 +3,11 @@
         <file-list-item
             v-for="(file, index) in files"
             :key="index"
-            index="index"
+            :index="index"
             :file="file"
             :file-type="fileType"
             :primary-fields="primaryFields"
-            :secondary-fields="secondaryFields"
-            class="file-list-item"></file-list-item>
+            :secondary-fields="secondaryFields"></file-list-item>
     </div>
 </template>
 <script>
@@ -58,8 +57,3 @@
         }
     }
 </script>
-<style lang="css" scoped>
-    .file-list-item {
-        @apply tw-border-b;
-    }
-</style>

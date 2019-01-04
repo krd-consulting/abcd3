@@ -11,19 +11,20 @@
         </div>
         <slot name="list">
             <div>
-                <slot name="list-items"></slot>
+                <slot></slot>
             </div>
         </slot>
         <div class="tw-py-2">
-            <base-pagination
-                :current-page.sync="page"
-                @current-change="handlePageChange"
-                layout="prev, slot, next"
-                :pager-count="5"
-                :page-size="perPage"
-                :total="total">
-                <span class="tw-text-grey-dark">{{ paginationInfo }}</span>
-            </base-pagination>
+            <slot name="pagination">
+                <base-pagination
+                    :current-page="page"
+                    @current-change="handlePageChange"
+                    layout="prev, slot, next"
+                    :page-size="perPage"
+                    :total="total">
+                    <span class="tw-text-grey-dark">{{ paginationInfo }}</span>
+                </base-pagination>
+            </slot>
         </div>
     </div>
 </template>
@@ -31,18 +32,19 @@
     export default {
 
         props: {
+            items: Array,
             page: Number,
             perPage: Number,
             total: Number
-        }
+        },
 
         computed: {
             firstItemNo() {
-                return (this.params.perPage*(this.params.page-1)) + 1 ;
+                return (this.perPage*(this.page-1)) + 1 ;
             },
 
             lastItemNo() {
-                const itemNo = this.params.page*this.params.perPage;
+                const itemNo = this.page*this.perPage;
 
                 if(itemNo > this.total)
                     return this.total;
@@ -54,6 +56,13 @@
                 return `Showing ${ this.firstItemNo }-${ this.lastItemNo } of ${ this.total }`;
             }
         },
+
+        methods: {
+            handlePageChange(page) {
+                this.$emit('page-change', page);
+                this.$emit('update:page', page);
+            }
+        }
 
     }
 </script>

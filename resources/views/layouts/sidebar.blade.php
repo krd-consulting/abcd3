@@ -40,6 +40,12 @@
             @empty
                 <li class="tw-py-4 tw-pl-8 tw-text-xs">You have no programs</li>
             @endforelse
+            <sidebar-list-item
+                index="3-5"
+                :route="{ path: '/programs' }"
+                >
+                More programs...
+            </sidebar-list-item>
         </base-submenu>
         @if(count($teams) > 0)
             <base-submenu index="4">

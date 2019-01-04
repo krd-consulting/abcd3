@@ -1,6 +1,6 @@
 <template>
     <list-item :to="`/files/${fileType}/${file.id}`">
-        <template slot="primary-data-text">{{ primaryData }}</template>
+        <template>{{ primaryData }}</template>
         <template slot="secondary-data">
             <secondary-data class="tw-text-sm" v-for="(data, index) in secondaryData" :key="index" :data="data">
                 {{ file[data] }}

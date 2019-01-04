@@ -1,9 +1,9 @@
 <template>
-    <div class="tw-flex tw-items-center tw-bg-white hover:tw-text-blue">
+    <div class="tw-flex tw-items-center tw-bg-white hover:tw-text-blue tw-border-b">
         <router-link tag="div" class="tw-w-5/6 tw-py-4 tw-pl-4 tw-cursor-pointer" :to="to">
             <slot name="primary-data">
                 <span class="tw-mb-2 tw-block tw-font-bold">
-                    <slot name="primary-data-text">{{ primaryData }}</slot>
+                    <slot>{{ primaryData }}</slot>
                 </span>
             </slot>
             <slot name="secondary-data"> {{ secondaryData }}</slot>
