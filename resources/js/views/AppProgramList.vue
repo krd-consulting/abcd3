@@ -6,6 +6,8 @@
             :key="index"
             :to="`/programs/${program.id}`">
             {{ program.name }}
+
+            <template v-if="program.team" slot="secondary-data-text">{{ program.team.name }}</template>
         </list-item>
         <template slot="pagination" slot-scope="pagination">
             <span class="tw-pl-4 tw-py-4 tw-text-sm tw-font-semibold tw-text-grey-dark">Showing all {{ total }} programs</span>

@@ -6,7 +6,11 @@
                     <slot>{{ primaryData }}</slot>
                 </span>
             </slot>
-            <slot name="secondary-data"> {{ secondaryData }}</slot>
+            <slot name="secondary-data">
+                <span class="tw-text-sm">
+                    <slot name="secondary-data-text">{{ secondaryData }}</slot>
+                </span>
+            </slot>
         </router-link tag="div">
         <slot name="options-container">
             <div class="tw-w-1/6 tw-py-4 tw-pr-4 tw-text-right">

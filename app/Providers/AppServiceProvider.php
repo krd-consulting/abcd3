@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
 
                 $view->with(
                     'programs',
-                    Auth::user()->availablePrograms
+                    Auth::user()->availablePrograms(4)->get()
                 );
 
                 $view->with(

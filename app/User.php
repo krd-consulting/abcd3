@@ -74,38 +74,7 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Team');
     }
 
-    // Query Scopes
-
-    public function scopeHasFile($query, $file) : bool
-    {
-        if(is_a($file, File::class))
-            return $this->hasFile($file->id);
-
-        return $this->files()->where('file_id', $file)->exists() ||
-            $this->teamFiles()->where('files.id', $file)->exists() ||
-            $this->programFiles()->where('files.id', $file)->exists();
-    }
-
-    public function scopeHasProgram($query, $program) : bool
-    {
-        if(is_a($program, Program::class))
-            return $this->hasProgram($program->id);
-
-        return $this->programs()->where('program_id', $program)->exists() ||
-            $this->teamPrograms()->where('programs.id', $program)->exists();
-    }
-
-    public function scopeHasTeam($query, $team): bool
-    {
-        if(is_a($team, Team::class))
-            return $this->hasTeam($team->id);
-
-        return $this->teams()->where('team_id', $team)->exists();
-    }
-
-    // Getters
-
-    public function getAvailableProgramsAttribute()
+    public function availablePrograms(?int $limit)
     {
         $programs;
 
@@ -113,28 +82,29 @@ class User extends Authenticatable
 
         switch($scope) {
             case 'universal':
-                $programs = Program::all();
+                $programs = new Program;
                 break;
 
             case 'team':
-                $programs = $this->teamPrograms;
+                $programs = $this->teamPrograms();
                 break;
 
             default:
-                $programs = $this->programs;
+                $programs = $this->programs();
+        }
+
+        if(isset($limit)) {
+            $programs = $programs->limit($limit);
         }
 
         return $programs;
     }
 
-    public function getScopeAttribute()
-    {
-        return $this->getScope()->name;
-    }
+    // Getters
 
-    public function getScopeValueAttribute()
+    public function getAvailableProgramsAttribute()
     {
-        return $this->getScope()->value;
+        return $this->availablePrograms(null)->get();
     }
 
     public function getAvailableTeamsAttribute()
@@ -156,12 +126,40 @@ class User extends Authenticatable
         return $teams;
     }
 
+    public function getScopeAttribute()
+    {
+        return $this->getScope()->name;
+    }
+
+    public function getScopeValueAttribute()
+    {
+        return $this->getScope()->value;
+    }
+
     public function getScope() {
         // TODO: Return default scope, if none.
 
         return $this->scopes()->orderBy('value', 'desc')->first();
     }
 
+    public function hasFile($file) : bool
+    {
+        if(is_a($file, File::class))
+            return $this->hasFile($file->id);
+
+        return $this->files()->where('file_id', $file)->exists() ||
+            $this->teamFiles()->where('files.id', $file)->exists() ||
+            $this->programFiles()->where('files.id', $file)->exists();
+    }
+
+    public function hasProgram($program) : bool
+    {
+        if(is_a($program, Program::class))
+            return $this->hasProgram($program->id);
+
+        return $this->programs()->where('program_id', $program)->exists() ||
+            $this->teamPrograms()->where('programs.id', $program)->exists();
+    }
 
     public function hasScopeOfAtleast($scope) : bool
     {
@@ -169,5 +167,13 @@ class User extends Authenticatable
             return $this->scopeValue >= $scope;
 
         return $this->scopeValue >= Scope::where('name', $scope)->first()->value;
+    }
+
+    public function hasTeam($team): bool
+    {
+        if(is_a($team, Team::class))
+            return $this->hasTeam($team->id);
+
+        return $this->teams()->where('team_id', $team)->exists();
     }
 }

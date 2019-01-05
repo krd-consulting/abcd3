@@ -28,7 +28,7 @@
                 <base-icon class="tw-text-xl tw-px-2">assignment</base-icon>
                 <span slot="title">Programs</span>
             </template>
-            @forelse($programs as $program)
+            @foreach($programs as $program)
                 <sidebar-list-item
                     key="{{ $program->id }}"
                     index="3-{{ $program->id }}"
@@ -37,15 +37,17 @@
                     <base-icon class="tw-text-xl tw-px-2">assignment</base-icon>
                     {{ $program->name }}
                 </sidebar-list-item>
-            @empty
+            @endforeach
+            @if(count($programs) > 0)
+                <sidebar-list-item
+                    index="3-5"
+                    :route="{ path: '/programs' }"
+                    >
+                    More programs...
+                </sidebar-list-item>
+            @else
                 <li class="tw-py-4 tw-pl-8 tw-text-xs">You have no programs</li>
-            @endforelse
-            <sidebar-list-item
-                index="3-5"
-                :route="{ path: '/programs' }"
-                >
-                More programs...
-            </sidebar-list-item>
+            @endif
         </base-submenu>
         @if(count($teams) > 0)
             <base-submenu index="4">
