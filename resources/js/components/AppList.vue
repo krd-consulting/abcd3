@@ -59,8 +59,8 @@
 
         methods: {
             handlePageChange(page) {
-                this.$emit('page-change', page);
                 this.$emit('update:page', page);
+                this.$emit('page-change', page);
             }
         }
 

@@ -77,6 +77,7 @@
                     this.total = response.meta.total;
                     this.type = response.file_type;
                 });
+
             },
 
             create() {

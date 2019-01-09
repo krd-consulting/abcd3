@@ -2,13 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\FileType;
+use App\Program;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-
-use App\FileType;
-use App\Program;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {

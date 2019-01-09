@@ -1,54 +1,28 @@
 <template>
     <list-item :to="`/files/${fileType}/${file.id}`">
-        <template>{{ primaryData }}</template>
+        <primary-data :file="file" :fields="fields"/>
         <template slot="secondary-data">
-            <secondary-data class="tw-text-sm" v-for="(data, index) in secondaryData" :key="index" :data="data">
-                {{ file[data] }}
-            </secondary-data>
+            <secondary-data class="tw-text-sm" :file="file" :fields="fields"/>
         </template>
     </list-item>
 </template>
 <script>
     import moment from 'moment';
     import ListItem from './AppListItem';
-    import SecondaryData from './FileListItemSecondaryData';
+    import PrimaryData from './FilePrimaryData';
+    import SecondaryData from './FileSecondaryData';
 
     export default {
         props: {
             file: Object,
             fileType: String,
-            primaryFields: Array,
-            secondaryFields: Array
+            fields: Object|Array
         },
 
         components: {
+            PrimaryData,
             ListItem,
             SecondaryData
         },
-
-        computed: {
-            primaryData() {
-                return this.groupFieldData(this.primaryFields);
-            },
-            secondaryData() {
-                return this.secondaryFields;
-            }
-        },
-
-        methods: {
-            formatBirthDate(date) {
-                return moment(date).format('MMMM D, YYYY');
-            },
-
-            groupFieldData(fields) {
-                let data = '';
-
-                fields.forEach(field => {
-                    data += this.file[field] + ' ';
-                });
-
-                return data;
-            }
-        }
     }
 </script>

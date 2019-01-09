@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\File;
 use App\FileType;
 use App\User;
+use App\Http\Resources\File as FileResource;
 use App\Http\Resources\Files;
 
 use Illuminate\Http\Request;
@@ -52,7 +53,9 @@ class FileController extends Controller
         $this->authorize('read', $file);
 
         // Can be put into resource.
-        return $file->with('file_type')->where('id', $file->id)->where('file_type_id', $fileType->id)->firstOrFail();
+        $file = $file->with('file_type')->where('id', $file->id)->where('file_type_id', $fileType->id)->firstOrFail();
+
+        return (new FileResource($file))->as($fileType);
     }
 
     public function create()
