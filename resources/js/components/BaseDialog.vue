@@ -1,5 +1,5 @@
 <template>
-    <el-dialog v-bind="$attrs" @close="close">
+    <el-dialog v-bind="$attrs" @open="open" @close="close">
         <slot name="title" slot="title"></slot>
         <slot></slot>
         <slot name="footer" slot="footer"></slot>
@@ -13,6 +13,11 @@
             close() {
                 this.$emit('update:visible', false);
                 this.$emit('close');
+            },
+
+            open() {
+                this.$emit('update:visible', true);
+                this.$emit('open');
             }
         }
     }

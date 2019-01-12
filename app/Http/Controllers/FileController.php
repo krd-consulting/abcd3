@@ -26,9 +26,11 @@ class FileController extends Controller
      */
     public function index(FileType $fileType)
     {
-        $files = $fileType->files()->availableFor(
-            auth()->user()
-        )->as($fileType);
+        $files = $fileType
+            ->files()
+            ->availableFor(
+                auth()->user()
+            )->as($fileType);
 
         // Sort per request.
         $ascending = request('ascending');

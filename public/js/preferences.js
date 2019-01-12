@@ -3454,6 +3454,10 @@ __webpack_require__.r(__webpack_exports__);
     close: function close() {
       this.$emit('update:visible', false);
       this.$emit('close');
+    },
+    open: function open() {
+      this.$emit('update:visible', true);
+      this.$emit('open');
     }
   }
 });
@@ -3868,7 +3872,20 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    prepareScopes: function prepareScopes() {
+    close: function close() {
+      this.$emit('update:active', false);
+      this.request.errors.clear();
+      this.roleData = {
+        name: '',
+        scope: {
+          id: ''
+        }
+      };
+    },
+    open: function open() {
+      if (this.scopes.length == 0) this.load();
+    },
+    load: function load() {
       var _this = this;
 
       var request = new _api_RoleRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
@@ -3886,26 +3903,14 @@ __webpack_require__.r(__webpack_exports__);
       this.request.store().then(function (response) {
         _this2.roleData = response.data;
 
-        _this2.close(true);
+        _this2.$emit('save', _this2.roleData);
+
+        _this2.close();
       }).catch(function (error) {//
       });
-    },
-    close: function close() {
-      var saved = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      if (saved) this.$emit('save', this.roleData);
-      this.$emit('update:active', false);
-      this.request.errors.clear();
-      this.roleData = {
-        name: '',
-        scope: {
-          id: ''
-        }
-      };
     }
   },
-  created: function created() {
-    this.prepareScopes();
-  }
+  created: function created() {}
 });
 
 /***/ }),
@@ -3997,18 +4002,8 @@ __webpack_require__.r(__webpack_exports__);
       scopes: []
     };
   },
-  watch: {
-    role: function role() {
-      this.newRoleData = this.role;
-    },
-    active: function active() {
-      if (this.active) {
-        this.editing = this.active;
-      }
-    }
-  },
   methods: {
-    prepareScopes: function prepareScopes() {
+    load: function load() {
       var _this = this;
 
       var request = new _api_RoleRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
@@ -4016,10 +4011,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.scopes = response.scopes;
       });
     },
-    close: function close(updated) {
-      if (updated) this.$emit('update', this.newRoleData);
+    close: function close() {
       this.$emit('update:active', false);
       this.request.errors.clear();
+    },
+    open: function open() {
+      if (this.scopes.length == 0) this.load();
+      this.newRoleData = this.role;
     },
     update: function update() {
       var _this2 = this;
@@ -4030,14 +4028,16 @@ __webpack_require__.r(__webpack_exports__);
         scope_id: this.newRoleData.scope.id
       });
       this.request.update(this.newRoleData.id).then(function (response) {
-        _this2.close(true);
+        _this2.newRoleData = response.data;
+
+        _this2.$emit('update', _this2.newRoleData);
+
+        _this2.close();
       }).catch(function () {//
       });
     }
   },
-  created: function created() {
-    this.prepareScopes();
-  }
+  created: function created() {}
 });
 
 /***/ }),
@@ -4052,8 +4052,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_RoleRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../api/RoleRequest */ "./resources/js/api/RoleRequest.js");
-/* harmony import */ var _PreferencesRoleCreate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PreferencesRoleCreate */ "./resources/js/views/PreferencesRoleCreate.vue");
-/* harmony import */ var _PreferencesRoleEdit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PreferencesRoleEdit */ "./resources/js/views/PreferencesRoleEdit.vue");
+/* harmony import */ var _api_RolePermissionRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api/RolePermissionRequest */ "./resources/js/api/RolePermissionRequest.js");
+/* harmony import */ var _PreferencesRoleCreate__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PreferencesRoleCreate */ "./resources/js/views/PreferencesRoleCreate.vue");
+/* harmony import */ var _PreferencesRoleEdit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PreferencesRoleEdit */ "./resources/js/views/PreferencesRoleEdit.vue");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4117,10 +4118,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    CreateRole: _PreferencesRoleCreate__WEBPACK_IMPORTED_MODULE_1__["default"],
-    EditRole: _PreferencesRoleEdit__WEBPACK_IMPORTED_MODULE_2__["default"]
+    CreateRole: _PreferencesRoleCreate__WEBPACK_IMPORTED_MODULE_2__["default"],
+    EditRole: _PreferencesRoleEdit__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   data: function data() {
     return {
@@ -4167,25 +4169,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.edit.roleIndex = index;
     },
     updateRole: function updateRole(role) {
-      this.roles[this.edit.roleIndex]['name'] = role.name;
-      this.roles[this.edit.roleIndex]['scope_id'] = role.scope.id;
+      this.roles[this.edit.roleIndex] = role;
     },
-    updateRolePermission: function updateRolePermission(role, permission, permitted, roleIndex, permissionIndex) {
+    toggleRolePermission: function toggleRolePermission(role, permission, permitted, roleIndex, permissionIndex) {
       var _this2 = this;
 
-      var request = new _api_RoleRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({
-        'role': {
-          'id': role.id
-        },
-        'permission': {
-          'id': permission.id
-        },
-        permitted: permitted
-      });
-      request.updateRolePermission().then(function (response) {
-        _this2.roles[roleIndex]['all_permissions'][permissionIndex].permitted = response.permitted;
-      }).catch(function (error) {//
-      });
+      var request = new _api_RolePermissionRequest__WEBPACK_IMPORTED_MODULE_1__["default"]();
+
+      if (permitted) {
+        request.store(role.id, permission.id).then(function () {
+          _this2.enableRolePermission(roleIndex, permissionIndex);
+        });
+      } else {
+        request.destroy(role.id, permission.id).then(function () {
+          _this2.disableRolePermission(roleIndex, permissionIndex);
+        });
+      }
+    },
+    enableRolePermission: function enableRolePermission(role, permission) {
+      this.roles[role]['all_permissions'][permission].permitted = true;
+    },
+    disableRolePermission: function disableRolePermission(role, permission) {
+      this.roles[role]['all_permissions'][permission].permitted = false;
     },
     deleteRole: function deleteRole(role, roleIndex) {
       var _this3 = this;
@@ -93536,7 +93541,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "el-dialog",
-    _vm._b({ on: { close: _vm.close } }, "el-dialog", _vm.$attrs, false),
+    _vm._b(
+      { on: { open: _vm.open, close: _vm.close } },
+      "el-dialog",
+      _vm.$attrs,
+      false
+    ),
     [
       _vm._t("title", null, { slot: "title" }),
       _vm._v(" "),
@@ -94062,7 +94072,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "base-dialog",
-    { attrs: { visible: _vm.active }, on: { close: _vm.close } },
+    {
+      attrs: { visible: _vm.active },
+      on: { close: _vm.close, open: _vm.open }
+    },
     [
       _c(
         "div",
@@ -94234,7 +94247,7 @@ var render = function() {
     "base-dialog",
     {
       attrs: { title: "Edit Role", visible: _vm.active },
-      on: { close: _vm.close }
+      on: { close: _vm.close, open: _vm.open }
     },
     [
       _c("form", [
@@ -94543,7 +94556,7 @@ var render = function() {
                                 attrs: { on: permission.permitted },
                                 on: {
                                   change: function($event) {
-                                    _vm.updateRolePermission(
+                                    _vm.toggleRolePermission(
                                       role,
                                       permission,
                                       $event,
@@ -108472,6 +108485,66 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/api/RolePermissionRequest.js":
+/*!***************************************************!*\
+  !*** ./resources/js/api/RolePermissionRequest.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var RolePermissionRequest =
+/*#__PURE__*/
+function (_Request) {
+  _inherits(RolePermissionRequest, _Request);
+
+  function RolePermissionRequest() {
+    _classCallCheck(this, RolePermissionRequest);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(RolePermissionRequest).apply(this, arguments));
+  }
+
+  _createClass(RolePermissionRequest, [{
+    key: "store",
+    value: function store(role, permission) {
+      return this.post("/api/role/".concat(role, "/permission/").concat(permission));
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(role, permission) {
+      return this.delete("/api/role/".concat(role, "/permission/").concat(permission));
+    }
+  }]);
+
+  return RolePermissionRequest;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (RolePermissionRequest);
+
+/***/ }),
+
 /***/ "./resources/js/api/RoleRequest.js":
 /*!*****************************************!*\
   !*** ./resources/js/api/RoleRequest.js ***!
@@ -108537,11 +108610,6 @@ function (_Request) {
     key: "update",
     value: function update(role) {
       return this.patch("/api/role/".concat(role));
-    }
-  }, {
-    key: "updateRolePermission",
-    value: function updateRolePermission() {
-      return this.patch('/api/role-permission');
     }
   }, {
     key: "destroy",

@@ -34,6 +34,7 @@ class Role extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'scope_id' => $this->scope_id,
+            'scope' => $this->scope,
             'all_permissions' => $allPermissions
         ];
     }

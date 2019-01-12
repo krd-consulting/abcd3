@@ -20,7 +20,7 @@ class FilePolicy
             return true;
     }
 
-    public function read(User $user, File $file) : bool
+    public function read(User $user, File $file)
     {
         if(!$user->hasScopeOfAtleast('case load'))
             return false;

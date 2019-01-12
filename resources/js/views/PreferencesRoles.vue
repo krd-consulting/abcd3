@@ -44,7 +44,7 @@
                                 <td class="tw-py-4 tw-text-center">
                                     <base-switch
                                         :on="permission.permitted"
-                                        @change="updateRolePermission(role, permission, $event, roleIndex, permissionIndex)"/>
+                                        @change="toggleRolePermission(role, permission, $event, roleIndex, permissionIndex)"/>
                                 </td>
                             </tr>
                         </tbody>
@@ -55,7 +55,8 @@
     </div>
 </template>
 <script>
-    import Request from '../api/RoleRequest';
+    import RoleRequest from '../api/RoleRequest';
+    import RolePermissionRequest from '../api/RolePermissionRequest';
     import CreateRole from './PreferencesRoleCreate';
     import EditRole from './PreferencesRoleEdit';
 
@@ -92,7 +93,7 @@
 
         methods: {
             retrieve() {
-                let request = new Request({...this.params});
+                let request = new RoleRequest({...this.params});
 
                 request.retrieve().then((response) => {
                     this.roles = Object.values(response.data.roles);
@@ -114,31 +115,35 @@
             },
 
             updateRole(role) {
-                this.roles[this.edit.roleIndex]['name'] = role.name;
-                this.roles[this.edit.roleIndex]['scope_id'] = role.scope.id;
+                this.roles[this.edit.roleIndex] = role;
             },
 
-            updateRolePermission(role, permission, permitted, roleIndex, permissionIndex) {
-                let request = new Request({
-                    'role': {
-                        'id': role.id
-                    },
-                    'permission': {
-                        'id': permission.id
-                    },
-                    permitted
-                });
+            toggleRolePermission(role, permission, permitted, roleIndex, permissionIndex) {
+                let request = new RolePermissionRequest();
 
-                request.updateRolePermission().then(response => {
-                        this.roles[roleIndex]['all_permissions'][permissionIndex].permitted = response.permitted;
-                    })
-                    .catch(error => {
-                        //
-                    });
+                if(permitted) {
+                    request.store(role.id, permission.id)
+                        .then(() => {
+                            this.enableRolePermission(roleIndex, permissionIndex)
+                        });
+                } else {
+                    request.destroy(role.id, permission.id)
+                        .then(() => {
+                            this.disableRolePermission(roleIndex, permissionIndex)
+                        });
+                }
+            },
+
+            enableRolePermission(role, permission) {
+                this.roles[role]['all_permissions'][permission].permitted = true;
+            },
+
+            disableRolePermission(role, permission) {
+                this.roles[role]['all_permissions'][permission].permitted = false;
             },
 
             deleteRole(role, roleIndex) {
-                let request = new Request({
+                let request = new RoleRequest({
                     'role': {
                         'id': role.id
                     }

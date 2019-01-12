@@ -6,6 +6,8 @@ use App\File;
 use App\Policies\FilePolicy;
 use App\Program;
 use App\Policies\ProgramPolicy;
+use App\Role;
+use App\Policies\RolePolicy;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -20,7 +22,8 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
         File::class => FilePolicy::class,
-        Program::class => ProgramPolicy::class
+        Program::class => ProgramPolicy::class,
+        Role::class => RolePolicy::class,
     ];
 
     /**

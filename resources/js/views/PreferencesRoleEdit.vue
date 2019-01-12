@@ -1,5 +1,5 @@
 <template>
-    <base-dialog title="Edit Role" :visible="active" @close="close">
+    <base-dialog title="Edit Role" :visible="active" @close="close" @open="open">
         <form>
             <div>
                 <div class="tw-flex tw-items-center tw-w-full">
@@ -81,20 +81,8 @@
             }
         },
 
-        watch: {
-            role: function() {
-                this.newRoleData = this.role;
-            },
-
-            active: function() {
-                if(this.active) {
-                    this.editing = this.active;
-                }
-            }
-        },
-
         methods: {
-            prepareScopes() {
+            load() {
                 let request = new Request({});
 
                 request.edit().then((response) => {
@@ -102,13 +90,17 @@
                 });
             },
 
-            close(updated) {
-                if(updated)
-                    this.$emit('update', this.newRoleData);
-
+            close() {
                 this.$emit('update:active', false);
 
                 this.request.errors.clear();
+            },
+
+            open() {
+                if(this.scopes.length == 0)
+                    this.load();
+
+                this.newRoleData = this.role;
             },
 
             update() {
@@ -120,7 +112,9 @@
 
                 this.request.update(this.newRoleData.id)
                     .then((response) => {
-                        this.close(true);
+                        this.newRoleData = response.data;
+                        this.$emit('update', this.newRoleData);
+                        this.close();
                     })
                     .catch(() => {
                         //
@@ -129,7 +123,7 @@
         },
 
         created() {
-            this.prepareScopes();
+
         }
     }
 </script>

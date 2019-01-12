@@ -1,5 +1,5 @@
 <template>
-    <base-dialog :visible="active" @close="close">
+    <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
             <base-icon class="tw-align-middle">person_add</base-icon> Create Role
         </div>
@@ -62,7 +62,6 @@
     export default {
         props: {
             active: Boolean,
-
         },
 
         data() {
@@ -82,7 +81,25 @@
         },
 
         methods: {
-            prepareScopes() {
+            close() {
+                this.$emit('update:active', false);
+
+                this.request.errors.clear();
+
+                this.roleData = {
+                    name: '',
+                    scope: {
+                        id: ''
+                    }
+                };
+            },
+
+            open() {
+                if(this.scopes.length == 0)
+                    this.load();
+            },
+
+            load() {
                 let request = new Request({});
 
                 request.create().then((response) => {
@@ -99,32 +116,17 @@
                 this.request.store()
                     .then((response) => {
                         this.roleData = response.data;
-                        this.close(true)
+                        this.$emit('save', this.roleData);
+                        this.close()
                     })
                     .catch((error) => {
                         //
                     });
-            },
-
-            close(saved = false) {
-                if(saved)
-                    this.$emit('save', this.roleData);
-
-                this.$emit('update:active', false);
-
-                this.request.errors.clear();
-
-                this.roleData = {
-                    name: '',
-                    scope: {
-                        id: ''
-                    }
-                };
-            },
+            }
         },
 
         created() {
-            this.prepareScopes();
+
         }
     }
 </script>
