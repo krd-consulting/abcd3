@@ -15,7 +15,7 @@ Vue.use(VueGoodTablePlugin);
 
 // Components
 import './baseComponents';
-Vue.component('file-list', require('./components/FileList.vue').default);
+Vue.component('record-list', require('./components/RecordList.vue').default);
 Vue.component('global-search', require('./components/GlobalSearch.vue').default);
 Vue.component('login-form', require('./components/LoginForm.vue').default);
 Vue.component('profile-picture', require('./components/ProfilePicture.vue').default);

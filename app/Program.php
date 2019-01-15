@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Program extends Model
 {
-    public function files()
+    public function records()
     {
-        return $this->belongsToMany('App\File');
+        return $this->belongsToMany('App\Record');
     }
 
     public function team()

@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
         $this->call(PermissionsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
 
-        $this->call(FileTypesTableSeeder::class);
+        $this->call(RecordTypesTableSeeder::class);
         $this->call(TeamsTableSeeder::class);
         $this->call(ProgramsTableSeeder::class);
-        $this->call(FilesTableSeeder::class);
+        $this->call(RecordsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
     }
 }

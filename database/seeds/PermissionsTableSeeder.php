@@ -13,7 +13,7 @@ class PermissionsTableSeeder extends Seeder
     {
         DB::table('permissions')->insert([
             [
-                'name' => 'write files',
+                'name' => 'write records',
                 'guard_name' => 'web'
             ],
             [

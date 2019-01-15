@@ -10,8 +10,8 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 
 Route::get('/', 'ShowHome');
 Route::get('/dashboard', 'ShowHome');
-Route::get('/files', 'ShowHome')->where('all', '(.*)');
-Route::get('/files/{all}', 'ShowHome')->where('all', '(.*)');
+Route::get('/records', 'ShowHome')->where('all', '(.*)');
+Route::get('/records/{all}', 'ShowHome')->where('all', '(.*)');
 Route::get('/programs', 'ShowHome')->where('all', '(.*)');
 Route::get('/programs/{all}', 'ShowHome')->where('all', '(.*)');
 
@@ -21,9 +21,10 @@ Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
 Route::prefix('api')
     ->middleware('auth')
     ->group( function() {
-        Route::get('files/create', 'FileController@create');
-        Route::get('files/{fileType}', 'FileController@index');
-        Route::get('files/{fileType}/{file}', 'FileController@show');
+        Route::get('records/create', 'RecordController@create');
+
+        Route::get('records/{recordType}', 'RecordTypeRecordController@index');
+        Route::get('records/{recordType}/{record}', 'RecordController@show');
 
         Route::get('programs', 'ProgramController@index');
         Route::get('programs/{program}', 'ProgramController@show');

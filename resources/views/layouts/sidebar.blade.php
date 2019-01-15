@@ -10,13 +10,13 @@
         <base-submenu index="2">
             <template slot="title">
                 <base-icon class="tw-text-xl tw-px-2">folder</base-icon>
-                <span slot="title">Files</span>
+                <span slot="title">Records</span>
             </template>
-            @foreach($fileTypes as $type)
+            @foreach($recordTypes as $type)
                 <sidebar-list-item
                     key="{{ $type->id }}"
                     index="2-{{ $type->id }}"
-                    :route="{ path: '/files/{{ $type->slug }}' }"
+                    :route="{ path: '/records/{{ $type->slug }}' }"
                     >
                     <base-icon class="tw-text-xl tw-px-2">insert_drive_file</base-icon>
                     {{ $type->name }}

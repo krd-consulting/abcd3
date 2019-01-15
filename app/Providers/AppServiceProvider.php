@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\FileType;
+use App\RecordType;
 use App\Program;
 
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +16,11 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(FileType $fileTypes, Program $programs)
+    public function boot(RecordType $recordTypes, Program $programs)
     {
-        View::composer('*', function($view) use ($fileTypes, $programs) {
+        View::composer('*', function($view) use ($recordTypes, $programs) {
             if(Auth::check()) {
-                $view->with('fileTypes', $fileTypes::all());
+                $view->with('recordTypes', $recordTypes::all());
 
                 $view->with(
                     'programs',

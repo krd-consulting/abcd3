@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('head-scripts')
-    <script src="{{ asset('js/preferences.js') }}" defer></script>
-@endsection
-
 @section('main-nav')
     <el-header class="tw-flex tw-items-center tw-justify-between tw-py-2 tw-border-b">
         <a class="tw-inline-block" href="/">
@@ -23,9 +19,9 @@
                         <base-icon class="tw-text-xl tw-px-2">dashboard</base-icon>
                         General
                     </sidebar-list-item>
-                    <sidebar-list-item index="2" :route="{ path: '/preferences/files' }">
+                    <sidebar-list-item index="2" :route="{ path: '/preferences/records' }">
                         <base-icon class="tw-text-xl tw-px-2">insert_drive_file</base-icon>
-                        Files
+                        Records
                     </sidebar-list-item>
                     @can('write roles')
                         <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
@@ -41,4 +37,8 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/preferences.js') }}" defer></script>
 @endsection

@@ -1,7 +1,7 @@
 import VueRouter from 'vue-router';
 
-import AppFileList from './views/AppFileList';
-import AppFileProfile from './views/AppFileProfile';
+import AppRecordList from './views/AppRecordList';
+import AppRecordProfile from './views/AppRecordProfile';
 import AppProgramList from './views/AppProgramList';
 import AppProgramProfile from './views/AppProgramProfile';
 
@@ -13,13 +13,13 @@ const routes = [
         path: '/dashboard', component: {template: '<h2>Dashboard</h2>'}
     },
     {
-        path: '/files', component: {template: '<h2>All Files</h2>'}
+        path: '/records', component: {template: '<h2>All records</h2>'}
     },
     {
-        path: '/files/:fileType', component: AppFileList,
+        path: '/records/:recordType', component: AppRecordList,
     },
     {
-        path: '/files/:fileType/:file', component: AppFileProfile,
+        path: '/records/:recordType/:record', component: AppRecordProfile,
     },
     {
         path: '/programs', component: AppProgramList,

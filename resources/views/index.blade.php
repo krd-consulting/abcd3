@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('head-scripts')
-    <script src="{{ asset('js/app.js') }}" defer></script>
-@endsection
-
 @section('main-nav')
     @include('layouts.nav')
 @endsection
@@ -16,4 +12,8 @@
     <el-main class="main">
          <router-view :key="$route.fullPath"></router-view>
     </el-main>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection

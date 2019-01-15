@@ -2,13 +2,14 @@
 
 namespace App;
 
+use App\Record;
+use App\Role;
+use App\Program;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-
-use App\Role;
-use App\Program;
 
 use Spatie\Permission\Traits\HasRoles;
 use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
@@ -39,9 +40,9 @@ class User extends Authenticatable
 
     // Relationships
 
-    public function files()
+    public function records()
     {
-        return $this->belongsToMany('App\File');
+        return $this->belongsToMany('App\Record');
     }
 
     public function programs()
@@ -49,9 +50,9 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Program');
     }
 
-    public function programFiles()
+    public function programRecords()
     {
-        return $this->hasManyDeepFromRelations($this->programs(), (new Program)->files());
+        return $this->hasManyDeepFromRelations($this->programs(), (new Program)->records());
     }
 
     public function scopes()
@@ -64,9 +65,9 @@ class User extends Authenticatable
         return $this->hasManyDeepFromRelations($this->teams(), (new Team)->programs());
     }
 
-    public function teamFiles()
+    public function teamRecords()
     {
-        return $this->hasManyDeepFromRelations($this->teams(), (new Team)->files());
+        return $this->hasManyDeepFromRelations($this->teams(), (new Team)->records());
     }
 
     public function teams()
@@ -142,14 +143,14 @@ class User extends Authenticatable
         return $this->scopes()->orderBy('value', 'desc')->first();
     }
 
-    public function hasFile($file) : bool
+    public function hasRecord($record) : bool
     {
-        if(is_a($file, File::class))
-            return $this->hasFile($file->id);
+        if(is_a($record, Record::class))
+            return $this->hasRecord($record->id);
 
-        return $this->files()->where('file_id', $file)->exists() ||
-            $this->teamFiles()->where('files.id', $file)->exists() ||
-            $this->programFiles()->where('files.id', $file)->exists();
+        return $this->record()->where('file_id', $record)->exists() ||
+            $this->teamRecords()->where('files.id', $record)->exists() ||
+            $this->programRecords()->where('files.id', $record)->exists();
     }
 
     public function hasProgram($program) : bool

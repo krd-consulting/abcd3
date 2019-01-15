@@ -94022,10 +94022,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/PreferencesFiles.vue?vue&type=template&id=7d8a6804&":
-/*!**************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/PreferencesFiles.vue?vue&type=template&id=7d8a6804& ***!
-  \**************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/PreferencesRecords.vue?vue&type=template&id=f2b91aee&":
+/*!****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/PreferencesRecords.vue?vue&type=template&id=f2b91aee& ***!
+  \****************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -94045,7 +94045,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("h2", { staticClass: "tw-mb-4" }, [_vm._v("Manage Files")])
+      _c("h2", { staticClass: "tw-mb-4" }, [_vm._v("Manage Records")])
     ])
   }
 ]
@@ -110175,7 +110175,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "VueRouter", function() { return vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-/* harmony import */ var _views_PreferencesFiles_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/PreferencesFiles.vue */ "./resources/js/views/PreferencesFiles.vue");
+/* harmony import */ var _views_PreferencesRecords_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/PreferencesRecords.vue */ "./resources/js/views/PreferencesRecords.vue");
 /* harmony import */ var _views_PreferencesRoles_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/PreferencesRoles.vue */ "./resources/js/views/PreferencesRoles.vue");
 
 
@@ -110186,8 +110186,8 @@ var routes = [{
     template: '<h2>General</h2>'
   }
 }, {
-  path: '/preferences/files',
-  component: _views_PreferencesFiles_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  path: '/preferences/records',
+  component: _views_PreferencesRecords_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
   path: '/preferences/roles',
   component: _views_PreferencesRoles_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
@@ -110200,16 +110200,16 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
-/***/ "./resources/js/views/PreferencesFiles.vue":
-/*!*************************************************!*\
-  !*** ./resources/js/views/PreferencesFiles.vue ***!
-  \*************************************************/
+/***/ "./resources/js/views/PreferencesRecords.vue":
+/*!***************************************************!*\
+  !*** ./resources/js/views/PreferencesRecords.vue ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PreferencesFiles_vue_vue_type_template_id_7d8a6804___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PreferencesFiles.vue?vue&type=template&id=7d8a6804& */ "./resources/js/views/PreferencesFiles.vue?vue&type=template&id=7d8a6804&");
+/* harmony import */ var _PreferencesRecords_vue_vue_type_template_id_f2b91aee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PreferencesRecords.vue?vue&type=template&id=f2b91aee& */ "./resources/js/views/PreferencesRecords.vue?vue&type=template&id=f2b91aee&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 var script = {}
@@ -110219,8 +110219,8 @@ var script = {}
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
   script,
-  _PreferencesFiles_vue_vue_type_template_id_7d8a6804___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PreferencesFiles_vue_vue_type_template_id_7d8a6804___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _PreferencesRecords_vue_vue_type_template_id_f2b91aee___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PreferencesRecords_vue_vue_type_template_id_f2b91aee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -110230,24 +110230,24 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/views/PreferencesFiles.vue"
+component.options.__file = "resources/js/views/PreferencesRecords.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/views/PreferencesFiles.vue?vue&type=template&id=7d8a6804&":
-/*!********************************************************************************!*\
-  !*** ./resources/js/views/PreferencesFiles.vue?vue&type=template&id=7d8a6804& ***!
-  \********************************************************************************/
+/***/ "./resources/js/views/PreferencesRecords.vue?vue&type=template&id=f2b91aee&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/views/PreferencesRecords.vue?vue&type=template&id=f2b91aee& ***!
+  \**********************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreferencesFiles_vue_vue_type_template_id_7d8a6804___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PreferencesFiles.vue?vue&type=template&id=7d8a6804& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/PreferencesFiles.vue?vue&type=template&id=7d8a6804&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreferencesFiles_vue_vue_type_template_id_7d8a6804___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreferencesRecords_vue_vue_type_template_id_f2b91aee___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./PreferencesRecords.vue?vue&type=template&id=f2b91aee& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/PreferencesRecords.vue?vue&type=template&id=f2b91aee&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreferencesRecords_vue_vue_type_template_id_f2b91aee___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreferencesFiles_vue_vue_type_template_id_7d8a6804___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PreferencesRecords_vue_vue_type_template_id_f2b91aee___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

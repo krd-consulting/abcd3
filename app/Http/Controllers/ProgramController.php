@@ -34,7 +34,7 @@ class ProgramController extends Controller
     {
         $this->authorize('read', $program);
 
-        return $program->load('files');
+        return $program->load('records');
     }
 
     public function create()

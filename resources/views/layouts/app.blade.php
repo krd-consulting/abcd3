@@ -9,13 +9,8 @@
 
     <title>{{ config('app.name', 'ABCD') }}</title>
 
-    <!-- Scripts -->
-    @section('head-scripts')
-    @show
-
     <!-- Styles -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -30,5 +25,9 @@
             @yield('content')
         </base-container>
     </base-container>
+
+    <!-- Scripts -->
+    @section('scripts')
+    @show
 </body>
 </html>

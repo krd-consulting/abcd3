@@ -1,11 +1,11 @@
 import VueRouter from 'vue-router';
 
-import Files from './views/PreferencesFiles.vue';
+import Records from './views/PreferencesRecords.vue';
 import Roles from './views/PreferencesRoles.vue';
 
 const routes = [
     { path: '/preferences', component: {template: '<h2>General</h2>'} },
-    { path: '/preferences/files', component: Files },
+    { path: '/preferences/records', component: Records },
     { path: '/preferences/roles', component: Roles }
 ];
 

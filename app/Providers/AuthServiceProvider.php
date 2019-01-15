@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\File;
-use App\Policies\FilePolicy;
+use App\Record;
+use App\Policies\RecordPolicy;
 use App\Program;
 use App\Policies\ProgramPolicy;
 use App\Role;
@@ -21,7 +21,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
-        File::class => FilePolicy::class,
+        Record::class => RecordPolicy::class,
         Program::class => ProgramPolicy::class,
         Role::class => RolePolicy::class,
     ];
