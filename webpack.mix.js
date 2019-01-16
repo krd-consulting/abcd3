@@ -11,7 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-var tailwindcss = require('tailwindcss');
+let tailwindcss = require('tailwindcss');
 
 mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/preferences.js', 'public/js')
