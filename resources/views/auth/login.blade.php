@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('head-scripts')
-    <script src="{{ asset('js/app.js') }}" defer></script>
-@endsection
-
 @section('content')
 
 <div class="tw-bg-grey-lighter tw-w-full tw-flex lg:tw-items-center tw-h-screen">
@@ -146,4 +142,8 @@
         </div>
     </login-form>
 </div>
+@endsection
+
+@section('scripts')
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection

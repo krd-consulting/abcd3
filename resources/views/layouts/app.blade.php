@@ -10,7 +10,8 @@
     <title>{{ config('app.name', 'ABCD') }}</title>
 
     <!-- Styles -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://rsms.me/inter/inter-ui.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
