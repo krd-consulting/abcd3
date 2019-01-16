@@ -1,10 +1,10 @@
 <template>
     <div class="tw-shadow tw-rounded tw-bg-white">
         <div class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b-2">
-            <h2 class="tw-font-bold tw-text-xl">
+            <h2 class="tw-font-bold tw-text-xl tw-w-2/3">
                 <slot name="header-text"></slot>
             </h2>
-            <div class="tw-flex-no-wrap">
+            <div class="tw-flex-no-wrap tw-w-1/3">
                 <slot name="options">
                 </slot>
             </div>

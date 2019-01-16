@@ -6,20 +6,16 @@
         :total="total">
         <template slot="header-text">{{ type.name }}</template>
         <template slot="options">
-            <el-select
-                v-model="params.sortBy"
-                placeholder="Sort By"
-                @change="retrieve"
-                clearable
-                size="small">
-                <el-option
-                    v-for="(field, index) in fields"
-                    :key="field"
-                    :label="index"
-                    :value="field">
-                </el-option>
-            </el-select>
-            <base-button @click="create">Create Record</base-button>
+            <div class="tw-flex">
+                <base-input
+                    class="tw-no-grow tw-mr-2"
+                    :placeholder="`Search for ${type.name}`">
+                    <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                </base-input>
+                <base-button class="tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue tw-no-shrink" @click="create">
+                    <base-icon class="tw-text-base tw-font-bold">add</base-icon>
+                </base-button>
+            </div>
         </template>
         <record-list
             slot="list"

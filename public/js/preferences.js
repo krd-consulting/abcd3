@@ -3399,7 +3399,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     type: String
@@ -93456,11 +93455,7 @@ var render = function() {
   return _c(
     "el-button",
     _vm._b(
-      {
-        staticClass: "tw-text-sm tw-rounded",
-        attrs: { "native-type": _vm.type },
-        on: { click: _vm.click }
-      },
+      { attrs: { "native-type": _vm.type }, on: { click: _vm.click } },
       "el-button",
       _vm.$attrs,
       false

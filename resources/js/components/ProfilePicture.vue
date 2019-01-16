@@ -1,5 +1,18 @@
 <template>
-    <img src="https://ui-avatars.com/api/?name=Super+User&background=0D8ABC&color=fff" style="width: 2rem; height: 2rem" class="tw-align-middle tw-inline-block tw-rounded-full tw-bg-grey-darker">
-
-    </img>
+    <div class="tw-flex tw-items-center tw-rounded-full tw-align-middle tw-text-sm">
+        <div class="tw-text-center tw-w-full">{{ initials }}</div>
+    </div>
 </template>
+<script>
+    export default {
+        props: {
+            username: String
+        },
+
+        computed: {
+            initials() {
+                return this.username.split(" ").map((n,i,a)=> i === 0 || i+1 === a.length ? n[0] : null).join("");
+            }
+        }
+    }
+</script>

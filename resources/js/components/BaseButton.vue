@@ -2,8 +2,7 @@
     <el-button
         v-bind="$attrs"
         :native-type="type"
-        @click="click"
-        class="tw-text-sm tw-rounded">
+        @click="click">
         <slot></slot>
     </el-button>
 </template>
