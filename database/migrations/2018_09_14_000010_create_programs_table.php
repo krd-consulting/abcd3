@@ -31,6 +31,10 @@ class CreateProgramsTable extends Migration
      */
     public function down()
     {
+        Schema::table('programs', function (Blueprint $table) {
+            $table->dropForeign(['team_id']);
+        });
+
         Schema::dropIfExists('programs');
     }
 }

@@ -8,6 +8,8 @@
         <template slot="options">
             <div class="tw-flex">
                 <base-input
+                    v-model="params.search"
+                    @input="search"
                     class="tw-no-grow tw-mr-2"
                     :placeholder="`Search for ${type.name}`">
                     <i slot="prefix" class="el-input__icon el-icon-search"></i>
@@ -25,6 +27,7 @@
     </list>
 </template>
 <script>
+    import lodash from 'lodash';
     import RecordRequest from '../api/RecordRequest';
 
     import List from '../components/AppList';
@@ -44,7 +47,8 @@
                     ascending: true,
                     sortBy: 'field_1_value',
                     page: 1,
-                    perPage: 5
+                    perPage: 10,
+                    search: ''
                 },
                 total: 0,
                 type: {
@@ -56,7 +60,7 @@
         watch: {
             '$route': function() {
                 this.params.page = 1;
-                this.params.perPage = 5;
+                this.params.perPage = 10;
                 this.retrieve();
             }
         },
@@ -75,6 +79,11 @@
                 });
 
             },
+
+            search: _.debounce(function() {
+                this.params.page = 1;
+                this.retrieve();
+            }, 300),
 
             create() {
                 this.request.create();

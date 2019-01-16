@@ -95,4 +95,14 @@ class Record extends Model
 
         $query->orderBy($column, $ascending);
     }
+
+    public function scopeSearch($query, $term)
+    {
+        if(empty($term))
+            return ;
+
+        $query->where('field_1_value', 'LIKE' , '%' . $term . '%')
+        ->orWhere('field_2_value', 'LIKE', '%' . $term . '%')
+        ->orWhere('field_3_value', 'LIKE', '%' . $term . '%');
+    }
 }

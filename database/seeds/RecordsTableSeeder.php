@@ -14,7 +14,7 @@ class RecordsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Record::class, 50)
+        factory(App\Record::class, 2000)
             ->create()
             ->each(function($record) {
                 // Add record to a random team.

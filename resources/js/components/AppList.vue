@@ -53,6 +53,9 @@
             },
 
             paginationInfo() {
+                if(this.total == 0)
+                    return `Nothing to show`;
+
                 return `Showing ${ this.firstItemNo }-${ this.lastItemNo } of ${ this.total }`;
             }
         },

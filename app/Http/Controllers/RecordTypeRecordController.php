@@ -22,6 +22,10 @@ class RecordTypeRecordController extends Controller
     {
         $records = $recordType->records()->availableFor(auth()->user());
 
+        // Search
+        $search = request('search');
+        $records->search($search);
+
         // Sort per request.
         $ascending = request('ascending');
         $sortBy = request('sortBy');
