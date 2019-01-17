@@ -75,11 +75,11 @@ A role can be assigned to any amount of users, and users can have any amount of 
 A scope simply determines the resources that a user has access to (can see).
 
 There are four scopes: 
-    * Self 
-    * Case Load
-    * Program 
-    * Team, and; 
-    * Universal 
+* Self 
+* Case Load
+* Program 
+* Team, and; 
+* Universal 
     
 These scopes grant varying levels of access to a user.
 
