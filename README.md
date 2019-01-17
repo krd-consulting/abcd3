@@ -59,7 +59,7 @@ And that's about it!
 ### Dynamic Records
 
 #### Record Types
-ABCD enables organizations to create their own record types. A record type basically requires a name, and an identity.
+ABCD enables organizations to create their own record types. A record type basically requires a **name**, and a **record identity**.
 
 #### Record Identity
 A record identity defines the record type’s required fields, and it gives ABCD an idea as to how the record type should be treated.
@@ -67,9 +67,9 @@ A record identity defines the record type’s required fields, and it gives ABCD
 ### Access Control (Roles, Scopes, Permissions)
 
 #### Roles
-A role has three components: its `scope`, its `permissions`, and the user that it is associated with. A user has a scope and have permissions through its role.
+A role has three components: its **scope**, its **permissions**, and the user that it is associated with. A user has a scope and have permissions through its role.
 
-A role can be assigned to any amount of users, and users can have any amount of roles. For example, a user can be assigned a Team Manager role and a Program Manager role.
+A role can be assigned to any amount of users, and users can have any amount of roles. For example, a user can be assigned a *Team Manager role* and a *Program Manager role*.
 
 #### Scopes
 A scope simply determines the resources that a user has access to (can see).
@@ -83,22 +83,22 @@ There are four scopes:
     
 These scopes grant varying levels of access to a user.
 
-First and foremost, the *self scope* grants the lowest level of access making it the most restrictive scope. Users with a self scope only have access to their own user profiles.
+First and foremost, the **self scope** grants the lowest level of access making it the most restrictive scope. Users with a self scope only have access to their own user profiles.
 
-The *case load scope* additionally grants users access to all of the records which are directly associated/assigned to a user.
+The **case load scope** additionally grants users access to all of the records which are directly associated/assigned to a user.
 
-The *program scope* additionally grants users access to all of the resources of the programs which the they are is directly assigned to.
+The **program scope** additionally grants users access to all of the resources of the programs which the they are is directly assigned to.
 
-The *team scope* additionally grants users access to all of the resources of the teams where the users belong to.
+The **team scope** additionally grants users access to all of the resources of the teams where the users belong to.
 
-Lastly, the *universal scope* grants users access to all of the resources in the database.
+Lastly, the **universal scope** grants users access to all of the resources in the database.
 
-In cases when a user has multiple roles, the user will attain the highest level scope among its roles. For instance, a user is assigned to a `Program Manager` role which has a program scope and a `Team Manager` role which has a team scope. Since the team scope has a higher level of access than the program scope, the user will have a team scope and is able to access resources inside the user’s team.
+In cases when a user has multiple roles, the user will attain the highest level scope among its roles. For instance, a user is assigned to a *Program Manager* role which has a program scope and a *Team Manager* role which has a team scope. Since the team scope has a higher level of access than the program scope, the user will have a team scope and is able to access resources inside the user’s team.
 
 #### Permissions
 Generally, permissions authorize users to perform an action on a resource. Since defining a user’s readable resources is already handled by scopes, permissions, for the most part, determine the resources/entities that a user can create, modify, and delete.
 
-For example, an organization can create a `Role Administrator` who is only allowed to create, modify, and delete roles, or a `Program Manager` role who is only allowed to write to records and programs.
+For example, an organization can create a *Role Administrator* who is only allowed to create, modify, and delete roles, or a *Program Manager* role who is only allowed to write to records and programs.
 
 The permissions available in ABCD are:
 1. Write records
