@@ -8,26 +8,45 @@ use App\RecordType;
 
 $factory->define(Record::class, function (Faker $faker) {
     $recordType = RecordType::inRandomOrder()->first();
-    $field3 = Field::find($recordType->field_3_id);
-    $field3Value = '';
 
-    switch($field3->name){
-        case 'birth_date':
-            $field3Value = $faker->date();
-            break;
+    $fields = array();
+    $values = array();
+    $fields[0] = Field::find($recordType->identity->field_1_id);
+    $fields[1] = Field::find($recordType->identity->field_2_id);
+    $fields[2] = Field::find($recordType->identity->field_3_id);
 
-        case 'email_address':
-            $field3Value = $faker->freeEmail;
-            break;
+    foreach($fields as $index=>$field) {
+        switch($field->name) {
+            case 'first_name':
+                $values[$index] = $faker->firstName();
+                break;
 
-        default:
-            $field3Value = $faker->phoneNumber;
+            case 'last_name':
+                $values[$index] = $faker->lastName();
+                break;
+
+            case 'business_name':
+                $values[$index] = $faker->company;
+                break;
+
+            case 'email_address':
+                $values[$index] = $faker->freeEmail;
+                break;
+
+            case 'birth_date':
+                $values[$index] = $faker->date;
+                break;
+
+            default:
+                $values[$index] = $faker->phoneNumber;
+                break;
+        }
     }
 
     return [
         'record_type_id' => $recordType->id,
-        'field_1_value' => $faker->firstName(),
-        'field_2_value' => $faker->lastName(),
-        'field_3_value' => $field3Value
+        'field_1_value' => $values[0],
+        'field_2_value' => $values[1],
+        'field_3_value' => $values[2]
     ];
 });

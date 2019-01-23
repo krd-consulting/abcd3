@@ -19,13 +19,13 @@ class Record extends JsonResource
     {
         return [
             'id' => $this->id,
-            $this->record_type->field1->name => $this->field_1_value,
-            $this->record_type->field2->name => $this->field_2_value,
-            $this->record_type->field3->name => $this->field_3_value,
+            $this->record_type->identity->field1->name => $this->field_1_value,
+            $this->record_type->identity->field2->name => $this->field_2_value,
+            $this->record_type->identity->field3->name => $this->field_3_value,
             'fields'=> [
-                $this->record_type->field1->name => 'field_1_value',
-                $this->record_type->field2->name => 'field_2_value',
-                $this->record_type->field3->name => 'field_3_value'
+                $this->record_type->identity->field1->name => 'field_1_value',
+                $this->record_type->identity->field2->name => 'field_2_value',
+                $this->record_type->identity->field3->name => 'field_3_value'
             ]
         ];
     }

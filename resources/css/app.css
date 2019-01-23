@@ -14,7 +14,7 @@
 @import url('https://rsms.me/inter/inter-ui.css');
 @import '~element-ui/lib/theme-chalk/index.css';
 
-body {
+html {
     @apply tw-text-grey-darkest;
     font-family: 'Inter UI', sans-serif;
 }

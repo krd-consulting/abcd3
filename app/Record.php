@@ -25,11 +25,11 @@ class Record extends Model
 
     // Query Scopes
 
-    public function scopeAs($query, $recordType) {
+    public function scopeAs($query, $identity) {
         $query->addSelect('id')
-            ->addSelect('field_1_value as ' . $recordType->field1->name)
-            ->addSelect('field_2_value as ' . $recordType->field2->name)
-            ->addSelect('field_3_value as ' . $recordType->field3->name);
+            ->addSelect('field_1_value as ' . $identity->field1->name)
+            ->addSelect('field_2_value as ' . $identity->field2->name)
+            ->addSelect('field_3_value as ' . $identity->field3->name);
     }
 
     public function scopeAvailableFor($query, $user) {

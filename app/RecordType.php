@@ -11,21 +11,14 @@ class RecordType extends Model
 {
     use HasSlug;
 
-    public function field1() {
-        return $this->hasOne('App\Field', 'id', 'field_1_id');
-    }
-
-    public function field2() {
-        return $this->hasOne('App\Field', 'id', 'field_2_id');
-    }
-
-    public function field3() {
-        return $this->hasOne('App\Field', 'id', 'field_3_id');
-    }
-
     public function records()
     {
         return $this->hasMany('App\Record');
+    }
+
+    public function identity()
+    {
+        return $this->belongsTo('App\RecordIdentity');
     }
 
     /**

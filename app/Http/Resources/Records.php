@@ -39,9 +39,9 @@ class Records extends ResourceCollection
         return [
             'record_type' => $this->recordType,
             'fields' => [
-                $this->recordType->field1->name => 'field_1_value',
-                $this->recordType->field2->name => 'field_2_value',
-                $this->recordType->field3->name => 'field_3_value'
+                $this->recordType->identity->field1->name => 'field_1_value',
+                $this->recordType->identity->field2->name => 'field_2_value',
+                $this->recordType->identity->field3->name => 'field_3_value'
             ]
         ];
     }
