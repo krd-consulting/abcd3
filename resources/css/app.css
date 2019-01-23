@@ -17,6 +17,7 @@
 html {
     @apply tw-text-grey-darkest;
     font-family: 'Inter UI', sans-serif;
+    font-size: 18px;
 }
 
 a {
