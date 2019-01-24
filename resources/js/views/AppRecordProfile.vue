@@ -2,8 +2,13 @@
     <div class="tw-shadow tw-rounded tw-bg-white">
         <div class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b-2">
             <div>
-                <primary-data class="tw-mb-2 tw-block tw-font-bold" :record="record" :fields="fields"/>
-                <secondary-data class="tw-text-sm" :record="record" :fields="fields"></secondary-data>
+                <div class="tw-inline-block tw-align-middle">
+                    <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-lg" :record="record" :fields="fields" />
+                </div>
+                <div class="tw-inline-block tw-align-middle">
+                    <primary-data class="tw-mb-2 tw-block tw-font-bold tw-text-xl" :record="record" :fields="fields"/>
+                    <secondary-data class="tw-text-sm" :record="record" :fields="fields"></secondary-data>
+                </div>
             </div>
         </div>
     </div>
@@ -11,12 +16,14 @@
 <script>
     import RecordRequest from '../api/RecordRequest';
 
+    import ProfilePicture from '../components/RecordProfilePicture';
     import PrimaryData from '../components/RecordPrimaryData';
     import SecondaryData from '../components/RecordSecondaryData';
 
     export default {
 
         components: {
+            ProfilePicture,
             PrimaryData,
             SecondaryData
         },

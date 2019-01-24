@@ -37,11 +37,11 @@
             classes() {
                 let fields = [];
 
-                if('contact_number' in this.fields)
-                    return 'tw-bg-red tw-text-white';
-
                 if('email_address' in this.fields)
                     return 'tw-bg-purple tw-text-white';
+
+                if('contact_number' in this.fields)
+                    return 'tw-bg-red tw-text-white';
 
                 if('birth_date' in this.fields)
                     return 'tw-bg-orange tw-text-white';

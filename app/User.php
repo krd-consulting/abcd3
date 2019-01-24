@@ -148,9 +148,9 @@ class User extends Authenticatable
         if(is_a($record, Record::class))
             return $this->hasRecord($record->id);
 
-        return $this->record()->where('file_id', $record)->exists() ||
-            $this->teamRecords()->where('files.id', $record)->exists() ||
-            $this->programRecords()->where('files.id', $record)->exists();
+        return $this->records()->where('record_id', $record)->exists() ||
+            $this->teamRecords()->where('records.id', $record)->exists() ||
+            $this->programRecords()->where('records.id', $record)->exists();
     }
 
     public function hasProgram($program) : bool

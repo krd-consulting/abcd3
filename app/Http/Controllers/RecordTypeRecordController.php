@@ -20,16 +20,18 @@ class RecordTypeRecordController extends Controller
      */
     public function index(RecordType $recordType)
     {
-        $records = $recordType->records()->availableFor(auth()->user());
+        $records = $recordType->records();
 
         // Search
         $search = request('search');
-        $records->search($search);
+        $records = $records->search($search);
 
         // Sort per request.
         $ascending = request('ascending');
         $sortBy = request('sortBy');
-        $records->sort($sortBy, $ascending);
+        $records = $records->sort($sortBy, $ascending);
+
+        $records = $records->availableFor(auth()->user());
 
         // Paginate per request.
         $perPage = request('perPage');

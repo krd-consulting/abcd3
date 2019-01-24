@@ -26,7 +26,7 @@ class RecordController extends Controller
      */
     public function index(RecordType $recordType)
     {
-        $records = $recordType->records()->availableFor(auth()->user());
+        $records = $recordType->records();
 
         // Search
         $search = request('search');
@@ -36,6 +36,8 @@ class RecordController extends Controller
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $records->sort($sortBy, $ascending);
+
+        $records = $records->availableFor(auth()->user());
 
         // Paginate per request.
         $perPage = request('perPage');
