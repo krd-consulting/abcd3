@@ -56,13 +56,39 @@ And that's about it!
 
 ## Features
 
-### Dynamic Records
-
-#### Record Types
-ABCD enables organizations to create their own record types. A record type basically requires a **name**, and a **record identity**.
+### Records
+Users can create, read, update, and delete records in ABCD. But before that, record identities must be configured, and record types must be created, respectively.
 
 #### Record Identity
-A record identity defines the record type’s required fields, and it gives ABCD an idea as to how the record type should be treated.
+A record identity defines a record’s fields, and it gives ABCD an idea as to how the record should be treated. This means that all record types of the same identity will have the same fields.
+
+A record type must have one of the four identities which are staff, volunteer, client, and external. 
+
+Staff records are ideally for records of people hired and paid to work or simply the employees in an organization. What makes staff records unique is that these can be given caseloads which are simply other records that are ‘caseload-able’.
+
+Volunteer records, ideally, should be used for records where tracking volunteer hours is imminent. Volunteer records are also caseload-able which means that these can be assigned to staff records.
+
+Client records are for an organization’s participants, clients, or people who directly benefit from an organization’s program/s. Client records, like volunteer records, are also caseload-able.
+
+Lastly, the external records are for records of entities that are not part of the organization like funders or donors, and external auditors.
+
+To configure a record identity, a combination of three fields that amount to a value of 5 must be assigned to the identity.
+
+#### Fields
+There are 6 record fields. Each one has a corresponding value and all are required to be filled in when creating a record.
+
+1. First Name - primary - 2
+2. Last Name - primary - 2
+3. Business Name - primary - 3
+4. Email Address - secondary - 1
+5. Contact Number - secondary - 1
+6. Birth Date - secondary - 1
+
+#### Record Types
+ABCD enables organizations to create their own record types. A record type basically requires a name, and should be given an identity.
+
+#### Record Deduping
+One of the important functions of Identities is deduping. ABCD automatically treats records that belong to the same identity and have completely identical field values as one. 
 
 ### Access Control (Roles, Scopes, Permissions)
 
