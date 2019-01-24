@@ -1,5 +1,5 @@
 <template>
-    <list-item :to="`/records/${recordType}/${record.id}`">
+    <list-item :to="`/records/${recordType}/${record.id}`" class="tw-py-4 tw-px-4">
         <template slot="image">
             <profile-picture class="tw-mr-2 tw-w-10 tw-h-10" :record="record" :fields="fields" />
         </template>

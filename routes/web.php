@@ -25,6 +25,7 @@ Route::prefix('api')
 
         Route::get('records/{recordType}', 'RecordTypeRecordController@index');
         Route::get('records/{recordType}/{record}', 'RecordController@show');
+        Route::get('records/{recordType}/{record}/programs', 'RecordProgramsController@index');
 
         Route::get('programs', 'ProgramController@index');
         Route::get('programs/{program}', 'ProgramController@show');

@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-items-center tw-bg-white hover:tw-text-blue tw-border-b">
-        <router-link tag="div" class="tw-flex tw-items-center tw-w-4/5 tw-py-4 tw-pl-4 tw-cursor-pointer" :to="to">
+        <router-link tag="div" class="tw-flex tw-items-center tw-w-4/5 tw-cursor-pointer" :to="to">
             <div>
                 <slot name="image">
                 </slot>
@@ -19,7 +19,7 @@
             </div>
         </router-link tag="div">
         <slot name="options-container">
-            <div class="tw-w-1/5 tw-py-4 tw-pr-4 tw-text-right">
+            <div class="tw-w-1/5 tw-text-right">
                 <slot name="options">
                 </slot>
             </div>
