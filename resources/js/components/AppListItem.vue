@@ -1,13 +1,13 @@
 <template>
     <div class="tw-flex tw-items-center tw-bg-white hover:tw-text-blue tw-border-b">
-        <router-link tag="div" class="tw-flex tw-items-center tw-w-4/5 tw-cursor-pointer" :to="to">
+        <router-link tag="div" class="tw-flex tw-items-top tw-w-3/5 tw-cursor-pointer" :to="to">
             <div>
                 <slot name="image">
                 </slot>
             </div>
             <div>
                 <slot name="primary-data">
-                    <span class="tw-mb-2 tw-block tw-font-bold">
+                    <span class="tw-mb-2 tw-block tw-font-semibold">
                         <slot>{{ primaryData }}</slot>
                     </span>
                 </slot>
@@ -19,7 +19,7 @@
             </div>
         </router-link tag="div">
         <slot name="options-container">
-            <div class="tw-w-1/5 tw-text-right">
+            <div class="tw-w-2/5 tw-text-right">
                 <slot name="options">
                 </slot>
             </div>

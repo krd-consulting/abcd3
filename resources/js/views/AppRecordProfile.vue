@@ -3,11 +3,11 @@
         <div class="tw-flex tw-items-top tw-justify-between tw-p-4">
             <div>
                 <div class="tw-inline-block tw-align-middle">
-                    <profile-picture class="tw-mr-2 tw-w-16 tw-h-16 tw-text-xl" :record="record" :fields="fields" />
+                    <profile-picture class="tw-mr-2 tw-w-16 tw-h-16 tw-text-2xl" :record="record" :fields="fields" />
                 </div>
                 <div class="tw-inline-block tw-align-middle">
-                    <primary-data class="tw-mb-2 tw-block tw-font-bold tw-text-xl" :record="record" :fields="fields"/>
-                    <secondary-data class="tw-text-sm" :record="record" :fields="fields"></secondary-data>
+                    <primary-data class="tw-mb-2 tw-block tw-font-semibold tw-text-xl" :record="record" :fields="fields"/>
+                    <secondary-data class="tw-text-sm tw-font-semibold" :record="record" :fields="fields"></secondary-data>
                 </div>
             </div>
             <div class="tw-text-right">
@@ -23,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="tw-pb-4 tw-px-4">
+        <div class="tw-bg-grey-lightest">
             <el-tabs :value="$route.name" @tab-click="handleClick">
                 <el-tab-pane name="record_profile_summary" label="Summary">
                 </el-tab-pane>
@@ -34,6 +34,8 @@
                     </template>
                 </el-tab-pane>
             </el-tabs>
+        </div>
+        <div>
             <router-view/>
         </div>
     </div>
@@ -82,6 +84,7 @@
 
         created() {
             this.retrieve();
+            console.log(this.$route.params);
         }
 
     }

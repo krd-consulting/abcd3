@@ -57,6 +57,15 @@ a:hover {
 /*
  Styles for .vgt-inner-wrap which wraps the table headers and body.
  */
+.el-tabs__header {
+    @apply
+        tw-m-0;
+}
+
+.el-tabs__header > div > div {
+    @apply tw-px-4;
+}
+
 .vgt-inner-wrap {
     @apply
         tw-shadow;

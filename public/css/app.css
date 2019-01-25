@@ -13574,6 +13574,15 @@ a:hover {
  Styles for .vgt-inner-wrap which wraps the table headers and body.
  */
 
+.el-tabs__header {
+  margin: 0;
+}
+
+.el-tabs__header > div > div {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .vgt-inner-wrap {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
 }
