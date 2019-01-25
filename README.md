@@ -57,12 +57,12 @@ And that's about it!
 ## Features
 
 ### Records
-Users can create, read, update, and delete records in ABCD. But before that, record identities must be configured, and record types must be created, respectively.
+One of the main features of ABCD is that it allows users to create, read, update, and delete records on the fly. But before that, record identities for an ABCD instance must be configured, and record types must be created, respectively.
+
+For a quick concept overview: a record always belongs to a record type which also requires a configured record identity.
 
 #### Record Identity
-A record identity defines a record’s fields, and it gives ABCD an idea as to how the record should be treated. This means that all record types of the same identity will have the same fields.
-
-A record type must have one of the four identities which are staff, volunteer, client, and external. 
+There are four record identities (staff, volunteer, client, and external) and each defines a record type's fields, and gives ABCD an idea as to how the record should be treated. Consequently, all record types of the same identity will all have the same fields.
 
 Staff records are ideally for records of people hired and paid to work or simply the employees in an organization. What makes staff records unique is that these can be given caseloads which are simply other records that are ‘caseload-able’.
 
@@ -75,20 +75,26 @@ Lastly, the external records are for records of entities that are not part of th
 To configure a record identity, a combination of three fields that amount to a value of 5 must be assigned to the identity.
 
 #### Fields
-There are 6 record fields. Each one has a corresponding value and all are required to be filled in when creating a record.
+There are 6 record fields. Each one has a corresponding value and all are required to be filled in when creating a record. A combination of fields that amount to a value of 5 must also be assigned to a record identity in order configure the identity.
 
-1. First Name - primary - 2
-2. Last Name - primary - 2
-3. Business Name - primary - 3
-4. Email Address - secondary - 1
-5. Contact Number - secondary - 1
-6. Birth Date - secondary - 1
+| Field            | Type       | Value  |
+|------------------|------------|-------:|
+| First Name       | Primary    | 2      |
+| Last Name        | Primary    | 2      |
+| Business Name    | Primary    | 3      |
+| Email Address    | Secondary  | 1      |
+| Contact Number   | Secondary  | 1      |
+| Birth Date       | Secondary  | 1      | 
+
+There are also two types of fields: primary and secondary and these affect how the values of these certain fields are displayed.
+
+Note: How different field types are displayed is controlled by the front-end code only. This means that, currently, there is no way to configure how the values of these different field types are displayed except through the front-end source code.
 
 #### Record Types
-ABCD enables organizations to create their own record types. A record type basically requires a name, and should be given an identity.
+A record type is, basically, a group of records and it requires a name, and should be given an identity.
 
 #### Record Deduping
-One of the important functions of Identities is deduping. ABCD automatically treats records that belong to the same identity and have completely identical field values as one. 
+One of the important functions of Identities is deduping. ABCD automatically links records that belong to the same identity and have completely identical field values. 
 
 ### Access Control (Roles, Scopes, Permissions)
 
