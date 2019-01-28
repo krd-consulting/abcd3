@@ -5,7 +5,7 @@ class ProgramRequest extends Request{
         return this.get('/api/programs');
     }
 
-    view(id) {
+    show(id) {
         return this.get('/api/programs/' + id);
     }
 

@@ -64,7 +64,7 @@
                     params: {...this.params}
                 });
 
-                this.request.view(this.$route.params.id).then((response) => {
+                this.request.show(this.$route.params.id).then((response) => {
                     this.program = response;
                 });
             },

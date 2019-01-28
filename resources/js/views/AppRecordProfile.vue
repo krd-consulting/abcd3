@@ -84,7 +84,6 @@
 
         created() {
             this.retrieve();
-            console.log(this.$route.params);
         }
 
     }
