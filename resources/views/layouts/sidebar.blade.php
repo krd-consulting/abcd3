@@ -1,9 +1,9 @@
 <nav class="tw-border-r">
     <sidebar-list :collapse="collapseSidebar" class="main-sidebar-menu">
-        <!--<sidebar-list-item index="1" :route="{ path: '/dashboard' }">
-            <base-icon class="tw-text-xl">dashboard</base-icon>
+        <sidebar-list-item index="1" :route="{ path: '/dashboard' }">
+            <base-icon class="tw-text-xl tw-mr-2">dashboard</base-icon>
             <span slot="title">Dashboard</span>
-        </sidebar-list-item>-->
+        </sidebar-list-item>
         <base-submenu index="2">
             <template slot="title">
                 <base-icon class="tw-text-xl tw-mr-2">folder</base-icon>

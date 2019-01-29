@@ -12,11 +12,13 @@
             <global-search></global-search>
         </div>
         <div>
-            <!--<div class="tw-inline-block tw-align-middle tw-mr-2">
+            <div class="tw-inline-block tw-align-middle tw-mr-2">
                 <el-dropdown class="main-nav-dropdown" trigger="click" placement="bottom-end">
                     <base-icon class="tw-text-lg">notifications</base-icon>
+                    <el-dropdown-menu slot="dropdown">
+                    </el-dropdown-menu>
                 </el-dropdown>
-            </div>-->
+            </div>
             <div class="tw-inline-block tw-align-middle">
                 <base-menu mode="horizontal">
                     <el-dropdown class="main-nav-dropdown" trigger="click" placement="bottom-end">

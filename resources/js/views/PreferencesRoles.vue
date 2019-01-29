@@ -13,12 +13,12 @@
             <h2 class="tw-mb-4">
                 <base-icon class="tw-text-xl tw-px-2">people</base-icon> Roles
             </h2>
-            <base-button @click="createRole">Create Role</base-button>
+            <base-button class="tw-mr-2" @click="createRole">Create Role</base-button>
         </div>
         <div class="tw-w-full tw-flex tw-items-start tw-flex-wrap tw-justify-between">
-            <div v-for="(role, roleIndex) in roles" class="lg:tw-w-1/2 tw-w-full tw-pr-4 tw-py-2 tw-flex-no-shrink">
+            <div v-for="(role, roleIndex) in roles" class="tw-w-1/2 tw-mb-4 tw-px-2">
                 <div class="tw-rounded tw-shadow">
-                    <div class="tw-flex tw-items-center tw-pt-4 tw-pb-2 tw-bg-grey-lighter tw-rounded">
+                    <div class="tw-flex tw-items-center tw-pt-4 tw-pb-2 tw-bg-grey-lightest">
                         <div class="tw-w-3/4 tw-pl-2">
                             <span class="tw-inline-block tw-font-semibold tw-mb-2">
                                 {{ role.name }}
