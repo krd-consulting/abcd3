@@ -15,11 +15,11 @@
 </head>
 <body>
     <base-container id="app" class="tw-h-screen">
-        @section('main-sidebar')
+        @section('main-nav')
         @show
 
         <base-container>
-            @section('main-nav')
+            @section('main-sidebar')
             @show
 
             @yield('content')

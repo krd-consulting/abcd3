@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Record extends Model
 {
     public function programs() {
-        return $this->belongsToMany('App\Program');
+        return $this->belongsToMany('App\Program')->withTimestamps();
     }
 
     public function teams() {

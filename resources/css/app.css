@@ -34,24 +34,25 @@ a:hover {
  *
  */
 
-.main-nav,
-.main-nav .user-nav > *,
-.main-sidebar,
-.main-sidebar li,
 .main {
     @apply tw-bg-grey-lightest;
 }
 
 .main {
-    @apply tw-px-12;
+    @apply tw-px-4;
+}
+
+.main-sidebar-menu:not(.el-menu--collapse), .main-logo-container {
+    width: 276px;
 }
 
 .main-nav {
     @apply
         tw-flex
-        tw-justify-between
+        tw-justify-start
+        tw-border-b
         tw-items-center
-        tw-px-12;
+        tw-px-0;
 }
 
 /*

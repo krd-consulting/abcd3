@@ -10,12 +10,13 @@
                 <base-input
                     v-model="params.search"
                     @input="search"
-                    class="tw-no-grow tw-mr-2"
+                    class="tw-no-shrink tw-mr-2"
                     :placeholder="`Search for ${type.name}`">
                     <i slot="prefix" class="el-input__icon el-icon-search"></i>
                 </base-input>
                 <base-button class="tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue tw-no-shrink" @click="create">
-                    <base-icon class="tw-text-base tw-font-bold">add</base-icon>
+                    <base-icon class="tw-text-base tw-font-bold tw-align-middle">add</base-icon>
+                    <span class="tw-align-middle">Add {{type.name}}</span>
                 </base-button>
             </div>
         </template>
