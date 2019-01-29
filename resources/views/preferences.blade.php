@@ -3,40 +3,38 @@
 @section('main-nav')
     <el-header class="tw-flex tw-items-center tw-justify-between tw-py-2 tw-border-b">
         <a class="tw-inline-block" href="/">
-            <base-icon class="tw-text-2xl">arrow_back</base-icon> Back
+            <base-icon class="tw-text-xl tw-align-middle">arrow_back</base-icon>
+            <span class="tw-align-middle">Back</span>
         </a>
-        <h1 class="tw-inline-block tw-mx-auto tw-text-center">Preferences</h1>
+        <h2 class="tw-inline-block tw-mx-auto tw-text-center">Preferences</h2>
         <span>&nbsp;</span>
     </el-header>
 @endsection
 
 @section('content')
-    <div class="tw-flex tw-py-8 tw-max-h-full tw-overflow-y-auto">
-        <div class="tw-container tw-mx-auto tw-w-full tw-flex">
-            <nav class="tw-w-1/4">
-                <sidebar-list>
-                    <sidebar-list-item index="1" :route="{ path: '/preferences/' }">
-                        <base-icon class="tw-text-xl tw-px-2">dashboard</base-icon>
-                        General
+    <div class="tw-container tw-mx-auto tw-flex tw-mt-8">
+        <nav>
+            <sidebar-list :collapse="false" class="preferences-sidebar-menu">
+                <sidebar-list-item index="1" :route="{ path: '/preferences/' }">
+                    <base-icon class="tw-text-xl tw-mr-2">dashboard</base-icon>
+                    <span slot="title">General</span>
+                </sidebar-list-item>
+                <sidebar-list-item index="2" :route="{ path: '/preferences/records' }">
+                    <base-icon class="tw-text-xl tw-mr-2">insert_drive_file</base-icon>
+                    <span slot="title">Records</span>
+                </sidebar-list-item>
+                @can('write roles')
+                    <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
+                        <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
+                        <span slot="title">Roles</span>
                     </sidebar-list-item>
-                    <sidebar-list-item index="2" :route="{ path: '/preferences/records' }">
-                        <base-icon class="tw-text-xl tw-px-2">insert_drive_file</base-icon>
-                        Records
-                    </sidebar-list-item>
-                    @can('write roles')
-                        <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
-                            <base-icon class="tw-text-xl tw-px-2">people</base-icon>
-                            Roles
-                        </sidebar-list-item>
-                    @endcan
-                </sidebar-list>
-            </nav>
-            <section class="tw-ml-8 tw-w-3/4">
-                <router-view></router-view>
-            </section>
-        </div>
+                @endcan
+            </sidebar-list>
+        </nav>
+        <section class="tw-ml-8">
+            <router-view></router-view>
+        </section>
     </div>
-
 @endsection
 
 @section('scripts')

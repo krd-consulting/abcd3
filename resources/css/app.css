@@ -42,7 +42,9 @@ a:hover {
     @apply tw-px-4;
 }
 
-.main-sidebar-menu:not(.el-menu--collapse), .main-logo-container {
+.main-sidebar-menu:not(.el-menu--collapse),
+.main-logo-container,
+.preferences-sidebar-menu:not(.el-menu--collapse) {
     width: 276px;
 }
 
