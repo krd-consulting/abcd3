@@ -8,7 +8,7 @@ class Program extends Model
 {
     public function records()
     {
-        return $this->belongsToMany('App\Record');
+        return $this->belongsToMany('App\Record')->withTimestamps();
     }
 
     public function team()

@@ -39,7 +39,6 @@ class User extends Authenticatable
     ];
 
     // Relationships
-
     public function records()
     {
         return $this->belongsToMany('App\Record');

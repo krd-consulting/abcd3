@@ -4,6 +4,14 @@ class RecordPrograms extends Request{
     retrieve(recordType, record) {
         return this.get(`/api/records/${recordType}/${record}/programs`);
     }
+
+    store(recordType, record, program) {
+        return this.post(`/api/records/${recordType}/${record}/program/${program}`);
+    }
+
+    destroy(recordType, record, program) {
+        return this.delete(`/api/records/${recordType}/${record}/program/${program}`);
+    }
 }
 
 export default RecordPrograms
