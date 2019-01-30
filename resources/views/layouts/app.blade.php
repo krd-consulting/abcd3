@@ -14,7 +14,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <base-container id="app" class="tw-h-screen">
+    <base-container id="app" class="tw-h-screen tw-max-h-screen">
         @section('main-nav')
         @show
 

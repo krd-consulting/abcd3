@@ -47,8 +47,12 @@
             </div>
         </form>
         <div slot="footer">
-            <base-button @click="close(false)">Cancel</base-button>
-            <base-button @click="update">Confirm</base-button>
+            <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-text-grey tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-grey-darker" @click="close(false)">
+                <span class="tw-text-xs tw-align-middle">Nevermind</span>
+            </base-button>
+            <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue tw-text-white tw-font-bold tw-border-none" @click="update">
+                <span class="tw-text-xs tw-align-middle">Good to go!</span>
+            </base-button>
         </div>
     </base-dialog>
 </template>

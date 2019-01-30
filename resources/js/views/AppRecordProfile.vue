@@ -7,7 +7,7 @@
                 </div>
                 <div class="tw-inline-block tw-align-middle">
                     <primary-data class="tw-mb-2 tw-block tw-font-semibold tw-text-xl" :record="record" :fields="fields"/>
-                    <secondary-data class="tw-text-sm tw-font-semibold" :record="record" :fields="fields"></secondary-data>
+                    <secondary-data class="tw-text-sm" :record="record" :fields="fields"></secondary-data>
                 </div>
             </div>
             <div class="tw-text-right">

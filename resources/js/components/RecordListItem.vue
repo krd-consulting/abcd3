@@ -5,7 +5,7 @@
         </template>
         <primary-data :record="record" :fields="fields"/>
         <template slot="secondary-data">
-            <secondary-data class="tw-text-xs tw-font-semibold" :record="record" :fields="fields"/>
+            <secondary-data class="tw-text-xs" :record="record" :fields="fields"/>
         </template>
         <template slot="options">
             <base-button class="tw-py-2 tw-px-2 tw-bg-green-lightest tw-text-green-dark tw-border-none">

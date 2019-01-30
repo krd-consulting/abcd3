@@ -1,6 +1,6 @@
 <template>
     <div class="tw-shadow tw-rounded tw-bg-white">
-        <div class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b-2">
+        <div class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b">
             <h2 class="tw-font-bold tw-text-xl tw-w-1/2">
                 <slot name="header-text"></slot>
             </h2>

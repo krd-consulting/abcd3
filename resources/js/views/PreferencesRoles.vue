@@ -9,39 +9,45 @@
             :active.sync="create.active"
             @save="storeRole"/>
 
-        <div class="tw-flex tw-items-center tw-justify-between">
-            <h2 class="tw-mb-4">
-                <base-icon class="tw-text-xl tw-px-2">people</base-icon> Roles
-            </h2>
-            <base-button class="tw-mr-2" @click="createRole">Create Role</base-button>
+        <div class="tw-flex tw-items-center tw-justify-between tw-mx-2 tw-pb-4 tw-border-b">
+            <div>
+                <h2>
+                    <base-icon class="tw-text-xl tw-px-2">people</base-icon>
+                    <span>Manage Roles</span>
+                </h2>
+            </div>
+            <base-button class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue tw-text-white tw-font-bold tw-border-none" @click="createRole">
+                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                <span class="tw-text-xs tw-align-middle">Create Role</span>
+            </base-button>
         </div>
-        <div class="tw-w-full tw-flex tw-items-start tw-flex-wrap tw-justify-between">
+        <div class="tw-w-full tw-flex tw-py-4 tw-items-start tw-flex-wrap tw-justify-between tw-overflow-y-auto" style="height: 78vh;">
             <div v-for="(role, roleIndex) in roles" class="tw-w-1/2 tw-mb-4 tw-px-2">
-                <div class="tw-rounded tw-shadow">
-                    <div class="tw-flex tw-items-center tw-pt-4 tw-pb-2 tw-bg-grey-lightest">
-                        <div class="tw-w-3/4 tw-pl-2">
-                            <span class="tw-inline-block tw-font-semibold tw-mb-2">
+                <div class="tw-rounded tw-shadow tw-bg-white tw-px-4 tw-py-2">
+                    <div class="tw-flex tw-items-center tw-pt-4 tw-pb-2 tw-border-b tw-rounded-t">
+                        <div class="tw-w-3/4">
+                            <div class="tw-font-semibold">
                                 {{ role.name }}
-                            </span>
+                            </div>
 
                             <scope-tag
-                                class="tw-align-middle tw-py-1 tw-font-semibold tw-text-xs tw-text-blue"
+                                class="tw-py-1 tw-text-xs tw-text-blue tw-font-semibold tw-capitalize"
                                 :scope="role.scope_id"/>
                         </div>
-                        <div class="tw-w-1/4 tw-text-center">
+                        <div class="tw-w-1/4 tw-text-right tw-mr-4">
                             <button @click="editRole(role, roleIndex)">
-                                <base-icon class="tw-text-base">edit</base-icon>
+                                <base-icon class="tw-text-sm tw-text-grey hover:tw-text-blue">edit</base-icon>
                             </button>
                             <button @click="deleteRole(role, roleIndex)">
-                                <base-icon class="tw-text-base">delete</base-icon>
+                                <base-icon class="tw-text-sm tw-text-grey hover:tw-text-red-light">delete</base-icon>
                             </button>
                         </div>
                     </div>
                     <table class="tw-w-full">
                         <tbody>
-                            <tr v-for="(permission, permissionIndex) in role.all_permissions" class="hover:tw-bg-grey-lightest">
-                                <td width="75%" class="tw-py-4 tw-pl-2 tw-text-sm">{{ permission.name }}</td>
-                                <td class="tw-py-4 tw-text-center">
+                            <tr v-for="(permission, permissionIndex) in role.all_permissions">
+                                <td width="75%" class="tw-py-4 tw-text-sm tw-capitalize">{{ permission.name }}</td>
+                                <td class="tw-py-4 tw-text-right tw-pr-4">
                                     <base-switch
                                         :on="permission.permitted"
                                         @change="toggleRolePermission(role, permission, $event, roleIndex, permissionIndex)"/>

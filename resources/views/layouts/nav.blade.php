@@ -31,7 +31,8 @@
                             </a>
                             <el-dropdown-item>
                                 <a href="/preferences">
-                                    <base-icon>settings</base-icon> Preferences
+                                    <base-icon class="tw-text-base tw-align-middle">settings</base-icon>
+                                    <span class="tw-align-middle">Preferences</span>
                                 </a>
                             </el-dropdown-item>
                             <el-dropdown-item>
@@ -42,8 +43,8 @@
                                     href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
-                                    <base-icon>exit_to_app</base-icon>
-                                    {{ __('Logout') }}
+                                    <base-icon class="tw-text-base tw-align-middle">exit_to_app</base-icon>
+                                    <span class="tw-align-middle">{{ __('Logout') }}</span>
                                 </a>
                             </el-dropdown-item>
                         </el-dropdown-menu>
