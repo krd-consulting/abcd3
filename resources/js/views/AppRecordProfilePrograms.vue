@@ -22,7 +22,7 @@
                 </template>
                 <div slot="tertiary-data" class="tw-flex tw-w-2/3">
                     <div class="tw-w-1/2">
-                        <span>January 1, 1970</span>
+                        <span>{{ program.pivot.created_at }}</span>
                     </div>
                     <div class="tw-w-1/2">
                         <span>Active</span>
