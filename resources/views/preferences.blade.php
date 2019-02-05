@@ -32,7 +32,7 @@
                     @endcan
                 </sidebar-list>
             </nav>
-            <section>
+            <section class="tw-flex-1">
                 <router-view></router-view>
             </section>
         </div>

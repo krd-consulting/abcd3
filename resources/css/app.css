@@ -9,15 +9,45 @@
  *
  * @import "tailwindcss/preflight";
  */
+@import '~element-ui/lib/theme-chalk/index.css';
+
 @tailwind preflight;
 
 @import url('https://rsms.me/inter/inter-ui.css');
-@import '~element-ui/lib/theme-chalk/index.css';
+
+.el-button+.el-button {
+    @apply
+        tw-m-0;
+}
+
+.el-dialog {
+    @apply
+        tw-rounded;
+}
+
+.el-dialog__footer {
+    @apply
+        tw-p-0;
+}
+
+.el-tabs__header {
+    @apply
+        tw-m-0;
+}
+
+.el-tabs__header > div > div {
+    @apply tw-px-4;
+}
+
+.vgt-inner-wrap {
+    @apply
+        tw-shadow;
+}
 
 html {
     @apply tw-text-grey-darkest;
     font-family: 'Inter UI', sans-serif;
-    font-size: 18px;
+
 }
 
 a {
@@ -57,22 +87,6 @@ a:hover {
         tw-px-0;
 }
 
-/*
- Styles for .vgt-inner-wrap which wraps the table headers and body.
- */
-.el-tabs__header {
-    @apply
-        tw-m-0;
-}
-
-.el-tabs__header > div > div {
-    @apply tw-px-4;
-}
-
-.vgt-inner-wrap {
-    @apply
-        tw-shadow;
-}
 
 .base-table {
     @apply

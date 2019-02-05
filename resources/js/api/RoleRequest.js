@@ -10,7 +10,7 @@ class RoleRequest extends Request{
     }
 
     store() {
-        return this.post('/api/role');
+        return this.post('/api/roles');
     }
 
     edit() {
@@ -18,11 +18,11 @@ class RoleRequest extends Request{
     }
 
     update(role) {
-        return this.patch(`/api/role/${role}`);
+        return this.patch(`/api/roles/${role}`);
     }
 
     destroy(role) {
-        return this.delete(`/api/role/${role}`);
+        return this.delete(`/api/roles/${role}`);
     }
 }
 

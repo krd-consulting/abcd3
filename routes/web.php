@@ -26,19 +26,19 @@ Route::prefix('api')
         Route::get('records/{recordType}', 'RecordTypeRecordController@index');
         Route::get('records/{recordType}/{record}', 'RecordController@show');
         Route::get('records/{recordType}/{record}/programs', 'RecordProgramsController@index');
-        Route::post('records/{recordType}/{record}/program/{program}', 'RecordProgramsController@store');
-        Route::delete('records/{recordType}/{record}/program/{program}', 'RecordProgramsController@destroy');
+        Route::post('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@store');
+        Route::delete('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@destroy');
 
         Route::get('programs', 'ProgramController@index');
         Route::get('programs/{program}', 'ProgramController@show');
 
         Route::get('roles', 'RoleController@index');
         Route::get('roles/create', 'RoleController@create');
-        Route::post('role', 'RoleController@store');
+        Route::post('roles', 'RoleController@store');
         Route::get('roles/edit', 'RoleController@edit');
-        Route::patch('role/{role}', 'RoleController@update');
-        Route::delete('role/{role}', 'RoleController@delete');
+        Route::patch('roles/{role}', 'RoleController@update');
+        Route::delete('roles/{role}', 'RoleController@delete');
 
-        Route::post('role/{role}/permission/{permission}', 'RolePermissionController@store');
-        Route::delete('role/{role}/permission/{permission}', 'RolePermissionController@destroy');
+        Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');
+        Route::delete('roles/{role}/permissions/{permission}', 'RolePermissionController@destroy');
 });

@@ -6,7 +6,7 @@
         <form>
             <div>
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5 tw-text-right tw-px-4">
+                    <label class="tw-w-1/5">
                         Name
                     </label>
                     <div class="tw-w-2/3">
@@ -24,7 +24,7 @@
             </div>
             <div class="tw-mt-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5 tw-text-right tw-px-4">
+                    <label class="tw-w-1/5">
                         Scope
                     </label>
                     <div class="tw-w-2/3">
@@ -50,8 +50,8 @@
                 </div>
             </div>
         </form>
-        <div slot="footer">
-            <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-text-grey tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-grey-darker" @click="close(false)">
+        <div slot="footer" class="tw-border-t tw-px-4 tw-py-4 tw-bg-grey-lightest tw-rounded-b">
+            <base-button class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-grey-darker tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue" @click="close(false)">
                 <span class="tw-text-xs tw-align-middle">Nevermind</span>
             </base-button>
             <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue tw-text-white tw-font-bold tw-border-none" @click="store">

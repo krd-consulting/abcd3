@@ -16,12 +16,12 @@
                     <span>Manage Roles</span>
                 </h2>
             </div>
-            <base-button class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue tw-text-white tw-font-bold tw-border-none" @click="createRole">
+            <base-button class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-transparent tw-text-blue tw-font-bold tw-border-none" @click="createRole">
                 <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
                 <span class="tw-text-xs tw-align-middle">Create Role</span>
             </base-button>
         </div>
-        <div class="tw-w-full tw-flex tw-py-4 tw-items-start tw-flex-wrap tw-justify-between tw-overflow-y-auto" style="height: 78vh;">
+        <div class="tw-w-full tw-flex tw-py-4 tw-items-start tw-flex-wrap tw-justify-between tw-overflow-y-auto" style="max-height: 78vh;">
             <div v-for="(role, roleIndex) in roles" class="tw-w-1/2 tw-mb-4 tw-px-2">
                 <div class="tw-rounded tw-shadow tw-bg-white tw-px-4 tw-py-2">
                     <div class="tw-flex tw-items-center tw-pt-4 tw-pb-2 tw-border-b tw-rounded-t">

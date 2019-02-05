@@ -6,11 +6,11 @@ class RecordPrograms extends Request{
     }
 
     store(recordType, record, program) {
-        return this.post(`/api/records/${recordType}/${record}/program/${program}`);
+        return this.post(`/api/records/${recordType}/${record}/programs/${program}`);
     }
 
     destroy(recordType, record, program) {
-        return this.delete(`/api/records/${recordType}/${record}/program/${program}`);
+        return this.delete(`/api/records/${recordType}/${record}/programs/${program}`);
     }
 }
 

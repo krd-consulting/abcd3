@@ -8,11 +8,11 @@
             <secondary-data class="tw-text-xs" :record="record" :fields="fields"/>
         </template>
         <template slot="options">
-            <base-button class="tw-py-2 tw-px-2 tw-bg-green-lightest tw-text-green-dark tw-border-none">
+            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none">
                 <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
                 <span class="tw-text-xs tw-align-middle">Edit</span>
             </base-button>
-            <base-button class="tw-py-2 tw-px-2 tw-bg-red-lightest tw-text-red-dark tw-border-none">
+            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none">
                 <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
                 <span class="tw-text-xs tw-align-middle">Delete</span>
             </base-button>
