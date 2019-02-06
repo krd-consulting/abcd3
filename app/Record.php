@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Record extends Model
 {
     public function programs() {
-        return $this->belongsToMany('App\Program')->withTimestamps();
+        return $this->belongsToMany('App\Program')
+            ->withTimestamps()
+            ->withPivot('notes', 'status', 'status_updated_at');
     }
 
     public function teams() {

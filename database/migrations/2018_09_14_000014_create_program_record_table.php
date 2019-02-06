@@ -17,6 +17,9 @@ class CreateProgramRecordTable extends Migration
             $table->increments('id');
             $table->integer('record_id')->unsigned();
             $table->integer('program_id')->unsigned();
+            $table->text('notes')->nullable();
+            $table->string('status')->nullable();
+            $table->timestamp('status_updated_at')->nullable();
             $table->timestamps();
 
             $table->foreign('record_id')->references('id')->on('records');

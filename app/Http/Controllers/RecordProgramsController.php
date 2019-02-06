@@ -17,7 +17,11 @@ class RecordProgramsController extends Controller
 
     public function store(RecordType $recordType, Record $record, Program $program)
     {
-        $record->programs()->attach($program);
+        $record->programs()->attach($program, [
+            'notes' => '',
+            'status' => 'active',
+            'status_updated_at' => now()
+        ]);
 
         return $program;
     }
