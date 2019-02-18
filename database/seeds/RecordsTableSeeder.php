@@ -26,7 +26,11 @@ class RecordsTableSeeder extends Seeder
                 rand(0,1) == 1
                     ? $record
                         ->programs()
-                        ->save(Program::inRandomOrder()->first())
+                        ->attach(Program::inRandomOrder()->first(), [
+                            'notes' => '',
+                            'status' => 'active',
+                            'status_updated_at' => now()
+                        ])
                     : NULL;
             });
     }

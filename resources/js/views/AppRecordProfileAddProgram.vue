@@ -7,6 +7,9 @@
         @remove="remove"
         @open="open"
         @close="close">
+            <template v-slot:title>
+                <slot name="title">Manage Programs</slot>
+            </template>
             <template v-slot:current-items-title>
                 Current Programs
             </template>
@@ -24,6 +27,9 @@
             </template>
             <template v-slot:available-item-subtitle="{ item }">
                 {{ item.team.name }}
+            </template>
+            <template v-slot:empty-available-items>
+                No more available programs.
             </template>
     </transfer>
     <!--<base-dialog title="Manage Programs" :visible="active" @close="close" @open="open">

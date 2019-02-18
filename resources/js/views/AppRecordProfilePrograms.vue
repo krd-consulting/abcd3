@@ -1,7 +1,18 @@
 <template>
     <div>
         <div class="tw-mb-2">
-            <div class="tw-pt-6 tw-pb-2 tw-pl-4 tw-text-xs tw-text-grey tw-uppercase tw-font-semibold">
+            <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="programs.length == 0">
+                <div>
+                    <base-button
+                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
+                        @click="addProgram">
+                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                        <span class="tw-text-xs tw-align-middle">Add Programs</span>
+                    </base-button>
+                </div>
+            </div>
+            <div v-if="programs.length > 0"
+                class="tw-pt-6 tw-pb-2 tw-pl-4 tw-text-xs tw-text-grey tw-uppercase tw-font-semibold">
                 <div class="tw-flex tw-w-4/5">
                     <div class="tw-w-1/4 tw-m-0">
                         <span class="tw-tracking-wide">Program</span>
@@ -17,7 +28,12 @@
                     </div>
                 </div>
             </div>
-            <list-item class="group tw-pl-4 tw-py-4" :to="`/programs/${program.id}`" :key="program.id" v-for="program in programs">
+            <list-item
+                v-if="programs.length > 0"
+                :to="`/programs/${program.id}`"
+                :key="program.id"
+                v-for="program in programs"
+                class="group tw-pl-4 tw-py-4">
                 <span class="hover:tw-text-blue">{{ program.name }}</span>
                 <template v-slot:secondary-data>
                     <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">people</base-icon>
@@ -63,6 +79,7 @@
         </div>
         <div class="tw-px-4 tw-pb-4">
             <base-button
+                v-if="programs.length > 0"
                 class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
                 @click="addProgram">
                 <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
@@ -71,7 +88,8 @@
             <add-program
                 :active.sync="add.active"
                 :assignedPrograms="programs"
-                @close="retrieve"/>
+                @close="retrieve">
+            </add-program>
         </div>
     </div>
 </template>

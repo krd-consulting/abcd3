@@ -12,11 +12,14 @@
             </div>
             <div class="tw-text-right">
                 <div>
-                    <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none">
+                    <span class="tw-uppercase tw-text-grey tw-text-xs tw-font-semibold">{{ record.type }}</span>
+                </div>
+                <div>
+                    <base-button class="tw-py-2 tw-px-0 tw-mr-4 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none">
                         <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
                         <span class="tw-text-xs tw-align-middle">Edit</span>
                     </base-button>
-                    <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none">
+                    <base-button class="tw-py-2 tw-px-0 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none">
                         <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
                         <span class="tw-text-xs tw-align-middle">Delete</span>
                     </base-button>

@@ -1,5 +1,10 @@
 <template>
-    <base-dialog title="Manage Programs" :visible="active" @close="close" @open="open">
+    <base-dialog :visible="active" @close="close" @open="open">
+        <div slot="title">
+            <slot name="title">
+                Transfer Items
+            </slot>
+        </div>
         <div class="tw-flex tw-text-grey-darkest">
             <div class="tw-flex-1 tw-pr-2">
                 <div class="tw-border tw-border-blue-lighter tw-rounded tw-overflow-y-auto" style="max-height: 300px;">
@@ -41,7 +46,9 @@
                     </div>
                     <div class="tw-h-64 tw-overflow-y-auto">
                         <div v-if="notSelected.length == 0" class="tw-py-24 tw-text-center">
-                            <span>There are no more available items.</span>
+                            <slot name="empty-available-items">
+                                <span>There are no more available items.</span>
+                            </slot>
                         </div>
                         <div v-for="item in notSelected" class="tw-py-2 tw-px-2 tw-border-b">
                             <label class="tw-flex">

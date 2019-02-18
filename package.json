@@ -20,7 +20,7 @@
         "vue-template-compiler": "^2.6.6"
     },
     "dependencies": {
-        "element-ui": "^2.5.4",
+        "element-ui": "^2.4.11",
         "moment": "^2.24.0",
         "tailwindcss": "^0.7.4",
         "vue-good-table": "^2.16.0",
