@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-items-center tw-bg-white hover:tw-text-blue tw-border-b">
+    <div class="tw-flex tw-items-center tw-bg-white tw-border-b">
         <router-link tag="div" class="tw-flex tw-flex-1 tw-items-top tw-cursor-pointer" :to="to">
             <div>
                 <slot name="image">

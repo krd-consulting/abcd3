@@ -9,7 +9,8 @@ class Record extends Model
     public function programs() {
         return $this->belongsToMany('App\Program')
             ->withTimestamps()
-            ->withPivot('notes', 'status', 'status_updated_at');
+            ->withPivot('notes', 'status', 'status_updated_at')
+            ->using('App\ProgramRecord');
     }
 
     public function teams() {

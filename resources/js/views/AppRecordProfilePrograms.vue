@@ -17,8 +17,8 @@
                     </div>
                 </div>
             </div>
-            <list-item class="tw-pl-4 tw-py-4" :to="`/programs/${program.id}`" :key="program.id" v-for="program in programs">
-                {{ program.name }}
+            <list-item class="group tw-pl-4 tw-py-4" :to="`/programs/${program.id}`" :key="program.id" v-for="program in programs">
+                <span class="hover:tw-text-blue">{{ program.name }}</span>
                 <template slot="secondary-data">
                     <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">people</base-icon>
                     <span class="tw-text-grey tw-text-sm tw-text-align-middle">{{ program.team.name }}</span>
@@ -37,7 +37,7 @@
                     </div>
                     <div class="tw-w-1/3">
                         <p v-if="program.pivot.notes">{{ program.pivot.notes }}</p>
-                        <base-button v-else class="tw-py-2 tw-px-0 tw-text-orange tw-font-semibold tw-border-none hover:tw-bg-transparent hover:tw-text-blue">
+                        <base-button v-else class="tw-py-2 tw-px-0 tw-text-grey tw-font-semibold tw-border-none hover:tw-bg-transparent hover:tw-text-blue">
                             <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
                             <span class="tw-text-xs tw-align-middle">Add Note</span>
                         </base-button>
@@ -45,16 +45,20 @@
                 </div>
                 <div slot="options-container" class="tw-w-1/5 tw-text-right">
                     <div class="tw-px-4">
-                        <base-button class="tw-py-2 tw-px-2 tw-text-red-dark tw-border-none" @click="remove(program.id)">
+                        <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-grey-darkest tw-border-none">
+                            <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
+                            <span class="tw-text-xs tw-align-middle">Edit</span>
+                        </base-button>
+                        <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="remove(program.id)">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Remove Program</span>
+                            <span class="tw-text-xs tw-align-middle">Remove</span>
                         </base-button>
                     </div>
                 </div>
             </list-item>
         </div>
         <div class="tw-px-4 tw-pb-4">
-            <base-button class="tw-py-2 tw-pl-2 tw-pr-4 tw-text-blue tw-font-bold tw-border-none" @click="addProgram">
+            <base-button class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none" @click="addProgram">
                 <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
                 <span class="tw-text-xs tw-align-middle">Manage Programs</span>
             </base-button>
