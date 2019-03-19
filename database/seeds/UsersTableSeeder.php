@@ -16,13 +16,13 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $admin = new User;
-        $admin->name = 'Super User';
-        $admin->email = 'admin@hellokrd.net';
-        $admin->password = bcrypt('secret');
-        $admin->remember_token = str_random(10);
-        $admin->save();
-        $admin->assignRole('Super User');
+        $roman = new User;
+        $roman->name = 'Roman Katsnelson';
+        $roman->email = 'roman@hellokrd.net';
+        $roman->password = bcrypt('secret');
+        $roman->remember_token = str_random(10);
+        $roman->save();
+        $roman->assignRole('Super User');
 
         $rupert = new User;
         $rupert->name = 'Rupert Amodia';
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         $rupert->password = bcrypt('secret');
         $rupert->remember_token = str_random(10);
         $rupert->save();
-        $rupert->teams()->attach(Team::inRandomOrder()->first());
+        //$rupert->teams()->attach(Team::inRandomOrder()->first());
         $rupert->assignRole('Team Manager');
 
         $gui = new User;
@@ -39,7 +39,7 @@ class UsersTableSeeder extends Seeder
         $gui->password = bcrypt('secret');
         $gui->remember_token = str_random(10);
         $gui->save();
-        $gui->programs()->attach(Program::inRandomOrder()->first());
+        //$gui->programs()->attach(Program::inRandomOrder()->first());
         $gui->assignRole('Program Manager');
 
         $scott = new User;
@@ -49,13 +49,5 @@ class UsersTableSeeder extends Seeder
         $scott->remember_token = str_random(10);
         $scott->save();
         $scott->assignRole('Guidance Counselor');
-	
-	$roman = new User;
-        $roman->name = 'Roman Katsnelson';
-        $roman->email = 'roman@hellokrd.net';
-        $roman->password = bcrypt('secret');
-        $roman->remember_token = str_random(10);
-        $roman->save();
-        $roman->assignRole('Guidance Counselor');
     }
 }

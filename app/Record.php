@@ -4,9 +4,26 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Staudenmeir\EloquentHasManyDeep\HasTableAlias;
+
 class Record extends Model
 {
-    public function programs() {
+    use HasTableAlias;
+
+    public function caseload()
+    {
+        return $this->cases();
+    }
+
+    public function cases()
+    {
+        return $this->belongsToMany('App\Record', 'cases', 'owner_id', 'record_id')
+            ->withTimestamps()
+            ->using('App\CaseRecord');
+    }
+
+    public function programs()
+    {
         return $this->belongsToMany('App\Program')
             ->withTimestamps()
             ->withPivot('notes', 'status', 'status_updated_at')
@@ -17,8 +34,8 @@ class Record extends Model
         return $this->belongsToMany('App\Team');
     }
 
-    public function users() {
-        return $this->belongsToMany('App\User');
+    public function user() {
+        return $this->belongsTo('App\User');
     }
 
     public function record_type()
@@ -40,21 +57,18 @@ class Record extends Model
 
         switch($scope) {
             case 'universal':
-
                 return $query;
 
             case 'team':
-
                 $teams = $user->teams;
                 return $query->inTeams($teams);
 
             case 'program':
-
                 $programs = $user->programs;
                 return $query->inPrograms($programs);
 
             default:
-                return $query->inCaseLoad($user);
+                return $query->inCaseload($user->records);
         }
     }
 
@@ -72,11 +86,11 @@ class Record extends Model
                 });
     }
 
-    public function scopeInCaseLoad($query, $users)
+    public function scopeInCaseload($query, $owners)
     {
-        return $query->whereHas('users', function ($query) use ($users) {
-                    return $query->whereIn('user_id', $users);
-                });
+        return $query->join('cases', 'records.id', '=', 'cases.record_id')
+                ->whereColumn('records.id', 'cases.record_id')
+                ->whereIn('owner_id', $owners);
     }
 
     public function scopeSort($query, $column, $ascending)

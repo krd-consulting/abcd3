@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\RecordType;
 use App\Program;
+use App\RecordType;
+use App\Team;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -16,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(RecordType $recordTypes, Program $programs)
+    public function boot(RecordType $recordTypes, Program $programs, Team $teams)
     {
         View::composer('*', function($view) use ($recordTypes, $programs) {
             if(Auth::check()) {
@@ -24,11 +25,12 @@ class AppServiceProvider extends ServiceProvider
 
                 $view->with(
                     'programs',
-                    Auth::user()->availablePrograms(4)->get()
+                    $programs->availableFor(Auth::user())->get()
                 );
 
                 $view->with(
                     'teams',
+                    //$teams->availableFor(Auth::user())
                     Auth::user()->availableTeams
                 );
             }

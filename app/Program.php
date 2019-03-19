@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Program extends Model
 {
+
     public function records()
     {
         return $this->belongsToMany('App\Record')
@@ -20,6 +21,24 @@ class Program extends Model
     }
 
     // Query Scopes
+    public function scopeAvailableFor($query, $user) {
+        $scope = $user->scope;
+
+        switch($scope) {
+            case 'universal':
+
+                return $query;
+
+            case 'team':
+
+                $teams = $user->teams;
+                return $query->inTeams($teams);
+
+            default:
+                return $user->programs();
+        }
+    }
+
     public function scopeInTeams($query, $teams) {
         return $query->whereIn('team_id', $teams);
     }

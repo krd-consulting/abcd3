@@ -21,7 +21,11 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        return auth()->user()->availablePrograms(null)->with('team')->get();
+        return auth()
+            ->user()
+            ->availablePrograms(null)
+            ->with('team')
+            ->get();
     }
 
     /**

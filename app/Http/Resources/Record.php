@@ -19,6 +19,7 @@ class Record extends JsonResource
     {
         return [
             'id' => $this->id,
+            'type' => $this->record_type->name,
             $this->record_type->identity->field1->name => $this->field_1_value,
             $this->record_type->identity->field2->name => $this->field_2_value,
             $this->record_type->identity->field3->name => $this->field_3_value,

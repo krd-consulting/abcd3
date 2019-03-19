@@ -5,6 +5,8 @@ namespace App;
 use App\Record;
 use App\Role;
 use App\Program;
+use App\ProgramRecord;
+use App\TeamRecord;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,7 +14,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 use Spatie\Permission\Traits\HasRoles;
-use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class User extends Authenticatable
 {
@@ -38,20 +40,34 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    // Relationships
-    public function records()
+    public function cases()
     {
-        return $this->belongsToMany('App\Record');
+        return $this->hasManyDeep('App\Record', ['App\Record as case_owners','cases'], [null ,'owner_id']);
     }
 
-    public function programs()
+    public function records()
     {
-        return $this->belongsToMany('App\Program');
+        return $this->hasMany('App\Record');
     }
 
     public function programRecords()
     {
-        return $this->hasManyDeepFromRelations($this->programs(), (new Program)->records());
+        $programs = $this->programs;
+
+        if($programs->isEmpty())
+            return null;
+
+        return ProgramRecord::whereIn('program_id', $programs);
+    }
+
+    public function teamRecords()
+    {
+        $teams = $this->teams;
+
+        if($teams->isEmpty())
+            return null;
+
+        return TeamRecord::whereIn('team_id', $teams);
     }
 
     public function scopes()
@@ -59,19 +75,19 @@ class User extends Authenticatable
         return $this->hasManyDeepFromRelations($this->roles(), (new Role)->scope());
     }
 
-    public function teamPrograms()
+    public function programs()
     {
-        return $this->hasManyDeepFromRelations($this->teams(), (new Team)->programs());
+        return $this->hasManyDeepFromRelations($this->records(), (new Record)->programs());
     }
 
-    public function teamRecords()
+    public function teamPrograms()
     {
-        return $this->hasManyDeepFromRelations($this->teams(), (new Team)->records());
+        return $this->hasManyDeep('App\Program', ['App\Record', 'record_team', 'App\Team']);
     }
 
     public function teams()
     {
-        return $this->belongsToMany('App\Team');
+        return $this->hasManyDeepFromRelations($this->records(), (new Record)->teams());
     }
 
     public function availablePrograms(?int $limit)
@@ -147,9 +163,30 @@ class User extends Authenticatable
         if(is_a($record, Record::class))
             return $this->hasRecord($record->id);
 
-        return $this->records()->where('record_id', $record)->exists() ||
-            $this->teamRecords()->where('records.id', $record)->exists() ||
-            $this->programRecords()->where('records.id', $record)->exists();
+        return $this->records()->where('id', $record)->exists() ||
+            $this->cases()->where('record_id', $record)->exists() ||
+            $this->hasProgramRecord($record) ||
+            $this->hasTeamRecord($record);
+    }
+
+    public function hasProgramRecord($record_id) : bool
+    {
+        $programRecord = $this->programRecords();
+
+        if(empty($programRecord))
+            return false;
+
+        return $programRecord->where('record_id', $record_id)->exists();
+    }
+
+    public function hasTeamRecord() : bool
+    {
+        $teamRecord = $this->teamRecords();
+
+        if(empty($teamRecord))
+            return false;
+
+        return $teamRecord->where('record_id', $record_id)->exists();
     }
 
     public function hasProgram($program) : bool

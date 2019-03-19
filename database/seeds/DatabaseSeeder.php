@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RecordTypesTableSeeder::class);
         $this->call(TeamsTableSeeder::class);
         $this->call(ProgramsTableSeeder::class);
-        $this->call(RecordsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(RecordsTableSeeder::class);
     }
 }
