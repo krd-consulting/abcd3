@@ -17,10 +17,14 @@ class CreateCasesTable extends Migration
             $table->increments('id');
             $table->integer('owner_id')->unsigned();
             $table->integer('record_id')->unsigned();
+            $table->integer('program_id')->unsigned();
+            $table->integer('created_by')->unsigned();
             $table->timestamps();
 
             $table->foreign('owner_id')->references('id')->on('records');
             $table->foreign('record_id')->references('id')->on('records');
+            $table->foreign('program_id')->references('id')->on('programs');
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 
@@ -31,6 +35,13 @@ class CreateCasesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('record_user');
+        Schema::table('cases', function (Blueprint $table) {
+            $table->dropForeign(['owner_id']);
+            $table->dropForeign(['record_id']);
+            $table->dropForeign(['program_id']);
+            $table->dropForeign(['created_by']);
+        });
+
+        Schema::dropIfExists('cases');
     }
 }

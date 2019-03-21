@@ -22,6 +22,7 @@ class CreateRecordsTable extends Migration
             $table->string('field_2_value', 100);
             $table->string('field_3_value', 100);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('record_type_id')->references('id')->on('record_types');
             $table->foreign('user_id')->references('id')->on('users');
@@ -37,6 +38,7 @@ class CreateRecordsTable extends Migration
     {
         Schema::table('records', function (Blueprint $table) {
             $table->dropForeign(['record_type_id']);
+            $table->dropForeign(['user_id']);
         });
 
         Schema::dropIfExists('records');

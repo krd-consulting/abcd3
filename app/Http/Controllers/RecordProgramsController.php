@@ -23,6 +23,8 @@ class RecordProgramsController extends Controller
             'status_updated_at' => now()
         ]);
 
+        $this->addRecordToProgramTeam($record, $program);
+
         return $program;
     }
 
@@ -31,5 +33,16 @@ class RecordProgramsController extends Controller
         $record->programs()->detach($program);
 
         return $program;
+    }
+
+    private function addRecordToProgramTeam(Record $record, Program $program)
+    {
+        $programTeam = $program->team->id;
+        $recordTeams = $record->teams->pluck('id');
+
+        if($recordTeams->contains($programTeam))
+            return;
+
+        $record->teams()->save($program->team);
     }
 }

@@ -39,7 +39,7 @@ class CreateRecordIdentitiesTable extends Migration
      */
     public function down()
     {
-        Schema::table('record_types', function (Blueprint $table) {
+        Schema::table('record_identities', function (Blueprint $table) {
             $table->dropForeign(['field_1_id']);
             $table->dropForeign(['field_2_id']);
             $table->dropForeign(['field_3_id']);

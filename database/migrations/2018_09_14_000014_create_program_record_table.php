@@ -34,6 +34,11 @@ class CreateProgramRecordTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('record_program');
+        Schema::table('program_record', function (Blueprint $table) {
+            $table->dropForeign(['record_id']);
+            $table->dropForeign(['program_id']);
+        });
+
+        Schema::dropIfExists('program_record');
     }
 }

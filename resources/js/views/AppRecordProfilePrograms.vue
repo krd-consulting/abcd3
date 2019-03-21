@@ -68,7 +68,7 @@
                                 <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
                                 <span class="tw-text-xs tw-align-middle">Edit</span>
                             </base-button>
-                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="remove(program.id)">
+                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(program.id)">
                                 <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
                                 <span class="tw-text-xs tw-align-middle">Remove</span>
                             </base-button>
@@ -125,6 +125,28 @@
                 ).then((response) => {
                     this.retrieve();
                 });
+            },
+
+            confirm(id) {
+                this.$confirm('Are you sure you want to remove this program?', 'Remove Program', {
+                    confirmButtonText: 'Remove',
+                    cancelButtonText: 'Wait, no!',
+                    type: 'warning'
+                }).then(() => {
+                    this.remove(id)
+                        .then(() => {
+                            this.$message({
+                                type: 'success',
+                                message: 'Program was removed.'
+                            });
+                        })
+                        .catch(() => {
+                            this.$message({
+                                type: 'error',
+                                message: 'Oops! Something went wrong.'
+                            });
+                        });
+                })
             },
 
             retrieve() {

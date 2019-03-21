@@ -18,4 +18,14 @@ class CaseRecord extends Pivot
         return $this->belongsTo('App\Record');
     }
 
+    public function program()
+    {
+        return $this->belongsTo('App\Program');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+    }
+
 }

@@ -40,7 +40,6 @@ class RoleController extends Controller
 
     public function store(StoreRole $request)
     {
-
         $role = new Role();
         $role->name = $request->input('name');
         $role->assignScope(
@@ -65,7 +64,7 @@ class RoleController extends Controller
         return new RoleResource($role->load('scope'));
     }
 
-    public function delete(Role $role)
+    public function destroy(Role $role)
     {
         $this->authorize('write', $role);
 

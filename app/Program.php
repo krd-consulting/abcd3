@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Program extends Model
 {
 
+    public function caseRecords()
+    {
+        return $this->hasMany('App\CaseRecord', 'program_id');
+    }
+
     public function records()
     {
         return $this->belongsToMany('App\Record')

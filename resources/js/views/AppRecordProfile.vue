@@ -19,7 +19,7 @@
                         <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
                         <span class="tw-text-xs tw-align-middle">Edit</span>
                     </base-button>
-                    <base-button class="tw-py-2 tw-px-0 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none">
+                    <base-button @click="confirm(record)" class="tw-py-2 tw-px-0 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none">
                         <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
                         <span class="tw-text-xs tw-align-middle">Delete</span>
                     </base-button>
@@ -83,6 +83,38 @@
                     this.fields = response.data.fields;
                 });
             },
+
+            confirm(record) {
+                this.$confirm('Are you sure you want to delete this record?', 'Delete Record', {
+                    confirmButtonText: 'Delete',
+                    cancelButtonText: 'Wait, no!',
+                    type: 'warning'
+                }).then(() => {
+                    this.deleteRecord(record)
+                        .then(() => {
+                            this.$emit('delete', record);
+
+                            this.$message({
+                                type: 'success',
+                                message: 'Record was deleted.'
+                            });
+                        })
+                        .catch(() => {
+                            this.$message({
+                                type: 'error',
+                                message: 'Oops! Something went wrong.'
+                            });
+                        });
+                })
+            },
+
+            deleteRecord(record) {
+                let request = new RecordRequest(record);
+
+                return request.destroy(record.id).then((response) => {
+                    this.$router.push(`/records/${record.type_slug}`);
+                });
+            }
         },
 
         created() {

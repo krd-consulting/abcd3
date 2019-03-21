@@ -16,6 +16,10 @@ class RecordRequest extends Request{
     store() {
         return this.post('/api/records');
     }
+
+    destroy(record) {
+        return this.delete(`/api/records/${record}`);
+    }
 }
 
 export default RecordRequest

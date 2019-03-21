@@ -35,10 +35,10 @@
                                 :scope="role.scope_id"/>
                         </div>
                         <div class="tw-w-1/4 tw-text-right tw-mr-4">
-                            <button @click="editRole(role, roleIndex)">
+                            <button @click="editRole(role)">
                                 <base-icon class="tw-text-sm tw-text-grey hover:tw-text-blue">edit</base-icon>
                             </button>
-                            <button @click="deleteRole(role, roleIndex)">
+                            <button @click="confirm(role)">
                                 <base-icon class="tw-text-sm tw-text-grey hover:tw-text-red-light">delete</base-icon>
                             </button>
                         </div>
@@ -114,14 +114,13 @@
                 this.roles.splice(0, 0, role);
             },
 
-            editRole(role, index) {
+            editRole(role) {
                 this.edit.role = _.clone(role);
                 this.edit.active = true;
-                this.edit.roleIndex = index;
             },
 
             updateRole(role) {
-                this.roles[this.edit.roleIndex] = role;
+                this.retrieve();
             },
 
             toggleRolePermission(role, permission, permitted, roleIndex, permissionIndex) {
@@ -148,15 +147,37 @@
                 this.roles[role]['all_permissions'][permission].permitted = false;
             },
 
-            deleteRole(role, roleIndex) {
+            confirm(role) {
+                this.$confirm('Are you sure you want to delete this role?', 'Delete Role', {
+                    confirmButtonText: 'Delete',
+                    cancelButtonText: 'Wait, no!',
+                    type: 'warning'
+                }).then(() => {
+                    this.deleteRole(role)
+                        .then(() => {
+                            this.$message({
+                                type: 'success',
+                                message: 'Role was deleted.'
+                            });
+                        })
+                        .catch(() => {
+                            this.$message({
+                                type: 'error',
+                                message: 'Oops! Something went wrong.'
+                            });
+                        });
+                })
+            },
+
+            deleteRole(role) {
                 let request = new RoleRequest({
                     'role': {
                         'id': role.id
                     }
                 });
 
-                request.destroy(role.id).then((response) => {
-                    this.roles.splice(roleIndex, 1);
+                return request.destroy(role.id).then((response) => {
+                    this.retrieve();
                 });
             }
         },

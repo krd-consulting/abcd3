@@ -2,12 +2,18 @@
 
 namespace App;
 
+use App\Events\ProgramRecordCreated;
+
 use Carbon\Carbon;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class ProgramRecord extends Pivot
 {
+    protected $dispatchesEvents = [
+        'created' => ProgramRecordCreated::class
+    ];
+
     public function program()
     {
         return $this->belongsTo('App\Program');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Record;
 use App\RecordType;
 use App\User;
+use App\Http\Requests\StoreRecord;
 use App\Http\Resources\Record as RecordResource;
 use App\Http\Resources\Records;
 
@@ -15,37 +16,6 @@ class RecordController extends Controller
     public function __construct()
     {
 
-    }
-
-    /**
-     * Returns a list $recordType records (sorted and paginated per request) available to the user
-     * with data about the records' record type and field names.
-     *
-     * @param  RecordType $recordType
-     * @return ResourceCollection
-     */
-    public function index(RecordType $recordType)
-    {
-        $records = $recordType->records();
-
-        // Search
-        $search = request('search');
-        $records->search($search);
-
-        // Sort per request.
-        $ascending = request('ascending');
-        $sortBy = request('sortBy');
-        $records->sort($sortBy, $ascending);
-
-        $records = $records->availableFor(auth()->user());
-
-        // Paginate per request.
-        $perPage = request('perPage');
-        $records = $records->paginate($perPage);
-
-        $records->load('record_type');
-
-        return (new Records($records));
     }
 
     /**
@@ -70,11 +40,22 @@ class RecordController extends Controller
         return auth()->user()->availableTeams;
     }
 
-    public function store()
+    public function store(StoreRecord $request)
     {
         $this->authorize('create', Record::class);
 
         // Store record when user is authorized.
+        $record = new Record();
+        $record->field_1_value = $request->input('field_1_value');
+        $record->field_2_value = $request->input('field_2_value');
+        $record->field_3_value = $request->input('field_3_value');
+        $record->record_type_id = $request->input('record_type_id');
+        $record->save();
+        $record->assignTeam(
+            $request->input('team_id')
+        );
+
+        return new RecordResource($record);
     }
 
     public function edit(Record $record)
@@ -96,5 +77,6 @@ class RecordController extends Controller
         $this->authorize('write', $record);
 
         // Delete record when user is authorized.
+        $record->delete();
     }
 }

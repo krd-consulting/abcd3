@@ -22,9 +22,11 @@ Route::prefix('api')
     ->middleware('auth')
     ->group( function() {
         Route::get('records/create', 'RecordController@create');
-
         Route::get('records/{recordType}', 'RecordTypeRecordController@index');
         Route::get('records/{recordType}/{record}', 'RecordController@show');
+        Route::post('records/', 'RecordController@store');
+        Route::delete('records/{record}', 'RecordController@destroy');
+
         Route::get('records/{recordType}/{record}/programs', 'RecordProgramsController@index');
         Route::post('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@store');
         Route::delete('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@destroy');
@@ -37,7 +39,7 @@ Route::prefix('api')
         Route::post('roles', 'RoleController@store');
         Route::get('roles/edit', 'RoleController@edit');
         Route::patch('roles/{role}', 'RoleController@update');
-        Route::delete('roles/{role}', 'RoleController@delete');
+        Route::delete('roles/{role}', 'RoleController@destroy');
 
         Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');
         Route::delete('roles/{role}/permissions/{permission}', 'RolePermissionController@destroy');

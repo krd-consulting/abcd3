@@ -45,29 +45,14 @@ class User extends Authenticatable
         return $this->hasManyDeep('App\Record', ['App\Record as case_owners','cases'], [null ,'owner_id']);
     }
 
+    public function caseRecords()
+    {
+        return $this->hasMany('App\CaseRecord', 'created_by');
+    }
+
     public function records()
     {
         return $this->hasMany('App\Record');
-    }
-
-    public function programRecords()
-    {
-        $programs = $this->programs;
-
-        if($programs->isEmpty())
-            return null;
-
-        return ProgramRecord::whereIn('program_id', $programs);
-    }
-
-    public function teamRecords()
-    {
-        $teams = $this->teams;
-
-        if($teams->isEmpty())
-            return null;
-
-        return TeamRecord::whereIn('team_id', $teams);
     }
 
     public function scopes()
@@ -171,22 +156,12 @@ class User extends Authenticatable
 
     public function hasProgramRecord($record_id) : bool
     {
-        $programRecord = $this->programRecords();
-
-        if(empty($programRecord))
-            return false;
-
-        return $programRecord->where('record_id', $record_id)->exists();
+        return ProgramRecord::whereIn('program_id', $this->programs)->where('record_id', $record_id)->exists();
     }
 
-    public function hasTeamRecord() : bool
+    public function hasTeamRecord($record_id)
     {
-        $teamRecord = $this->teamRecords();
-
-        if(empty($teamRecord))
-            return false;
-
-        return $teamRecord->where('record_id', $record_id)->exists();
+        return TeamRecord::whereIn('team_id', $this->teams->pluck('id'))->where('record_id', $record_id)->exists();
     }
 
     public function hasProgram($program) : bool

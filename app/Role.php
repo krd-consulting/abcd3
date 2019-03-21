@@ -11,9 +11,9 @@ class Role extends Model
         return $this->belongsTo('App\Scope');
     }
 
-    public function assignScope($scope)
+    public function assignScope($scopeId)
     {
-        $this->scope()->associate($scope);
+        $this->scope()->associate($scopeId);
 
         return $this->load('scope');
     }

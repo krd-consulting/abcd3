@@ -19,7 +19,7 @@ class CreateRecordTypesTable extends Migration
             $table->string('name', 32);
             $table->text('description')->nullable();
             $table->string('slug', 40)->nullable();
-
+            $table->boolean('userable')->default(false);
             $table->integer('identity_id')->unsigned();
 
             $table->timestamps();
@@ -35,6 +35,10 @@ class CreateRecordTypesTable extends Migration
      */
     public function down()
     {
+        Schema::table('record_types', function (Blueprint $table) {
+            $table->dropForeign(['identity_id']);
+        });
+
         Schema::dropIfExists('record_types');
     }
 }

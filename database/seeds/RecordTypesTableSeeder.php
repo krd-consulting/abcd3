@@ -31,6 +31,7 @@ class RecordTypesTableSeeder extends Seeder
         $staff->name = 'Staff';
         $staff->slug = 'staff';
         $staff->identity_id = $staffIdentity->id;
+        $staff->userable = true;
         $staff->save();
 
         // Volunteers

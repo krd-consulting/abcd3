@@ -3,12 +3,21 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Staudenmeir\EloquentHasManyDeep\HasTableAlias;
 
 class Record extends Model
 {
     use HasTableAlias;
+    use SoftDeletes;
+
+    public function assignTeam($teamId)
+    {
+        $this->teams()->attach($teamId);
+
+        return $this->load('teams');
+    }
 
     public function caseload()
     {
@@ -19,6 +28,7 @@ class Record extends Model
     {
         return $this->belongsToMany('App\Record', 'cases', 'owner_id', 'record_id')
             ->withTimestamps()
+            ->withPivot('program_id', 'created_by')
             ->using('App\CaseRecord');
     }
 

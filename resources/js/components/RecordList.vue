@@ -6,7 +6,8 @@
             :index="index"
             :record="record"
             :record-type="recordType"
-            :fields="fields"></record-list-item>
+            :fields="fields"
+            @delete="deleteRecord"></record-list-item>
     </div>
 </template>
 <script>
@@ -22,5 +23,11 @@
         components: {
             RecordListItem
         },
+
+        methods: {
+            deleteRecord(record) {
+                this.$emit('delete', record);
+            }
+        }
     }
 </script>
