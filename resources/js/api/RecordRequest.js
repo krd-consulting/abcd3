@@ -17,6 +17,14 @@ class RecordRequest extends Request{
         return this.post('/api/records');
     }
 
+    edit(record) {
+        return this.get(`/api/records/edit/${record}`);
+    }
+
+    update(record) {
+        return this.patch(`/api/records/${record}`);
+    }
+
     destroy(record) {
         return this.delete(`/api/records/${record}`);
     }

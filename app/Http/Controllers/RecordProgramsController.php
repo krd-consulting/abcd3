@@ -17,6 +17,9 @@ class RecordProgramsController extends Controller
 
     public function store(RecordType $recordType, Record $record, Program $program)
     {
+        $this->authorize('write', $record);
+        $this->authorize('write', $program);
+
         $record->programs()->attach($program, [
             'notes' => '',
             'status' => 'active',
@@ -30,11 +33,21 @@ class RecordProgramsController extends Controller
 
     public function destroy(RecordType $recordType, Record $record, Program $program)
     {
+        $this->authorize('write', $record);
+        $this->authorize('write', $program);
+
         $record->programs()->detach($program);
 
         return $program;
     }
 
+    /*
+     * Temporary implementation for automatically adding a record to a program's teams
+     * where the record doesn't belong to.
+     *
+     * Ideal implementation would be to trigger Eloquent Model Events.
+     *
+     */
     private function addRecordToProgramTeam(Record $record, Program $program)
     {
         $programTeam = $program->team->id;

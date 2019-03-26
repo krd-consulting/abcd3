@@ -7,6 +7,7 @@
             :record="record"
             :record-type="recordType"
             :fields="fields"
+            @edit="editRecord"
             @delete="deleteRecord"></record-list-item>
     </div>
 </template>
@@ -27,6 +28,10 @@
         methods: {
             deleteRecord(record) {
                 this.$emit('delete', record);
+            },
+
+            editRecord(record) {
+                this.$emit('edit', record);
             }
         }
     }

@@ -118,7 +118,7 @@
 
         methods: {
             remove(id) {
-                this.request.destroy(
+                return this.request.destroy(
                     this.$route.params.recordType,
                     this.$route.params.record,
                     id
@@ -140,10 +140,10 @@
                                 message: 'Program was removed.'
                             });
                         })
-                        .catch(() => {
+                        .catch((error) => {
                             this.$message({
                                 type: 'error',
-                                message: 'Oops! Something went wrong.'
+                                message: error.message
                             });
                         });
                 })

@@ -31,9 +31,9 @@ class RoleController extends Controller
         return ['scopes' => Scope::all()];
     }
 
-    public function edit(Role $role)
+    public function edit()
     {
-        $this->authorize('write', $role);
+        $this->authorize('write', Role::class);
 
         return ['scopes' => Scope::all()];
     }
@@ -54,7 +54,7 @@ class RoleController extends Controller
     {
         $role = new Role();
         $role->exists = true;
-        $role->id=$request->input('id');
+        $role->id = $request->input('id');
         $role->name = $request->input('name');
         $role->assignScope(
             $request->input('scope_id')

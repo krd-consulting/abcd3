@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\RecordType;
+use App\Record;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRecord extends FormRequest
+class UpdateRecord extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class StoreRecord extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->user()->can('write', Record::find($this->route('record')));
     }
 
     /**
@@ -25,21 +25,12 @@ class StoreRecord extends FormRequest
      */
     public function rules()
     {
-        $recordType = $this->input('record_type_id');
-
-        if(empty($recordType)) {
-            return [
-                'record_type_id' => 'exists:record_types,id',
-            ];
-        }
-
-        $recordType = RecordType::find($recordType);
+        $recordType = Record::find($this->input('id'))->record_type;
 
         return [
             'field_1_value' => $this->fieldRules()[$recordType->identity->field1->name],
             'field_2_value' => $this->fieldRules()[$recordType->identity->field2->name],
-            'field_3_value' => $this->fieldRules()[$recordType->identity->field3->name],
-            'team_id' => 'required|exists:teams,id'
+            'field_3_value' => $this->fieldRules()[$recordType->identity->field3->name]
         ];
     }
 
@@ -58,8 +49,7 @@ class StoreRecord extends FormRequest
     public function messages()
     {
         return [
-            'required' => 'The field above is required.',
-            'team_id.required' => 'Please select a team.',
+            'required' => 'The field above can\`t be empty.',
             'date' => 'Please enter a valid date.',
             'email' => 'Please enter a valid email address.',
             'before' => 'Please enter a valid birth date.',

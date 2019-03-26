@@ -22,6 +22,8 @@ Route::prefix('api')
     ->middleware('auth')
     ->group( function() {
         Route::get('records/create', 'RecordController@create');
+        Route::get('records/edit/{record}', 'RecordController@edit');
+        Route::patch('records/{record}', 'RecordController@update');
         Route::get('records/{recordType}', 'RecordTypeRecordController@index');
         Route::get('records/{recordType}/{record}', 'RecordController@show');
         Route::post('records/', 'RecordController@store');

@@ -2,9 +2,18 @@
     <div>
         <create-record
             :active.sync="create.active"
-            :record-type="type"
             :fields="fields"
+            :record-type="type"
             @save="retrieve"/>
+
+        <edit-record
+            :active.sync="edit.active"
+            :record="edit.record"
+            :fields="fields"
+            :record-type="type"
+            @update="retrieve"/>
+
+
         <list
             :page.sync="params.page"
             @page-change="retrieve"
@@ -31,6 +40,7 @@
                 :records="records"
                 :record-type="type.slug"
                 :fields="fields"
+                @edit="editRecord"
                 @delete="retrieve"/>
         </list>
     </div>
@@ -41,18 +51,28 @@
 
     import List from '../components/AppList';
     import CreateRecord from './AppRecordCreate';
+    import EditRecord from './AppRecordEdit';
 
     export default {
 
         components: {
             List,
-            CreateRecord
+            CreateRecord,
+            EditRecord
         },
 
         data() {
             return {
                 create: {
                     active: false
+                },
+                edit: {
+                    active: false,
+                    record: {
+                        field_1_value: '',
+                        field_2_value: '',
+                        field_3_value: '',
+                    }
                 },
                 fields: [],
                 records: [],
@@ -101,7 +121,13 @@
 
             createRecord() {
                 this.create.active = true;
-            }
+            },
+
+            editRecord(record) {
+                this.edit.record = record;
+
+                this.edit.active = true;
+            },
         },
 
         created() {

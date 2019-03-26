@@ -8,11 +8,11 @@
             <secondary-data class="tw-text-xs" :record="record" :fields="fields"/>
         </template>
         <template slot="options">
-            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none">
+            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" @click="editRecord(record)">
                 <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
                 <span class="tw-text-xs tw-align-middle">Edit</span>
             </base-button>
-            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none" @click="confirm(record)">
+            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none" @click="confirmDelete(record)">
                 <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
                 <span class="tw-text-xs tw-align-middle">Delete</span>
             </base-button>
@@ -43,7 +43,7 @@
         },
 
         methods: {
-            confirm(record) {
+            confirmDelete(record) {
                 this.$confirm('Are you sure you want to delete this record?', 'Delete Record', {
                     confirmButtonText: 'Delete',
                     cancelButtonText: 'Wait, no!',
@@ -58,10 +58,10 @@
                                 message: 'Record was deleted.'
                             });
                         })
-                        .catch(() => {
+                        .catch((error) => {
                             this.$message({
                                 type: 'error',
-                                message: 'Oops! Something went wrong.'
+                                message: error.message
                             });
                         });
                 })
@@ -70,9 +70,11 @@
             deleteRecord(record) {
                 let request = new Request(record);
 
-                return request.destroy(record.id).then((response) => {
-                    this.$emit('delete', record);
-                });
+                return request.destroy(record.id);
+            },
+
+            editRecord(record) {
+                this.$emit('edit', record);
             }
         }
     }

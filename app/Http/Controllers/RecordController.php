@@ -6,6 +6,7 @@ use App\Record;
 use App\RecordType;
 use App\User;
 use App\Http\Requests\StoreRecord;
+use App\Http\Requests\UpdateRecord;
 use App\Http\Resources\Record as RecordResource;
 use App\Http\Resources\Records;
 
@@ -19,7 +20,7 @@ class RecordController extends Controller
     }
 
     /**
-     * Show the prorecord of the selected user.
+     *
      *
      * @param  Record  $record
      * @return Record
@@ -63,13 +64,21 @@ class RecordController extends Controller
         $this->authorize('write', $record);
 
         // Return record when user is authorized.
+        return auth()->user()->availableTeams;
     }
 
-    public function update(Record $record)
+    public function update(UpdateRecord $request)
     {
-        $this->authorize('write', $record);
-
         // Update record when user is authorized.
+        $record = new Record();
+        $record->exists = true;
+        $record->id = $request->input('id');
+        $record->field_1_value = $request->input('field_1_value');
+        $record->field_2_value = $request->input('field_2_value');
+        $record->field_3_value = $request->input('field_3_value');
+        $record->save();
+
+        return $record;
     }
 
     public function destroy(Record $record)

@@ -32,69 +32,6 @@
                 No more available programs.
             </template>
     </transfer>
-    <!--<base-dialog title="Manage Programs" :visible="active" @close="close" @open="open">
-        <div class="tw-flex tw-text-grey-darkest">
-            <div class="tw-flex-1 tw-pr-2">
-                <div class="tw-border tw-border-blue-lighter tw-rounded tw-overflow-y-auto" style="max-height: 300px;">
-                    <div class="tw-bg-blue-lightest tw-text-blue-dark tw-py-2 tw-px-2 tw-rounded-t">
-                        Current Programs
-                    </div>
-                    <div class="tw-h-64 tw-overflow-y-auto">
-                        <div v-if="selected.length == 0" class="tw-py-24 tw-text-center">
-                            <span>Nothing here, yet.</span>
-                        </div>
-                        <div v-for="program in selected" class="tw-py-2 tw-px-2 tw-border-b tw-border-blue-lighter">
-                            <label class="tw-flex">
-                                <div class="tw-flex-initial">
-                                    <base-checkbox :value="true" @change="remove(program.id)"/>
-                                </div>
-                                <div class="tw-flex-1 tw-pl-2">
-                                    <div>
-                                        <span class="tw-text-base">{{ program.name }}</span>
-                                    </div>
-                                    <div>
-                                        <span class="tw-text-xs tw-text-grey">{{ program.team.name }}</span>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tw-flex-1 tw-pl-2">
-                <div class="tw-rounded tw-border tw-overflow-y-auto" style="max-height: 300px;">
-                    <div class="tw-bg-grey-lightest tw-py-2 tw-px-2 tw-rounded-t">
-                        Available Programs
-                    </div>
-                    <div class="tw-h-64 tw-overflow-y-auto">
-                        <div v-if="notSelected.length == 0" class="tw-py-24 tw-text-center">
-                            <span>There are no more available programs.</span>
-                        </div>
-                        <div v-for="program in notSelected" class="tw-py-2 tw-px-2 tw-border-b">
-                            <label class="tw-flex">
-                                <div class="tw-flex-initial">
-                                    <base-checkbox :value="false" @change="add(program.id)"/>
-                                </div>
-                                <div class="tw-flex-1 tw-pl-2">
-                                    <div>
-                                        <span class="tw-text-base">{{ program.name }}</span>
-                                    </div>
-                                    <div>
-                                        <span class="tw-text-xs tw-text-grey">{{ program.team.name }}</span>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div slot="footer" class="tw-border-t tw-px-4 tw-py-4 tw-bg-grey-lightest tw-rounded-b">
-            <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue tw-text-white tw-font-bold tw-border-none" @click="close">
-                <span class="tw-text-xs tw-align-middle">Good to go!</span>
-            </base-button>
-        </div>
-    </base-dialog>-->
 </template>
 <script>
     import ProgramRequest from '../api/ProgramRequest';
@@ -148,6 +85,11 @@
                     id
                 ).then((response) => {
                     this.selected.push(_.find(this.programs, {id}));
+                }).catch((error) => {
+                    this.$message({
+                        type: 'error',
+                        message: error.message
+                    });
                 });
             },
 
@@ -158,7 +100,12 @@
                     id
                 ).then((response) => {
                     this.selected = _.reject(this.selected, { id });
-                });
+                }).catch((error) => {
+                    this.$message({
+                        type: 'error',
+                        message: error.message
+                    });
+                });;
             }
         },
 

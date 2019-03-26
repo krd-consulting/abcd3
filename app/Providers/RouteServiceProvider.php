@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Route::model('fileType', \App\FileType::class);
+        Route::model('recordType', \App\RecordType::class);
 
         parent::boot();
     }

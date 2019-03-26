@@ -4,7 +4,8 @@
         <list-item
             v-for="(program, index) in programs"
             :key="index"
-            :to="`/programs/${program.id}`">
+            :to="`/programs/${program.id}`"
+            class="tw-py-4 tw-px-4">
             {{ program.name }}
 
             <template v-if="program.team" slot="secondary-data-text">{{ program.team.name }}</template>
