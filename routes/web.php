@@ -34,7 +34,14 @@ Route::prefix('api')
         Route::delete('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@destroy');
 
         Route::get('programs', 'ProgramController@index');
+        Route::get('programs/create', 'ProgramController@create');
+        Route::get('programs/edit/{record}', 'ProgramController@edit');
+        Route::patch('programs/{record}', 'ProgramController@update');
         Route::get('programs/{program}', 'ProgramController@show');
+        Route::post('programs/', 'ProgramController@store');
+        Route::delete('programs/{program}', 'ProgramController@destroy');
+
+        Route::get('programs/{program}/records/{recordType}', 'ProgramRecordsController@index');
 
         Route::get('roles', 'RoleController@index');
         Route::get('roles/create', 'RoleController@create');

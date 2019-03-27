@@ -6,6 +6,9 @@ import AppRecordProfilePrograms from './views/AppRecordProfilePrograms';
 import AppRecordProfileSummary from './views/AppRecordProfileSummary';
 import AppProgramList from './views/AppProgramList';
 import AppProgramProfile from './views/AppProgramProfile';
+import AppProgramProfileGroups from './views/AppProgramProfileGroups';
+import AppProgramProfileRecords from './views/AppProgramProfileRecords';
+import AppProgramProfileSummary from './views/AppProgramProfileSummary';
 
 const routes = [
     {
@@ -28,10 +31,15 @@ const routes = [
         ]
     },
     {
-        path: '/programs', component: AppProgramList,
+        path: '/programs', component: AppProgramList
     },
     {
-        path: '/programs/:id', component: AppProgramProfile
+        path: '/programs/:program', component: AppProgramProfile,
+        children: [
+            { path: '', name: 'program_profile_summary', component: AppProgramProfileSummary },
+            { path: 'groups', name: 'program_profile_groups', component: AppProgramProfileGroups },
+            { path: 'records/:recordType', name: 'program_profile_records', component: AppProgramProfileRecords },
+        ]
     }
 ];
 

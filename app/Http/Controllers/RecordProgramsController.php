@@ -6,13 +6,15 @@ use App\Program;
 use App\Record;
 use App\RecordType;
 
+use App\Http\Resources\Programs;
+
 use Illuminate\Http\Request;
 
 class RecordProgramsController extends Controller
 {
     public function index(RecordType $recordType, Record $record)
     {
-        return $record->programs()->with('team')->get();
+        return new Programs($record->programs);
     }
 
     public function store(RecordType $recordType, Record $record, Program $program)

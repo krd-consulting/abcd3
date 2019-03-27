@@ -1,31 +1,42 @@
 <template>
     <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Add {{ recordType.name }}
+            <base-icon class="tw-align-middle">person_add</base-icon> Edit Program
         </div>
         <form>
-            <div v-for="(field, fieldName) in fields" class="tw-mb-2">
-                <div  class="tw-flex tw-items-center tw-w-full">
+            <div class="tw-mb-2">
+                <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5 tw-capitalize">
-                        {{ fieldName.replace('_', ' ') }}
+                        Program Name
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-if="fieldName == 'birth_date'"
-                            v-model="recordData[field]"
-                            :name="fieldName"
-                            type="date"
-                            @keydown.native="request.errors.clear($event.target.name)"/>
-                        <base-input
-                            v-else
-                            v-model="recordData[field]"
-                            :name="fieldName"
+                            v-model="programData['name']"
+                            name="name"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
                 </div>
-                <div v-if="request.errors.has(field)" class="tw-flex tw-justify-end">
+                <div v-if="request.errors.has('name')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get(field)[0]" class="tw-text-xs tw-text-red"></span>
+                        <span v-text="request.errors.get('name')[0]" class="tw-text-xs tw-text-red"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="tw-mb-2">
+                <div  class="tw-flex tw-items-center tw-w-full">
+                    <label class="tw-w-1/5 tw-capitalize">
+                        Description
+                    </label>
+                    <div class="tw-w-2/3">
+                        <base-input
+                            v-model="programData['description']"
+                            name="description"
+                            @keydown.native="request.errors.clear($event.target.name)"/>
+                    </div>
+                </div>
+                <div v-if="request.errors.has('description')" class="tw-flex tw-justify-end">
+                    <div class="tw-w-4/5 tw-py-2">
+                        <span v-text="request.errors.get('description')[0]" class="tw-text-xs tw-text-red"></span>
                     </div>
                 </div>
             </div>
@@ -36,7 +47,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="recordData.team_id"
+                            v-model="programData.team_id"
                             name="team"
                             placeholder="Select Team"
                             @change="request.errors.clear('team')">
@@ -68,23 +79,20 @@
     </base-dialog>
 </template>
 <script>
-    import Request from '../api/RecordRequest';
+    import Request from '../api/ProgramRequest';
 
     export default {
         props: {
             active: Boolean,
-            recordType: String|Object,
-            fields: Array|Object
+            program: Array|Object
         },
 
         data() {
             return {
                 request: new Request(),
-                recordData: {
-                    field_1_value: '',
-                    field_2_value: '',
-                    field_3_value: '',
-                    record_type_id: '',
+                programData: {
+                    name: '',
+                    description: '',
                     team_id: ''
                 },
                 teams: []
@@ -98,37 +106,39 @@
                 this.request.errors.clear();
 
                 this.programData = {
-                    field_1_value: '',
-                    field_2_value: '',
-                    field_3_value: '',
-                    record_type_id: '',
+                    id: '',
+                    name: '',
+                    description: '',
                     team_id: ''
                 };
             },
 
             open() {
                 this.load();
+
+                this.programData.id = this.program.id;
+                this.programData.name = this.program.name;
+                this.programData.description = this.program.description;
+                this.programData.team_id = this.program.team_id;
             },
 
             load() {
                 let request = new Request({});
 
-                request.create().then((response) => {
+                request.edit().then((response) => {
                     this.teams = response;
                 });
             },
 
             store() {
-                this.recordData.record_type_id = this.recordType.id;
+                this.request = new Request(this.programData);
 
-                this.request = new Request(this.recordData);
-
-                this.request.store()
+                this.request.update(this.programData.id)
                     .then((response) => {
-                        this.$emit('save');
+                        this.$emit('update');
                         this.$message({
                             type: 'success',
-                            message: 'Record created successfully!'
+                            message: 'Program updated successfully!'
                         });
                         this.close()
                     })

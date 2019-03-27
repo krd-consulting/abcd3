@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Program extends Model
 {
+    use SoftDeletes;
 
     public function caseRecords()
     {
@@ -23,6 +25,11 @@ class Program extends Model
     public function team()
     {
         return $this->belongsTo('App\Team');
+    }
+
+    public function getAvailableRecordTypesAttribute()
+    {
+        return $this->records->load('record_type')->pluck('record_type')->unique();
     }
 
     // Query Scopes

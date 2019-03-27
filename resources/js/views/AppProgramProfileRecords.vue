@@ -1,21 +1,21 @@
 <template>
     <div>
         <div class="tw-mb-2">
-            <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="programs.length == 0">
+            <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="records.length == 0">
                 <div>
                     <base-button
                         class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
-                        @click="addProgram">
+                        @click="addRecord">
                         <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                        <span class="tw-text-xs tw-align-middle">Add Programs</span>
+                        <span class="tw-text-xs tw-align-middle">Add Records</span>
                     </base-button>
                 </div>
             </div>
-            <div v-if="programs.length > 0"
+            <div v-if="records.length > 0"
                 class="tw-pt-6 tw-pb-2 tw-pl-4 tw-text-xs tw-text-grey tw-uppercase tw-font-semibold">
                 <div class="tw-flex tw-w-4/5">
                     <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Program</span>
+                        <span class="tw-tracking-wide">Record</span>
                     </div>
                     <div class="tw-w-1/4 tw-m-0">
                         <span class="tw-tracking-wide">Status</span>
@@ -29,31 +29,30 @@
                 </div>
             </div>
             <list-item
-                v-if="programs.length > 0"
-                :to="`/programs/${program.id}`"
-                :key="program.id"
-                v-for="program in programs"
+                v-if="records.length > 0"
+                :to="`/records/${record.type_slug}/${record.id}`"
+                :key="record.id"
+                v-for="record in records"
                 class="group tw-pl-4 tw-py-4">
-                <span class="hover:tw-text-blue">{{ program.name }}</span>
+                <primary-data :record="record" :fields="record.fields"/>
                 <template v-slot:secondary-data>
-                    <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">people</base-icon>
-                    <span class="tw-text-grey tw-text-sm tw-text-align-middle">{{ program.team.name }}</span>
+                    <secondary-data class="tw-text-xs" :record="record" :fields="record.fields"/>
                 </template>
                 <template v-slot:tertiary-data>
                     <div class="tw-flex tw-w-3/5 tw-items-center">
                         <div class="tw-w-1/3">
-                            <div v-if="program.pivot.status" class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
-                                <span>{{ program.pivot.status }}</span>
+                            <div v-if="record.pivot.status" class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
+                                <span>{{ record.pivot.status }}</span>
                             </div>
-                            <div v-if="program.pivot.status_updated_at" class="tw-text-sm tw-text-grey">
-                                <span>Since {{ program.pivot.status_updated_at }}</span>
+                            <div v-if="record.pivot.status_updated_at" class="tw-text-sm tw-text-grey">
+                                <span>Since {{ record.pivot.status_updated_at }}</span>
                             </div>
                         </div>
                         <div class="tw-w-1/3">
-                            <span>{{ program.pivot.created_at }}</span>
+                            <span>{{ record.pivot.created_at }}</span>
                         </div>
                         <div class="tw-w-1/3">
-                            <p v-if="program.pivot.notes">{{ program.pivot.notes }}</p>
+                            <p v-if="record.pivot.notes">{{ record.pivot.notes }}</p>
                             <base-button v-else class="tw-py-2 tw-px-0 tw-text-grey tw-font-semibold tw-border-none hover:tw-bg-transparent hover:tw-text-blue">
                                 <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
                                 <span class="tw-text-xs tw-align-middle">Add Note</span>
@@ -68,7 +67,7 @@
                                 <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
                                 <span class="tw-text-xs tw-align-middle">Edit</span>
                             </base-button>
-                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(program.id)">
+                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(record.id)">
                                 <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
                                 <span class="tw-text-xs tw-align-middle">Remove</span>
                             </base-button>
@@ -79,31 +78,36 @@
         </div>
         <div class="tw-px-4 tw-pb-4">
             <base-button
-                v-if="programs.length > 0"
+                v-if="records.length > 0"
                 class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
-                @click="addProgram">
+                @click="addRecord">
                 <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                <span class="tw-text-xs tw-align-middle">Manage Programs</span>
+                <span class="tw-text-xs tw-align-middle">Manage Records</span>
             </base-button>
-            <add-program
+            <!--<add-record
                 :active.sync="add.active"
-                :assignedPrograms="programs"
+                :assignedRecords="records"
                 @close="retrieve">
-            </add-program>
+            </add-record>-->
         </div>
     </div>
 </template>
 <script>
-    import ProgramsRequest from '../api/RecordProgramsRequest';
-
+    import RecordsRequest from '../api/ProgramRecordsRequest';
     import ListItem from '../components/AppListItem';
+    import ProfilePicture from '../components/RecordProfilePicture';
+    import PrimaryData from '../components/RecordPrimaryData';
+    import SecondaryData from '../components/RecordSecondaryData';
 
-    import AddProgram from './AppRecordProfileAddProgram';
+    //import AddRecord from './AppRecordProfileAddRecord';
 
     export default {
         components: {
-            AddProgram,
-            ListItem
+            //AddRecord,
+            ListItem,
+            ProfilePicture,
+            PrimaryData,
+            SecondaryData,
         },
 
         data() {
@@ -111,8 +115,8 @@
                 add: {
                     active: false
                 },
-                request: new ProgramsRequest({}),
-                programs: []
+                request: new RecordsRequest({}),
+                records: []
             }
         },
 
@@ -128,7 +132,7 @@
             },
 
             confirm(id) {
-                this.$confirm('Are you sure you want to remove this program?', 'Remove Program', {
+                this.$confirm('Are you sure you want to remove this record?', 'Remove Record', {
                     confirmButtonText: 'Remove',
                     cancelButtonText: 'Wait, no!',
                     type: 'warning'
@@ -137,7 +141,7 @@
                         .then(() => {
                             this.$message({
                                 type: 'success',
-                                message: 'Program was removed.'
+                                message: 'Record was removed.'
                             });
                         })
                         .catch((error) => {
@@ -150,12 +154,12 @@
             },
 
             retrieve() {
-                this.request.retrieve(this.$route.params.recordType, this.$route.params.record).then((response) => {
-                    this.programs = response.data;
+                this.request.retrieve(this.$route.params.program, this.$route.params.recordType).then((response) => {
+                    this.records = response.data;
                 });
             },
 
-            addProgram() {
+            addRecord() {
                 this.add.active = true;
             }
         },

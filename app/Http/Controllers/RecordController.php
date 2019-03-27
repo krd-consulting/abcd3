@@ -63,7 +63,7 @@ class RecordController extends Controller
     {
         $this->authorize('write', $record);
 
-        // Return record when user is authorized.
+        // Return available teams when user is authorized.
         return auth()->user()->availableTeams;
     }
 

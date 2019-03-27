@@ -68,7 +68,7 @@
             },
 
             deleteRecord(record) {
-                let request = new Request(record);
+                let request = new Request();
 
                 return request.destroy(record.id);
             },

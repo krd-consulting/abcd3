@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Program;
+use App\Http\Resources\Program as ProgramResource;
+use App\Http\Requests\StoreProgram;
+use App\Http\Requests\UpdateProgram;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -38,35 +41,50 @@ class ProgramController extends Controller
     {
         $this->authorize('read', $program);
 
-        return $program->load('records');
+        return (new ProgramResource($program));
     }
 
     public function create()
     {
-        $this->authorize('create', File::class);
+        $this->authorize('create', Program::class);
 
         return auth()->user()->availableTeams;
     }
 
-    public function store()
+    public function store(StoreProgram $request)
     {
-        $this->authorize('create', File::class);
+        $this->authorize('create', Program::class);
 
         // Store program when user is authorized.
+        $program = new Program();
+        $program->name = $request->input('name');
+        $program->description = $request->input('description');
+        $program->team_id = $request->input('team_id');
+        $program->save();
+
+        return new ProgramResource($program);
     }
 
     public function edit(Program $program)
     {
         $this->authorize('write', $program);
 
-        // Return program when user is authorized.
+        // Return available teams when user is authorized.
+        return auth()->user()->availableTeams;
     }
 
-    public function update(Program $program)
+    public function update(UpdateProgram $request)
     {
-        $this->authorize('write', $program);
-
         // Update program when user is authorized.
+        $program = new Program();
+        $program->exists = true;
+        $program->id = $request->input('id');
+        $program->name = $request->input('name');
+        $program->description = $request->input('description');
+        $program->team_id = $request->input('team_id');
+        $program->save();
+
+        return $program;
     }
 
     public function destroy(Program $program)
@@ -74,5 +92,6 @@ class ProgramController extends Controller
         $this->authorize('write', $program);
 
         // Delete program when user is authorized.
+        $program->delete();
     }
 }

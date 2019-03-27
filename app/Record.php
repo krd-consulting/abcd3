@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\RecordType;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -124,5 +126,13 @@ class Record extends Model
         return $query->where('field_1_value', 'LIKE' , '%' . $term . '%')
         ->orWhere('field_2_value', 'LIKE', '%' . $term . '%')
         ->orWhere('field_3_value', 'LIKE', '%' . $term . '%');
+    }
+
+    public function scopeOnly($query, $recordType)
+    {
+         if(is_a($recordType, RecordType::class))
+            $recordType = $recordType->id;
+
+        return $query->where('record_type_id', $recordType);
     }
 }

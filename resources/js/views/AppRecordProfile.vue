@@ -27,7 +27,7 @@
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
                             <span class="tw-text-xs tw-align-middle">Edit</span>
                         </base-button>
-                        <base-button @click="confirm(record)" class="tw-py-2 tw-px-0 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none">
+                        <base-button @click="confirmDelete(record)" class="tw-py-2 tw-px-0 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
                             <span class="tw-text-xs tw-align-middle">Delete</span>
                         </base-button>
@@ -107,7 +107,7 @@
                 });
             },
 
-            confirm(record) {
+            confirmDelete(record) {
                 this.$confirm('Are you sure you want to delete this record?', 'Delete Record', {
                     confirmButtonText: 'Delete',
                     cancelButtonText: 'Wait, no!',
@@ -116,6 +116,8 @@
                     this.deleteRecord(record)
                         .then(() => {
                             this.$emit('delete', record);
+
+                            this.$router.push(`/records/${this.record.type_slug}`);
 
                             this.$message({
                                 type: 'success',
