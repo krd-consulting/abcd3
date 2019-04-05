@@ -14,11 +14,16 @@ class Program extends Model
         return $this->hasMany('App\CaseRecord', 'program_id');
     }
 
+    public function groups()
+    {
+        return $this->hasMany('App\Group');
+    }
+
     public function records()
     {
         return $this->belongsToMany('App\Record')
             ->withTimestamps()
-            ->withPivot('notes', 'status', 'status_updated_at')
+            ->withPivot('created_by')
             ->using('App\ProgramRecord');
     }
 
@@ -38,11 +43,9 @@ class Program extends Model
 
         switch($scope) {
             case 'universal':
-
                 return $query;
 
             case 'team':
-
                 $teams = $user->teams;
                 return $query->inTeams($teams);
 

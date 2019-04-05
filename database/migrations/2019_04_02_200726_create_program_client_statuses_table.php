@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRecordsTable extends Migration
+class CreateProgramClientStatusesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,18 @@ class CreateRecordsTable extends Migration
      */
     public function up()
     {
-        Schema::create('records', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
+        Schema::create('program_client_statuses', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('record_type_id')->unsigned();
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->string('field_1_value', 100);
-            $table->string('field_2_value', 100);
-            $table->string('field_3_value', 100);
+            $table->integer('program_client_id')->unsigned();
+            $table->string('status');
+            $table->string('previous_status')->nullable();
+            $table->unsignedBigInteger('previous_status_duration')->nullable();
+            $table->text('notes')->nullable();
             $table->timestamps();
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned();
-            $table->softDeletes();
 
-            $table->foreign('record_type_id')->references('id')->on('record_types');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('program_client_id')->references('id')->on('program_record');
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
         });
@@ -40,13 +37,12 @@ class CreateRecordsTable extends Migration
      */
     public function down()
     {
-        Schema::table('records', function (Blueprint $table) {
-            $table->dropForeign(['record_type_id']);
-            $table->dropForeign(['user_id']);
+        Schema::table('program_client_statuses', function (Blueprint $table) {
+            $table->dropForeign(['program_client_id']);
             $table->dropForeign(['created_by']);
             $table->dropForeign(['updated_by']);
         });
 
-        Schema::dropIfExists('records');
+        Schema::dropIfExists('program_client_statuses');
     }
 }

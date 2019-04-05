@@ -20,7 +20,8 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'App\Events\ProgramRecordCreated' => [
-            'App\Listeners\AddRecordToProgramTeam'
+            'App\Listeners\AddRecordToProgramTeam',
+            'App\Listeners\CreateProgramClientStatus'
         ]
     ];
 

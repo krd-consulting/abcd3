@@ -1,11 +1,11 @@
 import Request from '../core/Request';
 
-class ProgramRecordsRequest extends Request{
-    retrieve(program, recordType) {
-        return this.get(`/api/programs/${program}/records/${recordType}`);
+class ProgramGroupsRequest extends Request{
+    retrieve(program) {
+        return this.get(`/api/programs/${program}/groups`);
     }
 
-    store(program, recordType, record) {
+    /*store(program, recordType, record) {
         return this.post(`/api/programs/${program}/records/${recordType}/${record}`);
     }
 
@@ -13,7 +13,7 @@ class ProgramRecordsRequest extends Request{
         console.log(`/api/programs/${program}/records/${recordType}/${record}`);
 
         return this.delete(`/api/programs/${program}/records/${recordType}/${record}`);
-    }
+    }*/
 }
 
-export default ProgramRecordsRequest
+export default ProgramGroupsRequest

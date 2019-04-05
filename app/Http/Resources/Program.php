@@ -19,6 +19,7 @@ class Program extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'team' => $this->team,
+            'team_id' => $this->team->id,
             'pivot' => $this->pivot,
             'available_record_types' => $this->available_record_types,
             'created_at' => $this->created_at,

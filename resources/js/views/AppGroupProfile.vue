@@ -1,23 +1,23 @@
 <template>
     <div>
-        <edit-program
+        <edit-group
             :active.sync="edit.active"
-            :program="edit.program"
+            :group="edit.group"
             @update="retrieve"/>
 
         <div class="tw-shadow tw-rounded tw-bg-white">
             <div class="tw-flex tw-items-start tw-justify-between tw-p-4 tw-border-b-2">
                 <div>
-                    <h1 class="tw-font-semibold tw-text-xl">{{ program.name }}</h1>
-                    <p class="tw-text-grey">{{ program.description }}</p>
+                    <h1 class="tw-font-semibold tw-text-xl">{{ group.name }}</h1>
+                    <p class="tw-text-grey">{{ group.description }}</p>
                 </div>
                 <div class="tw-text-right">
                     <div>
                         <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">people</base-icon>
-                        <span class="tw-uppercase tw-text-grey tw-text-xs tw-font-semibold">{{ program.team.name }}</span>
+                        <span class="tw-uppercase tw-text-grey tw-text-xs tw-font-semibold">{{ group.program.name }}</span>
                     </div>
                     <div>
-                        <base-button @click="editProgram(program)" class="tw-py-2 tw-px-0 tw-mr-4 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none">
+                        <base-button @click="editGroup(group)" class="tw-py-2 tw-px-0 tw-mr-4 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
                             <span class="tw-text-xs tw-align-middle">Edit</span>
                         </base-button>
@@ -30,15 +30,9 @@
             </div>
             <div class="tw-bg-grey-lightest">
                 <el-tabs  @tab-click="handleClick">
-                    <el-tab-pane name="program_profile_summary" label="Summary">
+                    <el-tab-pane name="group_profile_summary" label="Summary">
                     </el-tab-pane>
-                    <el-tab-pane name="program_profile_groups">
-                        <template slot="label">
-                            <base-icon class="tw-align-middle tw-text-sm">assignment</base-icon>
-                            Groups
-                        </template>
-                    </el-tab-pane>
-                    <el-tab-pane v-for="(type, key) in recordTypes" :name="`program_profile_records_${type.slug}`" :key="key" label="Summary">
+                    <el-tab-pane v-for="(type, key) in recordTypes" :name="`group_profile_records_${type.slug}`" :key="key" label="Summary">
                         <template slot="label">
                             <base-icon class="tw-align-middle tw-text-sm">insert_drive_file</base-icon>
                             {{ type.name }}
@@ -53,27 +47,27 @@
     </div>
 </template>
 <script>
-    import ProgramRequest from '../api/ProgramRequest';
+    import GroupRequest from '../api/GroupRequest';
     import RecordTypeRequest from '../api/RecordTypeRequest';
 
-    import EditProgram from './AppProgramEdit';
+    import EditGroup from './AppGroupEdit';
 
     export default {
         components: {
-            EditProgram
+            EditGroup
         },
 
         data() {
             return {
-                program: {
+                group: {
                     name: '',
-                    team: {
+                    program: {
                         name: ''
                     }
                 },
                 edit: {
                     active: false,
-                    program: {
+                    group: {
                         field_1_value: '',
                         field_2_value: '',
                         field_3_value: '',
@@ -81,7 +75,7 @@
                     }
                 },
                 recordTypes: [],
-                request: new ProgramRequest({}),
+                request: new GroupRequest({}),
                 params: {
                     ascending: true,
                     sortBy: 'field_1_value',
@@ -124,14 +118,14 @@
 
         methods: {
             handleClick(tab, event) {
-                if(tab.name.includes('program_profile_records_'))
-                    return this.handleRecordTabClick(tab.name.replace('program_profile_records_', ''));
+                if(tab.name.includes('group_profile_records_'))
+                    return this.handleRecordTabClick(tab.name.replace('group_profile_records_', ''));
 
                 this.$router.push({ name: `${tab.name}`});
             },
 
             handleRecordTabClick(recordType) {
-                this.$router.push({ name: 'program_profile_records', params:  {recordType}});
+                this.$router.push({ name: 'group_profile_records', params:  {recordType}});
             },
 
             retrieve() {
@@ -139,8 +133,8 @@
                     params: {...this.params}
                 });
 
-                this.request.show(this.$route.params.program).then((response) => {
-                    this.program = response.data;
+                this.request.show(this.$route.params.group).then((response) => {
+                    this.group = response;
                 });
             },
 
@@ -152,19 +146,19 @@
                 });
             },
 
-            confirmDelete(program) {
-                this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
+            confirmDelete(group) {
+                this.$confirm('Are you sure you want to delete this group?', 'Delete Group', {
                     confirmButtonText: 'Delete',
                     cancelButtonText: 'Wait, no!',
                     type: 'warning'
                 }).then(() => {
-                    this.deleteProgram(program)
+                    this.deleteGroup(group)
                         .then(() => {
-                            this.$router.push('/programs');
+                            this.$router.push('/groups');
 
                             this.$message({
                                 type: 'success',
-                                message: 'Program was deleted.'
+                                message: 'Group was deleted.'
                             });
                         })
                         .catch((error) => {
@@ -176,16 +170,16 @@
                 })
             },
 
-            editProgram(program) {
-                this.edit.program = program;
+            editGroup(group) {
+                this.edit.group = group;
 
                 this.edit.active = true;
             },
 
-            deleteProgram(program) {
-                let request = new ProgramRequest({});
+            deleteGroup(group) {
+                let request = new GroupRequest({});
 
-                return request.destroy(program.id);
+                return request.destroy(group.id);
             },
         },
 

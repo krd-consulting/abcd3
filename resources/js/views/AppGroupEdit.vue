@@ -1,17 +1,17 @@
 <template>
     <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Edit Program
+            <base-icon class="tw-align-middle">person_add</base-icon> Edit Group
         </div>
         <form>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5 tw-capitalize">
-                        Program Name
+                        Group Name
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="programData['name']"
+                            v-model="groupData['name']"
                             name="name"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -29,7 +29,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="programData['description']"
+                            v-model="groupData['description']"
                             name="description"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -43,22 +43,22 @@
             <div>
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5">
-                        Team
+                        Program
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="programData.team_id"
-                            :value="programData.team_id"
-                            name="team"
+                            v-model="groupData.program_id"
+                            :value="groupData.program_id"
+                            name="program"
                             placeholder="Select Team"
-                            @change="request.errors.clear('team')"
+                            @change="request.errors.clear('program')"
                             disabled>
                             <el-option
-                                v-for="team in teams"
-                                :key="team.id"
-                                :label="team.name"
-                                :value="team.id">
-                                {{ team.name }}
+                                v-for="program in programs"
+                                :key="program.id"
+                                :label="program.name"
+                                :value="program.id">
+                                {{ program.name }}
                             </el-option>
                         </base-select>
                     </div>
@@ -81,23 +81,23 @@
     </base-dialog>
 </template>
 <script>
-    import Request from '../api/ProgramRequest';
+    import Request from '../api/GroupRequest';
 
     export default {
         props: {
             active: Boolean,
-            program: Array|Object
+            group: Array|Object
         },
 
         data() {
             return {
                 request: new Request(),
-                programData: {
+                groupData: {
                     name: '',
                     description: '',
-                    team_id: ''
+                    program_id: ''
                 },
-                teams: []
+                programs: []
             }
         },
 
@@ -107,19 +107,19 @@
 
                 this.request.errors.clear();
 
-                this.programData = {
+                this.groupData = {
                     id: '',
                     name: '',
                     description: '',
-                    team_id: ''
+                    program_id: ''
                 };
             },
 
             open() {
-                this.programData.id = this.program.id;
-                this.programData.name = this.program.name;
-                this.programData.description = this.program.description;
-                this.programData.team_id = this.program.team_id;
+                this.groupData.id = this.group.id;
+                this.groupData.name = this.group.name;
+                this.groupData.description = this.group.description;
+                this.groupData.program_id = this.group.program_id;
 
                 this.load();
             },
@@ -127,20 +127,20 @@
             load() {
                 let request = new Request({});
 
-                request.edit(this.programData.id).then((response) => {
-                    this.teams = response;
+                request.edit(this.groupData.id).then((response) => {
+                    this.programs = response;
                 });
             },
 
             store() {
-                this.request = new Request(this.programData);
+                this.request = new Request(this.groupData);
 
-                this.request.update(this.programData.id)
+                this.request.update(this.groupData.id)
                     .then((response) => {
                         this.$emit('update');
                         this.$message({
                             type: 'success',
-                            message: 'Program updated successfully!'
+                            message: 'Group updated successfully!'
                         });
                         this.close()
                     })

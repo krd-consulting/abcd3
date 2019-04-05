@@ -47,6 +47,8 @@ $factory->define(Record::class, function (Faker $faker) {
         'record_type_id' => $recordType->id,
         'field_1_value' => $values[0],
         'field_2_value' => $values[1],
-        'field_3_value' => $values[2]
+        'field_3_value' => $values[2],
+        'created_by' => 1,
+        'updated_by' => 1
     ];
 });

@@ -1,17 +1,17 @@
 <template>
     <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Edit Program
+            <base-icon class="tw-align-middle">person_add</base-icon> Create Group
         </div>
         <form>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5 tw-capitalize">
-                        Program Name
+                        Group Name
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="programData['name']"
+                            v-model="groupData['name']"
                             name="name"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -29,7 +29,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="programData['description']"
+                            v-model="groupData['description']"
                             name="description"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -43,29 +43,29 @@
             <div>
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5">
-                        Team
+                        Program
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="programData.team_id"
-                            :value="programData.team_id"
-                            name="team"
-                            placeholder="Select Team"
-                            @change="request.errors.clear('team')"
-                            disabled>
+                            v-model="groupData.program_id"
+                            :value="groupData.program_id"
+                            name="program"
+                            placeholder="Select Program"
+                            @change="request.errors.clear('program')"
+                            :disabled="isProgramGiven">
                             <el-option
-                                v-for="team in teams"
-                                :key="team.id"
-                                :label="team.name"
-                                :value="team.id">
-                                {{ team.name }}
+                                v-for="program in programs"
+                                :key="program.id"
+                                :label="program.name"
+                                :value="`${program.id}`">
+                                {{ program.name }}
                             </el-option>
                         </base-select>
                     </div>
                 </div>
-                <div v-if="request.errors.has('team_id')" class="tw-flex tw-justify-end">
+                <div v-if="request.errors.has('program_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red"></span>
+                        <span v-text="request.errors.get('program_id')[0]" class="tw-text-xs tw-text-red"></span>
                     </div>
                 </div>
             </div>
@@ -81,23 +81,29 @@
     </base-dialog>
 </template>
 <script>
-    import Request from '../api/ProgramRequest';
+    import Request from '../api/GroupRequest';
 
     export default {
         props: {
             active: Boolean,
-            program: Array|Object
+            programId: Number|String
         },
 
         data() {
             return {
                 request: new Request(),
-                programData: {
+                groupData: {
                     name: '',
                     description: '',
-                    team_id: ''
+                    program: ''
                 },
-                teams: []
+                programs: []
+            }
+        },
+
+        computed: {
+            isProgramGiven() {
+                return typeof this.programId !== 'undefined';
             }
         },
 
@@ -107,19 +113,17 @@
 
                 this.request.errors.clear();
 
-                this.programData = {
-                    id: '',
+                this.groupData = {
                     name: '',
                     description: '',
-                    team_id: ''
+                    program_id: ''
                 };
             },
 
             open() {
-                this.programData.id = this.program.id;
-                this.programData.name = this.program.name;
-                this.programData.description = this.program.description;
-                this.programData.team_id = this.program.team_id;
+                if(this.isProgramGiven) {
+                    this.groupData.program_id = this.programId;
+                }
 
                 this.load();
             },
@@ -127,20 +131,20 @@
             load() {
                 let request = new Request({});
 
-                request.edit(this.programData.id).then((response) => {
-                    this.teams = response;
+                request.create().then((response) => {
+                    this.programs = response;
                 });
             },
 
             store() {
-                this.request = new Request(this.programData);
+                this.request = new Request(this.groupData);
 
-                this.request.update(this.programData.id)
+                this.request.store()
                     .then((response) => {
-                        this.$emit('update');
+                        this.$emit('save');
                         this.$message({
                             type: 'success',
-                            message: 'Program updated successfully!'
+                            message: 'Group created successfully!'
                         });
                         this.close()
                     })

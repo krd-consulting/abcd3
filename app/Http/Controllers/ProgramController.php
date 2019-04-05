@@ -24,11 +24,7 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        return auth()
-            ->user()
-            ->availablePrograms(null)
-            ->with('team')
-            ->get();
+        return (new Program)->availableFor(auth()->user())->with('team')->get();
     }
 
     /**
@@ -60,6 +56,8 @@ class ProgramController extends Controller
         $program->name = $request->input('name');
         $program->description = $request->input('description');
         $program->team_id = $request->input('team_id');
+        $program->created_by = auth()->user()->id;
+        $program->updated_by = auth()->user()->id;
         $program->save();
 
         return new ProgramResource($program);
@@ -81,7 +79,7 @@ class ProgramController extends Controller
         $program->id = $request->input('id');
         $program->name = $request->input('name');
         $program->description = $request->input('description');
-        $program->team_id = $request->input('team_id');
+        $program->updated_by = auth()->user()->id;
         $program->save();
 
         return $program;

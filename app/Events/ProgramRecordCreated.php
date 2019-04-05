@@ -2,8 +2,7 @@
 
 namespace App\Events;
 
-use App\Program;
-use App\Record;
+use App\ProgramRecord;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -18,16 +17,18 @@ class ProgramRecordCreated
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $program;
-    public $order;
+    public $record;
+    public $programRecord;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Program $program, Record $record)
+    public function __construct(ProgramRecord $programRecord)
     {
-        $this->program = $program;
-        $this->record = $record;
+        $this->program = $programRecord->program;
+        $this->record = $programRecord->record;
+        $this->programRecord = $programRecord;
     }
 }

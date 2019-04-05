@@ -34,12 +34,29 @@ class Record extends Model
             ->using('App\CaseRecord');
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany('App\Group')
+            ->withTimestamps()
+            ->withPivot('enrolled_at', 'end', 'created_by', 'updated_by');
+    }
+
     public function programs()
     {
         return $this->belongsToMany('App\Program')
             ->withTimestamps()
-            ->withPivot('notes', 'status', 'status_updated_at')
+            ->withPivot('created_by')
             ->using('App\ProgramRecord');
+    }
+
+    public function program_records()
+    {
+        return $this->hasMany('App\ProgramRecord');
+    }
+
+    public function program_statuses()
+    {
+        return $this->hasManyThrough('App\ProgramClientStatus', 'App\ProgramRecord', NULL, 'program_client_id');
     }
 
     public function teams() {

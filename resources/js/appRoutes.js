@@ -9,6 +9,8 @@ import AppProgramProfile from './views/AppProgramProfile';
 import AppProgramProfileGroups from './views/AppProgramProfileGroups';
 import AppProgramProfileRecords from './views/AppProgramProfileRecords';
 import AppProgramProfileSummary from './views/AppProgramProfileSummary';
+import AppGroupList from './views/AppGroupList';
+import AppGroupProfile from './views/AppGroupProfile';
 
 const routes = [
     {
@@ -40,7 +42,18 @@ const routes = [
             { path: 'groups', name: 'program_profile_groups', component: AppProgramProfileGroups },
             { path: 'records/:recordType', name: 'program_profile_records', component: AppProgramProfileRecords },
         ]
-    }
+    },
+    {
+        path: '/groups', component: AppGroupList
+    },
+    {
+        path: '/groups/:group', component: AppGroupProfile,
+        children: [
+            { path: '', name: 'group_profile_summary', component: AppProgramProfileSummary },
+            //{ path: 'groups', name: 'program_profile_groups', component: AppProgramProfileGroups },
+            //{ path: 'records/:recordType', name: 'program_profile_records', component: AppProgramProfileRecords },
+        ]
+    },
 ];
 
 const router = new VueRouter({

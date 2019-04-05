@@ -1,66 +1,73 @@
 <template>
     <transfer
         :active="active"
-        :items="programs"
+        :items="records"
         :selected="selected"
         @add="add"
         @remove="remove"
         @open="open"
         @close="close">
             <template v-slot:title>
-                <slot name="title">Manage Programs</slot>
+                <slot name="title">Manage Records</slot>
             </template>
             <template v-slot:current-items-title>
-                Current Programs
+                Current Records
             </template>
             <template v-slot:available-items-title>
-                Available Programs
+                Available Records
             </template>
             <template v-slot:current-item-title="{ item }">
-                {{ item.name }}
+                <primary-data :record="item" :fields="fields"/>
             </template>
             <template v-slot:current-item-subtitle="{ item }">
-                {{ item.team.name }}
+                <secondary-data class="tw-text-xs" :record="item" :fields="fields"/>
             </template>
             <template v-slot:available-item-title="{ item }">
-                {{ item.name }}
+                <primary-data :record="item" :fields="fields"/>
             </template>
             <template v-slot:available-item-subtitle="{ item }">
-                {{ item.team.name }}
+                <secondary-data class="tw-text-xs" :record="item" :fields="fields"/>
             </template>
             <template v-slot:empty-available-items>
-                No more available programs.
+                No more available records.
             </template>
     </transfer>
 </template>
 <script>
-    import ProgramRequest from '../api/ProgramRequest';
-    import RecordProgramsRequest from '../api/RecordProgramsRequest';
+    import RecordRequest from '../api/RecordRequest';
+    import ProgramRecordsRequest from '../api/ProgramRecordsRequest';
 
     import Transfer from '../components/AppTransfer';
 
+    import PrimaryData from '../components/RecordPrimaryData';
+    import SecondaryData from '../components/RecordSecondaryData';
+
     export default {
         components: {
-            Transfer
+            Transfer,
+            PrimaryData,
+            SecondaryData
         },
 
         props: {
             active: Boolean,
-            assignedPrograms: Array
+            assignedRecords: Array,
+            recordType: String
         },
 
         data() {
             return {
-                programs: [],
-                programsRequest: new ProgramRequest({}),
-                recordProgramsRequest: new RecordProgramsRequest({}),
+                records: [],
+                fields: [],
+                recordsRequest: new RecordRequest({}),
+                programRecordsRequest: new ProgramRecordsRequest({}),
                 selected: [],
             }
         },
 
         computed: {
             notSelected() {
-                return _.differenceBy(this.programs, this.selected, 'id');
+                return _.differenceBy(this.records, this.selected, 'id');
             }
         },
 
@@ -71,20 +78,21 @@
             },
 
             open() {
-                this.selected = _.cloneDeep(this.assignedPrograms);
+                this.selected = _.cloneDeep(this.assignedRecords);
 
-                this.programsRequest.retrieve().then(response => {
-                    this.programs = response;
+                this.recordsRequest.retrieve(this.recordType).then(response => {
+                    this.records = response.data;
+                    this.fields = response.fields;
                 });
             },
 
             add(id) {
-                this.recordProgramsRequest.store(
+                this.programRecordsRequest.store(
+                    this.$route.params.program,
                     this.$route.params.recordType,
-                    this.$route.params.record,
                     id
                 ).then((response) => {
-                    this.selected.push(_.find(this.programs, {id}));
+                    this.selected.push(_.find(this.records, {id}));
                 }).catch((error) => {
                     this.$message({
                         type: 'error',
@@ -94,9 +102,9 @@
             },
 
             remove(id) {
-                this.recordProgramsRequest.destroy(
+                this.programRecordsRequest.destroy(
+                    this.$route.params.program,
                     this.$route.params.recordType,
-                    this.$route.params.record,
                     id
                 ).then((response) => {
                     this.selected = _.reject(this.selected, { id });

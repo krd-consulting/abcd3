@@ -7,74 +7,14 @@
                         class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
                         @click="addRecord">
                         <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                        <span class="tw-text-xs tw-align-middle">Add Records</span>
+                        <span class="tw-text-xs tw-align-middle">Add {{ recordType.name }}</span>
                     </base-button>
                 </div>
             </div>
-            <div v-if="records.length > 0"
-                class="tw-pt-6 tw-pb-2 tw-pl-4 tw-text-xs tw-text-grey tw-uppercase tw-font-semibold">
-                <div class="tw-flex tw-w-4/5">
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Record</span>
-                    </div>
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Status</span>
-                    </div>
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Enrollment Date</span>
-                    </div>
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Notes</span>
-                    </div>
-                </div>
-            </div>
-            <list-item
-                v-if="records.length > 0"
-                :to="`/records/${record.type_slug}/${record.id}`"
-                :key="record.id"
-                v-for="record in records"
-                class="group tw-pl-4 tw-py-4">
-                <primary-data :record="record" :fields="record.fields"/>
-                <template v-slot:secondary-data>
-                    <secondary-data class="tw-text-xs" :record="record" :fields="record.fields"/>
-                </template>
-                <template v-slot:tertiary-data>
-                    <div class="tw-flex tw-w-3/5 tw-items-center">
-                        <div class="tw-w-1/3">
-                            <div v-if="record.pivot.status" class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
-                                <span>{{ record.pivot.status }}</span>
-                            </div>
-                            <div v-if="record.pivot.status_updated_at" class="tw-text-sm tw-text-grey">
-                                <span>Since {{ record.pivot.status_updated_at }}</span>
-                            </div>
-                        </div>
-                        <div class="tw-w-1/3">
-                            <span>{{ record.pivot.created_at }}</span>
-                        </div>
-                        <div class="tw-w-1/3">
-                            <p v-if="record.pivot.notes">{{ record.pivot.notes }}</p>
-                            <base-button v-else class="tw-py-2 tw-px-0 tw-text-grey tw-font-semibold tw-border-none hover:tw-bg-transparent hover:tw-text-blue">
-                                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Add Note</span>
-                            </base-button>
-                        </div>
-                    </div>
-                </template>
-                <template v-slot:options-container>
-                    <div class="tw-w-1/5 tw-text-right">
-                        <div class="tw-px-4">
-                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-grey-darkest tw-border-none">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Edit</span>
-                            </base-button>
-                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(record.id)">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Remove</span>
-                            </base-button>
-                        </div>
-                    </div>
-                </template>
-            </list-item>
+            <clients-list v-if="recordType.identity.name == 'Client'" :records="records"/>
+            <staff-list v-else-if="recordType.identity.name == 'Staff'" :records="records"/>
+            <volunteers-list v-else-if="recordType.identity.name == 'Volunteer'" :records="records"/>
+            <external-list v-else-if="recordType.identity.name == 'External'" :records="records"/>
         </div>
         <div class="tw-px-4 tw-pb-4">
             <base-button
@@ -84,30 +24,31 @@
                 <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
                 <span class="tw-text-xs tw-align-middle">Manage Records</span>
             </base-button>
-            <!--<add-record
+            <add-record
                 :active.sync="add.active"
-                :assignedRecords="records"
+                :assigned-records="records"
+                :record-type="recordType.slug"
                 @close="retrieve">
-            </add-record>-->
+            </add-record>
         </div>
     </div>
 </template>
 <script>
     import RecordsRequest from '../api/ProgramRecordsRequest';
-    import ListItem from '../components/AppListItem';
-    import ProfilePicture from '../components/RecordProfilePicture';
-    import PrimaryData from '../components/RecordPrimaryData';
-    import SecondaryData from '../components/RecordSecondaryData';
 
-    //import AddRecord from './AppRecordProfileAddRecord';
+    import ClientsList from './AppProgramProfileRecordsClients';
+    import StaffList from './AppProgramProfileRecordsStaff';
+    import VolunteersList from './AppProgramProfileRecordsVolunteers';
+    import ExternalList from './AppProgramProfileRecordsExternal';
+    import AddRecord from './AppProgramProfileAddRecord';
 
     export default {
         components: {
-            //AddRecord,
-            ListItem,
-            ProfilePicture,
-            PrimaryData,
-            SecondaryData,
+            AddRecord,
+            ClientsList,
+            VolunteersList,
+            ExternalList,
+            StaffList
         },
 
         data() {
@@ -116,15 +57,21 @@
                     active: false
                 },
                 request: new RecordsRequest({}),
-                records: []
+                records: [],
+                recordType: {
+                    name: 'Records',
+                    identity: {
+                        name: ''
+                    }
+                }
             }
         },
 
         methods: {
             remove(id) {
                 return this.request.destroy(
+                    this.$route.params.program,
                     this.$route.params.recordType,
-                    this.$route.params.record,
                     id
                 ).then((response) => {
                     this.retrieve();
@@ -156,6 +103,7 @@
             retrieve() {
                 this.request.retrieve(this.$route.params.program, this.$route.params.recordType).then((response) => {
                     this.records = response.data;
+                    this.recordType = response.record_type;
                 });
             },
 

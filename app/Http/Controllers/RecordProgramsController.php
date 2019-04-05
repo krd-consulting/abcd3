@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Program;
+use App\ProgramRecord;
 use App\Record;
 use App\RecordType;
 
 use App\Http\Resources\Programs;
+use App\Traits\AddsRecordToProgramTeams;
 
 use Illuminate\Http\Request;
 
@@ -22,13 +24,13 @@ class RecordProgramsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $record->programs()->attach($program, [
-            'notes' => '',
-            'status' => 'active',
-            'status_updated_at' => now()
-        ]);
+        $user = auth()->user();
 
-        $this->addRecordToProgramTeam($record, $program);
+        $programRecord = new ProgramRecord();
+        $programRecord->program_id = $program->id;
+        $programRecord->record_id = $record->id;
+        $programRecord->created_by = $user->id;
+        $programRecord->save();
 
         return $program;
     }
@@ -41,23 +43,5 @@ class RecordProgramsController extends Controller
         $record->programs()->detach($program);
 
         return $program;
-    }
-
-    /*
-     * Temporary implementation for automatically adding a record to a program's teams
-     * where the record doesn't belong to.
-     *
-     * Ideal implementation would be to trigger Eloquent Model Events.
-     *
-     */
-    private function addRecordToProgramTeam(Record $record, Program $program)
-    {
-        $programTeam = $program->team->id;
-        $recordTeams = $record->teams->pluck('id');
-
-        if($recordTeams->contains($programTeam))
-            return;
-
-        $record->teams()->save($program->team);
     }
 }

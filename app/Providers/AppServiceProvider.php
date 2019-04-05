@@ -17,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(RecordType $recordTypes, Program $programs, Team $teams)
+    public function boot(RecordType $recordTypes, Program $programs)
     {
         View::composer('*', function($view) use ($recordTypes, $programs) {
             if(Auth::check()) {
@@ -25,12 +25,11 @@ class AppServiceProvider extends ServiceProvider
 
                 $view->with(
                     'programs',
-                    $programs->availableFor(Auth::user())->get()
+                    Auth::user()->availablePrograms(4)->get()
                 );
 
                 $view->with(
                     'teams',
-                    //$teams->availableFor(Auth::user())
                     Auth::user()->availableTeams
                 );
             }

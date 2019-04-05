@@ -5,6 +5,7 @@ namespace App;
 use App\Record;
 use App\Role;
 use App\Program;
+use App\Group;
 use App\ProgramRecord;
 use App\TeamRecord;
 
@@ -48,6 +49,11 @@ class User extends Authenticatable
     public function caseRecords()
     {
         return $this->hasMany('App\CaseRecord', 'created_by');
+    }
+
+    public function groups()
+    {
+        return $this->hasManyDeep('App\Group', ['App\Record', 'group_record']);
     }
 
     public function records()
@@ -154,13 +160,23 @@ class User extends Authenticatable
             $this->hasTeamRecord($record);
     }
 
-    public function hasProgramRecord($record_id) : bool
+    public function hasProgramRecord($record_id, bool $checkScope = true) : bool
     {
+        if($checkScope) {
+            if(!$this->hasScopeOfAtleast(3))
+                return false;
+        }
+
         return ProgramRecord::whereIn('program_id', $this->programs)->where('record_id', $record_id)->exists();
     }
 
-    public function hasTeamRecord($record_id)
+    public function hasTeamRecord($record_id, bool $checkScope = true) : bool
     {
+        if($checkScope) {
+            if(!$this->hasScopeOfAtleast(4))
+                return false;
+        }
+
         return TeamRecord::whereIn('team_id', $this->teams->pluck('id'))->where('record_id', $record_id)->exists();
     }
 
@@ -170,7 +186,39 @@ class User extends Authenticatable
             return $this->hasProgram($program->id);
 
         return $this->programs()->where('program_id', $program)->exists() ||
-            $this->teamPrograms()->where('programs.id', $program)->exists();
+            $this->hasTeamProgram($program, true);
+    }
+
+    public function hasTeamProgram($program, bool $checkScope = true) : bool
+    {
+        if($checkScope) {
+            if(!$this->hasScopeOfAtleast(4))
+                return false;
+        }
+
+        return $this->teamPrograms()->where('programs.id', $program)->exists();
+    }
+
+    public function hasGroup($group)
+    {
+        if(is_a($group, Group::class))
+            return $this->hasGroup($group->id);
+
+        return $this->programs()->whereHas('groups', function($query) use ($group) {
+                return $query->where('groups.id', $group);
+            })->exists() || $this->hasTeamGroup($group);
+    }
+
+    public function hasTeamGroup($group, bool $checkScope = true) : bool
+    {
+        if($checkScope) {
+            if(!$this->hasScopeOfAtleast(4))
+                return false;
+        }
+
+        return $this->teamPrograms()->whereHas('groups', function($query) use ($group) {
+            return $query->where('groups.id', $group);
+        })->exists();
     }
 
     public function hasScopeOfAtleast($scope) : bool

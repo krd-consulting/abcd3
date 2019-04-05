@@ -1,5 +1,164 @@
 <template>
-    <div class="tw-py-32 tw-text-center tw-text-grey-light">
-        <h2>Groups</h2>
+    <div>
+        <div class="tw-mb-2">
+            <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="groups.length == 0">
+                <div>
+                    <base-button
+                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
+                        @click="createGroup">
+                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                        <span class="tw-text-xs tw-align-middle">Create Group</span>
+                    </base-button>
+                </div>
+            </div>
+            <div v-if="groups.length > 0"
+                class="tw-pt-6 tw-pb-2 tw-pl-4 tw-text-xs tw-text-grey tw-uppercase tw-font-semibold">
+                <div class="tw-flex tw-w-4/5">
+                    <div class="tw-w-1/4 tw-m-0">
+                        <span class="tw-tracking-wide">Group</span>
+                    </div>
+                    <!--<div class="tw-w-1/4 tw-m-0">
+                        <span class="tw-tracking-wide">Status</span>
+                    </div>
+                    <div class="tw-w-1/4 tw-m-0">
+                        <span class="tw-tracking-wide">Enrollment Date</span>
+                    </div>
+                    <div class="tw-w-1/4 tw-m-0">
+                        <span class="tw-tracking-wide">Notes</span>
+                    </div>-->
+                </div>
+            </div>
+            <list-item
+                v-if="groups.length > 0"
+                :to="`/groups/${group.id}`"
+                :key="group.id"
+                v-for="group in groups"
+                class="group tw-pl-4 tw-py-4">
+                <span class="hover:tw-text-blue">{{ group.name }}</span>
+                <template v-slot:secondary-data>
+
+                </template>
+                <template v-slot:tertiary-data>
+                    <!--<div class="tw-flex tw-w-3/5 tw-items-center">
+                        <div class="tw-w-1/3">
+                            <div v-if="group.pivot.status" class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
+                                <span>{{ record.pivot.status }}</span>
+                            </div>
+                            <div v-if="record.pivot.status_updated_at" class="tw-text-sm tw-text-grey">
+                                <span>Since {{ record.pivot.status_updated_at }}</span>
+                            </div>
+                        </div>
+                        <div class="tw-w-1/3">
+                            <span>{{ record.pivot.created_at }}</span>
+                        </div>
+                        <div class="tw-w-1/3">
+                            <p v-if="record.pivot.notes">{{ record.pivot.notes }}</p>
+                            <base-button v-else class="tw-py-2 tw-px-0 tw-text-grey tw-font-semibold tw-border-none hover:tw-bg-transparent hover:tw-text-blue">
+                                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                                <span class="tw-text-xs tw-align-middle">Add Note</span>
+                            </base-button>
+                        </div>
+                    </div>-->
+                </template>
+                <template v-slot:options-container>
+                    <div class="tw-w-1/5 tw-text-right">
+                        <div class="tw-px-4">
+                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-grey-darkest tw-border-none">
+                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
+                                <span class="tw-text-xs tw-align-middle">Edit</span>
+                            </base-button>
+                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(record.id)">
+                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">delete</base-icon>
+                                <span class="tw-text-xs tw-align-middle">Delete</span>
+                            </base-button>
+                        </div>
+                    </div>
+                </template>
+            </list-item>
+        </div>
+       <div class="tw-px-4 tw-pb-4">
+            <base-button
+                v-if="groups.length > 0"
+                class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
+                @click="createGroup">
+                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                <span class="tw-text-xs tw-align-middle">Create Group</span>
+            </base-button>
+            <create-group
+                :active.sync="add.active"
+                :program-id="$route.params.program"
+                @save="retrieve"/>
+        </div>
     </div>
 </template>
+<script>
+    import GroupsRequest from '../api/ProgramGroupsRequest';
+    import ListItem from '../components/AppListItem';
+
+    import CreateGroup from './AppGroupCreate';
+
+    export default {
+        components: {
+            CreateGroup,
+            ListItem,
+        },
+
+        data() {
+            return {
+                add: {
+                    active: false
+                },
+                request: new GroupsRequest({}),
+                groups: []
+            }
+        },
+
+        methods: {
+            remove(id) {
+                return this.request.destroy(
+                    this.$route.params.program,
+                    this.$route.params.recordType,
+                    id
+                ).then((response) => {
+                    this.retrieve();
+                });
+            },
+
+            confirm(id) {
+                this.$confirm('Are you sure you want to remove this record?', 'Remove Record', {
+                    confirmButtonText: 'Remove',
+                    cancelButtonText: 'Wait, no!',
+                    type: 'warning'
+                }).then(() => {
+                    this.remove(id)
+                        .then(() => {
+                            this.$message({
+                                type: 'success',
+                                message: 'Record was removed.'
+                            });
+                        })
+                        .catch((error) => {
+                            this.$message({
+                                type: 'error',
+                                message: error.message
+                            });
+                        });
+                })
+            },
+
+            retrieve() {
+                this.request.retrieve(this.$route.params.program).then((response) => {
+                    this.groups = response.data;
+                });
+            },
+
+            createGroup() {
+                this.add.active = true;
+            }
+        },
+
+        created() {
+            this.retrieve();
+        }
+    }
+</script>

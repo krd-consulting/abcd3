@@ -1,6 +1,6 @@
 import Request from '../core/Request';
 
-class RecordPrograms extends Request{
+class RecordProgramsRequest extends Request{
     retrieve(recordType, record) {
         return this.get(`/api/records/${recordType}/${record}/programs`);
     }
@@ -14,4 +14,4 @@ class RecordPrograms extends Request{
     }
 }
 
-export default RecordPrograms
+export default RecordProgramsRequest

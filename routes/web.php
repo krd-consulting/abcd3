@@ -14,6 +14,10 @@ Route::get('/records', 'ShowHome')->where('all', '(.*)');
 Route::get('/records/{all}', 'ShowHome')->where('all', '(.*)');
 Route::get('/programs', 'ShowHome')->where('all', '(.*)');
 Route::get('/programs/{all}', 'ShowHome')->where('all', '(.*)');
+Route::get('/groups', 'ShowHome')->where('all', '(.*)');
+Route::get('/groups/{all}', 'ShowHome')->where('all', '(.*)');
+Route::get('/teams', 'ShowHome')->where('all', '(.*)');
+Route::get('/teams/{all}', 'ShowHome')->where('all', '(.*)');
 
 Route::get('/preferences', 'ShowPreferences');
 Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
@@ -21,6 +25,8 @@ Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
 Route::prefix('api')
     ->middleware('auth')
     ->group( function() {
+        Route::get('record-types', 'RecordTypeController@index');
+
         Route::get('records/create', 'RecordController@create');
         Route::get('records/edit/{record}', 'RecordController@edit');
         Route::patch('records/{record}', 'RecordController@update');
@@ -41,7 +47,19 @@ Route::prefix('api')
         Route::post('programs/', 'ProgramController@store');
         Route::delete('programs/{program}', 'ProgramController@destroy');
 
+        Route::get('programs/{program}/groups', 'ProgramGroupsController@index');
+
         Route::get('programs/{program}/records/{recordType}', 'ProgramRecordsController@index');
+        Route::post('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@store');
+        Route::delete('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@destroy');
+
+        Route::get('groups', 'GroupController@index');
+        Route::get('groups/create', 'GroupController@create');
+        Route::get('groups/edit/{group}', 'GroupController@edit');
+        Route::patch('groups/{group}', 'GroupController@update');
+        Route::get('groups/{group}', 'GroupController@show');
+        Route::post('groups', 'GroupController@store');
+        Route::delete('groups/{group}', 'GroupController@destroy');
 
         Route::get('roles', 'RoleController@index');
         Route::get('roles/create', 'RoleController@create');
