@@ -19,11 +19,22 @@ class Program extends Model
         return $this->hasMany('App\Group');
     }
 
+    public function program_records()
+    {
+        return $this->hasMany('App\ProgramRecord');
+    }
+
+    public function program_statuses()
+    {
+        return $this->hasManyThrough('App\ProgramClientStatus', 'App\ProgramRecord', NULL, 'program_client_id');
+    }
+
     public function records()
     {
         return $this->belongsToMany('App\Record')
             ->withTimestamps()
-            ->withPivot('created_by')
+            ->withPivot('created_by', 'deleted_at')
+            ->wherePivot('deleted_at', NULL)
             ->using('App\ProgramRecord');
     }
 

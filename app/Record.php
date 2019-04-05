@@ -46,6 +46,7 @@ class Record extends Model
         return $this->belongsToMany('App\Program')
             ->withTimestamps()
             ->withPivot('created_by')
+            ->wherePivot('deleted_at', NULL)
             ->using('App\ProgramRecord');
     }
 

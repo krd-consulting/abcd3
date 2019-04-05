@@ -19,9 +19,13 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
 
-        'App\Events\ProgramRecordCreated' => [
+        'App\Events\ProgramRecordSaved' => [
             'App\Listeners\AddRecordToProgramTeam',
-            'App\Listeners\CreateProgramClientStatus'
+            'App\Listeners\CreateWaitlistProgramClientStatus'
+        ],
+
+        'App\Events\ProgramRecordDeleted' => [
+            'App\Listeners\CreateRemovedProgramClientStatus'
         ]
     ];
 

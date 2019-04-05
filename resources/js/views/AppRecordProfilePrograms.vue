@@ -32,28 +32,33 @@
                 v-if="programs.length > 0"
                 :to="`/programs/${program.id}`"
                 :key="program.id"
+                :item="program"
                 v-for="program in programs"
                 class="group tw-pl-4 tw-py-4">
-                <span class="hover:tw-text-blue">{{ program.name }}</span>
-                <template v-slot:secondary-data>
-                    <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">people</base-icon>
-                    <span class="tw-text-grey tw-text-sm tw-text-align-middle">{{ program.team.name }}</span>
+                <template v-slot:primary-data="slotProps">
+                    <div>
+                        <span class="hover:tw-text-blue">{{ slotProps.item.name }}</span>
+                    </div>
                 </template>
-                <template v-slot:tertiary-data>
+                <template v-slot:secondary-data="slotProps">
+                    <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">people</base-icon>
+                    <span class="tw-text-grey tw-text-sm tw-text-align-middle">{{ slotProps.item.team.name }}</span>
+                </template>
+                <template v-slot:tertiary-data="slotProps">
                     <div class="tw-flex tw-w-3/5 tw-items-center">
                         <div class="tw-w-1/3">
-                            <div v-if="program.pivot.status" class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
-                                <span>{{ program.pivot.status }}</span>
+                            <div v-if="slotProps.item.program_status.status" class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
+                                <span>{{ slotProps.item.program_status.status.name }}</span>
                             </div>
-                            <div v-if="program.pivot.status_updated_at" class="tw-text-sm tw-text-grey">
-                                <span>Since {{ program.pivot.status_updated_at }}</span>
+                            <div v-if="slotProps.item.program_status.created_at" class="tw-text-sm tw-text-grey">
+                                <span>Since {{ slotProps.item.program_status.created_at }}</span>
                             </div>
                         </div>
                         <div class="tw-w-1/3">
-                            <span>{{ program.pivot.created_at }}</span>
+                            <span>{{ slotProps.item.enrolled_at }}</span>
                         </div>
                         <div class="tw-w-1/3">
-                            <p v-if="program.pivot.notes">{{ program.pivot.notes }}</p>
+                            <p v-if="slotProps.item.program_status.notes">{{ slotProps.item.program_status.notes }}</p>
                             <base-button v-else class="tw-py-2 tw-px-0 tw-text-grey tw-font-semibold tw-border-none hover:tw-bg-transparent hover:tw-text-blue">
                                 <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
                                 <span class="tw-text-xs tw-align-middle">Add Note</span>

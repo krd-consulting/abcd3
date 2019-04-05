@@ -2,12 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\ProgramRecordSaved;
+use App\ProgramClientStatus;
 
+use App\Events\ProgramRecordSaved;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class AddRecordToProgramTeam
+class CreateWaitlistProgramClientStatus
 {
     /**
      * Create the event listener.
@@ -27,12 +28,7 @@ class AddRecordToProgramTeam
      */
     public function handle(ProgramRecordSaved $event)
     {
-        $programTeam = $event->program->team_id;
-        $recordTeams = $event->record->teams->pluck('id');
-
-        if($recordTeams->contains($programTeam))
-            return;
-
-        $event->record->teams()->save($event->program->team);
+        $status = new ProgramClientStatus;
+        $status->createForProgramRecord($event->programRecord);
     }
 }

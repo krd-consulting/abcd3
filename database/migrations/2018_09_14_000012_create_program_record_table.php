@@ -20,6 +20,7 @@ class CreateProgramRecordTable extends Migration
             $table->timestamp('enrolled_at')->nullable();
             $table->timestamps();
             $table->integer('created_by')->unsigned();
+            $table->softDeletes();
 
             $table->foreign('record_id')->references('id')->on('records');
             $table->foreign('program_id')->references('id')->on('programs');

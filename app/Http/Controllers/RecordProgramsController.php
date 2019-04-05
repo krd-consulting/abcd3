@@ -16,7 +16,9 @@ class RecordProgramsController extends Controller
 {
     public function index(RecordType $recordType, Record $record)
     {
-        return new Programs($record->programs);
+        $programs = $record->programs()->with('program_records',  'program_statuses', 'program_statuses.status')->get();
+
+        return new Programs($programs);
     }
 
     public function store(RecordType $recordType, Record $record, Program $program)
@@ -27,10 +29,7 @@ class RecordProgramsController extends Controller
         $user = auth()->user();
 
         $programRecord = new ProgramRecord();
-        $programRecord->program_id = $program->id;
-        $programRecord->record_id = $record->id;
-        $programRecord->created_by = $user->id;
-        $programRecord->save();
+        $programRecord->createUsingBelongsTo($program, $record, $user);
 
         return $program;
     }
@@ -40,7 +39,7 @@ class RecordProgramsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $record->programs()->detach($program);
+        ProgramRecord::where('program_id', $program->id)->where('record_id', $record->id)->first()->delete();
 
         return $program;
     }

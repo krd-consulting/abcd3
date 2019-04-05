@@ -11,7 +11,10 @@
                     </base-button>
                 </div>
             </div>
-            <clients-list v-if="recordType.identity.name == 'Client'" :records="records"/>
+            <clients-list
+                v-if="recordType.identity.name == 'Client'"
+                :records="records"
+                @remove="confirm"/>
             <staff-list v-else-if="recordType.identity.name == 'Staff'" :records="records"/>
             <volunteers-list v-else-if="recordType.identity.name == 'Volunteer'" :records="records"/>
             <external-list v-else-if="recordType.identity.name == 'External'" :records="records"/>

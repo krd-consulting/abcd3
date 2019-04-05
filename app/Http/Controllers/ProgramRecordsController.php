@@ -17,9 +17,9 @@ class ProgramRecordsController extends Controller
 
     public function index(Program $program, RecordType $recordType)
     {
-        $records = $program->records()->with('program_records', 'program_statuses')->only($recordType);
+        $records = $program->records()->with('program_records', 'program_statuses', 'program_statuses.status')->only($recordType);
 
-        $records = $records->availableFor(auth()->user())->get();
+        $records = $records->availableFor(auth()->user())->paginate(10);
 
         return (new Records($records))->as($recordType);
     }
@@ -32,10 +32,7 @@ class ProgramRecordsController extends Controller
         $user = auth()->user();
 
         $programRecord = new ProgramRecord();
-        $programRecord->program_id = $program->id;
-        $programRecord->record_id = $record->id;
-        $programRecord->created_by = $user->id;
-        $programRecord->save();
+        $programRecord->createUsingBelongsTo($program, $record, $user);
 
         return $record;
     }
@@ -45,7 +42,7 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $program->records()->detach($record);
+        ProgramRecord::where('program_id', $program->id)->where('record_id', $record->id)->first()->delete();
 
         return $record;
     }

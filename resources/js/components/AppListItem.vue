@@ -6,19 +6,19 @@
                 </slot>
             </div>
             <div>
-                <slot name="primary-data">
+                <slot name="primary-data" :item="item">
                     <span class="tw-mb-2 tw-block tw-font-semibold">
                         <slot>{{ primaryData }}</slot>
                     </span>
                 </slot>
-                <slot name="secondary-data">
+                <slot name="secondary-data" :item="item">
                     <span class="tw-text-sm">
                         <slot name="secondary-data-text">{{ secondaryData }}</slot>
                     </span>
                 </slot>
             </div>
         </router-link tag="div">
-        <slot name="tertiary-data">
+        <slot name="tertiary-data" :item="item">
         </slot>
         <slot name="options-container">
             <div class="tw-w-2/5 tw-text-right">
@@ -33,7 +33,8 @@
         props: {
             to: String | Object,
             primaryData: String,
-            secondaryData: String
+            secondaryData: String,
+            item: Array | Object
         }
     }
 </script>
