@@ -2,10 +2,12 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\Pivot;
 
 class TeamRecord extends Pivot
 {
+    public $incrementing = true;
+
     protected $table = 'record_team';
 
     public function team()

@@ -18,6 +18,7 @@ class CreateTeamsTable extends Migration
             $table->string('name', 32);
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

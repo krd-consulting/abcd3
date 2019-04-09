@@ -32,8 +32,8 @@ class Program extends JsonResource
                 )['enrolled_at']
             ),
             'available_record_types' => $this->available_record_types,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            //'created_at' => $this->created_at,
+            //'updated_at' => $this->updated_at
         ];
     }
 }

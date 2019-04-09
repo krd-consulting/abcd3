@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Program extends Model
@@ -33,7 +33,7 @@ class Program extends Model
     {
         return $this->belongsToMany('App\Record')
             ->withTimestamps()
-            ->withPivot('created_by', 'deleted_at')
+            ->withPivot('deleted_at')
             ->wherePivot('deleted_at', NULL)
             ->using('App\ProgramRecord');
     }

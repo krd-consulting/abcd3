@@ -51,8 +51,6 @@ class RecordController extends Controller
         $record->field_2_value = $request->input('field_2_value');
         $record->field_3_value = $request->input('field_3_value');
         $record->record_type_id = $request->input('record_type_id');
-        $record->created_by = auth()->user()->id;
-        $record->updated_by = auth()->user()->id;
         $record->save();
         $record->assignTeam(
             $request->input('team_id')
@@ -78,7 +76,6 @@ class RecordController extends Controller
         $record->field_1_value = $request->input('field_1_value');
         $record->field_2_value = $request->input('field_2_value');
         $record->field_3_value = $request->input('field_3_value');
-        $record->updated_by = auth()->user()->id;
         $record->save();
 
         return $record;

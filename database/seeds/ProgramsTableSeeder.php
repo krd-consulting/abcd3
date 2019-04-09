@@ -16,8 +16,6 @@ class ProgramsTableSeeder extends Seeder
     {
         $programOne = new Program;
         $programOne->name = 'Program in T1';
-        $programOne->created_by = 1;
-        $programOne->updated_by = 1;
         $programOne->assignToTeam(
                 Team::where('name', 'Team One')->first()
             );
@@ -25,8 +23,6 @@ class ProgramsTableSeeder extends Seeder
 
         $programTwo = new Program;
         $programTwo->name = 'Program in T2';
-        $programTwo->created_by = 1;
-        $programTwo->updated_by = 1;
         $programTwo->assignToTeam(
                 Team::where('name', 'Team Two')->first()
             );

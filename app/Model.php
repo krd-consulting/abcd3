@@ -2,12 +2,12 @@
 
 namespace App;
 
-use Spatie\Permission\Models\Permission as Model;
+use Illuminate\Database\Eloquent\Model as EloquentModel;
 
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as HasAuditable;
 
-class Permission extends Model implements Auditable
+class Model extends EloquentModel implements Auditable
 {
     use HasAuditable;
 }

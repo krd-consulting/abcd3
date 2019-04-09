@@ -2,12 +2,12 @@
 
 namespace App;
 
-use Spatie\Permission\Models\Permission as Model;
+use Illuminate\Database\Eloquent\Relations\Pivot as EloquentPivot;
 
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as HasAuditable;
 
-class Permission extends Model implements Auditable
+class Pivot extends EloquentPivot implements Auditable
 {
     use HasAuditable;
 }

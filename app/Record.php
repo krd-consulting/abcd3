@@ -4,7 +4,7 @@ namespace App;
 
 use App\RecordType;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Staudenmeir\EloquentHasManyDeep\HasTableAlias;
@@ -30,7 +30,7 @@ class Record extends Model
     {
         return $this->belongsToMany('App\Record', 'cases', 'owner_id', 'record_id')
             ->withTimestamps()
-            ->withPivot('program_id', 'created_by')
+            ->withPivot('program_id')
             ->using('App\CaseRecord');
     }
 
@@ -38,14 +38,13 @@ class Record extends Model
     {
         return $this->belongsToMany('App\Group')
             ->withTimestamps()
-            ->withPivot('enrolled_at', 'end', 'created_by', 'updated_by');
+            ->withPivot('enrolled_at', 'end');
     }
 
     public function programs()
     {
         return $this->belongsToMany('App\Program')
             ->withTimestamps()
-            ->withPivot('created_by')
             ->wherePivot('deleted_at', NULL)
             ->using('App\ProgramRecord');
     }

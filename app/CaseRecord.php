@@ -2,10 +2,12 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\Pivot;
 
 class CaseRecord extends Pivot
 {
+    public $incrementing = true;
+
     protected $table = 'cases';
 
     public function owner()

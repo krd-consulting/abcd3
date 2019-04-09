@@ -29,8 +29,6 @@ class RecordsTableSeeder extends Seeder
         $roman->field_2_value = 'Katsnelson';
         $roman->field_3_value = 'roman@hellokrd.net';
         $roman->user()->associate($user);
-        $roman->created_by = $user->id;
-        $roman->updated_by = $user->id;
         $roman->save();
 
         $rupert = new Record;
@@ -39,8 +37,6 @@ class RecordsTableSeeder extends Seeder
         $rupert->field_2_value = 'Amodia';
         $rupert->field_3_value = 'rupert@hellokrd.net';
         $rupert->user()->associate(User::find(2));
-        $rupert->created_by = $user->id;
-        $rupert->updated_by = $user->id;
         $rupert->save();
         $rupert->teams()->save(Team::inRandomOrder()->first());
 
@@ -50,8 +46,6 @@ class RecordsTableSeeder extends Seeder
         $gui->field_2_value = 'Gramari';
         $gui->field_3_value = 'gui@hellokrd.net';
         $gui->user()->associate(User::find(3));
-        $gui->created_by = $user->id;
-        $gui->updated_by = $user->id;
         $gui->save();
         $gui->teams()->save(Team::inRandomOrder()->first());
 
@@ -61,8 +55,6 @@ class RecordsTableSeeder extends Seeder
         $scott->field_2_value = 'McCrae';
         $scott->field_3_value = 'scott@hellokrd.net';
         $scott->user()->associate(User::find(4));
-        $scott->created_by = $user->id;
-        $scott->updated_by = $user->id;
         $scott->save();
         $scott->teams()->save(Team::inRandomOrder()->first());
 
@@ -77,7 +69,6 @@ class RecordsTableSeeder extends Seeder
                     $programRecord->program_id = $program->id;
                     $programRecord->record_id = $record->id;
                     $programRecord->enrolled_at = date_create('now');
-                    $programRecord->created_by = $user->id;
                     $programRecord->save();
                 }
             });

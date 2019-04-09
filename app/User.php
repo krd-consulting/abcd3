@@ -17,8 +17,12 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Spatie\Permission\Traits\HasRoles;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
-class User extends Authenticatable
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as HasAuditable;
+
+class User extends Authenticatable implements Auditable
 {
+    use HasAuditable;
     use Notifiable;
     use HasRoles;
     use HasRelationships;

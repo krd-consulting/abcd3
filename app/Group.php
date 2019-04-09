@@ -4,7 +4,7 @@ namespace App;
 
 use App\User;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Group extends Model

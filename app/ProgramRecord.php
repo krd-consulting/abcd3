@@ -11,12 +11,14 @@ use App\Events\ProgramRecordDeleted;
 
 use Carbon\Carbon;
 
-use Illuminate\Database\Eloquent\Relations\Pivot;
+use App\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ProgramRecord extends Pivot
 {
     use SoftDeletes;
+
+    public $incrementing = true;
 
     protected $dispatchesEvents = [
         'created' => ProgramRecordSaved::class,
@@ -35,8 +37,6 @@ class ProgramRecord extends Pivot
 
         $this->program_id = $program->id;
         $this->record_id = $record->id;
-        $this->created_by = $user->id;
-        $this->updated_by = $user->id;
         $this->save();
 
         return $this;

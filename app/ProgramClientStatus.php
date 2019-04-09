@@ -7,7 +7,7 @@ use App\User;
 
 use App\Http\Requests\UpdateProgramRecord;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model;
 
 use Carbon\Carbon;
 
@@ -45,9 +45,7 @@ class ProgramClientStatus extends Model
             $this->id = NULL;
             $this->previous_status_id = $currentStatusId;
             $this->previous_status_duration = 0;
-            $this->created_by = $user->id;
         }
-        $this->updated_by = $user->id;
         $this->save();
     }
 
@@ -67,8 +65,6 @@ class ProgramClientStatus extends Model
         $this->previous_status_id = $previous_status;
         $this->previous_status_duration = $previous_status_duration;
         $this->notes = $notes;
-        $this->created_by = $programRecord->created_by;
-        $this->updated_by = $programRecord->created_by;
         $this->save();
     }
 }

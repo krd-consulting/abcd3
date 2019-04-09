@@ -38,8 +38,6 @@ class GroupController extends Controller
         $group->name = $request->input('name');
         $group->description = $request->input('description');
         $group->program_id = $request->input('program_id');
-        $group->created_by = auth()->user()->id;
-        $group->updated_by = auth()->user()->id;
         $group->save();
 
         return $group;
@@ -60,7 +58,6 @@ class GroupController extends Controller
         $group->id = $request->input('id');
         $group->name = $request->input('name');
         $group->description = $request->input('description');
-        $group->updated_by = auth()->user()->id;
         $group->save();
 
         return $group;

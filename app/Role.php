@@ -3,9 +3,13 @@
 namespace App;
 
 use Spatie\Permission\Models\Role as Model;
+use OwenIt\Auditing\Contracts\Auditable;
+use OwenIt\Auditing\Auditable as HasAuditable;
 
-class Role extends Model
+class Role extends Model implements Auditable
 {
+    use HasAuditable;
+
     public function scope()
     {
         return $this->belongsTo('App\Scope');

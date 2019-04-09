@@ -21,8 +21,8 @@ class CreateRecordTypesTable extends Migration
             $table->string('slug', 40)->nullable();
             $table->boolean('userable')->default(false);
             $table->integer('identity_id')->unsigned();
-
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('identity_id')->references('id')->on('record_identities');
         });
