@@ -37,7 +37,7 @@
                             <span>{{ slotProps.item.program_status.status.name }}</span>
                         </div>
                         <div class="tw-text-sm tw-text-grey">
-                            <span>{{ slotProps.item.program_status.created_at }}</span>
+                            <span>Since {{ slotProps.item.program_status.created_at }}</span>
                         </div>
                     </div>
                     <div class="tw-w-1/3">
@@ -55,7 +55,9 @@
             <template v-slot:options-container>
                 <div class="tw-w-1/5 tw-text-right">
                     <div class="tw-px-4">
-                        <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-grey-darkest tw-border-none">
+                        <base-button
+                            class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-grey-darkest tw-border-none"
+                            @click="$emit('edit', record)">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
                             <span class="tw-text-xs tw-align-middle">Edit</span>
                         </base-button>

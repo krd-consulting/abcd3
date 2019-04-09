@@ -3,6 +3,9 @@
 namespace App;
 
 use App\ProgramRecord;
+use App\User;
+
+use App\Http\Requests\UpdateProgramRecord;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,6 +30,25 @@ class ProgramClientStatus extends Model
     public function getCreatedAtAttribute($value)
     {
         return Carbon::parse($value)->format('F j, Y');
+    }
+
+    public function updateUsingRequest(UpdateProgramRecord $request, User $user)
+    {
+        $currentStatusId = $this->status_id;
+
+        $this->status_id = $request->status['id'];
+        $this->notes = $request->status['notes'];
+
+        $this->exists = !$this->isDirty('status_id');
+
+        if(!$this->exists) {
+            $this->id = NULL;
+            $this->previous_status_id = $currentStatusId;
+            $this->previous_status_duration = 0;
+            $this->created_by = $user->id;
+        }
+        $this->updated_by = $user->id;
+        $this->save();
     }
 
     public function createForProgramRecord(

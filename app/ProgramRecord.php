@@ -36,6 +36,7 @@ class ProgramRecord extends Pivot
         $this->program_id = $program->id;
         $this->record_id = $record->id;
         $this->created_by = $user->id;
+        $this->updated_by = $user->id;
         $this->save();
 
         return $this;
@@ -43,10 +44,12 @@ class ProgramRecord extends Pivot
 
     public function findTrashedUsingBelongsTo(Program $program, Record $record)
     {
-        return $this
-            ->where('program_id', $program->id)
-            ->where('record_id', $record->id)
-            ->onlyTrashed();
+        return $this->findUsingBelongsTo($program, $record)->onlyTrashed();
+    }
+
+    public function findUsingBelongsTo(Program $program, Record $record)
+    {
+        return $this->where('program_id', $program->id)->where('record_id', $record->id);
     }
 
     public function program()
@@ -66,6 +69,6 @@ class ProgramRecord extends Pivot
 
     public function getEnrolledAtAttribute($value)
     {
-        return Carbon::parse($value)->format('F j, Y');
+        return Carbon::parse($value)->format('Y-m-d');
     }
 }

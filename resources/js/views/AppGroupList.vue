@@ -9,7 +9,7 @@
             :group="edit.group"
             @update="retrieve"/>
 
-        <list>
+        <list :hasHeader="true">
             <template slot="header-text">Groups</template>
             <template slot="options">
                 <div class="tw-flex tw-flex-row-reverse">

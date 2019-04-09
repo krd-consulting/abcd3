@@ -1,6 +1,6 @@
 <template>
     <div class="tw-shadow tw-rounded tw-bg-white">
-        <div class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b">
+        <div v-if="hasHeader" class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b">
             <h2 class="tw-font-bold tw-text-xl tw-w-1/2">
                 <slot name="header-text"></slot>
             </h2>
@@ -14,7 +14,7 @@
                 <slot></slot>
             </div>
         </slot>
-        <div class="tw-py-2">
+        <div class="tw-py-2 tw-flex tw-justify-between">
             <slot name="pagination">
                 <base-pagination
                     :current-page="page"
@@ -24,6 +24,9 @@
                     :total="total">
                     <span class="tw-text-grey-dark">{{ paginationInfo }}</span>
                 </base-pagination>
+            </slot>
+            <slot name="footer-options">
+
             </slot>
         </div>
     </div>
@@ -35,7 +38,11 @@
             items: Array,
             page: Number,
             perPage: Number,
-            total: Number
+            total: Number,
+            hasHeader: {
+                type: Boolean,
+                default: false
+            }
         },
 
         computed: {

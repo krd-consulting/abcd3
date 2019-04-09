@@ -45,9 +45,9 @@ class GroupController extends Controller
         return $group;
     }
 
-    public function edit()
+    public function edit(Group $group)
     {
-        $this->authorize('write', Group::class);
+        $this->authorize('write', $group);
 
         return auth()->user()->availablePrograms;
     }

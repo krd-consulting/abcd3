@@ -41,7 +41,7 @@ Route::prefix('api')
 
         Route::get('programs', 'ProgramController@index');
         Route::get('programs/create', 'ProgramController@create');
-        Route::get('programs/edit/{record}', 'ProgramController@edit');
+        Route::get('programs/edit/{program}', 'ProgramController@edit');
         Route::patch('programs/{record}', 'ProgramController@update');
         Route::get('programs/{program}', 'ProgramController@show');
         Route::post('programs/', 'ProgramController@store');
@@ -50,6 +50,8 @@ Route::prefix('api')
         Route::get('programs/{program}/groups', 'ProgramGroupsController@index');
 
         Route::get('programs/{program}/records/{recordType}', 'ProgramRecordsController@index');
+        Route::get('programs/edit/{program}/records/{recordType}/{record}', 'ProgramRecordsController@edit');
+        Route::patch('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@update');
         Route::post('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@store');
         Route::delete('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@destroy');
 

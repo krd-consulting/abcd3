@@ -9,6 +9,14 @@ class ProgramRecordsRequest extends Request{
         return this.post(`/api/programs/${program}/records/${recordType}/${record}`);
     }
 
+    edit(program, recordType, record) {
+        return this.get(`/api/programs/edit/${program}/records/${recordType}/${record}`);
+    }
+
+    update(program, recordType, record) {
+        return this.patch(`/api/programs/${program}/records/${recordType}/${record}`);
+    }
+
     destroy(program, recordType, record) {
         console.log(`/api/programs/${program}/records/${recordType}/${record}`);
 

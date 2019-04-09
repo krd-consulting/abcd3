@@ -15,6 +15,7 @@
 
 
         <list
+            :has-header="true"
             :page.sync="params.page"
             @page-change="retrieve"
             :per-page="params.perPage"

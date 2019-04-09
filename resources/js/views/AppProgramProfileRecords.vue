@@ -1,53 +1,61 @@
 <template>
     <div>
-        <div class="tw-mb-2">
-            <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="records.length == 0">
-                <div>
-                    <base-button
-                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
-                        @click="addRecord">
-                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                        <span class="tw-text-xs tw-align-middle">Add {{ recordType.name }}</span>
-                    </base-button>
-                </div>
-            </div>
+        <add-record
+            :active.sync="add.active"
+            :assigned-records="records"
+            :record-type="recordType.slug"
+            @close="retrieve">
+        </add-record>
+        <edit-program-record
+            :active.sync="edit.active"
+            :record="edit.record"
+            :program-id="$route.params.program"
+            :fields="fields"
+            :record-type="recordType"
+            @update="retrieve"/>
+        <list
+            :page.sync="params.page"
+            @page-change="retrieve"
+            :per-page="params.perPage"
+            :total="total">
             <clients-list
                 v-if="recordType.identity.name == 'Client'"
                 :records="records"
-                @remove="confirm"/>
+                @remove="confirmDelete"
+                @edit="editRecord"/>
             <staff-list v-else-if="recordType.identity.name == 'Staff'" :records="records"/>
             <volunteers-list v-else-if="recordType.identity.name == 'Volunteer'" :records="records"/>
             <external-list v-else-if="recordType.identity.name == 'External'" :records="records"/>
-        </div>
-        <div class="tw-px-4 tw-pb-4">
-            <base-button
-                v-if="records.length > 0"
-                class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
-                @click="addRecord">
-                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                <span class="tw-text-xs tw-align-middle">Manage Records</span>
-            </base-button>
-            <add-record
-                :active.sync="add.active"
-                :assigned-records="records"
-                :record-type="recordType.slug"
-                @close="retrieve">
-            </add-record>
-        </div>
+
+            <template slot="footer-options">
+                <base-button
+                    v-if="records.length > 0"
+                    class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
+                    @click="addRecord">
+                    <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                    <span class="tw-text-xs tw-align-middle">Manage Records</span>
+                </base-button>
+            </template>
+        </list>
     </div>
 </template>
 <script>
     import RecordsRequest from '../api/ProgramRecordsRequest';
+    import List from '../components/AppList';
 
     import ClientsList from './AppProgramProfileRecordsClients';
     import StaffList from './AppProgramProfileRecordsStaff';
     import VolunteersList from './AppProgramProfileRecordsVolunteers';
     import ExternalList from './AppProgramProfileRecordsExternal';
+
     import AddRecord from './AppProgramProfileAddRecord';
+    import EditProgramRecord from './AppProgramRecordEdit';
 
     export default {
         components: {
             AddRecord,
+            EditProgramRecord,
+            List,
             ClientsList,
             VolunteersList,
             ExternalList,
@@ -59,14 +67,29 @@
                 add: {
                     active: false
                 },
+                edit: {
+                    active: false,
+                    record: {
+
+                    }
+                },
                 request: new RecordsRequest({}),
                 records: [],
+                fields: [],
                 recordType: {
                     name: 'Records',
                     identity: {
                         name: ''
                     }
-                }
+                },
+                params: {
+                    ascending: true,
+                    sortBy: 'field_1_value',
+                    page: 1,
+                    perPage: 10,
+                    search: ''
+                },
+                total: 0,
             }
         },
 
@@ -81,7 +104,7 @@
                 });
             },
 
-            confirm(id) {
+            confirmDelete(id) {
                 this.$confirm('Are you sure you want to remove this record?', 'Remove Record', {
                     confirmButtonText: 'Remove',
                     cancelButtonText: 'Wait, no!',
@@ -104,15 +127,27 @@
             },
 
             retrieve() {
+                this.request.setFields({
+                    params: {...this.params}
+                });
+
                 this.request.retrieve(this.$route.params.program, this.$route.params.recordType).then((response) => {
                     this.records = response.data;
                     this.recordType = response.record_type;
+                    this.fields = response.fields;
+                    this.total = response.meta.total;
                 });
             },
 
             addRecord() {
                 this.add.active = true;
-            }
+            },
+
+            editRecord(record) {
+                this.edit.record = record;
+
+                this.edit.active = true;
+            },
         },
 
         created() {
