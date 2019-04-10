@@ -32,21 +32,28 @@ class ProgramClientStatus extends Model
         return Carbon::parse($value)->format('F j, Y');
     }
 
-    public function updateUsingRequest(UpdateProgramRecord $request, User $user)
+    public function updateUsingRequest(UpdateProgramRecord $request)
     {
         $currentStatusId = $this->status_id;
 
         $this->status_id = $request->status['id'];
-        $this->notes = $request->status['notes'];
+        $this->notes = $request->notes;
 
         $this->exists = !$this->isDirty('status_id');
 
         if(!$this->exists) {
             $this->id = NULL;
             $this->previous_status_id = $currentStatusId;
-            $this->previous_status_duration = 0;
+            $this->previous_status_duration = $this->calculatePreviousStatusDuration();
         }
         $this->save();
+    }
+
+    protected function calculatePreviousStatusDuration()
+    {
+        $end = Carbon::parse($this->{$this->getUpdatedAtColumn()});
+
+        return $end->diffInSeconds(Carbon::now());
     }
 
     public function createForProgramRecord(

@@ -16,7 +16,10 @@ class RecordProgramsController extends Controller
 {
     public function index(RecordType $recordType, Record $record)
     {
-        $programs = $record->programs()->with('program_records',  'program_statuses', 'program_statuses.status')->get();
+        $programs = $record->programs()
+            ->with(['client_statuses' => function($query) use ($record) {
+                $query->where('record_id', $record->id);
+            }, 'client_statuses.status'])->get();
 
         return new Programs($programs);
     }

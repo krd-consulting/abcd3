@@ -27,7 +27,7 @@
                     <div class="tw-w-2/3">
                         <base-select
                             v-model="newRoleData.scope"
-                            name="scope_id"
+                            name="scope"
                             placeholder="Select Scope">
                             <el-option
                                 v-for="scope in scopes"

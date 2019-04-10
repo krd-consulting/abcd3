@@ -8,8 +8,10 @@
         </add-record>
         <edit-program-record
             :active.sync="edit.active"
+            :enrolledAt="edit.record.enrolled_at"
             :record="edit.record"
             :program-id="$route.params.program"
+            :program-status="edit.record.program_status"
             :fields="fields"
             :record-type="recordType"
             @update="retrieve"/>
@@ -40,8 +42,9 @@
     </div>
 </template>
 <script>
-    import RecordsRequest from '../api/ProgramRecordsRequest';
     import List from '../components/AppList';
+
+    import RecordsRequest from '../api/ProgramRecordsRequest';
 
     import ClientsList from './AppProgramProfileRecordsClients';
     import StaffList from './AppProgramProfileRecordsStaff';
@@ -53,9 +56,9 @@
 
     export default {
         components: {
+            List,
             AddRecord,
             EditProgramRecord,
-            List,
             ClientsList,
             VolunteersList,
             ExternalList,

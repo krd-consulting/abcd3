@@ -20,15 +20,12 @@ class Program extends JsonResource
             'description' => $this->description,
             'team' => $this->team,
             'team_id' => $this->team->id,
-            'program_status' => $this->when(
-                !empty($this->program_statuses),
-                $this->program_statuses->last()
-            ),
+            'program_status' => $this->client_statuses->last(),
             'enrolled_at' => $this->when(
                 !empty($this->program_records),
                 $this->program_records->firstWhere(
                     'id',
-                    $this->program_statuses->last()['program_client_id']
+                    $this->client_statuses->last()['program_client_id']
                 )['enrolled_at']
             ),
             'available_record_types' => $this->available_record_types,

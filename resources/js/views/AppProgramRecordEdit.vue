@@ -11,16 +11,15 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="requestData.status.id"
-                            :value="requestData.status.id"
+                            v-model="requestData.status"
                             name="status"
                             placeholder="Select Program Status"
-                            @change="request.errors.clear('team')">
+                            @change="request.errors.clear('status');requestData.notes = ''">
                             <el-option
                                 v-for="status in statuses"
                                 :key="status.id"
                                 :label="status.name"
-                                :value="status.id">
+                                :value="status">
                                 {{ status.name }}
                             </el-option>
                         </base-select>
@@ -58,7 +57,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="requestData.status.notes"
+                            v-model="requestData.notes"
                             name="notes"
                             type="textarea"
                             @keydown="request.errors.clear($event.target.name)"/>
@@ -89,8 +88,10 @@
     export default {
         props: {
             active: Boolean,
+            enrolledAt: String,
             record: Object,
             programId: String|Number,
+            programStatus: Array|Object,
             recordType: String|Object,
             fields: Array|Object
         },
@@ -106,9 +107,9 @@
                 requestData: {
                     status: {
                         id: '',
-                        name: '',
-                        notes: ''
+                        name: ''
                     },
+                    notes: '',
                     enrolled_at: ''
                 },
                 statuses: []
@@ -124,20 +125,17 @@
                 this.requestData = {
                     status: {
                         name: '',
-                        notes: ''
                     },
+                    notes: '',
                     enrolled_at: ''
                 };
             },
 
             open() {
                 this.recordId = this.record.id;
-                this.requestData.status.id = this.record.program_status.status.id;
-                this.requestData.status.value = this.record.program_status.status.value;
-                this.requestData.status.notes = this.record.program_status.notes;
-                this.requestData.enrolled_at = this.record.enrolled_at;
-
-                console.log(this.requestData);
+                this.requestData.status = this.programStatus.status;
+                this.requestData.notes = this.programStatus.notes;
+                this.requestData.enrolled_at = this.enrolledAt;
 
                 this.load();
             },
@@ -167,7 +165,6 @@
                             type: 'error',
                             message: error.message
                         });
-                        this.close()
                     });
             }
         },

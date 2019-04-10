@@ -54,9 +54,9 @@ class Record extends Model
         return $this->hasMany('App\ProgramRecord');
     }
 
-    public function program_statuses()
+    public function client_statuses()
     {
-        return $this->hasManyThrough('App\ProgramClientStatus', 'App\ProgramRecord', NULL, 'program_client_id');
+        return $this->hasManyThrough('App\ProgramClientStatus', 'App\ProgramClient', NULL, 'program_client_id');
     }
 
     public function teams() {

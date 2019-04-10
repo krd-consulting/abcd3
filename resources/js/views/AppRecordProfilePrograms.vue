@@ -1,114 +1,92 @@
 <template>
     <div>
-        <div class="tw-mb-2">
-            <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="programs.length == 0">
-                <div>
-                    <base-button
-                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
-                        @click="addProgram">
-                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                        <span class="tw-text-xs tw-align-middle">Add Programs</span>
-                    </base-button>
-                </div>
+        <add-program
+            :active.sync="add.active"
+            :assignedPrograms="programs"
+            @close="retrieve">
+        </add-program>
+        <edit-program-record
+            :active.sync="edit.active"
+            :enrolledAt="edit.program.enrolled_at"
+            :record="record"
+            :program-id="edit.program.id"
+            :program-status="edit.program.program_status"
+            :fields="fields"
+            :record-type="record.type"
+            @update="retrieve"/>
+        <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="programs.length == 0">
+            <div>
+                <base-button
+                    class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
+                    @click="addProgram">
+                    <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                    <span class="tw-text-xs tw-align-middle">Add Programs</span>
+                </base-button>
             </div>
-            <div v-if="programs.length > 0"
-                class="tw-pt-6 tw-pb-2 tw-pl-4 tw-text-xs tw-text-grey tw-uppercase tw-font-semibold">
-                <div class="tw-flex tw-w-4/5">
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Program</span>
-                    </div>
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Status</span>
-                    </div>
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Enrollment Date</span>
-                    </div>
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Notes</span>
-                    </div>
-                </div>
-            </div>
-            <list-item
-                v-if="programs.length > 0"
-                :to="`/programs/${program.id}`"
-                :key="program.id"
-                :item="program"
-                v-for="program in programs"
-                class="group tw-pl-4 tw-py-4">
-                <template v-slot:primary-data="slotProps">
-                    <div>
-                        <span class="hover:tw-text-blue">{{ slotProps.item.name }}</span>
-                    </div>
-                </template>
-                <template v-slot:secondary-data="slotProps">
-                    <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">people</base-icon>
-                    <span class="tw-text-grey tw-text-sm tw-text-align-middle">{{ slotProps.item.team.name }}</span>
-                </template>
-                <template v-slot:tertiary-data="slotProps">
-                    <div class="tw-flex tw-w-3/5 tw-items-center">
-                        <div class="tw-w-1/3">
-                            <div v-if="slotProps.item.program_status.status" class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
-                                <span>{{ slotProps.item.program_status.status.name }}</span>
-                            </div>
-                            <div v-if="slotProps.item.program_status.created_at" class="tw-text-sm tw-text-grey">
-                                <span>Since {{ slotProps.item.program_status.created_at }}</span>
-                            </div>
-                        </div>
-                        <div class="tw-w-1/3">
-                            <span>{{ slotProps.item.enrolled_at }}</span>
-                        </div>
-                        <div class="tw-w-1/3">
-                            <p v-if="slotProps.item.program_status.notes">{{ slotProps.item.program_status.notes }}</p>
-                            <base-button v-else class="tw-py-2 tw-px-0 tw-text-grey tw-font-semibold tw-border-none hover:tw-bg-transparent hover:tw-text-blue">
-                                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Add Note</span>
-                            </base-button>
-                        </div>
-                    </div>
-                </template>
-                <template v-slot:options-container>
-                    <div class="tw-w-1/5 tw-text-right">
-                        <div class="tw-px-4">
-                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-grey-darkest tw-border-none">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Edit</span>
-                            </base-button>
-                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(program.id)">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Remove</span>
-                            </base-button>
-                        </div>
-                    </div>
-                </template>
-            </list-item>
         </div>
-        <div class="tw-px-4 tw-pb-4">
-            <base-button
-                v-if="programs.length > 0"
-                class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
-                @click="addProgram">
-                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                <span class="tw-text-xs tw-align-middle">Manage Programs</span>
-            </base-button>
-            <add-program
-                :active.sync="add.active"
-                :assignedPrograms="programs"
-                @close="retrieve">
-            </add-program>
-        </div>
+        <list
+            :page.sync="params.page"
+            @page-change="retrieve"
+            :per-page="params.perPage"
+            :total="total">
+
+            <client-programs-list
+                v-if="record.type.identity.name == 'Client'"
+                :programs="programs"
+                @edit="editProgram"
+                @remove="confirmDelete"/>
+            <staff-programs-list
+                v-else-if="record.type.identity.name == 'Staff'"
+                :programs="programs"
+                @remove="confirmDelete"/>
+            <volunteer-programs-list
+                v-else-if="record.type.identity.name == 'Volunteer'"
+                :programs="programs"
+                @remove="confirmDelete"/>
+            <external-programs-list
+                v-else-if="record.type.identity.name == 'External'"
+                :programs="programs"
+                @remove="confirmDelete"/>
+
+            <template slot="footer-options">
+                <base-button
+                    v-if="programs.length > 0"
+                    class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
+                    @click="addProgram">
+                    <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                    <span class="tw-text-xs tw-align-middle">Manage Programs</span>
+                </base-button>
+            </template>
+        </list>
     </div>
 </template>
 <script>
+    import List from '../components/AppList';
+
     import ProgramsRequest from '../api/RecordProgramsRequest';
 
-    import ListItem from '../components/AppListItem';
-
     import AddProgram from './AppRecordProfileAddProgram';
+    import EditProgramRecord from './AppProgramRecordEdit';
+
+    import ClientProgramsList from './AppRecordProfileProgramsClients';
+    import StaffProgramsList from './AppRecordProfileProgramsStaff';
+    import VolunteerProgramsList from './AppRecordProfileProgramsVolunteer';
+    import ExternalProgramsList from './AppRecordProfileProgramsExternal';
 
     export default {
         components: {
+            List,
             AddProgram,
-            ListItem
+            EditProgramRecord,
+            ClientProgramsList,
+            StaffProgramsList,
+            VolunteerProgramsList,
+            ExternalProgramsList
+        },
+
+        props: {
+            record: Object,
+            fields: Array|Object
         },
 
         data() {
@@ -116,8 +94,22 @@
                 add: {
                     active: false
                 },
+                edit: {
+                    active: false,
+                    program: {
+                        id: ''
+                    }
+                },
                 request: new ProgramsRequest({}),
-                programs: []
+                programs: [],
+                params: {
+                    ascending: true,
+                    sortBy: 'field_1_value',
+                    page: 1,
+                    perPage: 10,
+                    search: ''
+                },
+                total: 0,
             }
         },
 
@@ -132,7 +124,7 @@
                 });
             },
 
-            confirm(id) {
+            confirmDelete(id) {
                 this.$confirm('Are you sure you want to remove this program?', 'Remove Program', {
                     confirmButtonText: 'Remove',
                     cancelButtonText: 'Wait, no!',
@@ -155,14 +147,26 @@
             },
 
             retrieve() {
+                this.request.setFields({
+                    params: {...this.params}
+                });
+
                 this.request.retrieve(this.$route.params.recordType, this.$route.params.record).then((response) => {
                     this.programs = response.data;
+                    this.total = response.data.length;
+                    this.params.perPage = this.total;
                 });
             },
 
             addProgram() {
                 this.add.active = true;
-            }
+            },
+
+            editProgram(program) {
+                this.edit.program = program;
+
+                this.edit.active = true;
+            },
         },
 
         created() {

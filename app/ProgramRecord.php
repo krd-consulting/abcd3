@@ -57,11 +57,6 @@ class ProgramRecord extends Pivot
         return $this->belongsTo('App\Program');
     }
 
-    public function statuses()
-    {
-        return $this->hasMany('App\ProgramClientStatus', 'program_client_id');
-    }
-
     public function record()
     {
         return $this->belongsTo('App\Record');

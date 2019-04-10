@@ -51,7 +51,7 @@
                 </el-tabs>
             </div>
             <div>
-                <router-view/>
+                <router-view :record="record" :fields="fields"/>
             </div>
         </div>
     </div>
@@ -86,7 +86,10 @@
                 fields: [],
                 record: {
                     type: {
-                        name: ''
+                        name: '',
+                        identity: {
+                            name: ''
+                        }
                     }
                 },
                 request: new RecordRequest({}),

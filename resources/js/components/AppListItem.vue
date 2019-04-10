@@ -20,7 +20,7 @@
         </router-link tag="div">
         <slot name="tertiary-data" :item="item">
         </slot>
-        <slot name="options-container">
+        <slot name="options-container" :item="item">
             <div class="tw-w-2/5 tw-text-right">
                 <slot name="options">
                 </slot>

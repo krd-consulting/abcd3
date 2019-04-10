@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Program;
-use App\ProgramRecord;
+use App\ProgramClient;
 use App\Record;
 use App\RecordType;
 use App\ClientStatus;
@@ -20,7 +20,7 @@ class ProgramRecordsController extends Controller
     public function index(Program $program, RecordType $recordType)
     {
         $records = $program->records()
-            ->with('program_records', 'program_statuses', 'program_statuses.status')
+            ->with('program_records', 'client_statuses', 'client_statuses.status')
             ->only($recordType);
 
         $records = $records->availableFor(auth()->user())->paginate(10);
@@ -51,13 +51,12 @@ class ProgramRecordsController extends Controller
 
     public function update(Program $program, RecordType $recordType, Record $record, UpdateProgramRecord $request)
     {
-        $programRecord = new ProgramRecord();
+        $programRecord = new ProgramClient();
         $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
 
         // find latest status which is needed to compare to request data
         $clientStatus = $programRecord->statuses()->latest()->first();
-
-        $clientStatus->updateUsingRequest($request, auth()->user());
+        $clientStatus->updateUsingRequest($request);
 
         // update enrollment date
         $programRecord->enrolled_at = $request->enrolled_at;
