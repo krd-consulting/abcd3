@@ -2,7 +2,7 @@
     <div>
         <add-record
             :active.sync="add.active"
-            :assigned-records="records"
+            :program-id="$route.params.program"
             :record-type="recordType.slug"
             @close="retrieve">
         </add-record>
@@ -16,10 +16,35 @@
             :record-type="recordType"
             @update="retrieve"/>
         <list
+            :has-header="true"
             :page.sync="params.page"
             @page-change="retrieve"
             :per-page="params.perPage"
             :total="total">
+            <template slot="empty-placeholder">
+                 <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="records.length == 0">
+                    <div>
+                        <base-button
+                            class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
+                            @click="addRecord">
+                            <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                            <span class="tw-text-xs tw-align-middle">Add Records</span>
+                        </base-button>
+                    </div>
+                </div>
+            </template>
+            <template slot="header-text">{{ recordType.name }}</template>
+            <template slot="options">
+                <div class="tw-flex">
+                    <base-input
+                        v-model="params.search"
+                        @input="search"
+                        class="tw-no-shrink tw-mr-2"
+                        :placeholder="`Search for ${recordType.name}`">
+                        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                    </base-input>
+                </div>
+            </template>
             <clients-list
                 v-if="recordType.identity.name == 'Client'"
                 :records="records"
@@ -141,6 +166,11 @@
                     this.total = response.meta.total;
                 });
             },
+
+            search: _.debounce(function() {
+                this.params.page = 1;
+                this.retrieve();
+            }, 300),
 
             addRecord() {
                 this.add.active = true;

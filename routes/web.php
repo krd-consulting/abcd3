@@ -50,6 +50,7 @@ Route::prefix('api')
         Route::get('programs/{program}/groups', 'ProgramGroupsController@index');
 
         Route::get('programs/{program}/records/{recordType}', 'ProgramRecordsController@index');
+        Route::get('programs/{program}/available-records/{recordType}', 'RecordsAvailableForProgram');
         Route::get('programs/edit/{program}/records/{recordType}/{record}', 'ProgramRecordsController@edit');
         Route::patch('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@update');
         Route::post('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@store');

@@ -36,6 +36,18 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <base-pagination
+                        :current-page.sync="selectedParams.page"
+                        @current-change="handleSelectedPageChange"
+                        layout="prev, slot, next"
+                        :page-size="selectedParams.perPage"
+                        :total="selectedParams.total">
+                        <template v-slot:pagination-info="slotProps">
+                            <span class="tw-text-grey-dark">{{ slotProps.paginationInfo }}</span>
+                        </template>
+                    </base-pagination>
+                </div>
             </div>
             <div class="tw-flex-1 tw-pl-2">
                 <div class="tw-rounded tw-border tw-overflow-y-auto" style="max-height: 300px;">
@@ -71,6 +83,18 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                    <base-pagination
+                        :current-page.sync="notSelectedParams.page"
+                        @current-change="handleNotSelectedPageChange"
+                        layout="prev, slot, next"
+                        :page-size="notSelectedParams.perPage"
+                        :total="notSelectedParams.total">
+                        <template v-slot:pagination-info="slotProps">
+                            <span class="tw-text-grey-dark">{{ slotProps.paginationInfo }}</span>
+                        </template>
+                    </base-pagination>
+                </div>
             </div>
         </div>
         <div slot="footer" class="tw-border-t tw-px-4 tw-py-4 tw-bg-grey-lightest tw-rounded-b">
@@ -87,13 +111,10 @@
         props: {
             active: Boolean,
             items: Array,
-            selected: Array
-        },
-
-        computed: {
-            notSelected() {
-                return _.differenceBy(this.items, this.selected, 'id');
-            }
+            notSelected: Array,
+            selected: Array,
+            selectedParams: Array|Object,
+            notSelectedParams: Array|Object,
         },
 
         methods: {
@@ -113,6 +134,14 @@
 
             remove(id) {
                 this.$emit('remove', id);
+            },
+
+            handleSelectedPageChange(page) {
+                this.$emit('selected-page-change', page);
+            },
+
+            handleNotSelectedPageChange(page) {
+                this.$emit('not-selected-page-change', page);
             }
         }
     }

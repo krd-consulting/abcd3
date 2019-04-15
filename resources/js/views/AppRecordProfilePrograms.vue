@@ -14,21 +14,24 @@
             :fields="fields"
             :record-type="record.type"
             @update="retrieve"/>
-        <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="programs.length == 0">
-            <div>
-                <base-button
-                    class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
-                    @click="addProgram">
-                    <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                    <span class="tw-text-xs tw-align-middle">Add Programs</span>
-                </base-button>
-            </div>
-        </div>
         <list
             :page.sync="params.page"
             @page-change="retrieve"
             :per-page="params.perPage"
             :total="total">
+
+            <template slot="empty-placeholder">
+                <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4">
+                    <div>
+                        <base-button
+                            class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
+                            @click="addProgram">
+                            <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                            <span class="tw-text-xs tw-align-middle">Add Programs</span>
+                        </base-button>
+                    </div>
+                </div>
+            </template>
 
             <client-programs-list
                 v-if="record.type.identity.name == 'Client'"

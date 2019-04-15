@@ -10,7 +10,7 @@
         </div>
         <list-item
             v-if="programs.length > 0"
-            :to="`/programs/${program.type_slug}/${program.id}`"
+            :to="`/programs/${program.id}`"
             :key="program.id"
             :item="program"
             v-for="program in programs"

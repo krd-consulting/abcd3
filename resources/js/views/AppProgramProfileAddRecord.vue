@@ -2,7 +2,12 @@
     <transfer
         :active="active"
         :items="records"
+        :notSelected="notSelected"
         :selected="selected"
+        :selectedParams="selectedParams"
+        :notSelectedParams="notSelectedParams"
+        @selected-page-change="handleSelectedPageChange"
+        @not-selected-page-change="handleNotSelectedPageChange"
         @add="add"
         @remove="remove"
         @open="open"
@@ -34,7 +39,7 @@
     </transfer>
 </template>
 <script>
-    import RecordRequest from '../api/RecordRequest';
+    import RecordRequest from '../api/RecordsAvailableForProgramRequest';
     import ProgramRecordsRequest from '../api/ProgramRecordsRequest';
 
     import Transfer from '../components/AppTransfer';
@@ -51,7 +56,7 @@
 
         props: {
             active: Boolean,
-            assignedRecords: Array,
+            programId: String|Number,
             recordType: String
         },
 
@@ -62,12 +67,21 @@
                 recordsRequest: new RecordRequest({}),
                 programRecordsRequest: new ProgramRecordsRequest({}),
                 selected: [],
-            }
-        },
-
-        computed: {
-            notSelected() {
-                return _.differenceBy(this.records, this.selected, 'id');
+                notSelected: [],
+                selectedParams: {
+                    ascending: true,
+                    sortBy: 'field_1_value',
+                    page: 1,
+                    perPage: 10,
+                    total: 0
+                },
+                notSelectedParams: {
+                    ascending: true,
+                    sortBy: 'field_1_value',
+                    page: 1,
+                    perPage: 10,
+                    total: 0
+                }
             }
         },
 
@@ -77,13 +91,44 @@
                 this.$emit('close');
             },
 
-            open() {
-                this.selected = _.cloneDeep(this.assignedRecords);
+            loadSelected() {
+                this.programRecordsRequest.setFields({
+                    params: this.selectedParams
+                });
 
-                this.recordsRequest.retrieve(this.recordType).then(response => {
-                    this.records = response.data;
+                this.programRecordsRequest.retrieve(this.programId, this.recordType).then(response => {
+                    this.selected = response.data;
+                    this.selectedParams.total = response.meta.total;
                     this.fields = response.fields;
                 });
+            },
+
+            loadNotSelected() {
+                this.recordsRequest.setFields({
+                    params: this.notSelectedParams
+                });
+
+                this.recordsRequest.retrieve(this.programId, this.recordType).then(response => {
+                    this.notSelected = response.data;
+                    this.notSelectedParams.total = response.meta.total;
+                });
+            },
+
+            open() {
+                this.loadSelected();
+                this.loadNotSelected();
+            },
+
+            handleSelectedPageChange(page) {
+                this.selectedParams.page = page;
+
+                this.loadSelected();
+            },
+
+            handleNotSelectedPageChange(page) {
+                this.notSelectedParams.page = page;
+
+                this.loadNotSelected();
             },
 
             add(id) {
@@ -92,7 +137,7 @@
                     this.$route.params.recordType,
                     id
                 ).then((response) => {
-                    this.selected.push(_.find(this.records, {id}));
+                    this.open();
                 }).catch((error) => {
                     this.$message({
                         type: 'error',
@@ -107,7 +152,7 @@
                     this.$route.params.recordType,
                     id
                 ).then((response) => {
-                    this.selected = _.reject(this.selected, { id });
+                    this.open();
                 }).catch((error) => {
                     this.$message({
                         type: 'error',

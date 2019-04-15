@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Program;
 use App\ProgramClient;
+use App\ProgramRecord;
 use App\Record;
 use App\RecordType;
 use App\ClientStatus;
@@ -20,10 +21,24 @@ class ProgramRecordsController extends Controller
     public function index(Program $program, RecordType $recordType)
     {
         $records = $program->records()
-            ->with('program_records', 'client_statuses', 'client_statuses.status')
-            ->only($recordType);
+            ->with(['client_statuses' => function($query) use ($program) {
+                $query->where('program_id', $program->id);
+            }, 'client_statuses.status'])->only($recordType);
 
-        $records = $records->availableFor(auth()->user())->paginate(10);
+        // Search
+        $search = request('search');
+        $records = $records->search($search);
+
+        // Sort per request.
+        $ascending = request('ascending');
+        $sortBy = request('sortBy');
+        $records = $records->sort($sortBy, $ascending);
+
+        $records = $records->availableFor(auth()->user());
+
+        // Paginate per request.
+        $perPage = request('perPage');
+        $records = $records->paginate($perPage);
 
         return (new Records($records))->as($recordType);
     }

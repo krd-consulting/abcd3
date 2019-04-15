@@ -8,7 +8,7 @@
         <div class="tw-shadow tw-rounded tw-bg-white">
             <div class="tw-flex tw-items-start tw-justify-between tw-p-4 tw-border-b-2">
                 <div>
-                    <h1 class="tw-font-semibold tw-text-xl">{{ program.name }}</h1>
+                    <h2>{{ program.name }}</h2>
                     <p class="tw-text-grey">{{ program.description }}</p>
                 </div>
                 <div class="tw-text-right">
