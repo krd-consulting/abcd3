@@ -18,7 +18,7 @@ class RecordRequest extends Request{
     }
 
     edit(record) {
-        return this.get(`/api/records/edit/${record}`);
+        return this.get(`/api/records/${record}/edit`);
     }
 
     update(record) {

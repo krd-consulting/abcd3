@@ -18,7 +18,7 @@ class GroupRequest extends Request{
     }
 
     edit(group) {
-        return this.get(`/api/groups/edit/${group}`);
+        return this.get(`/api/groups/${group}/edit`);
     }
 
     update(group) {

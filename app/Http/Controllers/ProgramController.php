@@ -69,12 +69,11 @@ class ProgramController extends Controller
         return auth()->user()->availableTeams;
     }
 
-    public function update(UpdateProgram $request)
+    public function update(Program $program, UpdateProgram $request)
     {
+        $this->authorize('write', $program);
+
         // Update program when user is authorized.
-        $program = new Program();
-        $program->exists = true;
-        $program->id = $request->input('id');
         $program->name = $request->input('name');
         $program->description = $request->input('description');
         $program->save();

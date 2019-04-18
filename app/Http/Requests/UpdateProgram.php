@@ -15,7 +15,7 @@ class UpdateProgram extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('write', Program::find($this->route('program')));
+        return true;
     }
 
     /**

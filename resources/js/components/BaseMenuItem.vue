@@ -1,7 +1,9 @@
 <template>
-    <el-menu-item v-bind="$attrs" :route="route">
-        <slot></slot>
-    </el-menu-item>
+    <router-link tag="a" :to="route">
+        <el-menu-item v-bind="$attrs">
+            <slot></slot>
+        </el-menu-item>
+    </router-link>
 </template>
 <script>
     export default {

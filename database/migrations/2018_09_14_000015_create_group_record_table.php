@@ -18,15 +18,11 @@ class CreateGroupRecordTable extends Migration
             $table->integer('group_id')->unsigned();
             $table->integer('record_id')->unsigned();
             $table->timestamp('enrolled_at');
-            $table->timestamp('end')->nullable();
+            $table->timestamp('end_at')->nullable();
             $table->timestamps();
-            $table->integer('created_by')->unsigned();
-            $table->integer('updated_by')->unsigned();
 
             $table->foreign('group_id')->references('id')->on('groups');
             $table->foreign('record_id')->references('id')->on('records');
-            $table->foreign('created_by')->references('id')->on('users');
-            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 
@@ -40,8 +36,6 @@ class CreateGroupRecordTable extends Migration
         Schema::table('group_record', function (Blueprint $table) {
             $table->dropForeign(['group_id']);
             $table->dropForeign(['record_id']);
-            $table->dropForeign(['created_by']);
-            $table->dropForeign(['updated_by']);
         });
 
         Schema::dropIfExists('group_record');

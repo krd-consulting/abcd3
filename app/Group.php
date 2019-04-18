@@ -20,7 +20,7 @@ class Group extends Model
     {
         return $this->belongsToMany('App\Record')
             ->withTimestamps()
-            ->withPivot('enrolled_at', 'end', 'created_by', 'updated_by');
+            ->withPivot('enrolled_at', 'end_at');
     }
 
     public function scopeAvailableFor($query, User $user) {

@@ -23,6 +23,7 @@ class Record extends JsonResource
             'type_slug' => $this->record_type->slug,
             'program_status' => $this->when(!empty($this->client_statuses), $this->client_statuses->last()),
             'enrolled_at' => $this->when(!empty($this->program_records), $this->program_records->firstWhere('id', $this->client_statuses->last()['program_client_id'])['enrolled_at']),
+            'pivot' => $this->pivot,
             $this->record_type->identity->field1->name => $this->field_1_value,
             $this->record_type->identity->field2->name => $this->field_2_value,
             $this->record_type->identity->field3->name => $this->field_3_value,

@@ -27,25 +27,18 @@ Route::prefix('api')
     ->group( function() {
         Route::get('record-types', 'RecordTypeController@index');
 
-        Route::get('records/create', 'RecordController@create');
-        Route::get('records/edit/{record}', 'RecordController@edit');
-        Route::patch('records/{record}', 'RecordController@update');
         Route::get('records/{recordType}', 'RecordTypeRecordController@index');
         Route::get('records/{recordType}/{record}', 'RecordController@show');
-        Route::post('records/', 'RecordController@store');
-        Route::delete('records/{record}', 'RecordController@destroy');
+
+        Route::resource('records', 'RecordController')->except([
+            'index', 'show'
+        ]);
 
         Route::get('records/{recordType}/{record}/programs', 'RecordProgramsController@index');
         Route::post('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@store');
         Route::delete('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@destroy');
 
-        Route::get('programs', 'ProgramController@index');
-        Route::get('programs/create', 'ProgramController@create');
-        Route::get('programs/edit/{program}', 'ProgramController@edit');
-        Route::patch('programs/{record}', 'ProgramController@update');
-        Route::get('programs/{program}', 'ProgramController@show');
-        Route::post('programs/', 'ProgramController@store');
-        Route::delete('programs/{program}', 'ProgramController@destroy');
+        Route::resource('programs', 'ProgramController');
 
         Route::get('programs/{program}/groups', 'ProgramGroupsController@index');
 
@@ -56,20 +49,13 @@ Route::prefix('api')
         Route::post('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@store');
         Route::delete('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@destroy');
 
-        Route::get('groups', 'GroupController@index');
-        Route::get('groups/create', 'GroupController@create');
-        Route::get('groups/edit/{group}', 'GroupController@edit');
-        Route::patch('groups/{group}', 'GroupController@update');
-        Route::get('groups/{group}', 'GroupController@show');
-        Route::post('groups', 'GroupController@store');
-        Route::delete('groups/{group}', 'GroupController@destroy');
+        Route::resource('groups', 'GroupController');
 
-        Route::get('roles', 'RoleController@index');
-        Route::get('roles/create', 'RoleController@create');
-        Route::post('roles', 'RoleController@store');
-        Route::get('roles/edit', 'RoleController@edit');
-        Route::patch('roles/{role}', 'RoleController@update');
-        Route::delete('roles/{role}', 'RoleController@destroy');
+        Route::get('groups/{group}/records/{recordType}', 'GroupRecordsController@index');
+        Route::get('groups/{group}/available-records/{recordType}', 'RecordsAvailableForGroup');
+        Route::post('groups/{group}/records/{recordType}/{record}', 'GroupRecordsController@store');
+
+        Route::resource('roles', 'RoleController');
 
         Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');
         Route::delete('roles/{role}/permissions/{permission}', 'RolePermissionController@destroy');

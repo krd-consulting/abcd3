@@ -38,7 +38,7 @@ class Record extends Model
     {
         return $this->belongsToMany('App\Group')
             ->withTimestamps()
-            ->withPivot('enrolled_at', 'end');
+            ->withPivot('enrolled_at', 'end_at');
     }
 
     public function programs()

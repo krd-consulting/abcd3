@@ -14,7 +14,7 @@ class ProgramRequest extends Request{
     }
 
     edit(program) {
-        return this.get(`/api/programs/edit/${program}`);
+        return this.get(`/api/programs/${program}/edit`);
     }
 
     store() {
@@ -22,7 +22,7 @@ class ProgramRequest extends Request{
     }
 
     update(program) {
-        return this.patch(`/api/programs/${program}`);
+        return this.put(`/api/programs/${program}`);
     }
 
     destroy(id) {

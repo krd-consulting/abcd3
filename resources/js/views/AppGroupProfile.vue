@@ -76,12 +76,6 @@
                 },
                 recordTypes: [],
                 request: new GroupRequest({}),
-                params: {
-                    ascending: true,
-                    sortBy: 'field_1_value',
-                    page: 1,
-                    perPage: 5
-                },
                 total: 0,
                 type: {
                     name: ''

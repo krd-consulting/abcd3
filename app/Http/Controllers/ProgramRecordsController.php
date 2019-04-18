@@ -56,10 +56,8 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $user = auth()->user();
-
         $programRecord = new ProgramRecord();
-        $programRecord->createUsingBelongsTo($program, $record, $user);
+        $programRecord->createUsingBelongsTo($program, $record);
 
         return $record;
     }

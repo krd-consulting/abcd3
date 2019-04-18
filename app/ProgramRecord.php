@@ -26,7 +26,7 @@ class ProgramRecord extends Pivot
         'restored' => ProgramRecordSaved::class
     ];
 
-    public function createUsingBelongsTo(Program $program, Record $record, User $user)
+    public function createUsingBelongsTo(Program $program, Record $record)
     {
         $existingRow = $this->findTrashedUsingBelongsTo($program, $record);
 
