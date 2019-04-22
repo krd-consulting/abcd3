@@ -19,7 +19,22 @@ class RecordProgramsController extends Controller
         $programs = $record->programs()
             ->with(['client_statuses' => function($query) use ($record) {
                 $query->where('record_id', $record->id);
-            }, 'client_statuses.status'])->get();
+            }, 'client_statuses.status']);
+
+        // Search
+        $search = request('search');
+        $programs = $programs->search($search);
+
+        // Sort per request.
+        $ascending = request('ascending');
+        $sortBy = request('sortBy');
+        $programs = $programs->sort($sortBy, $ascending);
+
+        $programs = $programs->availableFor(auth()->user());
+
+        // Paginate per request.
+        $perPage = request('perPage');
+        $programs = $programs->paginate($perPage);
 
         return new Programs($programs);
     }

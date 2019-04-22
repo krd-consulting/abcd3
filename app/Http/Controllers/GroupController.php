@@ -50,12 +50,9 @@ class GroupController extends Controller
         return auth()->user()->availablePrograms;
     }
 
-    public function update(UpdateGroup $request)
+    public function update(Group $group, UpdateGroup $request)
     {
         // Update group when user is authorized.
-        $group = new Group();
-        $group->exists = true;
-        $group->id = $request->input('id');
         $group->name = $request->input('name');
         $group->description = $request->input('description');
         $group->save();

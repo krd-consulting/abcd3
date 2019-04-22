@@ -63,4 +63,26 @@ class Group extends Model
                     return $query->whereIn('record_id', $records);
                 });
     }
+
+    public function scopeSort($query, $column, $ascending)
+    {
+        if(empty($column))
+            return ;
+
+        if($ascending == 'true')
+            $ascending = 'asc';
+        else
+            $ascending = 'desc';
+
+        return $query->orderBy($column, $ascending);
+    }
+
+    public function scopeSearch($query, $term)
+    {
+        if(empty($term))
+            return $query;
+
+        return $query->where('name', 'LIKE' , '%' . $term . '%')
+        ->orWhere('description', 'LIKE', '%' . $term . '%');
+    }
 }

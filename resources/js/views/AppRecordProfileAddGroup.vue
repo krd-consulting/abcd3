@@ -14,37 +14,37 @@
         @open="open"
         @close="close">
             <template v-slot:title>
-                <slot name="title">Manage Programs</slot>
+                <slot name="title">Manage Groups</slot>
             </template>
             <template v-slot:caption>
-                <p>Check available records to add them to the program or uncheck current records to remove them from the program.</p>
+                <p>Check available records to add them to the group or uncheck current records to remove them from the group.</p>
             </template>
             <template v-slot:current-items-title>
-                Current Programs
+                Current Groups
             </template>
             <template v-slot:available-items-title>
-                Available Programs
+                Available Groups
             </template>
             <template v-slot:current-item-title="{ item }">
                 {{ item.name }}
             </template>
             <template v-slot:current-item-subtitle="{ item }">
-                {{ item.team.name }}
+                
             </template>
             <template v-slot:available-item-title="{ item }">
                 {{ item.name }}
             </template>
             <template v-slot:available-item-subtitle="{ item }">
-                {{ item.team.name }}
+                
             </template>
             <template v-slot:empty-available-items>
-                No more available programs.
+                No more available groups.
             </template>
     </transfer>
 </template>
 <script>
-    import ProgramRequest from '../api/ProgramsAvailableForRecordRequest';
-    import RecordProgramsRequest from '../api/RecordProgramsRequest';
+    import GroupRequest from '../api/GroupsAvailableForRecordRequest';
+    import RecordGroupsRequest from '../api/RecordGroupsRequest';
 
     import Transfer from '../components/AppTransfer';
 
@@ -59,8 +59,8 @@
 
         data() {
             return {
-                programsRequest: new ProgramRequest({}),
-                recordProgramsRequest: new RecordProgramsRequest({}),
+                groupsRequest: new GroupRequest({}),
+                recordGroupsRequest: new RecordGroupsRequest({}),
                 selected: [],
                 notSelected: [],
                 selectedParams: {
@@ -87,23 +87,22 @@
             },
 
             loadSelected() {
-                this.recordProgramsRequest.setFields({
+                this.recordGroupsRequest.setFields({
                     params: this.selectedParams
                 });
 
-                this.recordProgramsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(response => {
+                this.recordGroupsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(response => {
                     this.selected = response.data;
                     this.selectedParams.total = response.meta.total;
-                    this.fields = response.fields;
                 });
             },
 
             loadNotSelected() {
-                this.programsRequest.setFields({
+                this.groupsRequest.setFields({
                     params: this.notSelectedParams
                 });
 
-                this.programsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(response => {
+                this.groupsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(response => {
                     this.notSelected = response.data;
                     this.notSelectedParams.total = response.meta.total;
                 });
@@ -139,7 +138,7 @@
             },
 
             add(id) {
-                this.recordProgramsRequest.store(
+                this.recordGroupsRequest.store(
                     this.$route.params.recordType,
                     this.$route.params.record,
                     id
@@ -154,12 +153,12 @@
             },
 
             remove(id) {
-                this.recordProgramsRequest.destroy(
+                this.recordGroupsRequest.destroy(
                     this.$route.params.recordType,
                     this.$route.params.record,
                     id
                 ).then((response) => {
-                    this.open()
+                    this.open();
                 }).catch((error) => {
                     this.$message({
                         type: 'error',

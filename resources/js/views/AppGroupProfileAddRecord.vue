@@ -1,7 +1,6 @@
 <template>
     <transfer
         :active="active"
-        :items="records"
         :notSelected="notSelected"
         :selected="selected"
         :selectedParams="selectedParams"
@@ -62,7 +61,6 @@
 
         data() {
             return {
-                records: [],
                 fields: [],
                 recordsRequest: new RecordRequest({}),
                 groupRecordsRequest: new GroupRecordsRequest({}),

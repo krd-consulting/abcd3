@@ -2,7 +2,6 @@
     <div>
         <add-program
             :active.sync="add.active"
-            :assignedPrograms="programs"
             @close="retrieve">
         </add-program>
         <edit-program-record
@@ -107,7 +106,7 @@
                 programs: [],
                 params: {
                     ascending: true,
-                    sortBy: 'field_1_value',
+                    sortBy: 'id',
                     page: 1,
                     perPage: 10,
                     search: ''
