@@ -1,19 +1,23 @@
 <template>
     <transfer
         :active="active"
-        :items="records"
         :notSelected="notSelected"
         :selected="selected"
         :selectedParams="selectedParams"
         :notSelectedParams="notSelectedParams"
         @selected-page-change="handleSelectedPageChange"
         @not-selected-page-change="handleNotSelectedPageChange"
+        @search-selected="searchSelected"
+        @search-not-selected="searchNotSelected"
         @add="add"
         @remove="remove"
         @open="open"
         @close="close">
             <template v-slot:title>
                 <slot name="title">Manage Records</slot>
+            </template>
+            <template v-slot:caption>
+                <p>Check available records to add them to the program or uncheck current records to remove them from the program.</p>
             </template>
             <template v-slot:current-items-title>
                 Current Records
@@ -127,6 +131,18 @@
 
             handleNotSelectedPageChange(page) {
                 this.notSelectedParams.page = page;
+
+                this.loadNotSelected();
+            },
+
+            searchSelected(search) {
+                this.selectedParams.search = search;
+
+                this.loadSelected();
+            },
+
+            searchNotSelected(search) {
+                this.notSelectedParams.search = search;
 
                 this.loadNotSelected();
             },

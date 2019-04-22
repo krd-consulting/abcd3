@@ -65,6 +65,28 @@ class Program extends Model
         }
     }
 
+    public function scopeSort($query, $column, $ascending)
+    {
+        if(empty($column))
+            return ;
+
+        if($ascending == 'true')
+            $ascending = 'asc';
+        else
+            $ascending = 'desc';
+
+        return $query->orderBy($column, $ascending);
+    }
+
+    public function scopeSearch($query, $term)
+    {
+        if(empty($term))
+            return $query;
+
+        return $query->where('name', 'LIKE' , '%' . $term . '%')
+        ->orWhere('description', 'LIKE', '%' . $term . '%');
+    }
+
     public function scopeInTeams($query, $teams) {
         return $query->whereIn('team_id', $teams);
     }

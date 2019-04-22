@@ -18,7 +18,7 @@ class CreateGroupsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('program_id')->unsigned();
-            $table->timestamp('start');
+            $table->timestamp('start')->nullable();
             $table->timestamp('end')->nullable();
             $table->timestamps();
             $table->softDeletes();

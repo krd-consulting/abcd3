@@ -1,14 +1,23 @@
 <template>
     <transfer
         :active="active"
-        :items="programs"
+        :notSelected="notSelected"
         :selected="selected"
+        :selectedParams="selectedParams"
+        :notSelectedParams="notSelectedParams"
+        @selected-page-change="handleSelectedPageChange"
+        @not-selected-page-change="handleNotSelectedPageChange"
+        @search-selected="searchSelected"
+        @search-not-selected="searchNotSelected"
         @add="add"
         @remove="remove"
         @open="open"
         @close="close">
             <template v-slot:title>
                 <slot name="title">Manage Programs</slot>
+            </template>
+            <template v-slot:caption>
+                <p>Check available records to add them to the program or uncheck current records to remove them from the program.</p>
             </template>
             <template v-slot:current-items-title>
                 Current Programs
@@ -34,7 +43,7 @@
     </transfer>
 </template>
 <script>
-    import ProgramRequest from '../api/ProgramRequest';
+    import ProgramRequest from '../api/ProgramsAvailableForRecordRequest';
     import RecordProgramsRequest from '../api/RecordProgramsRequest';
 
     import Transfer from '../components/AppTransfer';
@@ -55,12 +64,21 @@
                 programsRequest: new ProgramRequest({}),
                 recordProgramsRequest: new RecordProgramsRequest({}),
                 selected: [],
-            }
-        },
-
-        computed: {
-            notSelected() {
-                return _.differenceBy(this.programs, this.selected, 'id');
+                notSelected: [],
+                selectedParams: {
+                    ascending: true,
+                    sortBy: 'id',
+                    page: 1,
+                    perPage: 10,
+                    total: 0
+                },
+                notSelectedParams: {
+                    ascending: true,
+                    sortBy: 'id',
+                    page: 1,
+                    perPage: 10,
+                    total: 0
+                }
             }
         },
 
@@ -70,12 +88,56 @@
                 this.$emit('close');
             },
 
-            open() {
-                this.selected = _.cloneDeep(this.assignedPrograms);
-
-                this.programsRequest.retrieve().then(response => {
-                    this.programs = response;
+            loadSelected() {
+                this.recordProgramsRequest.setFields({
+                    params: this.selectedParams
                 });
+
+                this.recordProgramsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(response => {
+                    this.selected = response.data;
+                    this.selectedParams.total = response.meta.total;
+                    this.fields = response.fields;
+                });
+            },
+
+            loadNotSelected() {
+                this.programsRequest.setFields({
+                    params: this.notSelectedParams
+                });
+
+                this.programsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(response => {
+                    this.notSelected = response.data;
+                    this.notSelectedParams.total = response.meta.total;
+                });
+            },
+
+            open() {
+                this.loadSelected();
+                this.loadNotSelected();
+            },
+
+            handleSelectedPageChange(page) {
+                this.selectedParams.page = page;
+
+                this.loadSelected();
+            },
+
+            handleNotSelectedPageChange(page) {
+                this.notSelectedParams.page = page;
+
+                this.loadNotSelected();
+            },
+
+            searchSelected(search) {
+                this.selectedParams.search = search;
+
+                this.loadSelected();
+            },
+
+            searchNotSelected(search) {
+                this.notSelectedParams.search = search;
+
+                this.loadNotSelected();
             },
 
             add(id) {

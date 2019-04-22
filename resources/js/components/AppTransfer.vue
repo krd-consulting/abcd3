@@ -5,11 +5,27 @@
                 Transfer Items
             </slot>
         </div>
+        <div class="tw-mb-4">
+            <slot name="caption">
+                <p>Click on current/available items to add/remove them.</p>
+            </slot>
+        </div>
         <div class="tw-flex tw-text-grey-darkest">
             <div class="tw-flex-1 tw-pr-2">
-                <div class="tw-border tw-border-blue-lighter tw-rounded tw-overflow-y-auto" style="max-height: 300px;">
-                    <div class="tw-bg-blue-lightest tw-text-blue-dark tw-py-2 tw-px-2 tw-rounded-t">
-                        <slot name="current-items-title">Current Items</slot>
+                <div class="tw-border tw-border-blue-lighter tw-rounded tw-overflow-y-hidden" style="max-height: 300px;">
+                    <div class="tw-flex tw-justify-between tw-items-center tw-bg-blue-lightest tw-text-blue-dark tw-py-2 tw-px-2 tw-rounded-t">
+                        <slot name="current-items-title">
+                            <span>Current Items</span>
+                        </slot>
+                        <slot name="current-items-options">
+                            <base-input
+                                v-model="selectedParams.search"
+                                @input="searchSelected(selectedParams.search)"
+                                class="tw-w-1/2"
+                                placeholder="Search">
+                                <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                            </base-input>
+                        </slot>
                     </div>
                     <div class="tw-h-64 tw-overflow-y-auto">
                         <div v-if="selected.length == 0" class="tw-py-24 tw-text-center">
@@ -50,10 +66,19 @@
                 </div>
             </div>
             <div class="tw-flex-1 tw-pl-2">
-                <div class="tw-rounded tw-border tw-overflow-y-auto" style="max-height: 300px;">
-                    <div class="tw-bg-grey-lightest tw-py-2 tw-px-2 tw-rounded-t">
+                <div class="tw-rounded tw-border tw-overflow-y-hidden" style="max-height: 300px;">
+                    <div class="tw-flex tw-justify-between tw-items-center tw-bg-grey-lightest tw-text-grey-darkest tw-py-2 tw-px-2 tw-rounded-t">
                         <slot name="available-items-title">
-                            Available Items
+                            <span>Available Items</span>
+                        </slot>
+                        <slot name="available-items-options">
+                            <base-input
+                                v-model="notSelectedParams.search"
+                                @input="searchSelected(notSelectedParams.search)"
+                                class="tw-w-1/2"
+                                placeholder="Search">
+                                <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                            </base-input>
                         </slot>
                     </div>
                     <div class="tw-h-64 tw-overflow-y-auto">
@@ -110,7 +135,6 @@
     export default {
         props: {
             active: Boolean,
-            items: Array,
             notSelected: Array,
             selected: Array,
             selectedParams: Array|Object,
@@ -142,6 +166,14 @@
 
             handleNotSelectedPageChange(page) {
                 this.$emit('not-selected-page-change', page);
+            },
+
+            searchSelected(search) {
+                this.$emit('search-selected', search);
+            },
+
+            searchSelected(search) {
+                this.$emit('search-not-selected', search);
             }
         }
     }

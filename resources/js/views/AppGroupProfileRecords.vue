@@ -62,7 +62,7 @@
         </div>
         <list-item
             v-if="records.length > 0"
-            :to="`/records/${record.id}`"
+            :to="`/records/${recordType.slug}/${record.id}`"
             :key="record.id"
             :item="record"
             v-for="record in records"

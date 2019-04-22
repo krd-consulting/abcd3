@@ -35,6 +35,7 @@ Route::prefix('api')
         ]);
 
         Route::get('records/{recordType}/{record}/programs', 'RecordProgramsController@index');
+        Route::get('records/{recordType}/{record}/available-programs', 'ProgramsAvailableForRecord');
         Route::post('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@store');
         Route::delete('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@destroy');
 

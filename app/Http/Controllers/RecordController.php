@@ -67,12 +67,9 @@ class RecordController extends Controller
         return auth()->user()->availableTeams;
     }
 
-    public function update(UpdateRecord $request)
+    public function update(Record $record, UpdateRecord $request)
     {
         // Update record when user is authorized.
-        $record = new Record();
-        $record->exists = true;
-        $record->id = $request->input('id');
         $record->field_1_value = $request->input('field_1_value');
         $record->field_2_value = $request->input('field_2_value');
         $record->field_3_value = $request->input('field_3_value');
