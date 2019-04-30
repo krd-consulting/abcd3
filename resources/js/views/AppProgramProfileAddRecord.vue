@@ -40,6 +40,13 @@
             <template v-slot:empty-available-items>
                 No more available records.
             </template>
+            <template v-slot:available-items-footer-options>
+                <base-input
+                    v-model="enrolledAt"
+                    name="enrolled_at"
+                    type="date"
+                    @keydown.native="request.errors.clear($event.target.name)"/>
+            </template>
     </transfer>
 </template>
 <script>
@@ -85,7 +92,8 @@
                     page: 1,
                     perPage: 10,
                     total: 0
-                }
+                },
+                enrolledAt: ''
             }
         },
 
@@ -148,7 +156,11 @@
             },
 
             add(id) {
-                this.programRecordsRequest.store(
+                const request = new ProgramRecordsRequest({
+                    enrolled_at: this.enrolledAt
+                });
+
+                request.store(
                     this.$route.params.program,
                     this.$route.params.recordType,
                     id

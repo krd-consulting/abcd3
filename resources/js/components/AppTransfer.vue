@@ -108,7 +108,8 @@
                         </div>
                     </div>
                 </div>
-                <div>
+                <div class="tw-flex tw-flex-items-center tw-justify-between">
+                    <slot name="available-items-footer-options"></slot>
                     <base-pagination
                         :current-page.sync="notSelectedParams.page"
                         @current-change="handleNotSelectedPageChange"

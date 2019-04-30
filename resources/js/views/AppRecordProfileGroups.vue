@@ -25,11 +25,13 @@
                 v-if="groups.length > 0"
                 :to="`/groups/${group.id}`"
                 :key="group.id"
+                :item="group"
                 v-for="group in groups"
                 class="group tw-pl-4 tw-py-4">
                 <span class="hover:tw-text-blue">{{ group.name }}</span>
-                <template v-slot:secondary-data>
-
+                <template v-slot:secondary-data="slotProps">
+                    <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">assignment</base-icon>
+                    <span class="tw-text-grey tw-text-sm tw-text-align-middle">{{ slotProps.item.program.name }}</span>
                 </template>
                 <template v-slot:options-container>
                     <div class="tw-w-1/5 tw-text-right">

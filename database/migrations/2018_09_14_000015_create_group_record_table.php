@@ -17,8 +17,6 @@ class CreateGroupRecordTable extends Migration
             $table->increments('id');
             $table->integer('group_id')->unsigned();
             $table->integer('record_id')->unsigned();
-            $table->timestamp('enrolled_at');
-            $table->timestamp('end_at')->nullable();
             $table->timestamps();
 
             $table->foreign('group_id')->references('id')->on('groups');

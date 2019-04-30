@@ -50,7 +50,7 @@
                     </el-tab-pane>
                     <el-tab-pane name="record_profile_groups">
                         <template slot="label">
-                            <base-icon class="tw-align-middle tw-text-sm">assignment</base-icon>
+                            <base-icon class="tw-align-middle tw-text-sm">people</base-icon>
                             Groups
                         </template>
                     </el-tab-pane>

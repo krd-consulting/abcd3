@@ -6,6 +6,8 @@ use App\Program;
 use App\Record;
 use App\User;
 
+use App\Http\Requests\StoreProgramRecord;
+
 use App\Events\ProgramRecordSaved;
 use App\Events\ProgramRecordDeleted;
 
@@ -26,20 +28,24 @@ class ProgramRecord extends Pivot
         'restored' => ProgramRecordSaved::class
     ];
 
-    public function createUsingBelongsTo(Program $program, Record $record)
+    public function createUsingBelongsTo(Program $program, Record $record, StoreProgramRecord $request)
     {
-        $existingRow = $this->findTrashedUsingBelongsTo($program, $record);
+        $programRecord = $this->findTrashedUsingBelongsTo($program, $record);
 
-        if($existingRow->exists()) {
-            $existingRow->first()->restore();
-            return $existingRow;
+        if($programRecord->exists()) {
+            $programRecord = $programRecord->first();
+            $programRecord->restore();
+        }else {
+            $this->program_id = $program->id;
+            $this->record_id = $record->id;
+            $programRecord = $this;
         }
 
-        $this->program_id = $program->id;
-        $this->record_id = $record->id;
-        $this->save();
+        $programRecord->enrolled_at = $request->enrolled_at;
 
-        return $this;
+        $programRecord->save();
+
+        return $programRecord;
     }
 
     public function findTrashedUsingBelongsTo(Program $program, Record $record)

@@ -11,6 +11,7 @@ use App\ClientStatus;
 
 use App\Http\Resources\Records;
 
+use App\Http\Requests\StoreProgramRecord;
 use App\Http\Requests\UpdateProgramRecord;
 
 use Illuminate\Http\Request;
@@ -51,13 +52,13 @@ class ProgramRecordsController extends Controller
         return ClientStatus::all();
     }
 
-    public function store(Program $program, RecordType $recordType, Record $record)
+    public function store(Program $program, RecordType $recordType, Record $record, StoreProgramRecord $request)
     {
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
         $programRecord = new ProgramRecord();
-        $programRecord->createUsingBelongsTo($program, $record);
+        $programRecord->createUsingBelongsTo($program, $record, $request);
 
         return $record;
     }

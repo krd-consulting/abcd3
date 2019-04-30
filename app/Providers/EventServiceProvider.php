@@ -25,7 +25,8 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'App\Events\ProgramRecordDeleted' => [
-            'App\Listeners\CreateRemovedProgramClientStatus'
+            'App\Listeners\CreateRemovedProgramClientStatus',
+            'App\Listeners\RemoveRecordFromProgramGroup'
         ]
     ];
 

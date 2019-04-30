@@ -8,7 +8,8 @@ use App\Record;
 use App\RecordType;
 
 use App\Http\Resources\Programs;
-use App\Traits\AddsRecordToProgramTeams;
+
+use App\Http\Requests\StoreProgramRecord;
 
 use Illuminate\Http\Request;
 
@@ -39,15 +40,13 @@ class RecordProgramsController extends Controller
         return new Programs($programs);
     }
 
-    public function store(RecordType $recordType, Record $record, Program $program)
+    public function store(RecordType $recordType, Record $record, Program $program, StoreProgramRecord $request)
     {
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $user = auth()->user();
-
         $programRecord = new ProgramRecord();
-        $programRecord->createUsingBelongsTo($program, $record, $user);
+        $programRecord->createUsingBelongsTo($program, $record, $request);
 
         return $program;
     }

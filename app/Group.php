@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Record;
 use App\User;
 
 use App\Model;
@@ -19,8 +20,14 @@ class Group extends Model
     public function records()
     {
         return $this->belongsToMany('App\Record')
-            ->withTimestamps()
-            ->withPivot('enrolled_at', 'end_at');
+            ->withTimestamps();
+    }
+
+    public function addRecord(Record $record) 
+    {
+        $record->programs()->syncWithoutDetaching($this->program->id);
+
+        $this->records()->attach($record);
     }
 
     public function scopeAvailableFor($query, User $user) {

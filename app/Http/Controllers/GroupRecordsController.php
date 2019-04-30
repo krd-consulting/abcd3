@@ -39,9 +39,7 @@ class GroupRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $group);
 
-        $group->records()->attach($record, [
-            'enrolled_at' => now()
-        ]);
+        $group->addRecord($record);
 
         return $record;
     }

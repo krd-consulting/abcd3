@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Group;
 use App\RecordType;
 
 use App\Model;
@@ -21,6 +22,13 @@ class Record extends Model
         return $this->load('teams');
     }
 
+    public function assignGroup(Group $group)
+    {
+        $this->programs()->syncWithoutDetaching($group->program->id);
+
+        $this->groups()->attach($group);
+    }
+
     public function caseload()
     {
         return $this->cases();
@@ -37,8 +45,7 @@ class Record extends Model
     public function groups()
     {
         return $this->belongsToMany('App\Group')
-            ->withTimestamps()
-            ->withPivot('enrolled_at', 'end_at');
+            ->withTimestamps();
     }
 
     public function programs()

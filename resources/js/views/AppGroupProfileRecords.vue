@@ -50,13 +50,7 @@
             class="tw-pt-6 tw-pb-2 tw-pl-4 tw-text-xs tw-text-grey tw-uppercase tw-font-semibold">
             <div class="tw-flex tw-w-4/5">
                 <div class="tw-w-1/4 tw-m-0">
-                    <span class="tw-tracking-wide">Program</span>
-                </div>
-                <div class="tw-w-1/4 tw-m-0">
-                    <span class="tw-tracking-wide">Enrollment Date</span>
-                </div>
-                <div v-if="recordType.identity.name == 'Client'" class="tw-w-1/4 tw-m-0">
-                    <span class="tw-tracking-wide">End At</span>
+                    <span class="tw-tracking-wide">Record</span>
                 </div>
             </div>
         </div>
@@ -75,12 +69,6 @@
             </template>
             <template v-slot:tertiary-data="slotProps">
                 <div class="tw-flex tw-w-3/5 tw-items-center">
-                    <div class="tw-w-1/3">
-                        <span>{{ slotProps.item.pivot.enrolled_at }}</span>
-                    </div>
-                    <div class="tw-w-1/3">
-                        <span>{{ slotProps.item.pivot.end_at }}</span>
-                    </div>
                 </div>
             </template>
             <template v-slot:options-container="slotProps">

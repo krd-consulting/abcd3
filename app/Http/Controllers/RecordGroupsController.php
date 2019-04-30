@@ -14,7 +14,7 @@ class RecordGroupsController extends Controller
 {
     public function index(RecordType $recordType, Record $record)
     {
-        $groups = $record->groups();
+        $groups = $record->groups()->with('program');
 
         // Search
         $search = request('search');
@@ -39,9 +39,7 @@ class RecordGroupsController extends Controller
     	$this->authorize('write', $record);
         $this->authorize('write', $group);
 
-        $record->groups()->attach($group, [
-            'enrolled_at' => now()
-        ]);
+        $record->assignGroup($group);
 
         return $group;
     }
