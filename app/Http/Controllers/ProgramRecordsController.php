@@ -57,8 +57,8 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $programRecord = new ProgramRecord();
-        $programRecord->createUsingBelongsTo($program, $record, $request);
+        $programRecord = new ProgramClient();
+        $programRecord->createUsingBelongsTo($program, $record, true, $request);
 
         return $record;
     }
@@ -68,15 +68,15 @@ class ProgramRecordsController extends Controller
         $programRecord = new ProgramClient();
         $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
 
-        // find latest status which is needed to compare to request data
+        // Find latest status which is needed to compare to request data
         $clientStatus = $programRecord->statuses()->latest()->first();
         $clientStatus->updateUsingRequest($request);
 
-        // update enrollment date
+        // Update enrollment date
         $programRecord->enrolled_at = $request->enrolled_at;
         $programRecord->save();
 
-        // return response
+        // Return response
         return $programRecord;
     }
 

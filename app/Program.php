@@ -2,12 +2,17 @@
 
 namespace App;
 
+use App\Traits\Models\Search;
+use App\Traits\Models\Sort;
+
 use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Program extends Model
 {
     use SoftDeletes;
+    use Search;
+    use Sort;
 
     public function caseRecords()
     {

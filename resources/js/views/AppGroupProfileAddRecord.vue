@@ -7,6 +7,8 @@
         :notSelectedParams="notSelectedParams"
         @selected-page-change="handleSelectedPageChange"
         @not-selected-page-change="handleNotSelectedPageChange"
+        @search-selected="searchSelected"
+        @search-not-selected="searchNotSelected"
         @add="add"
         @remove="remove"
         @open="open"
@@ -125,6 +127,18 @@
 
             handleNotSelectedPageChange(page) {
                 this.notSelectedParams.page = page;
+
+                this.loadNotSelected();
+            },
+
+            searchSelected(search) {
+                this.selectedParams.search = search;
+
+                this.loadSelected();
+            },
+
+            searchNotSelected(search) {
+                this.notSelectedParams.search = search;
 
                 this.loadNotSelected();
             },

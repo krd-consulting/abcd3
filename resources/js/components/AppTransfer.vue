@@ -74,7 +74,7 @@
                         <slot name="available-items-options">
                             <base-input
                                 v-model="notSelectedParams.search"
-                                @input="searchSelected(notSelectedParams.search)"
+                                @input="searchNotSelected(notSelectedParams.search)"
                                 class="tw-w-1/2"
                                 placeholder="Search">
                                 <i slot="prefix" class="el-input__icon el-icon-search"></i>
@@ -173,7 +173,7 @@
                 this.$emit('search-selected', search);
             },
 
-            searchSelected(search) {
+            searchNotSelected(search) {
                 this.$emit('search-not-selected', search);
             }
         }

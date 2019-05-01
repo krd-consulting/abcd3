@@ -12,10 +12,12 @@
                     <p class="tw-text-grey">{{ group.description }}</p>
                 </div>
                 <div class="tw-text-right">
-                    <div>
+                    <router-link router-link tag="a" :to="`/programs/${group.program.id}`">
                         <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">people</base-icon>
-                        <span class="tw-uppercase tw-text-grey tw-text-xs tw-font-semibold">{{ group.program.name }}</span>
-                    </div>
+                        <span class="tw-uppercase tw-text-grey tw-text-xs tw-font-semibold">   
+                            {{ group.program.name }}
+                        </span>
+                    </router-link>
                     <div>
                         <base-button @click="editGroup(group)" class="tw-py-2 tw-px-0 tw-mr-4 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>

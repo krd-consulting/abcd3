@@ -47,10 +47,6 @@
             <template v-slot:options-container>
                 <div class="tw-w-1/5 tw-text-right">
                     <div class="tw-px-4">
-                        <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-grey-darkest tw-border-none">
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Edit</span>
-                        </base-button>
                         <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(record.id)">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
                             <span class="tw-text-xs tw-align-middle">Remove</span>

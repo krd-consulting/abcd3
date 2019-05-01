@@ -5,6 +5,9 @@ namespace App;
 use App\Group;
 use App\RecordType;
 
+use App\Traits\Models\Search;
+use App\Traits\Models\Sort;
+
 use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,6 +17,14 @@ class Record extends Model
 {
     use HasTableAlias;
     use SoftDeletes;
+    use Search;
+    use Sort;
+
+    public $searchColumns = [
+        'field_1_value',
+        'field_2_value',
+        'field_3_value',
+    ];
 
     public function assignTeam($teamId)
     {
@@ -127,29 +138,6 @@ class Record extends Model
         return $query->join('cases', 'records.id', '=', 'cases.record_id')
                 ->whereColumn('records.id', 'cases.record_id')
                 ->whereIn('owner_id', $owners);
-    }
-
-    public function scopeSort($query, $column, $ascending)
-    {
-        if(empty($column))
-            return ;
-
-        if($ascending == 'true')
-            $ascending = 'asc';
-        else
-            $ascending = 'desc';
-
-        return $query->orderBy($column, $ascending);
-    }
-
-    public function scopeSearch($query, $term)
-    {
-        if(empty($term))
-            return $query;
-
-        return $query->where('field_1_value', 'LIKE' , '%' . $term . '%')
-        ->orWhere('field_2_value', 'LIKE', '%' . $term . '%')
-        ->orWhere('field_3_value', 'LIKE', '%' . $term . '%');
     }
 
     public function scopeOnly($query, $recordType)

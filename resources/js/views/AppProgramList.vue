@@ -9,7 +9,7 @@
             :program="edit.program"
             @update="retrieve"/>
 
-        <list>
+        <list :hasHeader="true">
             <template slot="header-text">Programs</template>
             <template slot="options">
                 <div class="tw-flex tw-flex-row-reverse">
@@ -25,7 +25,6 @@
                 :to="`/programs/${program.id}`"
                 class="tw-py-4 tw-px-4">
                 {{ program.name }}
-
                 <template v-if="program.team" slot="secondary-data-text">{{ program.team.name }}</template>
                 <template slot="options">
                     <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" @click="editProgram(program)">
@@ -97,8 +96,8 @@
                 });
 
                 this.request.retrieve().then(response => {
-                    this.programs = response;
-                    this.total = response.length;
+                    this.programs = response.data;
+                    this.total = response.data.length;
                 });
             },
 

@@ -46,13 +46,13 @@
                 </div>
             </template>
             <clients-list
-                v-if="recordType.identity.name == 'Client'"
+                v-if="recordType.identity == 'Client'"
                 :records="records"
                 @remove="confirmDelete"
                 @edit="editRecord"/>
-            <staff-list v-else-if="recordType.identity.name == 'Staff'" :records="records"/>
-            <volunteers-list v-else-if="recordType.identity.name == 'Volunteer'" :records="records"/>
-            <external-list v-else-if="recordType.identity.name == 'External'" :records="records"/>
+            <staff-list v-else-if="recordType.identity == 'Staff'" :records="records"/>
+            <volunteers-list v-else-if="recordType.identity == 'Volunteer'" :records="records"/>
+            <external-list v-else-if="recordType.identity == 'External'" :records="records"/>
 
             <template slot="footer-options">
                 <base-button

@@ -24,7 +24,7 @@ class StoreProgramRecord extends FormRequest
     public function rules()
     {
         return [
-            'enrolled_at' => 'required|date|before:tomorrow'
+            'enrolled_at' => 'date|before:tomorrow|nullable'
         ];
     }
 }

@@ -1,18 +1,17 @@
 <nav class="tw-border-r">
     <sidebar-list :collapse="collapseSidebar" class="main-sidebar-menu">
-        <sidebar-list-item index="1" :route="{ path: '/dashboard' }">
+        <sidebar-list-item index="dashboard" :route="{ path: '/dashboard' }">
             <base-icon class="tw-text-xl tw-mr-2">dashboard</base-icon>
             <span slot="title">Dashboard</span>
         </sidebar-list-item>
-        <base-submenu index="2">
+        <base-submenu index="/records/">
             <template slot="title">
                 <base-icon class="tw-text-xl tw-mr-2">folder</base-icon>
                 <span slot="title">Records</span>
             </template>
             @foreach($recordTypes as $type)
                 <sidebar-list-item
-                    key="{{ $type->id }}"
-                    index="2-{{ $type->id }}"
+                    index="/records/{{ $type->slug }}"
                     :route="{ path: '/records/{{ $type->slug }}' }"
                     >
                     <base-icon class="tw-text-xl tw-mr-2">insert_drive_file</base-icon>
@@ -20,15 +19,14 @@
                 </sidebar-list-item>
             @endforeach
         </base-submenu>
-        <base-submenu index="3">
+        <base-submenu index="/programs/">
             <template slot="title">
                 <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
                 <span slot="title">Programs</span>
             </template>
             @foreach($programs as $program)
                 <sidebar-list-item
-                    key="{{ $program->id }}"
-                    index="3-{{ $program->id }}"
+                    index="/programs/{{ $program->id }}"
                     :route="{ path: '/programs/{{ $program->id }}' }"
                     >
                     <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
@@ -37,7 +35,7 @@
             @endforeach
             @if(count($programs) > 0)
                 <sidebar-list-item
-                    index="3"
+                    index="/programs/"
                     :route="{ path: '/programs' }"
                     >
                     All Programs...
@@ -46,20 +44,19 @@
                 <li class="tw-py-4 tw-pl-8 tw-text-xs">You have no programs</li>
             @endif
         </base-submenu>
-        <sidebar-list-item index="4" :route="{ path: '/groups' }">
+        <sidebar-list-item index="/groups/" :route="{ path: '/groups' }">
             <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
             <span slot="title">Groups</span>
         </sidebar-list-item>
         @if(count($teams) > 0)
-            <base-submenu index="5">
+            <base-submenu index="/teams/">
                 <template slot="title">
                     <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
                     <span slot="title">Teams</span>
                 </template>
                 @foreach($teams as $team)
                     <sidebar-list-item
-                        key="{{ $team->id }}"
-                        index="5-{{ $team->id }}"
+                        index="/teams/{{ $team->id }}"
                         :route="{ path: '/teams/{{ $team->id }}' }"
                         >
                         <base-icon class="tw-text-xl tw-mr-2">people</base-icon>

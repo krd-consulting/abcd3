@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Program;
 use App\Http\Resources\Program as ProgramResource;
+use App\Http\Resources\Programs;
 use App\Http\Requests\StoreProgram;
 use App\Http\Requests\UpdateProgram;
 
@@ -24,7 +25,9 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        return (new Program)->availableFor(auth()->user())->with('team')->get();
+        $programs = (new Program)->availableFor(auth()->user())->with('team')->get();
+
+        return (new Programs($programs));
     }
 
     /**

@@ -27,7 +27,9 @@ class StoreGroup extends FormRequest
     {
         return [
             'name' => [
-                'required',
+                    'required',
+
+                    // Check whether the group name already exists within the program.
                     Rule::unique('groups')->where(function ($query) {
                         return $query->where('program_id', $this->program_id);
                     })

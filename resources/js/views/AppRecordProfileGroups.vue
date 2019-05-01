@@ -36,13 +36,9 @@
                 <template v-slot:options-container>
                     <div class="tw-w-1/5 tw-text-right">
                         <div class="tw-px-4">
-                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-grey-darkest tw-border-none">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Edit</span>
-                            </base-button>
-                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(record.id)">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">delete</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Delete</span>
+                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(group.id)">
+                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
+                                <span class="tw-text-xs tw-align-middle">Remove</span>
                             </base-button>
                         </div>
                     </div>
@@ -85,8 +81,8 @@
         methods: {
             remove(id) {
                 return this.request.destroy(
-                    this.$route.params.program,
                     this.$route.params.recordType,
+                    this.$route.params.record,
                     id
                 ).then((response) => {
                     this.retrieve();
@@ -94,7 +90,7 @@
             },
 
             confirm(id) {
-                this.$confirm('Are you sure you want to remove this record?', 'Remove Record', {
+                this.$confirm('Are you sure you want to remove this group?', 'Remove Group', {
                     confirmButtonText: 'Remove',
                     cancelButtonText: 'Wait, no!',
                     type: 'warning'
@@ -103,7 +99,7 @@
                         .then(() => {
                             this.$message({
                                 type: 'success',
-                                message: 'Record was removed.'
+                                message: 'Group was removed.'
                             });
                         })
                         .catch((error) => {

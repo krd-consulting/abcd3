@@ -16,7 +16,7 @@ class UpdateGroup extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('write', Group::find($this->route('group')));
+        return true;
     }
 
     /**
@@ -28,7 +28,9 @@ class UpdateGroup extends FormRequest
     {
         return [
             'name' => [
-                'required',
+                    'required',
+
+                    // Check whether the group name already exists within the program (excludes the group being edited).
                     Rule::unique('groups')->where(function ($query) {
                         return $query->where('program_id', $this->program_id)->where('id', '!=', $this->id);
                     })

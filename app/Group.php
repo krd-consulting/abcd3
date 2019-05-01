@@ -5,12 +5,19 @@ namespace App;
 use App\Record;
 use App\User;
 
+use App\Traits\Models\Search;
+use App\Traits\Models\Sort;
+
 use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Group extends Model
 {
     use SoftDeletes;
+    use Search;
+    use Sort;
+
+    public $searchColumns = ['name', 'description'];
 
     public function program()
     {
@@ -69,27 +76,5 @@ class Group extends Model
         return $query->whereHas('records', function ($query) use ($records) {
                     return $query->whereIn('record_id', $records);
                 });
-    }
-
-    public function scopeSort($query, $column, $ascending)
-    {
-        if(empty($column))
-            return ;
-
-        if($ascending == 'true')
-            $ascending = 'asc';
-        else
-            $ascending = 'desc';
-
-        return $query->orderBy($column, $ascending);
-    }
-
-    public function scopeSearch($query, $term)
-    {
-        if(empty($term))
-            return $query;
-
-        return $query->where('name', 'LIKE' , '%' . $term . '%')
-        ->orWhere('description', 'LIKE', '%' . $term . '%');
     }
 }

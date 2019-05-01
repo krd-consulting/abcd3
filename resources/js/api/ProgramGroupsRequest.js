@@ -5,15 +5,9 @@ class ProgramGroupsRequest extends Request{
         return this.get(`/api/programs/${program}/groups`);
     }
 
-    /*store(program, recordType, record) {
-        return this.post(`/api/programs/${program}/records/${recordType}/${record}`);
+    destroy(group) {
+        return this.delete(`/api/groups/${group}`);
     }
-
-    destroy(program, recordType, record) {
-        console.log(`/api/programs/${program}/records/${recordType}/${record}`);
-
-        return this.delete(`/api/programs/${program}/records/${recordType}/${record}`);
-    }*/
 }
 
 export default ProgramGroupsRequest

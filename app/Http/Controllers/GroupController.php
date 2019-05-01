@@ -52,6 +52,8 @@ class GroupController extends Controller
 
     public function update(Group $group, UpdateGroup $request)
     {
+        $this->authorize('write', $group);
+        
         // Update group when user is authorized.
         $group->name = $request->input('name');
         $group->description = $request->input('description');

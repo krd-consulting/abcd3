@@ -28,7 +28,7 @@ class ProgramRecord extends Pivot
         'restored' => ProgramRecordSaved::class
     ];
 
-    public function createUsingBelongsTo(Program $program, Record $record, StoreProgramRecord $request)
+    public function createUsingBelongsTo(Program $program, Record $record, $save = true)
     {
         $programRecord = $this->findTrashedUsingBelongsTo($program, $record);
 
@@ -41,9 +41,7 @@ class ProgramRecord extends Pivot
             $programRecord = $this;
         }
 
-        $programRecord->enrolled_at = $request->enrolled_at;
-
-        $programRecord->save();
+        $save ? $programRecord->save() : NULL;
 
         return $programRecord;
     }
@@ -70,6 +68,9 @@ class ProgramRecord extends Pivot
 
     public function getEnrolledAtAttribute($value)
     {
+        if($value == NULL)
+            return NULL;
+        
         return Carbon::parse($value)->format('Y-m-d');
     }
 }

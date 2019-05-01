@@ -75,14 +75,8 @@
                 <div class="tw-w-1/5 tw-text-right">
                     <div class="tw-px-4">
                         <base-button
-                            class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-grey-darkest tw-border-none"
-                            @click="$emit('edit', slotProps.item)">
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Edit</span>
-                        </base-button>
-                        <base-button
                             class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none"
-                            @click="$emit('remove', slotProps.item.id)">
+                            @click="confirmDelete(slotProps.item.id)">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
                             <span class="tw-text-xs tw-align-middle">Remove</span>
                         </base-button>
@@ -112,13 +106,7 @@
 
     import RecordsRequest from '../api/GroupRecordsRequest';
 
-    // import ClientsList from './AppGroupProfileRecordsClients';
-    // import StaffList from './AppGroupProfileRecordsStaff';
-    // import VolunteersList from './AppGroupProfileRecordsVolunteers';
-    // import ExternalList from './AppGroupProfileRecordsExternal';
-
-     import AddRecord from './AppGroupProfileAddRecord';
-    // import EditGroupRecord from './AppGroupRecordEdit';
+    import AddRecord from './AppGroupProfileAddRecord';
 
     export default {
         components: {

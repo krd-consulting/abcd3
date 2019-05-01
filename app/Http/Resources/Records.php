@@ -4,6 +4,8 @@ namespace App\Http\Resources;
 
 use App\RecordType;
 
+use App\Http\Resources\RecordType as RecordTypeResource;
+
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class Records extends ResourceCollection
@@ -37,7 +39,7 @@ class Records extends ResourceCollection
     public function with($request)
     {
         return [
-            'record_type' => $this->recordType,
+            'record_type' => new RecordTypeResource($this->recordType),
             'fields' => [
                 $this->recordType->identity->field1->name => 'field_1_value',
                 $this->recordType->identity->field2->name => 'field_2_value',

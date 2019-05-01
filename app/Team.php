@@ -16,8 +16,15 @@ class Team extends Model
         return $this->hasMany('App\Program');
     }
 
-    public function users()
-    {
-        return $this->belongsToMany('App\User');
+    public function scopeAvailableFor($query, $user) {
+        $scope = $user->scope;
+
+        switch($scope) {
+            case 'universal':
+                return $query;
+
+            default:
+                return $user->teams();
+        }
     }
 }
