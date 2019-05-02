@@ -33,20 +33,20 @@
             </template>
 
             <client-programs-list
-                v-if="record.type.identity.name == 'Client'"
+                v-if="record.type.identity == 'Client'"
                 :programs="programs"
                 @edit="editProgram"
                 @remove="confirmDelete"/>
             <staff-programs-list
-                v-else-if="record.type.identity.name == 'Staff'"
+                v-else-if="record.type.identity == 'Staff'"
                 :programs="programs"
                 @remove="confirmDelete"/>
             <volunteer-programs-list
-                v-else-if="record.type.identity.name == 'Volunteer'"
+                v-else-if="record.type.identity == 'Volunteer'"
                 :programs="programs"
                 @remove="confirmDelete"/>
             <external-programs-list
-                v-else-if="record.type.identity.name == 'External'"
+                v-else-if="record.type.identity == 'External'"
                 :programs="programs"
                 @remove="confirmDelete"/>
 
