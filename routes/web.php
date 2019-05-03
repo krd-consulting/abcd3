@@ -51,6 +51,7 @@ Route::prefix('api')
         Route::get('teams', 'TeamController@index');
         Route::get('teams/{team}', 'TeamController@show');
         Route::post('teams', 'TeamController@store');
+        Route::delete('teams/{team}', 'TeamController@destroy');
 
         Route::resource('roles', 'RoleController');
 

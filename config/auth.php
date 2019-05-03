@@ -105,23 +105,23 @@ return [
             'value' => '1'
         ],
 
-        'case load' => [
-            'name' => 'self',
+        'case-load' => [
+            'name' => 'case load',
             'value' => '2'
         ],
 
         'program' => [
-            'name' => 'self',
+            'name' => 'program',
             'value' => '3'
         ],
 
         'team' => [
-            'name' => 'self',
+            'name' => 'team',
             'value' => '4'
         ],
 
         'universal' => [
-            'name' => 'self',
+            'name' => 'universal',
             'value' => '5'
         ],
     ],

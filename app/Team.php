@@ -3,9 +3,12 @@
 namespace App;
 
 use App\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Team extends Model
 {
+    use SoftDeletes;
+    
     public function records()
     {
         return $this->belongsToMany('App\Record');

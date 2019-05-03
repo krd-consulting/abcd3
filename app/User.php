@@ -4,6 +4,7 @@ namespace App;
 
 use App\Record;
 use App\Role;
+use App\Scope;
 use App\Program;
 use App\Group;
 use App\ProgramRecord;
@@ -139,17 +140,21 @@ class User extends Authenticatable implements Auditable
 
     public function getScopeAttribute()
     {
+        if(empty($this->getScope()))
+            return config('auth.scopes.self.name');
+
         return $this->getScope()->name;
     }
 
     public function getScopeValueAttribute()
     {
+        if(empty($this->getScope()))
+            return config('auth.scopes.self.value');
+
         return $this->getScope()->value;
     }
 
     public function getScope() {
-        // TODO: Return default scope, if none.
-
         return $this->scopes()->orderBy('value', 'desc')->first();
     }
 
@@ -227,9 +232,6 @@ class User extends Authenticatable implements Auditable
 
     public function hasScopeOfAtleast($scope) : bool
     {
-        if(is_numeric($scope))
-            return $this->scopeValue >= $scope;
-
         return $this->scopeValue >= Scope::where('name', $scope)->first()->value;
     }
 

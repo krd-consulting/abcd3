@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Scope;
+
 use Spatie\Permission\Models\Role as Model;
 use OwenIt\Auditing\Contracts\Auditable;
 use OwenIt\Auditing\Auditable as HasAuditable;
@@ -15,9 +17,12 @@ class Role extends Model implements Auditable
         return $this->belongsTo('App\Scope');
     }
 
-    public function assignScope($scopeId)
+    public function assignScope($scope)
     {
-        $this->scope()->associate($scopeId);
+        if(is_string($scope))
+            $scope = Scope::where('name', $scope)->first()->id;
+
+        $this->scope()->associate($scope);
 
         return $this->load('scope');
     }

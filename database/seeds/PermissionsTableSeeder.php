@@ -11,6 +11,6 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permissions')->insert(config('permissions'));
+        DB::table('permissions')->insert(config('auth.permissions'));
     }
 }

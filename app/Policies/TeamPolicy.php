@@ -44,7 +44,7 @@ class TeamPolicy
         if(!$user->can('write teams'))
             return false;
 
-        if(!$user->hasScopeOfAtleast('teams'))
+        if(!$user->hasScopeOfAtleast('team'))
             return false;
 
         if(!$user->hasTeam($team))
