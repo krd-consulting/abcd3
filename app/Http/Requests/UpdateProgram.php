@@ -27,7 +27,14 @@ class UpdateProgram extends FormRequest
     {
         return [
             'id' => 'required|exists:programs,id',
-            'name' => 'required|unique:programs,name,' . $this->input('id'),
+            'name' => [
+                    'required',
+
+                    // Check whether the program name already exists within the team (excludes the group being edited).
+                    Rule::unique('programs')->where(function ($query) {
+                        return $query->where('team_id', $this->team_id)->where('id', '!=', $this->id);
+                    })
+                ]
             'team_id' => 'required|exists:teams,id'
         ];
     }

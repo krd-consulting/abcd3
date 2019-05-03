@@ -16,6 +16,11 @@ class Team extends Model
         return $this->hasMany('App\Program');
     }
 
+    public function getAvailableRecordTypesAttribute()
+    {
+        return $this->records->load('record_type')->pluck('record_type')->unique();
+    }
+
     public function scopeAvailableFor($query, $user) {
         $scope = $user->scope;
 

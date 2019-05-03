@@ -99,4 +99,58 @@ return [
         ],
     ],
 
+    'scopes' => [
+        'self' => [
+            'name' => 'self',
+            'value' => '1'
+        ],
+
+        'case load' => [
+            'name' => 'self',
+            'value' => '2'
+        ],
+
+        'program' => [
+            'name' => 'self',
+            'value' => '3'
+        ],
+
+        'team' => [
+            'name' => 'self',
+            'value' => '4'
+        ],
+
+        'universal' => [
+            'name' => 'self',
+            'value' => '5'
+        ],
+    ],
+
+    'permissions' => [
+        'write-records' => [
+            'name' => 'write records',
+            'guard_name' => 'web'
+        ],
+
+        'write-programs' => [
+            'name' => 'write programs',
+            'guard_name' => 'web'
+        ],
+
+        'write-groups' => [
+            'name' => 'write groups',
+            'guard_name' => 'web'
+        ],
+
+        'write-teams' => [
+            'name' => 'write teams',
+            'guard_name' => 'web'
+        ],
+
+        'write-roles' => [
+            'name' => 'write roles',
+            'guard_name' => 'web'
+        ]
+    ]
+
 ];

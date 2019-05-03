@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Gate;
 
 class ProgramController extends Controller
 {
-    public function __construct()
-    {
-
-    }
-
     /**
      * Returns all programs (sorted and paginated per request) available to the user..
      *

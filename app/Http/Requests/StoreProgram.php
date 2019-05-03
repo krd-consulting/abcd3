@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProgram extends FormRequest
@@ -24,7 +26,14 @@ class StoreProgram extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:programs,name',
+            'name' => [
+                    'required',
+
+                    // Check whether the program name already exists within the team.
+                    Rule::unique('programs')->where(function ($query) {
+                        return $query->where('team_id', $this->team_id);
+                    })
+                ],
             'team_id' => 'required|exists:teams,id'
         ];
     }

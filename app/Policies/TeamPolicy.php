@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\User;
-use App\Group;
+use App\Team;
 
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -20,12 +20,12 @@ class TeamPolicy
             return true;
     }
 
-    public function read(User $user, Group $group)
+    public function read(User $user, Team $team)
     {
-        if(!$user->hasScopeOfAtleast('case load'))
+        if(!$user->hasScopeOfAtleast('team'))
             return false;
 
-        if(!$user->hasGroup($group->id))
+        if(!$user->hasTeam($team->id))
             return false;
 
         return true;
@@ -33,21 +33,21 @@ class TeamPolicy
 
     public function create(User $user)
     {
-        if(!$user->can('write groups'))
+        if(!$user->can('write teams'))
             return false;
 
         return true;
     }
 
-    public function write(User $user, Group $group)
+    public function write(User $user, Team $team)
     {
-        if(!$user->can('write groups'))
+        if(!$user->can('write teams'))
             return false;
 
-        if(!$user->hasScopeOfAtleast('case load'))
+        if(!$user->hasScopeOfAtleast('teams'))
             return false;
 
-        if(!$user->hasGroup($group))
+        if(!$user->hasTeam($team))
             return false;
 
         return true;

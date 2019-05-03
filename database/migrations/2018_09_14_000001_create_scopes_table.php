@@ -17,6 +17,7 @@ class CreateScopesTable extends Migration
             $table->increments('id');
             $table->string('name', 32);
             $table->integer('value')->unsigned();
+            $table->timestamps();
         });
     }
 

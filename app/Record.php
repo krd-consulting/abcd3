@@ -114,8 +114,11 @@ class Record extends Model
                 $programs = $user->programs;
                 return $query->inPrograms($programs);
 
-            default:
-                return $query->inCaseload($user->records);
+            case 'case load':
+                return $query->inCaseloadOrSelf($user);
+
+            case 'self':
+                return $user->records;
         }
     }
 
@@ -133,11 +136,23 @@ class Record extends Model
                 });
     }
 
-    public function scopeInCaseload($query, $owners)
+    public function scopeInCaseloadOrSelf($query, $user)
     {
-        return $query->join('cases', 'records.id', '=', 'cases.record_id')
-                ->whereColumn('records.id', 'cases.record_id')
-                ->whereIn('owner_id', $owners);
+        return $query
+                ->select(
+                    'records.id',
+                    'field_1_value',
+                    'field_2_value',
+                    'field_3_value',
+                    'record_type_id',
+                    'records.created_at',
+                    'records.updated_at'
+                )
+                ->leftJoin('cases', 'records.id', '=', 'cases.record_id')
+                ->where(function ($query) use ($user) {
+                    $query->whereColumn('records.id', 'cases.record_id')
+                        ->whereIn('owner_id', $user->records->pluck('id'));
+                })->orWhereIn('records.id', $user->records->pluck('id'));
     }
 
     public function scopeOnly($query, $recordType)

@@ -10,4 +10,6 @@ use OwenIt\Auditing\Auditable as HasAuditable;
 class Model extends EloquentModel implements Auditable
 {
     use HasAuditable;
+
+    protected $guarded = [];
 }

@@ -11,23 +11,6 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('permissions')->insert([
-            [
-                'name' => 'write records',
-                'guard_name' => 'web'
-            ],
-            [
-                'name' => 'write programs',
-                'guard_name' => 'web'
-            ],
-            [
-                'name' => 'write groups',
-                'guard_name' => 'web'
-            ],
-            [
-                'name' => 'write roles',
-                'guard_name' => 'web'
-            ]
-        ]);
+        DB::table('permissions')->insert(config('permissions'));
     }
 }
