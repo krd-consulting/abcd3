@@ -25,7 +25,7 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function user_with_write_teams_permission_can_create_a_team()
+    public function user_with_write_teams_permission_can_store_a_team()
     {
         $this->withoutExceptionHandling();
 
@@ -52,7 +52,7 @@ class TeamTest extends TestCase
     }
 
     /** @test */
-    public function user_without_write_teams_permission_cant_create_a_team()
+    public function user_without_write_teams_permission_cant_store_a_team()
     {
         $user = factory(User::class)->create();
 

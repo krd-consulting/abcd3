@@ -22,7 +22,7 @@ class TeamPolicy
 
     public function read(User $user, Team $team)
     {
-        if(!$user->hasScopeOfAtleast('team'))
+        if(!$user->hasScopeOfAtleast(config('auth.scopes.team.value')))
             return false;
 
         if(!$user->hasTeam($team->id))
@@ -33,7 +33,7 @@ class TeamPolicy
 
     public function create(User $user)
     {
-        if(!$user->can('write teams'))
+        if(!$user->can(config('auth.permissions.write-teams.name')))
             return false;
 
         return true;
@@ -41,10 +41,10 @@ class TeamPolicy
 
     public function write(User $user, Team $team)
     {
-        if(!$user->can('write teams'))
+        if(!$user->can(config('auth.permissions.write-teams.name')))
             return false;
 
-        if(!$user->hasScopeOfAtleast('team'))
+        if(!$user->hasScopeOfAtleast(config('auth.scopes.team.value')))
             return false;
 
         if(!$user->hasTeam($team))

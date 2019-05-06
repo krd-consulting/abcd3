@@ -232,6 +232,9 @@ class User extends Authenticatable implements Auditable
 
     public function hasScopeOfAtleast($scope) : bool
     {
+        if(is_numeric($scope))
+            return $this->scopeValue >= $scope;
+
         return $this->scopeValue >= Scope::where('name', $scope)->first()->value;
     }
 
