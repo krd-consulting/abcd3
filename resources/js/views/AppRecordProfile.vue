@@ -2,16 +2,14 @@
     <div>
         <edit-record
             :active.sync="edit.active"
-            :record="edit.record"
-            :fields="fields"
-            :record-type="record.type"
+            :record-id="edit.record"
             @update="retrieve"/>
 
         <resource-profile 
             :record="record"
             :fields="fields"
-            @edit="editRecord(record)" 
-            @delete="confirmDelete(record)">
+            @edit="editRecord(record.id)" 
+            @delete="confirmDelete(record.id)">
             <template v-slot:main-information-container>
                 <div>
                     <div class="tw-inline-block tw-align-middle">
@@ -59,11 +57,7 @@
             return {
                 edit: {
                     active: false,
-                    record: {
-                        field_1_value: '',
-                        field_2_value: '',
-                        field_3_value: '',
-                    }
+                    record: ''
                 },
                 fields: [],
                 record: {
@@ -127,7 +121,7 @@
             deleteRecord(record) {
                 let request = new RecordRequest(record);
 
-                return request.destroy(record.id);
+                return request.destroy(this.$route.params.recordType, this.$route.params.record);
             }
         },
 

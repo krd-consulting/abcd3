@@ -1,5 +1,5 @@
 <template>
-    <base-dialog :visible="active" @close="close" @open="open">
+    <base-dialog :visible="active" @close="close" @open="retrieve">
         <div slot="title">
             <base-icon class="tw-align-middle">person_add</base-icon> Edit {{ recordType.name }}
         </div>
@@ -71,21 +71,17 @@
                 this.request.errors.clear();
             },
 
-            open() {
-                this.retrieveRecord();
-            },
-
-            retrieveRecord() {
+            retrieve() {
                 let request = new RecordRequest({});
 
                 request.edit(this.recordType, this.recordId).then((response) => {
                     this.record = response.data;
 
-                    this.initializeNewRecordData();
+                    this.initializeData();
                 });
             },
 
-            initializeNewRecordData() {
+            initializeData() {
                 const fields = _.invert(this.record.fields);
                 this.newRecordData.field_1_value = this.record[fields['field_1_value']];
                 this.newRecordData.field_2_value = this.record[fields['field_2_value']];

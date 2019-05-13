@@ -25,8 +25,8 @@ class RecordRequest extends Request{
         return this.patch(`/api/records/${recordType}/${record}`);
     }
 
-    destroy(record) {
-        return this.delete(`/api/records/${record}`);
+    destroy(recordType, record) {
+        return this.delete(`/api/records/${recordType}/${record}`);
     }
 }
 

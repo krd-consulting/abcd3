@@ -6,7 +6,7 @@
 
         <edit-program
             :active.sync="edit.active"
-            :program="edit.program"
+            :program-id="edit.program"
             @update="retrieve"/>
 
         <list :hasHeader="true">
@@ -27,13 +27,13 @@
                 {{ program.name }}
                 <template v-if="program.team" slot="secondary-data-text">{{ program.team.name }}</template>
                 <template slot="options">
-                    <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" @click="editProgram(program)">
+                    <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" @click="editProgram(program.id)">
                         <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
                         <span class="tw-text-xs tw-align-middle">Edit</span>
                     </base-button>
                     <base-button
                         class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none"
-                        @click="confirmDelete(program)">
+                        @click="confirmDelete(program.id)">
                         <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
                         <span class="tw-text-xs tw-align-middle">Delete</span>
                     </base-button>
@@ -68,11 +68,7 @@
                 },
                 edit: {
                     active: false,
-                    program: {
-                        field_1_value: '',
-                        field_2_value: '',
-                        field_3_value: '',
-                    }
+                    program: ''
                 },
                 programs: [],
                 request: new Request({}),
@@ -138,7 +134,7 @@
             deleteProgram(program) {
                 let request = new Request();
 
-                return request.destroy(program.id);
+                return request.destroy(program);
             },
         },
 

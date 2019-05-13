@@ -1,5 +1,5 @@
 <template>
-    <base-dialog :visible="active" @close="close" @open="open">
+    <base-dialog :visible="active" @close="close" @open="retrieve">
         <div slot="title">
             <base-icon class="tw-align-middle">person_add</base-icon> Edit Program
         </div>
@@ -11,7 +11,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="programData['name']"
+                            v-model="newProgramData['name']"
                             name="name"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -29,7 +29,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="programData['description']"
+                            v-model="newProgramData['description']"
                             name="description"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -47,18 +47,17 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="programData.team_id"
-                            :value="programData.team_id"
+                            v-model="newProgramData.team.id"
+                            :value="newProgramData.team.id"
                             name="team"
                             placeholder="Select Team"
                             @change="request.errors.clear('team')"
                             disabled>
                             <el-option
-                                v-for="team in teams"
-                                :key="team.id"
-                                :label="team.name"
-                                :value="team.id">
-                                {{ team.name }}
+                                :key="newProgramData.team.id"
+                                :label="newProgramData.team.name"
+                                :value="newProgramData.team.id">
+                                {{ newProgramData.team.name }}
                             </el-option>
                         </base-select>
                     </div>
@@ -86,18 +85,18 @@
     export default {
         props: {
             active: Boolean,
-            program: Array|Object
+            programId: Array|Object
         },
 
         data() {
             return {
                 request: new Request(),
-                programData: {
+                program: {},
+                newProgramData: {
                     name: '',
                     description: '',
-                    team_id: ''
+                    team: {}
                 },
-                teams: []
             }
         },
 
@@ -107,35 +106,35 @@
 
                 this.request.errors.clear();
 
-                this.programData = {
+                this.newProgramData = {
                     id: '',
                     name: '',
                     description: '',
-                    team_id: ''
+                    team: ''
                 };
             },
 
-            open() {
-                this.programData.id = this.program.id;
-                this.programData.name = this.program.name;
-                this.programData.description = this.program.description;
-                this.programData.team_id = this.program.team_id;
-
-                this.load();
+            initializeData() {
+                this.newProgramData.id = this.program.id;
+                this.newProgramData.name = this.program.name;
+                this.newProgramData.description = this.program.description;
+                this.newProgramData.team = this.program.team;
             },
 
-            load() {
+            retrieve() {
                 let request = new Request({});
 
-                request.edit(this.programData.id).then((response) => {
-                    this.teams = response;
+                request.edit(this.programId).then((response) => {
+                    this.program = response.data;
+
+                    this.initializeData();
                 });
             },
 
             store() {
-                this.request = new Request(this.programData);
+                this.request = new Request(this.newProgramData);
 
-                this.request.update(this.programData.id)
+                this.request.update(this.newProgramData.id)
                     .then((response) => {
                         this.$emit('update');
                         this.$message({

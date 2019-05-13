@@ -64,7 +64,7 @@ class ProgramController extends Controller
         $this->authorize('write', $program);
 
         // Return available teams when user is authorized.
-        return auth()->user()->availableTeams;
+        return (new ProgramResource($program->load('team')));
     }
 
     public function update(Program $program, UpdateProgram $request)
