@@ -8,12 +8,9 @@
         </add-record>
         <edit-program-record
             :active.sync="edit.active"
-            :enrolledAt="edit.record.enrolled_at"
-            :record="edit.record"
+            :record-id="edit.record.id"
             :program-id="$route.params.program"
-            :program-status="edit.record.program_status"
-            :fields="fields"
-            :record-type="recordType"
+            :record-type="edit.record.type.slug"
             @update="retrieve"/>
         <list
             :has-header="true"

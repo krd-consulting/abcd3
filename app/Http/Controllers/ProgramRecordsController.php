@@ -49,7 +49,13 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        return ClientStatus::all();
+        return [
+            'data' => (new ProgramClient)
+                        ->findUsingBelongsTo($program, $record)
+                        ->with(['statuses' => function($query) {
+                            return $query->latest()->first();
+                        }, 'statuses.status'])->first()
+        ];
     }
 
     public function store(Program $program, RecordType $recordType, Record $record, StoreProgramRecord $request)

@@ -10,7 +10,7 @@ class ProgramRecordsRequest extends Request{
     }
 
     edit(program, recordType, record) {
-        return this.get(`/api/programs/edit/${program}/records/${recordType}/${record}`);
+        return this.get(`/api/programs/${program}/records/${recordType}/${record}/edit`);
     }
 
     update(program, recordType, record) {
@@ -18,8 +18,6 @@ class ProgramRecordsRequest extends Request{
     }
 
     destroy(program, recordType, record) {
-        console.log(`/api/programs/${program}/records/${recordType}/${record}`);
-
         return this.delete(`/api/programs/${program}/records/${recordType}/${record}`);
     }
 }

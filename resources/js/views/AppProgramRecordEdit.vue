@@ -1,7 +1,7 @@
 <template>
     <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Update <primary-data :record="record" :fields="fields"/>'s program status
+            <base-icon class="tw-align-middle">person_add</base-icon> Update <primary-data :record="record" :fields="record.fields"/>'s program status
         </div>
         <form>
             <div class="tw-mb-2">
@@ -82,18 +82,17 @@
 </template>
 <script>
     import Request from '../api/ProgramRecordsRequest';
+    import RecordRequest from '../api/RecordRequest';
+    import StatusesRequest from '../api/ProgramClientStatusesRequest';
 
     import PrimaryData from '../components/RecordPrimaryData';
 
     export default {
         props: {
             active: Boolean,
-            enrolledAt: String,
-            record: Object,
-            programId: String|Number,
-            programStatus: Array|Object,
-            recordType: String|Object,
-            fields: Array|Object
+            recordId: Number|String,
+            programId: Number|String,
+            recordType: String
         },
 
         components: {
@@ -103,7 +102,6 @@
         data() {
             return {
                 request: new Request(),
-                recordId: '',
                 requestData: {
                     status: {
                         id: '',
@@ -111,6 +109,9 @@
                     },
                     notes: '',
                     enrolled_at: ''
+                },
+                record: {
+                    fields: []
                 },
                 statuses: []
             }
@@ -132,26 +133,41 @@
             },
 
             open() {
-                this.recordId = this.record.id;
-                this.requestData.status = this.programStatus.status;
-                this.requestData.notes = this.programStatus.notes;
-                this.requestData.enrolled_at = this.enrolledAt;
-
-                this.load();
+                this.retrieveRecord();
+                this.retrieveStatuses();
+                this.retrieveProgramRecord();
             },
 
-            load() {
+            retrieveProgramRecord() {
                 let request = new Request({});
 
-                request.edit(this.programId, this.recordType.slug, this.recordId).then((response) => {
-                    this.statuses = response;
+                request.edit(this.programId, this.recordType, this.recordId).then((response) => {
+                    this.requestData.status = response.data.statuses[0].status;
+                    this.requestData.notes = response.data.statuses[0].notes;
+                    this.requestData.enrolled_at = response.data.enrolled_at;
+                });
+            },
+
+            retrieveRecord() {
+                let request = new RecordRequest({});
+
+                request.show(this.recordType, this.recordId).then((response) => {
+                    this.record = response.data;
+                });
+            },
+
+            retrieveStatuses() {
+                let request = new StatusesRequest({});
+
+                request.retrieve().then((response) => {
+                    this.statuses = response.data;
                 });
             },
 
             update() {
                 this.request = new Request(this.requestData);
 
-                this.request.update(this.programId, this.recordType.slug, this.recordId)
+                this.request.update(this.programId, this.recordType, this.recordId)
                     .then((response) => {
                         this.$emit('update');
                         this.$message({

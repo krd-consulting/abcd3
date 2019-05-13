@@ -37,10 +37,12 @@ Route::prefix('api')
 
         Route::get('programs/{program}/records/{recordType}', 'ProgramRecordsController@index');
         Route::get('programs/{program}/available-records/{recordType}', 'RecordsAvailableForProgram');
-        Route::get('programs/edit/{program}/records/{recordType}/{record}', 'ProgramRecordsController@edit');
+        Route::get('programs/{program}/records/{recordType}/{record}/edit', 'ProgramRecordsController@edit');
         Route::patch('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@update');
         Route::post('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@store');
         Route::delete('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@destroy');
+
+        Route::get('program-client-statuses', 'ProgramClientStatusesController@index');
 
         Route::resource('groups', 'GroupController');
 

@@ -6,12 +6,9 @@
         </add-program>
         <edit-program-record
             :active.sync="edit.active"
-            :enrolledAt="edit.program.enrolled_at"
-            :record="record"
+            :record-id="$route.params.record"
             :program-id="edit.program.id"
-            :program-status="edit.program.program_status"
-            :fields="fields"
-            :record-type="record.type"
+            :record-type="$route.params.recordType"
             @update="retrieve"/>
         <list
             :page.sync="params.page"
