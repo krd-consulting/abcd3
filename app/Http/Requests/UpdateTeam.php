@@ -13,7 +13,7 @@ class UpdateTeam extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,8 +24,8 @@ class UpdateTeam extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:teams,id'
-            'name' => 'required|unique:programs,name,' . $this->input('id'),
+            'id' => 'required|exists:teams,id',
+            'name' => 'required|unique:teams,name,' . $this->input('id'),
         ];
     }
 }

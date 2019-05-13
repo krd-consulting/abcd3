@@ -2,10 +2,10 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class TestsSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
@@ -19,10 +19,5 @@ class DatabaseSeeder extends Seeder
         
         $this->call(RecordIdentitiesTableSeeder::class);
         $this->call(RecordTypesTableSeeder::class);
-
-        $this->call(UsersTableSeeder::class);
-        $this->call(TeamsTableSeeder::class);
-        $this->call(ProgramsTableSeeder::class);
-        $this->call(RecordsTableSeeder::class);
     }
 }

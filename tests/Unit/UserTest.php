@@ -6,10 +6,13 @@ use App\User;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
+	use DatabaseMigrations, RefreshDatabase;
+
 	/** @test **/
     public function user_with_no_role_should_return_self_scope() 
     {

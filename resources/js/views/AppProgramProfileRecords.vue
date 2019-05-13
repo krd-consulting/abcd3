@@ -22,15 +22,17 @@
             :per-page="params.perPage"
             :total="total">
             <template slot="empty-placeholder">
-                 <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="records.length == 0">
-                    <div>
-                        <base-button
-                            class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
-                            @click="addRecord">
-                            <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Add Records</span>
-                        </base-button>
-                    </div>
+                <div class="tw-text-center tw-py-16 tw-border-b">
+                    <base-button
+                        v-if="params.search == ''"
+                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
+                        @click="addRecord">
+                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                        <span class="tw-text-xs tw-align-middle">Add Records</span>
+                    </base-button>
+                    <h3 v-else class="tw-text-grey">
+                        Sorry, there were no items that matched your query.
+                    </h3>
                 </div>
             </template>
             <template slot="header-text">{{ recordType.name }}</template>
@@ -50,9 +52,21 @@
                 :records="records"
                 @remove="confirmDelete"
                 @edit="editRecord"/>
-            <staff-list v-else-if="recordType.identity == 'Staff'" :records="records"/>
-            <volunteers-list v-else-if="recordType.identity == 'Volunteer'" :records="records"/>
-            <external-list v-else-if="recordType.identity == 'External'" :records="records"/>
+            <staff-list 
+                v-else-if="recordType.identity == 'Staff'" 
+                :records="records"
+                @remove="confirmDelete"
+                @edit="editRecord"/>
+            <volunteers-list 
+                v-else-if="recordType.identity == 'Volunteer'" 
+                :records="records"
+                @remove="confirmDelete"
+                @edit="editRecord"/>
+            <external-list 
+                v-else-if="recordType.identity == 'External'" 
+                :records="records"
+                @remove="confirmDelete"
+                @edit="editRecord"/>
 
             <template slot="footer-options">
                 <base-button

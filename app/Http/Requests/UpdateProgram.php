@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Program;
+use Illuminate\Validation\Rule;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -30,11 +30,11 @@ class UpdateProgram extends FormRequest
             'name' => [
                     'required',
 
-                    // Check whether the program name already exists within the team (excludes the group being edited).
+                    // Check whether the program name already exists within the team (excludes the program being edited).
                     Rule::unique('programs')->where(function ($query) {
                         return $query->where('team_id', $this->team_id)->where('id', '!=', $this->id);
                     })
-                ]
+                ],
             'team_id' => 'required|exists:teams,id'
         ];
     }

@@ -18,10 +18,10 @@
             <template v-slot:secondary-data>
                 <secondary-data class="tw-text-xs" :record="record" :fields="record.fields"/>
             </template>
-            <template v-slot:options-container>
+            <template v-slot:options-container="slotProps">
                 <div class="tw-w-1/5 tw-text-right">
                     <div class="tw-px-4">
-                        <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(record.id)">
+                        <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="$emit('remove', slotProps.item.id)">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
                             <span class="tw-text-xs tw-align-middle">Remove</span>
                         </base-button>

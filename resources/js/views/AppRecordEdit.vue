@@ -4,7 +4,7 @@
             <base-icon class="tw-align-middle">person_add</base-icon> Edit {{ recordType.name }}
         </div>
         <form>
-            <div v-for="(field, fieldName) in fields" class="tw-mb-2">
+            <div v-for="(field, fieldName) in record.fields" class="tw-mb-2">
                 <div  class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5 tw-capitalize">
                         {{ fieldName.replace('_', ' ') }}
@@ -41,26 +41,26 @@
     </base-dialog>
 </template>
 <script>
-    import Request from '../api/RecordRequest';
+    import RecordRequest from '../api/RecordRequest';
+    import TeamRequest from '../api/TeamRequest';
 
     export default {
         props: {
             active: Boolean,
-            record: Object,
-            recordType: String|Object,
-            fields: Array|Object
+            recordId: Number | String 
         },
 
         data() {
             return {
-                request: new Request(),
                 newRecordData: {
                     id: '',
                     field_1_value: '',
                     field_2_value: '',
-                    field_3_value: ''
+                    field_3_value: '',
                 },
-                teams: []
+                request: new RecordRequest(),
+                record: {}, 
+                recordType: this.$route.params.recordType,
             }
         },
 
@@ -69,38 +69,33 @@
                 this.$emit('update:active', false);
 
                 this.request.errors.clear();
-
-                this.newRecordData = {
-                    id: '',
-                    field_1_value: '',
-                    field_2_value: '',
-                    field_3_value: '',
-                };
             },
 
             open() {
-                this.newRecordData.id = this.record.id;
+                this.retrieveRecord();
+            },
 
+            retrieveRecord() {
+                let request = new RecordRequest({});
+
+                request.edit(this.recordType, this.recordId).then((response) => {
+                    this.record = response.data;
+
+                    this.initializeNewRecordData();
+                });
+            },
+
+            initializeNewRecordData() {
                 const fields = _.invert(this.record.fields);
                 this.newRecordData.field_1_value = this.record[fields['field_1_value']];
                 this.newRecordData.field_2_value = this.record[fields['field_2_value']];
                 this.newRecordData.field_3_value = this.record[fields['field_3_value']];
-
-                this.load();
-            },
-
-            load() {
-                let request = new Request({});
-
-                request.edit(this.newRecordData.id).then((response) => {
-                    this.teams = response;
-                });
             },
 
             update() {
-                this.request = new Request(this.newRecordData);
+                this.request = new RecordRequest(this.newRecordData);
 
-                this.request.update(this.newRecordData.id)
+                this.request.update(this.recordType, this.recordId)
                     .then((response) => {
                         this.$emit('update');
                         this.$message({

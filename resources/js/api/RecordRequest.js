@@ -9,20 +9,20 @@ class RecordRequest extends Request{
         return this.get(`/api/records/${recordType}/${record}`);
     }
 
-    create() {
-        return this.get('/api/records/create');
+    create(recordType) {
+        return this.get(`/api/records/${recordType}/create`);
     }
 
-    store() {
-        return this.post('/api/records');
+    store(recordType) {
+        return this.post(`/api/records/${recordType}`);
     }
 
-    edit(record) {
-        return this.get(`/api/records/${record}/edit`);
+    edit(recordType, record) {
+        return this.get(`/api/records/${recordType}/${record}/edit`);
     }
 
-    update(record) {
-        return this.patch(`/api/records/${record}`);
+    update(recordType, record) {
+        return this.patch(`/api/records/${recordType}/${record}`);
     }
 
     destroy(record) {

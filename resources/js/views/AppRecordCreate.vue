@@ -113,7 +113,7 @@
             load() {
                 let request = new Request({});
 
-                request.create().then((response) => {
+                request.create(this.recordType.slug).then((response) => {
                     this.teams = response;
                 });
             },
@@ -123,7 +123,7 @@
 
                 this.request = new Request(this.recordData);
 
-                this.request.store()
+                this.request.store(this.recordType.slug)
                     .then((response) => {
                         this.$emit('save');
                         this.$message({

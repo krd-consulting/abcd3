@@ -10,18 +10,42 @@ use App\Scope;
 use App\Team;
 use App\User;
 
+use App\Http\Resources\Teams;
+
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TeamTest extends TestCase
 {
-    use WithFaker, DatabaseTransactions;
+    use WithFaker, DatabaseMigrations, DatabaseTransactions;
 
-    public function setUp() : void
+    /** @test */
+    public function user_with_universal_scope_can_see_all_teams()
     {
-        parent::setUp();
-        $this->artisan('db:seed');
+        $this->withoutExceptionHandling();
+
+        $scope = Scope::where('name', config('auth.scopes.universal.name'))->first();
+
+        $role = Role::create([
+            'name' => 'see all teams',
+            'guard_name' => 'web',
+            'scope_id' => $scope->id
+        ]);
+
+        $user = factory(User::class)->create()->assignRole($role);
+
+        factory(Team::class, 5)->create();
+
+        $teams = Team::all('id', 'name', 'description');
+
+        $response = $this->actingAs($user)->get('/api/teams');
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => $teams->toArray()
+            ]);
     }
 
     /** @test */
@@ -66,6 +90,36 @@ class TeamTest extends TestCase
         $response->assertStatus(403);
 
         $this->assertDatabaseMissing('teams', $attributes);
+    }
+
+    /** @test */
+    public function user_with_write_teams_permission_can_update_a_team()
+    {
+        $this->withoutExceptionHandling();
+
+        $scope = Scope::where('name', config('auth.scopes.universal.name'))->first();
+
+        $role = Role::create([
+            'name' => 'write teams',
+            'guard_name' => 'web',
+            'scope_id' => $scope->id
+        ])->givePermissionTo(config('auth.permissions.write-teams.name'));
+
+        $user = factory(User::class)->create()->assignRole($role);
+
+        $team = factory(Team::class)->create();
+
+        $attributes = [
+            'id' => $team->id,
+            'name' => $this->faker->word,
+            'description' => $this->faker->sentence
+        ];
+
+        $response = $this->actingAs($user)->patch('/api/teams/' . $team->id, $attributes);
+
+        $response->assertStatus(200);
+
+        $this->assertDatabaseHas('teams', $attributes);
     }
 
     /** @test */

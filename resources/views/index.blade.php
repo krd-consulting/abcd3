@@ -10,7 +10,7 @@
 
 @section('content')
     <el-main class="main">
-         <router-view :key="$route.fullPath"></router-view>
+         <router-view></router-view>
     </el-main>
 @endsection
 

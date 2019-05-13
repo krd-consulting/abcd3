@@ -7,8 +7,12 @@
             :record-type="record.type"
             @update="retrieve"/>
 
-        <div class="tw-shadow tw-rounded tw-bg-white">
-            <div class="tw-flex tw-items-top tw-justify-between tw-p-4">
+        <resource-profile 
+            :record="record"
+            :fields="fields"
+            @edit="editRecord(record)" 
+            @delete="confirmDelete(record)">
+            <template v-slot:main-information-container>
                 <div>
                     <div class="tw-inline-block tw-align-middle">
                         <profile-picture class="tw-mr-2 tw-w-16 tw-h-16 tw-text-2xl" :record="record" :fields="fields" />
@@ -22,49 +26,20 @@
                         </p>
                     </div>
                 </div>
-                <div class="tw-text-right">
-                    <div>
-                        <span class="tw-uppercase tw-text-grey tw-text-xs tw-font-semibold">{{ record.type.name }}</span>
-                    </div>
-                    <div>
-                        <base-button @click="editRecord(record)" class="tw-py-2 tw-px-0 tw-mr-4 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none">
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Edit</span>
-                        </base-button>
-                        <base-button @click="confirmDelete(record)" class="tw-py-2 tw-px-0 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none">
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Delete</span>
-                        </base-button>
-                    </div>
-                </div>
-            </div>
-            <div class="tw-bg-grey-lightest">
-                <el-tabs  @tab-click="handleClick">
-                    <el-tab-pane name="record_profile_summary" label="Summary">
-                    </el-tab-pane>
-                    <el-tab-pane name="record_profile_programs">
-                        <template slot="label">
-                            <base-icon class="tw-align-middle tw-text-sm">assignment</base-icon>
-                            Programs
-                        </template>
-                    </el-tab-pane>
-                    <el-tab-pane name="record_profile_groups">
-                        <template slot="label">
-                            <base-icon class="tw-align-middle tw-text-sm">people</base-icon>
-                            Groups
-                        </template>
-                    </el-tab-pane>
-                </el-tabs>
-            </div>
-            <div>
-                <router-view :record="record" :fields="fields"/>
-            </div>
-        </div>
+            </template>
+            <template v-slot:extra-information-icon>
+                people
+            </template>
+            <template v-slot:extra-information>
+                {{ record.type.name }}
+            </template>
+        </resource-profile>
     </div>
 </template>
 <script>
     import RecordRequest from '../api/RecordRequest';
 
+    import ResourceProfile from '../components/AppResourceProfile';
     import EditRecord from './AppRecordEdit';
     import ProfilePicture from '../components/RecordProfilePicture';
     import PrimaryData from '../components/RecordPrimaryData';
@@ -73,6 +48,7 @@
     export default {
 
         components: {
+            ResourceProfile,
             EditRecord,
             ProfilePicture,
             PrimaryData,
@@ -103,10 +79,6 @@
         },
 
         methods: {
-            handleClick(tab, event) {
-                this.$router.push({ name: `${tab.name}`});
-            },
-
             retrieve() {
                 this.request.setFields({
                     params: {...this.params}

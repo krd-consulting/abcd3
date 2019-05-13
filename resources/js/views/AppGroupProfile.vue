@@ -5,57 +5,36 @@
             :group="edit.group"
             @update="retrieve"/>
 
-        <div class="tw-shadow tw-rounded tw-bg-white">
-            <div class="tw-flex tw-items-start tw-justify-between tw-p-4 tw-border-b-2">
-                <div>
-                    <h1 class="tw-font-semibold tw-text-xl">{{ group.name }}</h1>
-                    <p class="tw-text-grey">{{ group.description }}</p>
-                </div>
-                <div class="tw-text-right">
-                    <router-link router-link tag="a" :to="`/programs/${group.program.id}`">
-                        <base-icon class="tw-text-grey tw-text-xs tw-text-align-middle">people</base-icon>
-                        <span class="tw-uppercase tw-text-grey tw-text-xs tw-font-semibold">   
-                            {{ group.program.name }}
-                        </span>
-                    </router-link>
-                    <div>
-                        <base-button @click="editGroup(group)" class="tw-py-2 tw-px-0 tw-mr-4 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none">
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Edit</span>
-                        </base-button>
-                        <base-button @click="confirmDelete(record)" class="tw-py-2 tw-px-0 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none">
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Delete</span>
-                        </base-button>
-                    </div>
-                </div>
-            </div>
-            <div class="tw-bg-grey-lightest">
-                <el-tabs  @tab-click="handleClick">
-                    <el-tab-pane name="group_profile_summary" label="Summary">
-                    </el-tab-pane>
-                    <el-tab-pane v-for="(type, key) in recordTypes" :name="`group_profile_records_${type.slug}`" :key="key" label="Summary">
-                        <template slot="label">
-                            <base-icon class="tw-align-middle tw-text-sm">insert_drive_file</base-icon>
-                            {{ type.name }}
-                        </template>
-                    </el-tab-pane>
-                </el-tabs>
-            </div>
-            <div>
-                <router-view/>
-            </div>
-        </div>
+        <resource-profile 
+            :extra-information-path="`/programs/${group.program.id}`"
+            :record-types="recordTypes"
+            @edit="editGroup(group)" 
+            @delete="confirmDelete(group)">
+            <template v-slot:header>
+                {{ group.name }}
+            </template>
+            <template v-slot:subheader>
+                {{ group.description }}
+            </template>
+            <template v-slot:extra-information-icon>
+                people
+            </template>
+            <template v-slot:extra-information>
+                {{ group.program.name }}
+            </template>
+        </resource-profile>
     </div>
 </template>
 <script>
     import GroupRequest from '../api/GroupRequest';
     import RecordTypeRequest from '../api/RecordTypeRequest';
 
+    import ResourceProfile from '../components/AppResourceProfile';
     import EditGroup from './AppGroupEdit';
 
     export default {
         components: {
+            ResourceProfile,
             EditGroup
         },
 
@@ -82,33 +61,6 @@
                 type: {
                     name: ''
                 },
-            }
-        },
-
-        computed: {
-            firstItemNo() {
-                return (this.params.perPage*(this.params.page-1)) + 1 ;
-            },
-
-            lastItemNo() {
-                const itemNo = this.params.page*this.params.perPage;
-
-                if(itemNo > this.total)
-                    return this.total;
-
-                return itemNo;
-            },
-
-            paginationInfo() {
-                return `Showing ${ this.firstItemNo }-${ this.lastItemNo } of ${ this.total }`;
-            }
-        },
-
-        watch: {
-            '$route': function() {
-                this.params.page = 1;
-                this.params.perPage = 5;
-                this.retrieve();
             }
         },
 

@@ -35,8 +35,23 @@ return [
 
         'sqlite' => [
             'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', database_path('database.sqlite')),
+            'database' => ':memory:',
             'prefix' => '',
+        ],
+
+        'test' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', '127.0.0.1'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => env('DB_DATABASE', 'abcd-test'),
+            'username' => env('DB_USERNAME', 'abcd'),
+            'password' => env('DB_PASSWORD', 's0mething!'),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
         ],
 
         'mysql' => [

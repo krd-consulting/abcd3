@@ -8,11 +8,11 @@
             <secondary-data class="tw-text-xs" :record="record" :fields="fields"/>
         </template>
         <template slot="options">
-            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" @click="editRecord(record)">
+            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" @click="editRecord(record.id)">
                 <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
                 <span class="tw-text-xs tw-align-middle">Edit</span>
             </base-button>
-            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none" @click="confirmDelete(record)">
+            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none" @click="confirmDelete(record.id)">
                 <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
                 <span class="tw-text-xs tw-align-middle">Delete</span>
             </base-button>
@@ -70,7 +70,7 @@
             deleteRecord(record) {
                 let request = new Request();
 
-                return request.destroy(record.id);
+                return request.destroy(record);
             },
 
             editRecord(record) {

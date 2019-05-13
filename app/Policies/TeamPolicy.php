@@ -47,8 +47,11 @@ class TeamPolicy
         if(!$user->hasScopeOfAtleast(config('auth.scopes.team.value')))
             return false;
 
+        if($user->hasScopeOfAtleast(config('auth.scopes.universal.value')))
+            return true;
+
         if(!$user->hasTeam($team))
-            return false;
+             return false;
 
         return true;
     }

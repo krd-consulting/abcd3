@@ -29,14 +29,14 @@ class RecordController extends Controller
         return (new RecordResource($record));
     }
 
-    public function create()
+    public function create(RecordType $recordType)
     {
         $this->authorize('create', Record::class);
 
         return auth()->user()->availableTeams;
     }
 
-    public function store(StoreRecord $request)
+    public function store(RecordType $record, StoreRecord $request)
     {
         $this->authorize('create', Record::class);
 
@@ -54,16 +54,19 @@ class RecordController extends Controller
         return new RecordResource($record);
     }
 
-    public function edit(Record $record)
+    public function edit(RecordType $recordType, Record $record)
     {
         $this->authorize('write', $record);
 
-        // Return available teams when user is authorized.
-        return auth()->user()->availableTeams;
+        // Return record data when user is authorized.
+        $record = $record->load('record_type');
+        return (new RecordResource($record));
     }
 
-    public function update(Record $record, UpdateRecord $request)
+    public function update(RecordType $recordType, Record $record, UpdateRecord $request)
     {
+        $this->authorize('write', $record);
+
         // Update record when user is authorized.
         $record->field_1_value = $request->input('field_1_value');
         $record->field_2_value = $request->input('field_2_value');
@@ -73,7 +76,7 @@ class RecordController extends Controller
         return $record;
     }
 
-    public function destroy(Record $record)
+    public function destroy(RecordType $recordType, Record $record)
     {
         $this->authorize('write', $record);
 

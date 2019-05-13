@@ -54,19 +54,19 @@ class Program extends Model
     }
 
     // Query Scopes
-    public function scopeAvailableFor($query, $user) {
+    public function scopeAvailableFor($query, $user, $exceptions = []) {
         $scope = $user->scope;
 
         switch($scope) {
             case 'universal':
-                return $query;
+                return $query->whereNotIn('id', $exceptions);
 
             case 'team':
                 $teams = $user->teams;
-                return $query->inTeams($teams);
+                return $query->whereNotIn('id', $exceptions)->inTeams($teams);
 
             default:
-                return $user->programs();
+                return $user->programs()->whereNotIn('id', $exceptions);
         }
     }
 

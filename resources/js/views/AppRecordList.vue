@@ -8,9 +8,7 @@
 
         <edit-record
             :active.sync="edit.active"
-            :record="edit.record"
-            :fields="fields"
-            :record-type="type"
+            :record-id="edit.record"
             @update="retrieve"/>
 
 
@@ -23,13 +21,7 @@
             <template slot="header-text">{{ type.name }}</template>
             <template slot="options">
                 <div class="tw-flex">
-                    <base-input
-                        v-model="params.search"
-                        @input="search"
-                        class="tw-no-shrink tw-mr-2"
-                        :placeholder="`Search for ${type.name}`">
-                        <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                    </base-input>
+                    <search v-model="params.search" @input="search"/>
                     <base-button class="tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue tw-no-shrink" @click="createRecord">
                         <base-icon class="tw-text-base tw-font-bold tw-align-middle">add</base-icon>
                         <span class="tw-align-middle">Add {{type.name}}</span>
@@ -51,6 +43,8 @@
     import RecordRequest from '../api/RecordRequest';
 
     import List from '../components/AppList';
+    import Search from '../components/AppSearch';
+
     import CreateRecord from './AppRecordCreate';
     import EditRecord from './AppRecordEdit';
 
@@ -58,6 +52,7 @@
 
         components: {
             List,
+            Search,
             CreateRecord,
             EditRecord
         },
@@ -69,11 +64,7 @@
                 },
                 edit: {
                     active: false,
-                    record: {
-                        field_1_value: '',
-                        field_2_value: '',
-                        field_3_value: '',
-                    }
+                    record: ''
                 },
                 fields: [],
                 records: [],

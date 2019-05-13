@@ -1,68 +1,51 @@
 <template>
     <div>
-        <edit-program
+        <edit-team
             :active.sync="edit.active"
-            :program="edit.program"
+            :team="edit.team"
             @update="retrieve"/>
 
         <resource-profile 
-            :extra-information-path="`/teams/${program.team.id}`"
             :record-types="recordTypes"
-            @edit="editProgram(program)" 
-            @delete="confirmDelete(program)">
+            @edit="editTeam(team)" 
+            @delete="confirmDelete(team)">
             <template v-slot:header>
-                {{ program.name }}
+                {{ team.name }}
             </template>
             <template v-slot:subheader>
-                {{ program.description }}
-            </template>
-            <template v-slot:extra-information-icon>
-                people
-            </template>
-            <template v-slot:extra-information>
-                {{ program.team.name }}
+                {{ team.description }}
             </template>
         </resource-profile>
     </div>
 </template>
 <script>
-    import ProgramRequest from '../api/ProgramRequest';
+    import TeamRequest from '../api/TeamRequest';
     import RecordTypeRequest from '../api/RecordTypeRequest';
 
     import ResourceProfile from '../components/AppResourceProfile';
-    import EditProgram from './AppProgramEdit';
+    import EditTeam from './AppTeamEdit';
 
     export default {
         components: {
             ResourceProfile,
-            EditProgram
+            EditTeam
         },
 
         data() {
             return {
-                program: {
+                team: {
                     name: '',
-                    team: {
-                        name: ''
-                    }
+                    description: ''
                 },
                 edit: {
                     active: false,
-                    program: {
-                        field_1_value: '',
-                        field_2_value: '',
-                        field_3_value: '',
-                        team_id: ''
-                    }
+                    team: {
+                        name: '',
+                        description: ''
+                    },
                 },
                 recordTypes: [],
-                request: new ProgramRequest({}),
-                params: {
-                    ascending: true,
-                    sortBy: 'field_1_value',
-                    page: 1,
-                    perPage: 5
-                },
+                request: new TeamRequest({}),
                 total: 0,
                 type: {
                     name: ''
@@ -76,8 +59,8 @@
                     params: {...this.params}
                 });
 
-                this.request.show(this.$route.params.program).then((response) => {
-                    this.program = response.data;
+                this.request.show(this.$route.params.team).then((response) => {
+                    this.team = response.data;
                 });
             },
 
@@ -89,19 +72,19 @@
                 });
             },
 
-            confirmDelete(program) {
-                this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
+            confirmDelete(team) {
+                this.$confirm('Are you sure you want to delete this team?', 'Delete Team', {
                     confirmButtonText: 'Delete',
                     cancelButtonText: 'Wait, no!',
                     type: 'warning'
                 }).then(() => {
-                    this.deleteProgram(program)
+                    this.deleteTeam(team)
                         .then(() => {
-                            this.$router.push('/programs');
+                            this.$router.push('/teams');
 
                             this.$message({
                                 type: 'success',
-                                message: 'Program was deleted.'
+                                message: 'Team was deleted.'
                             });
                         })
                         .catch((error) => {
@@ -113,16 +96,16 @@
                 })
             },
 
-            editProgram(program) {
-                this.edit.program = program;
+            editTeam(team) {
+                this.edit.team = team;
 
                 this.edit.active = true;
             },
 
-            deleteProgram(program) {
-                let request = new ProgramRequest({});
+            deleteTeam(team) {
+                let request = new TeamRequest({});
 
-                return request.destroy(program.id);
+                return request.destroy(team.id);
             },
         },
 

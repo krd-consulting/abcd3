@@ -15,8 +15,8 @@ class ProgramsAvailableForRecord extends Controller
 
     public function __invoke(RecordType $recordType, Record $record)
     {
-        $programs = new Program;
         $selectedPrograms = $record->programs()->pluck('programs.id');
+        $programs = (new Program);
 
         // Search
         $search = request('search');
@@ -27,7 +27,7 @@ class ProgramsAvailableForRecord extends Controller
         $sortBy = request('sortBy');
         $programs = $programs->sort($sortBy, $ascending);
 
-        $programs = $programs->availableFor(auth()->user())->whereNotIn('programs.id', $selectedPrograms);
+        $programs = $programs->availableFor(auth()->user(), $selectedPrograms);
 
         // Paginate per request.
         $perPage = request('perPage');

@@ -15,7 +15,7 @@ class UpdateRecord extends FormRequest
      */
     public function authorize()
     {
-        return $this->user()->can('write', Record::find($this->route('record')));
+        return true;
     }
 
     /**
@@ -25,7 +25,7 @@ class UpdateRecord extends FormRequest
      */
     public function rules()
     {
-        $recordType = Record::find($this->input('id'))->record_type;
+        $recordType = $this->route('recordType');
 
         return [
             'field_1_value' => $this->fieldRules()[$recordType->identity->field1->name],

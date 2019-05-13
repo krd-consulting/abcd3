@@ -48,7 +48,7 @@
             <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
             <span slot="title">Groups</span>
         </sidebar-list-item>
-        @if(count($teams) > 0)
+        @if(count($teams) > 1)
             <base-submenu index="/teams/">
                 <template slot="title">
                     <base-icon class="tw-text-xl tw-mr-2">people</base-icon>

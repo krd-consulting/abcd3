@@ -13,12 +13,13 @@ Route::prefix('api')
     ->group( function() {
         Route::get('record-types', 'RecordTypeController@index');
 
-        Route::resource('records', 'RecordController')->except([
-            'index', 'show'
-        ]);
-
         Route::get('records/{recordType}', 'RecordTypeRecordController@index');
+        Route::get('records/{recordType}/create', 'RecordController@create');
+        Route::get('records/{recordType}/{record}/edit', 'RecordController@edit');
         Route::get('records/{recordType}/{record}', 'RecordController@show');
+        Route::post('records/{recordType}', 'RecordController@store');
+        Route::patch('records/{recordType}/{record}', 'RecordController@update');
+        Route::delete('records/{recordType}/{record}', 'RecordController@destroy');
 
         Route::get('records/{recordType}/{record}/programs', 'RecordProgramsController@index');
         Route::get('records/{recordType}/{record}/available-programs', 'ProgramsAvailableForRecord');   
@@ -50,6 +51,7 @@ Route::prefix('api')
 
         Route::get('teams', 'TeamController@index');
         Route::get('teams/{team}', 'TeamController@show');
+        Route::patch('teams/{team}', 'TeamController@update');
         Route::post('teams', 'TeamController@store');
         Route::delete('teams/{team}', 'TeamController@destroy');
 

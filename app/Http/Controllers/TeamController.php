@@ -18,7 +18,7 @@ class TeamController extends Controller
     {
     	$teams = (new Team)->availableFor(auth()->user())->get();
 
-    	return $teams;
+    	return (new Teams($teams));
     }
 
     public function show(Team $team)

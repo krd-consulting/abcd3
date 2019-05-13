@@ -1,8 +1,6 @@
 <template>
-    <div v-if="total == 0" class="tw-shadow tw-rounded tw-bg-white tw-pb-1">
-        <slot name="empty-placeholder"></slot>
-    </div>
-    <div v-else class="tw-shadow tw-rounded tw-bg-white">
+    
+    <div class="tw-shadow tw-rounded tw-bg-white">
         <div v-if="hasHeader" class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b">
             <h2 class="tw-font-bold tw-text-xl tw-w-1/2">
                 <slot name="header-text"></slot>
@@ -12,7 +10,10 @@
                 </slot>
             </div>
         </div>
-        <slot name="list">
+        <div v-if="total == 0">
+            <slot name="empty-placeholder"></slot>
+        </div>
+        <slot v-else name="list">
             <div>
                 <slot></slot>
             </div>

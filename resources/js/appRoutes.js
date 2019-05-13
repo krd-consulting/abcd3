@@ -14,6 +14,8 @@ import AppGroupList from './views/AppGroupList';
 import AppGroupProfile from './views/AppGroupProfile';
 import AppGroupProfileSummary from './views/AppGroupProfileSummary';
 import AppGroupProfileRecords from './views/AppGroupProfileRecords';
+import AppTeamProfile from './views/AppTeamProfile';
+import AppTeamProfileSummary from './views/AppTeamProfileSummary';
 
 const routes = [
     {
@@ -55,6 +57,14 @@ const routes = [
         children: [
             { path: '', name: 'group_profile_summary', component: AppGroupProfileSummary },
             { path: 'records/:recordType', name: 'group_profile_records', component: AppGroupProfileRecords },
+        ]
+    },
+
+    {
+        path: '/teams/:team', component: AppTeamProfile,
+        children: [
+            { path: '', name: 'team_profile_summary', component: AppTeamProfileSummary },
+            // { path: 'records/:recordType', name: 'team_profile_records', component: AppTeamProfileRecords },
         ]
     },
 ];
