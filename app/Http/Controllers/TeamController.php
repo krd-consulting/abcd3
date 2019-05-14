@@ -28,6 +28,13 @@ class TeamController extends Controller
     	return (new TeamResource($team));
     }
 
+    public function edit(Team $team)
+    {
+        $this->authorize('write', $team);
+
+        return (new TeamResource($team));
+    }
+
     public function store(StoreTeam $request)
     {
         $this->authorize('create', Team::class);

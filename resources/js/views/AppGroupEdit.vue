@@ -1,5 +1,5 @@
 <template>
-    <base-dialog :visible="active" @close="close" @open="open">
+    <base-dialog :visible="active" @close="close" @open="retrieve">
         <div slot="title">
             <base-icon class="tw-align-middle">person_add</base-icon> Edit Group
         </div>
@@ -11,7 +11,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="groupData['name']"
+                            v-model="newGroupData['name']"
                             name="name"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -29,7 +29,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="groupData['description']"
+                            v-model="newGroupData['description']"
                             name="description"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -47,18 +47,16 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="groupData.program_id"
-                            :value="groupData.program_id"
+                            v-model="newGroupData.program.id"
+                            :value="newGroupData.program.id"
                             name="program"
-                            placeholder="Select Team"
+                            placeholder="Select Program"
                             @change="request.errors.clear('program')"
                             disabled>
                             <el-option
-                                v-for="program in programs"
-                                :key="program.id"
-                                :label="program.name"
-                                :value="program.id">
-                                {{ program.name }}
+                                :label="newGroupData.program.name"
+                                :value="newGroupData.program.id">
+                                {{ newGroupData.program.name }}
                             </el-option>
                         </base-select>
                     </div>
@@ -86,18 +84,19 @@
     export default {
         props: {
             active: Boolean,
-            group: Array|Object
+            groupId: Number | String
         },
 
         data() {
             return {
                 request: new Request(),
-                groupData: {
+                newGroupData: {
+                    id: '',
                     name: '',
                     description: '',
+                    program: {},
                     program_id: ''
                 },
-                programs: []
             }
         },
 
@@ -107,35 +106,35 @@
 
                 this.request.errors.clear();
 
-                this.groupData = {
+                this.newGroupData = {
                     id: '',
                     name: '',
                     description: '',
+                    program: {},
                     program_id: ''
                 };
             },
 
-            open() {
-                this.groupData.id = this.group.id;
-                this.groupData.name = this.group.name;
-                this.groupData.description = this.group.description;
-                this.groupData.program_id = this.group.program_id;
-
-                this.load();
+            initializeWithData(data) {
+                this.newGroupData.id = data.id;
+                this.newGroupData.name = data.name;
+                this.newGroupData.description = data.description;
+                this.newGroupData.program_id = data.program_id;
+                this.newGroupData.program = data.program;
             },
 
-            load() {
+            retrieve() {
                 let request = new Request({});
 
-                request.edit(this.groupData.id).then((response) => {
-                    this.programs = response;
+                request.edit(this.groupId).then((response) => {
+                    this.initializeWithData(response.data);
                 });
             },
 
             store() {
-                this.request = new Request(this.groupData);
+                this.request = new Request(this.newGroupData);
 
-                this.request.update(this.groupData.id)
+                this.request.update(this.newGroupData.id)
                     .then((response) => {
                         this.$emit('update');
                         this.$message({

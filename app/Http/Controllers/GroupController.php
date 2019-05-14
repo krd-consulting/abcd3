@@ -47,7 +47,9 @@ class GroupController extends Controller
     {
         $this->authorize('write', $group);
 
-        return auth()->user()->availablePrograms;
+        return [
+            'data' => $group->load('program')
+        ];
     }
 
     public function update(Group $group, UpdateGroup $request)

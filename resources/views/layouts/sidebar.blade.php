@@ -27,6 +27,7 @@
             @foreach($programs as $program)
                 <sidebar-list-item
                     index="/programs/{{ $program->id }}"
+                    key="3-{{ $program->id }}"
                     :route="{ path: '/programs/{{ $program->id }}' }"
                     >
                     <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>

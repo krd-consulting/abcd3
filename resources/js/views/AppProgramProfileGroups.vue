@@ -138,8 +138,8 @@
                 })
             },
 
-            retrieve() {
-                this.request.retrieve(this.$route.params.program).then((response) => {
+            retrieve(program = this.$route.params.program) {
+                this.request.retrieve(program).then((response) => {
                     this.groups = response.data;
                 });
             },

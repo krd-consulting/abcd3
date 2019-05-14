@@ -6,7 +6,7 @@
 
         <edit-group
             :active.sync="edit.active"
-            :group="edit.group"
+            :group-id="edit.group"
             @update="retrieve"/>
 
         <list :hasHeader="true">
@@ -28,13 +28,13 @@
 
                 <template v-if="group.program" slot="secondary-data-text">{{ group.program.name }}</template>
                 <template slot="options">
-                    <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" @click="editGroup(group)">
+                    <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" @click="editGroup(group.id)">
                         <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
                         <span class="tw-text-xs tw-align-middle">Edit</span>
                     </base-button>
                     <base-button
                         class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none"
-                        @click="confirmDelete(group)">
+                        @click="confirmDelete(group.id)">
                         <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
                         <span class="tw-text-xs tw-align-middle">Delete</span>
                     </base-button>
@@ -139,7 +139,7 @@
             deleteGroup(group) {
                 let request = new Request();
 
-                return request.destroy(group.id);
+                return request.destroy(group);
             },
         },
 

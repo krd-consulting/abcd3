@@ -10,7 +10,7 @@
             :active.sync="edit.active"
             :record-id="edit.record.id"
             :program-id="$route.params.program"
-            :record-type="edit.record.type.slug"
+            :record-type="recordType.slug"
             @update="retrieve"/>
         <list
             :has-header="true"
@@ -165,12 +165,12 @@
                 })
             },
 
-            retrieve() {
+            retrieve(program = this.$route.params.program, recordType = this.$route.params.recordType) {
                 this.request.setFields({
                     params: {...this.params}
                 });
 
-                this.request.retrieve(this.$route.params.program, this.$route.params.recordType).then((response) => {
+                this.request.retrieve(program, recordType).then((response) => {
                     this.records = response.data;
                     this.recordType = response.record_type;
                     this.fields = response.fields;
@@ -196,6 +196,11 @@
 
         created() {
             this.retrieve();
+        },
+
+        beforeRouteUpdate (to, from, next) {
+            this.retrieve(to.params.program, to.params.recordType);
+            next();
         }
     }
 </script>

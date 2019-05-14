@@ -1,5 +1,5 @@
 <template>
-    <base-dialog :visible="active" @close="close" @open="open">
+    <base-dialog :visible="active" @close="close" @open="retrieve">
         <div slot="title">
             <base-icon class="tw-align-middle">person_add</base-icon> Edit Team
         </div>
@@ -11,7 +11,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="teamData['name']"
+                            v-model="newTeamData['name']"
                             name="name"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -29,7 +29,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="teamData['description']"
+                            v-model="newTeamData['description']"
                             name="description"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -57,13 +57,13 @@
     export default {
         props: {
             active: Boolean,
-            team: Array|Object
+            teamId: Number | String
         },
 
         data() {
             return {
                 request: new Request(),
-                teamData: {
+                newTeamData: {
                     name: '',
                     description: '',
                 },
@@ -76,23 +76,31 @@
 
                 this.request.errors.clear();
 
-                this.teamData = {
+                this.newTeamData = {
                     id: '',
                     name: '',
                     description: '',
                 };
             },
 
-            open() {
-                this.teamData.id = this.team.id;
-                this.teamData.name = this.team.name;
-                this.teamData.description = this.team.description;
+            initializeWithData(data) {
+                this.newTeamData.id = data.id;
+                this.newTeamData.name = data.name;
+                this.newTeamData.description = data.description;
+            },
+
+            retrieve() {
+                let request = new Request({});
+
+                request.edit(this.teamId).then((response) => {
+                    this.initializeWithData(response.data);
+                });
             },
 
             store() {
-                this.request = new Request(this.teamData);
+                this.request = new Request(this.newTeamData);
 
-                this.request.update(this.teamData.id)
+                this.request.update(this.newTeamData.id)
                     .then((response) => {
                         this.$emit('update');
                         this.$message({

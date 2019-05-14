@@ -9,6 +9,10 @@ class TeamRequest extends Request{
         return this.get(`/api/teams/${team}`);
     }
 
+    edit(team) {
+        return this.get(`/api/teams/${team}/edit`);
+    }
+
     store() {
         return this.post('/api/teams');
     }

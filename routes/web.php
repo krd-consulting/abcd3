@@ -51,11 +51,7 @@ Route::prefix('api')
         Route::post('groups/{group}/records/{recordType}/{record}', 'GroupRecordsController@store');
         Route::delete('groups/{group}/records/{recordType}/{record}', 'GroupRecordsController@destroy');
 
-        Route::get('teams', 'TeamController@index');
-        Route::get('teams/{team}', 'TeamController@show');
-        Route::patch('teams/{team}', 'TeamController@update');
-        Route::post('teams', 'TeamController@store');
-        Route::delete('teams/{team}', 'TeamController@destroy');
+        Route::resource('teams', 'TeamController');
 
         Route::resource('roles', 'RoleController');
 

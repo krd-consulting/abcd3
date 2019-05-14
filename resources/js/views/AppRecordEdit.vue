@@ -4,7 +4,7 @@
             <base-icon class="tw-align-middle">person_add</base-icon> Edit {{ recordType.name }}
         </div>
         <form>
-            <div v-for="(field, fieldName) in record.fields" class="tw-mb-2">
+            <div v-for="(field, fieldName) in fields" class="tw-mb-2">
                 <div  class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5 tw-capitalize">
                         {{ fieldName.replace('_', ' ') }}
@@ -59,7 +59,7 @@
                     field_3_value: '',
                 },
                 request: new RecordRequest(),
-                record: {}, 
+                fields: [],
                 recordType: this.$route.params.recordType,
             }
         },
@@ -75,17 +75,16 @@
                 let request = new RecordRequest({});
 
                 request.edit(this.recordType, this.recordId).then((response) => {
-                    this.record = response.data;
-
-                    this.initializeData();
+                    this.initializeWithData(response.data);
                 });
             },
 
-            initializeData() {
-                const fields = _.invert(this.record.fields);
-                this.newRecordData.field_1_value = this.record[fields['field_1_value']];
-                this.newRecordData.field_2_value = this.record[fields['field_2_value']];
-                this.newRecordData.field_3_value = this.record[fields['field_3_value']];
+            initializeWithData(data) {
+                this.fields = data.fields;
+                const invertedFields = _.invert(data.fields);
+                this.newRecordData.field_1_value = data[invertedFields['field_1_value']];
+                this.newRecordData.field_2_value = data[invertedFields['field_2_value']];
+                this.newRecordData.field_3_value = data[invertedFields['field_3_value']];
             },
 
             update() {

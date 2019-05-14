@@ -2,11 +2,10 @@
     <div>
         <edit-team
             :active.sync="edit.active"
-            :team="edit.team"
+            :team-id="team.id"
             @update="retrieve"/>
 
         <resource-profile 
-            :record-types="recordTypes"
             @edit="editTeam(team)" 
             @delete="confirmDelete(team)">
             <template v-slot:header>
@@ -20,7 +19,6 @@
 </template>
 <script>
     import TeamRequest from '../api/TeamRequest';
-    import RecordTypeRequest from '../api/RecordTypeRequest';
 
     import ResourceProfile from '../components/AppResourceProfile';
     import EditTeam from './AppTeamEdit';
@@ -39,10 +37,6 @@
                 },
                 edit: {
                     active: false,
-                    team: {
-                        name: '',
-                        description: ''
-                    },
                 },
                 recordTypes: [],
                 request: new TeamRequest({}),
@@ -54,21 +48,13 @@
         },
 
         methods: {
-            retrieve() {
+            retrieve(team = this.$route.params.team) {
                 this.request.setFields({
                     params: {...this.params}
                 });
 
-                this.request.show(this.$route.params.team).then((response) => {
+                this.request.show(team).then((response) => {
                     this.team = response.data;
-                });
-            },
-
-            retrieveRecordTypes() {
-                const request = new RecordTypeRequest({});
-
-                request.retrieve().then((response) => {
-                    this.recordTypes = response;
                 });
             },
 
@@ -111,7 +97,11 @@
 
         created() {
             this.retrieve();
-            this.retrieveRecordTypes();
+        },
+
+        beforeRouteUpdate (to, from, next) {
+            this.retrieve(to.params.team);
+            next();
         }
 
     }

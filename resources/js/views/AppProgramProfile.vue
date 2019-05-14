@@ -2,7 +2,7 @@
     <div>
         <edit-program
             :active.sync="edit.active"
-            :program="edit.program"
+            :program-id="program.id"
             @update="retrieve"/>
 
         <resource-profile 
@@ -48,12 +48,6 @@
                 },
                 edit: {
                     active: false,
-                    program: {
-                        field_1_value: '',
-                        field_2_value: '',
-                        field_3_value: '',
-                        team_id: ''
-                    }
                 },
                 recordTypes: [],
                 request: new ProgramRequest({}),
@@ -71,12 +65,12 @@
         },
 
         methods: {
-            retrieve() {
+            retrieve(program = this.$route.params.program) {
                 this.request.setFields({
                     params: {...this.params}
                 });
 
-                this.request.show(this.$route.params.program).then((response) => {
+                this.request.show(program).then((response) => {
                     this.program = response.data;
                 });
             },
@@ -127,8 +121,15 @@
         },
 
         created() {
-            this.retrieve();
+            this.retrieve(this.$route.params.program);
             this.retrieveRecordTypes();
+        },
+
+
+        beforeRouteUpdate (to, from, next) {
+            this.retrieve(to.params.program);
+            this.retrieveRecordTypes();
+            next();
         }
 
     }

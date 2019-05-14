@@ -85,7 +85,7 @@
     export default {
         props: {
             active: Boolean,
-            programId: Array|Object
+            programId: Number | String
         },
 
         data() {
@@ -95,7 +95,8 @@
                 newProgramData: {
                     name: '',
                     description: '',
-                    team: {}
+                    team: {},
+                    tema_id: ''
                 },
             }
         },
@@ -110,24 +111,24 @@
                     id: '',
                     name: '',
                     description: '',
-                    team: ''
+                    team: {},
+                    team_id: ''
                 };
             },
 
-            initializeData() {
-                this.newProgramData.id = this.program.id;
-                this.newProgramData.name = this.program.name;
-                this.newProgramData.description = this.program.description;
-                this.newProgramData.team = this.program.team;
+            initializeWithData(data) {
+                this.newProgramData.id = data.id;
+                this.newProgramData.name = data.name;
+                this.newProgramData.description = data.description;
+                this.newProgramData.team_id = data.team_id;
+                this.newProgramData.team = data.team;
             },
 
             retrieve() {
                 let request = new Request({});
 
                 request.edit(this.programId).then((response) => {
-                    this.program = response.data;
-
-                    this.initializeData();
+                    this.initializeWithData(response.data);
                 });
             },
 
