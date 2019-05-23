@@ -12,6 +12,7 @@
                         @csrf
                         <base-input
                             id="email"
+                            v-model="email"
                             type="email"
                             class="
                                 {{ $errors->has('email') ? ' is-invalid' : '' }}
@@ -31,6 +32,7 @@
 
                         <base-input
                             id="password"
+                            v-model="password"
                             type="password"
                             class="
                                 {{ $errors->has('password') ? ' is-invalid' : '' }}
@@ -39,6 +41,7 @@
                             name="password"
                             placeholder="Password"
                             required
+                            show-password
                         ></base-input>
 
                         @if ($errors->has('password'))

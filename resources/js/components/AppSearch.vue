@@ -14,9 +14,9 @@
 		},
 
 		methods: {
-			handleInput: _.debounce(function(event) {
-                this.$emit('input', event);
-            }, 300),
+			handleInput(event) {
+				this.$emit('input', event);
+			},
 		}
 	}
 </script>

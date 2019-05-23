@@ -22,6 +22,8 @@ class RecordProgramsController extends Controller
                 $query->where('record_id', $record->id);
             }, 'client_statuses.status']);
 
+        $programs = $programs->availableFor(auth()->user());
+
         // Search
         $search = request('search');
         $programs = $programs->search($search);
@@ -30,8 +32,6 @@ class RecordProgramsController extends Controller
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $programs = $programs->sort($sortBy, $ascending);
-
-        $programs = $programs->availableFor(auth()->user());
 
         // Paginate per request.
         $perPage = request('perPage');

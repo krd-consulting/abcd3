@@ -22,6 +22,8 @@ class RecordsAvailableForGroup extends Controller
         $selectedRecords = $group->records()->pluck('records.id');
         $records = $recordType->records()->whereNotIn('records.id', $selectedRecords);
 
+        $records = $records->availableFor(auth()->user());
+
         // Search
         $search = request('search');
         $records = $records->search($search);
@@ -30,8 +32,6 @@ class RecordsAvailableForGroup extends Controller
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $records = $records->sort($sortBy, $ascending);
-
-        $records = $records->availableFor(auth()->user());
 
         // Paginate per request.
         $perPage = request('perPage');

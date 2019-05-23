@@ -23,7 +23,7 @@
                 {{ tab.name }}
             </template>
         </el-tab-pane>
-        <el-tab-pane v-if="resourceName != 'team'" name="teams" key="teams">
+        <el-tab-pane v-if="resourceName != 'team' && resourceName != 'group' && resourceName != 'program'" name="teams" key="teams">
             <template slot="label">
                 <base-icon class="tw-align-middle tw-text-sm">people</base-icon>
                 Teams

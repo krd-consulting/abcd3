@@ -16,6 +16,8 @@ class GroupRecordsController extends Controller
     {
         $records = $group->records()->only($recordType);
 
+        $records = $records->availableFor(auth()->user());
+
         // Search
         $search = request('search');
         $records = $records->search($search);
@@ -24,8 +26,6 @@ class GroupRecordsController extends Controller
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $records = $records->sort($sortBy, $ascending);
-
-        $records = $records->availableFor(auth()->user());
 
         // Paginate per request.
         $perPage = request('perPage');

@@ -1,14 +1,15 @@
-<template>
-    
+<template>    
     <div class="tw-shadow tw-rounded tw-bg-white">
         <div v-if="hasHeader" class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b">
-            <h2 class="tw-font-bold tw-text-xl tw-w-1/2">
-                <slot name="header-text"></slot>
-            </h2>
-            <div class="tw-flex-no-wrap tw-w-1/2">
-                <slot name="options">
-                </slot>
-            </div>
+            <slot name="header">
+                <h2 class="tw-font-bold tw-text-xl tw-w-1/2">
+                    <slot name="header-text"></slot>
+                </h2>
+                <div class="tw-flex-no-wrap tw-w-1/2">
+                    <slot name="options">
+                    </slot>
+                </div>
+            </slot>
         </div>
         <div v-if="total == 0">
             <slot name="empty-placeholder"></slot>
@@ -18,9 +19,10 @@
                 <slot></slot>
             </div>
         </slot>
-        <div class="tw-py-2 tw-flex tw-justify-between">
-            <slot name="pagination">
+        <div class="tw-flex tw-justify-between">
+            <slot v-if="total > 0" name="pagination">
                 <base-pagination
+                    class="tw-py-2"   
                     v-show="showPagination"
                     :current-page="page"
                     @current-change="handlePageChange"
@@ -42,7 +44,7 @@
     export default {
 
         props: {
-            items: Array,
+            //items: Array,
             page: Number,
             perPage: Number,
             total: Number,

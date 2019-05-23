@@ -4,88 +4,63 @@
             :active.sync="add.active"
             :program-id="$route.params.program"
             :record-type="recordType.slug"
-            @close="retrieve">
+            @close="retrieve()">
         </add-record>
         <edit-program-record
             :active.sync="edit.active"
-            :record-id="edit.record.id"
+            :record-id="edit.record"
             :program-id="$route.params.program"
             :record-type="recordType.slug"
-            @update="retrieve"/>
-        <list
-            :has-header="true"
-            :page.sync="params.page"
-            @page-change="retrieve"
-            :per-page="params.perPage"
-            :total="total">
-            <template slot="empty-placeholder">
-                <div class="tw-text-center tw-py-16 tw-border-b">
-                    <base-button
-                        v-if="params.search == ''"
-                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
-                        @click="addRecord">
-                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                        <span class="tw-text-xs tw-align-middle">Add Records</span>
-                    </base-button>
-                    <h3 v-else class="tw-text-grey">
-                        Sorry, there were no items that matched your query.
-                    </h3>
-                </div>
-            </template>
-            <template slot="header-text">{{ recordType.name }}</template>
-            <template slot="options">
-                <div class="tw-flex">
-                    <base-input
-                        v-model="params.search"
-                        @input="search"
-                        class="tw-no-shrink tw-mr-2"
-                        :placeholder="`Search for ${recordType.name}`">
-                        <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                    </base-input>
-                </div>
-            </template>
-            <clients-list
-                v-if="recordType.identity == 'Client'"
-                :records="records"
-                @remove="confirmDelete"
-                @edit="editRecord"/>
-            <staff-list 
-                v-else-if="recordType.identity == 'Staff'" 
-                :records="records"
-                @remove="confirmDelete"
-                @edit="editRecord"/>
-            <volunteers-list 
-                v-else-if="recordType.identity == 'Volunteer'" 
-                :records="records"
-                @remove="confirmDelete"
-                @edit="editRecord"/>
-            <external-list 
-                v-else-if="recordType.identity == 'External'" 
-                :records="records"
-                @remove="confirmDelete"
-                @edit="editRecord"/>
+            @update="retrieve()"/>
 
-            <template slot="footer-options">
-                <base-button
-                    v-if="records.length > 0"
-                    class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
-                    @click="addRecord">
-                    <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                    <span class="tw-text-xs tw-align-middle">Manage Records</span>
-                </base-button>
+        <list
+            :items="records"
+            :page.sync="params.page"
+            :per-page="params.perPage"
+            :search-terms.sync="params.search"
+            :tertiary-columns="tertiaryDataColumns"
+            :total="total"
+            has-add
+            has-remove
+            has-list-columns
+            :has-edit="recordType.identity == 'Client'"
+            @add="addRecord"
+            @edit="editRecord"
+            @remove="confirmDelete(recordType.slug, $event)"
+            @page-change="retrieve()"
+            @search="retrieve()">
+            <template slot="header-text">{{ recordType.name }}</template>
+            <template slot="options-add-text">Add {{ recordType.name }}</template>
+
+            <template slot="list-column-primary-data">Record</template>
+
+            <template v-slot:list-item-image="{ item:record }">
+                <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-base" :record="record" :fields="fields" />
+            </template>
+
+            <template v-slot:list-item-primary-data="{ item:record }">
+                <primary-data :record="record" :fields="fields"/>
+            </template>
+
+            <template v-slot:list-item-secondary-data="{ item:record }">
+                <secondary-data class="tw-text-xs" :record="record" :fields="fields"/>
+            </template>
+
+            <template v-slot:list-item-tertiary-data="{ item:record }">
+                <tertiary-data :record-type="recordType" :record="record"/>
             </template>
         </list>
     </div>
 </template>
 <script>
-    import List from '../components/AppList';
+    import List from '../components/AppResourceList';
+
+    import ProfilePicture from '../components/RecordProfilePicture';
+    import PrimaryData from '../components/RecordPrimaryData';
+    import SecondaryData from '../components/RecordSecondaryData';
+    import TertiaryData from '../components/ProgramRecordPivotData';
 
     import RecordsRequest from '../api/ProgramRecordsRequest';
-
-    import ClientsList from './AppProgramProfileRecordsClients';
-    import StaffList from './AppProgramProfileRecordsStaff';
-    import VolunteersList from './AppProgramProfileRecordsVolunteers';
-    import ExternalList from './AppProgramProfileRecordsExternal';
 
     import AddRecord from './AppProgramProfileAddRecord';
     import EditProgramRecord from './AppProgramRecordEdit';
@@ -93,12 +68,12 @@
     export default {
         components: {
             List,
+            ProfilePicture,
+            PrimaryData,
+            SecondaryData,
+            TertiaryData,
             AddRecord,
-            EditProgramRecord,
-            ClientsList,
-            VolunteersList,
-            ExternalList,
-            StaffList
+            EditProgramRecord
         },
 
         data() {
@@ -116,7 +91,7 @@
                 records: [],
                 fields: [],
                 recordType: {
-                    name: 'Records',
+                    name: '',
                     identity: {
                         name: ''
                     }
@@ -132,24 +107,45 @@
             }
         },
 
+        computed: {
+            tertiaryDataColumns() {
+                switch(this.recordType.identity) {
+                    case 'Client':
+                        return [ 'Status', 'Enrollment Date', 'Notes' ];
+                        break;
+
+                    case 'Staff':
+                        return [ 'Caseload', 'Groups'];
+                        break;
+
+                    case 'Volunteer':
+                        return [ 'Hours Per Month', 'Hours Per Year'];
+                        break;
+
+                    default: 
+                        return [];
+                }
+            },
+        },
+
         methods: {
-            remove(id) {
+            remove(record) {
                 return this.request.destroy(
                     this.$route.params.program,
                     this.$route.params.recordType,
-                    id
+                    record
                 ).then((response) => {
                     this.retrieve();
                 });
             },
 
-            confirmDelete(id) {
+            confirmDelete(recordType, record) {
                 this.$confirm('Are you sure you want to remove this record?', 'Remove Record', {
                     confirmButtonText: 'Remove',
                     cancelButtonText: 'Wait, no!',
                     type: 'warning'
                 }).then(() => {
-                    this.remove(id)
+                    this.remove(record)
                         .then(() => {
                             this.$message({
                                 type: 'success',
@@ -177,11 +173,6 @@
                     this.total = response.meta.total;
                 });
             },
-
-            search: _.debounce(function() {
-                this.params.page = 1;
-                this.retrieve();
-            }, 300),
 
             addRecord() {
                 this.add.active = true;

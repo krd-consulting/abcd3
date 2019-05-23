@@ -3,9 +3,10 @@
         <edit-team
             :active.sync="edit.active"
             :team-id="team.id"
-            @update="retrieve"/>
+            @update="retrieve()"/>
 
         <resource-profile 
+            :record-types="recordTypes"
             @edit="editTeam(team)" 
             @delete="confirmDelete(team)">
             <template v-slot:header>
@@ -19,6 +20,7 @@
 </template>
 <script>
     import TeamRequest from '../api/TeamRequest';
+    import RecordTypeRequest from '../api/RecordTypeRequest';
 
     import ResourceProfile from '../components/AppResourceProfile';
     import EditTeam from './AppTeamEdit';
@@ -55,6 +57,14 @@
 
                 this.request.show(team).then((response) => {
                     this.team = response.data;
+                });
+            },
+            
+            retrieveRecordTypes() {
+                const request = new RecordTypeRequest({});
+
+                request.retrieve().then((response) => {
+                    this.recordTypes = response;
                 });
             },
 
@@ -97,6 +107,7 @@
 
         created() {
             this.retrieve();
+            this.retrieveRecordTypes();
         },
 
         beforeRouteUpdate (to, from, next) {

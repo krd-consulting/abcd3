@@ -86,7 +86,11 @@
     export default {
         props: {
             active: Boolean,
-            programId: Number|String
+            programId: Number|String,
+            teamId: {
+                type: Number | String,
+                default: null
+            }
         },
 
         data() {
@@ -131,7 +135,7 @@
             load() {
                 let request = new Request({});
 
-                request.create().then((response) => {
+                request.create(this.teamId).then((response) => {
                     this.programs = response;
                 });
             },

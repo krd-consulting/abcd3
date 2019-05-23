@@ -2,46 +2,35 @@
     <div>
         <create-group
             :active.sync="create.active"
-            @save="retrieve"/>
+            @save="retrieve()"/>
 
         <edit-group
             :active.sync="edit.active"
             :group-id="edit.group"
-            @update="retrieve"/>
+            @update="retrieve()"/>
 
-        <list :hasHeader="true">
+        <list
+            :items="groups"
+            :page.sync="params.page"
+            :per-page="params.perPage"
+            has-add
+            has-delete
+            :has-list-columns="false"
+            :hasSearch="false"
+            @add="createGroup"
+            @edit="editGroup"
+            @delete="confirmDelete"
+            @page-change="retrieve()"
+            :total="total">
             <template slot="header-text">Groups</template>
-            <template slot="options">
-                <div class="tw-flex tw-flex-row-reverse">
-                    <base-button class="tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue tw-no-shrink" @click="createGroup">
-                        <base-icon class="tw-text-base tw-font-bold tw-align-middle">add</base-icon>
-                        <span class="tw-align-middle">Create Group</span>
-                    </base-button>
-                </div>
-            </template>
-            <list-item
-                v-for="(group, index) in groups"
-                :key="index"
-                :to="`/groups/${group.id}`"
-                class="tw-py-4 tw-px-4">
-                {{ group.name }}
+            <template slot="options-add-text">Create Group</template>
 
-                <template v-if="group.program" slot="secondary-data-text">{{ group.program.name }}</template>
-                <template slot="options">
-                    <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" @click="editGroup(group.id)">
-                        <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
-                        <span class="tw-text-xs tw-align-middle">Edit</span>
-                    </base-button>
-                    <base-button
-                        class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none"
-                        @click="confirmDelete(group.id)">
-                        <base-icon class="tw-text-xs tw-mr-1 tw-align-top">delete</base-icon>
-                        <span class="tw-text-xs tw-align-middle">Delete</span>
-                    </base-button>
-                </template>
-            </list-item>
-            <template slot="pagination" slot-scope="pagination">
-                <span class="tw-pl-4 tw-py-4 tw-text-sm tw-font-semibold tw-text-grey-dark">Showing all {{ total }} groups</span>
+            <template v-slot:list-item-primary-data="{ item:group }">
+                {{ group.name }}
+            </template>
+
+             <template v-slot:list-item-secondary-data="{ item:group }">
+                <base-icon class="tw-text-xs align-middle">assignment</base-icon>{{ group.program.name }}
             </template>
         </list>
     </div>
@@ -49,15 +38,13 @@
 <script>
     import Request from '../api/GroupRequest';
 
-    import List from '../components/AppList';
-    import ListItem from '../components/AppListItem';
+    import List from '../components/AppResourceList';
     import CreateGroup from './AppGroupCreate';
     import EditGroup from './AppGroupEdit';
 
     export default {
         components: {
             List,
-            ListItem,
             CreateGroup,
             EditGroup
         },
@@ -81,12 +68,10 @@
                     ascending: true,
                     sortBy: 'field_1_value',
                     page: 1,
-                    perPage: 5
+                    perPage: 5,
+                    search: ''
                 },
                 total: 0,
-                type: {
-                    name: ''
-                },
             }
         },
 
@@ -97,8 +82,10 @@
                 });
 
                 this.request.retrieve().then(response => {
-                    this.groups = response;
-                    this.total = response.length;
+                    this.groups = response.data;
+                    this.total = response.total;
+
+                    console.log(this.total);
                 });
             },
 

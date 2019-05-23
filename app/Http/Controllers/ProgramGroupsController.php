@@ -12,6 +12,6 @@ class ProgramGroupsController extends Controller
 {
     public function index(Program $program)
     {
-        return new Groups($program->groups);
+        return new Groups($program->groups()->paginate());
     }
 }

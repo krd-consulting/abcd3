@@ -23,6 +23,8 @@ class RecordsAvailableForProgram extends Controller
         $selectedRecords = $program->records()->pluck('records.id');
         $records = $recordType->records()->whereNotIn('records.id', $selectedRecords);
 
+        $records = $records->availableFor(auth()->user());
+
         // Search
         $search = request('search');
         $records = $records->search($search);
@@ -31,8 +33,6 @@ class RecordsAvailableForProgram extends Controller
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $records = $records->sort($sortBy, $ascending);
-
-        $records = $records->availableFor(auth()->user());
 
         // Paginate per request.
         $perPage = request('perPage');

@@ -9,7 +9,10 @@ class GroupRequest extends Request{
         return this.get(`/api/groups/${group}`);
     }
 
-    create() {
+    create(team = null) {
+        if(team != null) 
+            return this.get(`/api/teams/${team}/groups/create`);
+
         return this.get('/api/groups/create');
     }
 

@@ -4,46 +4,54 @@
             :active.sync="create.active"
             :fields="fields"
             :record-type="type"
-            @save="retrieve"/>
+            @save="retrieve()"/>
 
         <edit-record
             :active.sync="edit.active"
             :record-id="edit.record"
-            @update="retrieve"/>
+            @update="retrieve()"/>
 
 
         <list
-            :has-header="true"
+            :items="records"
             :page.sync="params.page"
-            @page-change="retrieve"
             :per-page="params.perPage"
+            :search-terms.sync="params.search"
+            has-add
+            has-delete
+            :has-list-columns="false"
+            @add="createRecord"
+            @edit="editRecord"
+            @delete="confirmDelete(type.slug, $event)"
+            @page-change="retrieve()"
+            @search="retrieve()"
             :total="total">
             <template slot="header-text">{{ type.name }}</template>
-            <template slot="options">
-                <div class="tw-flex">
-                    <search v-model="params.search" @input="search"/>
-                    <base-button class="tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue tw-no-shrink" @click="createRecord">
-                        <base-icon class="tw-text-base tw-font-bold tw-align-middle">add</base-icon>
-                        <span class="tw-align-middle">Add {{type.name}}</span>
-                    </base-button>
-                </div>
+            <template slot="options-add-text">Add {{ type.name }}</template>
+
+            <template v-slot:list-item-image="{ item:record }">
+                <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-base" :record="record" :fields="fields" />
             </template>
-            <record-list
-                slot="list"
-                :records="records"
-                :record-type="type.slug"
-                :fields="fields"
-                @edit="editRecord"
-                @delete="retrieve"/>
+
+            <template v-slot:list-item-primary-data="{ item:record }">
+                <primary-data :record="record" :fields="fields"/>
+            </template>
+
+             <template v-slot:list-item-secondary-data="{ item:record }">
+                <secondary-data class="tw-text-xs" :record="record" :fields="fields"/>
+            </template>
         </list>
     </div>
 </template>
 <script>
     import lodash from 'lodash';
-    import RecordRequest from '../api/RecordRequest';
+    import Request from '../api/RecordRequest';
 
-    import List from '../components/AppList';
-    import Search from '../components/AppSearch';
+    import List from '../components/AppResourceList';
+
+    import ProfilePicture from '../components/RecordProfilePicture';
+    import PrimaryData from '../components/RecordPrimaryData';
+    import SecondaryData from '../components/RecordSecondaryData';
 
     import CreateRecord from './AppRecordCreate';
     import EditRecord from './AppRecordEdit';
@@ -52,7 +60,9 @@
 
         components: {
             List,
-            Search,
+            ProfilePicture,
+            PrimaryData,
+            SecondaryData,
             CreateRecord,
             EditRecord
         },
@@ -68,7 +78,7 @@
                 },
                 fields: [],
                 records: [],
-                request: new RecordRequest({}),
+                request: new Request({}),
                 params: {
                     ascending: true,
                     sortBy: 'field_1_value',
@@ -119,6 +129,36 @@
                 this.edit.record = record;
 
                 this.edit.active = true;
+            },
+
+            confirmDelete(recordType, record) {
+                this.$confirm('Are you sure you want to delete this record?', 'Delete Record', {
+                    confirmButtonText: 'Delete',
+                    cancelButtonText: 'Wait, no!',
+                    type: 'warning'
+                }).then(() => {
+                    this.deleteRecord(recordType, record)
+                        .then(() => {
+                            this.retrieve();
+
+                            this.$message({
+                                type: 'success',
+                                message: 'Record was deleted.'
+                            });
+                        })
+                        .catch((error) => {
+                            this.$message({
+                                type: 'error',
+                                message: error.message
+                            });
+                        });
+                })
+            },
+
+            deleteRecord(recordType, record) {
+                let request = new Request({});
+
+                return request.destroy(recordType, record);
             },
         },
 

@@ -19,6 +19,7 @@ class Team extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'available_record_types' => $this->available_record_types,
+            'path' => $this->path,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

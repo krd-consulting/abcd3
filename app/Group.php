@@ -17,6 +17,8 @@ class Group extends Model
     use Search;
     use Sort;
 
+    protected $appends = ['path'];
+
     public $searchColumns = ['name', 'description'];
 
     public function program()
@@ -35,6 +37,11 @@ class Group extends Model
         $record->programs()->syncWithoutDetaching($this->program->id);
 
         $this->records()->attach($record);
+    }
+
+    public function getPathAttribute()
+    {
+        return "/$this->table/$this->id";
     }
 
     public function scopeAvailableFor($query, User $user) {

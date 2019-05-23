@@ -88,7 +88,7 @@
         },
 
         props: {
-            records: Array
+            record: Array | Object
         }
     }
 </script>

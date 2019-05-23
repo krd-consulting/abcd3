@@ -21,7 +21,9 @@ class GroupsAvailableForRecord extends Controller
     public function __invoke(RecordType $recordType, Record $record)
     {
         $selectedGroups = $record->groups()->pluck('groups.id');
-        $groups = Group::whereNotIn('groups.id', $selectedGroups);
+        $groups = new Group;
+
+        $groups = $groups->availableFor(auth()->user())->whereNotIn('groups.id', $selectedGroups);
 
         // Search
         $search = request('search');
@@ -31,8 +33,6 @@ class GroupsAvailableForRecord extends Controller
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $groups = $groups->sort($sortBy, $ascending);
-
-        $groups = $groups->availableFor(auth()->user());
 
         // Paginate per request.
         $perPage = request('perPage');

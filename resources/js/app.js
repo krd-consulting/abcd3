@@ -32,6 +32,6 @@ const app = new Vue({
     el: '#app',
     router,
     data: {
-        collapseSidebar: false
+        collapseSidebar: false,
     }
 });

@@ -20,7 +20,7 @@ class Record extends Model
     use Search;
     use Sort;
 
-    public $searchColumns = [
+    protected $searchColumns = [
         'field_1_value',
         'field_2_value',
         'field_3_value',
@@ -88,6 +88,11 @@ class Record extends Model
     public function record_type()
     {
         return $this->belongsTo('App\RecordType');
+    }
+
+    public function getPathAttribute()
+    {
+        return "/$this->table/".$this->record_type->slug."/$this->id";
     }
 
     // Query Scopes

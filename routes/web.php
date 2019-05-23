@@ -31,6 +31,14 @@ Route::prefix('api')
         Route::post('records/{recordType}/{record}/groups/{group}', 'RecordGroupsController@store');
         Route::delete('records/{recordType}/{record}/groups/{group}', 'RecordGroupsController@destroy');
 
+        Route::get('records/{recordType}/{record}/teams', 'RecordTeamsController@index');
+        Route::get('records/{recordType}/{record}/available-teams', 'TeamsAvailableForRecord');
+        Route::post('records/{recordType}/{record}/teams/{team}', 'RecordTeamsController@store');
+        Route::delete('records/{recordType}/{record}/teams/{team}', 'RecordTeamsController@destroy');
+
+        Route::get('records/{recordType}/{record}/teams', 'RecordTeamsController@index');
+        Route::get('records/{recordType}/{record}/available-teams', 'TeamsAvailableForRecord');  
+
         Route::resource('programs', 'ProgramController');
 
         Route::get('programs/{program}/groups', 'ProgramGroupsController@index');
@@ -52,6 +60,16 @@ Route::prefix('api')
         Route::delete('groups/{group}/records/{recordType}/{record}', 'GroupRecordsController@destroy');
 
         Route::resource('teams', 'TeamController');
+
+        Route::get('teams/{team}/records/{recordType}', 'TeamRecordsController@index');
+        Route::get('teams/{team}/available-records/{recordType}', 'RecordsAvailableForTeam');
+        Route::post('teams/{team}/records/{recordType}/{record}', 'TeamRecordsController@store');
+        Route::delete('teams/{team}/records/{recordType}/{record}', 'TeamRecordsController@destroy');
+
+        Route::get('teams/{team}/programs', 'TeamProgramsController@index');
+
+        Route::get('teams/{team}/groups', 'TeamGroupsController@index');
+        Route::get('teams/{team}/groups/create', 'GroupController@create');
 
         Route::resource('roles', 'RoleController');
 

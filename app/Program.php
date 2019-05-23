@@ -53,6 +53,11 @@ class Program extends Model
         return $this->records->load('record_type')->pluck('record_type')->unique();
     }
 
+    public function getPathAttribute()
+    {
+        return "/$this->table/$this->id";
+    }
+
     // Query Scopes
     public function scopeAvailableFor($query, $user, $exceptions = []) {
         $scope = $user->scope;

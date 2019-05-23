@@ -2,85 +2,66 @@
     <div>
         <add-program
             :active.sync="add.active"
-            @close="retrieve">
+            @close="retrieve()">
         </add-program>
         <edit-program-record
             :active.sync="edit.active"
             :record-id="$route.params.record"
-            :program-id="edit.program.id"
+            :program-id="edit.program"
             :record-type="$route.params.recordType"
-            @update="retrieve"/>
-        <list
-            :page.sync="params.page"
-            @page-change="retrieve"
-            :per-page="params.perPage"
-            :total="total">
+            @update="retrieve()"/>
 
-            <template slot="empty-placeholder">
-                <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4">
-                    <div>
-                        <base-button
-                            class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
-                            @click="addProgram">
-                            <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Add Programs</span>
-                        </base-button>
-                    </div>
-                </div>
+        <list
+            :items="programs"
+            :page.sync="params.page"
+            :per-page="params.perPage"
+            :search-terms.sync="params.search"
+            :tertiary-columns="tertiaryDataColumns"
+            :total="total"
+            has-add
+            has-remove
+            has-list-columns
+            :has-edit="recordType.identity == 'Client'"
+            @add="addProgram"
+            @edit="editProgram"
+            @remove="confirmDelete($event)"
+            @page-change="retrieve()"
+            @search="retrieve()">
+            <template slot="header-text">Programs</template>
+            <template slot="options-add-text">Add Programs</template>
+
+            <template slot="list-column-primary-data">Program</template>
+
+            <template v-slot:list-item-primary-data="{ item:program }">
+                {{ program.name }}
             </template>
 
-            <client-programs-list
-                v-if="record.type.identity == 'Client'"
-                :programs="programs"
-                @edit="editProgram"
-                @remove="confirmDelete"/>
-            <staff-programs-list
-                v-else-if="record.type.identity == 'Staff'"
-                :programs="programs"
-                @remove="confirmDelete"/>
-            <volunteer-programs-list
-                v-else-if="record.type.identity == 'Volunteer'"
-                :programs="programs"
-                @remove="confirmDelete"/>
-            <external-programs-list
-                v-else-if="record.type.identity == 'External'"
-                :programs="programs"
-                @remove="confirmDelete"/>
+            <template v-slot:list-item-secondary-data="{ item:program }">
+                {{ program.team.name }}
+            </template>
 
-            <template slot="footer-options">
-                <base-button
-                    v-if="programs.length > 0"
-                    class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
-                    @click="addProgram">
-                    <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                    <span class="tw-text-xs tw-align-middle">Manage Programs</span>
-                </base-button>
+            <template v-slot:list-item-tertiary-data="{ item:program }">
+                <tertiary-data :record-type="recordType" :record="program"/>
             </template>
         </list>
     </div>
 </template>
 <script>
-    import List from '../components/AppList';
+    import List from '../components/AppResourceList';
 
     import ProgramsRequest from '../api/RecordProgramsRequest';
 
     import AddProgram from './AppRecordProfileAddProgram';
     import EditProgramRecord from './AppProgramRecordEdit';
 
-    import ClientProgramsList from './AppRecordProfileProgramsClients';
-    import StaffProgramsList from './AppRecordProfileProgramsStaff';
-    import VolunteerProgramsList from './AppRecordProfileProgramsVolunteer';
-    import ExternalProgramsList from './AppRecordProfileProgramsExternal';
+    import TertiaryData from '../components/ProgramRecordPivotData';
 
     export default {
         components: {
             List,
             AddProgram,
             EditProgramRecord,
-            ClientProgramsList,
-            StaffProgramsList,
-            VolunteerProgramsList,
-            ExternalProgramsList
+            TertiaryData
         },
 
         props: {
@@ -109,6 +90,31 @@
                     search: ''
                 },
                 total: 0,
+            }
+        },
+
+        computed: {
+            tertiaryDataColumns() {
+                switch(this.recordType.identity) {
+                    case 'Client':
+                        return [ 'Status', 'Enrollment Date', 'Notes' ];
+                        break;
+
+                    case 'Staff':
+                        return [ 'Caseload', 'Groups'];
+                        break;
+
+                    case 'Volunteer':
+                        return [ 'Hours Per Month', 'Hours Per Year'];
+                        break;
+
+                    default: 
+                        return [];
+                }
+            },
+
+            recordType() {
+                return this.record.type;
             }
         },
 
@@ -152,8 +158,7 @@
 
                 this.request.retrieve(this.$route.params.recordType, this.$route.params.record).then((response) => {
                     this.programs = response.data;
-                    this.total = response.data.length;
-                    this.params.perPage = this.total;
+                    this.total = response.meta.total;
                 });
             },
 

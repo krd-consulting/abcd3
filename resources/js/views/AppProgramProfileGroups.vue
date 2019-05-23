@@ -1,102 +1,49 @@
 <template>
     <div>
-        <div class="tw-mb-2">
-            <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4" v-if="groups.length == 0">
-                <div>
-                    <base-button
-                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
-                        @click="createGroup">
-                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                        <span class="tw-text-xs tw-align-middle">Create Group</span>
-                    </base-button>
-                </div>
-            </div>
-            <div v-if="groups.length > 0"
-                class="tw-pt-6 tw-pb-2 tw-pl-4 tw-text-xs tw-text-grey tw-uppercase tw-font-semibold">
-                <div class="tw-flex tw-w-4/5">
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Group</span>
-                    </div>
-                    <!--<div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Status</span>
-                    </div>
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Enrollment Date</span>
-                    </div>
-                    <div class="tw-w-1/4 tw-m-0">
-                        <span class="tw-tracking-wide">Notes</span>
-                    </div>-->
-                </div>
-            </div>
-            <list-item
-                v-if="groups.length > 0"
-                :to="`/groups/${group.id}`"
-                :key="group.id"
-                v-for="group in groups"
-                class="group tw-pl-4 tw-py-4">
-                <span class="hover:tw-text-blue">{{ group.name }}</span>
-                <template v-slot:secondary-data>
+        <create-group
+            :active.sync="add.active"
+            :program-id="$route.params.program"
+            @save="retrieve()"/>
 
-                </template>
-                <template v-slot:tertiary-data>
-                    <!--<div class="tw-flex tw-w-3/5 tw-items-center">
-                        <div class="tw-w-1/3">
-                            <div v-if="group.pivot.status" class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
-                                <span>{{ record.pivot.status }}</span>
-                            </div>
-                            <div v-if="record.pivot.status_updated_at" class="tw-text-sm tw-text-grey">
-                                <span>Since {{ record.pivot.status_updated_at }}</span>
-                            </div>
-                        </div>
-                        <div class="tw-w-1/3">
-                            <span>{{ record.pivot.created_at }}</span>
-                        </div>
-                        <div class="tw-w-1/3">
-                            <p v-if="record.pivot.notes">{{ record.pivot.notes }}</p>
-                            <base-button v-else class="tw-py-2 tw-px-0 tw-text-grey tw-font-semibold tw-border-none hover:tw-bg-transparent hover:tw-text-blue">
-                                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Add Note</span>
-                            </base-button>
-                        </div>
-                    </div>-->
-                </template>
-                <template v-slot:options-container>
-                    <div class="tw-w-1/5 tw-text-right">
-                        <div class="tw-px-4">
-                            <base-button class="tw-py-2 tw-px-2 tw-text-grey hover:tw-bg-transparent hover:tw-text-red tw-border-none" @click="confirm(group.id)">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">delete</base-icon>
-                                <span class="tw-text-xs tw-align-middle">Delete</span>
-                            </base-button>
-                        </div>
-                    </div>
-                </template>
-            </list-item>
-        </div>
-       <div class="tw-px-4 tw-pb-4">
-            <base-button
-                v-if="groups.length > 0"
-                class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
-                @click="createGroup">
-                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                <span class="tw-text-xs tw-align-middle">Create Group</span>
-            </base-button>
-            <create-group
-                :active.sync="add.active"
-                :program-id="$route.params.program"
-                @save="retrieve"/>
-        </div>
+        <list
+            :items="groups"
+            :page.sync="params.page"
+            :per-page="params.perPage"
+            :search-terms.sync="params.search"
+            :total="total"
+            has-add
+            has-delete
+            has-list-columns
+            :has-edit="false"
+            @add="createGroup"
+            @delete="confirmDelete($event)"
+            @page-change="retrieve()"
+            @search="retrieve()">
+            <template slot="header-text">Groups</template>
+            <template slot="options-add-text">Create Group</template>
+
+            <template slot="list-column-primary-data">Group</template>
+
+            <template v-slot:list-item-primary-data="{ item:group }">
+                {{ group.name }}
+            </template>
+
+            <template v-slot:list-item-secondary-data="{ item:group }">
+                
+            </template>
+        </list>
     </div>
 </template>
 <script>
     import GroupsRequest from '../api/ProgramGroupsRequest';
-    import ListItem from '../components/AppListItem';
 
+    import List from '../components/AppResourceList';
     import CreateGroup from './AppGroupCreate';
 
     export default {
         components: {
+            List,
             CreateGroup,
-            ListItem,
         },
 
         data() {
@@ -105,7 +52,15 @@
                     active: false
                 },
                 request: new GroupsRequest({}),
-                groups: []
+                groups: [],
+                params: {
+                    ascending: true,
+                    sortBy: 'id',
+                    page: 1,
+                    perPage: 10,
+                    search: ''
+                },
+                total: 0,
             }
         },
 
@@ -116,7 +71,7 @@
                 });
             },
 
-            confirm(id) {
+            confirmDelete(id) {
                 this.$confirm('Are you sure you want to delete this group?', 'Delete Group', {
                     confirmButtonText: 'Delete',
                     cancelButtonText: 'Wait, no!',
@@ -141,6 +96,7 @@
             retrieve(program = this.$route.params.program) {
                 this.request.retrieve(program).then((response) => {
                     this.groups = response.data;
+                    this.total = response.meta.total;
                 });
             },
 

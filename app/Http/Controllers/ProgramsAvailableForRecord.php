@@ -18,6 +18,8 @@ class ProgramsAvailableForRecord extends Controller
         $selectedPrograms = $record->programs()->pluck('programs.id');
         $programs = (new Program);
 
+        $programs = $programs->availableFor(auth()->user(), $selectedPrograms);
+
         // Search
         $search = request('search');
         $programs = $programs->search($search);
@@ -26,8 +28,6 @@ class ProgramsAvailableForRecord extends Controller
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $programs = $programs->sort($sortBy, $ascending);
-
-        $programs = $programs->availableFor(auth()->user(), $selectedPrograms);
 
         // Paginate per request.
         $perPage = request('perPage');

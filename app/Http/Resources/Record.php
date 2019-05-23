@@ -28,6 +28,7 @@ class Record extends JsonResource
                 return $this->program_records->firstWhere('id', $this->client_statuses()->latest()->first()['program_client_id'])['enrolled_at'];
             }),
             //'pivot' => $this->pivot,
+            'path' => $this->path,
             $this->record_type->identity->field1->name => $this->field_1_value,
             $this->record_type->identity->field2->name => $this->field_2_value,
             $this->record_type->identity->field3->name => $this->field_3_value,

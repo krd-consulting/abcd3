@@ -5,6 +5,7 @@ import AppRecordProfile from './views/AppRecordProfile';
 import AppRecordProfilePrograms from './views/AppRecordProfilePrograms';
 import AppRecordProfileSummary from './views/AppRecordProfileSummary';
 import AppRecordProfileGroups from './views/AppRecordProfileGroups';
+import AppRecordProfileTeams from './views/AppRecordProfileTeams';
 import AppProgramList from './views/AppProgramList';
 import AppProgramProfile from './views/AppProgramProfile';
 import AppProgramProfileGroups from './views/AppProgramProfileGroups';
@@ -16,6 +17,9 @@ import AppGroupProfileSummary from './views/AppGroupProfileSummary';
 import AppGroupProfileRecords from './views/AppGroupProfileRecords';
 import AppTeamProfile from './views/AppTeamProfile';
 import AppTeamProfileSummary from './views/AppTeamProfileSummary';
+import AppTeamProfilePrograms from './views/AppTeamProfilePrograms';
+import AppTeamProfileGroups from './views/AppTeamProfileGroups';
+import AppTeamProfileRecords from './views/AppTeamProfileRecords';
 
 const routes = [
     {
@@ -35,7 +39,8 @@ const routes = [
         children: [
             { path: '', name: 'record_profile_summary', component: AppRecordProfileSummary },
             { path: 'programs', name: 'record_profile_programs', component: AppRecordProfilePrograms },
-            { path: 'groups', name: 'record_profile_groups', component: AppRecordProfileGroups }
+            { path: 'groups', name: 'record_profile_groups', component: AppRecordProfileGroups },
+            { path: 'teams', name: 'record_profile_teams', component: AppRecordProfileTeams }
         ]
     },
     {
@@ -64,7 +69,9 @@ const routes = [
         path: '/teams/:team', component: AppTeamProfile,
         children: [
             { path: '', name: 'team_profile_summary', component: AppTeamProfileSummary },
-            // { path: 'records/:recordType', name: 'team_profile_records', component: AppTeamProfileRecords },
+            { path: 'programs', name: 'team_profile_programs', component: AppTeamProfilePrograms },
+            { path: 'groups', name: 'team_profile_groups', component: AppTeamProfileGroups },
+            { path: 'records/:recordType', name: 'team_profile_records', component: AppTeamProfileRecords },
         ]
     },
 ];

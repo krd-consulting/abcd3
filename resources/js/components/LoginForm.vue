@@ -2,8 +2,10 @@
     export default {
         data() {
             return {
-                forgotPasswordActive: false
+                forgotPasswordActive: false,
+                email: '',
+                password: ''
             }
         }
-     }
+    }
 </script>

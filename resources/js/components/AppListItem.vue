@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-items-center tw-bg-white tw-border-b">
-        <router-link tag="div" class="tw-flex tw-flex-1 tw-items-top tw-cursor-pointer" :to="to">
+        <router-link tag="div" class="tw-flex tw-w-1/6 tw-items-top tw-cursor-pointer" :to="to">
             <div>
                 <slot name="image">
                 </slot>
@@ -18,20 +18,25 @@
                 </slot>
             </div>
         </router-link tag="div">
-        <slot name="tertiary-data" :item="item">
-        </slot>
-        <slot name="options-container" :item="item">
-            <div class="tw-w-2/5 tw-text-right">
-                <slot name="options">
-                </slot>
-            </div>
-        </slot>
+        <div class="tw-flex tw-flex-grow tw-justify-between">
+            <slot name="tertiary-data" :item="item">
+            </slot>
+            <slot name="options-container" :item="item">
+                <div class="tw-text-right tw-w-1/6">
+                    <slot name="options">
+                    </slot>
+                </div>
+            </slot>
+        </div>
     </div>
 </template>
 <script>
     export default {
         props: {
-            to: String | Object,
+            to: {
+                type: String | Object,
+                default: ''
+            },
             primaryData: String,
             secondaryData: String,
             item: Array | Object

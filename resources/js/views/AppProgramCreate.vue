@@ -50,7 +50,8 @@
                             v-model="programData.team_id"
                             name="team"
                             placeholder="Select Team"
-                            @change="request.errors.clear('team')">
+                            @change="request.errors.clear('team')"
+                            :disabled="disableTeam">
                             <el-option
                                 v-for="team in teams"
                                 :key="team.id"
@@ -83,7 +84,15 @@
 
     export default {
         props: {
-            active: Boolean
+            active: Boolean,
+            teamId: {
+                type: String | Number,
+                default: ''
+            },
+            disableTeam: {
+                type: Boolean,
+                default: false
+            }
         },
 
         data() {
@@ -112,6 +121,8 @@
             },
 
             open() {
+                this.programData.team_id = Number(this.teamId);
+
                 this.load();
             },
 
@@ -142,7 +153,7 @@
         },
 
         created() {
-
+            
         }
     }
 </script>

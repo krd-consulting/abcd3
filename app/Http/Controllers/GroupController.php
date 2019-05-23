@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Group;
+use App\Team;
 use App\Http\Requests\StoreGroup;
 use App\Http\Requests\UpdateGroup;
 
@@ -12,7 +13,7 @@ class GroupController extends Controller
 {
     public function index()
     {
-        return (new Group())->availableFor(auth()->user())->with('program')->get();
+        return (new Group())->availableFor(auth()->user())->with('program')->paginate();
     }
 
     public function show(Group $group)
@@ -22,11 +23,17 @@ class GroupController extends Controller
         return $group->load('program');
     }
 
-    public function create()
+    public function create(Team $team = null)
     {
         $this->authorize('create', Group::class);
 
-        return auth()->user()->availablePrograms;
+        $query = auth()->user()->availablePrograms(null);
+
+        if(isset($team)) {
+            $query = $query->where('team_id', $team->id);
+        }
+
+        return $query->get();
     }
 
     public function store(StoreGroup $request)
