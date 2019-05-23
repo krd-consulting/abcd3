@@ -170,10 +170,12 @@
             },
 
             searchSelected(search) {
+                this.handleSelectedPageChange(1);
                 this.$emit('search-selected', search);
             },
 
             searchNotSelected(search) {
+                this.handleNotSelectedPageChange(1);
                 this.$emit('search-not-selected', search);
             }
         }

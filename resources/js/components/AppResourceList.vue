@@ -273,9 +273,10 @@
             },
 
             handleSearch(search) {
+                this.handlePageChange(1);
                 this.$emit('update:search-terms', search);
                 this.$emit('search', search);
-            }
+            },
         },
 
     }

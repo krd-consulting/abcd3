@@ -1,7 +1,7 @@
 <template>
 	<component :is="appropriateComponent" :record="record"/>
 </template>
-<script
+<script>
 	export default {
 		props: {
 			recordType: Array | Object,
