@@ -69,7 +69,12 @@ class ProgramRecordsController extends Controller
         return $record;
     }
 
-    public function update(Program $program, RecordType $recordType, Record $record, UpdateProgramRecord $request)
+    public function update(
+        Program $program, 
+        RecordType $recordType, 
+        Record $record, 
+        UpdateProgramRecord $request
+    )
     {
         $programRecord = new ProgramClient();
         $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
@@ -91,7 +96,7 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        ProgramRecord::where('program_id', $program->id)->where('record_id', $record->id)->first()->delete();
+        $program->records()->where('record_id', $record->id)->first()->delete();
 
         return $record;
     }
