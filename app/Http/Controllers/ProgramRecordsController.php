@@ -76,6 +76,9 @@ class ProgramRecordsController extends Controller
         UpdateProgramRecord $request
     )
     {
+        $class = $recordType->identity->name == 'Client' ? 'ProgramClient' : 'ProgramRecord';
+
+
         $programRecord = new ProgramClient();
         $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
 
