@@ -36,7 +36,8 @@ class Record extends JsonResource
                 $this->record_type->identity->field1->name => 'field_1_value',
                 $this->record_type->identity->field2->name => 'field_2_value',
                 $this->record_type->identity->field3->name => 'field_3_value'
-            ]
+            ],
+            'editable' => auth()->user()->can('write', $this->resource)
         ];
     }
 }

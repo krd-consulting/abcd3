@@ -39,6 +39,12 @@ Route::prefix('api')
         Route::get('records/{recordType}/{record}/teams', 'RecordTeamsController@index');
         Route::get('records/{recordType}/{record}/available-teams', 'TeamsAvailableForRecord');  
 
+        Route::get('programs/client-statuses', 'ClientStatusController@index');
+        Route::get('programs/client-statuses/{status}/edit', 'ClientStatusController@edit');
+        Route::post('programs/client-statuses', 'ClientStatusController@store');
+        Route::post('programs/client-statuses/{status}', 'ClientStatusController@update');
+        Route::delete('programs/client-statuses/{status}', 'ClientStatusController@destroy');
+
         Route::resource('programs', 'ProgramController');
 
         Route::get('programs/{program}/groups', 'ProgramGroupsController@index');
@@ -49,8 +55,6 @@ Route::prefix('api')
         Route::patch('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@update');
         Route::post('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@store');
         Route::delete('programs/{program}/records/{recordType}/{record}', 'ProgramRecordsController@destroy');
-
-        Route::get('program-client-statuses', 'ProgramClientStatusesController@index');
 
         Route::resource('groups', 'GroupController');
 

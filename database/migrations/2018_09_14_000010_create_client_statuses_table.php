@@ -17,7 +17,6 @@ class CreateClientStatusesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('description')->nullable();
-            $table->integer('value');
             $table->timestamps();
         });
     }

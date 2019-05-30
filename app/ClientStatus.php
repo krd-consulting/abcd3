@@ -10,4 +10,9 @@ class ClientStatus extends Model
     {
         return $this->hasMany('App\ProgramClientStatus', 'status_id');
     }
+
+    public function programs()
+    {
+    	return $this->hasMany('App\Program', 'default_client_status_id');
+    }
 }

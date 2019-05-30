@@ -215,19 +215,19 @@ return [
     'program_client_statuses' => [
         'waitlist' => [
             'name' => 'Waitlist',
-            'value' => 0
+            'description' => ''
         ],
         'active' => [
             'name' => 'Active',
-            'value' => 1
+            'description' => ''
         ],
         'concluded' => [
             'name' => 'Concluded',
-            'value' => 2
+            'description' => ''
         ],
         'removed' => [
             'name' => 'Removed',
-            'value' => -1
+            'description' => ''
         ]
     ]
 

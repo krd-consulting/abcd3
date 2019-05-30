@@ -75,10 +75,10 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="newProgramData.settings.default_client_status_id"
+                            v-model="newProgramData.default_client_status_id"
                             name="team"
                             placeholder="Select Default Status"
-                            @change="request.errors.clear('settings.default_client_status_id')">
+                            @change="request.errors.clear('default_client_status_id')">
                             <el-option
                                 v-for="status in statuses"
                                 :key="status.id"
@@ -89,9 +89,9 @@
                         </base-select>
                     </div>
                 </div>
-                <div v-if="request.errors.has('settings.default_client_status_id')" class="tw-flex tw-justify-end">
+                <div v-if="request.errors.has('default_client_status_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('settings.default_client_status_id')[0]" class="tw-text-xs tw-text-red"></span>
+                        <span v-text="request.errors.get('default_client_status_id')[0]" class="tw-text-xs tw-text-red"></span>
                     </div>
                 </div>
             </div>
@@ -108,7 +108,7 @@
 </template>
 <script>
     import Request from '../api/ProgramRequest';
-    import StatusRequest from '../api/ProgramClientStatusRequest';
+    import StatusRequest from '../api/ClientStatusRequest';
 
     export default {
         props: {
@@ -125,9 +125,7 @@
                     description: '',
                     team: {},
                     team_id: '',
-                    settings: { 
-                        default_client_status_id: ''
-                    }
+                    default_client_status_id: ''
                 },
                 statuses: []
             }
@@ -145,9 +143,7 @@
                     description: '',
                     team: {},
                     team_id: '',
-                    settings: { 
-                        default_client_status_id: ''
-                    }
+                    default_client_status_id: ''
                 };
             },
 
@@ -155,7 +151,7 @@
                 this.retrieve();
                 this.retrieveStatus();
 
-                this.newProgramData.settings.default_client_status_id = Number(this.newProgramData.settings.default_client_status_id);
+                this.newProgramData.default_client_status_id = Number(this.newProgramData.default_client_status_id);
             },
 
             initializeWithData(data) {
@@ -164,7 +160,7 @@
                 this.newProgramData.description = data.description;
                 this.newProgramData.team_id = data.team_id;
                 this.newProgramData.team = data.team;
-                this.newProgramData.settings = data.settings;
+                this.newProgramData.default_client_status_id = data.default_client_status_id;
             },
 
             retrieve() {

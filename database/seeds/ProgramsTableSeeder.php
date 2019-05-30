@@ -17,7 +17,7 @@ class ProgramsTableSeeder extends Seeder
     {
         $programOne = new Program;
         $programOne->name = 'Program in T1';
-        $programOne->settings->default_client_status_id =
+        $programOne->default_client_status_id =
                     ClientStatus::where('name', config('app.program_client_statuses.waitlist.name'))
                         ->first()
                         ->id;
@@ -28,8 +28,8 @@ class ProgramsTableSeeder extends Seeder
 
         $programTwo = new Program;
         $programTwo->name = 'Program in T2';
-        $programTwo->settings->default_client_status_id =
-                    ClientStatus::where('name', config('app.program_client_statuses.waitlist.name'))
+        $programTwo->default_client_status_id =
+                    ClientStatus::where('name', config('app.program_client_statuses.active.name'))
                         ->first()
                         ->id;
         $programTwo->assignToTeam(

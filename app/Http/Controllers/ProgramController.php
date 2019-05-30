@@ -58,7 +58,7 @@ class ProgramController extends Controller
         $program->name = $request->input('name');
         $program->description = $request->input('description');
         $program->team_id = $request->input('team_id');
-        $program->settings = $request->input('settings');
+        $program->default_client_status_id = $request->input('default_client_status_id');
         $program->save();
 
         return new ProgramResource($program);
@@ -79,7 +79,7 @@ class ProgramController extends Controller
         // Update program when user is authorized.
         $program->name = $request->input('name');
         $program->description = $request->input('description');
-        $program->settings = $request->input('settings');
+        $program->default_client_status_id = $request->input('default_client_status_id');
         $program->save();
 
         return $program;

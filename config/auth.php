@@ -150,6 +150,11 @@ return [
         'write-roles' => [
             'name' => 'write roles',
             'guard_name' => 'web'
+        ],
+
+        'write-client-statuses' => [
+            'name' => 'write client statuses',
+            'guard_name' => 'web'
         ]
     ]
 

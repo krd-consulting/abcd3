@@ -18,11 +18,12 @@ class CreateProgramsTable extends Migration
             $table->string('name', 32);
             $table->text('description')->nullable();
             $table->integer('team_id')->unsigned();
-            $table->schemalessAttributes('settings');
+            $table->integer('default_client_status_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('team_id')->references('id')->on('teams');
+            $table->foreign('default_client_status_id')->references('id')->on('client_statuses');
         });
     }
 

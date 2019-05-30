@@ -24,8 +24,12 @@
                         <base-icon class="tw-text-xl tw-mr-2">insert_drive_file</base-icon>
                         <span slot="title">Records</span>
                     </sidebar-list-item>
+                    <sidebar-list-item index="3" :route="{ path: '/preferences/programs' }">
+                        <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
+                        <span slot="title">Programs</span>
+                    </sidebar-list-item>
                     @can('write roles')
-                        <sidebar-list-item index="3" :route="{ path: '/preferences/roles' }">
+                        <sidebar-list-item index="4" :route="{ path: '/preferences/roles' }">
                             <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
                             <span slot="title">Roles</span>
                         </sidebar-list-item>

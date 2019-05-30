@@ -20,6 +20,7 @@ class Program extends JsonResource
             'description' => $this->description,
             'team' => $this->team,
             'team_id' => $this->team->id,
+            'default_client_status_id' => $this->default_client_status_id,
             'program_status' => $this->client_statuses->last(),
             'enrolled_at' => $this->when(
                 !empty($this->program_records),
@@ -30,7 +31,6 @@ class Program extends JsonResource
             ),
             'available_record_types' => $this->available_record_types,
             'path' => $this->path,
-            'settings' => $this->settings->all(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

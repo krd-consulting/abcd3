@@ -83,7 +83,7 @@
 <script>
     import Request from '../api/ProgramRecordsRequest';
     import RecordRequest from '../api/RecordRequest';
-    import StatusRequest from '../api/ProgramClientStatusRequest';
+    import StatusRequest from '../api/ClientStatusRequest';
 
     import PrimaryData from '../components/RecordPrimaryData';
 
