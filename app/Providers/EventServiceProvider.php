@@ -21,7 +21,7 @@ class EventServiceProvider extends ServiceProvider
 
         'App\Events\ProgramRecordSaved' => [
             'App\Listeners\AddRecordToProgramTeam',
-            'App\Listeners\CreateWaitlistProgramClientStatus'
+            'App\Listeners\InitializeProgramClientStatus'
         ],
 
         'App\Events\ProgramRecordDeleted' => [

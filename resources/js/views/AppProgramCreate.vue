@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5">
                         Team
@@ -65,6 +65,33 @@
                 <div v-if="request.errors.has('team_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
                         <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red"></span>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="tw-flex tw-items-center tw-w-full">
+                    <label class="tw-w-1/5">
+                        Default Status for Clients
+                    </label>
+                    <div class="tw-w-2/3">
+                        <base-select
+                            v-model="programData.settings.default_client_status_id"
+                            name="team"
+                            placeholder="Select Default Status"
+                            @change="request.errors.clear('settings.default_client_status_id')">
+                            <el-option
+                                v-for="status in statuses"
+                                :key="status.id"
+                                :label="status.name"
+                                :value="status.id">
+                                {{ status.name }}
+                            </el-option>
+                        </base-select>
+                    </div>
+                </div>
+                <div v-if="request.errors.has('settings.default_client_status_id')" class="tw-flex tw-justify-end">
+                    <div class="tw-w-4/5 tw-py-2">
+                        <span v-text="request.errors.get('settings.default_client_status_id')[0]" class="tw-text-xs tw-text-red"></span>
                     </div>
                 </div>
             </div>
@@ -101,9 +128,13 @@
                 programData: {
                     name: '',
                     description: '',
-                    team_id: ''
+                    team_id: '',
+                    settings: { 
+                        default_client_status_id: ''
+                    }
                 },
-                teams: []
+                teams: [],
+                statuses: []
             }
         },
 
@@ -116,12 +147,15 @@
                 this.programData = {
                     name: '',
                     description: '',
-                    team_id: ''
+                    team_id: '',
+                    settings: { 
+                        default_client_status_id: ''
+                    }
                 };
             },
 
             open() {
-                this.programData.team_id = Number(this.teamId);
+                this.programData.team_id = this.teamId == '' ? '' : Number(this.teamId);
 
                 this.load();
             },
@@ -130,7 +164,8 @@
                 let request = new Request({});
 
                 request.create().then((response) => {
-                    this.teams = response;
+                    this.teams = response.teams;
+                    this.statuses = response.statuses;
                 });
             },
 

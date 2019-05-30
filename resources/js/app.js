@@ -4,14 +4,11 @@ import vue from 'vue';
 
 // Plugins
 import ElementUI from 'element-ui';
-import VueGoodTablePlugin from 'vue-good-table';
-import 'vue-good-table/dist/vue-good-table.css'
 
 // Vue Instance
 window.Vue = vue;
 
 Vue.use(ElementUI);
-Vue.use(VueGoodTablePlugin);
 
 // Components
 import './baseComponents';

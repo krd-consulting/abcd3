@@ -30,6 +30,7 @@ class Program extends JsonResource
             ),
             'available_record_types' => $this->available_record_types,
             'path' => $this->path,
+            'settings' => $this->settings->all(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

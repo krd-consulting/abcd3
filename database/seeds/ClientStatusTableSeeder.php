@@ -11,27 +11,6 @@ class ClientStatusTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('client_statuses')->insert([
-            [
-                'name' => 'Waitlist',
-                'value' => 0
-            ],
-            [
-                'name' => 'Active',
-                'value' => 1
-            ],
-            [
-                'name' => 'On Leave',
-                'value' => 2
-            ],
-            [
-                'name' => 'Concluded',
-                'value' => 3
-            ],
-            [
-                'name' => 'Removed',
-                'value' => -1
-            ]
-        ]);
+        DB::table('client_statuses')->insert(config('app.program_client_statuses'));
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <base-dialog :visible="active" @close="close" @open="retrieve">
+    <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
             <base-icon class="tw-align-middle">person_add</base-icon> Edit Program
         </div>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5">
                         Team
@@ -68,6 +68,33 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <div class="tw-flex tw-items-center tw-w-full">
+                    <label class="tw-w-1/5">
+                        Default Status for Clients
+                    </label>
+                    <div class="tw-w-2/3">
+                        <base-select
+                            v-model="newProgramData.settings.default_client_status_id"
+                            name="team"
+                            placeholder="Select Default Status"
+                            @change="request.errors.clear('settings.default_client_status_id')">
+                            <el-option
+                                v-for="status in statuses"
+                                :key="status.id"
+                                :label="status.name"
+                                :value="status.id">
+                                {{ status.name }}
+                            </el-option>
+                        </base-select>
+                    </div>
+                </div>
+                <div v-if="request.errors.has('settings.default_client_status_id')" class="tw-flex tw-justify-end">
+                    <div class="tw-w-4/5 tw-py-2">
+                        <span v-text="request.errors.get('settings.default_client_status_id')[0]" class="tw-text-xs tw-text-red"></span>
+                    </div>
+                </div>
+            </div>
         </form>
         <div slot="footer" class="tw-border-t tw-px-4 tw-py-4 tw-bg-grey-lightest tw-rounded-b">
             <base-button class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-grey-darker tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue" @click="close(false)">
@@ -81,6 +108,7 @@
 </template>
 <script>
     import Request from '../api/ProgramRequest';
+    import StatusRequest from '../api/ProgramClientStatusRequest';
 
     export default {
         props: {
@@ -96,8 +124,12 @@
                     name: '',
                     description: '',
                     team: {},
-                    tema_id: ''
+                    team_id: '',
+                    settings: { 
+                        default_client_status_id: ''
+                    }
                 },
+                statuses: []
             }
         },
 
@@ -112,8 +144,18 @@
                     name: '',
                     description: '',
                     team: {},
-                    team_id: ''
+                    team_id: '',
+                    settings: { 
+                        default_client_status_id: ''
+                    }
                 };
+            },
+
+            open() {
+                this.retrieve();
+                this.retrieveStatus();
+
+                this.newProgramData.settings.default_client_status_id = Number(this.newProgramData.settings.default_client_status_id);
             },
 
             initializeWithData(data) {
@@ -122,6 +164,7 @@
                 this.newProgramData.description = data.description;
                 this.newProgramData.team_id = data.team_id;
                 this.newProgramData.team = data.team;
+                this.newProgramData.settings = data.settings;
             },
 
             retrieve() {
@@ -129,6 +172,14 @@
 
                 request.edit(this.programId).then((response) => {
                     this.initializeWithData(response.data);
+                });
+            },
+
+            retrieveStatus() {
+                let request = new StatusRequest({});
+
+                request.retrieve().then((response) => {
+                    this.statuses = response.data;
                 });
             },
 

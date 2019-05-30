@@ -8,7 +8,7 @@ use App\Events\ProgramRecordSaved;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class CreateWaitlistProgramClientStatus
+class InitializeProgramClientStatus
 {
     /**
      * Create the event listener.

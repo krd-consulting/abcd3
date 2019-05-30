@@ -35,7 +35,8 @@ class UpdateProgram extends FormRequest
                         return $query->where('team_id', $this->team_id)->where('id', '!=', $this->id);
                     })
                 ],
-            'team_id' => 'required|exists:teams,id'
+            'team_id' => 'required|exists:teams,id',
+            'settings.default_client_status_id' => 'required|exists:client_statuses,id'
         ];
     }
 }

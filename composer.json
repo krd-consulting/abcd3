@@ -11,6 +11,7 @@
         "laravel/tinker": "^1.0",
         "owen-it/laravel-auditing": "^9.0",
         "spatie/laravel-permission": "^2.25",
+        "spatie/laravel-schemaless-attributes": "^1.4",
         "spatie/laravel-sluggable": "^2.1",
         "staudenmeir/eloquent-has-many-deep": "^1.5"
     },

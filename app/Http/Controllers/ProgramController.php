@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Program;
+use App\ClientStatus;
 use App\Http\Resources\Program as ProgramResource;
 use App\Http\Resources\Programs;
 use App\Http\Requests\StoreProgram;
@@ -42,7 +43,10 @@ class ProgramController extends Controller
     {
         $this->authorize('create', Program::class);
 
-        return auth()->user()->availableTeams;
+        $teams = auth()->user()->availableTeams;
+        $statuses = ClientStatus::all();
+
+        return compact('teams', 'statuses');
     }
 
     public function store(StoreProgram $request)
@@ -54,6 +58,7 @@ class ProgramController extends Controller
         $program->name = $request->input('name');
         $program->description = $request->input('description');
         $program->team_id = $request->input('team_id');
+        $program->settings = $request->input('settings');
         $program->save();
 
         return new ProgramResource($program);
@@ -74,6 +79,7 @@ class ProgramController extends Controller
         // Update program when user is authorized.
         $program->name = $request->input('name');
         $program->description = $request->input('description');
+        $program->settings = $request->input('settings');
         $program->save();
 
         return $program;

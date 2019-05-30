@@ -17,7 +17,8 @@ class CreateProgramsTable extends Migration
             $table->increments('id');
             $table->string('name', 32);
             $table->text('description')->nullable();
-            $table->integer('team_id')->unsigned()->nullable();
+            $table->integer('team_id')->unsigned();
+            $table->schemalessAttributes('settings');
             $table->timestamps();
             $table->softDeletes();
 

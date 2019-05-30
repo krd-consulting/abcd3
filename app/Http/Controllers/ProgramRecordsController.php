@@ -99,7 +99,20 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $program->records()->where('record_id', $record->id)->first()->delete();
+        $record = $program->records()->where('record_id', $record->id)->first();
+
+        abort_if(
+            $record
+                ->client_statuses()
+                ->latest()
+                ->first()
+                ->status
+                ->value == config('app.program_client_statuses.active.value'), 
+            422,
+            'Can\'t remove active record.'
+        );
+
+        $record->delete();
 
         return $record;
     }

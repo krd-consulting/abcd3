@@ -7,12 +7,17 @@ use App\Traits\Models\Sort;
 
 use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\SchemalessAttributes\SchemalessAttributes;
 
 class Program extends Model
 {
     use SoftDeletes;
     use Search;
     use Sort;
+
+    public $casts = [
+        'settings' => 'array'
+    ];
 
     public function caseRecords()
     {
@@ -32,6 +37,16 @@ class Program extends Model
     public function client_statuses()
     {
         return $this->hasManyThrough('App\ProgramClientStatus', 'App\ProgramClient', NULL, 'program_client_id');
+    }
+
+    public function getSettingsAttribute(): SchemalessAttributes
+    {
+        return SchemalessAttributes::createForModel($this, 'settings');
+    }
+
+    public function scopeWithSettings(): Builder
+    {
+        return SchemalessAttributes::scopeWithSchemalessAttributes('settings');
     }
 
     public function records()

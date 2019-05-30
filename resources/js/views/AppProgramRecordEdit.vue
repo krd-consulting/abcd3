@@ -83,7 +83,7 @@
 <script>
     import Request from '../api/ProgramRecordsRequest';
     import RecordRequest from '../api/RecordRequest';
-    import StatusesRequest from '../api/ProgramClientStatusesRequest';
+    import StatusRequest from '../api/ProgramClientStatusRequest';
 
     import PrimaryData from '../components/RecordPrimaryData';
 
@@ -134,7 +134,7 @@
 
             open() {
                 this.retrieveRecord();
-                this.retrieveStatuses();
+                this.retrieveStatus();
                 this.retrieveProgramRecord();
             },
 
@@ -156,8 +156,8 @@
                 });
             },
 
-            retrieveStatuses() {
-                let request = new StatusesRequest({});
+            retrieveStatus() {
+                let request = new StatusRequest({});
 
                 request.retrieve().then((response) => {
                     this.statuses = response.data;

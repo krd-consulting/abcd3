@@ -58,7 +58,7 @@ class ProgramClientStatus extends Model
 
     public function createForProgramRecord(
         ProgramRecord $programRecord,
-        $status = 1,
+        $status = NULL,
         $previous_status = NULL,
         $previous_status_duration = 0,
         $notes = ''
@@ -68,7 +68,7 @@ class ProgramClientStatus extends Model
             return;
 
         $this->program_client_id = $programRecord->id;
-        $this->status_id = $status;
+        $this->status_id = $programRecord->program->settings->default_client_status_id;
         $this->previous_status_id = $previous_status;
         $this->previous_status_duration = $previous_status_duration;
         $this->notes = $notes;

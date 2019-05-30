@@ -212,4 +212,23 @@ return [
 
     ],
 
+    'program_client_statuses' => [
+        'waitlist' => [
+            'name' => 'Waitlist',
+            'value' => 0
+        ],
+        'active' => [
+            'name' => 'Active',
+            'value' => 1
+        ],
+        'concluded' => [
+            'name' => 'Concluded',
+            'value' => 2
+        ],
+        'removed' => [
+            'name' => 'Removed',
+            'value' => -1
+        ]
+    ]
+
 ];
