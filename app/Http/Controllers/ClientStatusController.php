@@ -33,6 +33,8 @@ class ClientStatusController extends Controller
     {
     	abort_if($status->programs()->exists(), 422, 'Status is set as default in some programs.');
 
+        abort_if($status->program_clients()->exists(), 422, 'Status is being used by some records.');
+
     	$status->delete();
     }
 }

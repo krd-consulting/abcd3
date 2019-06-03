@@ -107,7 +107,7 @@ class ProgramRecordsController extends Controller
                 ->latest()
                 ->first()
                 ->status
-                ->value == config('app.program_client_statuses.active.value'), 
+                ->name == config('app.program_client_statuses.active.name'), 
             422,
             'Can\'t remove active record.'
         );
