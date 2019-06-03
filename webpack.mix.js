@@ -13,8 +13,19 @@ const mix = require('laravel-mix');
 
 let tailwindcss = require('tailwindcss');
 
-mix.js('resources/js/app.js', 'public/js')
-    .js('resources/js/preferences.js', 'public/js')
+mix.webpackConfig({
+   resolve: {
+       alias: {
+           "@": path.resolve(
+               __dirname,
+               "resources/js"
+           )
+       }
+   }
+});
+
+mix.js('resources/js/App', 'public/js')
+    .js('resources/js/Preferences', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         tailwindcss('./tailwind.js'),
     ]);
