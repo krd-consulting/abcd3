@@ -63,6 +63,7 @@ class Record extends Model
     {
         return $this->belongsToMany('App\Program')
             ->withTimestamps()
+            ->withPivot(['enrolled_at', 'deleted_at'])
             ->wherePivot('deleted_at', NULL)
             ->using('App\ProgramRecord');
     }

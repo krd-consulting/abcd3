@@ -111,19 +111,19 @@
             tertiaryDataColumns() {
                 switch(this.recordType.identity) {
                     case 'Client':
-                        return [ 'Status', 'Enrollment Date', 'Notes' ];
+                        return [ 'Status', 'Enrollment Date', 'Notes'];
                         break;
 
                     case 'Staff':
-                        return [ 'Caseload', 'Groups'];
+                        return [ 'Caseload', 'Groups', 'Enrollment Date'];
                         break;
 
                     case 'Volunteer':
-                        return [ 'Hours Per Month', 'Hours Per Year'];
+                        return [ 'Hours Per Month', 'Hours Per Year', 'Enrollment Date'];
                         break;
 
                     default: 
-                        return [];
+                        return ['Enrollment Date'];
                 }
             },
         },

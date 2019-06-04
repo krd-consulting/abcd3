@@ -45,7 +45,10 @@ class RecordProgramsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $programRecord = new ProgramRecord();
+        $class = $this->getClass($recordType);
+
+        $programRecord = new $class();
+        
         $programRecord->createUsingBelongsTo($program, $record, $request);
 
         return $program;
@@ -56,8 +59,21 @@ class RecordProgramsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        ProgramRecord::where('program_id', $program->id)->where('record_id', $record->id)->first()->delete();
+        $class = $this->getClass($recordType);
+
+        $programRecord = new $class();
+
+        $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
+
+        $programRecord->delete();
 
         return $program;
+    }
+
+    private function getClass(RecordType $recordType) 
+    {
+        $class = $recordType->identity->name == 'Client' ? 'App\ProgramClient' : 'App\ProgramRecord';
+
+        return $class;
     }
 }

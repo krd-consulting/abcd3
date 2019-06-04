@@ -46,6 +46,7 @@ class ProgramClientStatus extends Model
             $this->previous_status_id = $currentStatusId;
             $this->previous_status_duration = $this->calculatePreviousStatusDuration();
         }
+        
         $this->save();
     }
 

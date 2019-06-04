@@ -26,6 +26,9 @@
 	            </base-button>
 	        </div>
 	    </div>
+	    <div class="tw-flex-1">
+	        <span>{{ record.enrolled_at }}</span>
+	    </div>
 	</div>
 </template>
 <script>

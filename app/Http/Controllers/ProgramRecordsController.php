@@ -49,12 +49,16 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
+        $class = $this->getClass($recordType);
+
+        $data = (new $class)->findUsingBelongsTo($program, $record);
+
+        if($data->withLatestStatus())
+            $data = $data->withLatestStatus();
+
         return [
-            'data' => (new ProgramClient)
-                        ->findUsingBelongsTo($program, $record)
-                        ->with(['statuses' => function($query) {
-                            return $query->latest()->first();
-                        }, 'statuses.status'])->first()
+            'data' => $data
+                        
         ];
     }
 
@@ -76,15 +80,16 @@ class ProgramRecordsController extends Controller
         UpdateProgramRecord $request
     )
     {
-        $class = $recordType->identity->name == 'Client' ? 'ProgramClient' : 'ProgramRecord';
+        $class = $this->getClass($recordType);
 
-
-        $programRecord = new ProgramClient();
+        $programRecord = new $class();
         $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
 
-        // Find latest status which is needed to compare to request data
-        $clientStatus = $programRecord->statuses()->latest()->first();
-        $clientStatus->updateUsingRequest($request);
+        if($programRecord->statuses()) {
+            // Find latest status which is needed to compare to request data
+            $status = $programRecord->statuses()->latest()->first();
+            $status->updateUsingRequest($request);
+        }
 
         // Update enrollment date
         $programRecord->enrolled_at = $request->enrolled_at;
@@ -99,21 +104,21 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $record = $program->records()->where('record_id', $record->id)->first();
+        $class = $this->getClass($recordType);
 
-        abort_if(
-            $record
-                ->client_statuses()
-                ->latest()
-                ->first()
-                ->status
-                ->name == config('app.program_client_statuses.active.name'), 
-            422,
-            'Can\'t remove active record.'
-        );
+        $programRecord = new $class();
 
-        $record->delete();
+        $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
+
+        $programRecord->delete();
 
         return $record;
+    }
+
+    private function getClass(RecordType $recordType) 
+    {
+        $class = $recordType->identity->name == 'Client' ? 'App\ProgramClient' : 'App\ProgramRecord';
+
+        return $class;
     }
 }

@@ -25,7 +25,7 @@ class Record extends JsonResource
                 return $this->client_statuses()->with('status')->latest()->first();
             }),
             'enrolled_at' => $this->whenPivotLoaded('program_record', function() {
-                return $this->program_records->firstWhere('id', $this->client_statuses()->latest()->first()['program_client_id'])['enrolled_at'];
+                return $this->pivot->enrolled_at;
             }),
             //'pivot' => $this->pivot,
             'path' => $this->path,

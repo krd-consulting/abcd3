@@ -22,13 +22,9 @@ class Program extends JsonResource
             'team_id' => $this->team->id,
             'default_client_status_id' => $this->default_client_status_id,
             'program_status' => $this->client_statuses->last(),
-            'enrolled_at' => $this->when(
-                !empty($this->program_records),
-                $this->program_records->firstWhere(
-                    'id',
-                    $this->client_statuses->last()['program_client_id']
-                )['enrolled_at']
-            ),
+            'enrolled_at' => $this->whenPivotLoaded('program_record', function() {
+                return $this->pivot->enrolled_at;
+            }),
             'available_record_types' => $this->available_record_types,
             'path' => $this->path,
             'created_at' => $this->created_at,

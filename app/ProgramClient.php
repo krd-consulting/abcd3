@@ -7,9 +7,9 @@ use App\Record;
 
 use App\Http\Requests\StoreProgramRecord;
 
-use App\ProgramRecord as Model;
+use App\ProgramRecord;
 
-class ProgramClient extends Model
+class ProgramClient extends ProgramRecord
 {
     protected $table = 'program_record';
 
@@ -20,16 +20,40 @@ class ProgramClient extends Model
 
     public function createUsingBelongsTo(Program $program, Record $record, $save = true, StoreProgramRecord $request = null)
     {
-    	if($record->record_type->identity->name != 'Client') {
-    		return parent::createUsingBelongsTo($program, $record, true);
-    	}
-
-        $programRecord = parent::createUsingBelongsTo($program, $record, $save);
+        $programRecord = parent::createUsingBelongsTo($program, $record, false);
 
         $programRecord->enrolled_at = $request->enrolled_at;
 
-        $programRecord->save();
+        $save ? $programRecord->save() : NULL;
 
         return $programRecord;
+    }
+
+    public function delete()
+    {
+        abort_if(
+            $this->isActive,
+            422,
+            "Can't remove record from program. The record is still active."
+        );
+
+        return parent::delete();
+    }
+
+    public function getLatestStatusAttribute()
+    {
+        return $this->statuses()->latest()->first();
+    }
+
+    public function scopeWithLatestStatus($query)
+    {
+        return $query->with(['statuses' => function($query) {
+                            return $query->latest()->first();
+                        }, 'statuses.status'])->first();
+    }
+
+    public function getIsActiveAttribute()
+    {
+        return $this->latestStatus->status->name == config('app.program_client_statuses.active.name');
     }
 }

@@ -43,7 +43,7 @@ class Program extends Model
     {
         return $this->belongsToMany('App\Record')
             ->withTimestamps()
-            ->withPivot('deleted_at')
+            ->withPivot(['enrolled_at', 'deleted_at'])
             ->wherePivot('deleted_at', NULL)
             ->using('App\ProgramRecord');
     }
