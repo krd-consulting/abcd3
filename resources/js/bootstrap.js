@@ -5,7 +5,8 @@ import vue from 'vue'
 window.Vue = vue;
 
 import ElementUI from 'element-ui'
-Vue.use(ElementUI);
+import locale from 'element-ui/lib/locale/lang/en';
+Vue.use(ElementUI,{ locale });
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
