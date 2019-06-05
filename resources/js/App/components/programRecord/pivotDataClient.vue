@@ -1,10 +1,10 @@
 <template>
 	<div class="tw-flex tw-flex-grow">
 	    <div class="tw-flex-1">
-	        <div class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
+	        <div class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green-500">
 	            <span>{{ record.program_status.status.name }}</span>
 	        </div>
-	        <div class="tw-text-sm tw-text-gray">
+	        <div class="tw-text-sm tw-text-gray-500">
 	            <span>Since {{ record.program_status.created_at }}</span>
 	        </div>
 	    </div>

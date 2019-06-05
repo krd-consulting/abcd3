@@ -1,7 +1,7 @@
 <template>
 	<div class="tw-flex tw-flex-grow">
 	    <div class="tw-flex-1">
-	        <div class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
+	        <div class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green-500">
 	            <span># of Cases</span>
 	        </div>
 	        <div>
@@ -14,7 +14,7 @@
 	        </div>
 	    </div>
 	    <div class="tw-flex-1">
-	        <div class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
+	        <div class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green-500">
 	            <span># of Groups</span>
 	        </div>
 	        <div>

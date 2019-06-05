@@ -12,10 +12,10 @@
 @endsection
 
 @section('content')
-    <div class="tw-w-full tw-bg-grey-lightest">
+    <div class="tw-w-full tw-bg-gray-100">
         <div class="tw-container tw-mx-auto tw-flex tw-mt-8">
             <nav>
-                <sidebar-list :collapse="false" class="preferences-sidebar-menu tw-bg-grey-lightest">
+                <sidebar-list :collapse="false" class="preferences-sidebar-menu tw-bg-gray-100">
                     <sidebar-list-item index="1" :route="{ path: '/preferences/' }">
                         <base-icon class="tw-text-xl tw-mr-2">dashboard</base-icon>
                         <span slot="title">General</span>

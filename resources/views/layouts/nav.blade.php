@@ -23,7 +23,7 @@
                 <base-menu mode="horizontal">
                     <el-dropdown class="main-nav-dropdown" trigger="click" placement="bottom-end">
                         <span>
-                            <profile-picture class="tw-w-8 tw-h-8 tw-bg-blue tw-text-white" username="{{ Auth::user()->name }}"></profile-picture>
+                            <profile-picture class="tw-w-8 tw-h-8 tw-bg-blue-500 tw-text-white" username="{{ Auth::user()->name }}"></profile-picture>
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <a>
