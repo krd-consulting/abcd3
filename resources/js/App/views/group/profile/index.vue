@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <edit-group
             :active.sync="edit.active"
             :group="edit.group"

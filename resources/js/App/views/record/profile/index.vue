@@ -16,9 +16,9 @@
                         <profile-picture class="tw-mr-2 tw-w-16 tw-h-16 tw-text-2xl" :record="record" :fields="fields" />
                     </div>
                     <div class="tw-inline-block tw-align-middle">
-                        <h1>
+                        <h2>
                             <primary-data class="tw-mb-2 tw-block tw-font-semibold tw-text-xl" :record="record" :fields="fields"/>
-                        </h1>
+                        </h2>
                         <p>
                             <secondary-data class="tw-text-sm" :record="record" :fields="fields"></secondary-data>
                         </p>

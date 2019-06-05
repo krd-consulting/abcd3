@@ -46,17 +46,17 @@
                 </div>
             </div>
         </form>
-        <div slot="footer" class="tw-flex tw-justify-between tw-border-t tw-px-4 tw-py-4 tw-bg-grey-lightest tw-rounded-b">
+        <div slot="footer" class="tw-flex tw-justify-between tw-border-t tw-px-4 tw-py-4 tw-bg-gray-100 tw-rounded-b">
             <div>
-                <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-red-lightest tw-text-red-dark tw-font-bold tw-border-none hover:tw-bg-red hover:tw-text-white" @click="close(false)">
+                <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-red-400est tw-text-red-600 tw-font-bold tw-border-none hover:tw-bg-red-500 hover:tw-text-white" @click="close(false)">
                     <span class="tw-text-xs tw-align-middle">Delete Role</span>
                 </base-button>
             </div>
             <div>
-                <base-button class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-grey-darker tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue" @click="close(false)">
+                <base-button class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-gray-700 tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue" @click="close(false)">
                     <span class="tw-text-xs tw-align-middle">Nevermind</span>
                 </base-button>
-                <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue tw-text-white tw-font-bold tw-border-none" @click="update">
+                <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none" @click="update">
                     <span class="tw-text-xs tw-align-middle">Good to go!</span>
                 </base-button>
             </div>

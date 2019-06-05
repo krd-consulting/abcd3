@@ -30,7 +30,7 @@
                     :page-size="perPage"
                     :total="total">
                     <template v-slot:pagination-info="slotProps">
-                        <span class="tw-text-grey-dark">{{ slotProps.paginationInfo }}</span>
+                        <span class="tw-text-gray-600">{{ slotProps.paginationInfo }}</span>
                     </template>
                 </base-pagination>
             </slot>

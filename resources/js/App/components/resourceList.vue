@@ -9,8 +9,8 @@
 
             <template slot="empty-placeholder">
                 <slot name="empty-placeholder">
-                    <div class="tw-text-center tw-py-16 tw-bg-grey-lightest tw-rounded tw-mx-4 tw-my-4">
-                        <div v-if="total == 0 && searchTerms !== ''" class="tw-my-2 tw-text-grey-dark">
+                    <div class="tw-text-center tw-py-16 tw-bg-gray-100 tw-rounded tw-mx-4 tw-my-4">
+                        <div v-if="total == 0 && searchTerms !== ''" class="tw-my-2 tw-text-gray-600">
                             <slot name="empty-placeholder-text">
                                 No items matched your query.
                             </slot>
@@ -18,7 +18,7 @@
                         <div>
                             <slot name="empty-placeholder-add-button">
                                 <base-button
-                                    class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue hover:tw-bg-transparent hover:tw-text-blue tw-text-white tw-border-none"
+                                    class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none"
                                     @click="$emit('add')">
                                     <base-icon class="tw-text-sm tw-align-middle tw-mr-1">
                                         <slot name="empty-placeholder-add-button-icon">add</slot>
@@ -44,7 +44,7 @@
                     </slot>
                     <slot v-if="hasAdd" name="options-add">
                             <base-button 
-                                class="tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue tw-no-shrink" 
+                                class="tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue-500 tw-no-shrink" 
                                 @click="$emit('add')">
                             <base-icon class="tw-text-base tw-font-bold tw-align-middle">
                                 <slot name="options-add-icon">
@@ -60,7 +60,7 @@
             </template>
 
             <slot v-if="hasListColumns" name="list-columns">
-                <div class="tw-flex tw-pt-6 tw-pb-2 tw-px-4 tw-text-xs tw-text-grey tw-uppercase tw-font-semibold">
+                <div class="tw-flex tw-pt-6 tw-pb-2 tw-px-4 tw-text-xs tw-text-gray-500 tw-uppercase tw-font-semibold">
                     <div class="tw-w-1/6" :column="primaryDataColumn">
                         <slot name="list-column-primary-data">{{ primaryDataColumn }}</slot>   
                     </div>
@@ -94,7 +94,7 @@
                     </slot>
 
                     <template slot="secondary-data">
-                        <span class="tw-text-sm tw-text-grey">
+                        <span class="tw-text-sm tw-text-gray">
                             <slot name="list-item-secondary-data" :item="item"></slot>
                         </span>
                     </template>
@@ -109,21 +109,21 @@
 
                     <template slot="options">
                         <base-button v-if="hasEdit" 
-                            class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-grey-darkest hover:tw-bg-transparent tw-border-none" 
+                            class="tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none" 
                             @click="$emit('edit', item[resourceIdentifier])">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
                             <span class="tw-text-xs tw-align-middle">Edit</span>
                         </base-button>
                         <base-button
                             v-if="hasRemove"
-                            class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none"
+                            class="tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
                             @click="$emit('remove', item[resourceIdentifier])">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
                             <span class="tw-text-xs tw-align-middle">Remove</span>
                         </base-button>
                         <base-button
                             v-if="hasDelete"
-                            class="tw-py-2 tw-px-2 tw-text-grey hover:tw-text-red hover:tw-bg-transparent tw-border-none"
+                            class="tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
                             @click="$emit('delete', item[resourceIdentifier])">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">delete</base-icon>
                             <span class="tw-text-xs tw-align-middle">Delete</span>
@@ -135,7 +135,7 @@
             <template slot="footer-options">
                 <base-button
                     v-if="hasManage && total > 0"
-                    class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
+                    class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none"
                     @click="$emit('manage')">
                     <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
                     <span class="tw-text-xs tw-align-middle">

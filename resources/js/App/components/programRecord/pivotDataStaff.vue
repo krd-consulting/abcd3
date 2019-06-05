@@ -6,7 +6,7 @@
 	        </div>
 	        <div>
 	            <base-button
-	                class="tw-py-2 tw-px-0 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
+	                class="tw-py-2 tw-px-0 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none"
 	                @click="">
 	                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
 	                <span class="tw-text-xs tw-align-middle">Manage Cases</span>
@@ -19,7 +19,7 @@
 	        </div>
 	        <div>
 	            <base-button
-	                class="tw-py-2 tw-px-0 hover:tw-bg-transparent hover:tw-text-blue tw-text-grey tw-border-none"
+	                class="tw-py-2 tw-px-0 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none"
 	                @click="">
 	                <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
 	                <span class="tw-text-xs tw-align-middle">Manage Groups</span>
