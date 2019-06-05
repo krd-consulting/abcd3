@@ -4,7 +4,7 @@
             <div class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
                 <span># of Hours</span>
             </div>
-            <div class="tw-text-sm tw-text-grey">
+            <div class="tw-text-sm tw-text-gray">
                 <span>HRS</span>
             </div>
         </div>
@@ -12,7 +12,7 @@
             <div class="tw-uppercase tw-text-sm tw-font-semibold tw-text-green">
                 <span># of Hours</span>
             </div>
-            <div class="tw-text-sm tw-text-grey">
+            <div class="tw-text-sm tw-text-gray">
                 <span>HRS</span>
             </div>
         </div>

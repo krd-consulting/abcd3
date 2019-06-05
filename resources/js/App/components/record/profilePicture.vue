@@ -38,13 +38,13 @@
                 let fields = [];
 
                 if('email_address' in this.fields)
-                    return 'tw-bg-purple tw-text-white';
+                    return 'tw-bg-purple-500 tw-text-white';
 
                 if('contact_number' in this.fields)
-                    return 'tw-bg-red tw-text-white';
+                    return 'tw-bg-red-500 tw-text-white';
 
                 if('birth_date' in this.fields)
-                    return 'tw-bg-orange tw-text-white';
+                    return 'tw-bg-orange-500 tw-text-white';
             }
         },
 

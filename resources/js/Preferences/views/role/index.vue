@@ -16,7 +16,7 @@
                     <span>Manage Roles</span>
                 </h2>
             </div>
-            <base-button class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-transparent tw-text-blue tw-font-bold tw-border-none" @click="createRole">
+            <base-button class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-transparent tw-text-blue-500 tw-font-bold tw-border-none" @click="createRole">
                 <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
                 <span class="tw-text-xs tw-align-middle">Create Role</span>
             </base-button>
@@ -31,15 +31,15 @@
                             </div>
 
                             <scope-tag
-                                class="tw-py-1 tw-text-xs tw-text-blue tw-font-semibold tw-capitalize"
+                                class="tw-py-1 tw-text-xs tw-text-blue-500 tw-font-semibold tw-capitalize"
                                 :scope="role.scope_id"/>
                         </div>
                         <div class="tw-w-1/4 tw-text-right tw-mr-4">
                             <button @click="editRole(role)">
-                                <base-icon class="tw-text-sm tw-text-grey hover:tw-text-blue">edit</base-icon>
+                                <base-icon class="tw-text-sm tw-text-gray-500 hover:tw-text-blue">edit</base-icon>
                             </button>
                             <button @click="confirm(role)">
-                                <base-icon class="tw-text-sm tw-text-grey hover:tw-text-red-light">delete</base-icon>
+                                <base-icon class="tw-text-sm tw-text-gray-500 hover:tw-text-red-400">delete</base-icon>
                             </button>
                         </div>
                     </div>

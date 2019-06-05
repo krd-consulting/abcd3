@@ -11,7 +11,7 @@
  */
 @import '~element-ui/lib/theme-chalk/index.css';
 
-@tailwind preflight;
+@tailwind base;
 
 @import url('https://rsms.me/inter/inter-ui.css');
 
@@ -45,18 +45,18 @@
 }
 
 html {
-    @apply tw-text-grey-darkest;
+    @apply tw-text-gray-800;
     font-family: 'Inter UI', sans-serif;
 
 }
 
 a {
     text-decoration: none;
-    @apply tw-text-grey-darkest;
+    @apply tw-text-gray-800;
 }
 
 a:hover {
-    @apply tw-text-blue tw-no-underline;
+    @apply tw-text-blue-500 tw-no-underline;
 }
 
 /**
@@ -65,7 +65,7 @@ a:hover {
  */
 
 .main {
-    @apply tw-bg-grey-lightest;
+    @apply tw-bg-gray-100;
 }
 
 .main {
@@ -100,8 +100,8 @@ a:hover {
         tw-px-4
         tw-text-xs
         tw-uppercase
-        tw-bg-grey-lighter
-        tw-text-grey-darker;
+        tw-bg-gray-200
+        tw-text-gray-700;
 }
 .base-table th {
   padding: .75em 1.5em .75em .75em;
@@ -127,7 +127,7 @@ a:hover {
 }
 
 .base-table thead th.sorting-asc, .base-table thead th.sorting-desc {
-    @apply tw-text-grey-darkest;
+    @apply tw-text-gray-800;
 }
 
 .base-table thead th.sorting-asc:after, .base-table thead th.sorting-desc:after {
@@ -147,7 +147,7 @@ a:hover {
         tw-py-4
         tw-px-4
         tw-border-b
-        tw-border-grey-lighter;
+        tw-border-gray-200;
 }
 
 .base-table tbody tr:last-child td {
