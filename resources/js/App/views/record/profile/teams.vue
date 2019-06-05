@@ -10,12 +10,13 @@
             :search-terms.sync="params.search"
             :total="total"
             has-add
-            has-delete
+            has-remove
             has-list-columns
             :has-search="false"
             :has-edit="false"
             :has-delete="false"
             @add="addTeam"
+            @remove="confirmDelete"
             @page-change="retrieve()"
             @search="retrieve()">
             <template slot="header-text">Teams</template>
@@ -74,7 +75,7 @@
                 });
             },
 
-            confirm(id) {
+            confirmDelete(id) {
                 this.$confirm('Are you sure you want to remove this team?', 'Remove Team', {
                     confirmButtonText: 'Remove',
                     cancelButtonText: 'Wait, no!',

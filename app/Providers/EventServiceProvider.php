@@ -23,7 +23,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\AddRecordToProgramTeam',
             'App\Listeners\InitializeProgramClientStatus'
         ],
-
+        
         'App\Events\ProgramRecordDeleted' => [
             'App\Listeners\CreateRemovedProgramClientStatus',
             'App\Listeners\RemoveRecordFromProgramGroup'
