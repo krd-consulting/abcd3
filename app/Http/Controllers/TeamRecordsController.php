@@ -49,6 +49,12 @@ class TeamRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $team);
 
+        abort_if(
+            $record->isActiveInProgram($team),
+            422,
+            "Can't remove record from team. It is still active in (a) program/s."
+        );
+
         $team->records()->detach($record);
 
         return $record;

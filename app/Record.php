@@ -4,6 +4,7 @@ namespace App;
 
 use App\Group;
 use App\RecordType;
+use App\Team;
 
 use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
@@ -94,6 +95,20 @@ class Record extends Model
     public function getPathAttribute()
     {
         return "/$this->table/".$this->record_type->slug."/$this->id";
+    }
+
+    public function isActiveInProgram(Team $team)
+    {
+        return $this->program_records()
+            ->leftJoin('program_client_status', 'program_client_id', 'program_record.id')
+            ->leftJoin('client_statuses', 'program_client_status.status_id', 'client_statuses.id')
+            ->leftJoin('programs', 'program_record.program_id', 'programs.id')
+            ->leftJoin('teams', 'programs.team_id', 'teams.id')
+            ->orderBy('program_client_status.created_at', 'desc')
+            ->select('client_statuses.name')
+            ->where('teams.id', $team->id)
+            ->first()
+            ->name == config('app.program_client_statuses.active.name'); 
     }
 
     // Query Scopes
