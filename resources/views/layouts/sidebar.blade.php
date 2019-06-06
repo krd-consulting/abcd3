@@ -66,5 +66,9 @@
                 @endforeach
             </base-submenu>
         @endif
+        <sidebar-list-item index="/forms/" :route="{ path: '/forms' }">
+            <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
+            <span slot="title">Forms</span>
+        </sidebar-list-item>
     </sidebar-list>
 </nav>

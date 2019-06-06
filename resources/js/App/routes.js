@@ -20,6 +20,7 @@ import TeamProfileSummary from './views/team/profile/summary';
 import TeamProfilePrograms from './views/team/profile/programs';
 import TeamProfileGroups from './views/team/profile/groups';
 import TeamProfileRecords from './views/team/profile/records';
+import FormList from './views/form';
 
 const routes = [
     {
@@ -74,6 +75,10 @@ const routes = [
             { path: 'records/:recordType', name: 'team_profile_records', component: TeamProfileRecords },
         ]
     },
+
+    {
+        path: '/forms/', component: FormList 
+    }
 ];
 
 const router = new VueRouter({
