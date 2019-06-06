@@ -1,4 +1,4 @@
-import '@/bootstrap';
+import '@/bootstrap'
 
 // Components
 import '@/components/base'
@@ -9,11 +9,22 @@ Vue.component('sidebar-list', require('@/components/sidebarList.vue').default);
 Vue.component('sidebar-list-item', require('@/components/sidebarListItem.vue').default);
 Vue.component('user-dropdown', require('@/components/userDropdown.vue').default);
 
+import Vuex from 'vuex'
+import draggable from 'vuedraggable'
+
 import { VueRouter, router } from './routes';
 Vue.use(VueRouter);
+
+
+Vue.config.productionTip = false
+Vue.use(draggable);
+Vue.use(Vuex);
 
 
 const app = new Vue({
     el: '#app',
     router,
+    data: {
+        collapseSidebar: false,
+    }
 });
