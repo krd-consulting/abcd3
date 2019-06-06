@@ -148,8 +148,8 @@
     </div>
 </template>
 <script>
-    import List from './list';
-    import ListItem from '../components/listItem';
+    import List from '@/components/list';
+    import ListItem from '@/components/listItem';
     import Search from '../components/search';
 
     export default {
