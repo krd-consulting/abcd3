@@ -3,9 +3,9 @@
         <base-button class="tw-border-none tw-bg-transparent tw-align-middle" @click="collapseSidebar = !collapseSidebar">
             <base-icon>menu</base-icon>
         </base-button>
-        <span class="tw-text-3xl tw-font-bold tw-align-middle tw-inline-block">
+        <a href="/" class="tw-text-3xl tw-font-bold tw-align-middle tw-inline-block">
             ABCD
-        </span>
+        </a>
     </div>
     <div class="tw-px-4 tw-flex tw-flex-1 tw-justify-between">
         <div class="tw-w-1/2">
