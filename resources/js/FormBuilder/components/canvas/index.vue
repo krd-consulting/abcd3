@@ -114,7 +114,7 @@
 
 <script>
 import draggable from 'vuedraggable'
-import SidePanel from '@/components/SidePanel.vue'
+import SidePanel from '@/components/sidePanel.vue'
 import ClickOutside from 'vue-click-outside'
 
 import TextField from '@/FormBuilder/components/canvas/fields/TextField.vue'
