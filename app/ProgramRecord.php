@@ -56,6 +56,16 @@ class ProgramRecord extends Pivot
         return $this->where('program_id', $program->id)->where('record_id', $record->id);
     }
 
+    public function findUsingPrograms(Record $record, $programs)
+    {
+        return $this->where('record_id', $record->id)->whereIn('program_id', $programs);
+    }
+
+    public function findUsingRecords(Program $program, $records)
+    {
+        return $this->where('program_id', $program->id)->whereIn('record_id', $records);
+    }
+
     public function program()
     {
         return $this->belongsTo('App\Program');

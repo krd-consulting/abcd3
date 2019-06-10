@@ -103,7 +103,9 @@ class Program extends Model
     }
 
     public function scopeInTeams($query, $teams) {
-        return $query->whereIn('team_id', $teams);
+        $table = $this->getTable();
+
+        return $query->whereIn("$table.team_id", $teams);
     }
 
     public function assignToTeam($team)

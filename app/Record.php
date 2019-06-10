@@ -6,6 +6,9 @@ use App\Group;
 use App\RecordType;
 use App\Team;
 
+use App\ProgramRecord;
+use App\ProgramClient;
+
 use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 
@@ -66,12 +69,26 @@ class Record extends Model
             ->withTimestamps()
             ->withPivot(['enrolled_at', 'deleted_at'])
             ->wherePivot('deleted_at', NULL)
-            ->using('App\ProgramRecord');
+            ->using(
+                $this->getProgramRecordPivotClass()
+            );
+    }
+
+    public function getProgramRecordPivotClass(RecordType $recordType = NULL)
+    {
+        $identity = $recordType == NULL ? 
+                $this->record_type == NULL ? '' : $this->record_type->identity->name
+            : $recordType->identity->name;
+
+        if($identity == 'Client')
+            return ProgramClient::class;
+
+        return ProgramRecord::class;
     }
 
     public function program_records()
     {
-        return $this->hasMany('App\ProgramRecord');
+        return $this->hasMany($this->getProgramRecordPivotClass());
     }
 
     public function client_statuses()
@@ -97,18 +114,30 @@ class Record extends Model
         return "/$this->table/".$this->record_type->slug."/$this->id";
     }
 
-    public function isActiveInProgram(Team $team)
+    public function activePrograms()
     {
-        return $this->program_records()
-            ->leftJoin('program_client_status', 'program_client_id', 'program_record.id')
-            ->leftJoin('client_statuses', 'program_client_status.status_id', 'client_statuses.id')
-            ->leftJoin('programs', 'program_record.program_id', 'programs.id')
-            ->leftJoin('teams', 'programs.team_id', 'teams.id')
-            ->orderBy('program_client_status.created_at', 'desc')
-            ->select('client_statuses.name')
-            ->where('teams.id', $team->id)
-            ->first()
-            ->name == config('app.program_client_statuses.active.name'); 
+        return $this->programs()
+                ->join(
+                    'program_client_status', 
+                    'program_record.id', 
+                    'program_client_status.program_client_id'
+                )->join(
+                    'client_statuses',
+                    'program_client_status.status_id',
+                    'client_statuses.id'
+                )->where('client_statuses.name', config('app.program_client_statuses.active.name'));
+    }
+
+    public function activeProgramsIn(Team $team)
+    {
+        return $this->activePrograms()->inTeams([$team->id]);
+    }
+
+    public function isActiveInProgramsIn(Team $team)
+    {
+        $programs = $this->activeProgramsIn($team);
+
+        return $programs->exists() ? $programs : false;
     }
 
     // Query Scopes

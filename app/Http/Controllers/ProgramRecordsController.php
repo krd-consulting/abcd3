@@ -24,7 +24,7 @@ class ProgramRecordsController extends Controller
         $records = $program->records()
             ->with(['client_statuses' => function($query) use ($program) {
                 $query->where('program_id', $program->id);
-            }, 'client_statuses.status'])->only($recordType);
+            }])->only($recordType);
 
         $records = $records->availableFor(auth()->user());
 
