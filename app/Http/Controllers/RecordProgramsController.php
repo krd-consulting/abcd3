@@ -20,7 +20,7 @@ class RecordProgramsController extends Controller
         $programs = $record->programs()
             ->with(['client_statuses' => function($query) use ($record) {
                 $query->where('record_id', $record->id);
-            }, 'client_statuses.status']);
+            }]);
 
         $programs = $programs->availableFor(auth()->user());
 

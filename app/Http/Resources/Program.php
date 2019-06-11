@@ -21,7 +21,9 @@ class Program extends JsonResource
             'team' => $this->team,
             'team_id' => $this->team->id,
             'default_client_status_id' => $this->default_client_status_id,
-            'program_status' => $this->client_statuses->last(),
+            'program_status' => $this->whenPivotLoaded('program_record', function() {
+                return $this->client_statuses()->latest()->first()->load('status');
+            }),
             'enrolled_at' => $this->whenPivotLoaded('program_record', function() {
                 return $this->pivot->enrolled_at;
             }),

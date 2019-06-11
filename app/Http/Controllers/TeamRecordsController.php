@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Team;
 use App\Record;
+use App\ProgramRecord;
 use App\RecordType;
 
 use App\Http\Resources\Records;
@@ -50,10 +51,22 @@ class TeamRecordsController extends Controller
         $this->authorize('write', $team);
 
         abort_if(
-            $record->isActiveInProgram($team),
+            $record->isActiveInProgramsIn($team),
             422,
             "Can't remove record from team. It is still active in (a) program/s."
         );
+
+        $programs = $record->programs()->inTeams([$team->id])->pluck('programs.id');
+
+        $groups = $record->groups()->where('program_id', $programs)->pluck('id');
+        $record->groups()->detach($groups);
+
+        $programRecords = (new ProgramRecord)->findUsingPrograms(
+            $record, 
+            $programs
+        );
+
+        $programRecords->delete();
 
         $team->records()->detach($record);
 
