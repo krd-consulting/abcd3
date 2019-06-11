@@ -152,10 +152,10 @@
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item label="Select By">
-        <el-radio-group v-model="options.dateType" size="medium">
+        <el-radio-group v-model="options.dateType" size="small">
           <el-radio-button label="day" ></el-radio-button>
-          <el-radio-button label="week"></el-radio-button>
-          <el-radio-button label="month"></el-radio-button>
+          <el-radio-button label="extended"></el-radio-button>
+          <el-radio-button label="range"></el-radio-button>
         </el-radio-group>
         <div v-if="options.dateType === 'day'">
           <span>Calendar Preferences</span><br>
@@ -163,11 +163,13 @@
           <el-switch v-model="options.daySelect2" inactive-text="No Quick menu" active-text="Quick menu"></el-switch>
           <el-switch v-model="options.daySelect3" inactive-text="No time" active-text="Include time"></el-switch>
         </div>
-        <div v-if="options.dateType === 'week'">
-           <p>ho</p>
+        <div v-if="options.dateType === 'extended'">
+           <p>week?</p>
+           <p>month?</p>
+           <p>year?</p>
         </div>
-        <div v-if="options.dateType === 'month'">
-          <p>eeyyoooo</p>
+        <div v-if="options.dateType === 'range'">
+          <p>from this day to that day</p>
         </div>
       </el-form-item>
       <el-form-item>
