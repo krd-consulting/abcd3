@@ -3,40 +3,38 @@
         <el-container>
             <el-main>
                 <el-card body-style="padding: 10px;" shadow="hover" >
-                    <el-divider content-position="left"><span>Required Content</span></el-divider>
+                    <el-divider content-position="left"><span>Standard Content</span></el-divider>
 
                     <el-card body-style="padding: 10px;" shadow="hover">
-                        <span class="inputLabel">Client Name</span>
-                        <el-input class="inputField" placeholder="Name of client" v-model="clientName"></el-input>
-                    </el-card>
-                            
-                    <el-card body-style="padding: 10px;" shadow="hover">
-                        <!-- <div class="block"> -->
-                            <span class="inputLabel">Date Completed</span><br>
-                            <el-date-picker v-model="dateCompleted" type="date" placeholder="Pick a day" :picker-options="pickerOptions">
-                            </el-date-picker>
-                        <!-- </div> -->
-                    </el-card>
-                            
-                    <el-card body-style="padding: 10px;" shadow="hover">
-                        <span class="inputLabel">Team</span><br>
-                        <el-select value="" placeholder="Select">
-                            <el-option v-for="department in departments" :key="department.value"
-                            :label="department.label" :value="department.value">
-                            </el-option>
-                        </el-select>
-                    </el-card>
                         
+                        <el-row :gutter="10">
+                            <el-col :span="10">
+                                <span class="input-label">Client Name</span>
+                                <el-input class="inputField" v-model="clientName"></el-input>
+                            </el-col>
+                            
+                            <el-col :span="6">
+                                <span class="input-label">Team</span><br>
+                                <el-select value="" placeholder="Select">
+                                    <el-option v-for="department in departments" :key="department.value"
+                                    :label="department.label" :value="department.value">
+                                    </el-option>
+                                </el-select>
+                            </el-col>
+                        </el-row>
+                        <el-row :guttter="10">
+                            <el-col :span="6">
+                                <span class="input-label">Date Completed</span><br>
+                                <el-date-picker v-model="dateCompleted" type="date" placeholder="Pick a day" :picker-options="pickerOptions">
+                                </el-date-picker>
+                            </el-col>
+                        </el-row>
+                    </el-card>  
                     <el-divider></el-divider>
                 </el-card>
 
             <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
-                <el-divider content-position="left">
-                    <!-- <form @submit.prevent="showField"> -->
-                        <span v-show="!showField('sectionHeader')" @click="focusField('sectionHeader')">{{ sectionHeader }}</span>
-                        <el-input v-model="sectionHeader" v-show="showField('sectionHeader')" @focus="focusField('sectionHeader')" @blur="blurField"></el-input>
-                    <!-- </form> -->
-                </el-divider>
+                <el-divider content-position="left"><span>Your Content</span></el-divider>
                     <draggable class="dropArea" v-model="fieldList">
                         <div v-for="(inputType, index) in fieldList" :key="index">
                             <el-row type="flex" :gutter="2">
@@ -47,57 +45,57 @@
                                     </div>
                                     <div v-if="inputType.input.id === 0"> <!-- textbox -->
                                         <Text-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Text-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
                                         <Text-box :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Text-box>
                                     </div>
                                     <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
                                         <Numeric-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Numeric-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 3"> <!-- Dropdown -->
                                         <Dropdown-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Dropdown-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 4"> <!-- Radio -->
                                         <Radio-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Radio-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 5"> <!-- Checkbox -->
                                         <Checkbox-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Checkbox-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 6"> <!-- Date Field -->
                                         <Date-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Date-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 7"> <!-- Matrix Field -->
                                         <Matrix-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Matrix-field>
                                     </div>
-                                    <div v-else-if="inputType.input.id === 8"> <!-- Email -->
-                                        <Email-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
-                                        </Email-field>
+                                    <div v-else-if="inputType.input.id === 8"> <!-- Section Divider -->
+                                        <Section-Divider :options="inputType.options">
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                        </Section-Divider>
                                     </div>
                                     <div v-else-if="inputType.input.id === 9"> <!-- Address -->
                                         <Address-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Address-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 10"> <!-- Phone Number -->
                                         <Phone-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>I no longer want this field</strong></el-button>
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Phone-field>
                                     </div>
                                 </el-card>
@@ -117,17 +115,18 @@ import draggable from 'vuedraggable'
 import SidePanel from '@/components/SidePanel.vue'
 import ClickOutside from 'vue-click-outside'
 
-import TextField from '@/FormBuilder/components/canvas/fields/TextField.vue'
-import TextBox from '@/FormBuilder/components/canvas/fields/TextArea.vue'
-import EmailField from '@/FormBuilder/components/canvas/fields/EmailField.vue'
-import AddressField from '@/FormBuilder/components/canvas/fields/AddressField.vue'
-import CheckboxField from '@/FormBuilder/components/canvas/fields/CheckboxField.vue'
-import DropdownField from '@/FormBuilder/components/canvas/fields/DropdownField.vue'
-import NumericField from '@/FormBuilder/components/canvas/fields/NumericField.vue'
-import PhoneField from '@/FormBuilder/components/canvas/fields/PhoneField.vue'
-import RadioField from '@/FormBuilder/components/canvas/fields/RadioField.vue'
-import DateField from '@/FormBuilder/components/canvas/fields/DateField.vue'
-import MatrixField from '@/FormBuilder/components/canvas/fields/MatrixField.vue'
+import TextField from '@/FormBuilder/components/canvas/fields/textField.vue'
+import TextBox from '@/FormBuilder/components/canvas/fields/textArea.vue'
+// import EmailField from '@/FormBuilder/components/canvas/fields/emailField.vue'
+// import AddressField from '@/FormBuilder/components/canvas/fields/addressField.vue'
+import CheckboxField from '@/FormBuilder/components/canvas/fields/checkboxField.vue'
+import DropdownField from '@/FormBuilder/components/canvas/fields/dropdownField.vue'
+import NumericField from '@/FormBuilder/components/canvas/fields/numericField.vue'
+// import PhoneField from '@/FormBuilder/components/canvas/fields/phoneField.vue'
+import RadioField from '@/FormBuilder/components/canvas/fields/radioField.vue'
+import DateField from '@/FormBuilder/components/canvas/fields/dateField.vue'
+import MatrixField from '@/FormBuilder/components/canvas/fields/matrixField.vue'
+import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
 
 export default {
     data: () => {
@@ -165,7 +164,6 @@ export default {
                 { value: 'Counselling', label: 'Counselling'},
                 { value: 'Community Programs', label: 'Community Programs'}
             ],
-            sectionHeader: 'New Section',
             input: {},
             inputType: {},
             inputOptions: {},
@@ -184,12 +182,10 @@ export default {
         SidePanel,
         TextField,
         TextBox,
-        EmailField,
+        SectionDivider,
         NumericField,
-        AddressField,
         CheckboxField,
         DropdownField,
-        PhoneField,
         RadioField,
         DateField,
         MatrixField,

@@ -10,21 +10,10 @@ const routes = [
         path: '/forms/create/preview',
         name: 'Form Preview',
         component: FormPreview,
-        // beforeRouteEnter (to, from, next) {
-        // const answer = window.confirm('Are you sure you want to leave?')
-        // if (answer) {
-        //     next('/Preview')
-        // } else {
-        //     next(false)
-        // }
-        // }
     },
     {
         path: '/forms/create/',
         name: 'NewForm',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: FormBuilder
     }
 ]

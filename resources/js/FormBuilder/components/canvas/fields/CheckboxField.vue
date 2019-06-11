@@ -23,7 +23,7 @@
           <h3>Checkbox List Items</h3>
           <el-row v-for="item in checkList" :key="item.id">
             <el-col :span="5">
-                <editable-text class="float-left" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
+                <editable-text class="cursor-text float-left" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
                 <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
             </el-col>
           </el-row>
