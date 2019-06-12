@@ -152,24 +152,28 @@
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item label="Select By">
-        <el-radio-group v-model="options.dateType" size="small">
-          <el-radio-button label="day" ></el-radio-button>
-          <el-radio-button label="extended"></el-radio-button>
-          <el-radio-button label="range"></el-radio-button>
+        <el-radio-group v-model="options.dateSelect" size="small">
+          <el-radio-button label="Day" ></el-radio-button>
+          <el-radio-button label="Extended Time"></el-radio-button>
+          <el-radio-button label="Range"></el-radio-button>
         </el-radio-group>
-        <div v-if="options.dateType === 'day'">
-          <span>Calendar Preferences</span><br>
-          <el-switch v-model="options.daySelect1" inactive-text="No restriction" active-text="Only past dates"></el-switch>
-          <el-switch v-model="options.daySelect2" inactive-text="No Quick menu" active-text="Quick menu"></el-switch>
-          <el-switch v-model="options.daySelect3" inactive-text="No time" active-text="Include time"></el-switch>
+        <div v-if="options.dateSelect === 'Day'">
+          <span>This option gives you a standard calendar to use, along with some helpful options to better suit your needs.</span><br>
+          <el-switch v-model="options.dateSelect1" active-text="Only allow up to current day"></el-switch>
+          <el-switch v-model="options.dateSelect2" active-text="Quick menu"></el-switch>
+          <el-switch v-model="options.dateSelect3" active-text="Include time"></el-switch>
         </div>
-        <div v-if="options.dateType === 'extended'">
-           <p>week?</p>
-           <p>month?</p>
-           <p>year?</p>
+        <div v-if="options.dateSelect === 'Extended Time'">
+          <span>This option allows you to make a selection by month or year</span><br>
+            <el-switch v-model="options.dateSelect4" 
+              active-text="Year" 
+              active-color="#409EFF"
+              inactive-text="Month" 
+              inactive-color="#409EFF">
+            </el-switch>
         </div>
-        <div v-if="options.dateType === 'range'">
-          <p>from this day to that day</p>
+        <div v-if="options.dateSelect === 'Range'">
+          <el-switch v-model="options.dateSelect5" active-text="Quick Menu"></el-switch>
         </div>
       </el-form-item>
       <el-form-item>
@@ -192,7 +196,7 @@
          <el-input-number v-model="options.matrixQuestions"
             controls-position="right" 
             @change="handleChange" 
-            :min="2">
+            :min="1">
           </el-input-number>
       </el-form-item>
       <el-form-item label="Number of Choices Per Question">
@@ -242,10 +246,12 @@ export default {
      isLimited: false,
      setLength: 50,
      sectionHeader: 'New Section',
-     dateType: 'day',
-     daySelect1: false,
-     daySelect2: false,
-     daySelect3: false,
+     dateSelect: 'day',
+     dateSelect1: false,
+     dateSelect2: false,
+     dateSelect3: false,
+     dateSelect4: false,
+     dateSelect5: false,
    },
   }
  },
