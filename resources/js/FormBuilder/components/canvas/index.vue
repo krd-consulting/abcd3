@@ -121,7 +121,7 @@ import CheckboxField from '@/FormBuilder/components/canvas/fields/checkboxField.
 import DropdownField from '@/FormBuilder/components/canvas/fields/dropdownField.vue'
 import NumericField from '@/FormBuilder/components/canvas/fields/numericField.vue'
 import RadioField from '@/FormBuilder/components/canvas/fields/radioField.vue'
-import DateField from '@/FormBuilder/components/canvas/fields/dateField/index.vue'
+import DateField from '@/FormBuilder/components/canvas/fields/dateField.vue'
 import MatrixField from '@/FormBuilder/components/canvas/fields/matrixField.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
 

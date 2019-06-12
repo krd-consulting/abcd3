@@ -3930,14 +3930,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -85709,23 +85701,13 @@ var render = function() {
                                   staticClass:
                                     "tw-text-xs tw-mr-1 tw-align-middle"
                                 },
-                                [
-                                  _vm._t("options-remove-icon", [
-                                    _vm._v("close")
-                                  ])
-                                ],
-                                2
+                                [_vm._v("close")]
                               ),
                               _vm._v(" "),
                               _c(
                                 "span",
                                 { staticClass: "tw-text-xs tw-align-middle" },
-                                [
-                                  _vm._t("options-remove-text", [
-                                    _vm._v("Remove")
-                                  ])
-                                ],
-                                2
+                                [_vm._v("Remove")]
                               )
                             ],
                             1
@@ -85754,23 +85736,13 @@ var render = function() {
                                   staticClass:
                                     "tw-text-xs tw-mr-1 tw-align-middle"
                                 },
-                                [
-                                  _vm._t("options-delete-icon", [
-                                    _vm._v("delete")
-                                  ])
-                                ],
-                                2
+                                [_vm._v("delete")]
                               ),
                               _vm._v(" "),
                               _c(
                                 "span",
                                 { staticClass: "tw-text-xs tw-align-middle" },
-                                [
-                                  _vm._t("options-delete-text", [
-                                    _vm._v("Delete")
-                                  ])
-                                ],
-                                2
+                                [_vm._v("Delete")]
                               )
                             ],
                             1
@@ -110176,7 +110148,7 @@ function (_Request) {
   }, {
     key: "update",
     value: function update(status) {
-      return this.patch("/api/programs/client-statuses/".concat(status));
+      return this.put("/api/programs/client-statuses/".concat(status));
     }
   }, {
     key: "destroy",
@@ -113245,8 +113217,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

@@ -5,30 +5,13 @@
             <el-collapse-item name="1">
                 <template slot="title">
                     <div v-if="options.dateType === 'day'">
-                        <div v-if="!options.daySelect1 && !options.daySelect2 && !options.daySelect3">
-                            <calendar/>
-                        </div>
-                        <div v-if="options.daySelect1 && !options.daySelect2 && !options.daySelect3">
-                            <calendar-past/>
-                        </div>
-                        <div v-if="!options.daySelect1 && options.daySelect2 && !options.daySelect3">
-                            <calendar-menu/>
-                        </div>
-                        <div v-if="options.daySelect1 && options.daySelect2 && !options.daySelect3">
-                            <calendar-past-menu/>
-                        </div>
-                        <div v-if="!options.daySelect1 && !options.daySelect2 && options.daySelect3">
-                            <calendar-time/>
-                        </div>
-                        <div v-if="options.daySelect1 && !options.daySelect2 && options.daySelect3">
-                            <calendar-past-time/>
-                        </div>
-                        <div v-if="!options.daySelect1 && options.daySelect2 && options.daySelect3">
-                            <calendar-menu-time/>
-                        </div>
-                        <div v-if="options.daySelect1 && options.daySelect2 && options.daySelect3">
-                            <calendar-menu-past-time/>
-                        </div>
+                        <el-date-picker 
+                            v-model="dateSelection" 
+                            :type="dateType" 
+                            :picker-options="dateOptions" 
+                            :placeholder="datePlaceHolder"
+                            :format="dateFormat">
+                        </el-date-picker>
                     </div>
 
                     <div v-if="options.dateType === 'extended'">
@@ -43,13 +26,6 @@
                         </div>
                     </div>
                     <div v-if="options.dateType === 'range'"></div>
-
-                    <!-- <el-date-picker v-if="value === 2" 
-                        v-model="dateSelection" type="daterange"
-                        range-separator="To"
-                        start-placeholder="Start date"
-                        end-placeholder="End date">
-                    </el-date-picker> -->
                 </template>
                 <div>
                     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
@@ -70,13 +46,13 @@
                             <div v-if="options.dateType === 'day'">
                                 <span>Calendar Preferences</span><br>
                                 <el-row>
-                                    <el-switch v-model="options.daySelect1" inactive-text="No restriction" active-text="Only past dates"></el-switch>
+                                    <el-switch @change="togglePastOnly" v-model="myOptions.daySelect1" inactive-text="No restriction" active-text="Only past dates"></el-switch>
                                 </el-row>
                                 <el-row>
-                                    <el-switch v-model="options.daySelect2" inactive-text="No Quick menu" active-text="Quick menu"></el-switch>
+                                    <el-switch @change="toggleQuickMenu" v-model="myOptions.daySelect2" inactive-text="No Quick menu" active-text="Quick menu"></el-switch>
                                 </el-row>
                                 <el-row>
-                                    <el-switch v-model="options.daySelect3" inactive-text="No time" active-text="Include time"></el-switch>
+                                    <el-switch @change="toggleTime" v-model="myOptions.daySelect3" inactive-text="No time" active-text="Include time"></el-switch>
                                 </el-row>
                             </div>
                             <div v-if="options.dateType === 'extended'">
@@ -101,21 +77,16 @@
 </template>
 
 <script>
-import calendar from '@/FormBuilder/components/canvas/fields/dateField/calendar.vue'
-import calendarPast from '@/FormBuilder/components/canvas/fields/dateField/calendarPast.vue'
-import calendarMenu from '@/FormBuilder/components/canvas/fields/dateField/calendarMenu.vue'
-import calendarPastMenu from '@/FormBuilder/components/canvas/fields/dateField/calendarPastMenu.vue'
-import calendarTime from '@/FormBuilder/components/canvas/fields/dateField/calendarTime.vue'
-import calendarPastTime from '@/FormBuilder/components/canvas/fields/dateField/calendarPastTime.vue'
-import calendarMenuTime from '@/FormBuilder/components/canvas/fields/dateField/calendarMenuTime.vue'
-import calendarMenuPastTime from '@/FormBuilder/components/canvas/fields/dateField/calendarMenuTime.vue'
 
 export default {
     data: () => {
         return {
-            dateLabel: '',
             dateSelection: '',
-            value: 0,
+            dateType: 'date',
+            dateOptions: {},
+            datePlaceHolder: 'Pick a day',
+            dateFormat: 'yyyy/MM/dd',
+            myOptions: []
         }
     },
     props: {
@@ -124,15 +95,32 @@ export default {
             default: {}
         }
     },
-    components: {
-        calendar,
-        calendarPast,
-        calendarMenu,
-        calendarPastMenu,
-        calendarTime,
-        calendarPastTime,
-        calendarMenuTime,
-        calendarMenuPastTime,
+    mounted() {
+        this.togglePastOnly(),
+        this.toggleQuickMenu(),
+        this.toggleTime()
+    },
+    created() {
+        this.myOptions = _.clone(this.options)
+    },
+    methods: {
+        togglePastOnly() {
+            if(this.myOptions.daySelect1 === true) {
+                this.dateOptions.disabledDate = function(time) { 
+                    return time.getTime() > Date.now() 
+                }
+                console.log(this.dateOptions)
+            } else if(this.myOptions.daySelect1 === false) {
+                delete this.dateOptions.disabledDate;
+                console.log(this.dateOptions)
+            }
+        },
+        toggleQuickMenu() {
+            console.log(this.options.daySelect2)
+        },
+        toggleTime() {
+            console.log(this.options.daySelect3)
+        }
     }
 }
 </script>

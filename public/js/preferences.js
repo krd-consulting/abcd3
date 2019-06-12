@@ -3640,14 +3640,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4045,10 +4037,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -4095,53 +4083,23 @@ __webpack_require__.r(__webpack_exports__);
       this.edit.status = status;
       this.edit.active = true;
     },
-    confirmDisable: function confirmDisable(status) {
+    confirmDelete: function confirmDelete(status) {
       var _this2 = this;
 
-      this.$confirm('Are you sure you want to disable this status?', 'Disable Status', {
-        confirmButtonText: 'Disable',
-        cancelButtonText: 'Wait, no!',
-        type: 'warning'
-      }).then(function () {
-        _this2.disableStatus(status).then(function () {
-          _this2.retrieve();
-
-          _this2.$message({
-            type: 'success',
-            message: 'Status was disabled.'
-          });
-        })["catch"](function (error) {
-          _this2.$message({
-            type: 'error',
-            message: error.message
-          });
-        });
-      });
-    },
-    disableStatus: function disableStatus(status) {
-      var request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({
-        id: status,
-        enabled: false
-      });
-      request.update(status);
-    },
-    confirmDelete: function confirmDelete(status) {
-      var _this3 = this;
-
-      this.$confirm('Are you sure you want to delete this status?', 'Delete Status', {
+      this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
         confirmButtonText: 'Delete',
         cancelButtonText: 'Wait, no!',
         type: 'warning'
       }).then(function () {
-        _this3.deleteStatus(status).then(function () {
-          _this3.retrieve();
+        _this2.deleteStatus(status).then(function () {
+          _this2.retrieve();
 
-          _this3.$message({
+          _this2.$message({
             type: 'success',
-            message: 'Status was deleted.'
+            message: 'Program was deleted.'
           });
         })["catch"](function (error) {
-          _this3.$message({
+          _this2.$message({
             type: 'error',
             message: error.message
           });
@@ -81014,23 +80972,13 @@ var render = function() {
                                   staticClass:
                                     "tw-text-xs tw-mr-1 tw-align-middle"
                                 },
-                                [
-                                  _vm._t("options-remove-icon", [
-                                    _vm._v("close")
-                                  ])
-                                ],
-                                2
+                                [_vm._v("close")]
                               ),
                               _vm._v(" "),
                               _c(
                                 "span",
                                 { staticClass: "tw-text-xs tw-align-middle" },
-                                [
-                                  _vm._t("options-remove-text", [
-                                    _vm._v("Remove")
-                                  ])
-                                ],
-                                2
+                                [_vm._v("Remove")]
                               )
                             ],
                             1
@@ -81059,23 +81007,13 @@ var render = function() {
                                   staticClass:
                                     "tw-text-xs tw-mr-1 tw-align-middle"
                                 },
-                                [
-                                  _vm._t("options-delete-icon", [
-                                    _vm._v("delete")
-                                  ])
-                                ],
-                                2
+                                [_vm._v("delete")]
                               ),
                               _vm._v(" "),
                               _c(
                                 "span",
                                 { staticClass: "tw-text-xs tw-align-middle" },
-                                [
-                                  _vm._t("options-delete-text", [
-                                    _vm._v("Delete")
-                                  ])
-                                ],
-                                2
+                                [_vm._v("Delete")]
                               )
                             ],
                             1
@@ -81590,7 +81528,7 @@ var render = function() {
             "per-page": _vm.params.perPage,
             "has-add": "",
             "has-delete": "",
-            "has-remove": "",
+            "has-list-columns": false,
             hasSearch: false,
             total: _vm.total
           },
@@ -81600,7 +81538,6 @@ var render = function() {
             },
             add: _vm.createStatus,
             delete: _vm.confirmDelete,
-            remove: _vm.confirmDisable,
             "page-change": function($event) {
               return _vm.retrieve()
             }
@@ -81626,12 +81563,7 @@ var render = function() {
           _vm._v(" "),
           _c("template", { slot: "options-add-text" }, [
             _vm._v("Create Client Status")
-          ]),
-          _vm._v(" "),
-          _vm._v(" "),
-          _c("template", { slot: "options-remove-icon" }, [_vm._v("close")]),
-          _vm._v(" "),
-          _c("template", { slot: "options-remove-text" }, [_vm._v("Disable")])
+          ])
         ],
         2
       )
@@ -98532,7 +98464,7 @@ function (_Request) {
   }, {
     key: "update",
     value: function update(status) {
-      return this.patch("/api/programs/client-statuses/".concat(status));
+      return this.put("/api/programs/client-statuses/".concat(status));
     }
   }, {
     key: "destroy",
@@ -100355,7 +100287,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/Preferences */"./resources/js/Preferences/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\Preferences */"./resources/js/Preferences/index.js");
 
 
 /***/ })
