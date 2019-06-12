@@ -106,12 +106,19 @@ export default {
     methods: {
         togglePastOnly() {
             if(this.myOptions.daySelect1 === true) {
-                this.dateOptions.disabledDate = function(time) { 
-                    return time.getTime() > Date.now() 
-                }
+                this.dateOptions = Object.assign({}, this.dateOptions, {
+                    disabledDate: function(time) { 
+                        return time.getTime() > Date.now() 
+                    }
+                });
+
                 console.log(this.dateOptions)
             } else if(this.myOptions.daySelect1 === false) {
-                delete this.dateOptions.disabledDate;
+
+                this.dateOptions = Object.assign({}, this.dateOptions, {
+                    disabledDate: {}
+                });
+
                 console.log(this.dateOptions)
             }
         },
