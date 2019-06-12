@@ -7,7 +7,7 @@
             </div>
             <div>
                 <slot name="primary-data" :item="item">
-                    <span class="tw-mb-2 tw-block tw-font-semibold">
+                    <span class="tw-block">
                         <slot>{{ primaryData }}</slot>
                     </span>
                 </slot>

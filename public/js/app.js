@@ -85276,7 +85276,7 @@ var render = function() {
             index == "birth_date"
               ? _c(
                   "span",
-                  { staticClass: "tw-text-gray-500 tw-rounded tw-mr-2" },
+                  { staticClass: "tw-rounded tw-mr-2" },
                   [
                     _c("base-icon", { staticClass: "tw-text-xs" }, [
                       _vm._v("calendar_today")
@@ -85289,7 +85289,7 @@ var render = function() {
               : index == "contact_number"
               ? _c(
                   "span",
-                  { staticClass: "tw-text-gray-500 tw-rounded tw-mr-2" },
+                  { staticClass: "tw-rounded tw-mr-2" },
                   [
                     _c("base-icon", { staticClass: "tw-text-xs" }, [
                       _vm._v("phone")
@@ -85302,7 +85302,7 @@ var render = function() {
               : index == "email_address"
               ? _c(
                   "span",
-                  { staticClass: "tw-text-gray-500 tw-rounded tw-mr-2" },
+                  { staticClass: "tw-rounded tw-mr-2" },
                   [
                     _c("base-icon", { staticClass: "tw-text-xs" }, [
                       _vm._v("email")
@@ -85616,7 +85616,7 @@ var render = function() {
                   _c("template", { slot: "secondary-data" }, [
                     _c(
                       "span",
-                      { staticClass: "tw-text-sm tw-text-gray" },
+                      { staticClass: "tw-text-sm" },
                       [
                         _vm._t("list-item-secondary-data", null, { item: item })
                       ],
@@ -89807,6 +89807,7 @@ var render = function() {
                 var record = ref.item
                 return [
                   _c("primary-data", {
+                    staticClass: "tw-font-semibold",
                     attrs: { record: record, fields: _vm.fields }
                   })
                 ]
@@ -89818,7 +89819,7 @@ var render = function() {
                 var record = ref.item
                 return [
                   _c("secondary-data", {
-                    staticClass: "tw-text-xs",
+                    staticClass: "tw-text-xs tw-text-gray-600",
                     attrs: { record: record, fields: _vm.fields }
                   })
                 ]
@@ -90361,8 +90362,7 @@ var render = function() {
                         "h2",
                         [
                           _c("primary-data", {
-                            staticClass:
-                              "tw-mb-2 tw-block tw-font-semibold tw-text-xl",
+                            staticClass: "tw-block tw-font-semibold tw-text-xl",
                             attrs: { record: _vm.record, fields: _vm.fields }
                           })
                         ],
@@ -92102,7 +92102,7 @@ var render = function() {
                 [
                   _c(
                     "span",
-                    { staticClass: "tw-mb-2 tw-block tw-font-semibold" },
+                    { staticClass: "tw-block" },
                     [_vm._t("default", [_vm._v(_vm._s(_vm.primaryData))])],
                     2
                   )

@@ -80921,7 +80921,7 @@ var render = function() {
                   _c("template", { slot: "secondary-data" }, [
                     _c(
                       "span",
-                      { staticClass: "tw-text-sm tw-text-gray" },
+                      { staticClass: "tw-text-sm" },
                       [
                         _vm._t("list-item-secondary-data", null, { item: item })
                       ],
@@ -82907,7 +82907,7 @@ var render = function() {
                 [
                   _c(
                     "span",
-                    { staticClass: "tw-mb-2 tw-block tw-font-semibold" },
+                    { staticClass: "tw-block" },
                     [_vm._t("default", [_vm._v(_vm._s(_vm.primaryData))])],
                     2
                   )

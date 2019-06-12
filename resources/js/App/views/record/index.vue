@@ -34,11 +34,11 @@
             </template>
 
             <template v-slot:list-item-primary-data="{ item:record }">
-                <primary-data :record="record" :fields="fields"/>
+                <primary-data class="tw-font-semibold" :record="record" :fields="fields"/>
             </template>
 
              <template v-slot:list-item-secondary-data="{ item:record }">
-                <secondary-data class="tw-text-xs" :record="record" :fields="fields"/>
+                <secondary-data class="tw-text-xs tw-text-gray-600" :record="record" :fields="fields"/>
             </template>
         </list>
     </div>

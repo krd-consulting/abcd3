@@ -44,8 +44,8 @@
         tw-shadow;
 }
 
-html {
-    @apply tw-text-gray-800;
+body {
+    @apply tw-text-base;
     font-family: 'Inter UI', sans-serif;
 
 }
