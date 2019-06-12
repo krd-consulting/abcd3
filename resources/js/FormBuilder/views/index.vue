@@ -1,25 +1,24 @@
 <template>
     <div class="formCreate">
-        <h1>Form Builder</h1>
-        <el-container>
+        <el-container class="create-container">
             
-            <el-aside>
+            <el-aside class="abcd-sticky">
                 <div id="logo">
                      ABCD
                 </div>
-                <FormMenu @add="addField"/>
+                <form-menu @add="addField"/>
             </el-aside>
 
-                <el-container>
-                    <el-header>
-                        <el-menu :default-active="$route.path" 
-                            class="w-full" background-color="#eef1f6" active-text-color="#409EFF" 
-                            mode="horizontal" @select="handleSelect" router>
-                            <el-menu-item default-active index="/NewForm" class="font-bold focus:font-extrabold">Form Builder</el-menu-item>
-                            <el-menu-item index="/Preview" class="font-bold focus:font-extrabold">Preview Form</el-menu-item>
-                            <el-menu-item index="/" class="dock-right font-bold focus:font-extrabold" @click="buildForm">Finish and Build!</el-menu-item>
-                        </el-menu>
-                    </el-header>
+            <el-container class="abcd-sticky">
+                <el-header class="abcd-sticky">
+                    <el-menu :default-active="$route.path" 
+                        class="w-full" background-color="#eef1f6" active-text-color="#409EFF" 
+                        mode="horizontal" @select="handleSelect" router>
+                        <el-menu-item default-active index="/forms/create" class="font-bold focus:font-extrabold">Form Builder</el-menu-item>
+                        <el-menu-item index="/forms/create/preview" class="font-bold focus:font-extrabold">Preview Form</el-menu-item>
+                        <el-menu-item index="/forms" class="dock-right font-bold focus:font-extrabold">Finish and Build!</el-menu-item>
+                    </el-menu>
+                </el-header>
     
                 <el-main>
                     <FormCanvas :fields="fields" @inputOptions="setOptions"/>
@@ -66,35 +65,43 @@ export default {
             this.canvasInput = data.input;
             this.inputOptions = data.options;
         },
-        buildForm() {
-            this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
-                    confirmButtonText: 'OK',
-                    cancelButtonText: 'Cancel',
-                    type: 'info'
-                }).then(() => {
-                    this.$message({
-                        type: 'success',
-                        message: 'Build Successful'
-                    });
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: "Keep doing what you're are doing"
-                    });          
-                });
-        }
+        // buildForm() {
+        //     this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
+        //             confirmButtonText: 'OK',
+        //             cancelButtonText: 'Cancel',
+        //             type: 'info'
+        //         }).then(() => {
+        //             this.$message({
+        //                 type: 'success',
+        //                 message: 'Build Successful'
+        //             });
+        //         }).catch(() => {
+        //             this.$message({
+        //                 type: 'info',
+        //                 message: "Keep doing what you're are doing"
+        //             });          
+        //         });
+        // }
     }
 }
 </script>
 
-<style>
-    .el-container {
+<style scoped>
+    .create-container {
         height: 100%; 
         flex-shrink: inherit;
         border: 1px solid #eee;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
     }
-    .el-header {
-        //background-color: rgb(238, 241, 246);
+    .abcd-sticky {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    }
+    .create-header {
+        background-color: rgb(238, 241, 246);
         color: #333;
         line-height: 50px;
         position: -webkit-sticky;

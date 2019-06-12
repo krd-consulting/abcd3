@@ -8,8 +8,12 @@
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="This Field is">
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
+      </el-form-item>
+      <el-form-item label="Set Character Limit">
+          <el-switch v-model="options.isLimited" inactive-text="No Limit" active-text="Set Character Limit"></el-switch>
+       <el-input-number :disabled="!options.isLimited" v-model="options.setLength" :step="5" step-strictly></el-input-number>
       </el-form-item>
       <el-form-item label="Field Refers To:">
         <el-select v-model="options.reference">
@@ -46,11 +50,12 @@
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="This Field is">
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item label="Set Character Limit">
-       <el-input-number v-model="options.setLength" :step="5" step-strictly></el-input-number>
+            <el-switch v-model="options.isLimited" inactive-text="No Limit" active-text="Set Character Limit"></el-switch>
+            <el-input-number :disabled="!options.isLimited" v-model="options.setLength" :step="5" step-strictly></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitOptions">Set</el-button>
@@ -65,8 +70,12 @@
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="This Field is">
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
+      </el-form-item>
+      <el-form-item label="Set Default Value">
+          <el-switch v-model="options.isLimited" inactive-text="No Default" active-text="Set Default"></el-switch>
+          <el-input-number :disabled="!options.isLimited" v-model="options.defaultNum"></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitOptions">Set</el-button>
@@ -81,7 +90,7 @@
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="This Field is">
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item>
@@ -101,7 +110,7 @@
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="This Field is">
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item>
@@ -120,7 +129,7 @@
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="This Field is">
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item>
@@ -139,8 +148,29 @@
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="This Field is">
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
+      </el-form-item>
+      <el-form-item label="Select By">
+        <el-radio-group v-model="options.dateType" size="small">
+          <el-radio-button label="day" ></el-radio-button>
+          <el-radio-button label="extended"></el-radio-button>
+          <el-radio-button label="range"></el-radio-button>
+        </el-radio-group>
+        <div v-if="options.dateType === 'day'">
+          <span>Calendar Preferences</span><br>
+          <el-switch v-model="options.daySelect1" inactive-text="No restriction" active-text="Only past dates"></el-switch>
+          <el-switch v-model="options.daySelect2" inactive-text="No Quick menu" active-text="Quick menu"></el-switch>
+          <el-switch v-model="options.daySelect3" inactive-text="No time" active-text="Include time"></el-switch>
+        </div>
+        <div v-if="options.dateType === 'extended'">
+           <p>week?</p>
+           <p>month?</p>
+           <p>year?</p>
+        </div>
+        <div v-if="options.dateType === 'range'">
+          <p>from this day to that day</p>
+        </div>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitOptions">Set</el-button>
@@ -155,7 +185,7 @@
       <el-form-item label="Field Label">
         <el-input v-model="options.title"></el-input>
       </el-form-item>
-      <el-form-item>
+      <el-form-item label="This Field is">
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item label="Number of Questions" >
@@ -178,52 +208,16 @@
     </el-form>
    </div>
 
-   <!--------Email---------->
    <div v-if="inputData.id === 8">
-    <h1>{{ inputData.name }} Options</h1>
-     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
-      <el-form-item label="Field Label">
-        <el-input v-model="options.title"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="success" @click="submitOptions">Set</el-button>
-      </el-form-item>
-    </el-form>
-   </div>
-
-   <!--------Address---------->
-   <div v-if="inputData.id === 9">
-    <h1>{{ inputData.name }} Options</h1>
-     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
-      <el-form-item label="Field Label">
-        <el-input v-model="options.title"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="success" @click="submitOptions">Set</el-button>
-      </el-form-item>
-    </el-form>
-   </div>
-
-   <!--------Phone Number---------->
-   <div v-if="inputData.id === 10">
-    <h1>{{ inputData.name }} Options</h1>
-     <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
-      <el-form-item label="Field Label">
-        <el-input v-model="options.title"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-switch v-model="options.required"></el-switch>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="success" @click="submitOptions">Set</el-button>
-      </el-form-item>
-    </el-form>
+       <h1>{{ inputData.name }} Options</h1>
+       <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
+            <el-form-item label="Section Title">
+                <el-input v-model="options.sectionHeader"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="success" @click="submitOptions">Set</el-button>
+            </el-form-item>
+       </el-form>
    </div>
  
 
@@ -236,21 +230,22 @@ export default {
  data: () => {
   return {
    options: {
-     title: '',
+     title: 'Field Name',
      required: false,
      reference: '',
+     defaultNum: 0,
      dropdownNum: 0,
      radioNum: 2,
      checkboxNum: 2,
      matrixQuestions: 2,
      matrixChoices: 5,
+     isLimited: false,
      setLength: 50,
-    //  dropdownItems: {
-    //   domains: [{
-    //    key:1,
-    //    value:''
-    //   }]
-    // }
+     sectionHeader: 'New Section',
+     dateType: 'day',
+     daySelect1: false,
+     daySelect2: false,
+     daySelect3: false,
    },
   }
  },
@@ -259,7 +254,7 @@ export default {
  },
  methods: {
   handleChange() {
-    console.log('Doing the thing');
+    console.log('Doing the thing in input options');
   },
   removeDomain(item) {
     var index = this.options.dropdownItems.domains.indexOf(item);
@@ -280,6 +275,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+#inputOptions {
+  margin-left: 15px;
+  margin-right: 15px;
+}
 </style>

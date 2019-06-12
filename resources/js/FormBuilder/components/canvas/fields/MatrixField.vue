@@ -2,17 +2,18 @@
     <div id="textarea">
         
         <span class="inputLabel">{{ options.title }}</span><br>
-        <el-table :data="matrix" style="width: 100%; margin-top: 20px; ; z-index: 0" height="342" border highlight-current-row show-summary>
+        <el-table :data="matrix" style="width: 100%; margin-top: 20px; ; z-index: 0" height="342" highlight-current-row show-summary>
             <el-table-column fixed label="question" :prop="question" v-slot="{ $index }">
-              <div class="inline-block">
-                <editable-text class="float-left" @input="showField" v-model="matrix[$index].question"></editable-text>
-                <el-button class="float-right pr-15" type="text" size="mini" @click="test(question)">Remove</el-button>
-              </div>
+                <editable-text class="cursor-text" @input="showField" v-model="matrix[$index].question"/>
             </el-table-column>
-            <el-table-column prop="response" label="response">
-                <el-radio-group v-for="item in radioList" :key="item.key" v-model="radio">
-                    <el-radio :label="radioList.key"></el-radio>
-                </el-radio-group>
+            <div v-for="item in radioList" :key="item.key" class="inline-block">
+                <el-table-column prop="response" :label="response" v-slot="{ $index }">
+                    <el-radio class="float-left" ></el-radio>
+                    <editable-text class="cursor-text float-right" @input="showField" v-model="matrix[$index].response"/>
+                </el-table-column>
+            </div>
+            <el-table-column fixed="right" width="120">
+                <el-button class="float-right" type="text" size="mini" @click="test(question)">Remove</el-button>
             </el-table-column>
         </el-table> 
         <el-collapse>   
@@ -21,6 +22,7 @@
                     <h1>Matrix Settings</h1>
                 </template>
                 <div>
+                    <slot></slot>
                   <div class="my-4">
                     <span>Field Label</span>
                     <el-row>
@@ -45,11 +47,11 @@
                         </el-col>
                       </el-row>
                         <!-- <span>Add Question to List</span>
-                        <el-input v-model="itemText"></el-input>
-                        <el-button type="success" @click="addItem">Add</el-button> -->
+                            <el-input v-model="itemText"></el-input>
+                            <el-button type="success" @click="addItem">Add</el-button> 
+                        -->
                     </form>
                 </div>
-                <slot></slot>
             </el-collapse-item>
         </el-collapse>
     </div>
@@ -66,6 +68,7 @@ export default {
             radio: 1,
             radioList: [{key: 0}],
             question: '',
+            response: '',
             editField: '',
             itemText: '',
         }
@@ -101,8 +104,12 @@ export default {
             this.itemText = ''
         },
         loadItem: function() {
+            // var i;
+            // for(i = 0; i < this.options.matrixChoices; i++) {
+            //     this.matrix.response["key" + i] = "Value";
+            // }
             this.matrix.push({
-                id: this.nextItem++, question: 'Question ' + this.nextItem, response: ''
+                id: this.nextItem++, question: 'Question ' + this.nextItem, response: 'response'
             })
         },
         removeItem(question) {
@@ -115,6 +122,7 @@ export default {
             var i;
             for(i = 0; i < this.options.matrixQuestions; i++) {
                 this.loadItem();
+                // this.matrix.response["key" + i] = "Value";
             }
         },
         getRadioList() {
@@ -125,12 +133,6 @@ export default {
                 })
             }
         },
-        // focusField(question) {
-        //     this.editField = question;
-        // },
-        // blurField(){
-        //     this.editField = '';
-        // },
         showField(question) {
             return (this.matrix[question] == '' || this.editField == question)
         },

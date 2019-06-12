@@ -8,19 +8,25 @@
               <template slot="title">
                   <p class="menu-title">Select a Field</p>
               </template>
-              <h3>General</h3>
+              <!-- <h3>General</h3> -->
               <div v-for="input in basicInputs" :key="input.id" @click="selectInput(input)">
                   <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="hover">
                       {{ input.name }}
                   </el-card>
               </div>
-
-              <h3>Preset Inputs</h3>
+            
+            <!-- TODO:  Post-MVP feature
+                    integrate this feature with the ability to save input option settings and create
+                    persisted presets that are reusable in other forms.
+                    eg: user knows they need a checklist of the same contents accross multiple forms,
+                    they can create it once, and save it into 'presetInputs' 
+            -->
+              <!-- <h3>Preset Inputs</h3>
               <div v-for="input in presetInputs" :key="input.id" @click="selectInput(input)">
                   <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="hover">
                       {{ input.name }}
                   </el-card>
-              </div>
+              </div> -->
           </el-collapse-item>
 
           <el-collapse-item name="2">
@@ -54,14 +60,15 @@ export default {
                 {id: 5, name: 'Checkbox', component: 'CheckboxField'},
                 {id: 6, name: 'Date Field', component: 'DateField'},
                 {id: 7, name: 'Matrix', component: 'MatrixField'},
+                {id: 8, name: 'Section Divider', component: 'SectionDivider'},
             ],
-            presetInputs: [
-                {id: 8, name: 'Email', component: 'EmailField'},
-                {id: 9, name: 'Address', component: 'AddressField'},
-                {id: 10, name: 'Phone Number', component: 'PhoneField'},
-            ],
+            // presetInputs: [
+            //     {id: 8, name: 'Email', component: 'EmailField'},
+            //     {id: 9, name: 'Address', component: 'AddressField'},
+            //     {id: 10, name: 'Phone Number', component: 'PhoneField'},
+            // ],
             others: [
-                {id: 11, name: 'Section Divider', icon: ''},
+                
             ],
             options: {} //passed from InputOptions component
         }
@@ -99,16 +106,27 @@ export default {
 </script>
 
 <style scoped>
+    /* .menu-container {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    } */
     .menu-container .el-row .el-col .el-collapse {
         /* margin-left: 5px;
         padding-left: 5px; */
         max-width: 300px;
         min-width: 150px;
         padding-right: 5px;
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
     }
     .menu-container .el-row {
         margin-left: 5px;
         padding-left: 5px;
+    }
+    .el-card {
+        margin: 5px;
     }
     .el-card:hover {
         border-color: #badcff;
