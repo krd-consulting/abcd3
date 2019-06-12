@@ -3930,14 +3930,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -7246,8 +7238,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     confirmDelete: function confirmDelete(recordType, record) {
       var _this2 = this;
 
-      this.$confirm('Are you sure you want to delete this record?', 'Delete Record', {
-        confirmButtonText: 'Delete',
+      this.$confirm('Are you sure you want to archive this record?', 'Archive Record', {
+        confirmButtonText: 'Archive',
         cancelButtonText: 'Wait, no!',
         type: 'warning'
       }).then(function () {
@@ -9496,8 +9488,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -85400,20 +85390,6 @@ var render = function() {
                             },
                             [
                               _c(
-                                "base-icon",
-                                {
-                                  staticClass:
-                                    "tw-text-sm tw-align-middle tw-mr-1"
-                                },
-                                [
-                                  _vm._t("empty-placeholder-add-button-icon", [
-                                    _vm._v("add")
-                                  ])
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
                                 "span",
                                 { staticClass: "tw-text-xs tw-align-middle" },
                                 [
@@ -85423,8 +85399,7 @@ var render = function() {
                                 ],
                                 2
                               )
-                            ],
-                            1
+                            ]
                           )
                         ])
                       ],
@@ -85445,89 +85420,78 @@ var render = function() {
           ),
           _vm._v(" "),
           _vm.hasOptions
-            ? _c("template", { slot: "options" }, [
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.showListHeaderOptions,
-                        expression: "showListHeaderOptions"
-                      }
-                    ],
-                    staticClass: "tw-flex tw-justify-end"
-                  },
-                  [
-                    _vm.hasSearch
-                      ? _vm._t("options-search", [
-                          _c("search", {
-                            on: {
-                              input: function($event) {
-                                return _vm.handleSearch(_vm.search)
-                              }
-                            },
-                            model: {
-                              value: _vm.search,
-                              callback: function($$v) {
-                                _vm.search = $$v
-                              },
-                              expression: "search"
-                            }
-                          })
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.hasAdd
-                      ? _vm._t("options-add", [
-                          _c(
-                            "base-button",
-                            {
-                              staticClass:
-                                "tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue-500 tw-no-shrink",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$emit("add")
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "base-icon",
-                                {
-                                  staticClass:
-                                    "tw-text-base tw-font-bold tw-align-middle"
-                                },
-                                [
-                                  _vm._t("options-add-icon", [
-                                    _vm._v(
-                                      "\n                                add\n                            "
-                                    )
-                                  ])
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "tw-align-middle" },
-                                [
-                                  _vm._t("options-add-text", [
-                                    _vm._v("Add Resource")
-                                  ])
-                                ],
-                                2
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      : _vm._e()
+            ? _c(
+                "template",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.showListHeaderOptions,
+                      expression: "showListHeaderOptions"
+                    }
                   ],
-                  2
-                )
-              ])
+                  slot: "options"
+                },
+                [
+                  _vm.hasSearch
+                    ? _vm._t("options-search", [
+                        _c("search", {
+                          staticClass: "tw-w-1/2",
+                          on: {
+                            input: function($event) {
+                              return _vm.handleSearch(_vm.search)
+                            }
+                          },
+                          model: {
+                            value: _vm.search,
+                            callback: function($$v) {
+                              _vm.search = $$v
+                            },
+                            expression: "search"
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.hasAdd
+                    ? _vm._t("options-add", [
+                        _c(
+                          "div",
+                          { staticClass: "tw-w-1/4 tw-text-right" },
+                          [
+                            _c(
+                              "base-button",
+                              {
+                                staticClass:
+                                  "tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue-500 tw-no-shrink",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.$emit("add")
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  { staticClass: "tw-align-middle" },
+                                  [
+                                    _vm._t("options-add-text", [
+                                      _vm._v("Add Resource")
+                                    ])
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                2
+              )
             : _vm._e(),
           _vm._v(" "),
           _vm.hasListColumns
@@ -85542,7 +85506,7 @@ var render = function() {
                     _c(
                       "div",
                       {
-                        staticClass: "tw-w-1/6",
+                        staticClass: "tw-w-1/4",
                         attrs: { column: _vm.primaryDataColumn }
                       },
                       [
@@ -85553,7 +85517,7 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "tw-flex tw-w-5/6" }, [
+                    _c("div", { staticClass: "tw-flex tw-w-3/4" }, [
                       _c(
                         "div",
                         { staticClass: "tw-flex tw-flex-grow" },
@@ -85657,7 +85621,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none",
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -85692,7 +85656,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -85737,7 +85701,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -85756,7 +85720,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._t("options-delete-icon", [
-                                    _vm._v("delete")
+                                    _vm._v("archive")
                                   ])
                                 ],
                                 2
@@ -85767,7 +85731,7 @@ var render = function() {
                                 { staticClass: "tw-text-xs tw-align-middle" },
                                 [
                                   _vm._t("options-delete-text", [
-                                    _vm._v("Delete")
+                                    _vm._v("Archive")
                                   ])
                                 ],
                                 2
@@ -86180,7 +86144,7 @@ var render = function() {
     "base-input",
     {
       staticClass: "tw-no-shrink tw-mr-2",
-      attrs: { value: _vm.value, placeholder: "Search for something" },
+      attrs: { value: _vm.value, placeholder: "Search" },
       on: {
         input: function($event) {
           return _vm.handleInput($event)
@@ -91991,17 +91955,12 @@ var render = function() {
               _vm._t("header", [
                 _c(
                   "h2",
-                  { staticClass: "tw-font-bold tw-text-xl tw-w-1/2" },
+                  { staticClass: "tw-font-bold tw-text-xl tw-w-1/4" },
                   [_vm._t("header-text")],
                   2
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-flex-no-wrap tw-w-1/2" },
-                  [_vm._t("options")],
-                  2
-                )
+                _vm._t("options")
               ])
             ],
             2
@@ -92088,7 +92047,7 @@ var render = function() {
       _c(
         "router-link",
         {
-          staticClass: "tw-flex tw-w-1/6 tw-items-top tw-cursor-pointer",
+          staticClass: "tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer",
           attrs: { tag: "div", to: _vm.to }
         },
         [
@@ -110176,7 +110135,7 @@ function (_Request) {
   }, {
     key: "update",
     value: function update(status) {
-      return this.patch("/api/programs/client-statuses/".concat(status));
+      return this.put("/api/programs/client-statuses/".concat(status));
     }
   }, {
     key: "destroy",

@@ -118,8 +118,8 @@
             },
 
             confirmDelete(recordType, record) {
-                this.$confirm('Are you sure you want to delete this record?', 'Delete Record', {
-                    confirmButtonText: 'Delete',
+                this.$confirm('Are you sure you want to archive this record?', 'Archive Record', {
+                    confirmButtonText: 'Archive',
                     cancelButtonText: 'Wait, no!',
                     type: 'warning'
                 }).then(() => {

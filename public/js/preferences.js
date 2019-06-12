@@ -3640,14 +3640,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -4045,10 +4037,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -4095,53 +4083,23 @@ __webpack_require__.r(__webpack_exports__);
       this.edit.status = status;
       this.edit.active = true;
     },
-    confirmDisable: function confirmDisable(status) {
+    confirmDelete: function confirmDelete(status) {
       var _this2 = this;
 
-      this.$confirm('Are you sure you want to disable this status?', 'Disable Status', {
-        confirmButtonText: 'Disable',
-        cancelButtonText: 'Wait, no!',
-        type: 'warning'
-      }).then(function () {
-        _this2.disableStatus(status).then(function () {
-          _this2.retrieve();
-
-          _this2.$message({
-            type: 'success',
-            message: 'Status was disabled.'
-          });
-        })["catch"](function (error) {
-          _this2.$message({
-            type: 'error',
-            message: error.message
-          });
-        });
-      });
-    },
-    disableStatus: function disableStatus(status) {
-      var request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({
-        id: status,
-        enabled: false
-      });
-      request.update(status);
-    },
-    confirmDelete: function confirmDelete(status) {
-      var _this3 = this;
-
-      this.$confirm('Are you sure you want to delete this status?', 'Delete Status', {
+      this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
         confirmButtonText: 'Delete',
         cancelButtonText: 'Wait, no!',
         type: 'warning'
       }).then(function () {
-        _this3.deleteStatus(status).then(function () {
-          _this3.retrieve();
+        _this2.deleteStatus(status).then(function () {
+          _this2.retrieve();
 
-          _this3.$message({
+          _this2.$message({
             type: 'success',
-            message: 'Status was deleted.'
+            message: 'Program was deleted.'
           });
         })["catch"](function (error) {
-          _this3.$message({
+          _this2.$message({
             type: 'error',
             message: error.message
           });
@@ -4914,8 +4872,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -80705,20 +80661,6 @@ var render = function() {
                             },
                             [
                               _c(
-                                "base-icon",
-                                {
-                                  staticClass:
-                                    "tw-text-sm tw-align-middle tw-mr-1"
-                                },
-                                [
-                                  _vm._t("empty-placeholder-add-button-icon", [
-                                    _vm._v("add")
-                                  ])
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
                                 "span",
                                 { staticClass: "tw-text-xs tw-align-middle" },
                                 [
@@ -80728,8 +80670,7 @@ var render = function() {
                                 ],
                                 2
                               )
-                            ],
-                            1
+                            ]
                           )
                         ])
                       ],
@@ -80750,89 +80691,78 @@ var render = function() {
           ),
           _vm._v(" "),
           _vm.hasOptions
-            ? _c("template", { slot: "options" }, [
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.showListHeaderOptions,
-                        expression: "showListHeaderOptions"
-                      }
-                    ],
-                    staticClass: "tw-flex tw-justify-end"
-                  },
-                  [
-                    _vm.hasSearch
-                      ? _vm._t("options-search", [
-                          _c("search", {
-                            on: {
-                              input: function($event) {
-                                return _vm.handleSearch(_vm.search)
-                              }
-                            },
-                            model: {
-                              value: _vm.search,
-                              callback: function($$v) {
-                                _vm.search = $$v
-                              },
-                              expression: "search"
-                            }
-                          })
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.hasAdd
-                      ? _vm._t("options-add", [
-                          _c(
-                            "base-button",
-                            {
-                              staticClass:
-                                "tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue-500 tw-no-shrink",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$emit("add")
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "base-icon",
-                                {
-                                  staticClass:
-                                    "tw-text-base tw-font-bold tw-align-middle"
-                                },
-                                [
-                                  _vm._t("options-add-icon", [
-                                    _vm._v(
-                                      "\n                                add\n                            "
-                                    )
-                                  ])
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "tw-align-middle" },
-                                [
-                                  _vm._t("options-add-text", [
-                                    _vm._v("Add Resource")
-                                  ])
-                                ],
-                                2
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      : _vm._e()
+            ? _c(
+                "template",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.showListHeaderOptions,
+                      expression: "showListHeaderOptions"
+                    }
                   ],
-                  2
-                )
-              ])
+                  slot: "options"
+                },
+                [
+                  _vm.hasSearch
+                    ? _vm._t("options-search", [
+                        _c("search", {
+                          staticClass: "tw-w-1/2",
+                          on: {
+                            input: function($event) {
+                              return _vm.handleSearch(_vm.search)
+                            }
+                          },
+                          model: {
+                            value: _vm.search,
+                            callback: function($$v) {
+                              _vm.search = $$v
+                            },
+                            expression: "search"
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.hasAdd
+                    ? _vm._t("options-add", [
+                        _c(
+                          "div",
+                          { staticClass: "tw-w-1/4 tw-text-right" },
+                          [
+                            _c(
+                              "base-button",
+                              {
+                                staticClass:
+                                  "tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue-500 tw-no-shrink",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.$emit("add")
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  { staticClass: "tw-align-middle" },
+                                  [
+                                    _vm._t("options-add-text", [
+                                      _vm._v("Add Resource")
+                                    ])
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                2
+              )
             : _vm._e(),
           _vm._v(" "),
           _vm.hasListColumns
@@ -80847,7 +80777,7 @@ var render = function() {
                     _c(
                       "div",
                       {
-                        staticClass: "tw-w-1/6",
+                        staticClass: "tw-w-1/4",
                         attrs: { column: _vm.primaryDataColumn }
                       },
                       [
@@ -80858,7 +80788,7 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "tw-flex tw-w-5/6" }, [
+                    _c("div", { staticClass: "tw-flex tw-w-3/4" }, [
                       _c(
                         "div",
                         { staticClass: "tw-flex tw-flex-grow" },
@@ -80962,7 +80892,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none",
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -80997,7 +80927,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -81042,7 +80972,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -81061,7 +80991,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._t("options-delete-icon", [
-                                    _vm._v("delete")
+                                    _vm._v("archive")
                                   ])
                                 ],
                                 2
@@ -81072,7 +81002,7 @@ var render = function() {
                                 { staticClass: "tw-text-xs tw-align-middle" },
                                 [
                                   _vm._t("options-delete-text", [
-                                    _vm._v("Delete")
+                                    _vm._v("Archive")
                                   ])
                                 ],
                                 2
@@ -81164,7 +81094,7 @@ var render = function() {
     "base-input",
     {
       staticClass: "tw-no-shrink tw-mr-2",
-      attrs: { value: _vm.value, placeholder: "Search for something" },
+      attrs: { value: _vm.value, placeholder: "Search" },
       on: {
         input: function($event) {
           return _vm.handleInput($event)
@@ -81590,7 +81520,7 @@ var render = function() {
             "per-page": _vm.params.perPage,
             "has-add": "",
             "has-delete": "",
-            "has-remove": "",
+            "has-list-columns": false,
             hasSearch: false,
             total: _vm.total
           },
@@ -81600,7 +81530,6 @@ var render = function() {
             },
             add: _vm.createStatus,
             delete: _vm.confirmDelete,
-            remove: _vm.confirmDisable,
             "page-change": function($event) {
               return _vm.retrieve()
             }
@@ -81626,12 +81555,7 @@ var render = function() {
           _vm._v(" "),
           _c("template", { slot: "options-add-text" }, [
             _vm._v("Create Client Status")
-          ]),
-          _vm._v(" "),
-          _vm._v(" "),
-          _c("template", { slot: "options-remove-icon" }, [_vm._v("close")]),
-          _vm._v(" "),
-          _c("template", { slot: "options-remove-text" }, [_vm._v("Disable")])
+          ])
         ],
         2
       )
@@ -82796,17 +82720,12 @@ var render = function() {
               _vm._t("header", [
                 _c(
                   "h2",
-                  { staticClass: "tw-font-bold tw-text-xl tw-w-1/2" },
+                  { staticClass: "tw-font-bold tw-text-xl tw-w-1/4" },
                   [_vm._t("header-text")],
                   2
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-flex-no-wrap tw-w-1/2" },
-                  [_vm._t("options")],
-                  2
-                )
+                _vm._t("options")
               ])
             ],
             2
@@ -82893,7 +82812,7 @@ var render = function() {
       _c(
         "router-link",
         {
-          staticClass: "tw-flex tw-w-1/6 tw-items-top tw-cursor-pointer",
+          staticClass: "tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer",
           attrs: { tag: "div", to: _vm.to }
         },
         [
@@ -98532,7 +98451,7 @@ function (_Request) {
   }, {
     key: "update",
     value: function update(status) {
-      return this.patch("/api/programs/client-statuses/".concat(status));
+      return this.put("/api/programs/client-statuses/".concat(status));
     }
   }, {
     key: "destroy",
