@@ -15,7 +15,7 @@
                   </el-card>
               </div>
             
-            <!-- TODO:  Post-MVP feature
+            <!-- TODO:  Maintainability feature
                     integrate this feature with the ability to save input option settings and create
                     persisted presets that are reusable in other forms.
                     eg: user knows they need a checklist of the same contents accross multiple forms,
@@ -60,7 +60,9 @@ export default {
                 {id: 5, name: 'Checkbox', component: 'CheckboxField'},
                 {id: 6, name: 'Date Field', component: 'DateField'},
                 {id: 7, name: 'Matrix', component: 'MatrixField'},
-                {id: 8, name: 'Section Divider', component: 'SectionDivider'},
+                {id: 8, name: 'Time Picker', component: 'Time Picker'},
+                {id: 9, name: 'File Upload', component: 'File Upload'},
+                {id: 10, name: 'Section Divider', component: 'SectionDivider'},
             ],
             // presetInputs: [
             //     {id: 8, name: 'Email', component: 'EmailField'},

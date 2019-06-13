@@ -11,6 +11,7 @@
                     </el-form-item>
                 </el-form>
             </div>
+            <slot></slot>
         </el-collapse-item>
      </el-collapse>
 </template>

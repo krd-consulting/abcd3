@@ -83,20 +83,20 @@
                                             <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Matrix-field>
                                     </div>
-                                    <div v-else-if="inputType.input.id === 8"> <!-- Section Divider -->
+                                    <div v-else-if="inputType.input.id === 8"> <!-- Time Picker -->
+                                        <Time-Picker :options="inputType.options">
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                        </Time-Picker>
+                                    </div>
+                                    <div v-else-if="inputType.input.id === 9"> <!-- File Upload -->
+                                        <File-Upload :options="inputType.options">
+                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                        </File-Upload>
+                                    </div>
+                                    <div v-else-if="inputType.input.id === 10"> <!-- Section Divider -->
                                         <Section-Divider :options="inputType.options">
                                             <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Section-Divider>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 9"> <!-- Address -->
-                                        <Address-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Address-field>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 10"> <!-- Phone Number -->
-                                        <Phone-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Phone-field>
                                     </div>
                                 </el-card>
                             </el-col>
@@ -123,6 +123,8 @@ import NumericField from '@/FormBuilder/components/canvas/fields/numericField.vu
 import RadioField from '@/FormBuilder/components/canvas/fields/radioField.vue'
 import DateField from '@/FormBuilder/components/canvas/fields/dateField.vue'
 import MatrixField from '@/FormBuilder/components/canvas/fields/matrixField.vue'
+import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
+import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
 
 export default {
@@ -186,6 +188,8 @@ export default {
         RadioField,
         DateField,
         MatrixField,
+        TimePicker,
+        FileUpload,
     },
     computed: {
         

@@ -151,30 +151,11 @@
       <el-form-item label="This Field is">
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
-      <el-form-item label="Select By">
-        <el-radio-group v-model="options.dateSelect" size="small">
-          <el-radio-button label="Day" ></el-radio-button>
-          <el-radio-button label="Extended Time"></el-radio-button>
-          <el-radio-button label="Range"></el-radio-button>
-        </el-radio-group>
-        <div v-if="options.dateSelect === 'Day'">
-          <span>This option gives you a standard calendar to use, along with some helpful options to better suit your needs.</span><br>
+      <el-form-item label="Calendar Preferences">
           <el-switch v-model="options.dateSelect1" active-text="Only allow up to current day"></el-switch>
           <el-switch v-model="options.dateSelect2" active-text="Quick menu"></el-switch>
           <el-switch v-model="options.dateSelect3" active-text="Include time"></el-switch>
-        </div>
-        <div v-if="options.dateSelect === 'Extended Time'">
-          <span>This option allows you to make a selection by month or year</span><br>
-            <el-switch v-model="options.dateSelect4" 
-              active-text="Year" 
-              active-color="#409EFF"
-              inactive-text="Month" 
-              inactive-color="#409EFF">
-            </el-switch>
-        </div>
-        <div v-if="options.dateSelect === 'Range'">
-          <el-switch v-model="options.dateSelect5" active-text="Quick Menu"></el-switch>
-        </div>
+          <el-switch v-model="options.dateSelect4" active-text="Date Range"></el-switch>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitOptions">Set</el-button>
@@ -212,7 +193,40 @@
     </el-form>
    </div>
 
+  <!-------- Time Picker ---------->
    <div v-if="inputData.id === 8">
+       <h1>{{ inputData.name }} Options</h1>
+       <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
+            <el-form-item label="Field Label">
+                <el-input v-model="options.title"></el-input>
+            </el-form-item>
+             <el-form-item label="This Field is">
+              <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="success" @click="submitOptions">Set</el-button>
+            </el-form-item>
+       </el-form>
+   </div>
+
+  <!-------- File Upload ---------->
+    <div v-if="inputData.id === 9">
+       <h1>{{ inputData.name }} Options</h1>
+       <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
+            <el-form-item label="Field Label">
+                <el-input v-model="options.title"></el-input>
+            </el-form-item>
+            <el-form-item label="This Field is">
+              <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="success" @click="submitOptions">Set</el-button>
+            </el-form-item>
+       </el-form>
+   </div>
+
+  <!-------- Section Divider ---------->
+    <div v-if="inputData.id === 10">
        <h1>{{ inputData.name }} Options</h1>
        <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
             <el-form-item label="Section Title">
@@ -246,12 +260,10 @@ export default {
      isLimited: false,
      setLength: 50,
      sectionHeader: 'New Section',
-     dateSelect: 'day',
      dateSelect1: false,
      dateSelect2: false,
      dateSelect3: false,
      dateSelect4: false,
-     dateSelect5: false,
    },
   }
  },
