@@ -74,6 +74,7 @@
                             </span>
                         </div>
                         <div class="tw-w-1/6">
+                            <slot name="list-column-options"></slot>
                         </div>
                     </div>
                 </div>
@@ -108,21 +109,26 @@
                     </template>
 
                     <template slot="options">
-                        <base-button v-if="hasEdit" 
+                        <base-button v-if="hasEdit"
+                        :item="item" 
                             class="tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none" 
                             @click="$emit('edit', item[resourceIdentifier])">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
                             <span class="tw-text-xs tw-align-middle">Edit</span>
                         </base-button>
-                        <base-button
-                            v-if="hasRemove"
-                            class="tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
-                            @click="$emit('remove', item[resourceIdentifier])">
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Remove</span>
-                        </base-button>
+                        <slot name="option-remove-button" :item="item">
+                            <base-button
+                                v-if="hasRemove"
+                                :item="item"
+                                class="tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
+                                @click="$emit('remove', item[resourceIdentifier])">
+                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">close</base-icon>
+                                <span class="tw-text-xs tw-align-middle">Remove</span>
+                            </base-button>
+                        </slot>
                         <base-button
                             v-if="hasDelete"
+                            :item="item"
                             class="tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
                             @click="$emit('delete', item[resourceIdentifier])">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">delete</base-icon>
@@ -133,15 +139,17 @@
             </slot>
 
             <template slot="footer-options">
-                <base-button
-                    v-if="hasManage && total > 0"
-                    class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none"
-                    @click="$emit('manage')">
-                    <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
-                    <span class="tw-text-xs tw-align-middle">
-                        <slot name="footer-options-manage-text">Manage Resources</slot>
-                    </span>
-                </base-button>
+                <slot name="footer-options">
+                    <base-button
+                        v-if="hasManage && total > 0"
+                        class="tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none"
+                        @click="$emit('manage')">
+                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">add</base-icon>
+                        <span class="tw-text-xs tw-align-middle">
+                            <slot name="footer-options-manage-text">Manage Resources</slot>
+                        </span>
+                    </base-button>
+                </slot>
             </template>
 
         </list>

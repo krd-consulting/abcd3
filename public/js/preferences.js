@@ -3640,6 +3640,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4006,6 +4014,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_components_resourceList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/App/components/resourceList */ "./resources/js/App/components/resourceList.vue");
 /* harmony import */ var _clientStatus_create__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./clientStatus/create */ "./resources/js/Preferences/views/program/clientStatus/create.vue");
 /* harmony import */ var _clientStatus_edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./clientStatus/edit */ "./resources/js/Preferences/views/program/clientStatus/edit.vue");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4060,9 +4087,10 @@ __webpack_require__.r(__webpack_exports__);
       statuses: [],
       params: {
         ascending: true,
-        sortBy: 'field_1_value',
+        sortBy: 'id',
         page: 1,
-        perPage: 5
+        perPage: 5,
+        disabled: false
       },
       total: 0
     };
@@ -4071,6 +4099,9 @@ __webpack_require__.r(__webpack_exports__);
     retrieve: function retrieve() {
       var _this = this;
 
+      this.request.setFields({
+        params: _objectSpread({}, this.params)
+      });
       this.request.retrieve().then(function (response) {
         _this.statuses = response.data;
         _this.total = response.data.length;
@@ -4083,20 +4114,20 @@ __webpack_require__.r(__webpack_exports__);
       this.edit.status = status;
       this.edit.active = true;
     },
-    confirmDelete: function confirmDelete(status) {
+    confirmDisable: function confirmDisable(status) {
       var _this2 = this;
 
-      this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
-        confirmButtonText: 'Delete',
+      this.$confirm('Are you sure you want to disable this status?', 'Disable Status', {
+        confirmButtonText: 'Disable',
         cancelButtonText: 'Wait, no!',
         type: 'warning'
       }).then(function () {
-        _this2.deleteStatus(status).then(function () {
+        _this2.disableStatus(status).then(function () {
           _this2.retrieve();
 
           _this2.$message({
             type: 'success',
-            message: 'Program was deleted.'
+            message: 'Status was disabled.'
           });
         })["catch"](function (error) {
           _this2.$message({
@@ -4106,9 +4137,72 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
+    disableStatus: function disableStatus(status) {
+      var request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({
+        id: status,
+        enabled: false
+      });
+      return request.update(status);
+    },
+    confirmEnable: function confirmEnable(status) {
+      var _this3 = this;
+
+      this.enableStatus(status).then(function () {
+        _this3.retrieve();
+
+        _this3.$message({
+          type: 'success',
+          message: 'Status was enabled.'
+        });
+      })["catch"](function (error) {
+        _this3.$message({
+          type: 'error',
+          message: error.message
+        });
+      });
+    },
+    enableStatus: function enableStatus(status) {
+      var request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({
+        id: status,
+        enabled: true
+      });
+      return request.update(status);
+    },
+    confirmDelete: function confirmDelete(status) {
+      var _this4 = this;
+
+      this.$confirm('Are you sure you want to delete this status?', 'Delete Status', {
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Wait, no!',
+        type: 'warning'
+      }).then(function () {
+        _this4.deleteStatus(status).then(function () {
+          _this4.retrieve();
+
+          _this4.$message({
+            type: 'success',
+            message: 'Status was deleted.'
+          });
+        })["catch"](function (error) {
+          _this4.$message({
+            type: 'error',
+            message: error.message
+          });
+        });
+      });
+    },
     deleteStatus: function deleteStatus(status) {
       var request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_0__["default"]();
       return request.destroy(status);
+    },
+    toggleDisable: function toggleDisable(status) {
+      status.disabled_at == null ? this.confirmDisable(status.id) : this.confirmEnable(status.id);
+    },
+    disableIcon: function disableIcon(disabled) {
+      return disabled == null ? 'close' : 'check';
+    },
+    disableText: function disableText(disabled) {
+      return disabled == null ? 'Disable' : 'Enable';
     }
   },
   created: function created() {
@@ -4847,18 +4941,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    on: Boolean
-  },
-  inheritAttrs: false,
-  methods: {
-    handleChange: function handleChange(payload) {
-      this.$emit('change', payload);
-    }
-  }
+  inheritAttrs: false
 });
 
 /***/ }),
@@ -80839,7 +80923,12 @@ var render = function() {
                         0
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "tw-w-1/6" })
+                      _c(
+                        "div",
+                        { staticClass: "tw-w-1/6" },
+                        [_vm._t("list-column-options")],
+                        2
+                      )
                     ])
                   ]
                 )
@@ -80921,6 +81010,7 @@ var render = function() {
                             {
                               staticClass:
                                 "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none",
+                              attrs: { item: item },
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -80950,40 +81040,49 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.hasRemove
-                        ? _c(
-                            "base-button",
-                            {
-                              staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$emit(
-                                    "remove",
-                                    item[_vm.resourceIdentifier]
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "base-icon",
+                      _vm._t(
+                        "option-remove-button",
+                        [
+                          _vm.hasRemove
+                            ? _c(
+                                "base-button",
                                 {
                                   staticClass:
-                                    "tw-text-xs tw-mr-1 tw-align-middle"
+                                    "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                                  attrs: { item: item },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$emit(
+                                        "remove",
+                                        item[_vm.resourceIdentifier]
+                                      )
+                                    }
+                                  }
                                 },
-                                [_vm._v("close")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "tw-text-xs tw-align-middle" },
-                                [_vm._v("Remove")]
+                                [
+                                  _c(
+                                    "base-icon",
+                                    {
+                                      staticClass:
+                                        "tw-text-xs tw-mr-1 tw-align-middle"
+                                    },
+                                    [_vm._v("close")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "tw-text-xs tw-align-middle"
+                                    },
+                                    [_vm._v("Remove")]
+                                  )
+                                ],
+                                1
                               )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
+                            : _vm._e()
+                        ],
+                        { item: item }
+                      ),
                       _vm._v(" "),
                       _vm.hasDelete
                         ? _c(
@@ -80991,6 +81090,7 @@ var render = function() {
                             {
                               staticClass:
                                 "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                              attrs: { item: item },
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -81020,7 +81120,7 @@ var render = function() {
                           )
                         : _vm._e()
                     ],
-                    1
+                    2
                   )
                 ],
                 2
@@ -81033,41 +81133,43 @@ var render = function() {
             "template",
             { slot: "footer-options" },
             [
-              _vm.hasManage && _vm.total > 0
-                ? _c(
-                    "base-button",
-                    {
-                      staticClass:
-                        "tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none",
-                      on: {
-                        click: function($event) {
-                          return _vm.$emit("manage")
+              _vm._t("footer-options", [
+                _vm.hasManage && _vm.total > 0
+                  ? _c(
+                      "base-button",
+                      {
+                        staticClass:
+                          "tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none",
+                        on: {
+                          click: function($event) {
+                            return _vm.$emit("manage")
+                          }
                         }
-                      }
-                    },
-                    [
-                      _c(
-                        "base-icon",
-                        { staticClass: "tw-text-sm tw-align-middle tw-mr-1" },
-                        [_vm._v("add")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        { staticClass: "tw-text-xs tw-align-middle" },
-                        [
-                          _vm._t("footer-options-manage-text", [
-                            _vm._v("Manage Resources")
-                          ])
-                        ],
-                        2
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
+                      },
+                      [
+                        _c(
+                          "base-icon",
+                          { staticClass: "tw-text-sm tw-align-middle tw-mr-1" },
+                          [_vm._v("add")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "tw-text-xs tw-align-middle" },
+                          [
+                            _vm._t("footer-options-manage-text", [
+                              _vm._v("Manage Resources")
+                            ])
+                          ],
+                          2
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
             ],
-            1
+            2
           )
         ],
         2
@@ -81526,9 +81628,9 @@ var render = function() {
             items: _vm.statuses,
             page: _vm.params.page,
             "per-page": _vm.params.perPage,
+            "has-list-columns": false,
             "has-add": "",
             "has-delete": "",
-            "has-list-columns": false,
             hasSearch: false,
             total: _vm.total
           },
@@ -81555,6 +81657,40 @@ var render = function() {
                   )
                 ]
               }
+            },
+            {
+              key: "option-remove-button",
+              fn: function(ref) {
+                var status = ref.item
+                return [
+                  _c(
+                    "base-button",
+                    {
+                      staticClass:
+                        "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                      on: {
+                        click: function($event) {
+                          return _vm.toggleDisable(status)
+                        }
+                      }
+                    },
+                    [
+                      _c(
+                        "base-icon",
+                        { staticClass: "tw-text-xs tw-mr-1 tw-align-middle" },
+                        [_vm._v(_vm._s(_vm.disableIcon(status.disabled_at)))]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        { staticClass: "tw-text-xs tw-align-middle" },
+                        [_vm._v(_vm._s(_vm.disableText(status.disabled_at)))]
+                      )
+                    ],
+                    1
+                  )
+                ]
+              }
             }
           ])
         },
@@ -81563,6 +81699,33 @@ var render = function() {
           _vm._v(" "),
           _c("template", { slot: "options-add-text" }, [
             _vm._v("Create Client Status")
+          ]),
+          _vm._v(" "),
+          _vm._v(" "),
+          _vm._v(" "),
+          _c("template", { slot: "footer-options" }, [
+            _c(
+              "div",
+              { staticClass: "tw-py-2 tw-px-4" },
+              [
+                _c("base-switch", {
+                  on: {
+                    change: function($event) {
+                      return _vm.retrieve()
+                    }
+                  },
+                  model: {
+                    value: _vm.params.disabled,
+                    callback: function($$v) {
+                      _vm.$set(_vm.params, "disabled", $$v)
+                    },
+                    expression: "params.disabled"
+                  }
+                }),
+                _vm._v(" Only Show Disabled Statuses\n                ")
+              ],
+              1
+            )
           ])
         ],
         2
@@ -82683,12 +82846,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "el-switch",
-    _vm._b(
-      { attrs: { value: _vm.on }, on: { change: _vm.handleChange } },
-      "el-switch",
-      _vm.$attrs,
-      false
-    )
+    _vm._g(_vm._b({}, "el-switch", _vm.$attrs, false), _vm.$listeners)
   )
 }
 var staticRenderFns = []
@@ -98464,7 +98622,7 @@ function (_Request) {
   }, {
     key: "update",
     value: function update(status) {
-      return this.put("/api/programs/client-statuses/".concat(status));
+      return this.patch("/api/programs/client-statuses/".concat(status));
     }
   }, {
     key: "destroy",
@@ -100287,7 +100445,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\Preferences */"./resources/js/Preferences/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/Preferences */"./resources/js/Preferences/index.js");
 
 
 /***/ })

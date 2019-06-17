@@ -3930,6 +3930,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -6808,7 +6816,11 @@ __webpack_require__.r(__webpack_exports__);
     retrieveStatus: function retrieveStatus() {
       var _this3 = this;
 
-      var request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_2__["default"]({});
+      var request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_2__["default"]({
+        params: {
+          disabled: false
+        }
+      });
       request.retrieve().then(function (response) {
         _this3.statuses = response.data;
       });
@@ -9463,18 +9475,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: {
-    on: Boolean
-  },
-  inheritAttrs: false,
-  methods: {
-    handleChange: function handleChange(payload) {
-      this.$emit('change', payload);
-    }
-  }
+  inheritAttrs: false
 });
 
 /***/ }),
@@ -85568,7 +85570,12 @@ var render = function() {
                         0
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "tw-w-1/6" })
+                      _c(
+                        "div",
+                        { staticClass: "tw-w-1/6" },
+                        [_vm._t("list-column-options")],
+                        2
+                      )
                     ])
                   ]
                 )
@@ -85650,6 +85657,7 @@ var render = function() {
                             {
                               staticClass:
                                 "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none",
+                              attrs: { item: item },
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -85679,40 +85687,49 @@ var render = function() {
                           )
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.hasRemove
-                        ? _c(
-                            "base-button",
-                            {
-                              staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$emit(
-                                    "remove",
-                                    item[_vm.resourceIdentifier]
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "base-icon",
+                      _vm._t(
+                        "option-remove-button",
+                        [
+                          _vm.hasRemove
+                            ? _c(
+                                "base-button",
                                 {
                                   staticClass:
-                                    "tw-text-xs tw-mr-1 tw-align-middle"
+                                    "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                                  attrs: { item: item },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$emit(
+                                        "remove",
+                                        item[_vm.resourceIdentifier]
+                                      )
+                                    }
+                                  }
                                 },
-                                [_vm._v("close")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "tw-text-xs tw-align-middle" },
-                                [_vm._v("Remove")]
+                                [
+                                  _c(
+                                    "base-icon",
+                                    {
+                                      staticClass:
+                                        "tw-text-xs tw-mr-1 tw-align-middle"
+                                    },
+                                    [_vm._v("close")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "tw-text-xs tw-align-middle"
+                                    },
+                                    [_vm._v("Remove")]
+                                  )
+                                ],
+                                1
                               )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
+                            : _vm._e()
+                        ],
+                        { item: item }
+                      ),
                       _vm._v(" "),
                       _vm.hasDelete
                         ? _c(
@@ -85720,6 +85737,7 @@ var render = function() {
                             {
                               staticClass:
                                 "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                              attrs: { item: item },
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -85749,7 +85767,7 @@ var render = function() {
                           )
                         : _vm._e()
                     ],
-                    1
+                    2
                   )
                 ],
                 2
@@ -85762,41 +85780,43 @@ var render = function() {
             "template",
             { slot: "footer-options" },
             [
-              _vm.hasManage && _vm.total > 0
-                ? _c(
-                    "base-button",
-                    {
-                      staticClass:
-                        "tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none",
-                      on: {
-                        click: function($event) {
-                          return _vm.$emit("manage")
+              _vm._t("footer-options", [
+                _vm.hasManage && _vm.total > 0
+                  ? _c(
+                      "base-button",
+                      {
+                        staticClass:
+                          "tw-py-2 tw-pl-2 tw-pr-4 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none",
+                        on: {
+                          click: function($event) {
+                            return _vm.$emit("manage")
+                          }
                         }
-                      }
-                    },
-                    [
-                      _c(
-                        "base-icon",
-                        { staticClass: "tw-text-sm tw-align-middle tw-mr-1" },
-                        [_vm._v("add")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        { staticClass: "tw-text-xs tw-align-middle" },
-                        [
-                          _vm._t("footer-options-manage-text", [
-                            _vm._v("Manage Resources")
-                          ])
-                        ],
-                        2
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e()
+                      },
+                      [
+                        _c(
+                          "base-icon",
+                          { staticClass: "tw-text-sm tw-align-middle tw-mr-1" },
+                          [_vm._v("add")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "span",
+                          { staticClass: "tw-text-xs tw-align-middle" },
+                          [
+                            _vm._t("footer-options-manage-text", [
+                              _vm._v("Manage Resources")
+                            ])
+                          ],
+                          2
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
             ],
-            1
+            2
           )
         ],
         2
@@ -91881,12 +91901,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "el-switch",
-    _vm._b(
-      { attrs: { value: _vm.on }, on: { change: _vm.handleChange } },
-      "el-switch",
-      _vm.$attrs,
-      false
-    )
+    _vm._g(_vm._b({}, "el-switch", _vm.$attrs, false), _vm.$listeners)
   )
 }
 var staticRenderFns = []
@@ -110148,7 +110163,7 @@ function (_Request) {
   }, {
     key: "update",
     value: function update(status) {
-      return this.put("/api/programs/client-statuses/".concat(status));
+      return this.patch("/api/programs/client-statuses/".concat(status));
     }
   }, {
     key: "destroy",
@@ -113217,8 +113232,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ClientStatus;
 
 use App\Http\Requests\StoreClientStatus;
+use App\Http\Requests\UpdateClientStatus;
 
 use Illuminate\Http\Request;
 
@@ -12,8 +13,10 @@ class ClientStatusController extends Controller
 {
     public function index()
     {
+        $disabled = request('disabled') == 'true';
+
     	return [
-    		'data' => ClientStatus::all()
+    		'data' => ClientStatus::disabled($disabled)->get()
     	];
     }
 
@@ -27,6 +30,16 @@ class ClientStatusController extends Controller
     	$status->save();
 
     	return $status;
+    }
+
+    public function update(ClientStatus $status, UpdateClientStatus $request)
+    {
+        $this->authorize('write', $status);
+
+        $status->fill($request->validated());
+        $status->save();
+
+        return $status;
     }
 
     public function destroy(ClientStatus $status)

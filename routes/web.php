@@ -42,7 +42,7 @@ Route::prefix('api')
         Route::get('programs/client-statuses', 'ClientStatusController@index');
         Route::get('programs/client-statuses/{status}/edit', 'ClientStatusController@edit');
         Route::post('programs/client-statuses', 'ClientStatusController@store');
-        Route::post('programs/client-statuses/{status}', 'ClientStatusController@update');
+        Route::patch('programs/client-statuses/{status}', 'ClientStatusController@update');
         Route::delete('programs/client-statuses/{status}', 'ClientStatusController@destroy');
 
         Route::resource('programs', 'ProgramController');

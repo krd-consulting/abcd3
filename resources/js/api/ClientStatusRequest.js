@@ -14,7 +14,7 @@ class ClientStatus extends Request{
     }
 
     update(status) {
-    	return this.put(`/api/programs/client-statuses/${status}`);
+    	return this.patch(`/api/programs/client-statuses/${status}`);
     }
 
     destroy(status) {

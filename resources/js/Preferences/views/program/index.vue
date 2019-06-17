@@ -12,9 +12,9 @@
             :items="statuses"
             :page.sync="params.page"
             :per-page="params.perPage"
+            :has-list-columns="false"
             has-add
             has-delete
-            :has-list-columns="false"
             :hasSearch="false"
             @add="createStatus"
             @delete="confirmDelete"
@@ -25,6 +25,21 @@
 
             <template v-slot:list-item-primary-data="{ item:status }">
                 {{ status.name }}
+            </template>
+
+            <template v-slot:option-remove-button="{ item:status }">
+                <base-button
+                    class="tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
+                    @click="toggleDisable(status)">
+                    <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">{{ disableIcon(status.disabled_at) }}</base-icon>
+                    <span class="tw-text-xs tw-align-middle">{{ disableText(status.disabled_at) }}</span>
+                </base-button>
+            </template>
+
+            <template slot="footer-options">
+                <div class="tw-py-2 tw-px-4">
+                    <base-switch v-model="params.disabled" @change="retrieve()"/> Only Show Disabled Statuses
+                </div>
             </template>
         </list>
 	</div>
@@ -57,9 +72,10 @@
 				statuses: [],
 				params: {
                     ascending: true,
-                    sortBy: 'field_1_value',
+                    sortBy: 'id',
                     page: 1,
-                    perPage: 5
+                    perPage: 5,
+                    disabled: false
                 },
                 total: 0,
 			}
@@ -67,6 +83,10 @@
 
 		methods: {
 			retrieve() {
+                this.request.setFields({
+                    params: {...this.params}
+                });
+
 				this.request.retrieve().then(response => {
 					this.statuses = response.data;
 					this.total = response.data.length;
@@ -83,8 +103,68 @@
                 this.edit.active = true;
             },
 
+            confirmDisable(status) {
+                this.$confirm('Are you sure you want to disable this status?', 'Disable Status', {
+                    confirmButtonText: 'Disable',
+                    cancelButtonText: 'Wait, no!',
+                    type: 'warning'
+                }).then(() => {
+                    this.disableStatus(status)
+                        .then(() => {
+                            this.retrieve();
+
+                            this.$message({
+                                type: 'success',
+                                message: 'Status was disabled.'
+                            });
+                        })
+                        .catch((error) => {
+                            this.$message({
+                                type: 'error',
+                                message: error.message
+                            });
+                        });
+                })
+            },
+
+            disableStatus(status) {
+                const request = new Request({
+                    id: status,
+                    enabled: false
+                });
+
+                return request.update(status);
+            },
+
+            confirmEnable(status) {
+                this.enableStatus(status)
+                    .then(() => {
+                        this.retrieve();
+
+                        this.$message({
+                            type: 'success',
+                            message: 'Status was enabled.'
+                        });
+                    })
+                    .catch((error) => {
+                        this.$message({
+                            type: 'error',
+                            message: error.message
+                        });
+                    });
+            },
+
+            enableStatus(status) {
+                const request = new Request({
+                    id: status,
+                    enabled: true
+                });
+
+                return request.update(status);
+            },
+
             confirmDelete(status) {
-                this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
+                this.$confirm('Are you sure you want to delete this status?', 'Delete Status', {
                     confirmButtonText: 'Delete',
                     cancelButtonText: 'Wait, no!',
                     type: 'warning'
@@ -95,7 +175,7 @@
 
                             this.$message({
                                 type: 'success',
-                                message: 'Program was deleted.'
+                                message: 'Status was deleted.'
                             });
                         })
                         .catch((error) => {
@@ -108,10 +188,22 @@
             },
 
             deleteStatus(status) {
-                let request = new Request();
+                const request = new Request();
 
                 return request.destroy(status);
             },
+
+            toggleDisable(status) {
+                status.disabled_at == null ?  this.confirmDisable(status.id) : this.confirmEnable(status.id);
+            },
+
+            disableIcon(disabled) {
+                return disabled == null ?  'close' : 'check';
+            },
+
+            disableText(disabled) {
+                return disabled == null ?  'Disable' : 'Enable';
+            }
 		},
 
 		created() {
