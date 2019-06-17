@@ -17,6 +17,7 @@ class CreateClientStatusesTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('description')->nullable();
+            $table->dateTime('disabled_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

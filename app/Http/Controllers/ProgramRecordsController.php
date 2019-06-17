@@ -57,8 +57,7 @@ class ProgramRecordsController extends Controller
             $data = $data->withLatestStatus();
 
         return [
-            'data' => $data
-                        
+            'data' => $data                        
         ];
     }
 

@@ -158,7 +158,11 @@
             },
 
             retrieveStatus() {
-                let request = new StatusRequest({});
+                let request = new StatusRequest({
+                    params: { 
+                        disabled: false
+                    }
+                });
 
                 request.retrieve().then((response) => {
                     this.statuses = response.data;
