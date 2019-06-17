@@ -26,7 +26,7 @@ mix.webpackConfig({
 
 mix.js('resources/js/App', 'public/js/app.js')
     .js('resources/js/Preferences', 'public/js/preferences.js')
-    .js('resources/js/FormBuilder', 'public/js/formbuider.js')
+    .js('resources/js/FormBuilder', 'public/js/formbuilder.js')
     .postCss('resources/css/app.css', 'public/css', [
         tailwindcss,
     ]);
