@@ -3711,6 +3711,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4101,6 +4102,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4110,7 +4123,7 @@ __webpack_require__.r(__webpack_exports__);
       radioSelect: 1,
       radioList: [],
       question: '',
-      response: 'derp',
+      response: '',
       editField: '',
       itemText: '',
       myOptions: []
@@ -4164,11 +4177,11 @@ __webpack_require__.r(__webpack_exports__);
       this.matrix.push({
         id: this.nextItem++,
         question: 'Question ' + this.nextItem,
-        response: 'response'
+        response: this.nextItem
       });
     },
-    removeItem: function removeItem(question) {
-      var index = this.matrix.indexOf(question);
+    removeItem: function removeItem(item) {
+      var index = this.matrix.indexOf(item);
 
       if (index !== -1) {
         this.matrix.splice(index, 1);
@@ -4178,24 +4191,22 @@ __webpack_require__.r(__webpack_exports__);
       var i;
 
       for (i = 0; i < this.myOptions.matrixQuestions; i++) {
-        this.loadItem(); // this.matrix.response["key" + i] = "Value";
+        this.loadItem();
       }
     },
     getRadioList: function getRadioList() {
       var i;
+      this.radioList = [];
 
       for (i = 1; i <= this.myOptions.matrixChoices; i++) {
         this.radioList.push({
-          key: i
+          key: i,
+          response: 'Item ' + i
         });
       }
     },
     showField: function showField(question) {
       return this.matrix[question] == '' || this.editField == question;
-    },
-    test: function test(value) {
-      var index = this.matrix.indexOf(value);
-      console.log(index);
     }
   }
 });
@@ -7789,6 +7800,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 // module
 exports.push([module.i, "#dropdown {\n  font-family: 'Inter UI', Arial, sans-serif;\n  font-weight: bold;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\nul {\n  list-style-type: none;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css&":
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css& ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "#matrix-table[data-v-2452dcb7] {\n  width: 100%;\n  margin-top: 20px;\n  z-index: 0;\n}\n#matrix-table table[data-v-2452dcb7], td[data-v-2452dcb7] {\n  border: 1px solid #dedfe0;\n}\n\n/* #matrix-table th {\n    background-color: #9ebdef;\n} */\n#matrix-table tbody tr[data-v-2452dcb7]:hover {\n  background: #9ebdef;\n}\n", ""]);
 
 // exports
 
@@ -83331,6 +83361,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/radioField.vue?vue&type=style&index=0&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/canvas/fields/radioField.vue?vue&type=style&index=0&lang=css& ***!
@@ -84735,151 +84795,132 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                [
-                  _c(
-                    "el-form",
-                    {
-                      ref: "options",
-                      attrs: { "label-position": "top", model: _vm.options },
-                      nativeOn: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "el-form-item",
-                        { attrs: { label: "Field Label" } },
-                        [
-                          _c(
-                            "el-col",
-                            { attrs: { span: 6 } },
-                            [
-                              _c("el-input", {
-                                model: {
-                                  value: _vm.options.title,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.options, "title", $$v)
-                                  },
-                                  expression: "options.title"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        [
-                          _c("el-switch", {
-                            attrs: {
-                              "active-text": "Required",
-                              "inactive-text": "Optional"
+              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
+                _c(
+                  "div",
+                  { staticClass: "tw-float-left" },
+                  [
+                    _c("span", [_vm._v("Field Label")]),
+                    _vm._v(" "),
+                    _c(
+                      "el-col",
+                      { attrs: { span: 6 } },
+                      [
+                        _c("el-input", {
+                          model: {
+                            value: _vm.myOptions.title,
+                            callback: function($$v) {
+                              _vm.$set(_vm.myOptions, "title", $$v)
                             },
-                            model: {
-                              value: _vm.options.required,
-                              callback: function($$v) {
-                                _vm.$set(_vm.options, "required", $$v)
-                              },
-                              expression: "options.required"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-form-item",
-                        { attrs: { label: "Calendar Preferences" } },
-                        [
-                          _c(
-                            "el-row",
-                            [
-                              _c("el-switch", {
-                                attrs: {
-                                  "active-text": "Only allow up to current day"
-                                },
-                                on: { change: _vm.togglePastOnly },
-                                model: {
-                                  value: _vm.myOptions.dateSelect1,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.myOptions, "dateSelect1", $$v)
-                                  },
-                                  expression: "myOptions.dateSelect1"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "el-row",
-                            [
-                              _c("el-switch", {
-                                attrs: { "active-text": "Include Quick menu" },
-                                on: { change: _vm.toggleQuickMenu },
-                                model: {
-                                  value: _vm.myOptions.dateSelect2,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.myOptions, "dateSelect2", $$v)
-                                  },
-                                  expression: "myOptions.dateSelect2"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "el-row",
-                            [
-                              _c("el-switch", {
-                                attrs: { "active-text": "Include time" },
-                                on: { change: _vm.toggleTime },
-                                model: {
-                                  value: _vm.myOptions.dateSelect3,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.myOptions, "dateSelect3", $$v)
-                                  },
-                                  expression: "myOptions.dateSelect3"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "el-row",
-                            [
-                              _c("el-switch", {
-                                attrs: { "active-text": "Date Range" },
-                                on: { change: _vm.toggleRangeMenu },
-                                model: {
-                                  value: _vm.myOptions.dateSelect4,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.myOptions, "dateSelect4", $$v)
-                                  },
-                                  expression: "myOptions.dateSelect4"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
+                            expression: "myOptions.title"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("span", [_vm._v("This field is")]),
+                    _vm._v(" "),
+                    _c("el-switch", {
+                      attrs: {
+                        "active-text": "Required",
+                        "inactive-text": "Optional"
+                      },
+                      model: {
+                        value: _vm.myOptions.required,
+                        callback: function($$v) {
+                          _vm.$set(_vm.myOptions, "required", $$v)
+                        },
+                        expression: "myOptions.required"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "tw-float-right" },
+                  [
+                    _c("span", [_vm._v("Calendar Preferences")]),
+                    _vm._v(" "),
+                    _c(
+                      "el-row",
+                      [
+                        _c("el-switch", {
+                          attrs: {
+                            "active-text": "Only allow up to current day"
+                          },
+                          on: { change: _vm.togglePastOnly },
+                          model: {
+                            value: _vm.myOptions.dateSelect1,
+                            callback: function($$v) {
+                              _vm.$set(_vm.myOptions, "dateSelect1", $$v)
+                            },
+                            expression: "myOptions.dateSelect1"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "el-row",
+                      [
+                        _c("el-switch", {
+                          attrs: { "active-text": "Include Quick menu" },
+                          on: { change: _vm.toggleQuickMenu },
+                          model: {
+                            value: _vm.myOptions.dateSelect2,
+                            callback: function($$v) {
+                              _vm.$set(_vm.myOptions, "dateSelect2", $$v)
+                            },
+                            expression: "myOptions.dateSelect2"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "el-row",
+                      [
+                        _c("el-switch", {
+                          attrs: { "active-text": "Include time" },
+                          on: { change: _vm.toggleTime },
+                          model: {
+                            value: _vm.myOptions.dateSelect3,
+                            callback: function($$v) {
+                              _vm.$set(_vm.myOptions, "dateSelect3", $$v)
+                            },
+                            expression: "myOptions.dateSelect3"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "el-row",
+                      [
+                        _c("el-switch", {
+                          attrs: { "active-text": "Date Range" },
+                          on: { change: _vm.toggleRangeMenu },
+                          model: {
+                            value: _vm.myOptions.dateSelect4,
+                            callback: function($$v) {
+                              _vm.$set(_vm.myOptions, "dateSelect4", $$v)
+                            },
+                            expression: "myOptions.dateSelect4"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
               _vm._v(" "),
               _vm._t("default")
             ],
@@ -85261,10 +85302,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&":
-/*!****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7& ***!
-  \****************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&scoped=true&":
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&scoped=true& ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -85285,60 +85326,79 @@ var render = function() {
       ]),
       _c("br"),
       _vm._v(" "),
-      _c(
-        "table",
-        [
+      _c("table", { attrs: { id: "matrix-table" } }, [
+        _c("thead", [
           _c(
             "tr",
+            { staticClass: "tw-max-w-sm" },
             [
-              _c("th", [_vm._v("Question")]),
+              _c("th"),
               _vm._v(" "),
-              _vm._l(_vm.radioList, function(radio, index) {
-                return _c("th", { key: index }, [
-                  _c(
-                    "span",
-                    [
-                      _c("editable-text", {
-                        staticClass: "cursor-text float-right",
-                        on: { input: _vm.showField },
-                        model: {
-                          value: _vm.matrix.response,
-                          callback: function($$v) {
-                            _vm.$set(_vm.matrix, "response", $$v)
-                          },
-                          expression: "matrix.response"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ])
-              }),
-              _vm._v(" "),
-              _c("th", [_vm._v("Remove item")])
+              _vm._l(_vm.radioList, function(item) {
+                return _c(
+                  "th",
+                  { key: item.key },
+                  [
+                    _c(
+                      "el-col",
+                      [
+                        _c("editable-text", {
+                          staticClass: "tw-cursor-pointer",
+                          on: { input: _vm.showField },
+                          model: {
+                            value: item.response,
+                            callback: function($$v) {
+                              _vm.$set(item, "response", $$v)
+                            },
+                            expression: "item.response"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              })
             ],
             2
-          ),
-          _vm._v(" "),
-          _vm._l(_vm.matrix, function(item, index) {
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.matrix, function(item) {
             return _c(
               "tr",
-              { key: index },
+              { key: item.id },
               [
                 _c(
                   "td",
                   [
                     _c("editable-text", {
-                      staticClass: "cursor-text",
+                      staticClass: "tw-cursor-pointer",
                       on: { input: _vm.showField },
                       model: {
-                        value: _vm.matrix.question,
+                        value: item.question,
                         callback: function($$v) {
-                          _vm.$set(_vm.matrix, "question", $$v)
+                          _vm.$set(item, "question", $$v)
                         },
-                        expression: "matrix.question"
+                        expression: "item.question"
                       }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "el-button",
+                      {
+                        attrs: { type: "text", size: "mini" },
+                        on: {
+                          click: function($event) {
+                            return _vm.removeItem(item)
+                          }
+                        }
+                      },
+                      [_vm._v("Remove")]
+                    )
                   ],
                   1
                 ),
@@ -85346,7 +85406,7 @@ var render = function() {
                 _vm._l(_vm.radioList, function(radio) {
                   return _c(
                     "td",
-                    { key: radio },
+                    { key: radio, staticClass: "tw-text-center" },
                     [
                       _c("el-radio", {
                         model: {
@@ -85360,35 +85420,14 @@ var render = function() {
                     ],
                     1
                   )
-                }),
-                _vm._v(" "),
-                _c(
-                  "td",
-                  { staticClass: "tw-float-right" },
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        staticClass: "float-right",
-                        attrs: { type: "text", size: "mini" },
-                        on: {
-                          click: function($event) {
-                            return _vm.test(_vm.question)
-                          }
-                        }
-                      },
-                      [_vm._v("Remove")]
-                    )
-                  ],
-                  1
-                )
+                })
               ],
               2
             )
-          })
-        ],
-        2
-      ),
+          }),
+          0
+        )
+      ]),
       _vm._v(" "),
       _c(
         "el-collapse",
@@ -85401,127 +85440,178 @@ var render = function() {
                 _c("h1", [_vm._v("Matrix Settings")])
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                [
-                  _vm._t("default"),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "my-4" },
-                    [
-                      _c("span", [_vm._v("Field Label")]),
-                      _vm._v(" "),
-                      _c(
-                        "el-row",
-                        [
-                          _c(
-                            "el-col",
-                            { attrs: { span: 6 } },
-                            [
-                              _c("el-input", {
-                                model: {
-                                  value: _vm.myOptions.title,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.myOptions, "title", $$v)
-                                  },
-                                  expression: "myOptions.title"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "my-4" },
-                    [
-                      _c("span", [_vm._v("Will this field be required?")]),
-                      _vm._v(" "),
-                      _c("el-switch", {
-                        attrs: {
-                          "active-text": "Required",
-                          "inactive-text": "Optional"
-                        },
-                        model: {
-                          value: _vm.myOptions.required,
-                          callback: function($$v) {
-                            _vm.$set(_vm.myOptions, "required", $$v)
-                          },
-                          expression: "myOptions.required"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "form",
-                    {
-                      staticClass: "my-4",
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.addItem($event)
-                        }
-                      }
-                    },
-                    [
-                      _c("span", [_vm._v("Add Question to List")]),
-                      _vm._v(" "),
-                      _c(
-                        "el-row",
-                        { attrs: { gutter: 5 } },
-                        [
-                          _c(
-                            "el-col",
-                            { attrs: { span: 6 } },
-                            [
-                              _c("el-input", {
-                                staticClass: "float-left",
-                                model: {
-                                  value: _vm.itemText,
-                                  callback: function($$v) {
-                                    _vm.itemText = $$v
-                                  },
-                                  expression: "itemText"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "el-col",
-                            { attrs: { span: 1.7 } },
-                            [
-                              _c(
-                                "el-button",
-                                {
-                                  staticClass: "float-right",
-                                  attrs: { type: "success" },
-                                  on: { click: _vm.addItem }
+              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
+                _c(
+                  "div",
+                  { staticClass: "tw-float-left" },
+                  [
+                    _c("span", [_vm._v("Field Label")]),
+                    _vm._v(" "),
+                    _c(
+                      "el-row",
+                      [
+                        _c(
+                          "el-col",
+                          { attrs: { span: 20 } },
+                          [
+                            _c("el-input", {
+                              model: {
+                                value: _vm.myOptions.title,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.myOptions, "title", $$v)
                                 },
-                                [_vm._v("Add")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                2
-              )
+                                expression: "myOptions.title"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "tw-my-6" },
+                      [
+                        _c("span", { staticClass: "tw-mb-4" }, [
+                          _vm._v("This field is")
+                        ]),
+                        _c("br"),
+                        _vm._v(" "),
+                        _c("el-switch", {
+                          attrs: {
+                            "active-text": "Required",
+                            "inactive-text": "Optional"
+                          },
+                          model: {
+                            value: _vm.myOptions.required,
+                            callback: function($$v) {
+                              _vm.$set(_vm.myOptions, "required", $$v)
+                            },
+                            expression: "myOptions.required"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "tw-float-right tw-mx-20" },
+                  [
+                    _c("span", { staticClass: "tw-mt-8" }, [
+                      _vm._v("Number of Choices")
+                    ]),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("el-input-number", {
+                      attrs: { "controls-position": "right", min: 1, max: 10 },
+                      on: { change: _vm.handleChange },
+                      model: {
+                        value: _vm.myOptions.matrixChoices,
+                        callback: function($$v) {
+                          _vm.$set(_vm.myOptions, "matrixChoices", $$v)
+                        },
+                        expression: "myOptions.matrixChoices"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "el-button",
+                      {
+                        staticClass: "tw-ml-4",
+                        attrs: { type: "success" },
+                        on: { click: _vm.getRadioList }
+                      },
+                      [_vm._v("Set ")]
+                    ),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        staticClass: "tw-inline-block tw-my-4",
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.addItem($event)
+                          }
+                        }
+                      },
+                      [
+                        _c("span", [
+                          _vm._v("Add a new question to the matrix")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "el-row",
+                          [
+                            _c(
+                              "el-col",
+                              {
+                                staticClass: "tw-float-left",
+                                attrs: { span: 16 }
+                              },
+                              [
+                                _c("el-input", {
+                                  model: {
+                                    value: _vm.itemText,
+                                    callback: function($$v) {
+                                      _vm.itemText = $$v
+                                    },
+                                    expression: "itemText"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "el-col",
+                              {
+                                staticClass: "tw-float-right",
+                                attrs: { span: 1.5 }
+                              },
+                              [
+                                _c(
+                                  "el-tooltip",
+                                  {
+                                    attrs: {
+                                      content:
+                                        "Alternatively, you can press enter after typing in this field to add items to the list"
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { type: "success" },
+                                        on: { click: _vm.addItem }
+                                      },
+                                      [_vm._v("Add")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _vm._t("default")
             ],
             2
           )
@@ -86737,8 +86827,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -86777,8 +86870,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -86817,8 +86913,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -86857,8 +86956,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -86897,8 +86999,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -86937,8 +87042,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -86977,8 +87085,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -87017,8 +87128,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -87057,8 +87171,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -87097,8 +87214,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -87137,8 +87257,11 @@ var render = function() {
                                                     "el-button",
                                                     {
                                                       staticClass:
-                                                        "canvas-card float-right text-x1",
-                                                      attrs: { type: "text" },
+                                                        "canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1",
+                                                      attrs: {
+                                                        type: "text",
+                                                        icon: "el-icon-close"
+                                                      },
                                                       on: {
                                                         click: function(
                                                           $event
@@ -108837,9 +108960,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _matrixField_vue_vue_type_template_id_2452dcb7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./matrixField.vue?vue&type=template&id=2452dcb7& */ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&");
+/* harmony import */ var _matrixField_vue_vue_type_template_id_2452dcb7_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./matrixField.vue?vue&type=template&id=2452dcb7&scoped=true& */ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&scoped=true&");
 /* harmony import */ var _matrixField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./matrixField.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _matrixField_vue_vue_type_style_index_0_id_2452dcb7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css& */ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -108847,13 +108972,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _matrixField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _matrixField_vue_vue_type_template_id_2452dcb7___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _matrixField_vue_vue_type_template_id_2452dcb7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _matrixField_vue_vue_type_template_id_2452dcb7_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _matrixField_vue_vue_type_template_id_2452dcb7_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "2452dcb7",
   null
   
 )
@@ -108879,19 +109004,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&":
-/*!**********************************************************************************************************!*\
-  !*** ./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7& ***!
-  \**********************************************************************************************************/
+/***/ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css&":
+/*!************************************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_style_index_0_id_2452dcb7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=style&index=0&id=2452dcb7&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_style_index_0_id_2452dcb7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_style_index_0_id_2452dcb7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_style_index_0_id_2452dcb7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_style_index_0_id_2452dcb7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_style_index_0_id_2452dcb7_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&scoped=true&":
+/*!**********************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&scoped=true& ***!
+  \**********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_template_id_2452dcb7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./matrixField.vue?vue&type=template&id=2452dcb7& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_template_id_2452dcb7___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_template_id_2452dcb7_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./matrixField.vue?vue&type=template&id=2452dcb7&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/matrixField.vue?vue&type=template&id=2452dcb7&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_template_id_2452dcb7_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_template_id_2452dcb7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matrixField_vue_vue_type_template_id_2452dcb7_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

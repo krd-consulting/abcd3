@@ -45,57 +45,57 @@
                                     </div>
                                     <div v-if="inputType.input.id === 0"> <!-- textbox -->
                                         <Text-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Text-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
                                         <Text-box :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Text-box>
                                     </div>
                                     <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
                                         <Numeric-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Numeric-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 3"> <!-- Dropdown -->
                                         <Dropdown-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Dropdown-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 4"> <!-- Radio -->
                                         <Radio-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Radio-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 5"> <!-- Checkbox -->
                                         <Checkbox-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Checkbox-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 6"> <!-- Date Field -->
                                         <Date-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Date-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 7"> <!-- Matrix Field -->
                                         <Matrix-field :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Matrix-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 8"> <!-- Time Picker -->
                                         <Time-Picker :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Time-Picker>
                                     </div>
                                     <div v-else-if="inputType.input.id === 9"> <!-- File Upload -->
                                         <File-Upload :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </File-Upload>
                                     </div>
                                     <div v-else-if="inputType.input.id === 10"> <!-- Section Divider -->
                                         <Section-Divider :options="inputType.options">
-                                            <el-button class="canvas-card float-right text-x1" type="text" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Section-Divider>
                                     </div>
                                 </el-card>

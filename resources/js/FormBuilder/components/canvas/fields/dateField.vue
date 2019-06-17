@@ -18,32 +18,33 @@
                     </div>
 
                 </template>
-                <div>
-                    <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
-                        <el-form-item label="Field Label">
+                    <div class="tw-flex tw-inline-block tw-w-full">
+                        <div class="tw-float-left">
+                            <span>Field Label</span>
                             <el-col :span="6">
-                                <el-input v-model="options.title"></el-input>
+                                <el-input v-model="myOptions.title"></el-input>
                             </el-col>
-                        </el-form-item>
-                        <el-form-item>
-                            <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
-                        </el-form-item>
-                        <el-form-item label="Calendar Preferences">
-                                <el-row>
-                                    <el-switch @change="togglePastOnly" v-model="myOptions.dateSelect1" active-text="Only allow up to current day"></el-switch>
-                                </el-row>
-                                <el-row>
-                                    <el-switch @change="toggleQuickMenu" v-model="myOptions.dateSelect2" active-text="Include Quick menu"></el-switch>
-                                </el-row>
-                                <el-row>
-                                    <el-switch @change="toggleTime" v-model="myOptions.dateSelect3" active-text="Include time"></el-switch>
-                                </el-row>
-                                <el-row>
-                                    <el-switch @change="toggleRangeMenu" v-model="myOptions.dateSelect4" active-text="Date Range"></el-switch>
-                                </el-row>
-                        </el-form-item>
-                    </el-form>
-                </div>
+
+                            <span>This field is</span>
+                            <el-switch v-model="myOptions.required" active-text="Required" inactive-text="Optional"></el-switch>
+                        </div>
+
+                        <div class="tw-float-right">
+                            <span>Calendar Preferences</span>
+                            <el-row>
+                                <el-switch @change="togglePastOnly" v-model="myOptions.dateSelect1" active-text="Only allow up to current day"></el-switch>
+                            </el-row>
+                            <el-row>
+                                <el-switch @change="toggleQuickMenu" v-model="myOptions.dateSelect2" active-text="Include Quick menu"></el-switch>
+                            </el-row>
+                            <el-row>
+                                <el-switch @change="toggleTime" v-model="myOptions.dateSelect3" active-text="Include time"></el-switch>
+                            </el-row>
+                            <el-row>
+                                <el-switch @change="toggleRangeMenu" v-model="myOptions.dateSelect4" active-text="Date Range"></el-switch>
+                            </el-row>
+                        </div>
+                    </div>
                 <slot></slot>
             </el-collapse-item>
         </el-collapse>
