@@ -33,7 +33,7 @@
                                     <el-switch @change="togglePastOnly" v-model="myOptions.dateSelect1" active-text="Only allow up to current day"></el-switch>
                                 </el-row>
                                 <el-row>
-                                    <el-switch @change="toggleQuickMenu" v-model="myOptions.dateSelect2" active-text="Quick menu"></el-switch>
+                                    <el-switch @change="toggleQuickMenu" v-model="myOptions.dateSelect2" active-text="Include Quick menu"></el-switch>
                                 </el-row>
                                 <el-row>
                                     <el-switch @change="toggleTime" v-model="myOptions.dateSelect3" active-text="Include time"></el-switch>

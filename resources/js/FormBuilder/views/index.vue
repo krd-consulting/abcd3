@@ -1,30 +1,33 @@
 <template>
     <div class="formCreate">
-        <el-container class="create-container">
-            
-            <el-aside class="abcd-sticky">
-                <div id="logo">
-                     ABCD
-                </div>
-                <form-menu @add="addField"/>
-            </el-aside>
+      
+        <el-container> 
+            <el-card> 
+                <el-aside class="menu-container">
+                    <form-menu @add="addField" class="abcd-sticky"/>
+                </el-aside>
+            </el-card>
 
-            <el-container class="abcd-sticky">
-                <el-header class="abcd-sticky">
-                    <el-menu :default-active="$route.path" 
-                        class="w-full" background-color="#eef1f6" active-text-color="#409EFF" 
-                        mode="horizontal" @select="handleSelect" router>
-                        <el-menu-item default-active index="/forms/create" class="font-bold focus:font-extrabold">Form Builder</el-menu-item>
-                        <el-menu-item index="/forms/create/preview" class="font-bold focus:font-extrabold">Preview Form</el-menu-item>
-                        <el-menu-item index="/forms" class="dock-right font-bold focus:font-extrabold">Finish and Build!</el-menu-item>
-                    </el-menu>
-                </el-header>
-    
-                <el-main>
-                    <FormCanvas :fields="fields" @inputOptions="setOptions"/>
-                </el-main>
-            </el-container>
+        <el-container id="canvas-container">
+        <el-card id="canvas">
+            <el-header class="abcd-header">
+                <el-menu :default-active="$route.path" 
+                    background-color="#fff" active-text-color="#409EFF" 
+                    mode="horizontal" @select="handleSelect" router>
+                        <el-menu-item default-active index="/forms/create" class="tw-font-bold tw-focus:font-extrabold">Form Builder</el-menu-item>
+                        <el-menu-item index="/forms/create/preview" class="tw-font-bold tw-focus:font-extrabold">Preview Form</el-menu-item>
+                        <el-menu-item index="/forms" class="dock-right tw-font-bold tw-focus:font-extrabold">Finish and Build!</el-menu-item>
+                </el-menu>
+            </el-header>   
+
+            <el-main>
+                <FormCanvas :fields="fields" @inputOptions="setOptions"/>
+            </el-main>
+        </el-card>
+
+            </el-container>   
         </el-container>
+        
     </div>
 </template>
 
@@ -87,53 +90,29 @@ export default {
 </script>
 
 <style scoped>
-    .create-container {
-        height: 100%; 
-        flex-shrink: inherit;
-        border: 1px solid #eee;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
+    .abcd-header {
+        background-color: #fff;
+    }
+    .dock-right {
+        float: right;
+    }
+    .menu-container{
+        margin-top: 60px;
+    }
+    #canvas {
+        width: 100%;
+    }
+    #canvas-container {
+        margin-left: 5px;
     }
     .abcd-sticky {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-    }
-    .create-header {
-        background-color: rgb(238, 241, 246);
-        color: #333;
-        line-height: 50px;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
+        position: -webkit-sticky !important;
+        position: -moz-sticky !important;
+        position: -ms-sticky !important;
+        position: -o-sticky !important;
+        position: sticky !important;
+        top: -1px !important;
         z-index: 1;
-    }
-    .el-aside {
-        color: #333;
-        background-color: rgb(238, 241, 246);
-        flex-shrink: inherit;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-        min-width: 180px;
-        max-width: 320px;
-        max-height: 960px;
-        padding-right: 5px;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-    .el-menu--horizontal > .el-menu-item.dock-right {
-        float: right;
-        margin: 0 auto;
-    }
-    #logo {
-        height: 60px;
-    }
-    img {
-        height: 50px;
-        margin-top: 5px;
-        margin-left: 15px;
     }
 </style>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="menu">
-    <div class="menu-container">
+    <div id="menu-container" class="abcd-sticky">
       <el-row type="flex">
         <el-col>
           <el-collapse v-model="step" accordion>
@@ -108,24 +108,8 @@ export default {
 </script>
 
 <style scoped>
-    /* .menu-container {
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-    } */
-    .menu-container .el-row .el-col .el-collapse {
-        /* margin-left: 5px;
-        padding-left: 5px; */
-        max-width: 300px;
-        min-width: 150px;
-        padding-right: 5px;
-        position: -webkit-sticky;
-        position: sticky;
-        top: 0;
-    }
-    .menu-container .el-row {
-        margin-left: 5px;
-        padding-left: 5px;
+    #menu {
+        overflow: hidden;
     }
     .el-card {
         margin: 5px;
@@ -138,6 +122,7 @@ export default {
         cursor: pointer;
     }
     .menu-title {
+        padding-left: 5px;
         font-size: 18px;
         font-weight: bold;
         color: #2c3e50;
@@ -145,5 +130,15 @@ export default {
     .fields {
       font-size: 13px;
       font-weight: bold;
+    }
+
+    .abcd-sticky {
+        position: -webkit-sticky !important;
+        position: -moz-sticky !important;
+        position: -ms-sticky !important;
+        position: -o-sticky !important;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1;
     }
 </style>

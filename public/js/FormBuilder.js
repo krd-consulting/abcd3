@@ -4075,20 +4075,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       matrix: [],
       nextItem: 0,
-      radio: 1,
-      radioList: [{
-        key: 0
-      }],
+      radioSelect: 1,
+      radioList: [],
       question: '',
-      response: '',
+      response: 'derp',
       editField: '',
-      itemText: ''
+      itemText: '',
+      myOptions: []
     };
   },
   components: {
@@ -4110,10 +4135,17 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  created: function created() {
+    this.myOptions = _.clone(this.options);
+  },
   mounted: function mounted() {
     this.getMatrixItems(); // calls method upon being rendered in the DOM
 
     this.getRadioList();
+  },
+  computed: {
+    columnText: function columnText() {// <editable-text class="cursor-text float-right" @input="showField" v-model="matrix[$index].response"/>
+    }
   },
   methods: {
     addItem: function addItem() {
@@ -4126,7 +4158,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     loadItem: function loadItem() {
       // var i;
-      // for(i = 0; i < this.options.matrixChoices; i++) {
+      // for(i = 0; i < this.myOptions.matrixChoices; i++) {
       //     this.matrix.response["key" + i] = "Value";
       // }
       this.matrix.push({
@@ -4145,14 +4177,14 @@ __webpack_require__.r(__webpack_exports__);
     getMatrixItems: function getMatrixItems() {
       var i;
 
-      for (i = 0; i < this.options.matrixQuestions; i++) {
+      for (i = 0; i < this.myOptions.matrixQuestions; i++) {
         this.loadItem(); // this.matrix.response["key" + i] = "Value";
       }
     },
     getRadioList: function getRadioList() {
       var i;
 
-      for (i = 1; i < this.options.matrixChoices; i++) {
+      for (i = 1; i <= this.myOptions.matrixChoices; i++) {
         this.radioList.push({
           key: i
         });
@@ -5237,6 +5269,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'inputOptions',
   data: function data() {
@@ -5334,6 +5374,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _FormBuilder_components_canvas_index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/FormBuilder/components/canvas/index.vue */ "./resources/js/FormBuilder/components/canvas/index.vue");
 /* harmony import */ var _FormBuilder_components_menu_index_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/FormBuilder/components/menu/index.vue */ "./resources/js/FormBuilder/components/menu/index.vue");
+//
+//
+//
 //
 //
 //
@@ -7812,7 +7855,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "/* .menu-container {\n    position: -webkit-sticky;\n    position: sticky;\n    top: 0;\n} */\n.menu-container .el-row .el-col .el-collapse[data-v-1ff48ab5] {\n  /* margin-left: 5px;\n    padding-left: 5px; */\n  max-width: 300px;\n  min-width: 150px;\n  padding-right: 5px;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n}\n.menu-container .el-row[data-v-1ff48ab5] {\n  margin-left: 5px;\n  padding-left: 5px;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n.abcd-sticky[data-v-1ff48ab5] {\n  position: -webkit-sticky !important;\n  position: -moz-sticky !important;\n  position: -ms-sticky !important;\n  position: -o-sticky !important;\n  position: sticky !important;\n  top: 0 !important;\n  z-index: 1;\n}\n", ""]);
 
 // exports
 
@@ -7850,7 +7893,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".create-container[data-v-0c2f292a] {\n  height: 100%;\n  flex-shrink: inherit;\n  border: 1px solid #eee;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n}\n.abcd-sticky[data-v-0c2f292a] {\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n}\n.create-header[data-v-0c2f292a] {\n  background-color: rgb(238, 241, 246);\n  color: #333;\n  line-height: 50px;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  z-index: 1;\n}\n.el-aside[data-v-0c2f292a] {\n  color: #333;\n  background-color: rgb(238, 241, 246);\n  flex-shrink: inherit;\n  position: -webkit-sticky;\n  position: sticky;\n  top: 0;\n  min-width: 180px;\n  max-width: 320px;\n  max-height: 960px;\n  padding-right: 5px;\n  overflow-y: auto;\n  overflow-x: hidden;\n}\n.el-menu--horizontal > .el-menu-item.dock-right[data-v-0c2f292a] {\n  float: right;\n  margin: 0 auto;\n}\n#logo[data-v-0c2f292a] {\n  height: 60px;\n}\nimg[data-v-0c2f292a] {\n  height: 50px;\n  margin-top: 5px;\n  margin-left: 15px;\n}\n", ""]);
+exports.push([module.i, ".abcd-header[data-v-0c2f292a] {\n  background-color: #fff;\n}\n.dock-right[data-v-0c2f292a] {\n  float: right;\n}\n.menu-container[data-v-0c2f292a]{\n  margin-top: 60px;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n}\n#canvas-container[data-v-0c2f292a] {\n  margin-left: 5px;\n}\n.abcd-sticky[data-v-0c2f292a] {\n  position: -webkit-sticky !important;\n  position: -moz-sticky !important;\n  position: -ms-sticky !important;\n  position: -o-sticky !important;\n  position: sticky !important;\n  top: -1px !important;\n  z-index: 1;\n}\n", ""]);
 
 // exports
 
@@ -84789,7 +84832,7 @@ var render = function() {
                             "el-row",
                             [
                               _c("el-switch", {
-                                attrs: { "active-text": "Quick menu" },
+                                attrs: { "active-text": "Include Quick menu" },
                                 on: { change: _vm.toggleQuickMenu },
                                 model: {
                                   value: _vm.myOptions.dateSelect2,
@@ -85248,103 +85291,111 @@ var render = function() {
     { attrs: { id: "textarea" } },
     [
       _c("span", { staticClass: "inputLabel" }, [
-        _vm._v(_vm._s(_vm.options.title))
+        _vm._v(_vm._s(_vm.myOptions.title))
       ]),
       _c("br"),
       _vm._v(" "),
       _c(
-        "el-table",
-        {
-          staticStyle: { width: "100%", "margin-top": "20px", "z-index": "0" },
-          attrs: {
-            data: _vm.matrix,
-            height: "342",
-            "highlight-current-row": "",
-            "show-summary": ""
-          }
-        },
+        "table",
         [
-          _c("el-table-column", {
-            attrs: { fixed: "", label: "question", prop: _vm.question },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(ref) {
-                  var $index = ref.$index
-                  return [
+          _c(
+            "tr",
+            [
+              _c("th", [_vm._v("Question")]),
+              _vm._v(" "),
+              _vm._l(_vm.radioList, function(radio, index) {
+                return _c("th", { key: index }, [
+                  _c(
+                    "span",
+                    [
+                      _c("editable-text", {
+                        staticClass: "cursor-text float-right",
+                        on: { input: _vm.showField },
+                        model: {
+                          value: _vm.matrix.response,
+                          callback: function($$v) {
+                            _vm.$set(_vm.matrix, "response", $$v)
+                          },
+                          expression: "matrix.response"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ])
+              }),
+              _vm._v(" "),
+              _c("th", [_vm._v("Remove item")])
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _vm._l(_vm.matrix, function(item, index) {
+            return _c(
+              "tr",
+              { key: index },
+              [
+                _c(
+                  "td",
+                  [
                     _c("editable-text", {
                       staticClass: "cursor-text",
                       on: { input: _vm.showField },
                       model: {
-                        value: _vm.matrix[$index].question,
+                        value: _vm.matrix.question,
                         callback: function($$v) {
-                          _vm.$set(_vm.matrix[$index], "question", $$v)
+                          _vm.$set(_vm.matrix, "question", $$v)
                         },
-                        expression: "matrix[$index].question"
+                        expression: "matrix.question"
                       }
                     })
-                  ]
-                }
-              }
-            ])
-          }),
-          _vm._v(" "),
-          _vm._l(_vm.radioList, function(item) {
-            return _c(
-              "div",
-              { key: item.key, staticClass: "inline-block" },
-              [
-                _c("el-table-column", {
-                  attrs: { prop: "response", label: _vm.response },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(ref) {
-                        var $index = ref.$index
-                        return [
-                          _c("el-radio", { staticClass: "float-left" }),
-                          _vm._v(" "),
-                          _c("editable-text", {
-                            staticClass: "cursor-text float-right",
-                            on: { input: _vm.showField },
-                            model: {
-                              value: _vm.matrix[$index].response,
-                              callback: function($$v) {
-                                _vm.$set(_vm.matrix[$index], "response", $$v)
-                              },
-                              expression: "matrix[$index].response"
-                            }
-                          })
-                        ]
-                      }
-                    }
-                  ])
-                })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.radioList, function(radio) {
+                  return _c(
+                    "td",
+                    { key: radio },
+                    [
+                      _c("el-radio", {
+                        model: {
+                          value: _vm.radioSelect,
+                          callback: function($$v) {
+                            _vm.radioSelect = $$v
+                          },
+                          expression: "radioSelect"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                _vm._v(" "),
+                _c(
+                  "td",
+                  { staticClass: "tw-float-right" },
+                  [
+                    _c(
+                      "el-button",
+                      {
+                        staticClass: "float-right",
+                        attrs: { type: "text", size: "mini" },
+                        on: {
+                          click: function($event) {
+                            return _vm.test(_vm.question)
+                          }
+                        }
+                      },
+                      [_vm._v("Remove")]
+                    )
+                  ],
+                  1
+                )
               ],
-              1
+              2
             )
-          }),
-          _vm._v(" "),
-          _c(
-            "el-table-column",
-            { attrs: { fixed: "right", width: "120" } },
-            [
-              _c(
-                "el-button",
-                {
-                  staticClass: "float-right",
-                  attrs: { type: "text", size: "mini" },
-                  on: {
-                    click: function($event) {
-                      return _vm.test(_vm.question)
-                    }
-                  }
-                },
-                [_vm._v("Remove")]
-              )
-            ],
-            1
-          )
+          })
         ],
         2
       ),
@@ -85380,11 +85431,11 @@ var render = function() {
                             [
                               _c("el-input", {
                                 model: {
-                                  value: _vm.options.title,
+                                  value: _vm.myOptions.title,
                                   callback: function($$v) {
-                                    _vm.$set(_vm.options, "title", $$v)
+                                    _vm.$set(_vm.myOptions, "title", $$v)
                                   },
-                                  expression: "options.title"
+                                  expression: "myOptions.title"
                                 }
                               })
                             ],
@@ -85409,11 +85460,11 @@ var render = function() {
                           "inactive-text": "Optional"
                         },
                         model: {
-                          value: _vm.options.required,
+                          value: _vm.myOptions.required,
                           callback: function($$v) {
-                            _vm.$set(_vm.options, "required", $$v)
+                            _vm.$set(_vm.myOptions, "required", $$v)
                           },
-                          expression: "options.required"
+                          expression: "myOptions.required"
                         }
                       })
                     ],
@@ -87175,7 +87226,7 @@ var render = function() {
   return _c("div", { attrs: { id: "menu" } }, [
     _c(
       "div",
-      { staticClass: "menu-container" },
+      { staticClass: "abcd-sticky", attrs: { id: "menu-container" } },
       [
         _c(
           "el-row",
@@ -88055,49 +88106,75 @@ var render = function() {
                   "el-form-item",
                   { attrs: { label: "Calendar Preferences" } },
                   [
-                    _c("el-switch", {
-                      attrs: { "active-text": "Only allow up to current day" },
-                      model: {
-                        value: _vm.options.dateSelect1,
-                        callback: function($$v) {
-                          _vm.$set(_vm.options, "dateSelect1", $$v)
-                        },
-                        expression: "options.dateSelect1"
-                      }
-                    }),
+                    _c(
+                      "el-row",
+                      [
+                        _c("el-switch", {
+                          attrs: {
+                            "active-text": "Only allow up to current day"
+                          },
+                          model: {
+                            value: _vm.options.dateSelect1,
+                            callback: function($$v) {
+                              _vm.$set(_vm.options, "dateSelect1", $$v)
+                            },
+                            expression: "options.dateSelect1"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("el-switch", {
-                      attrs: { "active-text": "Quick menu" },
-                      model: {
-                        value: _vm.options.dateSelect2,
-                        callback: function($$v) {
-                          _vm.$set(_vm.options, "dateSelect2", $$v)
-                        },
-                        expression: "options.dateSelect2"
-                      }
-                    }),
+                    _c(
+                      "el-row",
+                      [
+                        _c("el-switch", {
+                          attrs: { "active-text": "Quick menu" },
+                          model: {
+                            value: _vm.options.dateSelect2,
+                            callback: function($$v) {
+                              _vm.$set(_vm.options, "dateSelect2", $$v)
+                            },
+                            expression: "options.dateSelect2"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("el-switch", {
-                      attrs: { "active-text": "Include time" },
-                      model: {
-                        value: _vm.options.dateSelect3,
-                        callback: function($$v) {
-                          _vm.$set(_vm.options, "dateSelect3", $$v)
-                        },
-                        expression: "options.dateSelect3"
-                      }
-                    }),
+                    _c(
+                      "el-row",
+                      [
+                        _c("el-switch", {
+                          attrs: { "active-text": "Include time" },
+                          model: {
+                            value: _vm.options.dateSelect3,
+                            callback: function($$v) {
+                              _vm.$set(_vm.options, "dateSelect3", $$v)
+                            },
+                            expression: "options.dateSelect3"
+                          }
+                        })
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
-                    _c("el-switch", {
-                      attrs: { "active-text": "Date Range" },
-                      model: {
-                        value: _vm.options.dateSelect4,
-                        callback: function($$v) {
-                          _vm.$set(_vm.options, "dateSelect4", $$v)
-                        },
-                        expression: "options.dateSelect4"
-                      }
-                    })
+                    _c(
+                      "el-row",
+                      [
+                        _c("el-switch", {
+                          attrs: { "active-text": "Date Range" },
+                          model: {
+                            value: _vm.options.dateSelect4,
+                            callback: function($$v) {
+                              _vm.$set(_vm.options, "dateSelect4", $$v)
+                            },
+                            expression: "options.dateSelect4"
+                          }
+                        })
+                      ],
+                      1
+                    )
                   ],
                   1
                 ),
@@ -88570,87 +88647,99 @@ var render = function() {
     [
       _c(
         "el-container",
-        { staticClass: "create-container" },
         [
           _c(
-            "el-aside",
-            { staticClass: "abcd-sticky" },
+            "el-card",
             [
-              _c("div", { attrs: { id: "logo" } }, [
-                _vm._v("\n                 ABCD\n            ")
-              ]),
-              _vm._v(" "),
-              _c("form-menu", { on: { add: _vm.addField } })
+              _c(
+                "el-aside",
+                { staticClass: "menu-container" },
+                [
+                  _c("form-menu", {
+                    staticClass: "abcd-sticky",
+                    on: { add: _vm.addField }
+                  })
+                ],
+                1
+              )
             ],
             1
           ),
           _vm._v(" "),
           _c(
             "el-container",
-            { staticClass: "abcd-sticky" },
+            { attrs: { id: "canvas-container" } },
             [
               _c(
-                "el-header",
-                { staticClass: "abcd-sticky" },
+                "el-card",
+                { attrs: { id: "canvas" } },
                 [
                   _c(
-                    "el-menu",
-                    {
-                      staticClass: "w-full",
-                      attrs: {
-                        "default-active": _vm.$route.path,
-                        "background-color": "#eef1f6",
-                        "active-text-color": "#409EFF",
-                        mode: "horizontal",
-                        router: ""
-                      },
-                      on: { select: _vm.handleSelect }
-                    },
+                    "el-header",
+                    { staticClass: "abcd-header" },
                     [
                       _c(
-                        "el-menu-item",
+                        "el-menu",
                         {
-                          staticClass: "font-bold focus:font-extrabold",
                           attrs: {
-                            "default-active": "",
-                            index: "/forms/create"
-                          }
+                            "default-active": _vm.$route.path,
+                            "background-color": "#fff",
+                            "active-text-color": "#409EFF",
+                            mode: "horizontal",
+                            router: ""
+                          },
+                          on: { select: _vm.handleSelect }
                         },
-                        [_vm._v("Form Builder")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-menu-item",
-                        {
-                          staticClass: "font-bold focus:font-extrabold",
-                          attrs: { index: "/forms/create/preview" }
-                        },
-                        [_vm._v("Preview Form")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-menu-item",
-                        {
-                          staticClass:
-                            "dock-right font-bold focus:font-extrabold",
-                          attrs: { index: "/forms" }
-                        },
-                        [_vm._v("Finish and Build!")]
+                        [
+                          _c(
+                            "el-menu-item",
+                            {
+                              staticClass:
+                                "tw-font-bold tw-focus:font-extrabold",
+                              attrs: {
+                                "default-active": "",
+                                index: "/forms/create"
+                              }
+                            },
+                            [_vm._v("Form Builder")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-menu-item",
+                            {
+                              staticClass:
+                                "tw-font-bold tw-focus:font-extrabold",
+                              attrs: { index: "/forms/create/preview" }
+                            },
+                            [_vm._v("Preview Form")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-menu-item",
+                            {
+                              staticClass:
+                                "dock-right tw-font-bold tw-focus:font-extrabold",
+                              attrs: { index: "/forms" }
+                            },
+                            [_vm._v("Finish and Build!")]
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-main",
+                    [
+                      _c("FormCanvas", {
+                        attrs: { fields: _vm.fields },
+                        on: { inputOptions: _vm.setOptions }
+                      })
+                    ],
+                    1
                   )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-main",
-                [
-                  _c("FormCanvas", {
-                    attrs: { fields: _vm.fields },
-                    on: { inputOptions: _vm.setOptions }
-                  })
                 ],
                 1
               )

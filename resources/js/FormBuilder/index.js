@@ -15,7 +15,6 @@ import draggable from 'vuedraggable'
 import { VueRouter, router } from './routes';
 Vue.use(VueRouter);
 
-
 Vue.config.productionTip = false
 Vue.use(draggable);
 Vue.use(Vuex);

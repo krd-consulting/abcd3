@@ -152,10 +152,18 @@
         <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item label="Calendar Preferences">
+        <el-row>
           <el-switch v-model="options.dateSelect1" active-text="Only allow up to current day"></el-switch>
+        </el-row>
+        <el-row>
           <el-switch v-model="options.dateSelect2" active-text="Quick menu"></el-switch>
+        </el-row>
+        <el-row>
           <el-switch v-model="options.dateSelect3" active-text="Include time"></el-switch>
+        </el-row>
+        <el-row>
           <el-switch v-model="options.dateSelect4" active-text="Date Range"></el-switch>
+        </el-row>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitOptions">Set</el-button>
