@@ -1,6 +1,6 @@
 {
-    "/js/app.js": "/js/app.js",
+    "/js/App.js": "/js/App.js",
     "/css/app.css": "/css/app.css",
-    "/js/formbuilder.js": "/js/formbuilder.js",
-    "/js/preferences.js": "/js/preferences.js"
+    "/js/FormBuilder.js": "/js/FormBuilder.js",
+    "/js/Preferences.js": "/js/Preferences.js"
 }
