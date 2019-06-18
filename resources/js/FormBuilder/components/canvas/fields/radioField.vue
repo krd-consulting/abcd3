@@ -1,48 +1,58 @@
 <template>
     <div id="dropdown">
-         <el-collapse>
-            <span class="inputLabel">{{ options.title }}</span><br>
+         
+        <label for="radioGroup" class="inputLabel">{{ inputFieldData.label }}</label><br>
+        <sup>{{ inputFieldData.description }}</sup>
+        <el-radio-group id="radioGroup" v-for="item in radioList" :key="item.value">
+            <el-radio v-model="item.value" :label="item.value">{{ item.value }}</el-radio>
+        </el-radio-group>
+
+        <el-collapse>
             <el-collapse-item>
                 <template slot="title">
-                    <el-radio-group v-for="item in radioList" :key="item.value">
-                        <el-radio v-model="item.value" :label="item.value">{{ item.value }}</el-radio>
-                    </el-radio-group>
+                    <el-button icon="el-icon-edit">Field Options</el-button>
                 </template>
-                <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
-                    <el-form-item label="Field Label">
-                        <el-input v-model="options.title"></el-input>
-                    </el-form-item>
-                        <el-form-item>
-                            <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
-                    </el-form-item>
-                </el-form>
-                <el-form>
-                    <el-form-item label="Dropdown Items"></el-form-item>
-                </el-form>
-                    <!-- <ul>
-                        <li v-for="item in radioList" :key="item.id" >
-                            <span v-show="!showField('value')" @click="focusField('value')">
-                                {{ item.value }}
-                            </span>
-                            <el-input v-model="item.value" v-show="showField('value')" @focus="focusField('value')" @blur="blurField"></el-input>
-                            <el-button type="text" @click="removeItem(item)">Remove</el-button>
-                        </li>
-                    </ul> -->
-                <h3>Radio List Items</h3>
-                <el-row v-for="item in radioList" :key="item.id">
-                  <el-col :span="5">
-                      <editable-text class="cursor-text float-left" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
-                      <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
-                  </el-col>
-                </el-row>
+                <div class="tw-flex tw-inline-block tw-w-full">
+                    <div class="tw-float-left">
+                            
+                        <el-row class="tw-my-6">
+                            <label for="label">Field Label</label>
+                            <el-col :span="20">
+                                <el-input id="label" v-model="inputFieldData.label"></el-input>
+                            </el-col>
+                        </el-row>
+                        <el-row class="tw-my-6">
+                            <el-col :span="20">
+                                <label for="description">Field Description</label>
+                                <el-input id="description" v-model="inputFieldData.description"></el-input>
+                            </el-col>
+                        </el-row>
+                        <el-row class="tw-my-6">
+                            <label for="switch" class="tw-mb-4">This field is</label><br>
+                            <el-switch id="switch" v-model="inputFieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                        </el-row>
+                    </div>
 
-                <form @submit.prevent="addItem">
-                    <el-form>
-                        <el-form-item label="Add Item to List"></el-form-item>
-                    </el-form>
-                    <el-input v-model="itemText"></el-input>
-                    <el-button type="success" @click="addItem">Add</el-button>
-                </form>
+                     <div class="tw-float-right tw-mx-20 tw-my-6">
+                        <form @submit.prevent="addItem">
+                            <el-col :span="16">
+                                <label for="newItem">Add a new item to the list</label>
+                                <el-input id="newItem" v-model="itemText"></el-input>
+                                <el-button type="success" @click="addItem">Add</el-button>
+                            </el-col>
+                        </form>
+                    </div>   
+                    
+                    <div class="tw-float-right tw-mx-20 tw-my-6">
+                        <h3>Radio List Items</h3>
+                        <el-row v-for="item in radioList" :key="item.id">
+                            <editable-text class="cursor-text float-left" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
+                            <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
+                        </el-row>
+                    </div>
+
+                </div>
+
                 <slot></slot>
             </el-collapse-item>
         </el-collapse>
@@ -58,30 +68,24 @@ export default {
             itemText: '',
             value: '',
             editField: '',
-            radioList: [
-                // {id: 0, value: 'Item 1'},
-            ],
-            nextItem: 0
+            radioList: [],
+            nextItem: 0,
+            inputFieldData: []
         }
     },
     components: {
       EditableText
     },
     props: {
-        options: {
+        fieldData: {
             type: Array | Object,
             default: {
-                title: 'Dropdown',
-                required: false,
-                reference: '',
-                dropdownNum: 0,
-                radioNum: 2,
-                checkboxNum: 2,
-                matrixQuestions: 2,
-                matrixChoices: 5,
-                setLength: 50,
+                label: 'Radio List'
             }
         }
+    },
+    created() {
+        this.inputFieldData = _.clone(this.fieldData)
     },
     mounted: function() {
         this.setRadioItems(); // calls method upon being rendered in the DOM
@@ -106,7 +110,7 @@ export default {
         },
         setRadioItems() {
             var i;
-            for(i= 0; i < this.options.radioNum; i++) {
+            for(i= 0; i < this.inputFieldData.options.radioNum; i++) {
                 this.loadItem();
             }
         },

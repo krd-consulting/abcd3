@@ -1,22 +1,7 @@
 <template>
     <div id="textarea">
-        
-         <span class="inputLabel">{{ myOptions.title }}</span><br>
-        <!--<el-table :data="matrix" style="width: 100%; margin-top: 20px; ; z-index: 0" height="342" border highlight-current-row show-summary>
-            <el-table-column fixed label="question" :prop="question" v-slot="{ $index }">
-                <editable-text class="cursor-text" @input="showField" v-model="matrix[$index].question"/>
-            </el-table-column>
-            <div v-for="item in radioList" :key="item.key" class="inline-block">
-                <el-table-column prop="response" :label="response" v-slot="{ $index }">
-                    <el-radio class="float-left" ></el-radio>
-                    <editable-text class="cursor-text float-right" @input="showField" v-model="matrix[$index].response"/>
-                </el-table-column>
-            </div>
-            <el-table-column fixed="right" width="120">
-                
-            </el-table-column>
-        </el-table>  -->
-
+        <label for="matrix-table" class="inputLabel">{{ inputFieldData.label }}</label><br>
+        <sup>{{ inputFieldData.description }}</sup>
         <table id="matrix-table">
             <thead>
                 <tr class="tw-max-w-sm">
@@ -39,45 +24,46 @@
                     </td>
                 </tr>
             </tbody>
-            
         </table>
-
-        <!-- <div v-for="item in matrix" :key="item"></div> -->
 
         <el-collapse>   
             <el-collapse-item name="1">
                 <template slot="title">
-                    <h1>Matrix Settings</h1>
+                    <el-button icon="el-icon-edit">Field Options</el-button>
                 </template>
                 <div class="tw-flex tw-inline-block tw-w-full">
                   <div class="tw-float-left">
-                    <span>Field Label</span>
-                    <el-row>
-                      <el-col :span="20">
-                        <el-input v-model="myOptions.title"></el-input>
-                      </el-col>
+                    <el-row class="tw-my-6">
+                        <label for="label">Field Label</label>
+                        <el-col :span="20">
+                            <el-input id="label" v-model="inputFieldData.label"></el-input>
+                        </el-col>
                     </el-row>
-
-                    <div class="tw-my-6">
-                        <span class="tw-mb-4">This field is</span><br>
-                        <el-switch v-model="myOptions.required" active-text="Required" inactive-text="Optional"></el-switch>
-                    </div> 
+                    <el-row class="tw-my-6">
+                        <el-col :span="20">
+                            <label for="description">Field Description</label>
+                            <el-input id="description" v-model="inputFieldData.description"></el-input>
+                        </el-col>
+                    </el-row>
+                    <el-row class="tw-my-6">
+                        <label for="switch" class="tw-mb-4">This field is</label><br>
+                        <el-switch id="switch" v-model="inputFieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                    </el-row> 
                 </div>
 
                 <div class="tw-float-right tw-mx-20">
-                    <span class="tw-mt-8">Number of Choices</span><br>
-                    <el-input-number v-model="myOptions.matrixChoices"
-                        controls-position="right" 
-                        @change="handleChange" 
+                    <label for="choices">Number of Choices</label>
+                    <el-input-number id="choices" v-model="inputFieldData.options.matrixChoices"
+                        controls-position="right"  
                         :min="1" :max="10">
                     </el-input-number>
                     <el-button type="success" class="tw-ml-4" @click="getRadioList">Set </el-button><br>
 
                     <form @submit.prevent="addItem" class="tw-inline-block tw-my-4">
-                      <span>Add a new question to the matrix</span>
                       <el-row>
+                        <label for="add-item">Add a new question to the matrix</label>
                         <el-col :span="16" class="tw-float-left">
-                            <el-input v-model="itemText"></el-input>
+                            <el-input id="add-item" v-model="itemText"></el-input>
                         </el-col>
                         <el-col :span="1.5" class="tw-float-right">
                             <el-tooltip content="Alternatively, you can press enter after typing in this field to add items to the list">
@@ -109,30 +95,21 @@ export default {
             response: '',
             editField: '',
             itemText: '',
-            myOptions: []
+            inputFieldData: []
         }
     },
     components: {
         EditableText
     },
     props: {
-        options: {
+        fieldData: {
             type: Array | Object,
             default: {
-                title: 'Matrix Field',
-                required: false,
-                reference: '',
-                dropdownNum: 2,
-                radioNum: 2,
-                checkboxNum: 2,
-                matrixQuestions: 2,
-                matrixChoices: 5,
-                setLength: 50,
             }
         }
     },
     created() {
-        this.myOptions = _.clone(this.options)
+        this.inputFieldData = _.clone(this.fieldData)
     },
     mounted: function() {
         this.getMatrixItems(); // calls method upon being rendered in the DOM
@@ -168,7 +145,7 @@ export default {
         },
         getMatrixItems() {
             var i;
-            for(i = 0; i < this.myOptions.matrixQuestions; i++) {
+            for(i = 0; i < this.inputFieldData.options.matrixQuestions; i++) {
                 this.loadItem();
             }
         },
@@ -176,7 +153,7 @@ export default {
             var i;
             this.radioList = []
 
-            for(i = 1; i <= this.myOptions.matrixChoices; i++) {
+            for(i = 1; i <= this.inputFieldData.options.matrixChoices; i++) {
                 this.radioList.push({
                     key: i,
                     response: 'Item ' + i

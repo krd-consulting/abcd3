@@ -59,20 +59,16 @@ export default {
                 {id: 4, name: 'Radio', component: 'RadioField'},
                 {id: 5, name: 'Checkbox', component: 'CheckboxField'},
                 {id: 6, name: 'Date Field', component: 'DateField'},
-                {id: 7, name: 'Matrix', component: 'MatrixField'},
-                {id: 8, name: 'Time Picker', component: 'Time Picker'},
+                {id: 7, name: 'Time Picker', component: 'Time Picker'},
+                {id: 8, name: 'Matrix', component: 'MatrixField'},
                 {id: 9, name: 'File Upload', component: 'File Upload'},
                 {id: 10, name: 'Section Divider', component: 'SectionDivider'},
             ],
-            // presetInputs: [
-            //     {id: 8, name: 'Email', component: 'EmailField'},
-            //     {id: 9, name: 'Address', component: 'AddressField'},
-            //     {id: 10, name: 'Phone Number', component: 'PhoneField'},
-            // ],
+            // presetInputs: [],
             others: [
                 
             ],
-            options: {} //passed from InputOptions component
+            fieldData: {} //passed from InputOptions component
         }
     },
     props: {
@@ -94,11 +90,11 @@ export default {
             this.step = '2';
         },
         setInputOptions(value) {
-            this.options = value;
+            this.fieldData = value;
 
             const data = {
                 input: _.clone(this.selectedInput),
-                options: _.clone(this.options)
+                fieldData: _.clone(this.fieldData)
             };
             this.$emit("add", data);
             this.step = '1';

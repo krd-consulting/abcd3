@@ -1,50 +1,82 @@
 <template>
   <div id="textbox">
+    <el-row>
+        <el-col :span="8">
+            <label for="label" class="inputLabel">{{ inputFieldData.label }}</label><br>
+            <sup>{{ inputFieldData.description }}</sup>
+            <el-input v-if="inputFieldData.options.isLimited"
+                id="label"
+                type="text" 
+                :maxlength="inputFieldData.options.setLength" 
+                placeholder="Your text here" 
+                v-model="customField" 
+                show-word-limit>
+            </el-input>
+            <el-input v-else 
+                type="text" 
+                placeholder="Your text here" 
+                v-model="customField">
+            </el-input>
+        </el-col>
+    </el-row>
+    
     <el-collapse>
-      <span class="inputLabel">{{ options.title }}</span><br>
         <el-collapse-item name="1">
           <template slot="title">
-                <el-input v-if="options.isLimited" type="text" :rows="2" :maxlength="options.setLength" placeholder="Your text here" v-model="customField"></el-input>
-                <el-input v-else type="text" :rows="2" placeholder="Your text here" v-model="customField"></el-input>
+                <el-button icon="el-icon-edit">Field Options</el-button>
           </template>
-              <div><br>
-                  <el-form label-position="top" ref="options" :model="options" :rules="rules" @submit.native.prevent>
-                      <el-form-item label="Field Label">
-                          <el-col :span="6">
-                              <el-input v-model="options.title"></el-input>
-                          </el-col>
-                          
-                      </el-form-item>
-                      <el-form-item label="This field is ">
-                          <el-switch v-model="options.required" active-text="Required" inactive-text="Optional" 
-                              @click="required = !required"></el-switch>
-                      </el-form-item>
-                      <el-form-item label="Set Character Limit">
-                            <el-switch v-model="options.isLimited" inactive-text="No Limit" active-text="Set Character Limit"></el-switch><br>
-                            <el-input-number :disabled="!options.isLimited" v-model="options.setLength" :step="5" :min="0" step-strictly></el-input-number>
-                        </el-form-item>
-                      <el-form-item label="Field Refers To:">
-                          <el-select v-model="options.reference">
+              <div class="tw-flex tw-inline-block tw-w-full">
+                    <div class="tw-float-left">
+                            
+                        <el-row class="tw-my-6">
+                            <label for="label">Field Label</label>
+                            <el-col :span="20">
+                                <el-input id="label" v-model="inputFieldData.label"></el-input>
+                            </el-col>
+                        </el-row>
+                        <el-row class="tw-my-6">
+                            <el-col :span="20">
+                                <label for="description">Field Description</label>
+                                <el-input id="description" v-model="inputFieldData.description"></el-input>
+                            </el-col>
+                        </el-row>
+                        <el-row class="tw-my-6">
+                            <label for="switch" class="tw-mb-4">This field is</label><br>
+                            <el-switch id="switch" v-model="inputFieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                        </el-row>
+                    </div>
+
+                    <div class="tw-float-right tw-mx-20 tw-my-6">
+                        <label for="charLimit">Set Character Limit</label><br>
+                            <el-switch id="charLimit" v-model="inputFieldData.isLimited" inactive-text="No Limit" active-text="Limit"></el-switch><br>
+                            <el-input-number class="tw-my-6" :disabled="!inputFieldData.isLimited" v-model="inputFieldData.setLength" :step="5" :min="0" step-strictly></el-input-number>
+                        
+                    <el-row class="tw-my-6">
+                        <label for="reference">Field Refers To:</label><br>
+                          <el-select id="reference" v-model="inputFieldData.options.reference">
                               <el-option label="Itself" value="itself"></el-option>
                               <el-option label="A field within this form" value="internalField"></el-option>
                               <el-option label="Volunteer" value="volunteer"></el-option>
                               <el-option label="Client" value="client"></el-option>
                               <el-option label="Staff" value="staff"></el-option>
                           </el-select>
-                          <div v-if="options.reference === 'internalField'">
+                    </el-row>
+                    <el-row>
+                        <div v-if="inputFieldData.options.reference === 'internalField'">
                               <p>Do some stuff</p>
                           </div>
-                          <div v-if="options.reference === 'volunteer'">
+                          <div v-if="inputFieldData.options.reference === 'volunteer'">
                               <p>Do some other stuff</p>
                           </div>
-                          <div v-if="options.reference === 'client'">
-                              <p>Do something else</p>
+                          <div v-if="inputFieldData.options.reference === 'client'">
+                              <p>Do some thing</p>
                           </div>
-                          <div v-if="options.reference === 'staff'">
-                              <p>What are our references really?</p>
+                          <div v-if="inputFieldData.options.reference === 'staff'">
+                              <p>Do some other thing</p>
                           </div>
-                      </el-form-item>
-                  </el-form>
+                    </el-row>
+                        
+                  </div>
               </div>
             <slot></slot>
         </el-collapse-item>
@@ -57,14 +89,20 @@ export default {
     data() {
         return {
             setLength: 50,
-            customField: ''
+            customField: '',
+            inputFieldData: []
         }
     },
     props: {
-        options: {
+        fieldData: {
             type: Array | Object,
-            default: {}
+            default: {
+                label: 'Text Field'
+            }
         }
+    },
+    created() {
+        this.inputFieldData = _.clone(this.fieldData)
     },
     computed: {
       rules() {
@@ -79,5 +117,4 @@ export default {
 </script>
 
 <style>
-
 </style>

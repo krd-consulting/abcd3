@@ -2,12 +2,12 @@
      <el-collapse>
         <el-collapse-item name="1">
             <template slot="title">
-                <el-divider><span>{{ options.sectionHeader }}</span></el-divider>
+                <el-divider><span>{{ inputFieldData.options.sectionHeader }}</span></el-divider>
             </template>
             <div>
                 <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
                     <el-form-item label="Section Title">
-                        <el-input v-model="options.sectionHeader"></el-input>
+                        <el-input v-model="inputFieldData.options.sectionHeader"></el-input>
                     </el-form-item>
                 </el-form>
             </div>
@@ -20,13 +20,17 @@
 export default {
     data() {
         return {
+            inputFieldData: []
         }
     },
     props: {
-        options: {
+        fieldData: {
             type: Array | Object,
             default: {}
         }
+    },
+    created() {
+        this.inputFieldData = _.clone(this.fieldData)
     },
 }
 </script>

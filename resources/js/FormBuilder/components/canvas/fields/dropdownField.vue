@@ -1,38 +1,54 @@
 <template>
     <div id="dropdown">
+        <label for="dropdown" class="inputLabel">{{ inputFieldData.label }}</label><br>
+        <sup>{{ inputFieldData.description }}</sup>
+        <el-select id="dropdown" v-model="value" placeholder="select">
+            <el-option v-for="item in dropdownList" :key="item.id" :label="item.value" :value="item.value"></el-option>
+        </el-select>
          <el-collapse>
-            <span class="inputLabel">{{ options.title }}</span><br>
             <el-collapse-item>
                 <template slot="title">
-                    <el-select v-model="value" placeholder="select">
-                        <el-option v-for="item in dropdownList" :key="item.id" :label="item.value" :value="item.value"></el-option>
-                    </el-select>
+                    <el-button icon="el-icon-edit">Field Options</el-button>
                 </template>
-                <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
-                    <el-form-item label="Field Label">
-                        <el-input v-model="options.title"></el-input>
-                    </el-form-item>
-                        <el-form-item>
-                            <el-switch v-model="options.required" active-text="Required" inactive-text="Optional"></el-switch>
-                    </el-form-item>
-                </el-form>
-                
-                <h3>Dropdown Items</h3>
-                <el-row v-for="item in dropdownList" :key="item.id">
-                  <el-col :span="5">
-                      <editable-text class="cursor-text float-left" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
-                      <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
-                  </el-col>
-                </el-row>
-                        
-                <form @submit.prevent="addItem">
-                    <el-form>
-                        <el-form-item label="Add Item to List"></el-form-item>
-                    </el-form>
-                    <el-input v-model="itemText"></el-input>
-                    <el-button type="success" @click="addItem">Add</el-button>
-                </form>
-                
+                <div class="tw-flex tw-inline-block tw-w-full">
+                    <div class="tw-float-left">
+                            
+                        <el-row class="tw-my-6">
+                            <label for="label">Field Label</label>
+                            <el-col :span="20">
+                                <el-input id="label" v-model="inputFieldData.label"></el-input>
+                            </el-col>
+                        </el-row>
+                        <el-row class="tw-my-6">
+                            <el-col :span="20">
+                                <label for="description">Field Description</label>
+                                <el-input id="description" v-model="inputFieldData.description"></el-input>
+                            </el-col>
+                        </el-row>
+                        <el-row class="tw-my-6">
+                            <label for="switch" class="tw-mb-4">This field is</label><br>
+                            <el-switch id="switch" v-model="inputFieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                        </el-row>
+                    </div>
+
+                    <div class="tw-float-right tw-mx-20 tw-my-6">
+                        <form @submit.prevent="addItem">
+                            <el-col :span="16">
+                                <label for="newItem">Add a new item to the list</label>
+                                <el-input id="newItem" v-model="itemText"></el-input>
+                                <el-button type="success" @click="addItem">Add</el-button>
+                            </el-col>
+                        </form>
+                    </div>
+                    <div class="tw-float-right tw-mx-20 tw-my-6">
+                        <h3>Dropdown Items</h3>
+                        <el-row v-for="item in dropdownList" :key="item.id">
+                                <editable-text class="tw-cursor-pointer" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
+                                <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
+                        </el-row>
+                    </div>
+                </div>
+
                 <slot></slot>
             </el-collapse-item>
         </el-collapse>
@@ -49,27 +65,23 @@ export default {
             value: '',
             editField: '',
             dropdownList: [],
-            nextItem: 0
+            nextItem: 0,
+            inputFieldData: []
         }
     },
     components: {
         EditableText
     },
     props: {
-        options: {
+        fieldData: {
             type: Array | Object,
             default: {
-                title: 'Dropdown',
-                required: false,
-                reference: '',
-                dropdownNum: 0,
-                radioNum: 2,
-                checkboxNum: 2,
-                matrixQuestions: 2,
-                matrixChoices: 5,
-                setLength: 50,
+                label: 'Dropdown',
             }
         }
+    },
+    created() {
+        this.inputFieldData = _.clone(this.fieldData)
     },
     mounted: function() {
         this.setDropdownItems(); // calls method upon being rendered in the DOM
@@ -94,16 +106,10 @@ export default {
         },
         setDropdownItems() {
             var i;
-            for(i= 0; i < this.options.dropdownNum; i++) {
+            for(i= 0; i < this.inputFieldData.options.dropdownNum; i++) {
                 this.loadItem();
             }
         },
-        // focusField(value){
-        //     this.editField = value;
-        // },
-        // blurField(){
-        //     this.editField = '';
-        // },
         showField(value){
             return (this.dropdownList[value] == '' || this.editField == value)
         }
@@ -112,16 +118,7 @@ export default {
 </script>
 
 <style>
-#dropdown {
-  font-family: 'Inter UI', Arial, sans-serif;
-  font-weight: bold;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-ul {
-  list-style-type: none;
-}
+
 </style>
 
 

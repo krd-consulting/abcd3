@@ -44,57 +44,57 @@
                                         <p>New fields will be placed here</p>
                                     </div>
                                     <div v-if="inputType.input.id === 0"> <!-- textbox -->
-                                        <Text-field :options="inputType.options">
+                                        <Text-field :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Text-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
-                                        <Text-box :options="inputType.options">
+                                        <Text-box :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Text-box>
                                     </div>
                                     <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
-                                        <Numeric-field :options="inputType.options">
+                                        <Numeric-field :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Numeric-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 3"> <!-- Dropdown -->
-                                        <Dropdown-field :options="inputType.options">
+                                        <Dropdown-field :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Dropdown-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 4"> <!-- Radio -->
-                                        <Radio-field :options="inputType.options">
+                                        <Radio-field :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Radio-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 5"> <!-- Checkbox -->
-                                        <Checkbox-field :options="inputType.options">
+                                        <Checkbox-field :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Checkbox-field>
                                     </div>
                                     <div v-else-if="inputType.input.id === 6"> <!-- Date Field -->
-                                        <Date-field :options="inputType.options">
+                                        <Date-field :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Date-field>
                                     </div>
-                                    <div v-else-if="inputType.input.id === 7"> <!-- Matrix Field -->
-                                        <Matrix-field :options="inputType.options">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Matrix-field>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 8"> <!-- Time Picker -->
-                                        <Time-Picker :options="inputType.options">
+                                    <div v-else-if="inputType.input.id === 7"> <!-- Time Picker -->
+                                        <Time-Picker :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Time-Picker>
                                     </div>
+                                    <div v-else-if="inputType.input.id === 8"> <!-- Matrix Field -->
+                                        <Matrix-field :fieldData="inputType.fieldData">
+                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
+                                        </Matrix-field>
+                                    </div>
                                     <div v-else-if="inputType.input.id === 9"> <!-- File Upload -->
-                                        <File-Upload :options="inputType.options">
+                                        <File-Upload :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </File-Upload>
                                     </div>
                                     <div v-else-if="inputType.input.id === 10"> <!-- Section Divider -->
-                                        <Section-Divider :options="inputType.options">
+                                        <Section-Divider :fieldData="inputType.fieldData">
                                             <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
                                         </Section-Divider>
                                     </div>
@@ -165,7 +165,7 @@ export default {
             ],
             input: {},
             inputType: {},
-            inputOptions: {},
+            inputFieldData: {},
         }
     },
     props: {
@@ -174,7 +174,7 @@ export default {
             type: Array,
             default: []
         },
-        options: Function
+        fieldData: Function
     },
     components: {
         draggable,
@@ -224,18 +224,12 @@ export default {
 </script>
 
 <style scoped>
-@tailwind base;
-
-@tailwind components;
-
-@tailwind utilities;
-
 #canvas {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif; 
-  font-size: 20px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+    font-family: 'Inter UI', Arial, sans-serif;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
 }
 .el-row {
     margin-bottom: 5px;

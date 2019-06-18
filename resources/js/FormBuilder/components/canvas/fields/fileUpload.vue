@@ -1,7 +1,8 @@
 <template>
     <div id="fileUpload">
-      <span class="inputLabel">{{ myOptions.title }}</span><br>
-      <el-upload
+      <label for="dropdown" class="inputLabel">{{ inputFieldData.label }}</label><br>
+        <sup>{{ inputFieldData.description }}</sup>
+      <el-upload disabled
           action="https://jsonplaceholder.typicode.com/posts/"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
@@ -16,16 +17,32 @@
         <el-collapse>
             <el-collapse-item>
                 <template slot="title">
-                    <el-button type="text" icon="el-icon-edit">Edit Field</el-button>
+                    <el-button icon="el-icon-edit">Field Options</el-button>
                 </template>
-                 <el-form label-position="top" ref="myOptions" :model="options" @submit.native.prevent>
-                    <el-form-item label="Field Label">
-                        <el-input v-model="myOptions.title"></el-input>
-                    </el-form-item>
-                    <el-form-item label="This Field is">
-                      <el-switch v-model="myOptions.required" active-text="Required" inactive-text="Optional"></el-switch>
-                    </el-form-item>
-                </el-form>
+                <div class="tw-flex tw-inline-block tw-w-full">
+                    <div class="tw-float-left">
+                            
+                        <el-row class="tw-my-6">
+                            <label for="label">Field Label</label>
+                            <el-col :span="20">
+                                <el-input id="label" v-model="inputFieldData.label"></el-input>
+                            </el-col>
+                        </el-row>
+                        <el-row class="tw-my-6">
+                            <el-col :span="20">
+                                <label for="description">Field Description</label>
+                                <el-input id="description" v-model="inputFieldData.description"></el-input>
+                            </el-col>
+                        </el-row>
+                        <el-row class="tw-my-6">
+                            <label for="switch" class="tw-mb-4">This field is</label><br>
+                            <el-switch id="switch" v-model="inputFieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                        </el-row>
+                    </div>
+
+                </div>
+
+
                 <slot></slot>
             </el-collapse-item>
         </el-collapse>
@@ -37,19 +54,18 @@ export default {
     data() {
       return {
         fileList: [],
-        myOptions: [],
+        inputFieldData: []
       };
     },
     props: {
-        options: {
+        fieldData: {
             type: Array | Object,
             default: {}
         }
     },
     created() {
-        this.myOptions = _.clone(this.options)
+        this.inputFieldData = _.clone(this.fieldData)
     },
-
     methods: {
       handleRemove(file, fileList) {
         console.log(file, fileList);
