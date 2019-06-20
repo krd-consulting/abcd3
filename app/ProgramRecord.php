@@ -29,12 +29,14 @@ class ProgramRecord extends Pivot
         static::observe(ProgramRecordObserver::class);
     }
 
-    public function createFrom(Program $program, Record $record, $save = true, StoreProgramRecord $request)
+    public function createFrom(Program $program, Record $record, $save = true, StoreProgramRecord $request = NULL)
     {
-        $programRecord = $this->ofTrashed($program, $record);
+        $programRecord = $this->of($program, $record);
 
-        if($programRecord->exists()) {
+        if($programRecord->of($program, $record)->exists()) {
             $programRecord = $programRecord->first();
+        }else if($this->ofTrashed($program, $record)->exists()) {
+            $programRecord = $this->ofTrashed($program, $record)->first();
             $programRecord->restore();
         }else {
             $this->program_id = $program->id;
@@ -42,8 +44,13 @@ class ProgramRecord extends Pivot
             $programRecord = $this;
         }
 
-        $programRecord->enrolled_at = 
-            !isset($request->validated()['enrolled_at']) ? NULL : $request->validated()['enrolled_at'];
+        if(isset($request)) {
+            if(!empty($request->validated()['enrolled_at'])) {
+                $programRecord->enrolled_at = $request->validated()['enrolled_at'];
+            }else {
+                $programRecord->enrolled_at = now();
+            }
+        }
 
         $save ? $programRecord->save() : NULL;
 
@@ -63,6 +70,11 @@ class ProgramRecord extends Pivot
             return NULL;
         
         return Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function setStatus($status)
+    {
+
     }
 
     public function scopeOfTrashed($query, Program $program, Record $record)

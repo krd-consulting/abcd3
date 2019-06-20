@@ -39,16 +39,15 @@ class Record extends Model
 
     public function assignGroup(Group $group)
     {
-        $this->programs()->syncWithoutDetaching($group->program->id);
+        $model = $this->getProgramRecordPivotClass();
 
-        // Update program record status.
-        $this
-            ->programs()
-            ->where('programs.id', $group->program->id)
-            ->first()
-            ->pivot
-            ->latestStatus
-            ->updateUsing($group->program->group_client_status->id, '', true);
+        $programRecord = new $model();
+
+        $programRecord = $programRecord->withoutEvents(function() use ($group, $programRecord){
+            return $programRecord->createFrom($group->program, $this, true);
+        });
+
+        $programRecord->setStatus($group->program->group_client_status->id);
 
         $this->groups()->attach($group);
     }

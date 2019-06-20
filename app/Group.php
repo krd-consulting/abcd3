@@ -34,20 +34,7 @@ class Group extends Model
 
     public function addRecord(Record $record) 
     {
-        // Add record to group's program
-        $record->programs()->syncWithoutDetaching($this->program->id);
-
-        // Update program record status.
-        $record
-            ->programs()
-            ->where('programs.id', $this->program->id)
-            ->first()
-            ->pivot
-            ->latestStatus
-            ->updateUsing($this->program->group_client_status->id, '', true);
-
-        // Add record to this group.
-        $this->records()->attach($record);
+        $record->assignGroup($this);
     }
 
     public function getPathAttribute()

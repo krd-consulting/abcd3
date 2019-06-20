@@ -5,6 +5,7 @@ namespace App;
 use App\Program;
 use App\Record;
 use App\ProgramRecord;
+use App\ProgramClientStatus;
 
 use App\Http\Requests\StoreProgramRecord;
 use App\Http\Requests\UpdateProgramRecord;
@@ -21,7 +22,7 @@ class ProgramClient extends ProgramRecord
 
     protected $table = 'program_record';
 
-    protected $appends = ['id', 'latest_status'];
+    protected $appends = ['latest_status'];
 
     // protected $dispatchesEvents = [
     //     'created' => ProgramRecordSaved::class,
@@ -52,7 +53,7 @@ class ProgramClient extends ProgramRecord
     }
 
     public function createFrom(
-        Program $program, Record $record, $save = true, StoreProgramRecord $request
+        Program $program, Record $record, $save = true, StoreProgramRecord $request = NULL
     )
     {
         $programRecord = parent::createFrom($program, $record, false, $request);
@@ -80,6 +81,13 @@ class ProgramClient extends ProgramRecord
         );
 
         return parent::delete();
+    }
+
+    public function setStatus($status)
+    {
+        $clientStatus = new ProgramClientStatus();
+        $clientStatus->createForProgramRecord($this, $status);
+        $clientStatus->save();
     }
 
     public function getLatestStatusAttribute()
