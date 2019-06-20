@@ -7,9 +7,9 @@ use App\Record;
 use App\User;
 
 use App\Http\Requests\StoreProgramRecord;
+use App\Http\Requests\UpdateProgramRecord;
 
-use App\Events\ProgramRecordSaved;
-use App\Events\ProgramRecordDeleted;
+use App\Observers\ProgramRecordObserver;
 
 use Carbon\Carbon;
 
@@ -22,15 +22,16 @@ class ProgramRecord extends Pivot
 
     public $incrementing = true;
 
-    protected $dispatchesEvents = [
-        'created' => ProgramRecordSaved::class,
-        'deleted' => ProgramRecordDeleted::class,
-        'restored' => ProgramRecordSaved::class
-    ];
-
-    public function createUsingBelongsTo(Program $program, Record $record, $save = true)
+    protected static function boot()
     {
-        $programRecord = $this->findTrashedUsingBelongsTo($program, $record);
+        parent::boot();
+
+        static::observe(ProgramRecordObserver::class);
+    }
+
+    public function createFrom(Program $program, Record $record, $save = true, StoreProgramRecord $request)
+    {
+        $programRecord = $this->ofTrashed($program, $record);
 
         if($programRecord->exists()) {
             $programRecord = $programRecord->first();
@@ -41,29 +42,47 @@ class ProgramRecord extends Pivot
             $programRecord = $this;
         }
 
+        $programRecord->enrolled_at = 
+            !isset($request->validated()['enrolled_at']) ? NULL : $request->validated()['enrolled_at'];
+
         $save ? $programRecord->save() : NULL;
 
         return $programRecord;
     }
 
-    public function findTrashedUsingBelongsTo(Program $program, Record $record)
-    {
-        return $this->findUsingBelongsTo($program, $record)->onlyTrashed();
+    public function updateUsingRequest(UpdateProgramRecord $request)
+    {   
+        $this->enrolled_at = $request->enrolled_at;
+
+        return $this;
     }
 
-    public function findUsingBelongsTo(Program $program, Record $record)
+    public function getEnrolledAtAttribute($value)
     {
-        return $this->where('program_id', $program->id)->where('record_id', $record->id);
+        if($value == NULL)
+            return NULL;
+        
+        return Carbon::parse($value)->format('Y-m-d');
     }
 
-    public function findUsingPrograms(Record $record, $programs)
+    public function scopeOfTrashed($query, Program $program, Record $record)
     {
-        return $this->where('record_id', $record->id)->whereIn('program_id', $programs);
+        return $query->of($program, $record)->onlyTrashed();
     }
 
-    public function findUsingRecords(Program $program, $records)
+    public function scopeOf($query, Program $program, Record $record)
     {
-        return $this->where('program_id', $program->id)->whereIn('record_id', $records);
+        return $query->where('program_id', $program->id)->where('record_id', $record->id);
+    }
+
+    public function scopeOfPrograms($query, $programs, Record $record)
+    {
+        return $query->where('record_id', $record->id)->whereIn('program_id', $programs);
+    }
+
+    public function scopeOfRecords($query, $records, Program $program)
+    {
+        return $query->where('program_id', $program->id)->whereIn('record_id', $records);
     }
 
     public function program()
@@ -74,13 +93,5 @@ class ProgramRecord extends Pivot
     public function record()
     {
         return $this->belongsTo('App\Record');
-    }
-
-    public function getEnrolledAtAttribute($value)
-    {
-        if($value == NULL)
-            return NULL;
-        
-        return Carbon::parse($value)->format('Y-m-d');
     }
 }

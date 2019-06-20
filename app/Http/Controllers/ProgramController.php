@@ -80,6 +80,7 @@ class ProgramController extends Controller
         $program->name = $request->input('name');
         $program->description = $request->input('description');
         $program->default_client_status_id = $request->input('default_client_status_id');
+        $program->group_client_status_id = $request->input('group_client_status_id');
         $program->save();
 
         return $program;

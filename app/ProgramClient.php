@@ -4,29 +4,71 @@ namespace App;
 
 use App\Program;
 use App\Record;
+use App\ProgramRecord;
 
 use App\Http\Requests\StoreProgramRecord;
+use App\Http\Requests\UpdateProgramRecord;
 
-use App\ProgramRecord;
+use App\Observers\ProgramClientObserver;
+
+use \Tightenco\Parental\HasParent;
 
 class ProgramClient extends ProgramRecord
 {
+    use HasParent;
+        
+    public $incrementing = true;
+
     protected $table = 'program_record';
+
+    protected $appends = ['id', 'latest_status'];
+
+    // protected $dispatchesEvents = [
+    //     'created' => ProgramRecordSaved::class,
+    //     'deleted' => ProgramRecordDeleted::class,
+    //     'restored' => ProgramRecordSaved::class
+    // ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::observe(ProgramClientObserver::class);
+    }
 
     public function statuses()
     {
-        return $this->hasMany('App\ProgramClientStatus', 'program_client_id');
+        return $this->hasMany('App\ProgramClientStatus');
     }
 
-    public function createUsingBelongsTo(Program $program, Record $record, $save = true, StoreProgramRecord $request = null)
+    public function record()
     {
-        $programRecord = parent::createUsingBelongsTo($program, $record, false);
+        return $this->belongsTo('App\Client');
+    }
 
-        $programRecord->enrolled_at = $request->enrolled_at;
+    public function client()
+    {
+        return $this->record();
+    }
+
+    public function createFrom(
+        Program $program, Record $record, $save = true, StoreProgramRecord $request
+    )
+    {
+        $programRecord = parent::createFrom($program, $record, false, $request);
 
         $save ? $programRecord->save() : NULL;
 
         return $programRecord;
+    }
+
+    public function updateUsingRequest(UpdateProgramRecord $request)
+    {   
+        parent::updateUsingRequest($request);
+
+        $this->statuses()->latest()->first()->updateUsingRequest($request);
+
+        return $this;
     }
 
     public function delete()
@@ -48,8 +90,8 @@ class ProgramClient extends ProgramRecord
     public function scopeWithLatestStatus($query)
     {
         return $query->with(['statuses' => function($query) {
-                            return $query->latest()->first();
-                        }, 'statuses.status'])->first();
+            return $query->latest()->first();
+        }, 'statuses.status'])->first();
     }
 
     public function getIsActiveAttribute()

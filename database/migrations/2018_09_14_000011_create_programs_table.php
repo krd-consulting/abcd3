@@ -19,11 +19,15 @@ class CreateProgramsTable extends Migration
             $table->text('description')->nullable();
             $table->integer('team_id')->unsigned();
             $table->integer('default_client_status_id')->unsigned();
+            $table->integer('group_client_status_id')->unsigned()->nullable();
+            $table->integer('case_client_status_id')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('team_id')->references('id')->on('teams');
             $table->foreign('default_client_status_id')->references('id')->on('client_statuses');
+            $table->foreign('group_client_status_id')->references('id')->on('client_statuses');
+            $table->foreign('case_client_status_id')->references('id')->on('client_statuses');
         });
     }
 

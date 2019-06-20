@@ -13,7 +13,8 @@
         "spatie/laravel-permission": "^2.25",
         "spatie/laravel-schemaless-attributes": "^1.4",
         "spatie/laravel-sluggable": "^2.1",
-        "staudenmeir/eloquent-has-many-deep": "^1.5"
+        "staudenmeir/eloquent-has-many-deep": "^1.5",
+        "tightenco/parental": "0.7"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

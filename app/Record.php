@@ -41,6 +41,15 @@ class Record extends Model
     {
         $this->programs()->syncWithoutDetaching($group->program->id);
 
+        // Update program record status.
+        $this
+            ->programs()
+            ->where('programs.id', $group->program->id)
+            ->first()
+            ->pivot
+            ->latestStatus
+            ->updateUsing($group->program->group_client_status->id, '', true);
+
         $this->groups()->attach($group);
     }
 
@@ -65,9 +74,9 @@ class Record extends Model
 
     public function programs()
     {
-        return $this->belongsToMany('App\Program')
+        return $this->belongsToMany('App\Program', 'program_record', 'record_id' ,'program_id')
             ->withTimestamps()
-            ->withPivot(['enrolled_at', 'deleted_at'])
+            ->withPivot(['id', 'enrolled_at', 'deleted_at'])
             ->wherePivot('deleted_at', NULL)
             ->using(
                 $this->getProgramRecordPivotClass()
@@ -76,24 +85,16 @@ class Record extends Model
 
     public function getProgramRecordPivotClass(RecordType $recordType = NULL)
     {
-        $identity = $recordType == NULL ? 
-                $this->record_type == NULL ? '' : $this->record_type->identity->name
-            : $recordType->identity->name;
+        $model = $recordType == NULL ? 
+                $this->record_type == NULL ? 'Record' : $this->record_type->identity->model
+            : $recordType->identity->model;
 
-        if($identity == 'Client')
-            return ProgramClient::class;
-
-        return ProgramRecord::class;
+        return 'App\\Program' . $model;
     }
 
     public function program_records()
     {
         return $this->hasMany($this->getProgramRecordPivotClass());
-    }
-
-    public function client_statuses()
-    {
-        return $this->hasManyThrough('App\ProgramClientStatus', 'App\ProgramClient', NULL, 'program_client_id');
     }
 
     public function teams() {
@@ -116,16 +117,21 @@ class Record extends Model
 
     public function activePrograms()
     {
-        return $this->programs()
-                ->join(
-                    'program_client_status', 
-                    'program_record.id', 
-                    'program_client_status.program_client_id'
-                )->join(
-                    'client_statuses',
-                    'program_client_status.status_id',
-                    'client_statuses.id'
-                )->where('client_statuses.name', config('app.program_client_statuses.active.name'));
+        $latestStatuses = ProgramClientStatus::selectRaw(
+                "program_record_id, MAX(created_at) as max_created_at"
+            )->groupBy('program_record_id');
+
+        $programs = $this->programs()
+            ->join('program_client_status as statuses', 'program_record.id', 'statuses.program_record_id')
+            ->joinSub($latestStatuses, 'latest_statuses', function ($join) {
+                $join
+                    ->on('statuses.program_record_id', '=', 'latest_statuses.program_record_id')
+                    ->on('statuses.created_at', '=', 'latest_statuses.max_created_at');
+            })
+            ->join('client_statuses', 'statuses.status_id', 'client_statuses.id')
+            ->where('client_statuses.name', config('app.program_client_statuses.active.name'));
+
+        return $programs;
     }
 
     public function activeProgramsIn(Team $team)
@@ -214,5 +220,30 @@ class Record extends Model
             $recordType = $recordType->id;
 
         return $query->where('record_type_id', $recordType);
+    }
+
+    public function scopeWithLatestProgramStatuses($query, RecordType $recordType, Program $program)
+    {
+        if($recordType->identity->model == 'Record')
+            return $query;
+
+        $recordStatusTable = 'program_' . strtolower($recordType->identity->model) . '_status';
+
+        $model = 'App\\Program' . $recordType->identity->model . 'Status';
+
+        $latestStatuses = $model::selectRaw(
+            "program_record_id, MAX(created_at) as max_created_at"
+        )->groupBy('program_record_id');
+
+        return $query->with([
+            'program_statuses' => function ($query) use ($program, $latestStatuses, $recordStatusTable) {
+                $query
+                    ->joinSub($latestStatuses, 'latest_statuses', function ($join) use ($recordStatusTable) {
+                        $join
+                            ->on($recordStatusTable.'.program_record_id', '=', 'latest_statuses.program_record_id')
+                            ->on($recordStatusTable.'.created_at', '=', 'latest_statuses.max_created_at');
+                    })->where('program_id', $program->id);
+            }
+        ]);
     }
 }

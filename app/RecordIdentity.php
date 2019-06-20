@@ -6,6 +6,13 @@ use App\Model;
 
 class RecordIdentity extends Model
 {
+    protected $modelMap = [
+        'Client' => 'Client',
+        'Staff' => 'Record',
+        'Volunteer' => 'Record',
+        'External' => 'Record'
+    ];
+
     public function field1() {
         return $this->hasOne('App\Field', 'id', 'field_1_id');
     }
@@ -20,5 +27,9 @@ class RecordIdentity extends Model
 
     public function types() {
         return $this->hasMany('App\RecordTypes');
+    }
+
+    public function getModelAttribute() {
+        return $this->modelMap[$this->name];
     }
 }

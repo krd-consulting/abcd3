@@ -65,7 +65,9 @@ class RecordsTableSeeder extends Seeder
                 if(rand(0,1) == 1) {
                     $program = Program::inRandomOrder()->first();
 
-                    $programRecord = new ProgramRecord();
+                    $class = 'App\\Program' . $record->record_type->identity->model;
+
+                    $programRecord = new $class();
                     $programRecord->program_id = $program->id;
                     $programRecord->record_id = $record->id;
                     $programRecord->enrolled_at = date_create('now');

@@ -21,13 +21,16 @@ class Record extends JsonResource
             'id' => $this->id,
             'type_slug' => $this->record_type->slug,
             'type' => new RecordType($this->record_type),
-            'program_status' => $this->whenPivotLoaded('program_record', function() {
-                return $this->client_statuses()->latest()->first()->load('status');
-            }),
+            'program_status' => $this->whenPivotLoaded(
+                'program_record',
+                function () {
+                    if(!empty($this->program_statuses))
+                        return $this->program_statuses->first();
+                }
+            ),
             'enrolled_at' => $this->whenPivotLoaded('program_record', function() {
                 return $this->pivot->enrolled_at;
             }),
-            //'pivot' => $this->pivot,
             'path' => $this->path,
             $this->record_type->identity->field1->name => $this->field_1_value,
             $this->record_type->identity->field2->name => $this->field_2_value,

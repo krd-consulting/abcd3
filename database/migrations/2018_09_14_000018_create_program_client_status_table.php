@@ -15,14 +15,14 @@ class CreateProgramClientStatusTable extends Migration
     {
         Schema::create('program_client_status', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('program_client_id')->unsigned();
+            $table->integer('program_record_id')->unsigned();
             $table->integer('status_id')->unsigned();
             $table->integer('previous_status_id')->unsigned()->nullable();
             $table->unsignedBigInteger('previous_status_duration')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
 
-            $table->foreign('program_client_id')->references('id')->on('program_record');
+            $table->foreign('program_record_id')->references('id')->on('program_record');
             $table->foreign('status_id')->references('id')->on('client_statuses');
             $table->foreign('previous_status_id')->references('id')->on('client_statuses');
         });

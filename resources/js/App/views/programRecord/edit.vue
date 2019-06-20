@@ -143,8 +143,8 @@
                 let request = new Request({});
 
                 request.edit(this.programId, this.recordType, this.recordId).then((response) => {
-                    this.requestData.status = response.data.statuses[0].status;
-                    this.requestData.notes = response.data.statuses[0].notes;
+                    this.requestData.status = response.data.latest_status.status;
+                    this.requestData.notes = response.data.latest_status.notes;
                     this.requestData.enrolled_at = response.data.enrolled_at;
                 });
             },

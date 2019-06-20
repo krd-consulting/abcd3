@@ -36,7 +36,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"/js/App": 0
+/******/ 		"/js/app": 0
 /******/ 	};
 /******/
 /******/
@@ -5769,6 +5769,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5785,7 +5843,8 @@ __webpack_require__.r(__webpack_exports__);
         description: '',
         team: {},
         team_id: '',
-        default_client_status_id: ''
+        default_client_status_id: '',
+        group_client_status_id: ''
       },
       statuses: []
     };
@@ -5800,13 +5859,15 @@ __webpack_require__.r(__webpack_exports__);
         description: '',
         team: {},
         team_id: '',
-        default_client_status_id: ''
+        default_client_status_id: '',
+        group_client_status_id: ''
       };
     },
     open: function open() {
       this.retrieve();
       this.retrieveStatus();
       this.newProgramData.default_client_status_id = Number(this.newProgramData.default_client_status_id);
+      this.newProgramData.group_client_status_id = Number(this.newProgramData.group_client_status_id);
     },
     initializeWithData: function initializeWithData(data) {
       this.newProgramData.id = data.id;
@@ -5815,6 +5876,7 @@ __webpack_require__.r(__webpack_exports__);
       this.newProgramData.team_id = data.team_id;
       this.newProgramData.team = data.team;
       this.newProgramData.default_client_status_id = data.default_client_status_id;
+      this.newProgramData.group_client_status_id = data.group_client_status_id;
     },
     retrieve: function retrieve() {
       var _this = this;
@@ -5835,6 +5897,7 @@ __webpack_require__.r(__webpack_exports__);
     store: function store() {
       var _this3 = this;
 
+      console.log(this.newProgramData);
       this.request = new _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_0__["default"](this.newProgramData);
       this.request.update(this.newProgramData.id).then(function (response) {
         _this3.$emit('update');
@@ -6193,7 +6256,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_ProgramGroupsRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/ProgramGroupsRequest */ "./resources/js/api/ProgramGroupsRequest.js");
 /* harmony import */ var _App_components_resourceList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/App/components/resourceList */ "./resources/js/App/components/resourceList.vue");
-/* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../create */ "./resources/js/App/views/program/create.vue");
+/* harmony import */ var _App_views_group_create__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/App/views/group/create */ "./resources/js/App/views/group/create.vue");
 //
 //
 //
@@ -6236,7 +6299,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     List: _App_components_resourceList__WEBPACK_IMPORTED_MODULE_1__["default"],
-    CreateGroup: _create__WEBPACK_IMPORTED_MODULE_2__["default"]
+    CreateGroup: _App_views_group_create__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
@@ -6800,8 +6863,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var request = new _api_ProgramRecordsRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
       request.edit(this.programId, this.recordType, this.recordId).then(function (response) {
-        _this.requestData.status = response.data.statuses[0].status;
-        _this.requestData.notes = response.data.statuses[0].notes;
+        _this.requestData.status = response.data.latest_status.status;
+        _this.requestData.notes = response.data.latest_status.notes;
         _this.requestData.enrolled_at = response.data.enrolled_at;
       });
     },
@@ -7878,12 +7941,33 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    retrieve: function retrieve() {
+    confirmDelete: function confirmDelete(id) {
       var _this3 = this;
 
+      this.$confirm('Are you sure you want to remove this group?', 'Remove Group', {
+        confirmButtonText: 'Remove',
+        cancelButtonText: 'Wait, no!',
+        type: 'warning'
+      }).then(function () {
+        _this3.remove(id).then(function () {
+          _this3.$message({
+            type: 'success',
+            message: 'Group was removed.'
+          });
+        })["catch"](function (error) {
+          _this3.$message({
+            type: 'error',
+            message: error.message
+          });
+        });
+      });
+    },
+    retrieve: function retrieve() {
+      var _this4 = this;
+
       this.request.retrieve(this.$route.params.recordType, this.$route.params.record).then(function (response) {
-        _this3.groups = response.data;
-        _this3.total = response.meta.total;
+        _this4.groups = response.data;
+        _this4.total = response.meta.total;
       });
     },
     addGroup: function addGroup() {
@@ -88253,7 +88337,7 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _c("div", [
+        _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
             _c("label", { staticClass: "tw-w-1/5" }, [
               _vm._v(
@@ -88322,6 +88406,159 @@ var render = function() {
                     domProps: {
                       textContent: _vm._s(
                         _vm.request.errors.get("default_client_status_id")[0]
+                      )
+                    }
+                  })
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
+            _c(
+              "label",
+              [
+                _vm._v(
+                  "\n                    Set client's status as \n\n                    "
+                ),
+                _c(
+                  "base-select",
+                  {
+                    attrs: {
+                      name: "team",
+                      placeholder: "Select Default Status",
+                      disabled: ""
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.request.errors.clear(
+                          "default_client_status_id"
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.newProgramData.default_client_status_id,
+                      callback: function($$v) {
+                        _vm.$set(
+                          _vm.newProgramData,
+                          "default_client_status_id",
+                          $$v
+                        )
+                      },
+                      expression: "newProgramData.default_client_status_id"
+                    }
+                  },
+                  _vm._l(_vm.statuses, function(status) {
+                    return _c(
+                      "el-option",
+                      {
+                        key: status.id,
+                        attrs: { label: status.name, value: status.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(status.name) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                ),
+                _vm._v(
+                  "\n\n                    when added as case.\n                "
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm.request.errors.has("default_client_status_id")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.request.errors.get("default_client_status_id")[0]
+                      )
+                    }
+                  })
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
+            _c(
+              "label",
+              [
+                _vm._v(
+                  "\n                    Set client's status as \n\n                    "
+                ),
+                _c(
+                  "base-select",
+                  {
+                    attrs: {
+                      name: "team",
+                      placeholder: "Select Default Status"
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.request.errors.clear(
+                          "group_client_status_id"
+                        )
+                      }
+                    },
+                    model: {
+                      value: _vm.newProgramData.group_client_status_id,
+                      callback: function($$v) {
+                        _vm.$set(
+                          _vm.newProgramData,
+                          "group_client_status_id",
+                          $$v
+                        )
+                      },
+                      expression: "newProgramData.group_client_status_id"
+                    }
+                  },
+                  _vm._l(_vm.statuses, function(status) {
+                    return _c(
+                      "el-option",
+                      {
+                        key: status.id,
+                        attrs: { label: status.name, value: status.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(status.name) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                ),
+                _vm._v(
+                  "\n\n                    when added to group.\n                "
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm.request.errors.has("group_client_status_id")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.request.errors.get("group_client_status_id")[0]
                       )
                     }
                   })
@@ -90220,7 +90457,7 @@ var render = function() {
             "search-terms": _vm.params.search,
             total: _vm.total,
             "has-add": "",
-            "has-delete": "",
+            "has-remove": "",
             "has-list-columns": "",
             "has-search": false,
             "has-edit": false
@@ -90236,7 +90473,7 @@ var render = function() {
               return _vm.$set(_vm.params, "search", $event)
             },
             add: _vm.addGroup,
-            delete: function($event) {
+            remove: function($event) {
               return _vm.confirmDelete($event)
             },
             "page-change": function($event) {
@@ -113232,8 +113469,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

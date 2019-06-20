@@ -6,6 +6,10 @@ use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 
 use App\Model;
+
+use App\Record;
+use App\RecordIdentity;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Program extends Model
@@ -13,6 +17,8 @@ class Program extends Model
     use SoftDeletes;
     use Search;
     use Sort;
+
+    private $recordType;
 
     public function caseRecords()
     {
@@ -29,23 +35,58 @@ class Program extends Model
         return $this->hasMany('App\ProgramRecord');
     }
 
+    public function record_statuses()
+    {
+        return empty($this->client_statuses()) ? NULL : $this->client_statuses();
+    }
+
     public function client_statuses()
     {
-        return $this->hasManyThrough('App\ProgramClientStatus', 'App\ProgramClient', NULL, 'program_client_id');
+        return $this->hasManyThrough(
+            'App\ProgramClientStatus', 
+            'App\ProgramClient', 
+            'program_id', 
+            'program_record_id'
+        );
     }
 
     public function default_client_status()
     {
-        return $this->belongsTo('client_statuses');
+        return $this->belongsTo('App\ClientStatus');
+    }
+
+    public function group_client_status()
+    {
+        if(!$this->belongsTo('App\ClientStatus')->exists())
+            return $this->default_client_status();
+
+        return $this->belongsTo('App\ClientStatus');
+    }
+
+    public function case_client_status()
+    {
+        return $this->belongsTo('App\ClientStatus');
+    }
+
+    public function setRecordIdentity(RecordIdentity $recordIdentity)
+    {
+        $this->recordIdentity = $recordIdentity;
+
+        return $this;
     }
 
     public function records()
     {
-        return $this->belongsToMany('App\Record')
+        $model = 'Record';
+
+        if(!empty($this->recordIdentity))
+            $model = $this->recordIdentity->model;
+
+        return $this->belongsToMany("App\\$model", 'program_record', 'program_id' ,'record_id')
             ->withTimestamps()
-            ->withPivot(['enrolled_at', 'deleted_at'])
+            ->withPivot(['id', 'enrolled_at', 'deleted_at'])
             ->wherePivot('deleted_at', NULL)
-            ->using('App\ProgramRecord');
+            ->using("App\Program$model");
     }
 
     public function team()
@@ -106,6 +147,31 @@ class Program extends Model
         $table = $this->getTable();
 
         return $query->whereIn("$table.team_id", $teams);
+    }
+
+    public function scopeWithLatestRecordStatuses($query, Record $record) 
+    {
+        if($record->record_type->identity->model == 'Record')
+            return $query;
+
+        $recordStatusTable = 'program_' . strtolower($record->record_type->identity->model) . '_status';
+
+        $model = 'App\\Program' . $record->record_type->identity->model . 'Status';
+
+        $latestStatuses = $model::selectRaw(
+            "program_record_id, MAX(created_at) as max_created_at"
+        )->groupBy('program_record_id');
+
+        return $query->with([
+            'record_statuses' => function ($query) use ($record, $latestStatuses, $recordStatusTable) {
+                $query
+                    ->joinSub($latestStatuses, 'latest_statuses', function ($join) use ($recordStatusTable) {
+                        $join
+                            ->on($recordStatusTable.'.program_record_id', '=', 'latest_statuses.program_record_id')
+                            ->on($recordStatusTable.'.created_at', '=', 'latest_statuses.max_created_at');
+                    })->where('record_id', $record->id);
+            }
+        ]);
     }
 
     public function assignToTeam($team)
