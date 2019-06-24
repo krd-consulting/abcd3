@@ -49,6 +49,8 @@ class Record extends Model
 
         $programRecord->setStatus($group->program->group_client_status->id);
 
+        $this->teams()->syncWithoutDetaching($group->program->team->id);
+
         $this->groups()->attach($group);
     }
 
