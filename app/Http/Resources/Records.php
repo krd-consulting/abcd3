@@ -38,6 +38,9 @@ class Records extends ResourceCollection
      */
     public function with($request)
     {
+        if(empty($this->recordType))
+            return [];
+
         return [
             'record_type' => new RecordTypeResource($this->recordType),
             'fields' => [

@@ -56,6 +56,20 @@ class RecordTeamsController extends Controller
             "Can't remove record from team. It is still active in (a) program/s."
         );
 
+        $caseloadPrograms = $record
+                ->cases_managers()
+                ->join('programs', 'cases.program_id', 'programs.id')
+                ->where('programs.team_id', $team->id)
+                ->with('pivot.program');
+
+        abort_if(
+            $caseloadPrograms
+                ->exists(),
+            422,
+            "Can't remove record from team. It belongs to a caseload in programs: " 
+            . $caseloadPrograms->get()->implode('pivot.program.name', ', ')
+        );
+
         $programs = $record->programs()->inTeams([$team->id])->pluck('programs.id');
 
         $groups = $record->groups()->where('program_id', $programs)->pluck('id');

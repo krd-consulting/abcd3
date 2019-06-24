@@ -8612,7 +8612,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -8631,7 +8631,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -8669,7 +8669,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#inputOptions[data-v-2eb6e561] {\n  margin-left: 15px;\n  margin-right: 15px;\n}\r\n", ""]);
+exports.push([module.i, "#inputOptions[data-v-2eb6e561] {\n  margin-left: 15px;\n  margin-right: 15px;\n}\n", ""]);
 
 // exports
 
@@ -8707,7 +8707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -114573,7 +114573,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

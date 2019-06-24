@@ -135,6 +135,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'A' => 
         array (
             'App\\' => 4,
+            'AjCastro\\EagerLoadPivotRelations\\' => 33,
         ),
     );
 
@@ -361,6 +362,10 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'AjCastro\\EagerLoadPivotRelations\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ajcastro/eager-load-pivot-relations/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -396,12 +401,12 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
     );
 
     public static $classMap = array (
+        'AjCastro\\EagerLoadPivotRelations\\EagerLoadPivotBuilder' => __DIR__ . '/..' . '/ajcastro/eager-load-pivot-relations/src/EagerLoadPivotBuilder.php',
+        'AjCastro\\EagerLoadPivotRelations\\EagerLoadPivotTrait' => __DIR__ . '/..' . '/ajcastro/eager-load-pivot-relations/src/EagerLoadPivotTrait.php',
         'App\\CaseRecord' => __DIR__ . '/../..' . '/app/CaseRecord.php',
         'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',
         'App\\ClientStatus' => __DIR__ . '/../..' . '/app/ClientStatus.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
-        'App\\Events\\ProgramRecordDeleted' => __DIR__ . '/../..' . '/app/Events/ProgramRecordDeleted.php',
-        'App\\Events\\ProgramRecordSaved' => __DIR__ . '/../..' . '/app/Events/ProgramRecordSaved.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Field' => __DIR__ . '/../..' . '/app/Field.php',
         'App\\Group' => __DIR__ . '/../..' . '/app/Group.php',
@@ -410,6 +415,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\CaseController' => __DIR__ . '/../..' . '/app/Http/Controllers/CaseController.php',
         'App\\Http\\Controllers\\ClientStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClientStatusController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\GroupController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupController.php',
@@ -425,6 +431,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'App\\Http\\Controllers\\RecordTeamsController' => __DIR__ . '/../..' . '/app/Http/Controllers/RecordTeamsController.php',
         'App\\Http\\Controllers\\RecordTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/RecordTypeController.php',
         'App\\Http\\Controllers\\RecordTypeRecordController' => __DIR__ . '/../..' . '/app/Http/Controllers/RecordTypeRecordController.php',
+        'App\\Http\\Controllers\\RecordsAvailableForCaseload' => __DIR__ . '/../..' . '/app/Http/Controllers/RecordsAvailableForCaseload.php',
         'App\\Http\\Controllers\\RecordsAvailableForGroup' => __DIR__ . '/../..' . '/app/Http/Controllers/RecordsAvailableForGroup.php',
         'App\\Http\\Controllers\\RecordsAvailableForProgram' => __DIR__ . '/../..' . '/app/Http/Controllers/RecordsAvailableForProgram.php',
         'App\\Http\\Controllers\\RecordsAvailableForTeam' => __DIR__ . '/../..' . '/app/Http/Controllers/RecordsAvailableForTeam.php',
@@ -472,11 +479,9 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'App\\Http\\Resources\\Roles' => __DIR__ . '/../..' . '/app/Http/Resources/Roles.php',
         'App\\Http\\Resources\\Team' => __DIR__ . '/../..' . '/app/Http/Resources/Team.php',
         'App\\Http\\Resources\\Teams' => __DIR__ . '/../..' . '/app/Http/Resources/Teams.php',
-        'App\\Listeners\\AddRecordToProgramTeam' => __DIR__ . '/../..' . '/app/Listeners/AddRecordToProgramTeam.php',
-        'App\\Listeners\\CreateRemovedProgramClientStatus' => __DIR__ . '/../..' . '/app/Listeners/CreateRemovedProgramClientStatus.php',
-        'App\\Listeners\\InitializeProgramClientStatus' => __DIR__ . '/../..' . '/app/Listeners/InitializeProgramClientStatus.php',
-        'App\\Listeners\\RemoveRecordFromProgramGroup' => __DIR__ . '/../..' . '/app/Listeners/RemoveRecordFromProgramGroup.php',
         'App\\Model' => __DIR__ . '/../..' . '/app/Model.php',
+        'App\\Observers\\ProgramClientObserver' => __DIR__ . '/../..' . '/app/Observers/ProgramClientObserver.php',
+        'App\\Observers\\ProgramRecordObserver' => __DIR__ . '/../..' . '/app/Observers/ProgramRecordObserver.php',
         'App\\Permission' => __DIR__ . '/../..' . '/app/Permission.php',
         'App\\Pivot' => __DIR__ . '/../..' . '/app/Pivot.php',
         'App\\Policies\\ClientStatusPolicy' => __DIR__ . '/../..' . '/app/Policies/ClientStatusPolicy.php',

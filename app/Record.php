@@ -16,6 +16,7 @@ use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Staudenmeir\EloquentHasManyDeep\HasTableAlias;
+use AjCastro\EagerLoadPivotRelations\EagerLoadPivotTrait;
 
 class Record extends Model
 {
@@ -23,6 +24,7 @@ class Record extends Model
     use SoftDeletes;
     use Search;
     use Sort;
+    use EagerLoadPivotTrait;
 
     protected $searchColumns = [
         'field_1_value',
@@ -54,6 +56,23 @@ class Record extends Model
         $this->groups()->attach($group);
     }
 
+    public function assignCase(Record $case, Program $program)
+    {
+        $model = $case->getProgramRecordPivotClass();
+
+        $programRecord = new $model();
+
+        $programRecord = $programRecord->withoutEvents(function() use ($program, $case, $programRecord){
+            return $programRecord->createFrom($program, $case, true);
+        });
+
+        $programRecord->setStatus($program->case_client_status->id);
+
+        $case->teams()->syncWithoutDetaching($program->team->id);
+
+        $this->cases()->attach($case, ['program_id' => $program->id]);
+    }
+
     public function caseload()
     {
         return $this->cases();
@@ -62,6 +81,14 @@ class Record extends Model
     public function cases()
     {
         return $this->belongsToMany('App\Record', 'cases', 'owner_id', 'record_id')
+            ->withTimestamps()
+            ->withPivot('program_id')
+            ->using('App\CaseRecord');
+    }
+
+    public function cases_managers()
+    {
+        return $this->belongsToMany('App\Record', 'cases', 'record_id', 'owner_id')
             ->withTimestamps()
             ->withPivot('program_id')
             ->using('App\CaseRecord');
@@ -110,7 +137,6 @@ class Record extends Model
     {
         return $this->belongsTo('App\RecordType');
     }
-
     public function getPathAttribute()
     {
         return "/$this->table/".$this->record_type->slug."/$this->id";

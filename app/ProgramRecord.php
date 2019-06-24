@@ -47,10 +47,11 @@ class ProgramRecord extends Pivot
         if(isset($request)) {
             if(!empty($request->validated()['enrolled_at'])) {
                 $programRecord->enrolled_at = $request->validated()['enrolled_at'];
-            }else {
-                $programRecord->enrolled_at = now();
             }
         }
+
+        if(empty($programRecord->enrolled_at))
+            $programRecord->enrolled_at = now();
 
         $save ? $programRecord->save() : NULL;
 
