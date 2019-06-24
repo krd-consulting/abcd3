@@ -55,6 +55,30 @@
 
         props: {
             active: Boolean,
+            recordId: {
+                type: Number | String,
+                default: ''
+            },
+            recordType: {
+                type: String,
+                default: ''
+            }
+        },
+
+        computed: {
+            record() {
+                if(this.recordId === '')
+                    return this.$route.params.record;
+
+                return this.recordId;
+            },
+
+            type() {
+                if(this.recordType === '')
+                    return this.$route.params.recordType;
+
+                return this.recordType;
+            }
         },
 
         data() {
@@ -91,7 +115,7 @@
                     params: this.selectedParams
                 });
 
-                this.recordGroupsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(response => {
+                this.recordGroupsRequest.retrieve(this.type, this.record).then(response => {
                     this.selected = response.data;
                     this.selectedParams.total = response.meta.total;
                 });
@@ -102,7 +126,7 @@
                     params: this.notSelectedParams
                 });
 
-                this.groupsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(response => {
+                this.groupsRequest.retrieve(this.type, this.record).then(response => {
                     this.notSelected = response.data;
                     this.notSelectedParams.total = response.meta.total;
                 });
@@ -139,8 +163,8 @@
 
             add(id) {
                 this.recordGroupsRequest.store(
-                    this.$route.params.recordType,
-                    this.$route.params.record,
+                    this.type,
+                    this.record,
                     id
                 ).then((response) => {
                     this.open();
@@ -154,8 +178,8 @@
 
             remove(id) {
                 this.recordGroupsRequest.destroy(
-                    this.$route.params.recordType,
-                    this.$route.params.record,
+                    this.type,
+                    this.record,
                     id
                 ).then((response) => {
                     this.open();

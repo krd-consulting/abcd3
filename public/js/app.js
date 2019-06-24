@@ -7413,7 +7413,25 @@ __webpack_require__.r(__webpack_exports__);
     Transfer: _App_components_transfer__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
-    active: Boolean
+    active: Boolean,
+    recordId: {
+      type: Number | String,
+      "default": ''
+    },
+    recordType: {
+      type: String,
+      "default": ''
+    }
+  },
+  computed: {
+    record: function record() {
+      if (this.recordId === '') return this.$route.params.record;
+      return this.recordId;
+    },
+    type: function type() {
+      if (this.recordType === '') return this.$route.params.recordType;
+      return this.recordType;
+    }
   },
   data: function data() {
     return {
@@ -7448,7 +7466,7 @@ __webpack_require__.r(__webpack_exports__);
       this.recordGroupsRequest.setFields({
         params: this.selectedParams
       });
-      this.recordGroupsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(function (response) {
+      this.recordGroupsRequest.retrieve(this.type, this.record).then(function (response) {
         _this.selected = response.data;
         _this.selectedParams.total = response.meta.total;
       });
@@ -7459,7 +7477,7 @@ __webpack_require__.r(__webpack_exports__);
       this.groupsRequest.setFields({
         params: this.notSelectedParams
       });
-      this.groupsRequest.retrieve(this.$route.params.recordType, this.$route.params.record).then(function (response) {
+      this.groupsRequest.retrieve(this.type, this.record).then(function (response) {
         _this2.notSelected = response.data;
         _this2.notSelectedParams.total = response.meta.total;
       });
@@ -7487,7 +7505,7 @@ __webpack_require__.r(__webpack_exports__);
     add: function add(id) {
       var _this3 = this;
 
-      this.recordGroupsRequest.store(this.$route.params.recordType, this.$route.params.record, id).then(function (response) {
+      this.recordGroupsRequest.store(this.type, this.record, id).then(function (response) {
         _this3.open();
       })["catch"](function (error) {
         _this3.$message({
@@ -7499,7 +7517,7 @@ __webpack_require__.r(__webpack_exports__);
     remove: function remove(id) {
       var _this4 = this;
 
-      this.recordGroupsRequest.destroy(this.$route.params.recordType, this.$route.params.record, id).then(function (response) {
+      this.recordGroupsRequest.destroy(this.type, this.record, id).then(function (response) {
         _this4.open();
       })["catch"](function (error) {
         _this4.$message({
