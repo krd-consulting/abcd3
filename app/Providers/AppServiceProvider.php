@@ -3,8 +3,11 @@
 namespace App\Providers;
 
 use App\Program;
+use App\ProgramClient;
 use App\RecordType;
 use App\Team;
+
+use App\Observers\ProgramClientObserver;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -43,6 +46,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //ProgramClient::observe(ProgramClientObserver::class);
     }
 }

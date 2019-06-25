@@ -41,6 +41,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
+            'Tightenco\\Parental\\' => 19,
             'Tests\\' => 6,
         ),
         'S' => 
@@ -163,6 +164,10 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
             0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
+        ),
+        'Tightenco\\Parental\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tightenco/parental/src',
         ),
         'Tests\\' => 
         array (
@@ -392,6 +397,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
 
     public static $classMap = array (
         'App\\CaseRecord' => __DIR__ . '/../..' . '/app/CaseRecord.php',
+        'App\\Client' => __DIR__ . '/../..' . '/app/Client.php',
         'App\\ClientStatus' => __DIR__ . '/../..' . '/app/ClientStatus.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Events\\ProgramRecordDeleted' => __DIR__ . '/../..' . '/app/Events/ProgramRecordDeleted.php',
@@ -2258,6 +2264,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'OwenIt\\Auditing\\AuditingServiceProvider' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/AuditingServiceProvider.php',
         'OwenIt\\Auditing\\Auditor' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Auditor.php',
         'OwenIt\\Auditing\\Console\\AuditDriverCommand' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Console/AuditDriverCommand.php',
+        'OwenIt\\Auditing\\Console\\AuditDriverMakeCommand' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Console/AuditDriverMakeCommand.php',
         'OwenIt\\Auditing\\Console\\InstallCommand' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Console/InstallCommand.php',
         'OwenIt\\Auditing\\Contracts\\AttributeEncoder' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Contracts/AttributeEncoder.php',
         'OwenIt\\Auditing\\Contracts\\AttributeModifier' => __DIR__ . '/..' . '/owen-it/laravel-auditing/src/Contracts/AttributeModifier.php',
@@ -4015,6 +4022,9 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'TheSeer\\fDOM\\fDOMException' => __DIR__ . '/..' . '/theseer/fdomdocument/src/fDOMException.php',
         'TheSeer\\fDOM\\fDOMNode' => __DIR__ . '/..' . '/theseer/fdomdocument/src/fDOMNode.php',
         'TheSeer\\fDOM\\fDOMXPath' => __DIR__ . '/..' . '/theseer/fdomdocument/src/fDOMXPath.php',
+        'Tightenco\\Parental\\HasChildren' => __DIR__ . '/..' . '/tightenco/parental/src/HasChildren.php',
+        'Tightenco\\Parental\\HasParent' => __DIR__ . '/..' . '/tightenco/parental/src/HasParent.php',
+        'Tightenco\\Parental\\Providers\\NovaResourceProvider' => __DIR__ . '/..' . '/tightenco/parental/src/Providers/NovaResourceProvider.php',
         'TijsVerkoyen\\CssToInlineStyles\\CssToInlineStyles' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Processor.php',

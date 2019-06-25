@@ -10,12 +10,12 @@
             :search-terms.sync="params.search"
             :total="total"
             has-add
-            has-delete
+            has-remove
             has-list-columns
             :has-search="false"
             :has-edit="false"
             @add="addGroup"
-            @delete="confirmDelete($event)"
+            @remove="confirmDelete($event)"
             @page-change="retrieve()"
             @search="retrieve()">
             <template slot="header-text">Groups</template>
@@ -75,6 +75,28 @@
             },
 
             confirm(id) {
+                this.$confirm('Are you sure you want to remove this group?', 'Remove Group', {
+                    confirmButtonText: 'Remove',
+                    cancelButtonText: 'Wait, no!',
+                    type: 'warning'
+                }).then(() => {
+                    this.remove(id)
+                        .then(() => {
+                            this.$message({
+                                type: 'success',
+                                message: 'Group was removed.'
+                            });
+                        })
+                        .catch((error) => {
+                            this.$message({
+                                type: 'error',
+                                message: error.message
+                            });
+                        });
+                })
+            },
+
+            confirmDelete(id) {
                 this.$confirm('Are you sure you want to remove this group?', 'Remove Group', {
                     confirmButtonText: 'Remove',
                     cancelButtonText: 'Wait, no!',

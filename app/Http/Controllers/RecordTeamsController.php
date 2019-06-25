@@ -61,9 +61,9 @@ class RecordTeamsController extends Controller
         $groups = $record->groups()->where('program_id', $programs)->pluck('id');
         $record->groups()->detach($groups);
 
-        $programRecords = (new ProgramRecord)->findUsingPrograms(
-            $record, 
-            $programs
+        $programRecords = (new ProgramRecord)->ofPrograms(
+            $programs,
+            $record
         );
 
         $programRecords->delete();

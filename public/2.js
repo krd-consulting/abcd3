@@ -9,6 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _App_views_record_profile_addGroup__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/App/views/record/profile/addGroup */ "./resources/js/App/views/record/profile/addGroup.vue");
 //
 //
 //
@@ -42,9 +43,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    AddGroup: _App_views_record_profile_addGroup__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: {
     record: Array | Object
+  },
+  data: function data() {
+    return {
+      add: {
+        active: false
+      }
+    };
+  },
+  methods: {
+    addGroup: function addGroup() {
+      this.add.active = true;
+    }
   }
 });
 
@@ -76,8 +95,7 @@ var render = function() {
             "base-button",
             {
               staticClass:
-                "tw-py-2 tw-px-0 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none",
-              on: { click: function($event) {} }
+                "tw-py-2 tw-px-0 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none"
             },
             [
               _c(
@@ -103,12 +121,24 @@ var render = function() {
       _c(
         "div",
         [
+          _c("add-group", {
+            attrs: { "record-id": _vm.record.id, active: _vm.add.active },
+            on: {
+              "update:active": function($event) {
+                return _vm.$set(_vm.add, "active", $event)
+              },
+              close: function($event) {
+                return _vm.retrieve()
+              }
+            }
+          }),
+          _vm._v(" "),
           _c(
             "base-button",
             {
               staticClass:
                 "tw-py-2 tw-px-0 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none",
-              on: { click: function($event) {} }
+              on: { click: _vm.addGroup }
             },
             [
               _c(

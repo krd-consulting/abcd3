@@ -7,6 +7,8 @@ use App\ProgramRecord;
 use App\Record;
 use App\RecordType;
 
+use App\ProgramClientStatus;
+
 use App\Http\Resources\Programs;
 
 use App\Http\Requests\StoreProgramRecord;
@@ -17,10 +19,10 @@ class RecordProgramsController extends Controller
 {
     public function index(RecordType $recordType, Record $record)
     {
-        $programs = $record->programs()
-            ->with(['client_statuses' => function($query) use ($record) {
-                $query->where('record_id', $record->id);
-            }]);
+        $model = 'App\\' . $recordType->identity->model;
+        $record = (new $model())->find($record->id);
+
+        $programs = $record->programs()->withLatestRecordStatuses($record);
 
         $programs = $programs->availableFor(auth()->user());
 
@@ -45,11 +47,11 @@ class RecordProgramsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $class = $this->getClass($recordType);
+        $class = $this->getModel($recordType);
 
         $programRecord = new $class();
         
-        $programRecord->createUsingBelongsTo($program, $record, $request);
+        $programRecord->createFrom($program, $record, true, $request);
 
         return $program;
     }
@@ -59,21 +61,19 @@ class RecordProgramsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $class = $this->getClass($recordType);
+        $class = $this->getModel($recordType);
 
         $programRecord = new $class();
 
-        $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
+        $programRecord = $programRecord->of($program, $record)->first();
 
         $programRecord->delete();
 
         return $program;
     }
 
-    private function getClass(RecordType $recordType) 
+    private function getModel(RecordType $recordType) 
     {
-        $class = $recordType->identity->name == 'Client' ? 'App\ProgramClient' : 'App\ProgramRecord';
-
-        return $class;
+        return "App\Program" . $recordType->identity->model;
     }
 }

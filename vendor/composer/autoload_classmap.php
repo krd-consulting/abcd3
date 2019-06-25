@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'App\\CaseRecord' => $baseDir . '/app/CaseRecord.php',
+    'App\\Client' => $baseDir . '/app/Client.php',
     'App\\ClientStatus' => $baseDir . '/app/ClientStatus.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Events\\ProgramRecordDeleted' => $baseDir . '/app/Events/ProgramRecordDeleted.php',
@@ -1873,6 +1874,7 @@ return array(
     'OwenIt\\Auditing\\AuditingServiceProvider' => $vendorDir . '/owen-it/laravel-auditing/src/AuditingServiceProvider.php',
     'OwenIt\\Auditing\\Auditor' => $vendorDir . '/owen-it/laravel-auditing/src/Auditor.php',
     'OwenIt\\Auditing\\Console\\AuditDriverCommand' => $vendorDir . '/owen-it/laravel-auditing/src/Console/AuditDriverCommand.php',
+    'OwenIt\\Auditing\\Console\\AuditDriverMakeCommand' => $vendorDir . '/owen-it/laravel-auditing/src/Console/AuditDriverMakeCommand.php',
     'OwenIt\\Auditing\\Console\\InstallCommand' => $vendorDir . '/owen-it/laravel-auditing/src/Console/InstallCommand.php',
     'OwenIt\\Auditing\\Contracts\\AttributeEncoder' => $vendorDir . '/owen-it/laravel-auditing/src/Contracts/AttributeEncoder.php',
     'OwenIt\\Auditing\\Contracts\\AttributeModifier' => $vendorDir . '/owen-it/laravel-auditing/src/Contracts/AttributeModifier.php',
@@ -3630,6 +3632,9 @@ return array(
     'TheSeer\\fDOM\\fDOMException' => $vendorDir . '/theseer/fdomdocument/src/fDOMException.php',
     'TheSeer\\fDOM\\fDOMNode' => $vendorDir . '/theseer/fdomdocument/src/fDOMNode.php',
     'TheSeer\\fDOM\\fDOMXPath' => $vendorDir . '/theseer/fdomdocument/src/fDOMXPath.php',
+    'Tightenco\\Parental\\HasChildren' => $vendorDir . '/tightenco/parental/src/HasChildren.php',
+    'Tightenco\\Parental\\HasParent' => $vendorDir . '/tightenco/parental/src/HasParent.php',
+    'Tightenco\\Parental\\Providers\\NovaResourceProvider' => $vendorDir . '/tightenco/parental/src/Providers/NovaResourceProvider.php',
     'TijsVerkoyen\\CssToInlineStyles\\CssToInlineStyles' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Processor' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Processor.php',
     'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Processor' => $vendorDir . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Processor.php',

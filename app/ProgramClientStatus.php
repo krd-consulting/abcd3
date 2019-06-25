@@ -15,11 +15,13 @@ class ProgramClientStatus extends Model
 {
     protected $table = 'program_client_status';
 
+    public $with = ['status'];
+
     protected $guarded = [];
 
     public function programRecord()
     {
-        return $this->belongsTo('App\ProgramRecord', 'program_client_id');
+        return $this->belongsTo('App\ProgramRecord', 'program_record_id');
     }
 
     public function status()
@@ -34,10 +36,15 @@ class ProgramClientStatus extends Model
 
     public function updateUsingRequest(UpdateProgramRecord $request)
     {
+        $this->updateUsing($request->status['id'], $request->notes, true);
+    }
+
+    public function updateUsing($status, $notes = '', $save = false)
+    {
         $currentStatusId = $this->status_id;
 
-        $this->status_id = $request->status['id'];
-        $this->notes = $request->notes;
+        $this->status_id = $status;
+        $this->notes = $notes;
 
         $this->exists = !$this->isDirty('status_id');
 
@@ -47,7 +54,7 @@ class ProgramClientStatus extends Model
             $this->previous_status_duration = $this->calculatePreviousStatusDuration();
         }
         
-        $this->save();
+        $save == true ? $this->save() : NULL;
     }
 
     protected function calculatePreviousStatusDuration()
@@ -68,8 +75,8 @@ class ProgramClientStatus extends Model
         if($programRecord->record->record_type->identity->name != 'Client')
             return;
 
-        $this->program_client_id = $programRecord->id;
-        $this->status_id = $programRecord->program->default_client_status_id;
+        $this->program_record_id = $programRecord->id;
+        $this->status_id = isset($status) ? $status : $programRecord->program->default_client_status_id;
         $this->previous_status_id = $previous_status;
         $this->previous_status_duration = $previous_status_duration;
         $this->notes = $notes;

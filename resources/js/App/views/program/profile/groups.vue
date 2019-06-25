@@ -38,7 +38,7 @@
     import GroupsRequest from '@/api/ProgramGroupsRequest';
 
     import List from '@/App/components/resourceList';
-    import CreateGroup from '../create';
+    import CreateGroup from '@/App/views/group/create';
 
     export default {
         components: {

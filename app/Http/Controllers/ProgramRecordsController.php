@@ -21,10 +21,11 @@ class ProgramRecordsController extends Controller
 
     public function index(Program $program, RecordType $recordType)
     {
-        $records = $program->records()
-            ->with(['client_statuses' => function($query) use ($program) {
-                $query->where('program_id', $program->id);
-            }])->only($recordType);
+        $records = $program
+            ->setRecordIdentity($recordType->identity)
+            ->records()
+            ->withLatestProgramStatuses($recordType, $program)
+            ->only($recordType);
 
         $records = $records->availableFor(auth()->user());
 
@@ -49,12 +50,9 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $class = $this->getClass($recordType);
+        $programRecord = $this->getModel($recordType);
 
-        $data = (new $class)->findUsingBelongsTo($program, $record);
-
-        if($data->withLatestStatus())
-            $data = $data->withLatestStatus();
+        $data = (new $programRecord)->of($program, $record)->first();
 
         return [
             'data' => $data                        
@@ -66,8 +64,10 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $programRecord = new ProgramClient();
-        $programRecord->createUsingBelongsTo($program, $record, true, $request);
+        $programRecord = $this->getModel($recordType);
+
+        $programRecord = new $programRecord();
+        $programRecord->createFrom($program, $record, true, $request);
 
         return $record;
     }
@@ -79,20 +79,12 @@ class ProgramRecordsController extends Controller
         UpdateProgramRecord $request
     )
     {
-        $class = $this->getClass($recordType);
+        $programRecord = $this->getModel($recordType);
 
-        $programRecord = new $class();
-        $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
+        $programRecord = new $programRecord();
+        $programRecord = $programRecord->of($program, $record)->first();
 
-        if($programRecord->statuses()) {
-            // Find latest status which is needed to compare to request data
-            $status = $programRecord->statuses()->latest()->first();
-            $status->updateUsingRequest($request);
-        }
-
-        // Update enrollment date
-        $programRecord->enrolled_at = $request->enrolled_at;
-        $programRecord->save();
+        $programRecord->updateUsingRequest($request)->save();
 
         // Return response
         return $programRecord;
@@ -103,21 +95,19 @@ class ProgramRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $program);
 
-        $class = $this->getClass($recordType);
+        $model = $this->getModel($recordType);
 
-        $programRecord = new $class();
+        $programRecord = new $model();
 
-        $programRecord = $programRecord->findUsingBelongsTo($program, $record)->first();
+        $programRecord = $programRecord->of($program, $record)->first();
 
         $programRecord->delete();
 
         return $record;
     }
 
-    private function getClass(RecordType $recordType) 
+    private function getModel(RecordType $recordType) 
     {
-        $class = $recordType->identity->name == 'Client' ? 'App\ProgramClient' : 'App\ProgramRecord';
-
-        return $class;
+        return "App\Program" . $recordType->identity->model;
     }
 }

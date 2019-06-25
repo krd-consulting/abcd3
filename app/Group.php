@@ -34,9 +34,7 @@ class Group extends Model
 
     public function addRecord(Record $record) 
     {
-        $record->programs()->syncWithoutDetaching($this->program->id);
-
-        $this->records()->attach($record);
+        $record->assignGroup($this);
     }
 
     public function getPathAttribute()
