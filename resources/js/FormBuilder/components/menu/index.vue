@@ -1,9 +1,9 @@
 <template>
   <div id="menu">
     <div id="menu-container" class="abcd-sticky">
-      <el-row type="flex">
-        <el-col>
-          <el-collapse v-model="step" accordion>
+      <!-- <el-row class="tw-flex-1 tw-max-w-full"> -->
+        <!-- <el-col> -->
+          <el-collapse v-model="step" accordion class="tw-w-full">
             <el-collapse-item name="1">
               <template slot="title">
                   <p class="menu-title">Select a Field</p>
@@ -36,8 +36,8 @@
               <InputOptions :inputData="selectedInput" @outputData="setInputOptions"/>
             </el-collapse-item>
           </el-collapse>
-        </el-col>
-      </el-row>
+        <!-- </el-col> -->
+      <!-- </el-row> -->
     </div>            
   </div>
 </template>
@@ -52,16 +52,16 @@ export default {
             step: '1',
             selectedInput: {id: '', name: '', component: ''},
             basicInputs: [
-                {id: 0, name: 'Text Field', component: 'TexBox'},
-                {id: 1, name: 'Text Area', component: 'TexArea'},
+                {id: 0, name: 'Text Field', component: 'TexField'},
+                {id: 1, name: 'Text Area', component: 'TexBox'},
                 {id: 2, name: 'Numeric', component: 'NumericField'},
                 {id: 3, name: 'Dropdown', component: 'DropdownField'},
                 {id: 4, name: 'Radio', component: 'RadioField'},
                 {id: 5, name: 'Checkbox', component: 'CheckboxField'},
                 {id: 6, name: 'Date Field', component: 'DateField'},
-                {id: 7, name: 'Time Picker', component: 'Time Picker'},
+                {id: 7, name: 'Time Picker', component: 'TimePicker'},
                 {id: 8, name: 'Matrix', component: 'MatrixField'},
-                {id: 9, name: 'File Upload', component: 'File Upload'},
+                {id: 9, name: 'File Upload', component: 'FileUpload'},
                 {id: 10, name: 'Section Divider', component: 'SectionDivider'},
             ],
             // presetInputs: [],
@@ -106,7 +106,15 @@ export default {
 <style scoped>
     #menu {
         overflow: hidden;
+        display: flex;
+        max-width: 260px;
+        min-width: 160px;
     }
+    /* .el-row {
+        flex: 100%;
+        max-width: 250px;
+        min-width: 160px;
+    } */
     .el-card {
         margin: 5px;
     }
@@ -124,17 +132,7 @@ export default {
         color: #2c3e50;
     }
     .fields {
-      font-size: 13px;
-      font-weight: bold;
-    }
-
-    .abcd-sticky {
-        position: -webkit-sticky !important;
-        position: -moz-sticky !important;
-        position: -ms-sticky !important;
-        position: -o-sticky !important;
-        position: sticky !important;
-        top: 0 !important;
-        z-index: 1;
+        font-size: 13px;
+        font-weight: bold;
     }
 </style>

@@ -1,31 +1,35 @@
 <template>
-    <div class="formCreate">
-      
-        <el-container> 
-            <el-card> 
-                <el-aside class="menu-container">
-                    <form-menu @add="addField" class="abcd-sticky"/>
-                </el-aside>
-            </el-card>
+    <div id="formCreator">
+        <el-container>
 
-        <el-container id="canvas-container">
+                <el-card id="menu-container" class="abcd-sticky"> 
+                    <el-aside class="aside">
+                        <form-menu @add="addField"/>
+                    </el-aside>
+                </el-card>
+            
+
+        <!-- <el-container id="canvas-container"> -->
         <el-card id="canvas">
-            <el-header class="abcd-header">
+            <el-header>
                 <el-menu :default-active="$route.path" 
-                    background-color="#fff" active-text-color="#409EFF" 
-                    mode="horizontal" @select="handleSelect" router>
+                    background-color="#fff" 
+                    active-text-color="#409EFF" 
+                    mode="horizontal" 
+                    @select="handleSelect" 
+                    router>
                         <el-menu-item default-active index="/forms/create" class="tw-font-bold tw-focus:font-extrabold">Form Builder</el-menu-item>
                         <el-menu-item index="/forms/create/preview" class="tw-font-bold tw-focus:font-extrabold">Preview Form</el-menu-item>
-                        <el-menu-item index="/forms" class="dock-right tw-font-bold tw-focus:font-extrabold">Finish and Build!</el-menu-item>
+                        <el-menu-item index="/forms" @click="buildForm" class="tw-float-right tw-font-bold tw-focus:font-extrabold">Finish &#38; Build!</el-menu-item>
                 </el-menu>
             </el-header>   
 
             <el-main>
-                <FormCanvas :fields="fields" @inputOptions="setOptions"/>
+                <form-Canvas :fields="fields" @inputOptions="setOptions"/>
             </el-main>
         </el-card>
 
-            </el-container>   
+            <!-- </el-container>    -->
         </el-container>
         
     </div>
@@ -68,51 +72,67 @@ export default {
             this.canvasInput = data.input;
             this.inputOptions = data.options;
         },
-        // buildForm() {
-        //     this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
-        //             confirmButtonText: 'OK',
-        //             cancelButtonText: 'Cancel',
-        //             type: 'info'
-        //         }).then(() => {
-        //             this.$message({
-        //                 type: 'success',
-        //                 message: 'Build Successful'
-        //             });
-        //         }).catch(() => {
-        //             this.$message({
-        //                 type: 'info',
-        //                 message: "Keep doing what you're are doing"
-        //             });          
-        //         });
-        // }
+        buildForm() {
+            this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    type: 'info'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: 'Build Successful'
+                    });
+                    alert('One day, this form will persist to the database. but alas, tis not this day.')
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: "Keep doing what you're are doing"
+                    });          
+                });
+        }
     }
 }
 </script>
 
 <style scoped>
-    .abcd-header {
-        background-color: #fff;
+    #formCreator {
+        display: flex;
+        flex-direction: row;
+        /* align-items: center; */
+        /* align-items: flex-start; */
+        justify-content: center;
+        align-items: center;
     }
-    .dock-right {
-        float: right;
+    .el-header{
+        /* display: flex; */
     }
-    .menu-container{
-        margin-top: 60px;
+    .aside{
+        padding-top: 60px;
+        margin: 0 auto;
     }
     #canvas {
-        width: 100%;
+        flex: 60%;
+        margin-left: 10px;
+        margin-right: 10%;
     }
-    #canvas-container {
-        margin-left: 5px;
+    .dock_right{
+        float: right;
     }
-    .abcd-sticky {
+    #menu-container {
+        flex: 20%;
+        margin-left: 10%;
+        min-width: 240px;
+        max-height: 900px;
         position: -webkit-sticky !important;
-        position: -moz-sticky !important;
-        position: -ms-sticky !important;
-        position: -o-sticky !important;
         position: sticky !important;
-        top: -1px !important;
-        z-index: 1;
+        top: 0 !important;
+        /* z-index: 289; */
     }
+    /* #canvas-container {
+        margin-right: 200px;
+        max-width: 100%;
+        min-width: 50%;
+        
+    } */
 </style>
 

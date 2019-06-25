@@ -8,7 +8,7 @@
                     <th></th>
                     <th v-for="item in radioList" :key="item.key" >
                         <el-col>
-                            <editable-text class="tw-cursor-pointer" @input="showField" v-model="item.response"/>
+                            <editable-text class="tw-cursor-pointer" @input="showField" v-model="item.text"/>
                         </el-col>  
                     </th>
                 </tr>
@@ -61,7 +61,7 @@
 
                     <form @submit.prevent="addItem" class="tw-inline-block tw-my-4">
                       <el-row>
-                        <label for="add-item">Add a new question to the matrix</label>
+                        <label for="add-item">Add a new question</label>
                         <el-col :span="16" class="tw-float-left">
                             <el-input id="add-item" v-model="itemText"></el-input>
                         </el-col>
@@ -91,8 +91,6 @@ export default {
             nextItem: 0,
             radioSelect: 1,
             radioList: [],
-            question: '',
-            response: '',
             editField: '',
             itemText: '',
             inputFieldData: []
@@ -104,8 +102,7 @@ export default {
     props: {
         fieldData: {
             type: Array | Object,
-            default: {
-            }
+            default: {}
         }
     },
     created() {
@@ -129,12 +126,8 @@ export default {
             this.itemText = ''
         },
         loadItem: function() {
-            // var i;
-            // for(i = 0; i < this.myOptions.matrixChoices; i++) {
-            //     this.matrix.response["key" + i] = "Value";
-            // }
             this.matrix.push({
-                id: this.nextItem++, question: 'Question ' + this.nextItem, response: this.nextItem 
+                id: this.nextItem++, question: 'Question ' + this.nextItem, response: this.radioList
             })
         },
         removeItem(item) {
@@ -156,7 +149,7 @@ export default {
             for(i = 1; i <= this.inputFieldData.options.matrixChoices; i++) {
                 this.radioList.push({
                     key: i,
-                    response: 'Item ' + i
+                    text: 'Item ' + i
                 })
             }
         },
@@ -177,9 +170,6 @@ export default {
     #matrix-table table, td {
         border: 1px solid #dedfe0;
     }
-    /* #matrix-table th {
-        background-color: #9ebdef;
-    } */
     #matrix-table tbody tr:hover {
         background: #9ebdef;
     }

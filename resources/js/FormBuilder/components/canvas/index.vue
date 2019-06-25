@@ -3,101 +3,64 @@
         <el-container>
             <el-main>
                 <el-card body-style="padding: 10px;" shadow="hover" >
-                    <el-divider content-position="left"><span>Standard Content</span></el-divider>
+                    <el-header class="tw-text-center tw-mb-12">
+                        <h1 class="tw-text-4xl">
+                            <editable-text class="tw-cursor-pointer" 
+                                @input="showField" 
+                                v-model="title">
+                                    {{ title }}
+                            </editable-text>
+                        </h1>
 
-                    <el-card body-style="padding: 10px;" shadow="hover">
+                        <editable-text v-if="description" class="tw-cursor-pointer" 
+                            @input="showField" 
+                            v-model="description">
+                                {{ description }}
+                        </editable-text>
+
+                        <div v-if="!description">
+                            <el-input v-model="description" placeholder="This field is for subtext"></el-input>
+                        </div>
+                    </el-header>
+
+                <el-divider></el-divider>
                         
-                        <el-row :gutter="10">
-                            <el-col :span="10">
-                                <span class="input-label">Client Name</span>
-                                <el-input class="inputField" v-model="clientName"></el-input>
-                            </el-col>
-                            
-                            <el-col :span="6">
-                                <span class="input-label">Team</span><br>
-                                <el-select value="" placeholder="Select">
-                                    <el-option v-for="department in departments" :key="department.value"
-                                    :label="department.label" :value="department.value">
-                                    </el-option>
-                                </el-select>
-                            </el-col>
-                        </el-row>
-                        <el-row :guttter="10">
-                            <el-col :span="6">
-                                <span class="input-label">Date Completed</span><br>
-                                <el-date-picker v-model="dateCompleted" type="date" placeholder="Pick a day" :picker-options="pickerOptions">
-                                </el-date-picker>
-                            </el-col>
-                        </el-row>
-                    </el-card>  
-                    <el-divider></el-divider>
-                </el-card>
+                    <el-row :gutter="10">
+                        <el-col :span="10">
+                            <span class="input-label">Client Name</span>
+                            <el-input class="inputField" v-model="clientName"></el-input>
+                        </el-col>
+                        
+                        <el-col :span="6">
+                            <span class="input-label">Team</span><br>
+                            <el-select value="" placeholder="Select">
+                                <el-option v-for="team in teams" :key="team.value"
+                                :label="team.label" :value="team.value">
+                                </el-option>
+                            </el-select>
+                        </el-col>
+                    </el-row>
+                    <el-row :guttter="10">
+                        <el-col :span="6">
+                            <span class="input-label">Date Completed</span><br>
+                            <el-date-picker v-model="dateCompleted" type="date" placeholder="Pick a day" :picker-options="pickerOptions">
+                            </el-date-picker>
+                        </el-col>
+                    </el-row>
+                <el-divider></el-divider>
 
-            <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
                 <el-divider content-position="left"><span>Your Content</span></el-divider>
-                    <draggable class="dropArea" v-model="fieldList">
-                        <div v-for="(inputType, index) in fieldList" :key="index">
+
+                    <draggable class="dropArea" v-model="form">
+                        <div v-for="(inputType, index) in formList" :key="index">
                             <el-row type="flex" :gutter="2">
                             <el-col class="float-left" :span="24">
                                 <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
-                                    <div v-if="fieldList === null">
-                                        <p>New fields will be placed here</p>
-                                    </div>
-                                    <div v-if="inputType.input.id === 0"> <!-- textbox -->
-                                        <Text-field :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Text-field>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 1"> <!-- textArea -->
-                                        <Text-box :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Text-box>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 2"> <!-- Numeric field -->
-                                        <Numeric-field :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Numeric-field>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 3"> <!-- Dropdown -->
-                                        <Dropdown-field :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Dropdown-field>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 4"> <!-- Radio -->
-                                        <Radio-field :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Radio-field>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 5"> <!-- Checkbox -->
-                                        <Checkbox-field :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Checkbox-field>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 6"> <!-- Date Field -->
-                                        <Date-field :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Date-field>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 7"> <!-- Time Picker -->
-                                        <Time-Picker :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Time-Picker>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 8"> <!-- Matrix Field -->
-                                        <Matrix-field :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Matrix-field>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 9"> <!-- File Upload -->
-                                        <File-Upload :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </File-Upload>
-                                    </div>
-                                    <div v-else-if="inputType.input.id === 10"> <!-- Section Divider -->
-                                        <Section-Divider :fieldData="inputType.fieldData">
-                                            <el-button class="canvas-card hover:tw-text-red-600 tw-float-right tw-text-x1" type="text" icon="el-icon-close" @click="removeItem(index)"><strong>Remove</strong></el-button>
-                                        </Section-Divider>
-                                    </div>
+
+                                    <component :is="inputType.input.component" 
+                                        :fieldData="inputType.fieldData">
+                                    </component>
+                                    
                                 </el-card>
                             </el-col>
                         </el-row>
@@ -114,6 +77,7 @@
 import draggable from 'vuedraggable'
 import SidePanel from '@/components/sidePanel.vue'
 import ClickOutside from 'vue-click-outside'
+import EditableText from '@/components/editableText.vue'
 
 import TextField from '@/FormBuilder/components/canvas/fields/textField.vue'
 import TextBox from '@/FormBuilder/components/canvas/fields/textArea.vue'
@@ -127,13 +91,18 @@ import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
 import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
 
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+
 export default {
     data: () => {
         return {
+            // title: 'Your Form Title',
+            // description: 'Subtext',
             visible: false,
             clientName: '',
             dateCompleted: '',
-            fieldList: [],
+            formList: [],
+            // form: [],
             pickerOptions: {
                 disabledDate(time) {
                     return time.getTime() > Date.now();
@@ -159,11 +128,10 @@ export default {
                     }
                 }],
             },
-            departments: [
+            teams: [ // TODO: replace with data pulled from backend
                 { value: 'Counselling', label: 'Counselling'},
                 { value: 'Community Programs', label: 'Community Programs'}
             ],
-            input: {},
             inputType: {},
             inputFieldData: {},
         }
@@ -179,6 +147,7 @@ export default {
     components: {
         draggable,
         SidePanel,
+        EditableText,
         TextField,
         TextBox,
         SectionDivider,
@@ -192,32 +161,59 @@ export default {
         FileUpload,
     },
     computed: {
-        
+        ...mapState ([
+            'title',
+            'description',
+            'form'
+        ]),
+        ...mapMutations ([
+            'SET_TITLE',
+            'SET_DESCRIPTION',
+            'ADD_FIELD'
+        ]),
+        title: {
+            get() { return this.$store.state.title },
+            set(title) { this.$store.commit('SET_TITLE', title) }, 
+        },
+        description: {
+            get() { return this.$store.state.description },
+            set(description) { this.$store.commit('SET_DESCRIPTION', description) }
+        },
+        form: {
+            get() { return this.$store.state.form },
+            set(input) { this.$store.commit('ADD_FIELD', input) }
+        }
     },
     methods: {
         removeItem(index) {
-            alert(index);
-            this.fields.splice(index, 1);
-        },
-        focusField(value){
-            this.editField = value;
-        },
-        blurField(){
-            this.editField = '';
+            this.$confirm('are you sure you want to remove this field from your form?', 'Warning', {
+                confirmButtonText: 'Remove',
+                cancelButtonText: 'Nevermind',
+                type: 'warning'
+            }).then(() => {
+                this.$message({
+                    type: 'success',
+                    message: 'Field Successfully Removed'
+                })
+                this.fields.splice(index, 1);
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: "Alright, we'll keep it"
+                })
+            })
         },
         showField(value){
-            return (this.sectionHeader[value] == '' || this.editField == value)
+            return (this.value == '' || this.editField == value)
         }
     },
     watch: {
-        mouseOver: function(){
-            this.visible = !this.visible;   
-        },
         newInput() {
             this.form.push(this.input.id)
         },
         fields() {
-            this.fieldList = _.clone(this.fields);
+            this.formList = _.clone(this.fields);
+            // this.inputFieldData = _.clone(this.fieldData)
         }
     }
 }
@@ -226,16 +222,13 @@ export default {
 <style scoped>
 #canvas {
     font-family: 'Inter UI', Arial, sans-serif;
-    font-weight: bold;
+    /* font-weight: bold; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
 }
 .el-row {
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
+    margin: 5px;
   }
   .el-col {
     border-radius: 4px;
