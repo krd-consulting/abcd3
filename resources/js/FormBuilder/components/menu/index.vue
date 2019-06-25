@@ -52,7 +52,7 @@ export default {
             step: '1',
             selectedInput: {id: '', name: '', component: ''},
             basicInputs: [
-                {id: 0, name: 'Text Field', component: 'TexField'},
+                {id: 0, name: 'Text Field', component: 'TextField'},
                 {id: 1, name: 'Text Area', component: 'TexBox'},
                 {id: 2, name: 'Numeric', component: 'NumericField'},
                 {id: 3, name: 'Dropdown', component: 'DropdownField'},

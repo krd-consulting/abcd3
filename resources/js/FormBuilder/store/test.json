@@ -2,7 +2,7 @@
     "form": 
     {
         "title": "Test Form",
-        "description": "This form is pulling data from a temporary json file for testing",
+        "description": "Intake form for Shakespeare Slam Poetry Club",
         "targetType": "Client",
         "targetId": "3",
         "formType": "pre/post",
@@ -10,6 +10,188 @@
         "team": "",
         "date": "",
         "fields": [
+            {
+                "fieldType": "Radio",
+                "label": "What is thy gender",
+                "fieldDescription": "",
+                "reference": [],
+                "validation": [],
+                "settings": {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 50,
+                    "sectionHeader": "New Section",
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": {
+                    "questions": [],
+                    "responses": [
+                        {"id": 0, "text": "Male", "value": 1},
+                        {"id": 1, "text": "Female", "value": 2},
+                        {"id": 2, "text": "Non-Binary", "value": 3},
+                        {"id": 3, "text": "Speaketh not of mine amorous rite", "value": 4}
+                    ]
+                }
+            },
+            {
+                "fieldType": "TextField",
+                "label": "Wherefore art thee hither ",
+                "fieldDescription": "",
+                "reference": [],
+                "validation": [],
+                "settings": {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 50,
+                    "sectionHeader": "New Section",
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": {
+                    "questions": [],
+                    "responses": []
+                }
+            },
+            {
+                "fieldType": "TextBox",
+                "label": "pray pardon me thy expectation?",
+                "fieldDescription": "",
+                "reference": [],
+                "validation": [],
+                "settings": {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 150,
+                    "sectionHeader": "New Section",
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": {
+                    "questions": [],
+                    "responses": []
+                }
+            },
+            {
+                "fieldType": "NumericField",
+                "label": "What age is thee?",
+                "fieldDescription": "",
+                "reference": [],
+                "validation": [],
+                "settings": {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 150,
+                    "sectionHeader": "New Section",
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": {
+                    "questions": [],
+                    "responses": []
+                }
+            },
+            {
+                "fieldType": "Dropdown",
+                "label": "Is this very much a useful field?",
+                "fieldDescription": "",
+                "reference": [],
+                "validation": [],
+                "settings": {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 150,
+                    "sectionHeader": "New Section",
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": {
+                    "questions": [],
+                    "responses": [
+                        {"id": 1, "text": "Aye! We absolutely do", "value": 1},
+                        {"id": 2, "text": "Nay! We doth not", "value": 2},
+                        {"id": 3, "text": "oft upon a yonder edge-case", "value": 3}
+                    ]
+                }
+            },
+            {
+                "fieldType": "Checkbox",
+                "label": "What notable characters art among thy highest in estimation",
+                "fieldDescription": "",
+                "reference": [],
+                "validation": [],
+                "settings": {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 50,
+                    "sectionHeader": "New Section",
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": {
+                    "questions": [],
+                    "responses": [
+                        {"id": 0, "text": "Hamlet", "value": 1},
+                        {"id": 1, "text": "Iago", "value": 2},
+                        {"id": 2, "text": "Lady Macbeth", "value": 3},
+                        {"id": 3, "text": "Mercutio", "value": 4},
+                        {"id": 4, "text": "Macbeth", "value": 5},
+                        {"id": 5, "text": "Ophelia", "value": 6},
+                        {"id": 6, "text": "Othello", "value": 7},
+                        {"id": 7, "text": "Viola", "value": 8},
+                        {"id": 8, "text": "Benedick", "value": 9},
+                        {"id": 9, "text": "Horatio", "value": 10}
+                    ]
+                }
+            },
             {
                 "fieldType": "Matrix",
                 "label": "Satisfaction Survey",
@@ -50,40 +232,8 @@
                         {"id": 4, "text": "like a silver bow!", "value": 5}
                     ]
                 }
-            },
-            {
-                "fieldType": "Radio",
-                "label": "This is a Radio Group",
-                "fieldDescription": "",
-                "reference": [],
-                "validation": [],
-                "settings": {
-                    "required": false,
-                    "defaultNum": 0,
-                    "dropdownNum": 0,
-                    "radioNum": 2,
-                    "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
-                    "isLimited": false,
-                    "setLength": 50,
-                    "sectionHeader": "New Section",
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
-                },
-                "options": {
-                    "questions": [],
-                    "responses": [
-                        {"id": 0, "text": "Item 1", "value": 1},
-                        {"id": 1, "text": "Item 2", "value": 2},
-                        {"id": 2, "text": "Item 3", "value": 3},
-                        {"id": 3, "text": "Item 4", "value": 4},
-                        {"id": 4, "text": "Item 4", "value": 5}
-                    ]
-                }
             }
+            
         ]
     }
 }

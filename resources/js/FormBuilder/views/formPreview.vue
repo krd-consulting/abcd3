@@ -59,13 +59,16 @@
                         
                         <div class="tw-mt-4" v-for="field in data.fields" :key="field.fieldType">
 
-                            <div class="tw-mt-8">
+                            <div class="tw-my-8">
                                 <component
                                     :field="field"
                                     :is="field.fieldType">
                                 </component>
                             </div>
                         </div>
+                         <div class="tw-relative tw-text-center tw-mt-12">
+                             <el-button type="primary" class="tw-w-48">Submit</el-button>
+                         </div>
                     </el-main>
                 </div>
 
@@ -79,6 +82,11 @@
 import test from '@/FormBuilder/store/test.json'
 import Matrix from '@/FormBuilder/components/preview/matrix.vue'
 import Radio from '@/FormBuilder/components/preview/radio.vue'
+import TextField from '@/FormBuilder/components/preview/textField.vue'
+import TextBox from '@/FormBuilder/components/preview/textBox.vue'
+import NumericField from '@/FormBuilder/components/preview/numeric.vue'
+import Dropdown from '@/FormBuilder/components/preview/dropdown.vue'
+import Checkbox from '@/FormBuilder/components/preview/checkbox.vue'
 
 export default {
     data: () => {
@@ -96,7 +104,12 @@ export default {
     },
     components: {
         Matrix,
-        Radio
+        Radio,
+        TextField,
+        TextBox,
+        NumericField,
+        Dropdown,
+        Checkbox
     },
     created() {
         // this.getFormData();
@@ -118,7 +131,7 @@ export default {
         position: absolute;
         top: 50;
         left: 0;
-        height: 100%;
+        min-height: 85%;
         width: 100%;
     }
     #preview-form {
