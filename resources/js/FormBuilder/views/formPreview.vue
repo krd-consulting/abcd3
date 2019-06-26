@@ -87,6 +87,10 @@ import TextBox from '@/FormBuilder/components/preview/textBox.vue'
 import NumericField from '@/FormBuilder/components/preview/numeric.vue'
 import Dropdown from '@/FormBuilder/components/preview/dropdown.vue'
 import Checkbox from '@/FormBuilder/components/preview/checkbox.vue'
+import Datefield from '@/FormBuilder/components/preview/datefield.vue'
+import TimePicker from '@/FormBuilder/components/preview/timePicker.vue'
+import Upload from '@/FormBuilder/components/preview/upload.vue'
+import SectionDivider from '@/FormBuilder/components/preview/sectionDivider.vue'
 
 export default {
     data: () => {
@@ -109,7 +113,11 @@ export default {
         TextBox,
         NumericField,
         Dropdown,
-        Checkbox
+        Checkbox,
+        Datefield,
+        TimePicker,
+        Upload,
+        SectionDivider
     },
     created() {
         // this.getFormData();

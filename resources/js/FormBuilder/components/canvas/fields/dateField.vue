@@ -1,5 +1,5 @@
 <template>
-    <div id="datepciker">
+    <div id="datepicker">
         <label for="dateField" class="inputLabel">{{ inputFieldData.label }}</label><br>
         <sup>{{ inputFieldData.description }}</sup>
         <el-date-picker 

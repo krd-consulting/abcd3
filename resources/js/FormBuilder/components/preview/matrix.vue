@@ -1,7 +1,8 @@
 <template>
     <div id="matrix">
-        <!-- <div v-for="data in formData" :key="data.title"> -->
-            <!-- <div v-for="field in formData" :key="field.label"> -->
+        <br>
+        <el-row class="tw-mt-24">
+           <el-col :span="24">
                 <label for="matrix-table" class="inputLabel">{{ field.label }}</label><br>
                 <sup>{{ field.fieldDescription }}</sup>
                     <table id="matrix-table">
@@ -34,10 +35,9 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- </div> -->
-            </div>
-        <!-- </div> -->
-    <!-- </div> -->
+           </el-col>
+        </el-row>
+    </div>
 </template>
 
 <script>

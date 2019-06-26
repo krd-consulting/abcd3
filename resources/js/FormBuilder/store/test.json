@@ -7,7 +7,7 @@
         "targetId": "3",
         "formType": "pre/post",
         "Name": "",
-        "team": "",
+        "team": [],
         "date": "",
         "fields": [
             {
@@ -26,7 +26,6 @@
                     "matrixChoices": 5,
                     "isLimited": false,
                     "setLength": 50,
-                    "sectionHeader": "New Section",
                     "dateSelect1": false,
                     "dateSelect2": false,
                     "dateSelect3": false,
@@ -58,7 +57,6 @@
                     "matrixChoices": 5,
                     "isLimited": false,
                     "setLength": 50,
-                    "sectionHeader": "New Section",
                     "dateSelect1": false,
                     "dateSelect2": false,
                     "dateSelect3": false,
@@ -71,7 +69,7 @@
             },
             {
                 "fieldType": "TextBox",
-                "label": "pray pardon me thy expectation?",
+                "label": "Pray pardon me thy expectation?",
                 "fieldDescription": "",
                 "reference": [],
                 "validation": [],
@@ -85,7 +83,6 @@
                     "matrixChoices": 5,
                     "isLimited": false,
                     "setLength": 150,
-                    "sectionHeader": "New Section",
                     "dateSelect1": false,
                     "dateSelect2": false,
                     "dateSelect3": false,
@@ -112,7 +109,6 @@
                     "matrixChoices": 5,
                     "isLimited": false,
                     "setLength": 150,
-                    "sectionHeader": "New Section",
                     "dateSelect1": false,
                     "dateSelect2": false,
                     "dateSelect3": false,
@@ -139,7 +135,6 @@
                     "matrixChoices": 5,
                     "isLimited": false,
                     "setLength": 150,
-                    "sectionHeader": "New Section",
                     "dateSelect1": false,
                     "dateSelect2": false,
                     "dateSelect3": false,
@@ -150,8 +145,34 @@
                     "responses": [
                         {"id": 1, "text": "Aye! We absolutely do", "value": 1},
                         {"id": 2, "text": "Nay! We doth not", "value": 2},
-                        {"id": 3, "text": "oft upon a yonder edge-case", "value": 3}
+                        {"id": 3, "text": "Oft upon a yonder edge-case", "value": 3}
                     ]
+                }
+            },
+            {
+                "fieldType": "SectionDivider",
+                "label": "Just Because",
+                "fieldDescription": "",
+                "reference": [],
+                "validation": [],
+                "settings": {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 150,
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": {
+                    "questions": [],
+                    "responses": []
                 }
             },
             {
@@ -170,7 +191,6 @@
                     "matrixChoices": 5,
                     "isLimited": false,
                     "setLength": 50,
-                    "sectionHeader": "New Section",
                     "dateSelect1": false,
                     "dateSelect2": false,
                     "dateSelect3": false,
@@ -193,6 +213,58 @@
                 }
             },
             {
+                "fieldType": "Datefield",
+                "label": "Shall I compare thee to a summer's day?",
+                "fieldDescription": "Or mayhaps a winters eve?",
+                "reference": [],
+                "validation": [],
+                "settings": {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 50,
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": {
+                    "questions": [],
+                    "responses": []
+                }
+            },
+            {
+                "fieldType": "TimePicker",
+                "label": "The Time is nigh",
+                "fieldDescription": "",
+                "reference": [],
+                "validation": [],
+                "settings": {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 50,
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": {
+                    "questions": [],
+                    "responses": []
+                }
+            },
+            {
                 "fieldType": "Matrix",
                 "label": "Satisfaction Survey",
                 "fieldDescription": "An assessment of your overall life satisfaction",
@@ -209,7 +281,6 @@
                     "matrixChoices": 5,
                     "isLimited": false,
                     "setLength": 50,
-                    "sectionHeader": "New Section",
                     "dateSelect1": false,
                     "dateSelect2": false,
                     "dateSelect3": false,
@@ -231,6 +302,34 @@
                         {"id": 3, "text": "I feeleth well enow ", "value": 4},
                         {"id": 4, "text": "like a silver bow!", "value": 5}
                     ]
+                }
+            },
+            {
+                "fieldType": "Upload",
+                "label": "Present your most eloquent self-portrait",
+                "fieldDescription": "This shall be displayed upon thy Slam Poetry Roster card",
+                "reference": [],
+                "validation": [],
+                "settings": 
+                {
+                    "required": false,
+                    "defaultNum": 0,
+                    "dropdownNum": 0,
+                    "radioNum": 2,
+                    "checkboxNum": 2,
+                    "matrixQuestions": 2,
+                    "matrixChoices": 5,
+                    "isLimited": false,
+                    "setLength": 50,
+                    "dateSelect1": false,
+                    "dateSelect2": false,
+                    "dateSelect3": false,
+                    "dateSelect4": false
+                },
+                "options": 
+                {
+                    "questions": [],
+                    "responses": []
                 }
             }
             
