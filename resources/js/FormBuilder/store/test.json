@@ -3,17 +3,17 @@
     {
         "title": "Test Form",
         "description": "Intake form for Shakespeare Slam Poetry Club",
-        "targetType": "Client",
-        "targetId": "3",
-        "formType": "pre/post",
+        "target_type": "Client",
+        "target_id": "3",
+        "form_type": "pre/post",
         "Name": "",
         "team": [],
         "date": "",
         "fields": [
             {
-                "fieldType": "Radio",
+                "type": "Radio",
                 "label": "What is thy gender",
-                "fieldDescription": "",
+                "description": "",
                 "reference": [],
                 "validation": [],
                 "settings": {
@@ -22,18 +22,21 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 50,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 50,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": {
                     "questions": [],
-                    "responses": [
+                    "choices": [
                         {"id": 0, "text": "Male", "value": 1},
                         {"id": 1, "text": "Female", "value": 2},
                         {"id": 2, "text": "Non-Binary", "value": 3},
@@ -42,9 +45,9 @@
                 }
             },
             {
-                "fieldType": "TextField",
+                "type": "TextField",
                 "label": "Wherefore art thee hither ",
-                "fieldDescription": "",
+                "description": "",
                 "reference": [],
                 "validation": [],
                 "settings": {
@@ -53,24 +56,27 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 50,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 50,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": {
                     "questions": [],
-                    "responses": []
+                    "choices": []
                 }
             },
             {
-                "fieldType": "TextBox",
+                "type": "TextBox",
                 "label": "Pray pardon me thy expectation?",
-                "fieldDescription": "",
+                "description": "",
                 "reference": [],
                 "validation": [],
                 "settings": {
@@ -79,24 +85,27 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 150,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 150,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": {
                     "questions": [],
-                    "responses": []
+                    "choices": []
                 }
             },
             {
-                "fieldType": "NumericField",
+                "type": "NumericField",
                 "label": "What age is thee?",
-                "fieldDescription": "",
+                "description": "",
                 "reference": [],
                 "validation": [],
                 "settings": {
@@ -105,24 +114,27 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 150,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 150,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": {
                     "questions": [],
-                    "responses": []
+                    "choices": []
                 }
             },
             {
-                "fieldType": "Dropdown",
+                "type": "Dropdown",
                 "label": "Is this very much a useful field?",
-                "fieldDescription": "",
+                "description": "",
                 "reference": [],
                 "validation": [],
                 "settings": {
@@ -131,18 +143,21 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 150,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 150,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": {
                     "questions": [],
-                    "responses": [
+                    "choices": [
                         {"id": 1, "text": "Aye! We absolutely do", "value": 1},
                         {"id": 2, "text": "Nay! We doth not", "value": 2},
                         {"id": 3, "text": "Oft upon a yonder edge-case", "value": 3}
@@ -150,9 +165,9 @@
                 }
             },
             {
-                "fieldType": "SectionDivider",
+                "type": "SectionDivider",
                 "label": "Just Because",
-                "fieldDescription": "",
+                "description": "",
                 "reference": [],
                 "validation": [],
                 "settings": {
@@ -161,24 +176,27 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 150,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 150,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": {
                     "questions": [],
-                    "responses": []
+                    "choices": []
                 }
             },
             {
-                "fieldType": "Checkbox",
+                "type": "Checkbox",
                 "label": "What notable characters art among thy highest in estimation",
-                "fieldDescription": "",
+                "description": "",
                 "reference": [],
                 "validation": [],
                 "settings": {
@@ -187,18 +205,21 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 50,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 50,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": {
                     "questions": [],
-                    "responses": [
+                    "choices": [
                         {"id": 0, "text": "Hamlet", "value": 1},
                         {"id": 1, "text": "Iago", "value": 2},
                         {"id": 2, "text": "Lady Macbeth", "value": 3},
@@ -213,9 +234,9 @@
                 }
             },
             {
-                "fieldType": "Datefield",
+                "type": "Datefield",
                 "label": "Shall I compare thee to a summer's day?",
-                "fieldDescription": "Or mayhaps a winters eve?",
+                "description": "Or mayhaps a winters eve?",
                 "reference": [],
                 "validation": [],
                 "settings": {
@@ -224,24 +245,27 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 50,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 50,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": {
                     "questions": [],
-                    "responses": []
+                    "choices": []
                 }
             },
             {
-                "fieldType": "TimePicker",
+                "type": "TimePicker",
                 "label": "The Time is nigh",
-                "fieldDescription": "",
+                "description": "",
                 "reference": [],
                 "validation": [],
                 "settings": {
@@ -250,24 +274,27 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 50,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 50,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": {
                     "questions": [],
-                    "responses": []
+                    "choices": []
                 }
             },
             {
-                "fieldType": "Matrix",
+                "type": "Matrix",
                 "label": "Satisfaction Survey",
-                "fieldDescription": "An assessment of your overall life satisfaction",
+                "description": "An assessment of your overall life satisfaction",
                 "reference": [],
                 "validation": [],
                 "settings": 
@@ -277,14 +304,17 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 50,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 50,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": 
                 {
@@ -295,7 +325,7 @@
 
                     ],
                     
-                    "responses": [
+                    "choices": [
                         {"id": 0, "text": "A pestilent gall to me ", "value": 1},
                         {"id": 1, "text": "Tis but a scratch", "value": 2},
                         {"id": 2, "text": "I doth not care", "value": 3},
@@ -305,9 +335,9 @@
                 }
             },
             {
-                "fieldType": "Upload",
+                "type": "Upload",
                 "label": "Present your most eloquent self-portrait",
-                "fieldDescription": "This shall be displayed upon thy Slam Poetry Roster card",
+                "description": "This shall be displayed upon thy Slam Poetry Roster card",
                 "reference": [],
                 "validation": [],
                 "settings": 
@@ -317,19 +347,22 @@
                     "dropdownNum": 0,
                     "radioNum": 2,
                     "checkboxNum": 2,
-                    "matrixQuestions": 2,
-                    "matrixChoices": 5,
+                    "matrix_questions": 2,
+                    "matrix_choices": 5,
                     "isLimited": false,
-                    "setLength": 50,
-                    "dateSelect1": false,
-                    "dateSelect2": false,
-                    "dateSelect3": false,
-                    "dateSelect4": false
+                    "max": 50,
+                    "date": {
+                        "past_only": false,
+                        "future_only": false,
+                        "quick_menu": false,
+                        "include_time": false,
+                        "date_range": false
+                    }
                 },
                 "options": 
                 {
                     "questions": [],
-                    "responses": []
+                    "choices": []
                 }
             }
             

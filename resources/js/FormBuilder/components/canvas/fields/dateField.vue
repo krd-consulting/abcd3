@@ -1,7 +1,7 @@
 <template>
     <div id="datepicker">
-        <label for="dateField" class="inputLabel">{{ inputFieldData.label }}</label><br>
-        <sup>{{ inputFieldData.description }}</sup>
+        <label for="dateField" class="inputLabel">{{ field.label }}</label><br>
+        <sup>{{ field.description }}</sup>
         <el-date-picker 
             id="dateField"
             v-model="dateSelection" 
@@ -24,34 +24,37 @@
                              <span>Field Label</span>
                             <el-row>
                                 <el-col :span="20">
-                                    <el-input v-model="inputFieldData.label"></el-input>
+                                    <el-input v-model="field.label"></el-input>
                                 </el-col>
                             </el-row>
                             <el-row class="tw-my-6">
                                 <el-col :span="20">
                                     <label for="description">Field Description</label>
-                                    <el-input id="description" v-model="inputFieldData.description"></el-input>
+                                    <el-input id="description" v-model="field.description"></el-input>
                                 </el-col>
                             </el-row>
                             <el-row class="tw-my-6">
                                 <span class="tw-mb-4">This field is</span><br>
-                                <el-switch v-model="inputFieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                                <el-switch v-model="field.required" active-text="Required" inactive-text="Optional"></el-switch>
                             </el-row>
                         </div>
 
                         <div class="tw-float-right tw-mx-20">
                             <span>Calendar Preferences</span>
                             <el-row class="tw-m-4">
-                                <el-switch @change="togglePastOnly" v-model="inputFieldData.options.dateSelect1" active-text="Only allow up to current day"></el-switch>
+                                <el-switch @change="togglePastOnly" v-model="field.settings.past_only" active-text="Up to current day"></el-switch>
                             </el-row>
                             <el-row class="tw-m-4">
-                                <el-switch @change="toggleQuickMenu" v-model="inputFieldData.options.dateSelect2" active-text="Include Quick menu"></el-switch>
+                                <el-switch @change="toggleFutureOnly" v-model="field.settings.future_only" active-text="Beyond current day"></el-switch>
                             </el-row>
                             <el-row class="tw-m-4">
-                                <el-switch @change="toggleTime" v-model="inputFieldData.options.dateSelect3" active-text="Include time"></el-switch>
+                                <el-switch @change="toggleQuickMenu" v-model="field.settings.quick_menu" active-text="Include Quick menu"></el-switch>
                             </el-row>
                             <el-row class="tw-m-4">
-                                <el-switch @change="toggleRangeMenu" v-model="inputFieldData.options.dateSelect4" active-text="Date Range"></el-switch>
+                                <el-switch @change="toggleTime" v-model="field.settings.include_time" active-text="Include time"></el-switch>
+                            </el-row>
+                            <el-row class="tw-m-4">
+                                <el-switch @change="toggleRangeMenu" v-model="field.settings.date_range" active-text="Date Range"></el-switch>
                             </el-row>
                         </div>
                     </div>
@@ -74,7 +77,7 @@ export default {
             rangeSeparator: '',
             startDate: '',
             endDate: '',
-            inputFieldData: []
+            field: []
         }
     },
     props: {
@@ -84,17 +87,28 @@ export default {
         }
     },
     created() {
-        this.inputFieldData = _.clone(this.fieldData)
+        this.field = _.clone(this.fieldData)
     },
     mounted() {
         this.togglePastOnly(),
+        this.toggleFutureOnly(),
         this.toggleQuickMenu(),
         this.toggleTime(),
         this.toggleRangeMenu()
     },
+    computed: {
+        handlePastFutureToggle() {
+            if(this.field.settings.past_only === true){
+                this.field.settings.future_only === false
+            }
+            if(this.field.settings.future_only === true) {
+                this.field.settings.past_only === false
+            }
+        }
+    },
     methods: {
         togglePastOnly() {
-            if(this.inputFieldData.options.dateSelect1 === true) {
+            if(this.field.settings.past_only === true) {
                 this.dateOptions = Object.assign({}, this.dateOptions, {
                     disabledDate(time) { 
                         return time.getTime() > Date.now() 
@@ -110,8 +124,25 @@ export default {
                 this.datePlaceHolder = "Pick a day"
             }
         },
+        toggleFutureOnly() {
+            if(this.field.settings.future_only === true) {
+                this.dateOptions = Object.assign({}, this.dateOptions, {
+                    disabledDate(time) { 
+                        return time.getTime() < Date.now() 
+                    },
+                });
+                this.dateType = "date",
+                this.datePlaceHolder = "Pick a day"
+            } else {
+                this.dateOptions = Object.assign({}, this.dateOptions, {
+                    disabledDate: {}
+                });
+                this.dateType = "date",
+                this.datePlaceHolder = "Pick a day"
+            }
+        },
         toggleQuickMenu() {
-            if(this.inputFieldData.options.dateSelect2 === true) {
+            if(this.field.settings.quick_menu === true) {
                 this.dateOptions = Object.assign({}, this.dateOptions, {
                     shortcuts: [
                         { text: 'Today', onClick(picker) 
@@ -133,7 +164,7 @@ export default {
                 this.dateType = "date",
                 this.datePlaceHolder = "Pick a day"
             } else {
-                this.dateOptions.Object.assign({}, this.dateOptions, {
+                this.datesettings.Object.assign({}, this.dateOptions, {
                     shortcuts: {}
                 });
                 this.dateType = "date",
@@ -141,7 +172,7 @@ export default {
             }
         },
         toggleTime() {
-            if(this.inputFieldData.options.dateSelect3 === true) {
+            if(this.field.settings.include_time === true) {
                 this.dateType = "datetime",
                 this.datePlaceHolder = "Pick a day and time"
                 this.dateFormat = "yyyy/MM/dd hh:mm:ss a"
@@ -152,7 +183,7 @@ export default {
             
         },
         toggleRangeMenu() {
-            if(this.inputFieldData.options.dateSelect4 === true){
+            if(this.field.settings.date_range === true){
                 this.dateType = 'daterange',
                 this.rangeSeparator = 'to',
                 this.dateFormat = "yyyy/MM/dd",

@@ -8,8 +8,6 @@
                     </el-aside>
                 </el-card>
             
-
-        <!-- <el-container id="canvas-container"> -->
         <el-card id="canvas">
             <el-header>
                 <el-menu :default-active="$route.path" 
@@ -29,14 +27,13 @@
             </el-main>
         </el-card>
 
-            <!-- </el-container>    -->
-        </el-container>
+    </el-container>
         
     </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable';
+import draggable from 'vuedraggable'
 import FormCanvas from '@/FormBuilder/components/canvas/index.vue'
 import FormMenu from '@/FormBuilder/components/menu/index.vue'
 
@@ -49,7 +46,6 @@ export default {
     },
     data: () => {
         return {
-            // image: image,
             activeIndex: '1',
             inputOptions: {},
             fields: []
@@ -60,8 +56,9 @@ export default {
             console.log(key, keyPath);
         },
         addField(field) {
-            // append to fields
+            // append to fields arrays
             this.fields.push(field);
+            // this.$store.dispatch('addField', field)
         },
         setOptions(options) {
             this.inputOptions.push(options)

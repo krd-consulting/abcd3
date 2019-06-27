@@ -3,7 +3,7 @@
 
    <!--------TextBox---------->
    <div v-if="inputData.id === 0">
-    <h1>{{ inputData.name }} Options</h1>
+    <h1>{{ inputData.name }} options</h1>
      <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="fieldData.label"></el-input>
@@ -15,10 +15,10 @@
         <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item label="Set Character Limit">
-          <el-switch v-model="fieldData.options.isLimited" inactive-text="No Limit" active-text="Set Character Limit"></el-switch>
-       <el-input-number :disabled="!fieldData.options.isLimited" v-model="fieldData.options.setLength" :step="5" step-strictly></el-input-number>
+          <el-switch v-model="fieldData.settings.isLimited" inactive-text="No Limit" active-text="Set Character Limit"></el-switch>
+       <el-input-number :disabled="!fieldData.settings.isLimited" v-model="fieldData.settings.max" :step="5" step-strictly></el-input-number>
       </el-form-item>
-      <el-form-item label="Field Refers To:">
+      <!-- <el-form-item label="Field Refers To:">
         <el-select v-model="fieldData.reference">
          <el-option label="Itself" value="itself"></el-option>
           <el-option label="A field within this form" value="internalField"></el-option>
@@ -38,7 +38,7 @@
         <div v-if="fieldData.reference === 'staff'">
          <p>What are our references really?</p>
         </div>
-      </el-form-item>
+      </el-form-item> -->
       
       <el-form-item>
         <el-button type="success" @click="submitfieldData(fieldData)">Set</el-button>
@@ -48,7 +48,7 @@
 
    <!--------TextArea---------->
    <div v-if="inputData.id === 1">
-    <h1>{{ inputData.name }} Options</h1>
+    <h1>{{ inputData.name }} Settings</h1>
      <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="fieldData.label"></el-input>
@@ -60,8 +60,8 @@
         <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item label="Set Character Limit">
-            <el-switch v-model="fieldData.options.isLimited" inactive-text="No Limit" active-text="Set Character Limit"></el-switch>
-            <el-input-number :disabled="!fieldData.options.isLimited" v-model="fieldData.options.setLength" :step="5" step-strictly></el-input-number>
+            <el-switch v-model="fieldData.settings.isLimited" inactive-text="No Limit" active-text="Set Character Limit"></el-switch>
+            <el-input-number :disabled="!fieldData.settings.isLimited" v-model="fieldData.settings.max" :step="5" step-strictly></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitfieldData">Set</el-button>
@@ -71,7 +71,7 @@
 
   <!---------Numeric--------->
    <div v-if="inputData.id === 2">
-    <h1>{{ inputData.name }} Options</h1>
+    <h1>{{ inputData.name }} Settings</h1>
      <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="fieldData.label"></el-input>
@@ -94,7 +94,7 @@
 
    <!--------Dropdown---------->
    <div v-if="inputData.id === 3">
-    <h1>{{ inputData.name }} Options</h1>
+    <h1>{{ inputData.name }} Settings</h1>
      <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="fieldData.label"></el-input>
@@ -106,7 +106,7 @@
         <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item>
-         <el-input-number v-model="fieldData.options.dropdownNum" controls-position="right" @change="handleChange" :min="2" :max="10"></el-input-number>
+         <el-input-number v-model="fieldData.settings.dropdownNum" controls-position="right" @change="handleChange" :min="2" :max="10"></el-input-number>
       </el-form-item>
 
       <el-form-item>
@@ -117,7 +117,7 @@
 
    <!--------Radio---------->
    <div v-if="inputData.id === 4">
-    <h1>{{ inputData.name }} Options</h1>
+    <h1>{{ inputData.name }} Settings</h1>
      <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="fieldData.label"></el-input>
@@ -129,7 +129,7 @@
         <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item>
-         <el-input-number v-model="fieldData.options.radioNum" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+         <el-input-number v-model="fieldData.settings.radioNum" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitfieldData">Set</el-button>
@@ -139,7 +139,7 @@
 
    <!--------Checkbox---------->
    <div v-if="inputData.id === 5">
-    <h1>{{ inputData.name }} Options</h1>
+    <h1>{{ inputData.name }} Settings</h1>
      <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="fieldData.label"></el-input>
@@ -151,7 +151,7 @@
         <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item>
-         <el-input-number v-model="fieldData.options.checkboxNum" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+         <el-input-number v-model="fieldData.settings.checkboxNum" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
       </el-form-item>
       <el-form-item>
         <el-button type="success" @click="submitfieldData">Set</el-button>
@@ -161,7 +161,7 @@
 
    <!--------Date---------->
    <div v-if="inputData.id === 6">
-    <h1>{{ inputData.name }} Options</h1>
+    <h1>{{ inputData.name }} Settings</h1>
      <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="fieldData.label"></el-input>
@@ -174,16 +174,16 @@
       </el-form-item>
       <el-form-item label="Calendar Preferences">
         <el-row>
-          <el-switch v-model="fieldData.options.dateSelect1" active-text="Only allow up to current day"></el-switch>
+          <el-switch v-model="fieldData.settings.past_only" active-text="Only allow up to current day"></el-switch>
         </el-row>
         <el-row>
-          <el-switch v-model="fieldData.options.dateSelect2" active-text="Quick menu"></el-switch>
+          <el-switch v-model="fieldData.settings.quick_menu" active-text="Quick menu"></el-switch>
         </el-row>
         <el-row>
-          <el-switch v-model="fieldData.options.dateSelect3" active-text="Include time"></el-switch>
+          <el-switch v-model="fieldData.settings.include_time" active-text="Include time"></el-switch>
         </el-row>
         <el-row>
-          <el-switch v-model="fieldData.options.dateSelect4" active-text="Date Range"></el-switch>
+          <el-switch v-model="fieldData.settings.date_range" active-text="Date Range"></el-switch>
         </el-row>
       </el-form-item>
       <el-form-item>
@@ -194,7 +194,7 @@
   
   <!-------- Time Picker ---------->
    <div v-if="inputData.id === 7">
-       <h1>{{ inputData.name }} Options</h1>
+       <h1>{{ inputData.name }} Settings</h1>
        <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
             <el-form-item label="Field Label">
                 <el-input v-model="fieldData.label"></el-input>
@@ -213,7 +213,7 @@
 
   <!--------Matrix---------->
   <div v-if="inputData.id === 8">
-    <h1>{{ inputData.name }} Options</h1>
+    <h1>{{ inputData.name }} Settings</h1>
      <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
       <el-form-item label="Field Label">
         <el-input v-model="fieldData.label"></el-input>
@@ -225,14 +225,14 @@
         <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
       </el-form-item>
       <el-form-item label="Number of Questions" >
-         <el-input-number v-model="fieldData.options.matrixQuestions"
+         <el-input-number v-model="fieldData.settings.matrix_questions"
             controls-position="right" 
             @change="handleChange" 
             :min="1">
           </el-input-number>
       </el-form-item>
       <el-form-item label="Number of Choices Per Question">
-         <el-input-number v-model="fieldData.options.matrixChoices"
+         <el-input-number v-model="fieldData.settings.matrix_choices"
             controls-position="right" 
             @change="handleChange" 
             :min="1" :max="10">
@@ -246,7 +246,7 @@
 
   <!-------- File Upload ---------->
     <div v-if="inputData.id === 9">
-       <h1>{{ inputData.name }} Options</h1>
+       <h1>{{ inputData.name }} Settings</h1>
        <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
             <el-form-item label="Field Label">
                 <el-input v-model="fieldData.label"></el-input>
@@ -265,10 +265,10 @@
 
   <!-------- Section Divider ---------->
     <div v-if="inputData.id === 10">
-       <h1>{{ inputData.name }} Options</h1>
+       <h1>{{ inputData.name }} Settings</h1>
        <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
             <el-form-item label="Section label">
-                <el-input v-model="fieldData.options.sectionHeader"></el-input>
+                <el-input v-model="fieldData.label"></el-input>
             </el-form-item>
             <el-form-item>
                 <el-button type="success" @click="submitfieldData">Set</el-button>
@@ -287,23 +287,23 @@ export default {
   return {
    fieldData: {
      label: 'Field Name',
-     required: false,
      description: '',
      reference: '',
-     options: {
-       defaultNum: 0,
-       dropdownNum: 0,
-       radioNum: 2,
-       checkboxNum: 2,
-       matrixQuestions: 2,
-       matrixChoices: 5,
-       isLimited: false,
-       setLength: 50,
-       sectionHeader: 'New Section',
-       dateSelect1: false,
-       dateSelect2: false,
-       dateSelect3: false,
-       dateSelect4: false,
+     settings: {
+        required: false,
+        defaultNum: 0,
+        dropdownNum: 0,
+        radioNum: 2,
+        checkboxNum: 2,
+        matrix_questions: 2,
+        matrix_choices: 5,
+        isLimited: false,
+        max: 50,
+        past_only: false,
+        future_only: false,
+        quick_menu: false,
+        include_time: false,
+        date_range: false,
     }
      
    },
@@ -314,20 +314,8 @@ export default {
  },
  methods: {
   handleChange() {
-    console.log('Doing the thing in input fieldData');
+    console.log('Doing the thing in inputOptions');
   },
-  // removeDomain(item) {
-  //   var index = this.fieldData.dropdownItems.domains.indexOf(item);
-  //   if (index !== -1) {
-  //     this.fieldData.dropdownItems.domains.splice(index, 1);
-  //   }
-  // },
-  // addDomain() {
-  //   this.fieldData.dropdownItems.domains.push({
-  //     key: Date.now(),
-  //     value: ''
-  //   });
-  // },
   submitfieldData(fieldData) {
     this.$emit('outputData', this.fieldData);
   }

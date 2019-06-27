@@ -53,7 +53,7 @@ export default {
             selectedInput: {id: '', name: '', component: ''},
             basicInputs: [
                 {id: 0, name: 'Text Field', component: 'TextField'},
-                {id: 1, name: 'Text Area', component: 'TexBox'},
+                {id: 1, name: 'Text Area', component: 'TextBox'},
                 {id: 2, name: 'Numeric', component: 'NumericField'},
                 {id: 3, name: 'Dropdown', component: 'DropdownField'},
                 {id: 4, name: 'Radio', component: 'RadioField'},
