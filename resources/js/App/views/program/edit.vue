@@ -101,11 +101,10 @@
                         Set client's status as 
 
                         <base-select
-                            v-model="newProgramData.default_client_status_id"
+                            v-model="newProgramData.case_client_status_id"
                             name="team"
                             placeholder="Select Default Status"
-                            disabled
-                            @change="request.errors.clear('default_client_status_id')">
+                            @change="request.errors.clear('case_client_status_id')">
                             <el-option
                                 v-for="status in statuses"
                                 :key="status.id"
@@ -118,9 +117,9 @@
                         when added as case.
                     </label>
                 </div>
-                <div v-if="request.errors.has('default_client_status_id')" class="tw-flex tw-justify-end">
+                <div v-if="request.errors.has('case_client_status_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('default_client_status_id')[0]" class="tw-text-xs tw-text-red"></span>
+                        <span v-text="request.errors.get('case_client_status_id')[0]" class="tw-text-xs tw-text-red"></span>
                     </div>
                 </div>
             </div>

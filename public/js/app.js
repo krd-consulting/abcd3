@@ -3610,16 +3610,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   components: {
     clientData: function clientData() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./pivotDataClient */ "./resources/js/App/components/programRecord/pivotDataClient.vue"));
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./pivotDataClient */ "./resources/js/App/components/programRecord/pivotDataClient.vue"));
     },
     staffData: function staffData() {
-      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./pivotDataStaff */ "./resources/js/App/components/programRecord/pivotDataStaff.vue"));
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./pivotDataStaff */ "./resources/js/App/components/programRecord/pivotDataStaff.vue"));
     },
     volunteerData: function volunteerData() {
       return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./pivotDataVolunteer */ "./resources/js/App/components/programRecord/pivotDataVolunteer.vue"));
     },
     externalData: function externalData() {
-      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./pivotDataExternal */ "./resources/js/App/components/programRecord/pivotDataExternal.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./pivotDataExternal */ "./resources/js/App/components/programRecord/pivotDataExternal.vue"));
     }
   },
   computed: {
@@ -5661,7 +5661,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/ProgramRequest */ "./resources/js/api/ProgramRequest.js");
 /* harmony import */ var _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/api/ClientStatusRequest */ "./resources/js/api/ClientStatusRequest.js");
-//
 //
 //
 //
@@ -87504,7 +87503,7 @@ var render = function() {
             var item = ref.item
             return [
               _c("primary-data", {
-                attrs: { record: item, fields: _vm.fields }
+                attrs: { record: item, fields: item.fields }
               })
             ]
           }
@@ -87516,7 +87515,7 @@ var render = function() {
             return [
               _c("secondary-data", {
                 staticClass: "tw-text-xs",
-                attrs: { record: item, fields: _vm.fields }
+                attrs: { record: item, fields: item.fields }
               })
             ]
           }
@@ -87527,7 +87526,7 @@ var render = function() {
             var item = ref.item
             return [
               _c("primary-data", {
-                attrs: { record: item, fields: _vm.fields }
+                attrs: { record: item, fields: item.fields }
               })
             ]
           }
@@ -87539,7 +87538,7 @@ var render = function() {
             return [
               _c("secondary-data", {
                 staticClass: "tw-text-xs",
-                attrs: { record: item, fields: _vm.fields }
+                attrs: { record: item, fields: item.fields }
               })
             ]
           }
@@ -88445,26 +88444,23 @@ var render = function() {
                   {
                     attrs: {
                       name: "team",
-                      placeholder: "Select Default Status",
-                      disabled: ""
+                      placeholder: "Select Default Status"
                     },
                     on: {
                       change: function($event) {
-                        return _vm.request.errors.clear(
-                          "default_client_status_id"
-                        )
+                        return _vm.request.errors.clear("case_client_status_id")
                       }
                     },
                     model: {
-                      value: _vm.newProgramData.default_client_status_id,
+                      value: _vm.newProgramData.case_client_status_id,
                       callback: function($$v) {
                         _vm.$set(
                           _vm.newProgramData,
-                          "default_client_status_id",
+                          "case_client_status_id",
                           $$v
                         )
                       },
-                      expression: "newProgramData.default_client_status_id"
+                      expression: "newProgramData.case_client_status_id"
                     }
                   },
                   _vm._l(_vm.statuses, function(status) {
@@ -88493,14 +88489,14 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm.request.errors.has("default_client_status_id")
+          _vm.request.errors.has("case_client_status_id")
             ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
                 _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
                   _c("span", {
                     staticClass: "tw-text-xs tw-text-red",
                     domProps: {
                       textContent: _vm._s(
-                        _vm.request.errors.get("default_client_status_id")[0]
+                        _vm.request.errors.get("case_client_status_id")[0]
                       )
                     }
                   })
@@ -113487,8 +113483,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

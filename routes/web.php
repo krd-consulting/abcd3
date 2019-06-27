@@ -49,6 +49,17 @@ Route::prefix('api')
 
         Route::get('programs/{program}/groups', 'ProgramGroupsController@index');
 
+        Route::get(
+            'programs/{program}/records/{recordType}/{record}/available-cases', 
+            'RecordsAvailableForCaseload'
+        );
+        Route::get('programs/{program}/records/{recordType}/{record}/cases', 'CaseController@index');
+        Route::post('programs/{program}/records/{recordType}/{record}/cases/{case}', 'CaseController@store');
+        Route::delete(
+            'programs/{program}/records/{recordType}/{record}/cases/{case}', 
+            'CaseController@destroy'
+        );
+
         Route::get('programs/{program}/records/{recordType}', 'ProgramRecordsController@index');
         Route::get('programs/{program}/available-records/{recordType}', 'RecordsAvailableForProgram');
         Route::get('programs/{program}/records/{recordType}/{record}/edit', 'ProgramRecordsController@edit');

@@ -31,6 +31,8 @@ class Record extends JsonResource
             'enrolled_at' => $this->whenPivotLoaded('program_record', function() {
                 return $this->pivot->enrolled_at;
             }),
+            'cases_count' => $this->cases->count(),
+            'groups_count' => $this->groups->count(),
             'path' => $this->path,
             $this->record_type->identity->field1->name => $this->field_1_value,
             $this->record_type->identity->field2->name => $this->field_2_value,

@@ -51,9 +51,9 @@ class User extends Authenticatable implements Auditable
         return $this->hasManyDeep('App\Record', ['App\Record as case_owners','cases'], [null ,'owner_id']);
     }
 
-    public function caseRecords()
+    public function case_records()
     {
-        return $this->hasMany('App\CaseRecord', 'created_by');
+        return $this->hasManyThrough('App\CaseRecord', 'App\Record', null, 'owner_id');
     }
 
     public function groups()

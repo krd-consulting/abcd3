@@ -61,4 +61,5 @@ return array(
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'BeyondCode\\DumpServer\\' => array($vendorDir . '/beyondcode/laravel-dump-server/src'),
     'App\\' => array($baseDir . '/app'),
+    'AjCastro\\EagerLoadPivotRelations\\' => array($vendorDir . '/ajcastro/eager-load-pivot-relations/src'),
 );

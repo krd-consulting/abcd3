@@ -14,10 +14,13 @@
         @open="open"
         @close="close">
             <template v-slot:title>
-                <slot name="title">Manage Records</slot>
+                <slot name="title">Manage Cases</slot>
+            </template>
+            <template v-slot:caption>
+                <p>Check available records to add them to the caseload or uncheck current records to remove them from the caseload.</p>
             </template>
             <template v-slot:current-items-title>
-                Current Records
+                Current Caseload
             </template>
             <template v-slot:available-items-title>
                 Available Records
@@ -40,8 +43,8 @@
     </transfer>
 </template>
 <script>
-    import RecordRequest from '@/api/RecordsAvailableForGroupRequest';
-    import GroupRecordsRequest from '@/api/GroupRecordsRequest';
+    import AvailableCasesRequest from '@/api/RecordsAvailableForCaseloadRequest';
+    import CasesRequest from '@/api/CasesRequest';
 
     import Transfer from '@/App/components/transfer';
 
@@ -57,27 +60,59 @@
 
         props: {
             active: Boolean,
-            groupId: String|Number,
-            recordType: String
+            recordId: {
+                type: Number | String,
+                default: ''
+            },
+            recordType: {
+                type: String,
+                default: ''
+            },
+            programId: {
+                type: Number | String,
+                default: ''
+            }
+        },
+
+        computed: {
+            record() {
+                if(this.recordId === '')
+                    return this.$route.params.record;
+
+                return this.recordId;
+            },
+
+            type() {
+                if(this.recordType === '')
+                    return this.$route.params.recordType;
+
+                return this.recordType;
+            },
+
+            program() {
+                if(this.programId === '')
+                    return this.$route.params.program;
+
+                return this.programId;
+            }
         },
 
         data() {
             return {
-                fields: [],
-                recordsRequest: new RecordRequest({}),
-                groupRecordsRequest: new GroupRecordsRequest({}),
+                casesRequest: new CasesRequest({}),
+                availableCasesRequest: new AvailableCasesRequest({}),
                 selected: [],
                 notSelected: [],
                 selectedParams: {
                     ascending: true,
-                    sortBy: 'field_1_value',
+                    sortBy: 'id',
                     page: 1,
                     perPage: 10,
                     total: 0
                 },
                 notSelectedParams: {
                     ascending: true,
-                    sortBy: 'field_1_value',
+                    sortBy: 'id',
                     page: 1,
                     perPage: 10,
                     total: 0
@@ -92,23 +127,22 @@
             },
 
             loadSelected() {
-                this.groupRecordsRequest.setFields({
+                this.casesRequest.setFields({
                     params: this.selectedParams
                 });
 
-                this.groupRecordsRequest.retrieve(this.groupId, this.recordType).then(response => {
+                this.casesRequest.retrieve(this.program, this.type, this.record).then(response => {
                     this.selected = response.data;
                     this.selectedParams.total = response.meta.total;
-                    this.fields = response.fields;
                 });
             },
 
             loadNotSelected() {
-                this.recordsRequest.setFields({
+                this.availableCasesRequest.setFields({
                     params: this.notSelectedParams
                 });
 
-                this.recordsRequest.retrieve(this.groupId, this.recordType).then(response => {
+                this.availableCasesRequest.retrieve(this.program, this.type, this.record).then(response => {
                     this.notSelected = response.data;
                     this.notSelectedParams.total = response.meta.total;
                 });
@@ -144,10 +178,11 @@
             },
 
             add(id) {
-                this.groupRecordsRequest.store(
-                    this.$route.params.group,
-                    this.$route.params.recordType,
-                    id
+                this.casesRequest.store(
+                    this.program,
+                    this.type,
+                    this.record,
+                    id,
                 ).then((response) => {
                     this.open();
                 }).catch((error) => {
@@ -159,9 +194,10 @@
             },
 
             remove(id) {
-                this.groupRecordsRequest.destroy(
-                    this.$route.params.group,
-                    this.$route.params.recordType,
+                this.casesRequest.destroy(
+                    this.program,
+                    this.type,
+                    this.record,
                     id
                 ).then((response) => {
                     this.open();

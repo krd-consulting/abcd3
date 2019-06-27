@@ -37,7 +37,8 @@ class UpdateProgram extends FormRequest
                 ],
             'team_id' => 'required|exists:teams,id',
             'default_client_status_id' => 'required|exists:client_statuses,id',
-            'group_client_status_id' => 'required|exists:client_statuses,id'
+            'case_client_status_id' => 'sometimes|nullable|exists:client_statuses,id',
+            'group_client_status_id' => 'sometimes|nullable|exists:client_statuses,id'
         ];
     }
 }

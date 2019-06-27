@@ -65,6 +65,9 @@ class Program extends Model
 
     public function case_client_status()
     {
+        if(!$this->belongsTo('App\ClientStatus')->exists())
+            return $this->default_client_status();
+        
         return $this->belongsTo('App\ClientStatus');
     }
 
