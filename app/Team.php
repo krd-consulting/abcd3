@@ -15,8 +15,6 @@ class Team extends Model
     use Search;
     use Sort;
 
-    protected $appends = ['path'];
-
     protected $searchColumns = [
         'name',
     ];
