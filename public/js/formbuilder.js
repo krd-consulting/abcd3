@@ -5725,6 +5725,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/RecordTypeRequest */ "./resources/js/api/RecordTypeRequest.js");
 //
 //
 //
@@ -5783,10 +5784,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'textField',
   data: function data() {
     return {
+      recordTypes: [],
       fieldData: {
         label: '',
         description: '',
@@ -5828,7 +5833,18 @@ __webpack_require__.r(__webpack_exports__);
     submitfieldData: function submitfieldData(fieldData) {
       this.$emit('inputData', this.fieldData);
       console.log(this.fieldData);
+    },
+    retrieveRecordTypes: function retrieveRecordTypes() {
+      var _this = this;
+
+      var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
+      request.retrieve().then(function (response) {
+        _this.recordTypes = response;
+      });
     }
+  },
+  created: function created() {
+    this.retrieveRecordTypes();
   }
 });
 
@@ -7099,11 +7115,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    value: String | Number,
-    edit: {
-      type: Boolean,
-      "default": false
-    }
+    value: String | Number
   },
   data: function data() {
     return {
@@ -89442,17 +89454,14 @@ var render = function() {
                     attrs: { label: "Another Form", value: "form" }
                   }),
                   _vm._v(" "),
-                  _c("el-option", {
-                    attrs: { label: "Volunteer", value: "volunteer" }
-                  }),
-                  _vm._v(" "),
-                  _c("el-option", {
-                    attrs: { label: "Client", value: "client" }
-                  }),
-                  _vm._v(" "),
-                  _c("el-option", { attrs: { label: "Staff", value: "staff" } })
+                  _vm._l(_vm.recordTypes, function(type) {
+                    return _c("el-option", {
+                      key: type.slug,
+                      attrs: { label: type.name, value: type.slug }
+                    })
+                  })
                 ],
-                1
+                2
               ),
               _vm._v(" "),
               _vm.fieldData.reference === "form"
@@ -113473,6 +113482,61 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/RecordTypeRequest.js":
+/*!***********************************************!*\
+  !*** ./resources/js/api/RecordTypeRequest.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var RecordType =
+/*#__PURE__*/
+function (_Request) {
+  _inherits(RecordType, _Request);
+
+  function RecordType() {
+    _classCallCheck(this, RecordType);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(RecordType).apply(this, arguments));
+  }
+
+  _createClass(RecordType, [{
+    key: "retrieve",
+    value: function retrieve() {
+      return this.get("/api/record-types");
+    }
+  }]);
+
+  return RecordType;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (RecordType);
+
+/***/ }),
+
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
@@ -115068,6 +115132,188 @@ component.options.__file = "resources/js/components/userDropdown.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_userDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./userDropdown.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/userDropdown.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_userDropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/core/Errors.js":
+/*!*************************************!*\
+  !*** ./resources/js/core/Errors.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Errors =
+/*#__PURE__*/
+function () {
+  function Errors() {
+    _classCallCheck(this, Errors);
+
+    this.errors = {};
+  }
+
+  _createClass(Errors, [{
+    key: "has",
+    value: function has(field) {
+      return this.errors.hasOwnProperty(field);
+    }
+  }, {
+    key: "get",
+    value: function get(field) {
+      return this.errors[field];
+    }
+  }, {
+    key: "record",
+    value: function record(errors) {
+      this.errors = errors;
+    }
+  }, {
+    key: "any",
+    value: function any() {
+      return Object.keys(this.errors).length > 0;
+    }
+  }, {
+    key: "clear",
+    value: function clear(field) {
+      if (field) {
+        delete this.errors[field];
+        return;
+      }
+
+      this.errors = {};
+    }
+  }]);
+
+  return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Errors);
+
+/***/ }),
+
+/***/ "./resources/js/core/Request.js":
+/*!**************************************!*\
+  !*** ./resources/js/core/Request.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Errors_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Errors.js */ "./resources/js/core/Errors.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var Request =
+/*#__PURE__*/
+function () {
+  function Request(fields) {
+    _classCallCheck(this, Request);
+
+    this.setFields(fields);
+  }
+
+  _createClass(Request, [{
+    key: "setFields",
+    value: function setFields(fields) {
+      this.fieldData = fields;
+
+      for (var field in fields) {
+        this[field] = fields[field];
+      }
+
+      this.errors = new _Errors_js__WEBPACK_IMPORTED_MODULE_0__["default"]();
+    }
+  }, {
+    key: "data",
+    value: function data() {
+      var data = {};
+
+      for (var field in this.fieldData) {
+        data[field] = this[field];
+      }
+
+      return data;
+    }
+  }, {
+    key: "get",
+    value: function get(url) {
+      return this.submit('get', url);
+    }
+  }, {
+    key: "patch",
+    value: function patch(url) {
+      return this.submit('patch', url);
+    }
+  }, {
+    key: "post",
+    value: function post(url) {
+      return this.submit('post', url);
+    }
+  }, {
+    key: "put",
+    value: function put(url) {
+      return this.submit('put', url);
+    }
+  }, {
+    key: "delete",
+    value: function _delete(url) {
+      return this.submit('delete', url);
+    }
+  }, {
+    key: "submit",
+    value: function submit(request, url) {
+      var _this = this;
+
+      return new Promise(function (resolve, reject) {
+        axios[request](url, _this.data()).then(function (response) {
+          _this.onSuccess();
+
+          resolve(response.data);
+        })["catch"](function (error) {
+          _this.onFail(error.response.data.errors);
+
+          reject(error.response.data);
+        });
+      });
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      for (var field in this.fieldData) {
+        this[field] = '';
+      }
+
+      this.errors.clear();
+    }
+  }, {
+    key: "onSuccess",
+    value: function onSuccess() {
+      this.clear();
+    }
+  }, {
+    key: "onFail",
+    value: function onFail(errors) {
+      this.errors.record(errors);
+    }
+  }]);
+
+  return Request;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Request);
 
 /***/ }),
 

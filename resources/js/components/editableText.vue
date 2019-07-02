@@ -16,10 +16,6 @@
 	export default {
 		props: {
 			value: String | Number,
-			edit: {
-				type: Boolean,
-				default: false
-			}
 		},
 
 		data() {

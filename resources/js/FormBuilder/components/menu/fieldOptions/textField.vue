@@ -29,9 +29,11 @@
                 <el-select v-model="fieldData.reference">
                     <el-option label="No Reference" value="noRef"></el-option>
                     <el-option label="Another Form" value="form"></el-option>
-                    <el-option label="Volunteer" value="volunteer"></el-option>
-                    <el-option label="Client" value="client"></el-option>
-                    <el-option label="Staff" value="staff"></el-option>
+                    <el-option 
+                        v-for="type in recordTypes" 
+                        :label="type.name" 
+                        :value="type.slug"
+                        :key="type.slug"></el-option>
                 </el-select>
 
                 <div v-if="fieldData.reference === 'form'">
@@ -57,10 +59,14 @@
 </template>
 
 <script>
+import RecordTypeRequest from '@/api/RecordTypeRequest';
+
 export default {
     name: 'textField',
     data: () => {
         return {
+            recordTypes: [],
+
             fieldData: {
                 label: '',
                 description: '',
@@ -99,7 +105,19 @@ export default {
         submitfieldData(fieldData) {
             this.$emit('inputData', this.fieldData);
             console.log(this.fieldData)
-        }
+        },
+
+        retrieveRecordTypes() {
+            const request = new RecordTypeRequest({});
+
+            request.retrieve().then((response) => {
+                this.recordTypes = response;
+            });
+        },
+    },
+
+    created() {
+        this.retrieveRecordTypes();
     }
 }
 </script>
