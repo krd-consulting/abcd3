@@ -1,8 +1,8 @@
 <template>
     <div id="dropdown">
          
-        <label for="radioGroup" class="inputLabel">{{ inputFieldData.label }}</label><br>
-        <sup>{{ inputFieldData.description }}</sup>
+        <label for="radioGroup" class="inputLabel">{{ field.label }}</label><br>
+        <sup>{{ field.description }}</sup>
         <el-radio-group id="radioGroup" v-for="item in radioList" :key="item.value">
             <el-radio v-model="item.value" :label="item.value">{{ item.value }}</el-radio>
         </el-radio-group>
@@ -18,18 +18,18 @@
                         <el-row class="tw-my-6">
                             <label for="label">Field Label</label>
                             <el-col :span="20">
-                                <el-input id="label" v-model="inputFieldData.label"></el-input>
+                                <el-input id="label" v-model="field.label"></el-input>
                             </el-col>
                         </el-row>
                         <el-row class="tw-my-6">
                             <el-col :span="20">
                                 <label for="description">Field Description</label>
-                                <el-input id="description" v-model="inputFieldData.description"></el-input>
+                                <el-input id="description" v-model="field.description"></el-input>
                             </el-col>
                         </el-row>
                         <el-row class="tw-my-6">
                             <label for="switch" class="tw-mb-4">This field is</label><br>
-                            <el-switch id="switch" v-model="inputFieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                            <el-switch id="switch" v-model="field.required" active-text="Required" inactive-text="Optional"></el-switch>
                         </el-row>
                     </div>
 
@@ -70,7 +70,7 @@ export default {
             editField: '',
             radioList: [],
             nextItem: 0,
-            inputFieldData: []
+            field: []
         }
     },
     components: {
@@ -85,7 +85,7 @@ export default {
         }
     },
     created() {
-        this.inputFieldData = _.clone(this.fieldData)
+        this.field = _.clone(this.fieldData)
     },
     mounted: function() {
         this.setRadioItems(); // calls method upon being rendered in the DOM
@@ -110,7 +110,7 @@ export default {
         },
         setRadioItems() {
             var i;
-            for(i= 0; i < this.inputFieldData.options.radioNum; i++) {
+            for(i= 0; i < this.field.settings.radioNum; i++) {
                 this.loadItem();
             }
         },

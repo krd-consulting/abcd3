@@ -27,8 +27,8 @@
                         
                     <el-row :gutter="10">
                         <el-col :span="10">
-                            <span class="input-label">Client Name</span>
-                            <el-input class="inputField" v-model="clientName"></el-input>
+                            <span class="input-label"> {{ target_type }} Name</span>
+                            <el-input class="inputField"></el-input>
                         </el-col>
                         
                         <el-col :span="6">
@@ -59,6 +59,12 @@
 
                                     <component :is="inputType.input.component" 
                                         :fieldData="inputType.fieldData">
+                                        <el-button type="text" 
+                                            @click="removeItem(index)" 
+                                            icon="el-icon-close" 
+                                            class="tw-float-right hover:tw-text-red-600">
+                                                Remove
+                                        </el-button>
                                     </component>
                                     
                                 </el-card>
@@ -98,8 +104,9 @@ export default {
         return {
             // title: 'Your Form Title',
             // description: 'Subtext',
+            target_type: 'Staff',
             visible: false,
-            clientName: '',
+            name: '',
             dateCompleted: '',
             formList: [],
             // form: [],
@@ -181,7 +188,7 @@ export default {
         },
         form: {
             get() { return this.$store.state.form },
-            set(input) { this.$store.commit('ADD_FIELD', input) }
+            set(input) { this.$store.dispatch('addField', input) }
         }
     },
     methods: {

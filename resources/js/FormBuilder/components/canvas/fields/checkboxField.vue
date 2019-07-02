@@ -1,7 +1,7 @@
 <template>
   <div id="checkbox">
-      <label for="check" class="inputLabel">{{ inputFieldData.label }}</label><br>
-        <sup>{{ inputFieldData.description }}</sup>
+      <label for="check" class="inputLabel">{{ fields.label }}</label><br>
+        <sup>{{ fields.description }}</sup>
         <el-checkbox-group id="check" v-for="item in checkList" :key="item.value">
             <el-checkbox v-model="item.value" :label="item.value">{{ item.value }}</el-checkbox>
         </el-checkbox-group>
@@ -16,18 +16,18 @@
                 <el-row class="tw-my-6">
                     <label for="label">Field Label</label>
                     <el-col :span="20">
-                        <el-input id="label" v-model="inputFieldData.label"></el-input>
+                        <el-input id="label" v-model="fields.label"></el-input>
                     </el-col>
                 </el-row>
                 <el-row class="tw-my-6">
                     <el-col :span="20">
                         <label for="description">Field Description</label>
-                        <el-input id="description" v-model="inputFieldData.description"></el-input>
+                        <el-input id="description" v-model="fields.description"></el-input>
                     </el-col>
                 </el-row>
                 <el-row class="tw-my-6">
                     <label for="switch" class="tw-mb-4">This field is</label><br>
-                    <el-switch id="switch" v-model="inputFieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                    <el-switch id="switch" v-model="fields.required" active-text="Required" inactive-text="Optional"></el-switch>
                 </el-row>
             </div>
 
@@ -69,7 +69,7 @@ export default {
             editField: '',
             checkList: [],
             nextItem: 0,
-            inputFieldData: []
+            fields: []
         }
     },
     components: {
@@ -84,7 +84,7 @@ export default {
         }
     },
     created() {
-        this.inputFieldData = _.clone(this.fieldData)
+        this.fields = _.clone(this.fieldData)
     },
     mounted: function() {
         this.setCheckboxItems(); // calls method upon being rendered in the DOM
@@ -109,7 +109,7 @@ export default {
         },
         setCheckboxItems() {
             var i;
-            for(i= 0; i < this.inputFieldData.options.checkboxNum; i++) {
+            for(i= 0; i < this.fields.settings.checkboxNum; i++) {
                 this.loadItem();
             }
         },

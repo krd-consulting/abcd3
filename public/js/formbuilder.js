@@ -3604,7 +3604,7 @@ __webpack_require__.r(__webpack_exports__);
       editField: '',
       checkList: [],
       nextItem: 0,
-      inputFieldData: []
+      fields: []
     };
   },
   components: {
@@ -3619,7 +3619,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
+    this.fields = _.clone(this.fieldData);
   },
   mounted: function mounted() {
     this.setCheckboxItems(); // calls method upon being rendered in the DOM
@@ -3648,7 +3648,7 @@ __webpack_require__.r(__webpack_exports__);
     setCheckboxItems: function setCheckboxItems() {
       var i;
 
-      for (i = 0; i < this.inputFieldData.options.checkboxNum; i++) {
+      for (i = 0; i < this.fields.settings.checkboxNum; i++) {
         this.loadItem();
       }
     },
@@ -3732,6 +3732,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3743,7 +3746,7 @@ __webpack_require__.r(__webpack_exports__);
       rangeSeparator: '',
       startDate: '',
       endDate: '',
-      inputFieldData: []
+      field: []
     };
   },
   props: {
@@ -3753,14 +3756,25 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
+    this.field = _.clone(this.fieldData);
   },
   mounted: function mounted() {
-    this.togglePastOnly(), this.toggleQuickMenu(), this.toggleTime(), this.toggleRangeMenu();
+    this.togglePastOnly(), this.toggleFutureOnly(), this.toggleQuickMenu(), this.toggleTime(), this.toggleRangeMenu();
+  },
+  computed: {
+    handlePastFutureToggle: function handlePastFutureToggle() {
+      if (this.field.settings.past_only === true) {
+        this.field.settings.future_only === false;
+      }
+
+      if (this.field.settings.future_only === true) {
+        this.field.settings.past_only === false;
+      }
+    }
   },
   methods: {
     togglePastOnly: function togglePastOnly() {
-      if (this.inputFieldData.options.dateSelect1 === true) {
+      if (this.field.settings.past_only === true) {
         this.dateOptions = Object.assign({}, this.dateOptions, {
           disabledDate: function disabledDate(time) {
             return time.getTime() > Date.now();
@@ -3774,8 +3788,23 @@ __webpack_require__.r(__webpack_exports__);
         this.dateType = "date", this.datePlaceHolder = "Pick a day";
       }
     },
+    toggleFutureOnly: function toggleFutureOnly() {
+      if (this.field.settings.future_only === true) {
+        this.dateOptions = Object.assign({}, this.dateOptions, {
+          disabledDate: function disabledDate(time) {
+            return time.getTime() < Date.now();
+          }
+        });
+        this.dateType = "date", this.datePlaceHolder = "Pick a day";
+      } else {
+        this.dateOptions = Object.assign({}, this.dateOptions, {
+          disabledDate: {}
+        });
+        this.dateType = "date", this.datePlaceHolder = "Pick a day";
+      }
+    },
     toggleQuickMenu: function toggleQuickMenu() {
-      if (this.inputFieldData.options.dateSelect2 === true) {
+      if (this.field.settings.quick_menu === true) {
         this.dateOptions = Object.assign({}, this.dateOptions, {
           shortcuts: [{
             text: 'Today',
@@ -3800,14 +3829,14 @@ __webpack_require__.r(__webpack_exports__);
         });
         this.dateType = "date", this.datePlaceHolder = "Pick a day";
       } else {
-        this.dateOptions.Object.assign({}, this.dateOptions, {
+        this.datesettings.Object.assign({}, this.dateOptions, {
           shortcuts: {}
         });
         this.dateType = "date", this.datePlaceHolder = "Pick a day";
       }
     },
     toggleTime: function toggleTime() {
-      if (this.inputFieldData.options.dateSelect3 === true) {
+      if (this.field.settings.include_time === true) {
         this.dateType = "datetime", this.datePlaceHolder = "Pick a day and time";
         this.dateFormat = "yyyy/MM/dd hh:mm:ss a";
       } else {
@@ -3815,7 +3844,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     toggleRangeMenu: function toggleRangeMenu() {
-      if (this.inputFieldData.options.dateSelect4 === true) {
+      if (this.field.settings.date_range === true) {
         this.dateType = 'daterange', this.rangeSeparator = 'to', this.dateFormat = "yyyy/MM/dd", this.startDate = 'Start date', this.endDate = 'End date';
       }
     }
@@ -3891,6 +3920,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3900,7 +3930,7 @@ __webpack_require__.r(__webpack_exports__);
       editField: '',
       dropdownList: [],
       nextItem: 0,
-      inputFieldData: []
+      field: []
     };
   },
   components: {
@@ -3915,7 +3945,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
+    this.field = _.clone(this.fieldData);
   },
   mounted: function mounted() {
     this.setDropdownItems(); // calls method upon being rendered in the DOM
@@ -3944,7 +3974,7 @@ __webpack_require__.r(__webpack_exports__);
     setDropdownItems: function setDropdownItems() {
       var i;
 
-      for (i = 0; i < this.inputFieldData.options.dropdownNum; i++) {
+      for (i = 0; i < this.field.settings.dropdownNum; i++) {
         this.loadItem();
       }
     },
@@ -4306,11 +4336,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'numeric',
   data: function data() {
     return {
       num: 0,
-      inputFieldData: []
+      field: []
     };
   },
   props: {
@@ -4320,7 +4352,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
+    this.field = _.clone(this.fieldData);
   }
 });
 
@@ -4406,7 +4438,7 @@ __webpack_require__.r(__webpack_exports__);
       editField: '',
       radioList: [],
       nextItem: 0,
-      inputFieldData: []
+      field: []
     };
   },
   components: {
@@ -4421,7 +4453,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
+    this.field = _.clone(this.fieldData);
   },
   mounted: function mounted() {
     this.setRadioItems(); // calls method upon being rendered in the DOM
@@ -4450,7 +4482,7 @@ __webpack_require__.r(__webpack_exports__);
     setRadioItems: function setRadioItems() {
       var i;
 
-      for (i = 0; i < this.inputFieldData.options.radioNum; i++) {
+      for (i = 0; i < this.field.settings.radioNum; i++) {
         this.loadItem();
       }
     },
@@ -4553,37 +4585,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Textbox',
   data: function data() {
     return {
-      customArea: '',
-      setLength: 50,
-      inputFieldData: []
+      value: '',
+      field: []
     };
   },
   props: {
@@ -4595,7 +4602,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
+    this.field = _.clone(this.fieldData);
   }
 });
 
@@ -4696,12 +4703,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Textfield',
   data: function data() {
     return {
-      setLength: 50,
-      customField: '',
-      inputFieldData: []
+      value: '',
+      field: []
     };
   },
   props: {
@@ -4713,18 +4728,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
-  },
-  computed: {
-    rules: function rules() {
-      return {
-        customField: [{
-          required: this.isRequired,
-          message: 'Please make an entry',
-          trigger: 'blur'
-        }]
-      };
-    }
+    this.field = _.clone(this.fieldData);
   }
 });
 
@@ -4910,6 +4914,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4931,8 +4941,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       // title: 'Your Form Title',
       // description: 'Subtext',
+      target_type: 'Staff',
       visible: false,
-      clientName: '',
+      name: '',
       dateCompleted: '',
       formList: [],
       // form: [],
@@ -5019,7 +5030,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return this.$store.state.form;
       },
       set: function set(input) {
-        this.$store.commit('ADD_FIELD', input);
+        this.$store.dispatch('addField', input);
       }
     }
   }),
@@ -5135,7 +5146,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         id: 1,
         name: 'Text Area',
-        component: 'TexBox'
+        component: 'TextBox'
       }, {
         id: 2,
         name: 'Numeric',
@@ -5505,23 +5516,23 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fieldData: {
         label: 'Field Name',
-        required: false,
         description: '',
         reference: '',
-        options: {
+        settings: {
+          required: false,
           defaultNum: 0,
           dropdownNum: 0,
           radioNum: 2,
           checkboxNum: 2,
-          matrixQuestions: 2,
-          matrixChoices: 5,
+          matrix_questions: 2,
+          matrix_choices: 5,
           isLimited: false,
-          setLength: 50,
-          sectionHeader: 'New Section',
-          dateSelect1: false,
-          dateSelect2: false,
-          dateSelect3: false,
-          dateSelect4: false
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
         }
       }
     };
@@ -5531,20 +5542,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     handleChange: function handleChange() {
-      console.log('Doing the thing in input fieldData');
+      console.log('Doing the thing in inputOptions');
     },
-    // removeDomain(item) {
-    //   var index = this.fieldData.dropdownItems.domains.indexOf(item);
-    //   if (index !== -1) {
-    //     this.fieldData.dropdownItems.domains.splice(index, 1);
-    //   }
-    // },
-    // addDomain() {
-    //   this.fieldData.dropdownItems.domains.push({
-    //     key: Date.now(),
-    //     value: ''
-    //   });
-    // },
     submitfieldData: function submitfieldData(fieldData) {
       this.$emit('outputData', this.fieldData);
     }
@@ -6207,9 +6206,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -6222,7 +6218,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      // image: image,
       activeIndex: '1',
       inputOptions: {},
       fields: []
@@ -6233,8 +6228,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log(key, keyPath);
     },
     addField: function addField(field) {
-      // append to fields
-      this.fields.push(field);
+      // append to fields arrays
+      this.fields.push(field); // this.$store.dispatch('addField', field)
     },
     setOptions: function setOptions(options) {
       this.inputOptions.push(options);
@@ -85402,11 +85397,11 @@ var render = function() {
     { attrs: { id: "checkbox" } },
     [
       _c("label", { staticClass: "inputLabel", attrs: { for: "check" } }, [
-        _vm._v(_vm._s(_vm.inputFieldData.label))
+        _vm._v(_vm._s(_vm.fields.label))
       ]),
       _c("br"),
       _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.inputFieldData.description))]),
+      _c("sup", [_vm._v(_vm._s(_vm.fields.description))]),
       _vm._v(" "),
       _vm._l(_vm.checkList, function(item) {
         return _c(
@@ -85469,11 +85464,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "label" },
                               model: {
-                                value: _vm.inputFieldData.label,
+                                value: _vm.fields.label,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
+                                  _vm.$set(_vm.fields, "label", $$v)
                                 },
-                                expression: "inputFieldData.label"
+                                expression: "fields.label"
                               }
                             })
                           ],
@@ -85498,15 +85493,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "description" },
                               model: {
-                                value: _vm.inputFieldData.description,
+                                value: _vm.fields.description,
                                 callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
-                                    $$v
-                                  )
+                                  _vm.$set(_vm.fields, "description", $$v)
                                 },
-                                expression: "inputFieldData.description"
+                                expression: "fields.description"
                               }
                             })
                           ],
@@ -85534,11 +85525,11 @@ var render = function() {
                             "inactive-text": "Optional"
                           },
                           model: {
-                            value: _vm.inputFieldData.required,
+                            value: _vm.fields.required,
                             callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
+                              _vm.$set(_vm.fields, "required", $$v)
                             },
-                            expression: "inputFieldData.required"
+                            expression: "fields.required"
                           }
                         })
                       ],
@@ -85688,11 +85679,11 @@ var render = function() {
     { attrs: { id: "datepicker" } },
     [
       _c("label", { staticClass: "inputLabel", attrs: { for: "dateField" } }, [
-        _vm._v(_vm._s(_vm.inputFieldData.label))
+        _vm._v(_vm._s(_vm.field.label))
       ]),
       _c("br"),
       _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.inputFieldData.description))]),
+      _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
       _vm._v(" "),
       _c("el-date-picker", {
         attrs: {
@@ -85748,11 +85739,11 @@ var render = function() {
                           [
                             _c("el-input", {
                               model: {
-                                value: _vm.inputFieldData.label,
+                                value: _vm.field.label,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
+                                  _vm.$set(_vm.field, "label", $$v)
                                 },
-                                expression: "inputFieldData.label"
+                                expression: "field.label"
                               }
                             })
                           ],
@@ -85777,15 +85768,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "description" },
                               model: {
-                                value: _vm.inputFieldData.description,
+                                value: _vm.field.description,
                                 callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
-                                    $$v
-                                  )
+                                  _vm.$set(_vm.field, "description", $$v)
                                 },
-                                expression: "inputFieldData.description"
+                                expression: "field.description"
                               }
                             })
                           ],
@@ -85810,11 +85797,11 @@ var render = function() {
                             "inactive-text": "Optional"
                           },
                           model: {
-                            value: _vm.inputFieldData.required,
+                            value: _vm.field.required,
                             callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
+                              _vm.$set(_vm.field, "required", $$v)
                             },
-                            expression: "inputFieldData.required"
+                            expression: "field.required"
                           }
                         })
                       ],
@@ -85835,20 +85822,33 @@ var render = function() {
                       { staticClass: "tw-m-4" },
                       [
                         _c("el-switch", {
-                          attrs: {
-                            "active-text": "Only allow up to current day"
-                          },
+                          attrs: { "active-text": "Up to current day" },
                           on: { change: _vm.togglePastOnly },
                           model: {
-                            value: _vm.inputFieldData.options.dateSelect1,
+                            value: _vm.field.settings.past_only,
                             callback: function($$v) {
-                              _vm.$set(
-                                _vm.inputFieldData.options,
-                                "dateSelect1",
-                                $$v
-                              )
+                              _vm.$set(_vm.field.settings, "past_only", $$v)
                             },
-                            expression: "inputFieldData.options.dateSelect1"
+                            expression: "field.settings.past_only"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "el-row",
+                      { staticClass: "tw-m-4" },
+                      [
+                        _c("el-switch", {
+                          attrs: { "active-text": "Beyond current day" },
+                          on: { change: _vm.toggleFutureOnly },
+                          model: {
+                            value: _vm.field.settings.future_only,
+                            callback: function($$v) {
+                              _vm.$set(_vm.field.settings, "future_only", $$v)
+                            },
+                            expression: "field.settings.future_only"
                           }
                         })
                       ],
@@ -85863,15 +85863,11 @@ var render = function() {
                           attrs: { "active-text": "Include Quick menu" },
                           on: { change: _vm.toggleQuickMenu },
                           model: {
-                            value: _vm.inputFieldData.options.dateSelect2,
+                            value: _vm.field.settings.quick_menu,
                             callback: function($$v) {
-                              _vm.$set(
-                                _vm.inputFieldData.options,
-                                "dateSelect2",
-                                $$v
-                              )
+                              _vm.$set(_vm.field.settings, "quick_menu", $$v)
                             },
-                            expression: "inputFieldData.options.dateSelect2"
+                            expression: "field.settings.quick_menu"
                           }
                         })
                       ],
@@ -85886,15 +85882,11 @@ var render = function() {
                           attrs: { "active-text": "Include time" },
                           on: { change: _vm.toggleTime },
                           model: {
-                            value: _vm.inputFieldData.options.dateSelect3,
+                            value: _vm.field.settings.include_time,
                             callback: function($$v) {
-                              _vm.$set(
-                                _vm.inputFieldData.options,
-                                "dateSelect3",
-                                $$v
-                              )
+                              _vm.$set(_vm.field.settings, "include_time", $$v)
                             },
-                            expression: "inputFieldData.options.dateSelect3"
+                            expression: "field.settings.include_time"
                           }
                         })
                       ],
@@ -85909,15 +85901,11 @@ var render = function() {
                           attrs: { "active-text": "Date Range" },
                           on: { change: _vm.toggleRangeMenu },
                           model: {
-                            value: _vm.inputFieldData.options.dateSelect4,
+                            value: _vm.field.settings.date_range,
                             callback: function($$v) {
-                              _vm.$set(
-                                _vm.inputFieldData.options,
-                                "dateSelect4",
-                                $$v
-                              )
+                              _vm.$set(_vm.field.settings, "date_range", $$v)
                             },
-                            expression: "inputFieldData.options.dateSelect4"
+                            expression: "field.settings.date_range"
                           }
                         })
                       ],
@@ -85966,11 +85954,11 @@ var render = function() {
     { attrs: { id: "dropdown" } },
     [
       _c("label", { staticClass: "inputLabel", attrs: { for: "dropdown" } }, [
-        _vm._v(_vm._s(_vm.inputFieldData.label))
+        _vm._v(_vm._s(_vm.field.label))
       ]),
       _c("br"),
       _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.inputFieldData.description))]),
+      _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
       _vm._v(" "),
       _c(
         "el-select",
@@ -86030,11 +86018,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "label" },
                               model: {
-                                value: _vm.inputFieldData.label,
+                                value: _vm.field.label,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
+                                  _vm.$set(_vm.field, "label", $$v)
                                 },
-                                expression: "inputFieldData.label"
+                                expression: "field.label"
                               }
                             })
                           ],
@@ -86059,15 +86047,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "description" },
                               model: {
-                                value: _vm.inputFieldData.description,
+                                value: _vm.field.description,
                                 callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
-                                    $$v
-                                  )
+                                  _vm.$set(_vm.field, "description", $$v)
                                 },
-                                expression: "inputFieldData.description"
+                                expression: "field.description"
                               }
                             })
                           ],
@@ -86095,11 +86079,11 @@ var render = function() {
                             "inactive-text": "Optional"
                           },
                           model: {
-                            value: _vm.inputFieldData.required,
+                            value: _vm.field.required,
                             callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
+                              _vm.$set(_vm.field, "required", $$v)
                             },
-                            expression: "inputFieldData.required"
+                            expression: "field.required"
                           }
                         })
                       ],
@@ -86823,23 +86807,25 @@ var render = function() {
     { attrs: { id: "numeric" } },
     [
       _c("label", { staticClass: "inputLabel", attrs: { for: "numfield" } }, [
-        _vm._v(_vm._s(_vm.inputFieldData.label))
+        _vm._v(_vm._s(_vm.field.label))
       ]),
       _c("br"),
       _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.inputFieldData.description))]),
+      _c("sup", [_vm._v(_vm._s(_vm.field.fieldDescription))]),
       _vm._v(" "),
-      _vm.inputFieldData.options.isLimited
+      _vm.field.settings.isLimited
         ? _c("el-input-number", {
+            attrs: { id: "numfield" },
             model: {
-              value: _vm.inputFieldData.options.defaultNum,
+              value: _vm.field.settings.defaultNum,
               callback: function($$v) {
-                _vm.$set(_vm.inputFieldData.options, "defaultNum", $$v)
+                _vm.$set(_vm.field.settings, "defaultNum", $$v)
               },
-              expression: "inputFieldData.options.defaultNum"
+              expression: "field.settings.defaultNum"
             }
           })
         : _c("el-input-number", {
+            attrs: { id: "numfield" },
             model: {
               value: _vm.num,
               callback: function($$v) {
@@ -86887,11 +86873,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "label" },
                               model: {
-                                value: _vm.inputFieldData.label,
+                                value: _vm.field.label,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
+                                  _vm.$set(_vm.field, "label", $$v)
                                 },
-                                expression: "inputFieldData.label"
+                                expression: "field.label"
                               }
                             })
                           ],
@@ -86916,15 +86902,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "description" },
                               model: {
-                                value: _vm.inputFieldData.description,
+                                value: _vm.field.fieldDescription,
                                 callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
-                                    $$v
-                                  )
+                                  _vm.$set(_vm.field, "fieldDescription", $$v)
                                 },
-                                expression: "inputFieldData.description"
+                                expression: "field.fieldDescription"
                               }
                             })
                           ],
@@ -86952,11 +86934,11 @@ var render = function() {
                             "inactive-text": "Optional"
                           },
                           model: {
-                            value: _vm.inputFieldData.required,
+                            value: _vm.field.required,
                             callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
+                              _vm.$set(_vm.field, "required", $$v)
                             },
-                            expression: "inputFieldData.required"
+                            expression: "field.required"
                           }
                         })
                       ],
@@ -86979,30 +86961,24 @@ var render = function() {
                         "active-text": "Set Default"
                       },
                       model: {
-                        value: _vm.inputFieldData.options.isLimited,
+                        value: _vm.field.settings.isLimited,
                         callback: function($$v) {
-                          _vm.$set(_vm.inputFieldData.options, "isLimited", $$v)
+                          _vm.$set(_vm.field.settings, "isLimited", $$v)
                         },
-                        expression: "inputFieldData.options.isLimited"
+                        expression: "field.settings.isLimited"
                       }
                     }),
                     _c("br"),
                     _vm._v(" "),
                     _c("el-input-number", {
                       staticClass: "tw-my-6",
-                      attrs: {
-                        disabled: !_vm.inputFieldData.options.isLimited
-                      },
+                      attrs: { disabled: !_vm.field.settings.isLimited },
                       model: {
-                        value: _vm.inputFieldData.options.defaultNum,
+                        value: _vm.field.settings.defaultNum,
                         callback: function($$v) {
-                          _vm.$set(
-                            _vm.inputFieldData.options,
-                            "defaultNum",
-                            $$v
-                          )
+                          _vm.$set(_vm.field.settings, "defaultNum", $$v)
                         },
-                        expression: "inputFieldData.options.defaultNum"
+                        expression: "field.settings.defaultNum"
                       }
                     })
                   ],
@@ -87048,11 +87024,11 @@ var render = function() {
     { attrs: { id: "dropdown" } },
     [
       _c("label", { staticClass: "inputLabel", attrs: { for: "radioGroup" } }, [
-        _vm._v(_vm._s(_vm.inputFieldData.label))
+        _vm._v(_vm._s(_vm.field.label))
       ]),
       _c("br"),
       _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.inputFieldData.description))]),
+      _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
       _vm._v(" "),
       _vm._l(_vm.radioList, function(item) {
         return _c(
@@ -87115,11 +87091,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "label" },
                               model: {
-                                value: _vm.inputFieldData.label,
+                                value: _vm.field.label,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
+                                  _vm.$set(_vm.field, "label", $$v)
                                 },
-                                expression: "inputFieldData.label"
+                                expression: "field.label"
                               }
                             })
                           ],
@@ -87144,15 +87120,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "description" },
                               model: {
-                                value: _vm.inputFieldData.description,
+                                value: _vm.field.description,
                                 callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
-                                    $$v
-                                  )
+                                  _vm.$set(_vm.field, "description", $$v)
                                 },
-                                expression: "inputFieldData.description"
+                                expression: "field.description"
                               }
                             })
                           ],
@@ -87180,11 +87152,11 @@ var render = function() {
                             "inactive-text": "Optional"
                           },
                           model: {
-                            value: _vm.inputFieldData.required,
+                            value: _vm.field.required,
                             callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
+                              _vm.$set(_vm.field, "required", $$v)
                             },
-                            expression: "inputFieldData.required"
+                            expression: "field.required"
                           }
                         })
                       ],
@@ -87325,7 +87297,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "textarea" } },
+    { attrs: { id: "Textbox" } },
     [
       _c(
         "el-row",
@@ -87336,43 +87308,43 @@ var render = function() {
             [
               _c(
                 "label",
-                { staticClass: "inputLabel", attrs: { for: "textArea" } },
-                [_vm._v(_vm._s(_vm.inputFieldData.label))]
+                { staticClass: "inputLabel", attrs: { for: "textBox" } },
+                [_vm._v(_vm._s(_vm.field.label))]
               ),
               _vm._v(" "),
-              _c("sup", [_vm._v(_vm._s(_vm.inputFieldData.description))]),
+              _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
               _vm._v(" "),
-              _vm.inputFieldData.options.isLimited
+              _vm.field.settings.isLimited
                 ? _c("el-input", {
                     attrs: {
-                      id: "textArea",
+                      id: "textBox",
                       type: "textarea",
                       rows: 2,
-                      maxlength: _vm.inputFieldData.options.setLength,
+                      maxlength: _vm.field.settings.max,
                       "show-word-limit": "",
                       placeholder: "Your text here"
                     },
                     model: {
-                      value: _vm.customArea,
+                      value: _vm.value,
                       callback: function($$v) {
-                        _vm.customArea = $$v
+                        _vm.value = $$v
                       },
-                      expression: "customArea"
+                      expression: "value"
                     }
                   })
                 : _c("el-input", {
                     attrs: {
-                      id: "textArea",
+                      id: "textBox",
                       type: "textarea",
                       rows: 2,
                       placeholder: "Your text here"
                     },
                     model: {
-                      value: _vm.customArea,
+                      value: _vm.value,
                       callback: function($$v) {
-                        _vm.customArea = $$v
+                        _vm.value = $$v
                       },
-                      expression: "customArea"
+                      expression: "value"
                     }
                   })
             ],
@@ -87394,7 +87366,7 @@ var render = function() {
                 { slot: "title" },
                 [
                   _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field Options")
+                    _vm._v("Field field")
                   ])
                 ],
                 1
@@ -87420,11 +87392,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "label" },
                               model: {
-                                value: _vm.inputFieldData.label,
+                                value: _vm.field.label,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
+                                  _vm.$set(_vm.field, "label", $$v)
                                 },
-                                expression: "inputFieldData.label"
+                                expression: "field.label"
                               }
                             })
                           ],
@@ -87449,15 +87421,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "description" },
                               model: {
-                                value: _vm.inputFieldData.description,
+                                value: _vm.field.description,
                                 callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
-                                    $$v
-                                  )
+                                  _vm.$set(_vm.field, "description", $$v)
                                 },
-                                expression: "inputFieldData.description"
+                                expression: "field.description"
                               }
                             })
                           ],
@@ -87485,11 +87453,11 @@ var render = function() {
                             "inactive-text": "Optional"
                           },
                           model: {
-                            value: _vm.inputFieldData.required,
+                            value: _vm.field.required,
                             callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
+                              _vm.$set(_vm.field, "required", $$v)
                             },
-                            expression: "inputFieldData.required"
+                            expression: "field.required"
                           }
                         })
                       ],
@@ -87515,11 +87483,11 @@ var render = function() {
                         "active-text": "Set Character Limit"
                       },
                       model: {
-                        value: _vm.inputFieldData.options.isLimited,
+                        value: _vm.field.settings.isLimited,
                         callback: function($$v) {
-                          _vm.$set(_vm.inputFieldData.options, "isLimited", $$v)
+                          _vm.$set(_vm.field.settings, "isLimited", $$v)
                         },
-                        expression: "inputFieldData.options.isLimited"
+                        expression: "field.settings.isLimited"
                       }
                     }),
                     _c("br"),
@@ -87527,92 +87495,19 @@ var render = function() {
                     _c("el-input-number", {
                       staticClass: "tw-my-6",
                       attrs: {
-                        disabled: !_vm.inputFieldData.options.isLimited,
+                        disabled: !_vm.field.settings.isLimited,
                         step: 5,
                         min: 0,
                         "step-strictly": ""
                       },
                       model: {
-                        value: _vm.inputFieldData.options.setLength,
+                        value: _vm.field.settings.max,
                         callback: function($$v) {
-                          _vm.$set(_vm.inputFieldData.options, "setLength", $$v)
+                          _vm.$set(_vm.field.settings, "max", $$v)
                         },
-                        expression: "inputFieldData.options.setLength"
+                        expression: "field.settings.max"
                       }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("label", { attrs: { for: "reference" } }, [
-                          _vm._v("Field Refers To:")
-                        ]),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c(
-                          "el-select",
-                          {
-                            attrs: { id: "reference" },
-                            model: {
-                              value: _vm.inputFieldData.options.reference,
-                              callback: function($$v) {
-                                _vm.$set(
-                                  _vm.inputFieldData.options,
-                                  "reference",
-                                  $$v
-                                )
-                              },
-                              expression: "inputFieldData.options.reference"
-                            }
-                          },
-                          [
-                            _c("el-option", {
-                              attrs: { label: "Itself", value: "itself" }
-                            }),
-                            _vm._v(" "),
-                            _c("el-option", {
-                              attrs: {
-                                label: "A field within this form",
-                                value: "internalField"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("el-option", {
-                              attrs: { label: "Volunteer", value: "volunteer" }
-                            }),
-                            _vm._v(" "),
-                            _c("el-option", {
-                              attrs: { label: "Client", value: "client" }
-                            }),
-                            _vm._v(" "),
-                            _c("el-option", {
-                              attrs: { label: "Staff", value: "staff" }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("el-row", [
-                      _vm.inputFieldData.options.reference === "internalField"
-                        ? _c("div", [_c("p", [_vm._v("Do some stuff")])])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.inputFieldData.options.reference === "volunteer"
-                        ? _c("div", [_c("p", [_vm._v("Do some other stuff")])])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.inputFieldData.options.reference === "client"
-                        ? _c("div", [_c("p", [_vm._v("Do some thing")])])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.inputFieldData.options.reference === "staff"
-                        ? _c("div", [_c("p", [_vm._v("Do some other thing")])])
-                        : _vm._e()
-                    ])
+                    })
                   ],
                   1
                 )
@@ -87653,7 +87548,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "textbox" } },
+    { attrs: { id: "Textfield" } },
     [
       _c(
         "el-row",
@@ -87665,37 +87560,37 @@ var render = function() {
               _c(
                 "label",
                 { staticClass: "inputLabel", attrs: { for: "label" } },
-                [_vm._v(_vm._s(_vm.inputFieldData.label))]
+                [_vm._v(_vm._s(_vm.field.label))]
               ),
               _c("br"),
               _vm._v(" "),
-              _c("sup", [_vm._v(_vm._s(_vm.inputFieldData.description))]),
+              _c("sup", [_vm._v(_vm._s(_vm.field.settingsDescription))]),
               _vm._v(" "),
-              _vm.inputFieldData.options.isLimited
+              _vm.field.settings.isLimited
                 ? _c("el-input", {
                     attrs: {
                       id: "label",
                       type: "text",
-                      maxlength: _vm.inputFieldData.options.setLength,
+                      maxlength: _vm.field.settings.max,
                       placeholder: "Your text here",
                       "show-word-limit": ""
                     },
                     model: {
-                      value: _vm.customField,
+                      value: _vm.value,
                       callback: function($$v) {
-                        _vm.customField = $$v
+                        _vm.value = $$v
                       },
-                      expression: "customField"
+                      expression: "value"
                     }
                   })
                 : _c("el-input", {
                     attrs: { type: "text", placeholder: "Your text here" },
                     model: {
-                      value: _vm.customField,
+                      value: _vm.value,
                       callback: function($$v) {
-                        _vm.customField = $$v
+                        _vm.value = $$v
                       },
-                      expression: "customField"
+                      expression: "value"
                     }
                   })
             ],
@@ -87717,7 +87612,7 @@ var render = function() {
                 { slot: "title" },
                 [
                   _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field Options")
+                    _vm._v("Field field")
                   ])
                 ],
                 1
@@ -87743,11 +87638,11 @@ var render = function() {
                             _c("el-input", {
                               attrs: { id: "label" },
                               model: {
-                                value: _vm.inputFieldData.label,
+                                value: _vm.field.label,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
+                                  _vm.$set(_vm.field, "label", $$v)
                                 },
-                                expression: "inputFieldData.label"
+                                expression: "field.label"
                               }
                             })
                           ],
@@ -87766,21 +87661,21 @@ var render = function() {
                           { attrs: { span: 20 } },
                           [
                             _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Description")
+                              _vm._v("Field Subtext")
                             ]),
                             _vm._v(" "),
                             _c("el-input", {
                               attrs: { id: "description" },
                               model: {
-                                value: _vm.inputFieldData.description,
+                                value: _vm.field.settingsDescription,
                                 callback: function($$v) {
                                   _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
+                                    _vm.field,
+                                    "settingsDescription",
                                     $$v
                                   )
                                 },
-                                expression: "inputFieldData.description"
+                                expression: "field.settingsDescription"
                               }
                             })
                           ],
@@ -87808,11 +87703,11 @@ var render = function() {
                             "inactive-text": "Optional"
                           },
                           model: {
-                            value: _vm.inputFieldData.required,
+                            value: _vm.field.settings.required,
                             callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
+                              _vm.$set(_vm.field.settings, "required", $$v)
                             },
-                            expression: "inputFieldData.required"
+                            expression: "field.settings.required"
                           }
                         })
                       ],
@@ -87838,11 +87733,11 @@ var render = function() {
                         "active-text": "Limit"
                       },
                       model: {
-                        value: _vm.inputFieldData.isLimited,
+                        value: _vm.field.settings.isLimited,
                         callback: function($$v) {
-                          _vm.$set(_vm.inputFieldData, "isLimited", $$v)
+                          _vm.$set(_vm.field.settings, "isLimited", $$v)
                         },
-                        expression: "inputFieldData.isLimited"
+                        expression: "field.settings.isLimited"
                       }
                     }),
                     _c("br"),
@@ -87850,92 +87745,19 @@ var render = function() {
                     _c("el-input-number", {
                       staticClass: "tw-my-6",
                       attrs: {
-                        disabled: !_vm.inputFieldData.isLimited,
+                        disabled: !_vm.field.settings.isLimited,
                         step: 5,
                         min: 0,
                         "step-strictly": ""
                       },
                       model: {
-                        value: _vm.inputFieldData.setLength,
+                        value: _vm.field.settings.max,
                         callback: function($$v) {
-                          _vm.$set(_vm.inputFieldData, "setLength", $$v)
+                          _vm.$set(_vm.field.settings, "max", $$v)
                         },
-                        expression: "inputFieldData.setLength"
+                        expression: "field.settings.max"
                       }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("label", { attrs: { for: "reference" } }, [
-                          _vm._v("Field Refers To:")
-                        ]),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c(
-                          "el-select",
-                          {
-                            attrs: { id: "reference" },
-                            model: {
-                              value: _vm.inputFieldData.options.reference,
-                              callback: function($$v) {
-                                _vm.$set(
-                                  _vm.inputFieldData.options,
-                                  "reference",
-                                  $$v
-                                )
-                              },
-                              expression: "inputFieldData.options.reference"
-                            }
-                          },
-                          [
-                            _c("el-option", {
-                              attrs: { label: "Itself", value: "itself" }
-                            }),
-                            _vm._v(" "),
-                            _c("el-option", {
-                              attrs: {
-                                label: "A field within this form",
-                                value: "internalField"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("el-option", {
-                              attrs: { label: "Volunteer", value: "volunteer" }
-                            }),
-                            _vm._v(" "),
-                            _c("el-option", {
-                              attrs: { label: "Client", value: "client" }
-                            }),
-                            _vm._v(" "),
-                            _c("el-option", {
-                              attrs: { label: "Staff", value: "staff" }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("el-row", [
-                      _vm.inputFieldData.options.reference === "internalField"
-                        ? _c("div", [_c("p", [_vm._v("Do some stuff")])])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.inputFieldData.options.reference === "volunteer"
-                        ? _c("div", [_c("p", [_vm._v("Do some other stuff")])])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.inputFieldData.options.reference === "client"
-                        ? _c("div", [_c("p", [_vm._v("Do some thing")])])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.inputFieldData.options.reference === "staff"
-                        ? _c("div", [_c("p", [_vm._v("Do some other thing")])])
-                        : _vm._e()
-                    ])
+                    })
                   ],
                   1
                 )
@@ -88258,19 +88080,10 @@ var render = function() {
                         { attrs: { span: 10 } },
                         [
                           _c("span", { staticClass: "input-label" }, [
-                            _vm._v("Client Name")
+                            _vm._v(" " + _vm._s(_vm.target_type) + " Name")
                           ]),
                           _vm._v(" "),
-                          _c("el-input", {
-                            staticClass: "inputField",
-                            model: {
-                              value: _vm.clientName,
-                              callback: function($$v) {
-                                _vm.clientName = $$v
-                              },
-                              expression: "clientName"
-                            }
-                          })
+                          _c("el-input", { staticClass: "inputField" })
                         ],
                         1
                       ),
@@ -88380,12 +88193,39 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c(inputType.input.component, {
-                                        tag: "component",
-                                        attrs: {
-                                          fieldData: inputType.fieldData
-                                        }
-                                      })
+                                      _c(
+                                        inputType.input.component,
+                                        {
+                                          tag: "component",
+                                          attrs: {
+                                            fieldData: inputType.fieldData
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "el-button",
+                                            {
+                                              staticClass:
+                                                "tw-float-right hover:tw-text-red-600",
+                                              attrs: {
+                                                type: "text",
+                                                icon: "el-icon-close"
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.removeItem(index)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                            Remove\n                                    "
+                                              )
+                                            ]
+                                          )
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
@@ -88556,7 +88396,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " options")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -88635,91 +88475,28 @@ var render = function() {
                         "active-text": "Set Character Limit"
                       },
                       model: {
-                        value: _vm.fieldData.options.isLimited,
+                        value: _vm.fieldData.settings.isLimited,
                         callback: function($$v) {
-                          _vm.$set(_vm.fieldData.options, "isLimited", $$v)
+                          _vm.$set(_vm.fieldData.settings, "isLimited", $$v)
                         },
-                        expression: "fieldData.options.isLimited"
+                        expression: "fieldData.settings.isLimited"
                       }
                     }),
                     _vm._v(" "),
                     _c("el-input-number", {
                       attrs: {
-                        disabled: !_vm.fieldData.options.isLimited,
+                        disabled: !_vm.fieldData.settings.isLimited,
                         step: 5,
                         "step-strictly": ""
                       },
                       model: {
-                        value: _vm.fieldData.options.setLength,
+                        value: _vm.fieldData.settings.max,
                         callback: function($$v) {
-                          _vm.$set(_vm.fieldData.options, "setLength", $$v)
+                          _vm.$set(_vm.fieldData.settings, "max", $$v)
                         },
-                        expression: "fieldData.options.setLength"
+                        expression: "fieldData.settings.max"
                       }
                     })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Refers To:" } },
-                  [
-                    _c(
-                      "el-select",
-                      {
-                        model: {
-                          value: _vm.fieldData.reference,
-                          callback: function($$v) {
-                            _vm.$set(_vm.fieldData, "reference", $$v)
-                          },
-                          expression: "fieldData.reference"
-                        }
-                      },
-                      [
-                        _c("el-option", {
-                          attrs: { label: "Itself", value: "itself" }
-                        }),
-                        _vm._v(" "),
-                        _c("el-option", {
-                          attrs: {
-                            label: "A field within this form",
-                            value: "internalField"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("el-option", {
-                          attrs: { label: "Volunteer", value: "volunteer" }
-                        }),
-                        _vm._v(" "),
-                        _c("el-option", {
-                          attrs: { label: "Client", value: "client" }
-                        }),
-                        _vm._v(" "),
-                        _c("el-option", {
-                          attrs: { label: "Staff", value: "staff" }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _vm.fieldData.reference === "internalField"
-                      ? _c("div", [_c("p", [_vm._v("Do some stuff")])])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.fieldData.reference === "volunteer"
-                      ? _c("div", [_c("p", [_vm._v("Do some other stuff")])])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.fieldData.reference === "client"
-                      ? _c("div", [_c("p", [_vm._v("Do something else")])])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.fieldData.reference === "staff"
-                      ? _c("div", [
-                          _c("p", [_vm._v("What are our references really?")])
-                        ])
-                      : _vm._e()
                   ],
                   1
                 ),
@@ -88754,7 +88531,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -88833,26 +88610,26 @@ var render = function() {
                         "active-text": "Set Character Limit"
                       },
                       model: {
-                        value: _vm.fieldData.options.isLimited,
+                        value: _vm.fieldData.settings.isLimited,
                         callback: function($$v) {
-                          _vm.$set(_vm.fieldData.options, "isLimited", $$v)
+                          _vm.$set(_vm.fieldData.settings, "isLimited", $$v)
                         },
-                        expression: "fieldData.options.isLimited"
+                        expression: "fieldData.settings.isLimited"
                       }
                     }),
                     _vm._v(" "),
                     _c("el-input-number", {
                       attrs: {
-                        disabled: !_vm.fieldData.options.isLimited,
+                        disabled: !_vm.fieldData.settings.isLimited,
                         step: 5,
                         "step-strictly": ""
                       },
                       model: {
-                        value: _vm.fieldData.options.setLength,
+                        value: _vm.fieldData.settings.max,
                         callback: function($$v) {
-                          _vm.$set(_vm.fieldData.options, "setLength", $$v)
+                          _vm.$set(_vm.fieldData.settings, "max", $$v)
                         },
-                        expression: "fieldData.options.setLength"
+                        expression: "fieldData.settings.max"
                       }
                     })
                   ],
@@ -88885,7 +88662,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -89012,7 +88789,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -89088,11 +88865,11 @@ var render = function() {
                       attrs: { "controls-position": "right", min: 2, max: 10 },
                       on: { change: _vm.handleChange },
                       model: {
-                        value: _vm.fieldData.options.dropdownNum,
+                        value: _vm.fieldData.settings.dropdownNum,
                         callback: function($$v) {
-                          _vm.$set(_vm.fieldData.options, "dropdownNum", $$v)
+                          _vm.$set(_vm.fieldData.settings, "dropdownNum", $$v)
                         },
-                        expression: "fieldData.options.dropdownNum"
+                        expression: "fieldData.settings.dropdownNum"
                       }
                     })
                   ],
@@ -89129,7 +88906,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -89205,11 +88982,11 @@ var render = function() {
                       attrs: { "controls-position": "right", min: 1, max: 10 },
                       on: { change: _vm.handleChange },
                       model: {
-                        value: _vm.fieldData.options.radioNum,
+                        value: _vm.fieldData.settings.radioNum,
                         callback: function($$v) {
-                          _vm.$set(_vm.fieldData.options, "radioNum", $$v)
+                          _vm.$set(_vm.fieldData.settings, "radioNum", $$v)
                         },
-                        expression: "fieldData.options.radioNum"
+                        expression: "fieldData.settings.radioNum"
                       }
                     })
                   ],
@@ -89242,7 +89019,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -89318,11 +89095,11 @@ var render = function() {
                       attrs: { "controls-position": "right", min: 1, max: 10 },
                       on: { change: _vm.handleChange },
                       model: {
-                        value: _vm.fieldData.options.checkboxNum,
+                        value: _vm.fieldData.settings.checkboxNum,
                         callback: function($$v) {
-                          _vm.$set(_vm.fieldData.options, "checkboxNum", $$v)
+                          _vm.$set(_vm.fieldData.settings, "checkboxNum", $$v)
                         },
-                        expression: "fieldData.options.checkboxNum"
+                        expression: "fieldData.settings.checkboxNum"
                       }
                     })
                   ],
@@ -89355,7 +89132,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -89436,15 +89213,11 @@ var render = function() {
                             "active-text": "Only allow up to current day"
                           },
                           model: {
-                            value: _vm.fieldData.options.dateSelect1,
+                            value: _vm.fieldData.settings.past_only,
                             callback: function($$v) {
-                              _vm.$set(
-                                _vm.fieldData.options,
-                                "dateSelect1",
-                                $$v
-                              )
+                              _vm.$set(_vm.fieldData.settings, "past_only", $$v)
                             },
-                            expression: "fieldData.options.dateSelect1"
+                            expression: "fieldData.settings.past_only"
                           }
                         })
                       ],
@@ -89457,15 +89230,15 @@ var render = function() {
                         _c("el-switch", {
                           attrs: { "active-text": "Quick menu" },
                           model: {
-                            value: _vm.fieldData.options.dateSelect2,
+                            value: _vm.fieldData.settings.quick_menu,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.fieldData.options,
-                                "dateSelect2",
+                                _vm.fieldData.settings,
+                                "quick_menu",
                                 $$v
                               )
                             },
-                            expression: "fieldData.options.dateSelect2"
+                            expression: "fieldData.settings.quick_menu"
                           }
                         })
                       ],
@@ -89478,15 +89251,15 @@ var render = function() {
                         _c("el-switch", {
                           attrs: { "active-text": "Include time" },
                           model: {
-                            value: _vm.fieldData.options.dateSelect3,
+                            value: _vm.fieldData.settings.include_time,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.fieldData.options,
-                                "dateSelect3",
+                                _vm.fieldData.settings,
+                                "include_time",
                                 $$v
                               )
                             },
-                            expression: "fieldData.options.dateSelect3"
+                            expression: "fieldData.settings.include_time"
                           }
                         })
                       ],
@@ -89499,15 +89272,15 @@ var render = function() {
                         _c("el-switch", {
                           attrs: { "active-text": "Date Range" },
                           model: {
-                            value: _vm.fieldData.options.dateSelect4,
+                            value: _vm.fieldData.settings.date_range,
                             callback: function($$v) {
                               _vm.$set(
-                                _vm.fieldData.options,
-                                "dateSelect4",
+                                _vm.fieldData.settings,
+                                "date_range",
                                 $$v
                               )
                             },
-                            expression: "fieldData.options.dateSelect4"
+                            expression: "fieldData.settings.date_range"
                           }
                         })
                       ],
@@ -89543,7 +89316,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -89638,7 +89411,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -89715,15 +89488,15 @@ var render = function() {
                       attrs: { "controls-position": "right", min: 1 },
                       on: { change: _vm.handleChange },
                       model: {
-                        value: _vm.fieldData.options.matrixQuestions,
+                        value: _vm.fieldData.settings.matrix_questions,
                         callback: function($$v) {
                           _vm.$set(
-                            _vm.fieldData.options,
-                            "matrixQuestions",
+                            _vm.fieldData.settings,
+                            "matrix_questions",
                             $$v
                           )
                         },
-                        expression: "fieldData.options.matrixQuestions"
+                        expression: "fieldData.settings.matrix_questions"
                       }
                     })
                   ],
@@ -89738,11 +89511,15 @@ var render = function() {
                       attrs: { "controls-position": "right", min: 1, max: 10 },
                       on: { change: _vm.handleChange },
                       model: {
-                        value: _vm.fieldData.options.matrixChoices,
+                        value: _vm.fieldData.settings.matrix_choices,
                         callback: function($$v) {
-                          _vm.$set(_vm.fieldData.options, "matrixChoices", $$v)
+                          _vm.$set(
+                            _vm.fieldData.settings,
+                            "matrix_choices",
+                            $$v
+                          )
                         },
-                        expression: "fieldData.options.matrixChoices"
+                        expression: "fieldData.settings.matrix_choices"
                       }
                     })
                   ],
@@ -89775,7 +89552,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -89870,7 +89647,7 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Options")]),
+            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
             _vm._v(" "),
             _c(
               "el-form",
@@ -89890,11 +89667,11 @@ var render = function() {
                   [
                     _c("el-input", {
                       model: {
-                        value: _vm.fieldData.options.sectionHeader,
+                        value: _vm.fieldData.label,
                         callback: function($$v) {
-                          _vm.$set(_vm.fieldData.options, "sectionHeader", $$v)
+                          _vm.$set(_vm.fieldData, "label", $$v)
                         },
-                        expression: "fieldData.options.sectionHeader"
+                        expression: "fieldData.label"
                       }
                     })
                   ],
@@ -112681,7 +112458,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  addField: function addField(field) {
+    field.commit('ADD_FIELD');
+  }
+});
 
 /***/ }),
 
@@ -112790,7 +112571,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: form, default */
 /***/ (function(module) {
 
-module.exports = {"form":{"title":"Test Form","description":"Intake form for Shakespeare Slam Poetry Club","targetType":"Client","targetId":"3","formType":"pre/post","Name":"","team":[],"date":"","fields":[{"fieldType":"Radio","label":"What is thy gender","fieldDescription":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":50,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[{"id":0,"text":"Male","value":1},{"id":1,"text":"Female","value":2},{"id":2,"text":"Non-Binary","value":3},{"id":3,"text":"Speaketh not of mine amorous rite","value":4}]}},{"fieldType":"TextField","label":"Wherefore art thee hither ","fieldDescription":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":50,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[]}},{"fieldType":"TextBox","label":"Pray pardon me thy expectation?","fieldDescription":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":150,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[]}},{"fieldType":"NumericField","label":"What age is thee?","fieldDescription":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":150,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[]}},{"fieldType":"Dropdown","label":"Is this very much a useful field?","fieldDescription":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":150,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[{"id":1,"text":"Aye! We absolutely do","value":1},{"id":2,"text":"Nay! We doth not","value":2},{"id":3,"text":"Oft upon a yonder edge-case","value":3}]}},{"fieldType":"SectionDivider","label":"Just Because","fieldDescription":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":150,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[]}},{"fieldType":"Checkbox","label":"What notable characters art among thy highest in estimation","fieldDescription":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":50,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[{"id":0,"text":"Hamlet","value":1},{"id":1,"text":"Iago","value":2},{"id":2,"text":"Lady Macbeth","value":3},{"id":3,"text":"Mercutio","value":4},{"id":4,"text":"Macbeth","value":5},{"id":5,"text":"Ophelia","value":6},{"id":6,"text":"Othello","value":7},{"id":7,"text":"Viola","value":8},{"id":8,"text":"Benedick","value":9},{"id":9,"text":"Horatio","value":10}]}},{"fieldType":"Datefield","label":"Shall I compare thee to a summer's day?","fieldDescription":"Or mayhaps a winters eve?","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":50,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[]}},{"fieldType":"TimePicker","label":"The Time is nigh","fieldDescription":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":50,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[]}},{"fieldType":"Matrix","label":"Satisfaction Survey","fieldDescription":"An assessment of your overall life satisfaction","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":50,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[{"id":0,"text":"How for art thou satisfied"},{"id":1,"text":"From whence from thou art satisfied"},{"id":2,"text":"Doth satisfaction thous't cannot attain"}],"responses":[{"id":0,"text":"A pestilent gall to me ","value":1},{"id":1,"text":"Tis but a scratch","value":2},{"id":2,"text":"I doth not care","value":3},{"id":3,"text":"I feeleth well enow ","value":4},{"id":4,"text":"like a silver bow!","value":5}]}},{"fieldType":"Upload","label":"Present your most eloquent self-portrait","fieldDescription":"This shall be displayed upon thy Slam Poetry Roster card","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrixQuestions":2,"matrixChoices":5,"isLimited":false,"setLength":50,"dateSelect1":false,"dateSelect2":false,"dateSelect3":false,"dateSelect4":false},"options":{"questions":[],"responses":[]}}]}};
+module.exports = {"form":{"title":"Test Form","description":"Intake form for Shakespeare Slam Poetry Club","target_type":"Client","target_id":"3","form_type":"pre/post","Name":"","team":[],"date":"","fields":[{"type":"Radio","label":"What is thy gender","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Male","value":1},{"id":1,"text":"Female","value":2},{"id":2,"text":"Non-Binary","value":3},{"id":3,"text":"Speaketh not of mine amorous rite","value":4}]}},{"type":"TextField","label":"Wherefore art thee hither ","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TextBox","label":"Pray pardon me thy expectation?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"NumericField","label":"What age is thee?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Dropdown","label":"Is this very much a useful field?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":1,"text":"Aye! We absolutely do","value":1},{"id":2,"text":"Nay! We doth not","value":2},{"id":3,"text":"Oft upon a yonder edge-case","value":3}]}},{"type":"SectionDivider","label":"Just Because","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Checkbox","label":"What notable characters art among thy highest in estimation","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Hamlet","value":1},{"id":1,"text":"Iago","value":2},{"id":2,"text":"Lady Macbeth","value":3},{"id":3,"text":"Mercutio","value":4},{"id":4,"text":"Macbeth","value":5},{"id":5,"text":"Ophelia","value":6},{"id":6,"text":"Othello","value":7},{"id":7,"text":"Viola","value":8},{"id":8,"text":"Benedick","value":9},{"id":9,"text":"Horatio","value":10}]}},{"type":"Datefield","label":"Shall I compare thee to a summer's day?","description":"Or mayhaps a winters eve?","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TimePicker","label":"The Time is nigh","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Matrix","label":"Satisfaction Survey","description":"An assessment of your overall life satisfaction","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[{"id":0,"text":"How for art thou satisfied"},{"id":1,"text":"From whence from thou art satisfied"},{"id":2,"text":"Doth satisfaction thous't cannot attain"}],"choices":[{"id":0,"text":"A pestilent gall to me ","value":1},{"id":1,"text":"Tis but a scratch","value":2},{"id":2,"text":"I doth not care","value":3},{"id":3,"text":"I feeleth well enow ","value":4},{"id":4,"text":"like a silver bow!","value":5}]}},{"type":"Upload","label":"Present your most eloquent self-portrait","description":"This shall be displayed upon thy Slam Poetry Roster card","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}}]}};
 
 /***/ }),
 
