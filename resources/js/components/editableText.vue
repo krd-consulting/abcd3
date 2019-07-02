@@ -1,5 +1,5 @@
 <template>
-	<div v-on="$listeners.click" @click="edit" @keyup.enter="save">
+	<div v-on="$listeners.click" @click.prevent="edit" @keyup.enter="save">
 		<div class="pb-px" v-if="!active">{{ value }}</div>
 		<div v-if="active">
 			<el-input 
@@ -15,7 +15,11 @@
 <script>
 	export default {
 		props: {
-			value: String | Number
+			value: String | Number,
+			edit: {
+				type: Boolean,
+				default: false
+			}
 		},
 
 		data() {

@@ -4404,6 +4404,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4463,6 +4470,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     showField: function showField(value) {
       return this.radioList[value] == '' || this.editField == value;
+    },
+    test: function test() {
+      alert('hello');
     }
   }
 });
@@ -7089,7 +7099,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    value: String | Number
+    value: String | Number,
+    edit: {
+      type: Boolean,
+      "default": false
+    }
   },
   data: function data() {
     return {
@@ -9141,7 +9155,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -9160,7 +9174,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\r\n    right: 10px; */\n}\r\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\n    right: 10px; */\n}\n", ""]);
 
 // exports
 
@@ -9217,7 +9231,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -87398,12 +87412,14 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._l(_vm.radioList, function(item) {
-        return _c(
-          "el-radio-group",
-          { key: item.value, attrs: { id: "radioGroup" } },
-          [
-            _c("el-radio", {
+      _c(
+        "el-radio-group",
+        { attrs: { id: "radioGroup" } },
+        _vm._l(_vm.radioList, function(item) {
+          return _c(
+            "el-radio",
+            {
+              key: item.value,
               staticClass: "tw-mx-4",
               attrs: { label: item.value },
               model: {
@@ -87413,11 +87429,28 @@ var render = function() {
                 },
                 expression: "item.value"
               }
-            })
-          ],
-          1
-        )
-      }),
+            },
+            [
+              _c(
+                "editable-text",
+                {
+                  staticClass: "tw-cursor-pointer",
+                  model: {
+                    value: item.value,
+                    callback: function($$v) {
+                      _vm.$set(item, "value", $$v)
+                    },
+                    expression: "item.value"
+                  }
+                },
+                [_vm._v(_vm._s(item.value))]
+              )
+            ],
+            1
+          )
+        }),
+        1
+      ),
       _vm._v(" "),
       _vm._t("default"),
       _vm._v(" "),
@@ -91300,7 +91333,10 @@ var render = function() {
     _vm._g(
       {
         on: {
-          click: _vm.edit,
+          click: function($event) {
+            $event.preventDefault()
+            return _vm.edit($event)
+          },
           keyup: function($event) {
             if (
               !$event.type.indexOf("key") &&
@@ -115042,7 +115078,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

@@ -5,10 +5,17 @@
             <editable-text class="tw-cursor-pointer" v-model="field.label">{{ field.label}}</editable-text>
         </label>
         
-        <el-radio-group id="radioGroup" v-for="item in radioList" :key="item.value">
+        <el-radio-group id="radioGroup">
             
-            <el-radio v-model="item.value" :label="item.value" class="tw-mx-4">
-                <!-- <editable-text class="tw-cursor-pointer" @input="showField" v-model="item.value">{{ item.value }}</editable-text> -->
+            <el-radio 
+                v-model="item.value" 
+                v-for="item in radioList" 
+                :key="item.value" 
+                :label="item.value" 
+                class="tw-mx-4">
+                <editable-text 
+                    class="tw-cursor-pointer"
+                    v-model="item.value">{{ item.value }}</editable-text>
             </el-radio>
 
         </el-radio-group>
@@ -105,6 +112,10 @@ export default {
         showField(value){
             return (this.radioList[value] == '' || this.editField == value)
         },
+
+        test() {
+            alert('hello');
+        }
     }
 }
 </script>
