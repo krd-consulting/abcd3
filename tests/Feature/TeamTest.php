@@ -14,12 +14,11 @@ use App\Http\Resources\Teams;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TeamTest extends TestCase
 {
-    use WithFaker, DatabaseMigrations, DatabaseTransactions;
+    use WithFaker, RefreshDatabase;
 
     /** @test */
     public function user_with_universal_scope_can_see_all_teams()
