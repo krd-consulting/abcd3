@@ -1,54 +1,32 @@
 <template>
     <div id="timePicker">
-        <label for="time-picker" class="inputLabel">{{ inputFieldData.label }}</label><br>
-        <sup>{{ inputFieldData.description }}</sup>
-        <el-time-picker
-            arrow-control
-            v-model="timeSelection"
-            :picker-options="{selectableRange: '18:30:00 - 20:30:00'}"
-            placeholder="Pick a time">
-        </el-time-picker>
+        <el-row>
 
-        <el-collapse>
-            <el-collapse-item>
-                <template slot="title">
-                    <el-button icon="el-icon-edit">Field Options</el-button>
-                </template>
-                <div class="tw-flex tw-inline-block tw-w-full">
-                    <div class="tw-float-left">
-                            
-                        <el-row class="tw-my-6">
-                            <label for="label">Field Label</label>
-                            <el-col :span="20">
-                                <el-input id="label" v-model="inputFieldData.label"></el-input>
-                            </el-col>
-                        </el-row>
-                        <el-row class="tw-my-6">
-                            <el-col :span="20">
-                                <label for="description">Field Description</label>
-                                <el-input id="description" v-model="inputFieldData.description"></el-input>
-                            </el-col>
-                        </el-row>
-                        <el-row class="tw-my-6">
-                            <label for="switch" class="tw-mb-4">This field is</label><br>
-                            <el-switch id="switch" v-model="inputFieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
-                        </el-row>
-                    </div>
+            <label class="inputLabel">
+                <editable-text class="tw-cursor-pointer" @input="showField" v-model="field.label">{{ field.label }}</editable-text>
+            </label>
 
-                </div>
+            <sup>{{ field.description }}</sup>
+            <el-time-picker
+                arrow-control
+                v-model="timeSelection"
+                :picker-options="{selectableRange: '18:30:00 - 20:30:00'}"
+                placeholder="Pick a time">
+            </el-time-picker>
 
-                <slot></slot>
-            </el-collapse-item>
-        </el-collapse>
+            <slot></slot>
+        </el-row>
     </div>
 </template>
 
 <script>
+import EditableText from '@/components/editableText.vue'
+
 export default {
     data: () => {
         return {
             timeSelection: '',
-            inputFieldData: [],
+            field: [],
         }
     },
     props: {
@@ -57,9 +35,17 @@ export default {
             default: {}
         }
     },
-    created() {
-        this.inputFieldData = _.clone(this.fieldData)
+    components: {
+        EditableText
     },
+    created() {
+        this.field = _.clone(this.fieldData)
+    },
+    methods: {
+        showField(value){
+            return (this.field.label[value] == '' || this.editField == value)
+        }
+    }
 }
 </script>
 

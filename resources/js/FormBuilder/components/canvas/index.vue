@@ -3,6 +3,7 @@
         <el-container>
             <el-main>
                 <el-card body-style="padding: 10px;" shadow="hover" >
+
                     <el-header class="tw-text-center tw-mb-12">
                         <h1 class="tw-text-4xl">
                             <editable-text class="tw-cursor-pointer" 
@@ -59,12 +60,12 @@
 
                                     <component :is="inputType.input.component" 
                                         :fieldData="inputType.fieldData">
-                                        <el-button type="text" 
-                                            @click="removeItem(index)" 
-                                            icon="el-icon-close" 
-                                            class="tw-float-right hover:tw-text-red-600">
-                                                Remove
-                                        </el-button>
+                                            <el-button type="text" 
+                                                @click="removeItem(index)" 
+                                                icon="el-icon-close" 
+                                                class="button-position tw-float-right hover:tw-text-red-600">
+                                                    Remove
+                                            </el-button>
                                     </component>
                                     
                                 </el-card>
@@ -72,7 +73,9 @@
                         </el-row>
                     </div>
                 </draggable>
+
                 <el-divider></el-divider>
+                
             </el-card>
             </el-main>
         </el-container>
@@ -250,5 +253,10 @@ export default {
   }
   .canvas-card {
       font-size: 110%;
+  }
+  .button-position {
+    position: relative;
+    /* bottom: -10px;
+    right: 10px; */
   }
 </style>

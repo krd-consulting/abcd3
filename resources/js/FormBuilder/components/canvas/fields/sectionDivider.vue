@@ -1,26 +1,24 @@
 <template>
-     <el-collapse>
-        <el-collapse-item name="1">
-            <template slot="title">
-                <el-divider><span>{{ inputFieldData.options.sectionHeader }}</span></el-divider>
-            </template>
-            <div>
-                <el-form label-position="top" ref="options" :model="options" @submit.native.prevent>
-                    <el-form-item label="Section Title">
-                        <el-input v-model="inputFieldData.options.sectionHeader"></el-input>
-                    </el-form-item>
-                </el-form>
-            </div>
-            <slot></slot>
-        </el-collapse-item>
-     </el-collapse>
+    <div>
+        <el-divider>
+
+            <span>
+                <editable-text class="tw-cursor-pointer" @input="showField" v-model="field.label">{{ field.label}}</editable-text>
+            </span>
+
+        </el-divider>
+
+        <slot></slot>
+    </div>
 </template>
 
 <script>
+import EditableText from '@/components/editableText.vue'
+
 export default {
     data() {
         return {
-            inputFieldData: []
+            field: []
         }
     },
     props: {
@@ -29,9 +27,17 @@ export default {
             default: {}
         }
     },
-    created() {
-        this.inputFieldData = _.clone(this.fieldData)
+    components: {
+        EditableText
     },
+    created() {
+        this.field = _.clone(this.fieldData)
+    },
+    methods: {
+        showField(value){
+            return (this.field.label[value] == '' || this.editField == value)
+        }
+    }
 }
 </script>
 

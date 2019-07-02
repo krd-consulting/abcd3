@@ -11,25 +11,6 @@
             <el-button icon="el-icon-edit">Field Options</el-button>
         </template>
         <div class="tw-flex tw-inline-block tw-w-full">
-            <div class="tw-float-left">
-                    
-                <el-row class="tw-my-6">
-                    <label for="label">Field Label</label>
-                    <el-col :span="20">
-                        <el-input id="label" v-model="fields.label"></el-input>
-                    </el-col>
-                </el-row>
-                <el-row class="tw-my-6">
-                    <el-col :span="20">
-                        <label for="description">Field Description</label>
-                        <el-input id="description" v-model="fields.description"></el-input>
-                    </el-col>
-                </el-row>
-                <el-row class="tw-my-6">
-                    <label for="switch" class="tw-mb-4">This field is</label><br>
-                    <el-switch id="switch" v-model="fields.required" active-text="Required" inactive-text="Optional"></el-switch>
-                </el-row>
-            </div>
 
             <div class="tw-float-right tw-mx-20 tw-my-6">
                 <form @submit.prevent="addItem">

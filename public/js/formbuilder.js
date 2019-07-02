@@ -3488,52 +3488,6 @@ function mergeFn (a, b) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      inputFieldData: []
-    };
-  },
-  props: {
-    fieldData: {
-      type: Array | Object,
-      "default": {}
-    }
-  },
-  created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/checkboxField.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/canvas/fields/checkboxField.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
 //
 //
@@ -3549,11 +3503,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      field: []
+    };
+  },
+  props: {
+    fieldData: {
+      type: Array | Object,
+      "default": {}
+    }
+  },
+  components: {
+    EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  created: function created() {
+    this.field = _.clone(this.fieldData);
+  },
+  methods: {
+    showField: function showField(value) {
+      return this.field.label[value] == '' || this.editField == value;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/canvas/fields/checkboxField.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/canvas/fields/checkboxField.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
 //
 //
 //
@@ -4417,18 +4404,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4486,12 +4461,6 @@ __webpack_require__.r(__webpack_exports__);
         this.loadItem();
       }
     },
-    focusField: function focusField(value) {
-      this.editField = value;
-    },
-    blurField: function blurField() {
-      this.editField = '';
-    },
     showField: function showField(value) {
       return this.radioList[value] == '' || this.editField == value;
     }
@@ -4509,6 +4478,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
 //
 //
 //
@@ -4539,52 +4509,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textbox',
   data: function data() {
@@ -4601,8 +4526,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  components: {
+    EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   created: function created() {
     this.field = _.clone(this.fieldData);
+  },
+  methods: {
+    showField: function showField(value) {
+      return this.field.label[value] == '' || this.editField == value;
+    }
   }
 });
 
@@ -4617,6 +4550,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
 //
 //
 //
@@ -4647,70 +4581,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textfield',
   data: function data() {
@@ -4727,8 +4598,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  components: {
+    EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   created: function created() {
     this.field = _.clone(this.fieldData);
+  },
+  methods: {
+    showField: function showField(value) {
+      return this.field.label[value] == '' || this.editField == value;
+    }
   }
 });
 
@@ -4743,6 +4622,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
 //
 //
 //
@@ -4764,35 +4644,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       timeSelection: '',
-      inputFieldData: []
+      field: []
     };
   },
   props: {
@@ -4801,8 +4658,16 @@ __webpack_require__.r(__webpack_exports__);
       "default": {}
     }
   },
+  components: {
+    EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
+    this.field = _.clone(this.fieldData);
+  },
+  methods: {
+    showField: function showField(value) {
+      return this.field.label[value] == '' || this.editField == value;
+    }
   }
 });
 
@@ -4839,6 +4704,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
 //
 //
 //
@@ -5072,18 +4940,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/index.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/index.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
-/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _inputOptions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inputOptions */ "./resources/js/FormBuilder/components/menu/inputOptions.vue");
 //
 //
 //
@@ -5112,117 +4977,323 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'checkBox',
   data: function data() {
     return {
-      step: '1',
-      selectedInput: {
-        id: '',
-        name: '',
-        component: ''
-      },
-      basicInputs: [{
-        id: 0,
-        name: 'Text Field',
-        component: 'TextField'
-      }, {
-        id: 1,
-        name: 'Text Area',
-        component: 'TextBox'
-      }, {
-        id: 2,
-        name: 'Numeric',
-        component: 'NumericField'
-      }, {
-        id: 3,
-        name: 'Dropdown',
-        component: 'DropdownField'
-      }, {
-        id: 4,
-        name: 'Radio',
-        component: 'RadioField'
-      }, {
-        id: 5,
-        name: 'Checkbox',
-        component: 'CheckboxField'
-      }, {
-        id: 6,
-        name: 'Date Field',
-        component: 'DateField'
-      }, {
-        id: 7,
-        name: 'Time Picker',
-        component: 'TimePicker'
-      }, {
-        id: 8,
-        name: 'Matrix',
-        component: 'MatrixField'
-      }, {
-        id: 9,
-        name: 'File Upload',
-        component: 'FileUpload'
-      }, {
-        id: 10,
-        name: 'Section Divider',
-        component: 'SectionDivider'
-      }],
-      // presetInputs: [],
-      others: [],
-      fieldData: {} //passed from InputOptions component
-
+      fieldData: {
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
     };
   },
   props: {
-    outputData: Object
+    inputData: Object
   },
-  components: {
-    draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a,
-    InputOptions: _inputOptions__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
-  computed: {},
   methods: {
-    selectInput: function selectInput(input) {
-      console.log(input.name);
-      this.selectedInput = Object.assign({}, input);
-      console.log(this.selectedInput.id);
-      this.step = '2';
+    handleChange: function handleChange() {
+      console.log('Doing the thing in menu options');
     },
-    setInputOptions: function setInputOptions(value) {
-      this.fieldData = value;
-      var data = {
-        input: _.clone(this.selectedInput),
-        fieldData: _.clone(this.fieldData)
-      };
-      this.$emit("add", data);
-      this.step = '1';
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('outputData', this.fieldData);
     }
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'datePicker',
+  data: function data() {
+    return {
+      fieldData: {
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  },
+  methods: {
+    handleChange: function handleChange() {
+      console.log('Doing the thing in menu options');
+    },
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('inputData', this.fieldData);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'dropdown',
+  data: function data() {
+    return {
+      fieldData: {
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  },
+  methods: {
+    handleChange: function handleChange() {
+      console.log('Doing the thing in menu options');
+    },
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('outputData', this.fieldData);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'fileUpload',
+  data: function data() {
+    return {
+      fieldData: {
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  },
+  methods: {
+    handleChange: function handleChange() {
+      console.log('Doing the thing in menu options');
+    },
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('outputData', this.fieldData);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5267,220 +5338,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'matrix',
+  data: function data() {
+    return {
+      fieldData: {
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  },
+  methods: {
+    handleChange: function handleChange() {
+      console.log('Doing the thing in menu options');
+    },
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('inputData', this.fieldData);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -5511,11 +5426,165 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'inputOptions',
+  name: 'Numeric',
   data: function data() {
     return {
       fieldData: {
-        label: 'Field Name',
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  },
+  methods: {
+    handleChange: function handleChange() {
+      console.log('Doing the thing in menu options');
+    },
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('inputData', this.fieldData);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'radioField',
+  data: function data() {
+    return {
+      fieldData: {
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  },
+  methods: {
+    handleChange: function handleChange() {
+      console.log('Doing the thing in menu options');
+    },
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('outputData', this.fieldData);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'sectionDivider',
+  data: function data() {
+    return {
+      fieldData: {
+        label: '',
         description: '',
         reference: '',
         settings: {
@@ -5542,10 +5611,475 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     handleChange: function handleChange() {
-      console.log('Doing the thing in inputOptions');
+      console.log('Doing the thing in menu options');
     },
     submitfieldData: function submitfieldData(fieldData) {
       this.$emit('outputData', this.fieldData);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'textBox',
+  data: function data() {
+    return {
+      fieldData: {
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'textField',
+  data: function data() {
+    return {
+      fieldData: {
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  },
+  methods: {
+    handleChange: function handleChange() {
+      // used for testing connection. throw away when finished
+      console.log('Doing the thing in menu options');
+    },
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('inputData', this.fieldData);
+      console.log(this.fieldData);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'timePicker',
+  data: function data() {
+    return {
+      fieldData: {
+        label: '',
+        description: '',
+        reference: '',
+        settings: {
+          required: false,
+          defaultNum: 0,
+          dropdownNum: 0,
+          radioNum: 2,
+          checkboxNum: 2,
+          matrix_questions: 2,
+          matrix_choices: 5,
+          isLimited: false,
+          max: 50,
+          past_only: false,
+          future_only: false,
+          quick_menu: false,
+          include_time: false,
+          date_range: false
+        },
+        rules: {
+          label: [{
+            required: true,
+            message: 'Please input Question or Title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  },
+  methods: {
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('inputData', this.fieldData);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/index.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/index.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
+/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _fieldOptions_textField_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fieldOptions/textField.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue");
+/* harmony import */ var _fieldOptions_textArea_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fieldOptions/textArea.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue");
+/* harmony import */ var _fieldOptions_timePicker_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./fieldOptions/timePicker.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue");
+/* harmony import */ var _fieldOptions_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./fieldOptions/sectionDivider.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue");
+/* harmony import */ var _fieldOptions_fileUpload_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./fieldOptions/fileUpload.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue");
+/* harmony import */ var _fieldOptions_numeric_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./fieldOptions/numeric.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue");
+/* harmony import */ var _fieldOptions_matrix_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./fieldOptions/matrix.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue");
+/* harmony import */ var _fieldOptions_datePicker_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./fieldOptions/datePicker.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue");
+/* harmony import */ var _fieldOptions_checkBox_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./fieldOptions/checkBox.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue");
+/* harmony import */ var _fieldOptions_radioField_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fieldOptions/radioField.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue");
+/* harmony import */ var _fieldOptions_dropdown_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fieldOptions/dropdown.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      step: '1',
+      selectedInput: {},
+      inputs: [{
+        id: 0,
+        name: 'Text Field',
+        component: 'TextField'
+      }, {
+        id: 1,
+        name: 'Text Area',
+        component: 'TextBox'
+      }, {
+        id: 2,
+        name: 'Numeric',
+        component: 'NumericField'
+      }, {
+        id: 3,
+        name: 'Dropdown',
+        component: 'Dropdown'
+      }, {
+        id: 4,
+        name: 'Radio',
+        component: 'RadioField'
+      }, {
+        id: 5,
+        name: 'Checkbox',
+        component: 'CheckBox'
+      }, {
+        id: 6,
+        name: 'Date Picker',
+        component: 'DatePicker'
+      }, {
+        id: 7,
+        name: 'Time Picker',
+        component: 'TimePicker'
+      }, {
+        id: 8,
+        name: 'Matrix',
+        component: 'MatrixField'
+      }, {
+        id: 9,
+        name: 'File Upload',
+        component: 'FileUpload'
+      }, {
+        id: 10,
+        name: 'Section Divider',
+        component: 'SectionDivider'
+      }],
+      // presetInputs: [],
+      fieldData: {} //passed from InputOptions component
+
+    };
+  },
+  props: {
+    outputData: Object,
+    inputData: Object
+  },
+  components: {
+    draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a,
+    TextField: _fieldOptions_textField_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TextBox: _fieldOptions_textArea_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TimePicker: _fieldOptions_timePicker_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    SectionDivider: _fieldOptions_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    FileUpload: _fieldOptions_fileUpload_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    NumericField: _fieldOptions_numeric_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    MatrixField: _fieldOptions_matrix_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    DatePicker: _fieldOptions_datePicker_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    CheckBox: _fieldOptions_checkBox_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    RadioField: _fieldOptions_radioField_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    Dropdown: _fieldOptions_dropdown_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+  },
+  computed: {},
+  methods: {
+    selectInput: function selectInput(input) {
+      console.log(input.name);
+      this.selectedInput = Object.assign({}, input);
+      console.log(this.selectedInput.name);
+      this.step = '2';
+    },
+    setInputOptions: function setInputOptions(value) {
+      this.fieldData = value;
+      var data = {
+        input: _.clone(this.selectedInput),
+        fieldData: _.clone(this.fieldData)
+      };
+      this.$emit("add", data);
+      this.selectedInput = {};
+      this.step = '1';
+    },
+    submitfieldData: function submitfieldData(fieldData) {
+      this.$emit('inputData', this.fieldData);
     }
   }
 });
@@ -8607,7 +9141,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
 
 // exports
 
@@ -8626,7 +9160,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\r\n    right: 10px; */\n}\r\n", ""]);
 
 // exports
 
@@ -8646,25 +9180,6 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n\n/* .el-row {\n    flex: 100%;\n    max-width: 250px;\n    min-width: 160px;\n} */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css&":
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css& ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "#inputOptions[data-v-2eb6e561] {\n  margin-left: 15px;\n  margin-right: 15px;\n}\n", ""]);
 
 // exports
 
@@ -8702,7 +9217,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
 
 // exports
 
@@ -84248,36 +84763,6 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css&":
-/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css& ***!
-  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css&");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
-
-/***/ }),
-
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/preview/matrix.vue?vue&type=style&index=0&id=2f8745fb&scoped=true&lang=css&":
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/preview/matrix.vue?vue&type=style&index=0&id=2f8745fb&scoped=true&lang=css& ***!
@@ -85301,73 +85786,35 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-collapse",
+    "div",
     [
-      _c(
-        "el-collapse-item",
-        { attrs: { name: "1" } },
-        [
-          _c(
-            "template",
-            { slot: "title" },
-            [
-              _c("el-divider", [
-                _c("span", [
-                  _vm._v(_vm._s(_vm.inputFieldData.options.sectionHeader))
-                ])
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            [
-              _c(
-                "el-form",
-                {
-                  ref: "options",
-                  attrs: { "label-position": "top", model: _vm.options },
-                  nativeOn: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "Section Title" } },
-                    [
-                      _c("el-input", {
-                        model: {
-                          value: _vm.inputFieldData.options.sectionHeader,
-                          callback: function($$v) {
-                            _vm.$set(
-                              _vm.inputFieldData.options,
-                              "sectionHeader",
-                              $$v
-                            )
-                          },
-                          expression: "inputFieldData.options.sectionHeader"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._t("default")
-        ],
-        2
-      )
+      _c("el-divider", [
+        _c(
+          "span",
+          [
+            _c(
+              "editable-text",
+              {
+                staticClass: "tw-cursor-pointer",
+                on: { input: _vm.showField },
+                model: {
+                  value: _vm.field.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.field, "label", $$v)
+                  },
+                  expression: "field.label"
+                }
+              },
+              [_vm._v(_vm._s(_vm.field.label))]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _vm._t("default")
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -85445,100 +85892,6 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
-                _c(
-                  "div",
-                  { staticClass: "tw-float-left" },
-                  [
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("label", { attrs: { for: "label" } }, [
-                          _vm._v("Field Label")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("el-input", {
-                              attrs: { id: "label" },
-                              model: {
-                                value: _vm.fields.label,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.fields, "label", $$v)
-                                },
-                                expression: "fields.label"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Description")
-                            ]),
-                            _vm._v(" "),
-                            _c("el-input", {
-                              attrs: { id: "description" },
-                              model: {
-                                value: _vm.fields.description,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.fields, "description", $$v)
-                                },
-                                expression: "fields.description"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "label",
-                          { staticClass: "tw-mb-4", attrs: { for: "switch" } },
-                          [_vm._v("This field is")]
-                        ),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("el-switch", {
-                          attrs: {
-                            id: "switch",
-                            "active-text": "Required",
-                            "inactive-text": "Optional"
-                          },
-                          model: {
-                            value: _vm.fields.required,
-                            callback: function($$v) {
-                              _vm.$set(_vm.fields, "required", $$v)
-                            },
-                            expression: "fields.required"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
                 _c("div", { staticClass: "tw-float-right tw-mx-20 tw-my-6" }, [
                   _c(
                     "form",
@@ -87023,36 +87376,50 @@ var render = function() {
     "div",
     { attrs: { id: "dropdown" } },
     [
-      _c("label", { staticClass: "inputLabel", attrs: { for: "radioGroup" } }, [
-        _vm._v(_vm._s(_vm.field.label))
-      ]),
-      _c("br"),
-      _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
+      _c(
+        "label",
+        { staticClass: "inputLabel" },
+        [
+          _c(
+            "editable-text",
+            {
+              staticClass: "tw-cursor-pointer",
+              model: {
+                value: _vm.field.label,
+                callback: function($$v) {
+                  _vm.$set(_vm.field, "label", $$v)
+                },
+                expression: "field.label"
+              }
+            },
+            [_vm._v(_vm._s(_vm.field.label))]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _vm._l(_vm.radioList, function(item) {
         return _c(
           "el-radio-group",
           { key: item.value, attrs: { id: "radioGroup" } },
           [
-            _c(
-              "el-radio",
-              {
-                attrs: { label: item.value },
-                model: {
-                  value: item.value,
-                  callback: function($$v) {
-                    _vm.$set(item, "value", $$v)
-                  },
-                  expression: "item.value"
-                }
-              },
-              [_vm._v(_vm._s(item.value))]
-            )
+            _c("el-radio", {
+              staticClass: "tw-mx-4",
+              attrs: { label: item.value },
+              model: {
+                value: item.value,
+                callback: function($$v) {
+                  _vm.$set(item, "value", $$v)
+                },
+                expression: "item.value"
+              }
+            })
           ],
           1
         )
       }),
+      _vm._v(" "),
+      _vm._t("default"),
       _vm._v(" "),
       _c(
         "el-collapse",
@@ -87060,209 +87427,122 @@ var render = function() {
           _c(
             "el-collapse-item",
             [
-              _c(
-                "template",
-                { slot: "title" },
-                [
-                  _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field Options")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
+              _c("template", { slot: "title" }, [
                 _c(
-                  "div",
-                  { staticClass: "tw-float-left" },
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.addItem($event)
+                      }
+                    }
+                  },
                   [
                     _c(
                       "el-row",
-                      { staticClass: "tw-my-6" },
                       [
-                        _c("label", { attrs: { for: "label" } }, [
-                          _vm._v("Field Label")
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "el-col",
-                          { attrs: { span: 20 } },
+                          { attrs: { span: 16 } },
                           [
                             _c("el-input", {
-                              attrs: { id: "label" },
+                              attrs: { id: "newItem" },
                               model: {
-                                value: _vm.field.label,
+                                value: _vm.itemText,
                                 callback: function($$v) {
-                                  _vm.$set(_vm.field, "label", $$v)
+                                  _vm.itemText = $$v
                                 },
-                                expression: "field.label"
+                                expression: "itemText"
                               }
                             })
                           ],
                           1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Description")
-                            ]),
-                            _vm._v(" "),
-                            _c("el-input", {
-                              attrs: { id: "description" },
-                              model: {
-                                value: _vm.field.description,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.field, "description", $$v)
-                                },
-                                expression: "field.description"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "label",
-                          { staticClass: "tw-mb-4", attrs: { for: "switch" } },
-                          [_vm._v("This field is")]
                         ),
-                        _c("br"),
                         _vm._v(" "),
-                        _c("el-switch", {
-                          attrs: {
-                            id: "switch",
-                            "active-text": "Required",
-                            "inactive-text": "Optional"
-                          },
-                          model: {
-                            value: _vm.field.required,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field, "required", $$v)
-                            },
-                            expression: "field.required"
-                          }
-                        })
+                        _c(
+                          "el-col",
+                          { attrs: { span: 8 } },
+                          [
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { type: "success" },
+                                on: { click: _vm.addItem }
+                              },
+                              [_vm._v("Add")]
+                            )
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
                   ],
                   1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "tw-float-right tw-mx-20 tw-my-6" }, [
-                  _c(
-                    "form",
-                    {
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.addItem($event)
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "el-col",
-                        { attrs: { span: 16 } },
-                        [
-                          _c("label", { attrs: { for: "newItem" } }, [
-                            _vm._v("Add a new item to the list")
-                          ]),
-                          _vm._v(" "),
-                          _c("el-input", {
-                            attrs: { id: "newItem" },
-                            model: {
-                              value: _vm.itemText,
-                              callback: function($$v) {
-                                _vm.itemText = $$v
-                              },
-                              expression: "itemText"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "el-button",
-                            {
-                              attrs: { type: "success" },
-                              on: { click: _vm.addItem }
-                            },
-                            [_vm._v("Add")]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-float-right tw-mx-20 tw-my-6" },
-                  [
-                    _c("h3", [_vm._v("Radio List Items")]),
-                    _vm._v(" "),
-                    _vm._l(_vm.radioList, function(item) {
-                      return _c(
-                        "el-row",
-                        { key: item.id },
-                        [
-                          _c(
-                            "editable-text",
-                            {
-                              staticClass: "cursor-text float-left",
-                              on: { input: _vm.showField },
-                              model: {
-                                value: item.value,
-                                callback: function($$v) {
-                                  _vm.$set(item, "value", $$v)
-                                },
-                                expression: "item.value"
-                              }
-                            },
-                            [_vm._v(_vm._s(item.value))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "el-button",
-                            {
-                              staticClass: "float-right pr-15",
-                              attrs: { type: "text", size: "mini" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.removeItem(item)
-                                }
-                              }
-                            },
-                            [_vm._v("Remove")]
-                          )
-                        ],
-                        1
-                      )
-                    })
-                  ],
-                  2
                 )
               ]),
               _vm._v(" "),
-              _vm._t("default")
+              _c(
+                "div",
+                [
+                  _c("h1", [_vm._v("Edit List Items")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.radioList, function(item) {
+                    return _c(
+                      "el-row",
+                      { key: item.id },
+                      [
+                        _c(
+                          "el-col",
+                          { staticClass: "tw-mr-4", attrs: { span: 8 } },
+                          [
+                            _c(
+                              "editable-text",
+                              {
+                                staticClass: "tw-cursor-pointer float-left",
+                                on: { input: _vm.showField },
+                                model: {
+                                  value: item.value,
+                                  callback: function($$v) {
+                                    _vm.$set(item, "value", $$v)
+                                  },
+                                  expression: "item.value"
+                                }
+                              },
+                              [_vm._v(_vm._s(item.value))]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "el-col",
+                          { staticClass: "tw-ml-4", attrs: { span: 6 } },
+                          [
+                            _c(
+                              "el-button",
+                              {
+                                staticClass: "float-right pr-15",
+                                attrs: { type: "text", size: "mini" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.removeItem(item)
+                                  }
+                                }
+                              },
+                              [_vm._v("Remove")]
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  })
+                ],
+                2
+              )
             ],
             2
           )
@@ -87308,8 +87588,25 @@ var render = function() {
             [
               _c(
                 "label",
-                { staticClass: "inputLabel", attrs: { for: "textBox" } },
-                [_vm._v(_vm._s(_vm.field.label))]
+                { staticClass: "inputLabel" },
+                [
+                  _c(
+                    "editable-text",
+                    {
+                      staticClass: "tw-cursor-pointer",
+                      on: { input: _vm.showField },
+                      model: {
+                        value: _vm.field.label,
+                        callback: function($$v) {
+                          _vm.$set(_vm.field, "label", $$v)
+                        },
+                        expression: "field.label"
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.field.label))]
+                  )
+                ],
+                1
               ),
               _vm._v(" "),
               _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
@@ -87349,176 +87646,11 @@ var render = function() {
                   })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _vm._t("default")
         ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "el-collapse",
-        [
-          _c(
-            "el-collapse-item",
-            { attrs: { name: "1" } },
-            [
-              _c(
-                "template",
-                { slot: "title" },
-                [
-                  _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field field")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
-                _c(
-                  "div",
-                  { staticClass: "tw-float-left" },
-                  [
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("label", { attrs: { for: "label" } }, [
-                          _vm._v("Field Label")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("el-input", {
-                              attrs: { id: "label" },
-                              model: {
-                                value: _vm.field.label,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.field, "label", $$v)
-                                },
-                                expression: "field.label"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Description")
-                            ]),
-                            _vm._v(" "),
-                            _c("el-input", {
-                              attrs: { id: "description" },
-                              model: {
-                                value: _vm.field.description,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.field, "description", $$v)
-                                },
-                                expression: "field.description"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "label",
-                          { staticClass: "tw-mb-4", attrs: { for: "switch" } },
-                          [_vm._v("This field is")]
-                        ),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("el-switch", {
-                          attrs: {
-                            id: "switch",
-                            "active-text": "Required",
-                            "inactive-text": "Optional"
-                          },
-                          model: {
-                            value: _vm.field.required,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field, "required", $$v)
-                            },
-                            expression: "field.required"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-float-right tw-mx-20 tw-my-6" },
-                  [
-                    _c("label", { attrs: { for: "charLimit" } }, [
-                      _vm._v("Set Character Limit")
-                    ]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("el-switch", {
-                      attrs: {
-                        id: "charLimit",
-                        "inactive-text": "No Limit",
-                        "active-text": "Set Character Limit"
-                      },
-                      model: {
-                        value: _vm.field.settings.isLimited,
-                        callback: function($$v) {
-                          _vm.$set(_vm.field.settings, "isLimited", $$v)
-                        },
-                        expression: "field.settings.isLimited"
-                      }
-                    }),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("el-input-number", {
-                      staticClass: "tw-my-6",
-                      attrs: {
-                        disabled: !_vm.field.settings.isLimited,
-                        step: 5,
-                        min: 0,
-                        "step-strictly": ""
-                      },
-                      model: {
-                        value: _vm.field.settings.max,
-                        callback: function($$v) {
-                          _vm.$set(_vm.field.settings, "max", $$v)
-                        },
-                        expression: "field.settings.max"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _vm._t("default")
-            ],
-            2
-          )
-        ],
-        1
+        2
       )
     ],
     1
@@ -87555,21 +87687,35 @@ var render = function() {
         [
           _c(
             "el-col",
-            { attrs: { span: 8 } },
+            { attrs: { span: 10 } },
             [
               _c(
                 "label",
-                { staticClass: "inputLabel", attrs: { for: "label" } },
-                [_vm._v(_vm._s(_vm.field.label))]
+                { staticClass: "inputLabel" },
+                [
+                  _c(
+                    "editable-text",
+                    {
+                      staticClass: "tw-cursor-pointer",
+                      on: { input: _vm.showField },
+                      model: {
+                        value: _vm.field.label,
+                        callback: function($$v) {
+                          _vm.$set(_vm.field, "label", $$v)
+                        },
+                        expression: "field.label"
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.field.label))]
+                  )
+                ],
+                1
               ),
-              _c("br"),
-              _vm._v(" "),
-              _c("sup", [_vm._v(_vm._s(_vm.field.settingsDescription))]),
               _vm._v(" "),
               _vm.field.settings.isLimited
                 ? _c("el-input", {
                     attrs: {
-                      id: "label",
+                      id: "input",
                       type: "text",
                       maxlength: _vm.field.settings.max,
                       placeholder: "Your text here",
@@ -87584,7 +87730,11 @@ var render = function() {
                     }
                   })
                 : _c("el-input", {
-                    attrs: { type: "text", placeholder: "Your text here" },
+                    attrs: {
+                      id: "input",
+                      type: "text",
+                      placeholder: "Your text here"
+                    },
                     model: {
                       value: _vm.value,
                       callback: function($$v) {
@@ -87595,180 +87745,11 @@ var render = function() {
                   })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _vm._t("default")
         ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "el-collapse",
-        [
-          _c(
-            "el-collapse-item",
-            { attrs: { name: "1" } },
-            [
-              _c(
-                "template",
-                { slot: "title" },
-                [
-                  _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field field")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
-                _c(
-                  "div",
-                  { staticClass: "tw-float-left" },
-                  [
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("label", { attrs: { for: "label" } }, [
-                          _vm._v("Field Label")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("el-input", {
-                              attrs: { id: "label" },
-                              model: {
-                                value: _vm.field.label,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.field, "label", $$v)
-                                },
-                                expression: "field.label"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Subtext")
-                            ]),
-                            _vm._v(" "),
-                            _c("el-input", {
-                              attrs: { id: "description" },
-                              model: {
-                                value: _vm.field.settingsDescription,
-                                callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.field,
-                                    "settingsDescription",
-                                    $$v
-                                  )
-                                },
-                                expression: "field.settingsDescription"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "label",
-                          { staticClass: "tw-mb-4", attrs: { for: "switch" } },
-                          [_vm._v("This field is")]
-                        ),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("el-switch", {
-                          attrs: {
-                            id: "switch",
-                            "active-text": "Required",
-                            "inactive-text": "Optional"
-                          },
-                          model: {
-                            value: _vm.field.settings.required,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field.settings, "required", $$v)
-                            },
-                            expression: "field.settings.required"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-float-right tw-mx-20 tw-my-6" },
-                  [
-                    _c("label", { attrs: { for: "charLimit" } }, [
-                      _vm._v("Set Character Limit")
-                    ]),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("el-switch", {
-                      attrs: {
-                        id: "charLimit",
-                        "inactive-text": "No Limit",
-                        "active-text": "Limit"
-                      },
-                      model: {
-                        value: _vm.field.settings.isLimited,
-                        callback: function($$v) {
-                          _vm.$set(_vm.field.settings, "isLimited", $$v)
-                        },
-                        expression: "field.settings.isLimited"
-                      }
-                    }),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c("el-input-number", {
-                      staticClass: "tw-my-6",
-                      attrs: {
-                        disabled: !_vm.field.settings.isLimited,
-                        step: 5,
-                        min: 0,
-                        "step-strictly": ""
-                      },
-                      model: {
-                        value: _vm.field.settings.max,
-                        callback: function($$v) {
-                          _vm.$set(_vm.field.settings, "max", $$v)
-                        },
-                        expression: "field.settings.max"
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _vm._t("default")
-            ],
-            2
-          )
-        ],
-        1
+        2
       )
     ],
     1
@@ -87801,152 +87782,51 @@ var render = function() {
     { attrs: { id: "timePicker" } },
     [
       _c(
-        "label",
-        { staticClass: "inputLabel", attrs: { for: "time-picker" } },
-        [_vm._v(_vm._s(_vm.inputFieldData.label))]
-      ),
-      _c("br"),
-      _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.inputFieldData.description))]),
-      _vm._v(" "),
-      _c("el-time-picker", {
-        attrs: {
-          "arrow-control": "",
-          "picker-options": { selectableRange: "18:30:00 - 20:30:00" },
-          placeholder: "Pick a time"
-        },
-        model: {
-          value: _vm.timeSelection,
-          callback: function($$v) {
-            _vm.timeSelection = $$v
-          },
-          expression: "timeSelection"
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "el-collapse",
+        "el-row",
         [
           _c(
-            "el-collapse-item",
+            "label",
+            { staticClass: "inputLabel" },
             [
               _c(
-                "template",
-                { slot: "title" },
-                [
-                  _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field Options")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
-                _c(
-                  "div",
-                  { staticClass: "tw-float-left" },
-                  [
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("label", { attrs: { for: "label" } }, [
-                          _vm._v("Field Label")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("el-input", {
-                              attrs: { id: "label" },
-                              model: {
-                                value: _vm.inputFieldData.label,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
-                                },
-                                expression: "inputFieldData.label"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Description")
-                            ]),
-                            _vm._v(" "),
-                            _c("el-input", {
-                              attrs: { id: "description" },
-                              model: {
-                                value: _vm.inputFieldData.description,
-                                callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
-                                    $$v
-                                  )
-                                },
-                                expression: "inputFieldData.description"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "label",
-                          { staticClass: "tw-mb-4", attrs: { for: "switch" } },
-                          [_vm._v("This field is")]
-                        ),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("el-switch", {
-                          attrs: {
-                            id: "switch",
-                            "active-text": "Required",
-                            "inactive-text": "Optional"
-                          },
-                          model: {
-                            value: _vm.inputFieldData.required,
-                            callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
-                            },
-                            expression: "inputFieldData.required"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _vm._t("default")
+                "editable-text",
+                {
+                  staticClass: "tw-cursor-pointer",
+                  on: { input: _vm.showField },
+                  model: {
+                    value: _vm.field.label,
+                    callback: function($$v) {
+                      _vm.$set(_vm.field, "label", $$v)
+                    },
+                    expression: "field.label"
+                  }
+                },
+                [_vm._v(_vm._s(_vm.field.label))]
+              )
             ],
-            2
-          )
+            1
+          ),
+          _vm._v(" "),
+          _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
+          _vm._v(" "),
+          _c("el-time-picker", {
+            attrs: {
+              "arrow-control": "",
+              "picker-options": { selectableRange: "18:30:00 - 20:30:00" },
+              placeholder: "Pick a time"
+            },
+            model: {
+              value: _vm.timeSelection,
+              callback: function($$v) {
+                _vm.timeSelection = $$v
+              },
+              expression: "timeSelection"
+            }
+          }),
+          _vm._v(" "),
+          _vm._t("default")
         ],
-        1
+        2
       )
     ],
     1
@@ -88206,7 +88086,7 @@ var render = function() {
                                             "el-button",
                                             {
                                               staticClass:
-                                                "tw-float-right hover:tw-text-red-600",
+                                                "button-position tw-float-right hover:tw-text-red-600",
                                               attrs: {
                                                 type: "text",
                                                 icon: "el-icon-close"
@@ -88219,7 +88099,7 @@ var render = function() {
                                             },
                                             [
                                               _vm._v(
-                                                "\n                                            Remove\n                                    "
+                                                "\n                                                Remove\n                                        "
                                               )
                                             ]
                                           )
@@ -88248,6 +88128,1443 @@ var render = function() {
               )
             ],
             1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Field Description" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.description,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "description", $$v)
+                  },
+                  expression: "fieldData.description"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [
+              _c("el-input-number", {
+                attrs: { "controls-position": "right", min: 1, max: 10 },
+                on: { change: _vm.handleChange },
+                model: {
+                  value: _vm.fieldData.settings.checkboxNum,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "checkboxNum", $$v)
+                  },
+                  expression: "fieldData.settings.checkboxNum"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=template&id=83e109ac&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=template&id=83e109ac& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Field Description" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.description,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "description", $$v)
+                  },
+                  expression: "fieldData.description"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Calendar Preferences" } },
+            [
+              _c(
+                "el-row",
+                [
+                  _c("el-switch", {
+                    attrs: { "active-text": "Only allow up to current day" },
+                    model: {
+                      value: _vm.fieldData.settings.past_only,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fieldData.settings, "past_only", $$v)
+                      },
+                      expression: "fieldData.settings.past_only"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-row",
+                [
+                  _c("el-switch", {
+                    attrs: { "active-text": "Quick menu" },
+                    model: {
+                      value: _vm.fieldData.settings.quick_menu,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fieldData.settings, "quick_menu", $$v)
+                      },
+                      expression: "fieldData.settings.quick_menu"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-row",
+                [
+                  _c("el-switch", {
+                    attrs: { "active-text": "Include time" },
+                    model: {
+                      value: _vm.fieldData.settings.include_time,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fieldData.settings, "include_time", $$v)
+                      },
+                      expression: "fieldData.settings.include_time"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-row",
+                [
+                  _c("el-switch", {
+                    attrs: { "active-text": "Date Range" },
+                    model: {
+                      value: _vm.fieldData.settings.date_range,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fieldData.settings, "date_range", $$v)
+                      },
+                      expression: "fieldData.settings.date_range"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=template&id=7636685f&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=template&id=7636685f& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Field Description" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.description,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "description", $$v)
+                  },
+                  expression: "fieldData.description"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [
+              _c("el-input-number", {
+                attrs: { "controls-position": "right", min: 2, max: 10 },
+                on: { change: _vm.handleChange },
+                model: {
+                  value: _vm.fieldData.settings.dropdownNum,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "dropdownNum", $$v)
+                  },
+                  expression: "fieldData.settings.dropdownNum"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=template&id=02e1a92a&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=template&id=02e1a92a& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "fileUpload" } },
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Field Description" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.description,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "description", $$v)
+                  },
+                  expression: "fieldData.description"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=template&id=ff1b0ce2&":
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=template&id=ff1b0ce2& ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Additional Title Information" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.description,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "description", $$v)
+                  },
+                  expression: "fieldData.description"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Number of Questions" } },
+            [
+              _c("el-input-number", {
+                attrs: { "controls-position": "right", min: 1 },
+                on: { change: _vm.handleChange },
+                model: {
+                  value: _vm.fieldData.settings.matrix_questions,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "matrix_questions", $$v)
+                  },
+                  expression: "fieldData.settings.matrix_questions"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Number of Choices Per Question" } },
+            [
+              _c("el-input-number", {
+                attrs: { "controls-position": "right", min: 1, max: 10 },
+                on: { change: _vm.handleChange },
+                model: {
+                  value: _vm.fieldData.settings.matrix_choices,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "matrix_choices", $$v)
+                  },
+                  expression: "fieldData.settings.matrix_choices"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=template&id=ad0d03a2&":
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=template&id=ad0d03a2& ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Field Description" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.description,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "description", $$v)
+                  },
+                  expression: "fieldData.description"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Set Default Value" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "inactive-text": "No Default",
+                  "active-text": "Set Default"
+                },
+                model: {
+                  value: _vm.fieldData.isLimited,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "isLimited", $$v)
+                  },
+                  expression: "fieldData.isLimited"
+                }
+              }),
+              _vm._v(" "),
+              _c("el-input-number", {
+                attrs: { disabled: !_vm.fieldData.isLimited },
+                model: {
+                  value: _vm.fieldData.defaultNum,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "defaultNum", $$v)
+                  },
+                  expression: "fieldData.defaultNum"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=template&id=7d40c98d&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=template&id=7d40c98d& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [
+              _c("el-input-number", {
+                attrs: { "controls-position": "right", min: 1, max: 10 },
+                on: { change: _vm.handleChange },
+                model: {
+                  value: _vm.fieldData.settings.radioNum,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "radioNum", $$v)
+                  },
+                  expression: "fieldData.settings.radioNum"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=template&id=fb086a7c&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=template&id=fb086a7c& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "sectionDivider" } },
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: { "label-position": "top", model: _vm.fieldData },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Section label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=template&id=d654f9b0&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=template&id=d654f9b0& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "textBox" } },
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Set Character Limit" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "inactive-text": "No Limit",
+                  "active-text": "Set Character Limit"
+                },
+                model: {
+                  value: _vm.fieldData.settings.isLimited,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "isLimited", $$v)
+                  },
+                  expression: "fieldData.settings.isLimited"
+                }
+              }),
+              _vm._v(" "),
+              _c("el-input-number", {
+                attrs: {
+                  disabled: !_vm.fieldData.settings.isLimited,
+                  step: 5,
+                  "step-strictly": ""
+                },
+                model: {
+                  value: _vm.fieldData.settings.max,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "max", $$v)
+                  },
+                  expression: "fieldData.settings.max"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=template&id=59e4086f&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=template&id=59e4086f& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Set Character Limit" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "inactive-text": "No Limit",
+                  "active-text": "Set Character Limit"
+                },
+                model: {
+                  value: _vm.fieldData.settings.isLimited,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "isLimited", $$v)
+                  },
+                  expression: "fieldData.settings.isLimited"
+                }
+              }),
+              _vm._v(" "),
+              _c("el-input-number", {
+                attrs: {
+                  disabled: !_vm.fieldData.settings.isLimited,
+                  step: 5,
+                  "step-strictly": ""
+                },
+                model: {
+                  value: _vm.fieldData.settings.max,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "max", $$v)
+                  },
+                  expression: "fieldData.settings.max"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Field Refers To:" } },
+            [
+              _c(
+                "el-select",
+                {
+                  model: {
+                    value: _vm.fieldData.reference,
+                    callback: function($$v) {
+                      _vm.$set(_vm.fieldData, "reference", $$v)
+                    },
+                    expression: "fieldData.reference"
+                  }
+                },
+                [
+                  _c("el-option", {
+                    attrs: { label: "No Reference", value: "noRef" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-option", {
+                    attrs: { label: "Another Form", value: "form" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-option", {
+                    attrs: { label: "Volunteer", value: "volunteer" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-option", {
+                    attrs: { label: "Client", value: "client" }
+                  }),
+                  _vm._v(" "),
+                  _c("el-option", { attrs: { label: "Staff", value: "staff" } })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm.fieldData.reference === "form"
+                ? _c("div", [
+                    _c("p", [
+                      _vm._v("New Select Menu with list of available "),
+                      _c("b", [_vm._v("forms")]),
+                      _vm._v(" from back end")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v("From there, available fields within that form")
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.fieldData.reference === "volunteer"
+                ? _c("div", [
+                    _c("p", [
+                      _vm._v("Link to available "),
+                      _c("b", [_vm._v("volunteers")]),
+                      _vm._v(" from back end")
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.fieldData.reference === "client"
+                ? _c("div", [
+                    _c("p", [
+                      _vm._v("Link to available "),
+                      _c("b", [_vm._v("Clients")]),
+                      _vm._v(" from back end")
+                    ])
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.fieldData.reference === "staff"
+                ? _c("div", [
+                    _c("p", [
+                      _vm._v("Link to available "),
+                      _c("b", [_vm._v("Staff Members")]),
+                      _vm._v(" from back end")
+                    ])
+                  ])
+                : _vm._e()
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=template&id=1a28c389&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=template&id=1a28c389& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "timePicker" } },
+    [
+      _c(
+        "el-form",
+        {
+          ref: "fieldData",
+          attrs: {
+            "label-position": "top",
+            rules: _vm.fieldData.rules,
+            model: _vm.fieldData
+          },
+          nativeOn: {
+            submit: function($event) {
+              $event.preventDefault()
+            }
+          }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Question/Title", prop: "label" } },
+            [
+              _c("el-input", {
+                model: {
+                  value: _vm.fieldData.label,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "label", $$v)
+                  },
+                  expression: "fieldData.label"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "This Field is" } },
+            [
+              _c("el-switch", {
+                attrs: {
+                  "active-text": "Required",
+                  "inactive-text": "Optional"
+                },
+                model: {
+                  value: _vm.fieldData.required,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData, "required", $$v)
+                  },
+                  expression: "fieldData.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [_vm._t("default", null, { fieldData: _vm.fieldData })],
+            2
           )
         ],
         1
@@ -88307,7 +89624,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._l(_vm.basicInputs, function(input) {
+                _vm._l(_vm.inputs, function(input) {
                   return _c(
                     "div",
                     {
@@ -88330,7 +89647,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    " +
+                            "\n                      " +
                               _vm._s(input.name) +
                               "\n                "
                           )
@@ -88349,14 +89666,45 @@ var render = function() {
               { attrs: { name: "2" } },
               [
                 _c("template", { slot: "title" }, [
-                  _c("p", { staticClass: "menu-title" }, [
-                    _vm._v("Field Requirements")
-                  ])
+                  !_vm.selectedInput.name
+                    ? _c("p", { staticClass: "menu-title" }, [
+                        _vm._v("Field Requirements")
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.selectedInput.name
+                    ? _c("p", { staticClass: "menu-title" }, [
+                        _vm._v(_vm._s(_vm.selectedInput.name) + " Settings")
+                      ])
+                    : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("InputOptions", {
+                _c(_vm.selectedInput.component, {
+                  tag: "component",
                   attrs: { inputData: _vm.selectedInput },
-                  on: { outputData: _vm.setInputOptions }
+                  on: { outputData: _vm.setInputOptions },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(ref) {
+                        var fieldData = ref.fieldData
+                        return [
+                          _c(
+                            "el-button",
+                            {
+                              attrs: { type: "success" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.setInputOptions(fieldData)
+                                }
+                              }
+                            },
+                            [_vm._v("Set")]
+                          )
+                        ]
+                      }
+                    }
+                  ])
                 })
               ],
               2
@@ -88367,1338 +89715,6 @@ var render = function() {
       ],
       1
     )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=template&id=2eb6e561&scoped=true&":
-/*!********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=template&id=2eb6e561&scoped=true& ***!
-  \********************************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "inputOptions" } }, [
-    _vm.inputData.id === 0
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " options")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Set Character Limit" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "inactive-text": "No Limit",
-                        "active-text": "Set Character Limit"
-                      },
-                      model: {
-                        value: _vm.fieldData.settings.isLimited,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData.settings, "isLimited", $$v)
-                        },
-                        expression: "fieldData.settings.isLimited"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("el-input-number", {
-                      attrs: {
-                        disabled: !_vm.fieldData.settings.isLimited,
-                        step: 5,
-                        "step-strictly": ""
-                      },
-                      model: {
-                        value: _vm.fieldData.settings.max,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData.settings, "max", $$v)
-                        },
-                        expression: "fieldData.settings.max"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: {
-                          click: function($event) {
-                            return _vm.submitfieldData(_vm.fieldData)
-                          }
-                        }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 1
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Set Character Limit" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "inactive-text": "No Limit",
-                        "active-text": "Set Character Limit"
-                      },
-                      model: {
-                        value: _vm.fieldData.settings.isLimited,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData.settings, "isLimited", $$v)
-                        },
-                        expression: "fieldData.settings.isLimited"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("el-input-number", {
-                      attrs: {
-                        disabled: !_vm.fieldData.settings.isLimited,
-                        step: 5,
-                        "step-strictly": ""
-                      },
-                      model: {
-                        value: _vm.fieldData.settings.max,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData.settings, "max", $$v)
-                        },
-                        expression: "fieldData.settings.max"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: { click: _vm.submitfieldData }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 2
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Set Default Value" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "inactive-text": "No Default",
-                        "active-text": "Set Default"
-                      },
-                      model: {
-                        value: _vm.fieldData.isLimited,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "isLimited", $$v)
-                        },
-                        expression: "fieldData.isLimited"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("el-input-number", {
-                      attrs: { disabled: !_vm.fieldData.isLimited },
-                      model: {
-                        value: _vm.fieldData.defaultNum,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "defaultNum", $$v)
-                        },
-                        expression: "fieldData.defaultNum"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: { click: _vm.submitfieldData }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 3
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c("el-input-number", {
-                      attrs: { "controls-position": "right", min: 2, max: 10 },
-                      on: { change: _vm.handleChange },
-                      model: {
-                        value: _vm.fieldData.settings.dropdownNum,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData.settings, "dropdownNum", $$v)
-                        },
-                        expression: "fieldData.settings.dropdownNum"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: {
-                          click: function($event) {
-                            return _vm.submitfieldData(_vm.fieldData)
-                          }
-                        }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 4
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c("el-input-number", {
-                      attrs: { "controls-position": "right", min: 1, max: 10 },
-                      on: { change: _vm.handleChange },
-                      model: {
-                        value: _vm.fieldData.settings.radioNum,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData.settings, "radioNum", $$v)
-                        },
-                        expression: "fieldData.settings.radioNum"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: { click: _vm.submitfieldData }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 5
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c("el-input-number", {
-                      attrs: { "controls-position": "right", min: 1, max: 10 },
-                      on: { change: _vm.handleChange },
-                      model: {
-                        value: _vm.fieldData.settings.checkboxNum,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData.settings, "checkboxNum", $$v)
-                        },
-                        expression: "fieldData.settings.checkboxNum"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: { click: _vm.submitfieldData }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 6
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Calendar Preferences" } },
-                  [
-                    _c(
-                      "el-row",
-                      [
-                        _c("el-switch", {
-                          attrs: {
-                            "active-text": "Only allow up to current day"
-                          },
-                          model: {
-                            value: _vm.fieldData.settings.past_only,
-                            callback: function($$v) {
-                              _vm.$set(_vm.fieldData.settings, "past_only", $$v)
-                            },
-                            expression: "fieldData.settings.past_only"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      [
-                        _c("el-switch", {
-                          attrs: { "active-text": "Quick menu" },
-                          model: {
-                            value: _vm.fieldData.settings.quick_menu,
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.fieldData.settings,
-                                "quick_menu",
-                                $$v
-                              )
-                            },
-                            expression: "fieldData.settings.quick_menu"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      [
-                        _c("el-switch", {
-                          attrs: { "active-text": "Include time" },
-                          model: {
-                            value: _vm.fieldData.settings.include_time,
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.fieldData.settings,
-                                "include_time",
-                                $$v
-                              )
-                            },
-                            expression: "fieldData.settings.include_time"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      [
-                        _c("el-switch", {
-                          attrs: { "active-text": "Date Range" },
-                          model: {
-                            value: _vm.fieldData.settings.date_range,
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.fieldData.settings,
-                                "date_range",
-                                $$v
-                              )
-                            },
-                            expression: "fieldData.settings.date_range"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: { click: _vm.submitfieldData }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 7
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: { click: _vm.submitfieldData }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 8
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Number of Questions" } },
-                  [
-                    _c("el-input-number", {
-                      attrs: { "controls-position": "right", min: 1 },
-                      on: { change: _vm.handleChange },
-                      model: {
-                        value: _vm.fieldData.settings.matrix_questions,
-                        callback: function($$v) {
-                          _vm.$set(
-                            _vm.fieldData.settings,
-                            "matrix_questions",
-                            $$v
-                          )
-                        },
-                        expression: "fieldData.settings.matrix_questions"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Number of Choices Per Question" } },
-                  [
-                    _c("el-input-number", {
-                      attrs: { "controls-position": "right", min: 1, max: 10 },
-                      on: { change: _vm.handleChange },
-                      model: {
-                        value: _vm.fieldData.settings.matrix_choices,
-                        callback: function($$v) {
-                          _vm.$set(
-                            _vm.fieldData.settings,
-                            "matrix_choices",
-                            $$v
-                          )
-                        },
-                        expression: "fieldData.settings.matrix_choices"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: { click: _vm.submitfieldData }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 9
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Field Description" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.description,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "description", $$v)
-                        },
-                        expression: "fieldData.description"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "This Field is" } },
-                  [
-                    _c("el-switch", {
-                      attrs: {
-                        "active-text": "Required",
-                        "inactive-text": "Optional"
-                      },
-                      model: {
-                        value: _vm.fieldData.required,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "required", $$v)
-                        },
-                        expression: "fieldData.required"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: { click: _vm.submitfieldData }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.inputData.id === 10
-      ? _c(
-          "div",
-          [
-            _c("h1", [_vm._v(_vm._s(_vm.inputData.name) + " Settings")]),
-            _vm._v(" "),
-            _c(
-              "el-form",
-              {
-                ref: "fieldData",
-                attrs: { "label-position": "top", model: _vm.fieldData },
-                nativeOn: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                  }
-                }
-              },
-              [
-                _c(
-                  "el-form-item",
-                  { attrs: { label: "Section label" } },
-                  [
-                    _c("el-input", {
-                      model: {
-                        value: _vm.fieldData.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.fieldData, "label", $$v)
-                        },
-                        expression: "fieldData.label"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-form-item",
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "success" },
-                        on: { click: _vm.submitfieldData }
-                      },
-                      [_vm._v("Set")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      : _vm._e()
   ])
 }
 var staticRenderFns = []
@@ -111398,6 +111414,765 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkBox.vue?vue&type=template&id=08d3aef1& */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&");
+/* harmony import */ var _checkBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkBox.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _checkBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./checkBox.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1& ***!
+  \***********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./checkBox.vue?vue&type=template&id=08d3aef1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _datePicker_vue_vue_type_template_id_83e109ac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./datePicker.vue?vue&type=template&id=83e109ac& */ "./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=template&id=83e109ac&");
+/* harmony import */ var _datePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./datePicker.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _datePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _datePicker_vue_vue_type_template_id_83e109ac___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _datePicker_vue_vue_type_template_id_83e109ac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_datePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./datePicker.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_datePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=template&id=83e109ac&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=template&id=83e109ac& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_datePicker_vue_vue_type_template_id_83e109ac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./datePicker.vue?vue&type=template&id=83e109ac& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/datePicker.vue?vue&type=template&id=83e109ac&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_datePicker_vue_vue_type_template_id_83e109ac___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_datePicker_vue_vue_type_template_id_83e109ac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _dropdown_vue_vue_type_template_id_7636685f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./dropdown.vue?vue&type=template&id=7636685f& */ "./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=template&id=7636685f&");
+/* harmony import */ var _dropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./dropdown.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _dropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _dropdown_vue_vue_type_template_id_7636685f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _dropdown_vue_vue_type_template_id_7636685f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./dropdown.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_dropdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=template&id=7636685f&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=template&id=7636685f& ***!
+  \***********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_dropdown_vue_vue_type_template_id_7636685f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./dropdown.vue?vue&type=template&id=7636685f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue?vue&type=template&id=7636685f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_dropdown_vue_vue_type_template_id_7636685f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_dropdown_vue_vue_type_template_id_7636685f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _fileUpload_vue_vue_type_template_id_02e1a92a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fileUpload.vue?vue&type=template&id=02e1a92a& */ "./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=template&id=02e1a92a&");
+/* harmony import */ var _fileUpload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fileUpload.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _fileUpload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _fileUpload_vue_vue_type_template_id_02e1a92a___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _fileUpload_vue_vue_type_template_id_02e1a92a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fileUpload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./fileUpload.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fileUpload_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=template&id=02e1a92a&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=template&id=02e1a92a& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fileUpload_vue_vue_type_template_id_02e1a92a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./fileUpload.vue?vue&type=template&id=02e1a92a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/fileUpload.vue?vue&type=template&id=02e1a92a&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fileUpload_vue_vue_type_template_id_02e1a92a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_fileUpload_vue_vue_type_template_id_02e1a92a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _matrix_vue_vue_type_template_id_ff1b0ce2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./matrix.vue?vue&type=template&id=ff1b0ce2& */ "./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=template&id=ff1b0ce2&");
+/* harmony import */ var _matrix_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./matrix.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _matrix_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _matrix_vue_vue_type_template_id_ff1b0ce2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _matrix_vue_vue_type_template_id_ff1b0ce2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_matrix_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./matrix.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_matrix_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=template&id=ff1b0ce2&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=template&id=ff1b0ce2& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matrix_vue_vue_type_template_id_ff1b0ce2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./matrix.vue?vue&type=template&id=ff1b0ce2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/matrix.vue?vue&type=template&id=ff1b0ce2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matrix_vue_vue_type_template_id_ff1b0ce2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_matrix_vue_vue_type_template_id_ff1b0ce2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue":
+/*!***************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _numeric_vue_vue_type_template_id_ad0d03a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./numeric.vue?vue&type=template&id=ad0d03a2& */ "./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=template&id=ad0d03a2&");
+/* harmony import */ var _numeric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./numeric.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _numeric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _numeric_vue_vue_type_template_id_ad0d03a2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _numeric_vue_vue_type_template_id_ad0d03a2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_numeric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./numeric.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_numeric_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=template&id=ad0d03a2&":
+/*!**********************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=template&id=ad0d03a2& ***!
+  \**********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_numeric_vue_vue_type_template_id_ad0d03a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./numeric.vue?vue&type=template&id=ad0d03a2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/numeric.vue?vue&type=template&id=ad0d03a2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_numeric_vue_vue_type_template_id_ad0d03a2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_numeric_vue_vue_type_template_id_ad0d03a2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _radioField_vue_vue_type_template_id_7d40c98d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./radioField.vue?vue&type=template&id=7d40c98d& */ "./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=template&id=7d40c98d&");
+/* harmony import */ var _radioField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./radioField.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _radioField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _radioField_vue_vue_type_template_id_7d40c98d___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _radioField_vue_vue_type_template_id_7d40c98d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_radioField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./radioField.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_radioField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=template&id=7d40c98d&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=template&id=7d40c98d& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_radioField_vue_vue_type_template_id_7d40c98d___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./radioField.vue?vue&type=template&id=7d40c98d& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue?vue&type=template&id=7d40c98d&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_radioField_vue_vue_type_template_id_7d40c98d___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_radioField_vue_vue_type_template_id_7d40c98d___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _sectionDivider_vue_vue_type_template_id_fb086a7c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./sectionDivider.vue?vue&type=template&id=fb086a7c& */ "./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=template&id=fb086a7c&");
+/* harmony import */ var _sectionDivider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./sectionDivider.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _sectionDivider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _sectionDivider_vue_vue_type_template_id_fb086a7c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _sectionDivider_vue_vue_type_template_id_fb086a7c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_sectionDivider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./sectionDivider.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_sectionDivider_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=template&id=fb086a7c&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=template&id=fb086a7c& ***!
+  \*****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_sectionDivider_vue_vue_type_template_id_fb086a7c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./sectionDivider.vue?vue&type=template&id=fb086a7c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/sectionDivider.vue?vue&type=template&id=fb086a7c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_sectionDivider_vue_vue_type_template_id_fb086a7c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_sectionDivider_vue_vue_type_template_id_fb086a7c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _textArea_vue_vue_type_template_id_d654f9b0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./textArea.vue?vue&type=template&id=d654f9b0& */ "./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=template&id=d654f9b0&");
+/* harmony import */ var _textArea_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./textArea.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _textArea_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _textArea_vue_vue_type_template_id_d654f9b0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _textArea_vue_vue_type_template_id_d654f9b0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_textArea_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./textArea.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_textArea_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=template&id=d654f9b0&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=template&id=d654f9b0& ***!
+  \***********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_textArea_vue_vue_type_template_id_d654f9b0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./textArea.vue?vue&type=template&id=d654f9b0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/textArea.vue?vue&type=template&id=d654f9b0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_textArea_vue_vue_type_template_id_d654f9b0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_textArea_vue_vue_type_template_id_d654f9b0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _textField_vue_vue_type_template_id_59e4086f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./textField.vue?vue&type=template&id=59e4086f& */ "./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=template&id=59e4086f&");
+/* harmony import */ var _textField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./textField.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _textField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _textField_vue_vue_type_template_id_59e4086f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _textField_vue_vue_type_template_id_59e4086f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/textField.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_textField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./textField.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_textField_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=template&id=59e4086f&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=template&id=59e4086f& ***!
+  \************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_textField_vue_vue_type_template_id_59e4086f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./textField.vue?vue&type=template&id=59e4086f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=template&id=59e4086f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_textField_vue_vue_type_template_id_59e4086f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_textField_vue_vue_type_template_id_59e4086f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue":
+/*!******************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _timePicker_vue_vue_type_template_id_1a28c389___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./timePicker.vue?vue&type=template&id=1a28c389& */ "./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=template&id=1a28c389&");
+/* harmony import */ var _timePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./timePicker.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _timePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _timePicker_vue_vue_type_template_id_1a28c389___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _timePicker_vue_vue_type_template_id_1a28c389___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_timePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./timePicker.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_timePicker_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=template&id=1a28c389&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=template&id=1a28c389& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_timePicker_vue_vue_type_template_id_1a28c389___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./timePicker.vue?vue&type=template&id=1a28c389& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/timePicker.vue?vue&type=template&id=1a28c389&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_timePicker_vue_vue_type_template_id_1a28c389___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_timePicker_vue_vue_type_template_id_1a28c389___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/FormBuilder/components/menu/index.vue":
 /*!************************************************************!*\
   !*** ./resources/js/FormBuilder/components/menu/index.vue ***!
@@ -111480,93 +112255,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_1ff48ab5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_1ff48ab5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/FormBuilder/components/menu/inputOptions.vue":
-/*!*******************************************************************!*\
-  !*** ./resources/js/FormBuilder/components/menu/inputOptions.vue ***!
-  \*******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _inputOptions_vue_vue_type_template_id_2eb6e561_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./inputOptions.vue?vue&type=template&id=2eb6e561&scoped=true& */ "./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=template&id=2eb6e561&scoped=true&");
-/* harmony import */ var _inputOptions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inputOptions.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _inputOptions_vue_vue_type_style_index_0_id_2eb6e561_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css& */ "./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  _inputOptions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _inputOptions_vue_vue_type_template_id_2eb6e561_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _inputOptions_vue_vue_type_template_id_2eb6e561_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  "2eb6e561",
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/FormBuilder/components/menu/inputOptions.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./inputOptions.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css&":
-/*!****************************************************************************************************************************!*\
-  !*** ./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css& ***!
-  \****************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_style_index_0_id_2eb6e561_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/style-loader!../../../../../node_modules/css-loader??ref--6-1!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../node_modules/vue-loader/lib??vue-loader-options!./inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=style&index=0&id=2eb6e561&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_style_index_0_id_2eb6e561_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_style_index_0_id_2eb6e561_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_style_index_0_id_2eb6e561_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_style_index_0_id_2eb6e561_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_style_index_0_id_2eb6e561_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=template&id=2eb6e561&scoped=true&":
-/*!**************************************************************************************************************!*\
-  !*** ./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=template&id=2eb6e561&scoped=true& ***!
-  \**************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_template_id_2eb6e561_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./inputOptions.vue?vue&type=template&id=2eb6e561&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/inputOptions.vue?vue&type=template&id=2eb6e561&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_template_id_2eb6e561_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_inputOptions_vue_vue_type_template_id_2eb6e561_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -114354,7 +115042,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })
