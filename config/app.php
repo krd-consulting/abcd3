@@ -229,6 +229,30 @@ return [
             'name' => 'Removed',
             'description' => ''
         ]
+    ],
+
+    'resource_types' => [
+        'record' => [
+            'name' => 'Record',
+            'model' => 'App\RecordType'
+        ],
+        'program' => [
+            'name' => 'Program',
+            'model' => 'App\Program'
+        ],
+        'group' => [
+            'name' => 'Group',
+            'model' => 'App\Group'
+        ],
+        'form' => [
+            'name' => 'Form',
+            'model' => 'App\Form'
+        ],
+        'form field' => [
+            'name' => 'Form Field',
+            'model' => 'App\FormField'
+        ],
+        
     ]
 
 ];
