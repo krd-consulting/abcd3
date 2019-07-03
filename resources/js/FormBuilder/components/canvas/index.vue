@@ -90,11 +90,11 @@ import EditableText from '@/components/editableText.vue'
 
 import TextField from '@/FormBuilder/components/canvas/fields/textField.vue'
 import TextBox from '@/FormBuilder/components/canvas/fields/textArea.vue'
-import CheckboxField from '@/FormBuilder/components/canvas/fields/checkboxField.vue'
-import DropdownField from '@/FormBuilder/components/canvas/fields/dropdownField.vue'
+import CheckBox from '@/FormBuilder/components/canvas/fields/checkboxField.vue'
+import Dropdown from '@/FormBuilder/components/canvas/fields/dropdownField.vue'
 import NumericField from '@/FormBuilder/components/canvas/fields/numericField.vue'
 import RadioField from '@/FormBuilder/components/canvas/fields/radioField.vue'
-import DateField from '@/FormBuilder/components/canvas/fields/dateField.vue'
+import DatePicker from '@/FormBuilder/components/canvas/fields/dateField.vue'
 import MatrixField from '@/FormBuilder/components/canvas/fields/matrixField.vue'
 import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
 import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
@@ -162,10 +162,10 @@ export default {
         TextBox,
         SectionDivider,
         NumericField,
-        CheckboxField,
-        DropdownField,
+        CheckBox,
+        Dropdown,
         RadioField,
-        DateField,
+        DatePicker,
         MatrixField,
         TimePicker,
         FileUpload,

@@ -1,58 +1,26 @@
 <template>
     <div id="dropdown">
-        <label for="dropdown" class="inputLabel">{{ field.label }}</label><br>
-        <sup>{{ field.description }}</sup>
+        <label class="inputLabel">
+            <editable-text class="tw-cursor-pointer" v-model="field.label">{{ field.label}}</editable-text>
+        </label>
         <el-select id="dropdown" v-model="value" placeholder="select">
             <el-option v-for="item in dropdownList" :key="item.id" :label="item.value" :value="item.value"></el-option>
         </el-select>
-         <el-collapse>
-            <el-collapse-item>
-                <template slot="title">
-                    <el-button icon="el-icon-edit">Field Options</el-button>
-                </template>
-                <div class="tw-flex tw-inline-block tw-w-full">
-                    <div class="tw-float-left">
-                            
-                        <el-row class="tw-my-6">
-                            <label for="label">Field Label</label>
-                            <el-col :span="20">
-                                <el-input id="label" v-model="field.label"></el-input>
-                            </el-col>
-                        </el-row>
-                        <el-row class="tw-my-6">
-                            <el-col :span="20">
-                                <label for="description">Field Description</label>
-                                <el-input id="description" v-model="field.description"></el-input>
-                            </el-col>
-                        </el-row>
-                        <el-row class="tw-my-6">
-                            <label for="switch" class="tw-mb-4">This field is</label><br>
-                            <el-switch id="switch" v-model="field.required" active-text="Required" inactive-text="Optional"></el-switch>
-                        </el-row>
+        <div class="tw-float-right">
+            <editable-text class="tw-cursor-pointer" v-model="value">{{ value.value }}</editable-text>
+            <el-button v-if="value != ''" class="float-right pr-15" type="text" size="mini" @click="removeItem(value)">Remove Item</el-button>
+        </div>
+        
+        <form @submit.prevent="addItem" class="tw-mt-4">
+            <el-row>
+                <el-col :span="12">
+                    <label for="newItem">Add Item <el-button class="tw-ml-2" type="text" @click="addItem">Add</el-button></label>
+                    <el-input id="newItem" v-model="itemText"></el-input>
+                </el-col>
+            </el-row>
+        </form>
 
-                    </div>
-
-                    <div class="tw-float-right tw-mx-20 tw-my-6">
-                        <form @submit.prevent="addItem">
-                            <el-col :span="16">
-                                <label for="newItem">Add a new item to the list</label>
-                                <el-input id="newItem" v-model="itemText"></el-input>
-                                <el-button type="success" @click="addItem">Add</el-button>
-                            </el-col>
-                        </form>
-                    </div>
-                    <div class="tw-float-right tw-mx-20 tw-my-6">
-                        <h3>Dropdown Items</h3>
-                        <el-row v-for="item in dropdownList" :key="item.id">
-                                <editable-text class="tw-cursor-pointer" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
-                                <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
-                        </el-row>
-                    </div>
-                </div>
-
-                <slot></slot>
-            </el-collapse-item>
-        </el-collapse>
+        <slot></slot>
     </div>
 </template>
 

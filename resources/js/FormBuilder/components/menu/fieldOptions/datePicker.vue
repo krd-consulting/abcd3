@@ -6,17 +6,16 @@
                 <el-input v-model="fieldData.label"></el-input>
             </el-form-item>
             
-            <el-form-item label="Field Description">
-                <el-input v-model="fieldData.description"></el-input>
-            </el-form-item>
-            
             <el-form-item label="This Field is">
                 <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
             
             <el-form-item label="Calendar Preferences">
                 <el-row>
-                    <el-switch v-model="fieldData.settings.past_only" active-text="Only allow up to current day"></el-switch>
+                    <el-switch v-model="fieldData.settings.past_only" active-text="Up to current day"></el-switch>
+                </el-row>
+                <el-row>
+                    <el-switch v-model="fieldData.settings.future_only" active-text="Beyond current day"></el-switch>
                 </el-row>
                 <el-row>
                     <el-switch v-model="fieldData.settings.quick_menu" active-text="Quick menu"></el-switch>

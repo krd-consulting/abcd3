@@ -13,54 +13,7 @@
             :end-placeholder="endDate"
             :format="dateFormat">
         </el-date-picker>
-            
-        <el-collapse>
-            <el-collapse-item name="1">
-                <template slot="title">
-                    <el-button icon="el-icon-edit">Field Options</el-button>
-                </template>
-                    <div class="tw-flex tw-inline-block tw-w-full">
-                        <div class="tw-float-left">
-                             <span>Field Label</span>
-                            <el-row>
-                                <el-col :span="20">
-                                    <el-input v-model="field.label"></el-input>
-                                </el-col>
-                            </el-row>
-                            <el-row class="tw-my-6">
-                                <el-col :span="20">
-                                    <label for="description">Field Description</label>
-                                    <el-input id="description" v-model="field.description"></el-input>
-                                </el-col>
-                            </el-row>
-                            <el-row class="tw-my-6">
-                                <span class="tw-mb-4">This field is</span><br>
-                                <el-switch v-model="field.required" active-text="Required" inactive-text="Optional"></el-switch>
-                            </el-row>
-                        </div>
-
-                        <div class="tw-float-right tw-mx-20">
-                            <span>Calendar Preferences</span>
-                            <el-row class="tw-m-4">
-                                <el-switch @change="togglePastOnly" v-model="field.settings.past_only" active-text="Up to current day"></el-switch>
-                            </el-row>
-                            <el-row class="tw-m-4">
-                                <el-switch @change="toggleFutureOnly" v-model="field.settings.future_only" active-text="Beyond current day"></el-switch>
-                            </el-row>
-                            <el-row class="tw-m-4">
-                                <el-switch @change="toggleQuickMenu" v-model="field.settings.quick_menu" active-text="Include Quick menu"></el-switch>
-                            </el-row>
-                            <el-row class="tw-m-4">
-                                <el-switch @change="toggleTime" v-model="field.settings.include_time" active-text="Include time"></el-switch>
-                            </el-row>
-                            <el-row class="tw-m-4">
-                                <el-switch @change="toggleRangeMenu" v-model="field.settings.date_range" active-text="Date Range"></el-switch>
-                            </el-row>
-                        </div>
-                    </div>
-                <slot></slot>
-            </el-collapse-item>
-        </el-collapse>
+            <slot></slot>
     </div>
 </template>
 

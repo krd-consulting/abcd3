@@ -3591,7 +3591,7 @@ __webpack_require__.r(__webpack_exports__);
       editField: '',
       checkList: [],
       nextItem: 0,
-      fields: []
+      field: []
     };
   },
   components: {
@@ -3600,13 +3600,11 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     fieldData: {
       type: Array | Object,
-      "default": {
-        label: 'Check Field'
-      }
+      "default": {}
     }
   },
   created: function created() {
-    this.fields = _.clone(this.fieldData);
+    this.field = _.clone(this.fieldData);
   },
   mounted: function mounted() {
     this.setCheckboxItems(); // calls method upon being rendered in the DOM
@@ -3635,12 +3633,9 @@ __webpack_require__.r(__webpack_exports__);
     setCheckboxItems: function setCheckboxItems() {
       var i;
 
-      for (i = 0; i < this.fields.settings.checkboxNum; i++) {
+      for (i = 0; i < this.field.settings.checkboxNum; i++) {
         this.loadItem();
       }
-    },
-    showField: function showField(value) {
-      return this.checkList[value] == '' || this.editField == value;
     }
   }
 });
@@ -3656,53 +3651,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -3876,38 +3824,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3982,37 +3898,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -4130,36 +4015,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4170,7 +4025,7 @@ __webpack_require__.r(__webpack_exports__);
       radioList: [],
       editField: '',
       itemText: '',
-      inputFieldData: []
+      field: []
     };
   },
   components: {
@@ -4183,16 +4038,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.inputFieldData = _.clone(this.fieldData);
+    this.field = _.clone(this.fieldData);
   },
   mounted: function mounted() {
-    this.getMatrixItems(); // calls method upon being rendered in the DOM
-
+    // calls methods upon being rendered in the DOM
+    this.getMatrixItems();
     this.getRadioList();
-  },
-  computed: {
-    columnText: function columnText() {// <editable-text class="cursor-text float-right" @input="showField" v-model="matrix[$index].response"/>
-    }
   },
   methods: {
     addItem: function addItem() {
@@ -4210,17 +4061,31 @@ __webpack_require__.r(__webpack_exports__);
         response: this.radioList
       });
     },
-    removeItem: function removeItem(item) {
+    removeRow: function removeRow(item) {
       var index = this.matrix.indexOf(item);
 
       if (index !== -1) {
         this.matrix.splice(index, 1);
       }
     },
+    addColumn: function addColumn() {
+      // this.getRadioList();
+      this.radioList.push({
+        key: this.field.settings.matrix_choices++,
+        text: 'Item ' + this.field.settings.matrix_choices
+      });
+    },
+    removeColumn: function removeColumn(item) {
+      var index = this.radioList.indexOf(item);
+
+      if (index !== -1) {
+        this.radioList.splice(index, 1);
+      }
+    },
     getMatrixItems: function getMatrixItems() {
       var i;
 
-      for (i = 0; i < this.inputFieldData.options.matrixQuestions; i++) {
+      for (i = 0; i < this.field.settings.matrix_questions; i++) {
         this.loadItem();
       }
     },
@@ -4228,15 +4093,12 @@ __webpack_require__.r(__webpack_exports__);
       var i;
       this.radioList = [];
 
-      for (i = 1; i <= this.inputFieldData.options.matrixChoices; i++) {
+      for (i = 1; i <= this.field.settings.matrix_choices; i++) {
         this.radioList.push({
           key: i,
           text: 'Item ' + i
         });
       }
-    },
-    showField: function showField(question) {
-      return this.matrix[question] == '' || this.editField == question;
     }
   }
 });
@@ -4394,23 +4256,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4467,12 +4312,6 @@ __webpack_require__.r(__webpack_exports__);
       for (i = 0; i < this.field.settings.radioNum; i++) {
         this.loadItem();
       }
-    },
-    showField: function showField(value) {
-      return this.radioList[value] == '' || this.editField == value;
-    },
-    test: function test() {
-      alert('hello');
     }
   }
 });
@@ -4878,10 +4717,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     TextBox: _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     SectionDivider: _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
     NumericField: _FormBuilder_components_canvas_fields_numericField_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-    CheckboxField: _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    DropdownField: _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    CheckBox: _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    Dropdown: _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
     RadioField: _FormBuilder_components_canvas_fields_radioField_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-    DateField: _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    DatePicker: _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
     MatrixField: _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
     TimePicker: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
     FileUpload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
@@ -4959,10 +4798,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -5082,7 +4917,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'datePicker',
   data: function data() {
@@ -5141,10 +4975,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -9167,7 +8997,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
 
 // exports
 
@@ -9186,7 +9016,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\n    right: 10px; */\n}\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\r\n    right: 10px; */\n}\r\n", ""]);
 
 // exports
 
@@ -9243,7 +9073,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
 
 // exports
 
@@ -85869,164 +85699,149 @@ var render = function() {
     "div",
     { attrs: { id: "checkbox" } },
     [
-      _c("label", { staticClass: "inputLabel", attrs: { for: "check" } }, [
-        _vm._v(_vm._s(_vm.fields.label))
-      ]),
-      _c("br"),
-      _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.fields.description))]),
-      _vm._v(" "),
-      _vm._l(_vm.checkList, function(item) {
-        return _c(
-          "el-checkbox-group",
-          { key: item.value, attrs: { id: "check" } },
-          [
-            _c(
-              "el-checkbox",
-              {
-                attrs: { label: item.value },
-                model: {
-                  value: item.value,
-                  callback: function($$v) {
-                    _vm.$set(item, "value", $$v)
-                  },
-                  expression: "item.value"
-                }
-              },
-              [_vm._v(_vm._s(item.value))]
-            )
-          ],
-          1
-        )
-      }),
-      _vm._v(" "),
       _c(
-        "el-collapse",
+        "label",
+        { staticClass: "inputLabel" },
         [
           _c(
-            "el-collapse-item",
-            [
-              _c(
-                "template",
-                { slot: "title" },
-                [
-                  _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field Options")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
-                _c("div", { staticClass: "tw-float-right tw-mx-20 tw-my-6" }, [
-                  _c(
-                    "form",
-                    {
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.addItem($event)
-                        }
-                      }
-                    },
-                    [
-                      _c(
-                        "el-col",
-                        { attrs: { span: 16 } },
-                        [
-                          _c("label", { attrs: { for: "newItem" } }, [
-                            _vm._v("Add a new item to the list")
-                          ]),
-                          _vm._v(" "),
-                          _c("el-input", {
-                            attrs: { id: "newItem" },
-                            model: {
-                              value: _vm.itemText,
-                              callback: function($$v) {
-                                _vm.itemText = $$v
-                              },
-                              expression: "itemText"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "el-button",
-                            {
-                              attrs: { type: "success" },
-                              on: { click: _vm.addItem }
-                            },
-                            [_vm._v("Add")]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-float-right tw-mx-20 tw-my-6" },
-                  [
-                    _c("h3", [_vm._v("Checkbox List Items")]),
-                    _vm._v(" "),
-                    _vm._l(_vm.checkList, function(item) {
-                      return _c(
-                        "el-row",
-                        { key: item.id },
-                        [
-                          _c(
-                            "el-col",
-                            [
-                              _c(
-                                "editable-text",
-                                {
-                                  staticClass: "tw-cursor-pointer float-left",
-                                  on: { input: _vm.showField },
-                                  model: {
-                                    value: item.value,
-                                    callback: function($$v) {
-                                      _vm.$set(item, "value", $$v)
-                                    },
-                                    expression: "item.value"
-                                  }
-                                },
-                                [_vm._v(_vm._s(item.value))]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "el-button",
-                                {
-                                  staticClass: "float-right pr-15",
-                                  attrs: { type: "text", size: "mini" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.removeItem(item)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Remove")]
-                              )
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _vm._t("default")
-            ],
-            2
+            "editable-text",
+            {
+              staticClass: "tw-cursor-pointer",
+              model: {
+                value: _vm.field.label,
+                callback: function($$v) {
+                  _vm.$set(_vm.field, "label", $$v)
+                },
+                expression: "field.label"
+              }
+            },
+            [_vm._v(_vm._s(_vm.field.label))]
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c(
+        "el-checkbox-group",
+        { attrs: { id: "check" } },
+        _vm._l(_vm.checkList, function(item) {
+          return _c(
+            "el-checkbox",
+            {
+              key: item.value,
+              attrs: { label: item.value },
+              model: {
+                value: item.value,
+                callback: function($$v) {
+                  _vm.$set(item, "value", $$v)
+                },
+                expression: "item.value"
+              }
+            },
+            [
+              _c(
+                "editable-text",
+                {
+                  staticClass: "tw-cursor-pointer",
+                  model: {
+                    value: item.value,
+                    callback: function($$v) {
+                      _vm.$set(item, "value", $$v)
+                    },
+                    expression: "item.value"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                          " +
+                      _vm._s(item.value) +
+                      "\n                  "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  staticClass: "float-right pr-15",
+                  attrs: { type: "text", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      return _vm.removeItem(item)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                          Remove\n                  "
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        }),
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "tw-mt-4",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.addItem($event)
+            }
+          }
+        },
+        [
+          _c(
+            "el-row",
+            [
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "label",
+                    { attrs: { for: "newItem" } },
+                    [
+                      _vm._v("Add Item "),
+                      _c(
+                        "el-button",
+                        {
+                          staticClass: "tw-ml-2",
+                          attrs: { type: "text" },
+                          on: { click: _vm.addItem }
+                        },
+                        [_vm._v("Add")]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("el-input", {
+                    attrs: { id: "newItem" },
+                    model: {
+                      value: _vm.itemText,
+                      callback: function($$v) {
+                        _vm.itemText = $$v
+                      },
+                      expression: "itemText"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm._t("default")
     ],
     2
   )
@@ -86084,226 +85899,9 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c(
-        "el-collapse",
-        [
-          _c(
-            "el-collapse-item",
-            { attrs: { name: "1" } },
-            [
-              _c(
-                "template",
-                { slot: "title" },
-                [
-                  _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field Options")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
-                _c(
-                  "div",
-                  { staticClass: "tw-float-left" },
-                  [
-                    _c("span", [_vm._v("Field Label")]),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("el-input", {
-                              model: {
-                                value: _vm.field.label,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.field, "label", $$v)
-                                },
-                                expression: "field.label"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Description")
-                            ]),
-                            _vm._v(" "),
-                            _c("el-input", {
-                              attrs: { id: "description" },
-                              model: {
-                                value: _vm.field.description,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.field, "description", $$v)
-                                },
-                                expression: "field.description"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("span", { staticClass: "tw-mb-4" }, [
-                          _vm._v("This field is")
-                        ]),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("el-switch", {
-                          attrs: {
-                            "active-text": "Required",
-                            "inactive-text": "Optional"
-                          },
-                          model: {
-                            value: _vm.field.required,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field, "required", $$v)
-                            },
-                            expression: "field.required"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-float-right tw-mx-20" },
-                  [
-                    _c("span", [_vm._v("Calendar Preferences")]),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-m-4" },
-                      [
-                        _c("el-switch", {
-                          attrs: { "active-text": "Up to current day" },
-                          on: { change: _vm.togglePastOnly },
-                          model: {
-                            value: _vm.field.settings.past_only,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field.settings, "past_only", $$v)
-                            },
-                            expression: "field.settings.past_only"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-m-4" },
-                      [
-                        _c("el-switch", {
-                          attrs: { "active-text": "Beyond current day" },
-                          on: { change: _vm.toggleFutureOnly },
-                          model: {
-                            value: _vm.field.settings.future_only,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field.settings, "future_only", $$v)
-                            },
-                            expression: "field.settings.future_only"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-m-4" },
-                      [
-                        _c("el-switch", {
-                          attrs: { "active-text": "Include Quick menu" },
-                          on: { change: _vm.toggleQuickMenu },
-                          model: {
-                            value: _vm.field.settings.quick_menu,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field.settings, "quick_menu", $$v)
-                            },
-                            expression: "field.settings.quick_menu"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-m-4" },
-                      [
-                        _c("el-switch", {
-                          attrs: { "active-text": "Include time" },
-                          on: { change: _vm.toggleTime },
-                          model: {
-                            value: _vm.field.settings.include_time,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field.settings, "include_time", $$v)
-                            },
-                            expression: "field.settings.include_time"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-m-4" },
-                      [
-                        _c("el-switch", {
-                          attrs: { "active-text": "Date Range" },
-                          on: { change: _vm.toggleRangeMenu },
-                          model: {
-                            value: _vm.field.settings.date_range,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field.settings, "date_range", $$v)
-                            },
-                            expression: "field.settings.date_range"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _vm._t("default")
-            ],
-            2
-          )
-        ],
-        1
-      )
+      _vm._t("default")
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -86332,12 +85930,27 @@ var render = function() {
     "div",
     { attrs: { id: "dropdown" } },
     [
-      _c("label", { staticClass: "inputLabel", attrs: { for: "dropdown" } }, [
-        _vm._v(_vm._s(_vm.field.label))
-      ]),
-      _c("br"),
-      _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
+      _c(
+        "label",
+        { staticClass: "inputLabel" },
+        [
+          _c(
+            "editable-text",
+            {
+              staticClass: "tw-cursor-pointer",
+              model: {
+                value: _vm.field.label,
+                callback: function($$v) {
+                  _vm.$set(_vm.field, "label", $$v)
+                },
+                expression: "field.label"
+              }
+            },
+            [_vm._v(_vm._s(_vm.field.label))]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "el-select",
@@ -86361,222 +85974,103 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "el-collapse",
+        "div",
+        { staticClass: "tw-float-right" },
         [
           _c(
-            "el-collapse-item",
+            "editable-text",
+            {
+              staticClass: "tw-cursor-pointer",
+              model: {
+                value: _vm.value,
+                callback: function($$v) {
+                  _vm.value = $$v
+                },
+                expression: "value"
+              }
+            },
+            [_vm._v(_vm._s(_vm.value.value))]
+          ),
+          _vm._v(" "),
+          _vm.value != ""
+            ? _c(
+                "el-button",
+                {
+                  staticClass: "float-right pr-15",
+                  attrs: { type: "text", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      return _vm.removeItem(_vm.value)
+                    }
+                  }
+                },
+                [_vm._v("Remove Item")]
+              )
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "tw-mt-4",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.addItem($event)
+            }
+          }
+        },
+        [
+          _c(
+            "el-row",
             [
               _c(
-                "template",
-                { slot: "title" },
+                "el-col",
+                { attrs: { span: 12 } },
                 [
-                  _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field Options")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
-                _c(
-                  "div",
-                  { staticClass: "tw-float-left" },
-                  [
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("label", { attrs: { for: "label" } }, [
-                          _vm._v("Field Label")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("el-input", {
-                              attrs: { id: "label" },
-                              model: {
-                                value: _vm.field.label,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.field, "label", $$v)
-                                },
-                                expression: "field.label"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Description")
-                            ]),
-                            _vm._v(" "),
-                            _c("el-input", {
-                              attrs: { id: "description" },
-                              model: {
-                                value: _vm.field.description,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.field, "description", $$v)
-                                },
-                                expression: "field.description"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "label",
-                          { staticClass: "tw-mb-4", attrs: { for: "switch" } },
-                          [_vm._v("This field is")]
-                        ),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("el-switch", {
-                          attrs: {
-                            id: "switch",
-                            "active-text": "Required",
-                            "inactive-text": "Optional"
-                          },
-                          model: {
-                            value: _vm.field.required,
-                            callback: function($$v) {
-                              _vm.$set(_vm.field, "required", $$v)
-                            },
-                            expression: "field.required"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "tw-float-right tw-mx-20 tw-my-6" }, [
                   _c(
-                    "form",
-                    {
-                      on: {
-                        submit: function($event) {
-                          $event.preventDefault()
-                          return _vm.addItem($event)
-                        }
-                      }
-                    },
+                    "label",
+                    { attrs: { for: "newItem" } },
                     [
+                      _vm._v("Add Item "),
                       _c(
-                        "el-col",
-                        { attrs: { span: 16 } },
-                        [
-                          _c("label", { attrs: { for: "newItem" } }, [
-                            _vm._v("Add a new item to the list")
-                          ]),
-                          _vm._v(" "),
-                          _c("el-input", {
-                            attrs: { id: "newItem" },
-                            model: {
-                              value: _vm.itemText,
-                              callback: function($$v) {
-                                _vm.itemText = $$v
-                              },
-                              expression: "itemText"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "el-button",
-                            {
-                              attrs: { type: "success" },
-                              on: { click: _vm.addItem }
-                            },
-                            [_vm._v("Add")]
-                          )
-                        ],
-                        1
+                        "el-button",
+                        {
+                          staticClass: "tw-ml-2",
+                          attrs: { type: "text" },
+                          on: { click: _vm.addItem }
+                        },
+                        [_vm._v("Add")]
                       )
                     ],
                     1
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-float-right tw-mx-20 tw-my-6" },
-                  [
-                    _c("h3", [_vm._v("Dropdown Items")]),
-                    _vm._v(" "),
-                    _vm._l(_vm.dropdownList, function(item) {
-                      return _c(
-                        "el-row",
-                        { key: item.id },
-                        [
-                          _c(
-                            "editable-text",
-                            {
-                              staticClass: "tw-cursor-pointer",
-                              on: { input: _vm.showField },
-                              model: {
-                                value: item.value,
-                                callback: function($$v) {
-                                  _vm.$set(item, "value", $$v)
-                                },
-                                expression: "item.value"
-                              }
-                            },
-                            [_vm._v(_vm._s(item.value))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "el-button",
-                            {
-                              staticClass: "float-right pr-15",
-                              attrs: { type: "text", size: "mini" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.removeItem(item)
-                                }
-                              }
-                            },
-                            [_vm._v("Remove")]
-                          )
-                        ],
-                        1
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _vm._t("default")
+                  ),
+                  _vm._v(" "),
+                  _c("el-input", {
+                    attrs: { id: "newItem" },
+                    model: {
+                      value: _vm.itemText,
+                      callback: function($$v) {
+                        _vm.itemText = $$v
+                      },
+                      expression: "itemText"
+                    }
+                  })
+                ],
+                1
+              )
             ],
-            2
+            1
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm._t("default")
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -86645,132 +86139,9 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "el-collapse",
-        [
-          _c(
-            "el-collapse-item",
-            [
-              _c(
-                "template",
-                { slot: "title" },
-                [
-                  _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field Options")
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
-                _c(
-                  "div",
-                  { staticClass: "tw-float-left" },
-                  [
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("label", { attrs: { for: "label" } }, [
-                          _vm._v("Field Label")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("el-input", {
-                              attrs: { id: "label" },
-                              model: {
-                                value: _vm.inputFieldData.label,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
-                                },
-                                expression: "inputFieldData.label"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Description")
-                            ]),
-                            _vm._v(" "),
-                            _c("el-input", {
-                              attrs: { id: "description" },
-                              model: {
-                                value: _vm.inputFieldData.description,
-                                callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
-                                    $$v
-                                  )
-                                },
-                                expression: "inputFieldData.description"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "label",
-                          { staticClass: "tw-mb-4", attrs: { for: "switch" } },
-                          [_vm._v("This field is")]
-                        ),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("el-switch", {
-                          attrs: {
-                            id: "switch",
-                            "active-text": "Required",
-                            "inactive-text": "Optional"
-                          },
-                          model: {
-                            value: _vm.inputFieldData.required,
-                            callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
-                            },
-                            expression: "inputFieldData.required"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _vm._t("default")
-            ],
-            2
-          )
-        ],
-        1
-      )
+      _vm._t("default")
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -86802,11 +86173,11 @@ var render = function() {
       _c(
         "label",
         { staticClass: "inputLabel", attrs: { for: "matrix-table" } },
-        [_vm._v(_vm._s(_vm.inputFieldData.label))]
+        [_vm._v(_vm._s(_vm.field.label))]
       ),
       _c("br"),
       _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.inputFieldData.description))]),
+      _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
       _vm._v(" "),
       _c("table", { attrs: { id: "matrix-table" } }, [
         _c("thead", [
@@ -86814,7 +86185,21 @@ var render = function() {
             "tr",
             { staticClass: "tw-max-w-sm" },
             [
-              _c("th"),
+              _c(
+                "th",
+                [
+                  _c(
+                    "el-button",
+                    {
+                      staticClass: "tw-ml-4",
+                      attrs: { type: "text" },
+                      on: { click: _vm.addColumn }
+                    },
+                    [_vm._v("Add Radio Column")]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _vm._l(_vm.radioList, function(item) {
                 return _c(
@@ -86826,7 +86211,6 @@ var render = function() {
                       [
                         _c("editable-text", {
                           staticClass: "tw-cursor-pointer",
-                          on: { input: _vm.showField },
                           model: {
                             value: item.text,
                             callback: function($$v) {
@@ -86834,7 +86218,25 @@ var render = function() {
                             },
                             expression: "item.text"
                           }
-                        })
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "el-button",
+                          {
+                            staticClass: "tw-float-right tw-pr-15",
+                            attrs: { type: "text", size: "mini" },
+                            on: {
+                              click: function($event) {
+                                return _vm.removeColumn(item)
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                Remove\n                        "
+                            )
+                          ]
+                        )
                       ],
                       1
                     )
@@ -86859,7 +86261,6 @@ var render = function() {
                   [
                     _c("editable-text", {
                       staticClass: "tw-cursor-pointer",
-                      on: { input: _vm.showField },
                       model: {
                         value: item.question,
                         callback: function($$v) {
@@ -86875,7 +86276,7 @@ var render = function() {
                         attrs: { type: "text", size: "mini" },
                         on: {
                           click: function($event) {
-                            return _vm.removeItem(item)
+                            return _vm.removeRow(item)
                           }
                         }
                       },
@@ -86891,6 +86292,7 @@ var render = function() {
                     { key: radio, staticClass: "tw-text-center" },
                     [
                       _c("el-radio", {
+                        attrs: { disabled: "" },
                         model: {
                           value: _vm.radioSelect,
                           callback: function($$v) {
@@ -86912,251 +86314,79 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c(
-        "el-collapse",
+        "form",
+        {
+          staticClass: "tw-inline-block tw-my-4",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.addItem($event)
+            }
+          }
+        },
         [
           _c(
-            "el-collapse-item",
-            { attrs: { name: "1" } },
+            "el-row",
             [
+              _c("label", { attrs: { for: "add-item" } }, [
+                _vm._v("Add a new question")
+              ]),
+              _vm._v(" "),
               _c(
-                "template",
-                { slot: "title" },
+                "el-col",
+                { staticClass: "tw-float-left", attrs: { span: 16 } },
                 [
-                  _c("el-button", { attrs: { icon: "el-icon-edit" } }, [
-                    _vm._v("Field Options")
-                  ])
+                  _c("el-input", {
+                    attrs: { id: "add-item" },
+                    model: {
+                      value: _vm.itemText,
+                      callback: function($$v) {
+                        _vm.itemText = $$v
+                      },
+                      expression: "itemText"
+                    }
+                  })
                 ],
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "tw-flex tw-inline-block tw-w-full" }, [
-                _c(
-                  "div",
-                  { staticClass: "tw-float-left" },
-                  [
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c("label", { attrs: { for: "label" } }, [
-                          _vm._v("Field Label")
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("el-input", {
-                              attrs: { id: "label" },
-                              model: {
-                                value: _vm.inputFieldData.label,
-                                callback: function($$v) {
-                                  _vm.$set(_vm.inputFieldData, "label", $$v)
-                                },
-                                expression: "inputFieldData.label"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 20 } },
-                          [
-                            _c("label", { attrs: { for: "description" } }, [
-                              _vm._v("Field Description")
-                            ]),
-                            _vm._v(" "),
-                            _c("el-input", {
-                              attrs: { id: "description" },
-                              model: {
-                                value: _vm.inputFieldData.description,
-                                callback: function($$v) {
-                                  _vm.$set(
-                                    _vm.inputFieldData,
-                                    "description",
-                                    $$v
-                                  )
-                                },
-                                expression: "inputFieldData.description"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "el-row",
-                      { staticClass: "tw-my-6" },
-                      [
-                        _c(
-                          "label",
-                          { staticClass: "tw-mb-4", attrs: { for: "switch" } },
-                          [_vm._v("This field is")]
-                        ),
-                        _c("br"),
-                        _vm._v(" "),
-                        _c("el-switch", {
-                          attrs: {
-                            id: "switch",
-                            "active-text": "Required",
-                            "inactive-text": "Optional"
-                          },
-                          model: {
-                            value: _vm.inputFieldData.required,
-                            callback: function($$v) {
-                              _vm.$set(_vm.inputFieldData, "required", $$v)
-                            },
-                            expression: "inputFieldData.required"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-float-right tw-mx-20" },
-                  [
-                    _c("label", { attrs: { for: "choices" } }, [
-                      _vm._v("Number of Choices")
-                    ]),
-                    _vm._v(" "),
-                    _c("el-input-number", {
+              _c(
+                "el-col",
+                { staticClass: "tw-float-right", attrs: { span: 1.5 } },
+                [
+                  _c(
+                    "el-tooltip",
+                    {
                       attrs: {
-                        id: "choices",
-                        "controls-position": "right",
-                        min: 1,
-                        max: 10
-                      },
-                      model: {
-                        value: _vm.inputFieldData.options.matrixChoices,
-                        callback: function($$v) {
-                          _vm.$set(
-                            _vm.inputFieldData.options,
-                            "matrixChoices",
-                            $$v
-                          )
-                        },
-                        expression: "inputFieldData.options.matrixChoices"
+                        content:
+                          "Alternatively, you can press enter after typing in this field to add items to the list"
                       }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "el-button",
-                      {
-                        staticClass: "tw-ml-4",
-                        attrs: { type: "success" },
-                        on: { click: _vm.getRadioList }
-                      },
-                      [_vm._v("Set ")]
-                    ),
-                    _c("br"),
-                    _vm._v(" "),
-                    _c(
-                      "form",
-                      {
-                        staticClass: "tw-inline-block tw-my-4",
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.addItem($event)
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "el-row",
-                          [
-                            _c("label", { attrs: { for: "add-item" } }, [
-                              _vm._v("Add a new question")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "el-col",
-                              {
-                                staticClass: "tw-float-left",
-                                attrs: { span: 16 }
-                              },
-                              [
-                                _c("el-input", {
-                                  attrs: { id: "add-item" },
-                                  model: {
-                                    value: _vm.itemText,
-                                    callback: function($$v) {
-                                      _vm.itemText = $$v
-                                    },
-                                    expression: "itemText"
-                                  }
-                                })
-                              ],
-                              1
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "el-col",
-                              {
-                                staticClass: "tw-float-right",
-                                attrs: { span: 1.5 }
-                              },
-                              [
-                                _c(
-                                  "el-tooltip",
-                                  {
-                                    attrs: {
-                                      content:
-                                        "Alternatively, you can press enter after typing in this field to add items to the list"
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "el-button",
-                                      {
-                                        attrs: { type: "success" },
-                                        on: { click: _vm.addItem }
-                                      },
-                                      [_vm._v("Add")]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ],
-                              1
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _vm._t("default")
+                    },
+                    [
+                      _c(
+                        "el-button",
+                        {
+                          attrs: { type: "success" },
+                          on: { click: _vm.addItem }
+                        },
+                        [_vm._v("Add")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
-            2
+            1
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm._t("default")
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -87455,7 +86685,27 @@ var render = function() {
                     expression: "item.value"
                   }
                 },
-                [_vm._v(_vm._s(item.value))]
+                [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(item.value) +
+                      "\n                    "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  staticClass: "float-right pr-15",
+                  attrs: { type: "text", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      return _vm.removeItem(item)
+                    }
+                  }
+                },
+                [_vm._v("Remove")]
               )
             ],
             1
@@ -87464,136 +86714,64 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm._t("default"),
-      _vm._v(" "),
       _c(
-        "el-collapse",
+        "form",
+        {
+          staticClass: "tw-mt-4",
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.addItem($event)
+            }
+          }
+        },
         [
           _c(
-            "el-collapse-item",
+            "el-row",
             [
-              _c("template", { slot: "title" }, [
-                _c(
-                  "form",
-                  {
-                    on: {
-                      submit: function($event) {
-                        $event.preventDefault()
-                        return _vm.addItem($event)
-                      }
-                    }
-                  },
-                  [
-                    _c(
-                      "el-row",
-                      [
-                        _c(
-                          "el-col",
-                          { attrs: { span: 16 } },
-                          [
-                            _c("el-input", {
-                              attrs: { id: "newItem" },
-                              model: {
-                                value: _vm.itemText,
-                                callback: function($$v) {
-                                  _vm.itemText = $$v
-                                },
-                                expression: "itemText"
-                              }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "el-col",
-                          { attrs: { span: 8 } },
-                          [
-                            _c(
-                              "el-button",
-                              {
-                                attrs: { type: "success" },
-                                on: { click: _vm.addItem }
-                              },
-                              [_vm._v("Add")]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
               _c(
-                "div",
+                "el-col",
+                { attrs: { span: 12 } },
                 [
-                  _c("h1", [_vm._v("Edit List Items")]),
+                  _c(
+                    "label",
+                    { attrs: { for: "newItem" } },
+                    [
+                      _vm._v("Add Item "),
+                      _c(
+                        "el-button",
+                        {
+                          staticClass: "tw-ml-2",
+                          attrs: { type: "text" },
+                          on: { click: _vm.addItem }
+                        },
+                        [_vm._v("Add")]
+                      )
+                    ],
+                    1
+                  ),
                   _vm._v(" "),
-                  _vm._l(_vm.radioList, function(item) {
-                    return _c(
-                      "el-row",
-                      { key: item.id },
-                      [
-                        _c(
-                          "el-col",
-                          { staticClass: "tw-mr-4", attrs: { span: 8 } },
-                          [
-                            _c(
-                              "editable-text",
-                              {
-                                staticClass: "tw-cursor-pointer float-left",
-                                on: { input: _vm.showField },
-                                model: {
-                                  value: item.value,
-                                  callback: function($$v) {
-                                    _vm.$set(item, "value", $$v)
-                                  },
-                                  expression: "item.value"
-                                }
-                              },
-                              [_vm._v(_vm._s(item.value))]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "el-col",
-                          { staticClass: "tw-ml-4", attrs: { span: 6 } },
-                          [
-                            _c(
-                              "el-button",
-                              {
-                                staticClass: "float-right pr-15",
-                                attrs: { type: "text", size: "mini" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.removeItem(item)
-                                  }
-                                }
-                              },
-                              [_vm._v("Remove")]
-                            )
-                          ],
-                          1
-                        )
-                      ],
-                      1
-                    )
+                  _c("el-input", {
+                    attrs: { id: "newItem" },
+                    model: {
+                      value: _vm.itemText,
+                      callback: function($$v) {
+                        _vm.itemText = $$v
+                      },
+                      expression: "itemText"
+                    }
                   })
                 ],
-                2
+                1
               )
             ],
-            2
+            1
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _vm._t("default")
     ],
     2
   )
@@ -88241,23 +87419,6 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Field Description" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.fieldData.description,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "description", $$v)
-                  },
-                  expression: "fieldData.description"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
             { attrs: { label: "This Field is" } },
             [
               _c("el-switch", {
@@ -88367,23 +87528,6 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Field Description" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.fieldData.description,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "description", $$v)
-                  },
-                  expression: "fieldData.description"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
             { attrs: { label: "This Field is" } },
             [
               _c("el-switch", {
@@ -88411,13 +87555,30 @@ var render = function() {
                 "el-row",
                 [
                   _c("el-switch", {
-                    attrs: { "active-text": "Only allow up to current day" },
+                    attrs: { "active-text": "Up to current day" },
                     model: {
                       value: _vm.fieldData.settings.past_only,
                       callback: function($$v) {
                         _vm.$set(_vm.fieldData.settings, "past_only", $$v)
                       },
                       expression: "fieldData.settings.past_only"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-row",
+                [
+                  _c("el-switch", {
+                    attrs: { "active-text": "Beyond current day" },
+                    model: {
+                      value: _vm.fieldData.settings.future_only,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fieldData.settings, "future_only", $$v)
+                      },
+                      expression: "fieldData.settings.future_only"
                     }
                   })
                 ],
@@ -88542,23 +87703,6 @@ var render = function() {
                     _vm.$set(_vm.fieldData, "label", $$v)
                   },
                   expression: "fieldData.label"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "Field Description" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.fieldData.description,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "description", $$v)
-                  },
-                  expression: "fieldData.description"
                 }
               })
             ],
@@ -115324,7 +114468,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

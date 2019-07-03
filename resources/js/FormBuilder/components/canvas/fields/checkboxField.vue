@@ -1,41 +1,41 @@
 <template>
   <div id="checkbox">
-      <label for="check" class="inputLabel">{{ fields.label }}</label><br>
-        <sup>{{ fields.description }}</sup>
-        <el-checkbox-group id="check" v-for="item in checkList" :key="item.value">
-            <el-checkbox v-model="item.value" :label="item.value">{{ item.value }}</el-checkbox>
+      <label class="inputLabel">
+            <editable-text class="tw-cursor-pointer" v-model="field.label">{{ field.label}}</editable-text>
+        </label>
+
+        <el-checkbox-group id="check" >
+            <el-checkbox 
+                v-model="item.value" 
+                v-for="item in checkList" 
+                :key="item.value" 
+                :label="item.value">
+                    <editable-text 
+                        class="tw-cursor-pointer"
+                        v-model="item.value">
+                            {{ item.value }}
+                    </editable-text>
+                    <el-button 
+                        class="float-right pr-15" 
+                        type="text" 
+                        size="mini" 
+                        @click="removeItem(item)">
+                            Remove
+                    </el-button>
+            </el-checkbox>
         </el-checkbox-group>
-    <el-collapse>
-      <el-collapse-item>
-        <template slot="title">
-            <el-button icon="el-icon-edit">Field Options</el-button>
-        </template>
-        <div class="tw-flex tw-inline-block tw-w-full">
 
-            <div class="tw-float-right tw-mx-20 tw-my-6">
-                <form @submit.prevent="addItem">
-                    <el-col :span="16">
-                        <label for="newItem">Add a new item to the list</label>
-                        <el-input id="newItem" v-model="itemText"></el-input>
-                        <el-button type="success" @click="addItem">Add</el-button>
-                    </el-col>
-                </form>
-            </div>
-            <div class="tw-float-right tw-mx-20 tw-my-6">
-                <h3>Checkbox List Items</h3>
-                <el-row v-for="item in checkList" :key="item.id">
-                    <el-col>
-                        <editable-text class="tw-cursor-pointer float-left" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
-                        <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
-                    </el-col>
-                </el-row>
-            </div>
-        </div>
-          
-        <slot></slot>
+        <form @submit.prevent="addItem" class="tw-mt-4">
+            <el-row>
+                <el-col :span="12">
+                    <label for="newItem">Add Item <el-button class="tw-ml-2" type="text" @click="addItem">Add</el-button></label>
+                    <el-input id="newItem" v-model="itemText"></el-input>  
+                </el-col>
+            </el-row>
+        </form>
+        
+    <slot></slot>
 
-      </el-collapse-item>
-    </el-collapse>
   </div>
 </template>
 
@@ -50,7 +50,7 @@ export default {
             editField: '',
             checkList: [],
             nextItem: 0,
-            fields: []
+            field: []
         }
     },
     components: {
@@ -60,12 +60,11 @@ export default {
         fieldData: {
             type: Array | Object,
             default: {
-                label: 'Check Field',
             }
         }
     },
     created() {
-        this.fields = _.clone(this.fieldData)
+        this.field = _.clone(this.fieldData)
     },
     mounted: function() {
         this.setCheckboxItems(); // calls method upon being rendered in the DOM
@@ -90,13 +89,10 @@ export default {
         },
         setCheckboxItems() {
             var i;
-            for(i= 0; i < this.fields.settings.checkboxNum; i++) {
+            for(i= 0; i < this.field.settings.checkboxNum; i++) {
                 this.loadItem();
             }
         },
-        showField(value){
-            return (this.checkList[value] == '' || this.editField == value)
-        }
     }
 }
 </script>

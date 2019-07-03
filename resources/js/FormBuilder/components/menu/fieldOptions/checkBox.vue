@@ -6,10 +6,6 @@
                 <el-input v-model="fieldData.label"></el-input>
             </el-form-item>
             
-            <el-form-item label="Field Description">
-                <el-input v-model="fieldData.description"></el-input>
-            </el-form-item>
-            
             <el-form-item label="This Field is">
                 <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>

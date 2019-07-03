@@ -4,53 +4,36 @@
         <label class="inputLabel">
             <editable-text class="tw-cursor-pointer" v-model="field.label">{{ field.label}}</editable-text>
         </label>
+
+        <!-- <el-row> -->
+             <el-radio-group id="radioGroup">
+                <el-radio 
+                    v-model="item.value" 
+                    v-for="item in radioList" 
+                    :key="item.value" 
+                    :label="item.value" 
+                    class="tw-mx-4">
+                        <editable-text 
+                            class="tw-cursor-pointer"
+                            v-model="item.value">
+                                {{ item.value }}
+                        </editable-text>
+                        <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
+                </el-radio>
+                
+            </el-radio-group>
         
-        <el-radio-group id="radioGroup">
-            
-            <el-radio 
-                v-model="item.value" 
-                v-for="item in radioList" 
-                :key="item.value" 
-                :label="item.value" 
-                class="tw-mx-4">
-                <editable-text 
-                    class="tw-cursor-pointer"
-                    v-model="item.value">{{ item.value }}</editable-text>
-            </el-radio>
-
-        </el-radio-group>
-
+        
+        <form @submit.prevent="addItem" class="tw-mt-4">
+            <el-row>
+                <el-col :span="12">
+                    <label for="newItem">Add Item <el-button class="tw-ml-2" type="text" @click="addItem">Add</el-button></label>
+                    <el-input id="newItem" v-model="itemText"></el-input>
+                </el-col>
+            </el-row>
+        </form>
+        
         <slot></slot>
-
-        <el-collapse>
-            <el-collapse-item>
-                <template slot="title">
-                    <form @submit.prevent="addItem">
-                        <el-row>
-                            <el-col :span="16">
-                                <el-input id="newItem" v-model="itemText"></el-input>
-                            </el-col>
-                            <el-col :span="8">
-                                <el-button type="success" @click="addItem">Add</el-button>
-                            </el-col>
-                        </el-row>
-                    </form>
-                </template>
-                <div>
-                        <h1>Edit List Items</h1>
-                        <el-row v-for="item in radioList" :key="item.id">
-                            <el-col :span="8" class="tw-mr-4">
-                                <editable-text class="tw-cursor-pointer float-left" @input="showField" v-model="item.value">{{ item.value }}</editable-text>
-                                
-                            </el-col>
-                            <el-col :span="6" class="tw-ml-4">
-                                <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
-                            </el-col>
-                        </el-row>
-                </div>
-
-            </el-collapse-item>
-        </el-collapse>
     </div>
 </template>
 
@@ -109,13 +92,6 @@ export default {
                 this.loadItem();
             }
         },
-        showField(value){
-            return (this.radioList[value] == '' || this.editField == value)
-        },
-
-        test() {
-            alert('hello');
-        }
     }
 }
 </script>
