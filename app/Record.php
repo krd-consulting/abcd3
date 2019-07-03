@@ -125,8 +125,14 @@ class Record extends Model
         return $this->hasMany($this->getProgramRecordPivotClass());
     }
 
-    public function teams() {
+    public function teams() 
+    {
         return $this->belongsToMany('App\Team');
+    }
+
+    public function forms()
+    {
+        return $this->belongsToMany('App\Form');
     }
 
     public function user() {

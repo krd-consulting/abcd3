@@ -86,6 +86,11 @@ class User extends Authenticatable implements Auditable
         return $this->hasManyDeepFromRelations($this->records(), (new Record)->teams());
     }
 
+    public function forms()
+    {
+        return $this->hasManyDeepFromRelations($this->records(), (new Record)->forms());
+    }
+
     public function availablePrograms(?int $limit)
     {
         $programs;

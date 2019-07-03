@@ -231,7 +231,7 @@ return [
         ]
     ],
 
-    'resource_types' => [
+    'form_target_types' => [
         'record' => [
             'name' => 'Record',
             'model' => 'App\RecordType'
@@ -248,7 +248,7 @@ return [
             'name' => 'Form',
             'model' => 'App\Form'
         ],
-        'form field' => [
+        'form_field' => [
             'name' => 'Form Field',
             'model' => 'App\FormField'
         ],
