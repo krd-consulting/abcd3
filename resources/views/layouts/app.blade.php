@@ -12,6 +12,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>body {height: 100%;}</style>
 </head>
 <body>
     <base-container id="app" class="tw-h-screen tw-max-h-screen">

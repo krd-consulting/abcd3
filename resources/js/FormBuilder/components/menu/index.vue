@@ -1,9 +1,9 @@
 <template>
   <div id="menu">
-    <div id="menu-container" class="abcd-sticky">
+    <div id="menu-container">
       <!-- <el-row class="tw-flex-1 tw-max-w-full"> -->
         <!-- <el-col> -->
-          <el-collapse v-model="step" accordion class="tw-w-full">
+          <el-collapse v-model="step" accordion id="menu-stepper">
             <el-collapse-item name="1">
               <template slot="title">
                   <p class="menu-title">Select a Field</p>
@@ -142,16 +142,35 @@ export default {
 </script>
 
 <style scoped>
+ 
+@media (min-width: 768px){
+    
+    /* Ipad size */
+ 
+}
+ 
+@media (min-width: 1024px){
+    
+    /* Standard monitor size */
+
+}
+ 
+@media (min-width: 1200px){
+
+    /* large monitor size */
+ 
+}
     #menu {
         overflow: hidden;
         display: flex;
         max-width: 260px;
         min-width: 160px;
     }
-    /* .el-row {
-        flex: 100%;
-        max-width: 250px;
-        min-width: 160px;
+    .el-collapse {
+        width: 250px;
+    }
+    /* #menu-stepper {
+        width: auto;
     } */
     .el-card {
         margin: 5px;

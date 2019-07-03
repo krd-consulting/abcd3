@@ -1,13 +1,13 @@
 <template>
     <div id="dropdown">
         <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer" v-model="field.label">{{ field.label}}</editable-text>
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
         </label>
         <el-select id="dropdown" v-model="value" placeholder="select">
             <el-option v-for="item in dropdownList" :key="item.id" :label="item.value" :value="item.value"></el-option>
         </el-select>
         <div class="tw-float-right">
-            <editable-text class="tw-cursor-pointer" v-model="value">{{ value.value }}</editable-text>
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="value">{{ value.value }}</editable-text>
             <el-button v-if="value != ''" class="float-right pr-15" type="text" size="mini" @click="removeItem(value)">Remove Item</el-button>
         </div>
         
@@ -86,8 +86,12 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.mouseOver:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    font-size: 110%;
+}
 </style>
 
 

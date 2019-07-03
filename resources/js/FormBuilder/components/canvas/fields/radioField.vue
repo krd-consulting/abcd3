@@ -2,7 +2,7 @@
     <div id="dropdown">
          
         <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer" v-model="field.label">{{ field.label}}</editable-text>
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
         </label>
 
         <!-- <el-row> -->
@@ -14,7 +14,7 @@
                     :label="item.value" 
                     class="tw-mx-4">
                         <editable-text 
-                            class="tw-cursor-pointer"
+                            class="tw-cursor-pointer mouseOver"
                             v-model="item.value">
                                 {{ item.value }}
                         </editable-text>
@@ -96,8 +96,10 @@ export default {
 }
 </script>
 
-<style>
-ul {
-  list-style-type: none;
+<style scoped>
+.mouseOver:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    font-size: 110%;
 }
 </style>

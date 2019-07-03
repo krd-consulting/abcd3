@@ -5,18 +5,14 @@
             <el-form-item label="Question/Title" prop="label">
                 <el-input v-model="fieldData.label"></el-input>
             </el-form-item>
-        
-            <el-form-item label="Field Description">
-                <el-input v-model="fieldData.description"></el-input>
-            </el-form-item>
 
             <el-form-item label="This Field is">
-                <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
 
             <el-form-item label="Set Default Value">
-                <el-switch v-model="fieldData.isLimited" inactive-text="No Default" active-text="Set Default"></el-switch>
-                <el-input-number :disabled="!fieldData.isLimited" v-model="fieldData.defaultNum"></el-input-number>
+                <el-switch v-model="fieldData.settings.isLimited" inactive-text="No Default" active-text="Set Default"></el-switch>
+                <el-input-number :disabled="!fieldData.settings.isLimited" v-model="fieldData.settings.defaultNum"></el-input-number>
             </el-form-item>
 
             <el-form-item>

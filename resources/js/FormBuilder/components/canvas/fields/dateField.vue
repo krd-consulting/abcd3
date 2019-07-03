@@ -1,7 +1,8 @@
 <template>
     <div id="datepicker">
-        <label for="dateField" class="inputLabel">{{ field.label }}</label><br>
-        <sup>{{ field.description }}</sup>
+        <label class="inputLabel">
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
+        </label>
         <el-date-picker 
             id="dateField"
             v-model="dateSelection" 
@@ -18,6 +19,7 @@
 </template>
 
 <script>
+import EditableText from '@/components/editableText.vue'
 
 export default {
     data: () => {
@@ -38,6 +40,9 @@ export default {
             type: Array | Object,
             default: {}
         }
+    },
+    components: {
+        EditableText
     },
     created() {
         this.field = _.clone(this.fieldData)
@@ -148,6 +153,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.mouseOver:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    font-size: 110%;
+}
 </style>

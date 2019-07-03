@@ -3,7 +3,7 @@
         <el-divider>
 
             <span>
-                <editable-text class="tw-cursor-pointer" @input="showField" v-model="field.label">{{ field.label}}</editable-text>
+                <editable-text class="tw-cursor-pointer mouseOver" @input="showField" v-model="field.label">{{ field.label}}</editable-text>
             </span>
 
         </el-divider>
@@ -41,7 +41,11 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.mouseOver:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    font-size: 110%;
+}
 </style>
 

@@ -1,7 +1,9 @@
 <template>
     <div id="fileUpload">
-      <label for="dropdown" class="inputLabel">{{ inputFieldData.label }}</label><br>
-        <sup>{{ inputFieldData.description }}</sup>
+      <label class="inputLabel">
+          <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
+          <editable-text class="tw-cursor-pointer mouseOver tw-text-xs" v-model="field.description">{{ field.description }}</editable-text>
+      </label>
       <el-upload disabled
           action="https://jsonplaceholder.typicode.com/posts/"
           :on-preview="handlePreview"
@@ -19,11 +21,13 @@
 </template>
 
 <script>
+import EditableText from '@/components/editableText.vue'
+
 export default {
     data() {
       return {
         fileList: [],
-        inputFieldData: []
+        field: []
       };
     },
     props: {
@@ -32,8 +36,11 @@ export default {
             default: {}
         }
     },
+    components: {
+      EditableText
+    },
     created() {
-        this.inputFieldData = _.clone(this.fieldData)
+        this.field = _.clone(this.fieldData)
     },
     methods: {
       handleRemove(file, fileList) {
@@ -52,6 +59,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.mouseOver:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    font-size: 110%;
+}
 </style>

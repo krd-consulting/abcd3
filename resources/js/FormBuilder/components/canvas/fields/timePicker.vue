@@ -3,7 +3,7 @@
         <el-row>
 
             <label class="inputLabel">
-                <editable-text class="tw-cursor-pointer" @input="showField" v-model="field.label">{{ field.label }}</editable-text>
+                <editable-text class="tw-cursor-pointer mouseOver" @input="showField" v-model="field.label">{{ field.label }}</editable-text>
             </label>
 
             <sup>{{ field.description }}</sup>
@@ -49,6 +49,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.mouseOver:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    font-size: 110%;
+}
 </style>

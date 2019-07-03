@@ -2,13 +2,13 @@
     <div id="formCreator">
         <el-container>
 
-                <el-card id="menu-container" class="abcd-sticky"> 
-                    <el-aside class="aside">
-                        <form-menu @add="addField"/>
-                    </el-aside>
+                <el-card id="menu-container"> 
+                    <!-- <el-aside class="aside"> -->
+                        <form-menu id="menu" @add="addField"/>
+                    <!-- </el-aside> -->
                 </el-card>
             
-        <el-card id="canvas">
+        <el-card id="canvas-container">
             <el-header>
                 <el-menu :default-active="$route.path" 
                     background-color="#fff" 
@@ -18,13 +18,13 @@
                     router>
                         <el-menu-item default-active index="/forms/create" class="tw-font-bold tw-focus:font-extrabold">Form Builder</el-menu-item>
                         <el-menu-item index="/forms/create/preview" class="tw-font-bold tw-focus:font-extrabold">Preview Form</el-menu-item>
-                        <el-menu-item index="/forms" @click="buildForm" class="tw-float-right tw-font-bold tw-focus:font-extrabold">Finish &#38; Build!</el-menu-item>
+                        <el-menu-item index="/forms" @click="buildForm" class="float-right tw-font-bold tw-focus:font-extrabold">Finish &#38; Build!</el-menu-item>
                 </el-menu>
             </el-header>   
 
-            <el-main>
-                <form-Canvas :fields="fields" @inputOptions="setOptions"/>
-            </el-main>
+            <!-- <el-main> -->
+                <form-Canvas :fields="fields" @inputOptions="setOptions" id="canvas"/>
+            <!-- </el-main> -->
         </el-card>
 
     </el-container>
@@ -92,6 +92,43 @@ export default {
 </script>
 
 <style scoped>
+ 
+@media (min-width: 768px){
+    #formCreator {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+    #canvas-container {
+        flex: 80%;
+        /* 
+        margin-right: 30px; */
+        margin: 0 auto;
+        margin-left: 5px;
+        min-width: 500px;
+    }
+    #canvas {
+        width: 100%;
+        padding-right: 5px;
+    }
+    .el-header {
+        min-width: 500px;
+    }
+    #menu-container {
+        flex: 20%;
+        padding-top: 60px;
+        margin: 0 auto;
+        min-width: 240px;
+        max-height: 900px;
+        position: -webkit-sticky !important;
+        position: sticky !important;
+        top: 0 !important;
+        align-self: flex-start !important;
+        z-index: 289;
+    }
+}
+ 
+@media (min-width: 1024px){
     #formCreator {
         display: flex;
         flex-direction: row;
@@ -100,36 +137,43 @@ export default {
         justify-content: center;
         align-items: center;
     }
-    .el-header{
-        /* display: flex; */
-    }
-    .aside{
-        padding-top: 60px;
-        margin: 0 auto;
-    }
-    #canvas {
-        flex: 60%;
+    #canvas-container {
+        flex: 80%;
         margin-left: 10px;
         margin-right: 10%;
+        min-width: 500px;
     }
-    .dock_right{
-        float: right;
+    #canvas {
+        width: 100%;
+        padding-right: 15px;
+    }
+    .el-header {
+        min-width: 500px;
     }
     #menu-container {
         flex: 20%;
+        padding-top: 60px;
+        padding-bottom: 10px;
+        margin: 0 auto;
         margin-left: 10%;
-        min-width: 240px;
+        width: 300px;
         max-height: 900px;
         position: -webkit-sticky !important;
         position: sticky !important;
         top: 0 !important;
-        /* z-index: 289; */
+        align-self: flex-start !important; 
+        z-index: 1;
     }
-    /* #canvas-container {
-        margin-right: 200px;
-        max-width: 100%;
-        min-width: 50%;
-        
-    } */
+
+    .float-right {
+        float: right !important;
+    }
+}
+ 
+@media (min-width: 1200px){
+
+ 
+}
+
 </style>
 

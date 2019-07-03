@@ -1,16 +1,18 @@
 <template>
     <div id="textarea">
-        <label for="matrix-table" class="inputLabel">{{ field.label }}</label><br>
-        <sup>{{ field.description }}</sup>
+        <label class="inputLabel">
+          <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
+          <editable-text class="tw-cursor-pointer mouseOver tw-text-xs" v-model="field.description">{{ field.description }}</editable-text>
+      </label>
         <table id="matrix-table">
             <thead>
                 <tr class="tw-max-w-sm">
                     <th><el-button type="text" class="tw-ml-4" @click="addColumn">Add Radio Column</el-button></th>
                     <th v-for="item in radioList" :key="item.key" >
                         <el-col>
-                            <editable-text class="tw-cursor-pointer" v-model="item.text"/>
+                            <editable-text class="tw-cursor-pointer mouseOver" v-model="item.text"/>
                             <el-button 
-                                class="tw-float-right tw-pr-15" 
+                                class="tw-pr-15" 
                                 type="text" 
                                 size="mini" 
                                 @click="removeColumn(item)">
@@ -23,7 +25,7 @@
             <tbody>
                 <tr v-for="item in matrix" :key="item.id">
                     <td>
-                        <editable-text class="tw-cursor-pointer" v-model="item.question"/>
+                        <editable-text class="tw-cursor-pointer mouseOver" v-model="item.question"/>
                         <el-button type="text" size="mini" @click="removeRow(item)">Remove</el-button>
                     </td>
                     <td v-for="radio in radioList" :key="radio" class="tw-text-center">
@@ -148,4 +150,9 @@ export default {
     #matrix-table tbody tr:hover {
         background: #9ebdef;
     }
+    .mouseOver:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    font-size: 110%;
+}
 </style>

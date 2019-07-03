@@ -1,8 +1,10 @@
 <template>
   <div id="checkbox">
-      <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer" v-model="field.label">{{ field.label}}</editable-text>
-        </label>
+        <label class="inputLabel">
+            <el-col>
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
+            </el-col>
+        </label><br>
 
         <el-checkbox-group id="check" >
             <el-checkbox 
@@ -11,7 +13,7 @@
                 :key="item.value" 
                 :label="item.value">
                     <editable-text 
-                        class="tw-cursor-pointer"
+                        class="tw-cursor-pointer mouseOver"
                         v-model="item.value">
                             {{ item.value }}
                     </editable-text>
@@ -97,5 +99,10 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.mouseOver:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    font-size: 110%;
+}
 </style>

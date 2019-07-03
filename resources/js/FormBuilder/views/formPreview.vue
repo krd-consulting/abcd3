@@ -33,9 +33,11 @@
                     </el-header>
                     
                     <el-main>
-                        <el-row :gutter="10" class="tw-mb-4">
-                            <el-col :span="10">
+                        <el-row :gutter="20" class="tw-mb-4">
+                            <el-col :span="2">
                                 <span class="input-label">{{ data.targetType }} Name</span>
+                            </el-col>  
+                            <el-col :span="10">
                                 <el-input class="inputField" v-model="clientName"></el-input>
                             </el-col>
                             
@@ -92,6 +94,7 @@ import TimePicker from '@/FormBuilder/components/preview/timePicker.vue'
 import Upload from '@/FormBuilder/components/preview/upload.vue'
 import SectionDivider from '@/FormBuilder/components/preview/sectionDivider.vue'
 
+
 export default {
     data: () => {
         return {
@@ -127,7 +130,7 @@ export default {
             console.log(key, keyPath);
         },
         buildForm() {
-            alert('One day, this form will persist to the database. but alas, tis not this day.')
+            alert('One day, this form will persist to the database, thus the application, but alas, tis not this day.')
         }
     }
 }
