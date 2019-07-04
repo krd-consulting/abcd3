@@ -231,6 +231,11 @@ return [
         ]
     ],
 
+    'form_types' => [
+        'static' => 'Static',
+        'pre-post' => 'Pre-post'
+    ],
+
     'form_target_types' => [
         'record' => [
             'name' => 'Record',

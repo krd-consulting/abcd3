@@ -1,7 +1,6 @@
 <template>
     <div id="formCreator">
         <el-container>
-
                 <el-card id="menu-container"> 
                     <!-- <el-aside class="aside"> -->
                         <form-menu id="menu" @add="addField"/>
@@ -50,6 +49,7 @@
                 fields: []
             }
         },
+
         methods: {
             addField(field) {
                 // append to fields arrays

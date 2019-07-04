@@ -50,6 +50,33 @@
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5">
+                        Form Type
+                    </label>
+                    <div class="tw-w-2/3">
+                        <base-select
+                            v-model="formData.type"
+                            name="type"
+                            placeholder="Select Form Type"
+                            @change="request.errors.clear('type')">
+                            <el-option
+                                v-for="(type, index) in types"
+                                :key="index"
+                                :label="type"
+                                :value="type">
+                                {{ type }}
+                            </el-option>
+                        </base-select>
+                    </div>
+                </div>
+                <div v-if="request.errors.has('type')" class="tw-flex tw-justify-end">
+                    <div class="tw-w-4/5 tw-py-2">
+                        <span v-text="request.errors.get('type')[0]" class="tw-text-xs tw-text-red-500"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="tw-mb-2">
+                <div class="tw-flex tw-items-center tw-w-full">
+                    <label class="tw-w-1/5">
                         This form is about
                     </label>
                     <div class="tw-w-2/3">
@@ -57,7 +84,8 @@
                             v-model="formData.target"
                             name="target"
                             placeholder="Select Resource"
-                            @change="request.errors.clear('target')">
+                            @change="request.errors.clear('target.type');
+                                request.errors.clear('target.type_id')">
                             <el-option
                                 v-for="(type, index) in targetTypes"
                                 :key="index"
@@ -68,9 +96,14 @@
                         </base-select>
                     </div>
                 </div>
-                <div v-if="request.errors.has('target')" class="tw-flex tw-justify-end">
+                <div v-if="request.errors.has('target.type')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('target')[0]" class="tw-text-xs tw-text-red-500"></span>
+                        <span v-text="request.errors.get('target.type')[0]" class="tw-text-xs tw-text-red-500"></span>
+                    </div>
+                </div>
+                <div v-if="request.errors.has('target.type_id')" class="tw-flex tw-justify-end">
+                    <div class="tw-w-4/5 tw-py-2">
+                        <span v-text="request.errors.get('target.type_id')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
             </div>
@@ -102,9 +135,12 @@
                 request: new Request(),
                 formData: {
                     name: '',
-                    target: ''
+                    description: '',
+                    target: '',
+                    type: ''
                 },
                 targetTypes: [],
+                types: []
             }
         },
 
@@ -117,7 +153,8 @@
                 this.formData = {
                     name: '',
                     description: '',
-                    taget: ''
+                    target: '',
+                    type: ''
                 };
             },
 
@@ -129,7 +166,8 @@
                 let request = new Request({});
 
                 request.create().then((response) => {
-                    this.targetTypes = response.data;
+                    this.targetTypes = response.data.target_types;
+                    this.types = response.data.types;
                 });
             },
 

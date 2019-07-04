@@ -1,7 +1,5 @@
 <template>
     <div id="canvas">
-        <!-- <initialize :active.sync="initialize.active" @save="initializeForm"/> -->
-
         <el-container>
             <el-main>
                 <el-card body-style="padding: 10px;" shadow="hover" >
@@ -102,8 +100,6 @@ import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
 import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
 
-
-
 export default {
     data: () => {
         return {
@@ -170,7 +166,6 @@ export default {
         MatrixField,
         TimePicker,
         FileUpload,
-        Initialize
     },
     computed: {
         title: {
@@ -218,6 +213,7 @@ export default {
             this.description = data.description;
             this.target = data.target;
         }
+
     },
     watch: {
         fields() {

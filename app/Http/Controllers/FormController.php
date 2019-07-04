@@ -67,7 +67,10 @@ class FormController extends Controller
         });
 
         return [
-            'data' => $targetTypes
+            'data' => [
+                'target_types' => $targetTypes,
+                'types' => config('app.form_types')
+            ]
         ];
     }
 }
