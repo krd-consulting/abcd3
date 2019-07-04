@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Form;
 use App\FormTargetType;
+use App\Scope;
 
 use Illuminate\Http\Request;
 
@@ -69,7 +70,8 @@ class FormController extends Controller
         return [
             'data' => [
                 'target_types' => $targetTypes,
-                'types' => config('app.form_types')
+                'types' => config('app.form_types'),
+                'scopes' => Scope::all()
             ]
         ];
     }

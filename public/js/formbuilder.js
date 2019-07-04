@@ -4516,10 +4516,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/fileUpload.vue */ "./resources/js/FormBuilder/components/canvas/fields/fileUpload.vue");
 /* harmony import */ var _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/SectionDivider.vue */ "./resources/js/FormBuilder/components/canvas/fields/SectionDivider.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -4692,21 +4688,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     TimePicker: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
     FileUpload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_15__["mapState"])(['title', 'target', 'description', 'form']), Object(vuex__WEBPACK_IMPORTED_MODULE_15__["mapMutations"])(['SET_TITLE', 'SET_TARGET', 'SET_DESCRIPTION', 'ADD_FIELD']), {
+  computed: {
     title: {
       get: function get() {
         return this.$store.state.title;
       },
       set: function set(title) {
         this.$store.commit('SET_TITLE', title);
-      }
-    },
-    target: {
-      get: function get() {
-        return this.$store.state.target;
-      },
-      set: function set(target) {
-        this.$store.commit('SET_TARGET', target);
       }
     },
     description: {
@@ -4725,7 +4713,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.$store.dispatch('addField', input);
       }
     }
-  }),
+  },
   methods: {
     removeItem: function removeItem(index) {
       var _this = this;
@@ -4760,9 +4748,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.formList = _.clone(this.fields); // this.inputFieldData = _.clone(this.fieldData)
     }
   },
-  created: function created() {
-    console.log(this.$route.query);
-  }
+  created: function created() {}
 });
 
 /***/ }),
@@ -6636,191 +6622,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/views/initialize.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  inheritAttrs: false,
-  props: {
-    active: Boolean
-  },
-  data: function data() {
-    return {
-      request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"](),
-      formData: {
-        name: '',
-        description: '',
-        target: '',
-        type: ''
-      },
-      targetTypes: [],
-      types: []
-    };
-  },
-  methods: {
-    close: function close() {
-      this.$emit('update:active', false);
-      this.request.errors.clear();
-      this.formData = {
-        name: '',
-        description: '',
-        target: '',
-        type: ''
-      };
-    },
-    open: function open() {
-      this.load();
-    },
-    load: function load() {
-      var _this = this;
-
-      var request = new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
-      request.create().then(function (response) {
-        _this.targetTypes = response.data.target_types;
-        _this.types = response.data.types;
-      });
-    },
-    submit: function submit() {
-      var _this2 = this;
-
-      this.request = new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"](this.formData);
-      this.request.validate().then(function (response) {
-        _this2.$emit('save', response.data);
-
-        _this2.close();
-      })["catch"](function (error) {//
-      });
-    }
-  },
-  created: function created() {
-    this.load();
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder/views/initialize.vue: Unexpected token, expected \",\" (184:4)\n\n\u001b[0m \u001b[90m 182 | \u001b[39m    }\u001b[0m\n\u001b[0m \u001b[90m 183 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 184 | \u001b[39m    methods\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 185 | \u001b[39m        close() {\u001b[0m\n\u001b[0m \u001b[90m 186 | \u001b[39m            \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39m$emit(\u001b[32m'update:active'\u001b[39m\u001b[33m,\u001b[39m \u001b[36mfalse\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 187 | \u001b[39m\u001b[0m\n    at Parser.raise (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:3851:17)\n    at Parser.unexpected (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5167:16)\n    at Parser.expect (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5153:28)\n    at Parser.parseObj (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:6637:14)\n    at Parser.parseExprAtom (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:6274:21)\n    at Parser.parseExprSubscripts (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5914:23)\n    at Parser.parseMaybeUnary (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5894:21)\n    at Parser.parseExprOps (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5781:23)\n    at Parser.parseMaybeConditional (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5754:23)\n    at Parser.parseMaybeAssign (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5701:21)\n    at Parser.parseExportDefaultExpression (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:8470:24)\n    at Parser.parseExport (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:8365:31)\n    at Parser.parseStatementContent (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7395:27)\n    at Parser.parseStatement (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7291:17)\n    at Parser.parseBlockOrModuleBlockBody (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7868:25)\n    at Parser.parseBlockBody (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7855:10)\n    at Parser.parseTopLevel (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7220:10)\n    at Parser.parse (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:8863:17)\n    at parse (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:11135:38)\n    at parser (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\n    at normalizeFile (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)\n    at runSync (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at process.nextTick (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transform.js:34:34)\n    at _combinedTickCallback (internal/process/next_tick.js:131:7)\n    at process._tickCallback (internal/process/next_tick.js:180:9)");
 
 /***/ }),
 
@@ -90823,6 +90627,90 @@ var render = function() {
                 ])
               ])
             : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tw-mb-2" }, [
+          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
+            _c("label", { staticClass: "tw-w-1/5" }, [
+              _vm._v(
+                "\n                    Who can see this form?\n                "
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tw-w-2/3" },
+              [
+                _c(
+                  "base-select",
+                  {
+                    attrs: { name: "target", placeholder: "Select Resource" },
+                    on: {
+                      change: function($event) {
+                        _vm.request.errors.clear("target.type")
+                        _vm.request.errors.clear("target.type_id")
+                      }
+                    },
+                    model: {
+                      value: _vm.formData.target,
+                      callback: function($$v) {
+                        _vm.$set(_vm.formData, "target", $$v)
+                      },
+                      expression: "formData.target"
+                    }
+                  },
+                  _vm._l(_vm.targetTypes, function(type, index) {
+                    return _c(
+                      "el-option",
+                      {
+                        key: index,
+                        attrs: { label: type.name, value: type.target }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(type.name) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm.request.errors.has("target.type")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red-500",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.request.errors.get("target.type")[0]
+                      )
+                    }
+                  })
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.request.errors.has("target.type_id")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red-500",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.request.errors.get("target.type_id")[0]
+                      )
+                    }
+                  })
+                ])
+              ])
+            : _vm._e()
         ])
       ]),
       _vm._v(" "),
@@ -113763,83 +113651,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_initialize_vue_vue_type_template_id_055d3472___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/api/FormRequest.js":
-/*!*****************************************!*\
-  !*** ./resources/js/api/FormRequest.js ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var Form =
-/*#__PURE__*/
-function (_Request) {
-  _inherits(Form, _Request);
-
-  function Form() {
-    _classCallCheck(this, Form);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Form).apply(this, arguments));
-  }
-
-  _createClass(Form, [{
-    key: "retrieve",
-    value: function retrieve() {
-      return this.get("/api/forms");
-    }
-  }, {
-    key: "create",
-    value: function create() {
-      return this.get("/api/forms/create");
-    }
-  }, {
-    key: "validate",
-    value: function validate() {
-      return this.post("/api/forms/create");
-    } // store() {
-    // 	return this.post(`/api/programs/client-statuses`);
-    // }
-    // edit(status) {
-    // 	return this.get(`/api/programs/client-statuses/${status}/edit`);
-    // }
-    // update(status) {
-    // 	return this.patch(`/api/programs/client-statuses/${status}`);
-    // }
-    // destroy(status) {
-    // 	return this.delete(`/api/programs/client-statuses/${status}`);
-    // }
-
-  }]);
-
-  return Form;
-}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (Form);
 
 /***/ }),
 

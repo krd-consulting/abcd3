@@ -171,25 +171,9 @@ export default {
         FileUpload,
     },
     computed: {
-        ...mapState ([
-            'title',
-            'target',
-            'description',
-            'form'
-        ]),
-        ...mapMutations ([
-            'SET_TITLE',
-            'SET_TARGET',
-            'SET_DESCRIPTION',
-            'ADD_FIELD'
-        ]),
         title: {
             get() { return this.$store.state.title },
             set(title) { this.$store.commit('SET_TITLE', title) }, 
-        },
-        target: {
-            get() { return this.$store.state.target },
-            set(target) { this.$store.commit('SET_TARGET', target) }, 
         },
         description: {
             get() { return this.$store.state.description },
@@ -234,7 +218,6 @@ export default {
     },
 
     created() {
-        console.log(this.$route.query);
     }
 }
 </script>
