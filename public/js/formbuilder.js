@@ -3593,7 +3593,7 @@ __webpack_require__.r(__webpack_exports__);
       editField: '',
       checkList: [],
       nextItem: 0,
-      field: []
+      field: {}
     };
   },
   components: {
@@ -4500,27 +4500,22 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_sidePanel_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/sidePanel.vue */ "./resources/js/components/sidePanel.vue");
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_sidePanel_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/sidePanel.vue */ "./resources/js/components/sidePanel.vue");
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_textField_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/textField.vue */ "./resources/js/FormBuilder/components/canvas/fields/textField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/textArea.vue */ "./resources/js/FormBuilder/components/canvas/fields/textArea.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/checkboxField.vue */ "./resources/js/FormBuilder/components/canvas/fields/checkboxField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/dropdownField.vue */ "./resources/js/FormBuilder/components/canvas/fields/dropdownField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_numericField_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/numericField.vue */ "./resources/js/FormBuilder/components/canvas/fields/numericField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_radioField_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/radioField.vue */ "./resources/js/FormBuilder/components/canvas/fields/radioField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/dateField.vue */ "./resources/js/FormBuilder/components/canvas/fields/dateField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/matrixField.vue */ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/timePicker.vue */ "./resources/js/FormBuilder/components/canvas/fields/timePicker.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/fileUpload.vue */ "./resources/js/FormBuilder/components/canvas/fields/fileUpload.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/SectionDivider.vue */ "./resources/js/FormBuilder/components/canvas/fields/SectionDivider.vue");
-/* harmony import */ var _FormBuilder_views_initialize__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/FormBuilder/views/initialize */ "./resources/js/FormBuilder/views/initialize.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+/* harmony import */ var _FormBuilder_views_initialize__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/FormBuilder/views/initialize */ "./resources/js/FormBuilder/views/initialize.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_textField_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/textField.vue */ "./resources/js/FormBuilder/components/canvas/fields/textField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/textArea.vue */ "./resources/js/FormBuilder/components/canvas/fields/textArea.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/checkboxField.vue */ "./resources/js/FormBuilder/components/canvas/fields/checkboxField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/dropdownField.vue */ "./resources/js/FormBuilder/components/canvas/fields/dropdownField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_numericField_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/numericField.vue */ "./resources/js/FormBuilder/components/canvas/fields/numericField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_radioField_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/radioField.vue */ "./resources/js/FormBuilder/components/canvas/fields/radioField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/dateField.vue */ "./resources/js/FormBuilder/components/canvas/fields/dateField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/matrixField.vue */ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/timePicker.vue */ "./resources/js/FormBuilder/components/canvas/fields/timePicker.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/fileUpload.vue */ "./resources/js/FormBuilder/components/canvas/fields/fileUpload.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/SectionDivider.vue */ "./resources/js/FormBuilder/components/canvas/fields/SectionDivider.vue");
 //
 //
 //
@@ -4605,9 +4600,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-
 
 
 
@@ -4627,13 +4619,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      // title: 'Your Form Title',
-      // description: 'Subtext',
       initialize: {
         active: true
       },
       target_type: 'Staff',
-      visible: false,
       name: '',
       dateCompleted: '',
       formList: [],
@@ -4671,8 +4660,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         value: 'Community Programs',
         label: 'Community Programs'
       }],
-      inputType: {},
-      inputFieldData: {}
+      inputType: {}
     };
   },
   props: {
@@ -4685,22 +4673,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   components: {
     draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a,
-    SidePanel: _components_sidePanel_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    SidePanel: _components_sidePanel_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    TextField: _FormBuilder_components_canvas_fields_textField_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    TextBox: _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    SectionDivider: _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
-    NumericField: _FormBuilder_components_canvas_fields_numericField_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-    CheckBox: _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    Dropdown: _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    RadioField: _FormBuilder_components_canvas_fields_radioField_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-    DatePicker: _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
-    MatrixField: _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
-    TimePicker: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
-    FileUpload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
-    Initialize: _FormBuilder_views_initialize__WEBPACK_IMPORTED_MODULE_15__["default"]
+    TextField: _FormBuilder_components_canvas_fields_textField_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    TextBox: _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    SectionDivider: _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+    NumericField: _FormBuilder_components_canvas_fields_numericField_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    CheckBox: _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    Dropdown: _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    RadioField: _FormBuilder_components_canvas_fields_radioField_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    DatePicker: _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+    MatrixField: _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
+    TimePicker: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+    FileUpload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
+    Initialize: _FormBuilder_views_initialize__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapState"])(['title', 'target', 'description', 'form']), Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapMutations"])(['SET_TITLE', 'SET_TARGET', 'SET_DESCRIPTION', 'ADD_FIELD']), {
+  computed: {
     title: {
       get: function get() {
         return this.$store.state.title;
@@ -4725,15 +4713,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.$store.commit('SET_DESCRIPTION', description);
       }
     },
-    form: {
+    setFields: {
       get: function get() {
-        return this.$store.state.form;
+        return this.$store.state.fields;
       },
-      set: function set(input) {
-        this.$store.dispatch('addField', input);
+      set: function set(fieldData) {
+        this.$store.commit('SET_FIELDS', fieldData);
       }
+    },
+    removeField: {// remove selected field
     }
-  }),
+  },
   methods: {
     removeItem: function removeItem(index) {
       var _this = this;
@@ -4756,9 +4746,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       });
     },
-    showField: function showField(value) {
-      return this.value == '' || this.editField == value;
-    },
     initializeForm: function initializeForm(data) {
       this.title = data.name;
       this.description = data.description;
@@ -4766,11 +4753,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   watch: {
-    newInput: function newInput() {
-      this.form.push(this.input.id);
-    },
     fields: function fields() {
-      this.formList = _.clone(this.fields); // this.inputFieldData = _.clone(this.fieldData)
+      this.formList = _.clone(this.fields);
+    },
+    formList: {
+      handler: function handler() {
+        this.setFields = this.formList;
+      },
+      deep: true
     }
   },
   created: function created() {
@@ -4819,23 +4809,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fieldData: {
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          checkboxNum: 2
+        },
+        options: {
+          choices: []
         },
         rules: {
           label: [{
@@ -4914,18 +4893,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fieldData: {
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
           past_only: false,
           future_only: false,
           quick_menu: false,
@@ -4996,23 +4965,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fieldData: {
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          dropdownNum: 2
+        },
+        options: {
+          choices: []
         },
         rules: {
           label: [{
@@ -5079,22 +5037,8 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         label: '',
         description: '',
-        reference: '',
         settings: {
-          required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          required: false
         },
         rules: {
           label: [{
@@ -5176,22 +5120,13 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         label: '',
         description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
           matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          matrix_choices: 5
+        },
+        options: {
+          choices: []
         },
         rules: {
           label: [{
@@ -5258,23 +5193,9 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fieldData: {
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          defaultNum: 0
         },
         rules: {
           label: [{
@@ -5339,23 +5260,12 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fieldData: {
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          radioNum: 2
+        },
+        options: {
+          choices: []
         },
         rules: {
           label: [{
@@ -5411,25 +5321,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
-        label: '',
-        description: '',
-        reference: '',
-        settings: {
-          required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
-        }
+        label: ''
       }
     };
   },
@@ -5498,23 +5390,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fieldData: {
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
           isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          max: 50
         },
         rules: {
           label: [{
@@ -5611,23 +5490,11 @@ __webpack_require__.r(__webpack_exports__);
       recordTypes: [],
       fieldData: {
         label: '',
-        description: '',
         reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
           isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          max: 50
         },
         rules: {
           label: [{
@@ -5702,23 +5569,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       fieldData: {
         label: '',
-        description: '',
-        reference: '',
         settings: {
-          required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          required: false
         },
         rules: {
           label: [{
@@ -5836,47 +5688,36 @@ __webpack_require__.r(__webpack_exports__);
       step: '1',
       selectedInput: {},
       inputs: [{
-        id: 0,
         name: 'Text Field',
         component: 'TextField'
       }, {
-        id: 1,
         name: 'Text Area',
         component: 'TextBox'
       }, {
-        id: 2,
         name: 'Numeric',
         component: 'NumericField'
       }, {
-        id: 3,
         name: 'Dropdown',
         component: 'Dropdown'
       }, {
-        id: 4,
         name: 'Radio',
         component: 'RadioField'
       }, {
-        id: 5,
         name: 'Checkbox',
         component: 'CheckBox'
       }, {
-        id: 6,
         name: 'Date Picker',
         component: 'DatePicker'
       }, {
-        id: 7,
         name: 'Time Picker',
         component: 'TimePicker'
       }, {
-        id: 8,
         name: 'Matrix',
         component: 'MatrixField'
       }, {
-        id: 9,
         name: 'File Upload',
         component: 'FileUpload'
       }, {
-        id: 10,
         name: 'Section Divider',
         component: 'SectionDivider'
       }],
@@ -6403,6 +6244,7 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
 /* harmony import */ var _FormBuilder_components_preview_timePicker_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/FormBuilder/components/preview/timePicker.vue */ "./resources/js/FormBuilder/components/preview/timePicker.vue");
 /* harmony import */ var _FormBuilder_components_preview_upload_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/preview/upload.vue */ "./resources/js/FormBuilder/components/preview/upload.vue");
 /* harmony import */ var _FormBuilder_components_preview_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/FormBuilder/components/preview/sectionDivider.vue */ "./resources/js/FormBuilder/components/preview/sectionDivider.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -6495,6 +6337,8 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
 
 
 
+
+ // import store from '@/FormBuilder/store/index.js'
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6526,12 +6370,43 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
   },
   created: function created() {// this.getFormData();
   },
+  computed: {// state_fields: {
+    //     get() { return this.$store.state.fields },
+    //     set(formData) { this.$store.commit('SET_FIELDS', formData) }
+    // }
+  },
+  watch: {// formData: {
+    //     handler() {
+    //         this.state_fields = this.formData
+    //     },
+    //     deep: true
+    // }
+  },
   methods: {
     handleSelect: function handleSelect(key, keyPath) {
+      // placeholder
       console.log(key, keyPath);
     },
     buildForm: function buildForm() {
-      alert('One day, this form will persist to the database, thus the application, but alas, tis not this day.');
+      var _this = this;
+
+      this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'info'
+      }).then(function () {
+        _this.$message({
+          type: 'success',
+          message: 'Build Successful'
+        });
+
+        alert('One day, this form will persist to the database. but alas, tis not this day.');
+      })["catch"](function () {
+        _this.$message({
+          type: 'info',
+          message: "Keep doing what you're are doing"
+        });
+      });
     }
   }
 });
@@ -6584,7 +6459,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6603,16 +6477,9 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    handleSelect: function handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
     addField: function addField(field) {
       // append to fields arrays
-      this.fields.push(field); // this.$store.dispatch('addField', field)
-    },
-    setOptions: function setOptions(options) {
-      this.inputOptions.push(options);
-      console.log(this.inputOptions.title); // this.$emit()
+      this.fields.push(field);
     },
     updateCanvas: function updateCanvas(data) {
       this.canvasInput = data.input;
@@ -9123,7 +8990,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9142,7 +9009,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9161,7 +9028,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9180,7 +9047,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9199,7 +9066,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9237,7 +9104,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9256,7 +9123,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9275,7 +9142,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9294,7 +9161,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9313,7 +9180,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9332,7 +9199,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\n    right: 10px; */\n}\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\r\n    right: 10px; */\n}\r\n", ""]);
 
 // exports
 
@@ -9351,7 +9218,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\n        width: auto;\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\r\n        width: auto;\r\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\r\n", ""]);
 
 // exports
 
@@ -9389,7 +9256,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
 
 // exports
 
@@ -9427,7 +9294,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\n\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \r\n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -87605,16 +87472,6 @@ var render = function() {
     "div",
     { attrs: { id: "canvas" } },
     [
-      _c("initialize", {
-        attrs: { active: _vm.initialize.active },
-        on: {
-          "update:active": function($event) {
-            return _vm.$set(_vm.initialize, "active", $event)
-          },
-          save: _vm.initializeForm
-        }
-      }),
-      _vm._v(" "),
       _c(
         "el-container",
         [
@@ -87637,7 +87494,6 @@ var render = function() {
                             "editable-text",
                             {
                               staticClass: "tw-cursor-pointer",
-                              on: { input: _vm.showField },
                               model: {
                                 value: _vm.title,
                                 callback: function($$v) {
@@ -87663,7 +87519,6 @@ var render = function() {
                             "editable-text",
                             {
                               staticClass: "tw-cursor-pointer",
-                              on: { input: _vm.showField },
                               model: {
                                 value: _vm.description,
                                 callback: function($$v) {
@@ -87961,11 +87816,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -87974,6 +87829,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { attrs: { label: "Number of Checkbox Selections" } },
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
@@ -88070,11 +87926,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -88266,6 +88122,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { attrs: { label: "Number of Menu Selections" } },
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 2, max: 10 },
@@ -88380,11 +88237,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -88488,11 +88345,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -88740,11 +88597,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -88753,6 +88610,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { attrs: { label: "Number of Radio Selections" } },
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
@@ -88917,11 +88775,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -89044,11 +88902,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -89253,11 +89111,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -90227,7 +90085,6 @@ var render = function() {
                     {
                       staticClass:
                         "tw-float-right tw-font-bold focus:font-extrabold",
-                      attrs: { index: "/forms" },
                       on: { click: _vm.buildForm }
                     },
                     [
@@ -90498,7 +90355,7 @@ var render = function() {
                         {
                           staticClass:
                             "float-right tw-font-bold tw-focus:font-extrabold",
-                          attrs: { index: "/forms" },
+                          attrs: { index: "" },
                           on: { click: _vm.buildForm }
                         },
                         [_vm._v("Finish & Build!")]
@@ -90510,10 +90367,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("form-Canvas", {
-                attrs: { fields: _vm.fields, id: "canvas" },
-                on: { inputOptions: _vm.setOptions }
-              })
+              _c("form-Canvas", { attrs: { fields: _vm.fields, id: "canvas" } })
             ],
             1
           )
@@ -113325,8 +113179,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _this = undefined;
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   SET_TITLE: function SET_TITLE(state, title) {
     state.title = title;
@@ -113337,8 +113189,8 @@ var _this = undefined;
   SET_TARGET: function SET_TARGET(state, target) {
     state.target = target;
   },
-  ADD_FIELD: function ADD_FIELD(state, field) {
-    state.form = _this.form.push(_this.field);
+  SET_FIELDS: function SET_FIELDS(state, fields) {
+    state.fields = fields;
   }
 });
 
@@ -113360,7 +113212,7 @@ __webpack_require__.r(__webpack_exports__);
     type: '',
     id: ''
   },
-  form: []
+  fields: []
 });
 
 /***/ }),
@@ -113372,7 +113224,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: form, default */
 /***/ (function(module) {
 
-module.exports = {"form":{"title":"Test Form","description":"Intake form for Shakespeare Slam Poetry Club","target_type":"Client","target_id":"3","form_type":"pre/post","Name":"","team":[],"date":"","fields":[{"type":"Radio","label":"What is thy gender","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Male","value":1},{"id":1,"text":"Female","value":2},{"id":2,"text":"Non-Binary","value":3},{"id":3,"text":"Speaketh not of mine amorous rite","value":4}]}},{"type":"TextField","label":"Wherefore art thee hither ","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TextBox","label":"Pray pardon me thy expectation?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"NumericField","label":"What age is thee?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Dropdown","label":"Is this very much a useful field?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":1,"text":"Aye! We absolutely do","value":1},{"id":2,"text":"Nay! We doth not","value":2},{"id":3,"text":"Oft upon a yonder edge-case","value":3}]}},{"type":"SectionDivider","label":"Just Because","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Checkbox","label":"What notable characters art among thy highest in estimation","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Hamlet","value":1},{"id":1,"text":"Iago","value":2},{"id":2,"text":"Lady Macbeth","value":3},{"id":3,"text":"Mercutio","value":4},{"id":4,"text":"Macbeth","value":5},{"id":5,"text":"Ophelia","value":6},{"id":6,"text":"Othello","value":7},{"id":7,"text":"Viola","value":8},{"id":8,"text":"Benedick","value":9},{"id":9,"text":"Horatio","value":10}]}},{"type":"Datefield","label":"Shall I compare thee to a summer's day?","description":"Or mayhaps a winters eve?","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TimePicker","label":"The Time is nigh","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Matrix","label":"Satisfaction Survey","description":"An assessment of your overall life satisfaction","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[{"id":0,"text":"How for art thou satisfied"},{"id":1,"text":"From whence from thou art satisfied"},{"id":2,"text":"Doth satisfaction thous't cannot attain"}],"choices":[{"id":0,"text":"A pestilent gall to me ","value":1},{"id":1,"text":"Tis but a scratch","value":2},{"id":2,"text":"I doth not care","value":3},{"id":3,"text":"I feeleth well enow ","value":4},{"id":4,"text":"like a silver bow!","value":5}]}},{"type":"Upload","label":"Present your most eloquent self-portrait","description":"This shall be displayed upon thy Slam Poetry Roster card","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}}]}};
+module.exports = {"form":{"title":"Test Form","description":"Intake form for Shakespeare Slam Poetry Club","target_type":"Client","target_id":"3","form_type":"pre/post","Name":"","team":[],"date":"","fields":[{"name":"Radio","label":"What is thy gender","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Male","value":1},{"id":1,"text":"Female","value":2},{"id":2,"text":"Non-Binary","value":3},{"id":3,"text":"Speaketh not of mine amorous rite","value":4}]}},{"type":"TextField","label":"Wherefore art thee hither ","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TextBox","label":"Pray pardon me thy expectation?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"NumericField","label":"What age is thee?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Dropdown","label":"Is this very much a useful field?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":1,"text":"Aye! We absolutely do","value":1},{"id":2,"text":"Nay! We doth not","value":2},{"id":3,"text":"Oft upon a yonder edge-case","value":3}]}},{"type":"SectionDivider","label":"Just Because","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Checkbox","label":"What notable characters art among thy highest in estimation","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Hamlet","value":1},{"id":1,"text":"Iago","value":2},{"id":2,"text":"Lady Macbeth","value":3},{"id":3,"text":"Mercutio","value":4},{"id":4,"text":"Macbeth","value":5},{"id":5,"text":"Ophelia","value":6},{"id":6,"text":"Othello","value":7},{"id":7,"text":"Viola","value":8},{"id":8,"text":"Benedick","value":9},{"id":9,"text":"Horatio","value":10}]}},{"type":"Datefield","label":"Shall I compare thee to a summer's day?","description":"Or mayhaps a winters eve?","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TimePicker","label":"The Time is nigh","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Matrix","label":"Satisfaction Survey","description":"An assessment of your overall life satisfaction","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[{"id":0,"text":"How for art thou satisfied"},{"id":1,"text":"From whence from thou art satisfied"},{"id":2,"text":"Doth satisfaction thous't cannot attain"}],"choices":[{"id":0,"text":"A pestilent gall to me ","value":1},{"id":1,"text":"Tis but a scratch","value":2},{"id":2,"text":"I doth not care","value":3},{"id":3,"text":"I feeleth well enow ","value":4},{"id":4,"text":"like a silver bow!","value":5}]}},{"type":"Upload","label":"Present your most eloquent self-portrait","description":"This shall be displayed upon thy Slam Poetry Roster card","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}}]}};
 
 /***/ }),
 
@@ -115538,7 +115390,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

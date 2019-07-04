@@ -7,7 +7,7 @@
             </el-form-item>
             
             <el-form-item label="This Field is">
-                <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
             
             <el-form-item label="Calendar Preferences">
@@ -42,18 +42,8 @@ export default {
         return {
             fieldData: {
                 label: '',
-                description: '',
-                reference: '',
                 settings: {
                     required: false,
-                    defaultNum: 0,
-                    dropdownNum: 0,
-                    radioNum: 2,
-                    checkboxNum: 2,
-                    matrix_questions: 2,
-                    matrix_choices: 5,
-                    isLimited: false,
-                    max: 50,
                     past_only: false,
                     future_only: false,
                     quick_menu: false,

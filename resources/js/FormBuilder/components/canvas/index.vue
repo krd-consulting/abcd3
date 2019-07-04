@@ -1,6 +1,6 @@
 <template>
     <div id="canvas">
-        <initialize :active.sync="initialize.active" @save="initializeForm"/>
+        <!-- <initialize :active.sync="initialize.active" @save="initializeForm"/> -->
 
         <el-container>
             <el-main>
@@ -9,14 +9,12 @@
                     <el-header class="tw-text-center tw-mb-12">
                         <h1 class="tw-text-4xl">
                             <editable-text class="tw-cursor-pointer" 
-                                @input="showField" 
                                 v-model="title">
                                     {{ title }}
                             </editable-text>
                         </h1>
 
-                        <editable-text v-if="description" class="tw-cursor-pointer" 
-                            @input="showField" 
+                        <editable-text v-if="description" class="tw-cursor-pointer"  
                             v-model="description">
                                 {{ description }}
                         </editable-text>
@@ -86,9 +84,11 @@
 
 <script>
 import draggable from 'vuedraggable'
-import SidePanel from '@/components/sidePanel.vue'
 import ClickOutside from 'vue-click-outside'
+import SidePanel from '@/components/sidePanel.vue'
 import EditableText from '@/components/editableText.vue'
+
+import Initialize from '@/FormBuilder/views/initialize'
 
 import TextField from '@/FormBuilder/components/canvas/fields/textField.vue'
 import TextBox from '@/FormBuilder/components/canvas/fields/textArea.vue'
@@ -102,20 +102,15 @@ import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
 import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
 
-import Initialize from '@/FormBuilder/views/initialize'
 
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
     data: () => {
         return {
-            // title: 'Your Form Title',
-            // description: 'Subtext',
             initialize: {
                 active: true
             },
             target_type: 'Staff',
-            visible: false,
             name: '',
             dateCompleted: '',
             formList: [],
@@ -150,7 +145,6 @@ export default {
                 { value: 'Community Programs', label: 'Community Programs'}
             ],
             inputType: {},
-            inputFieldData: {},
         }
     },
     props: {
@@ -179,18 +173,6 @@ export default {
         Initialize
     },
     computed: {
-        ...mapState ([
-            'title',
-            'target',
-            'description',
-            'form'
-        ]),
-        ...mapMutations ([
-            'SET_TITLE',
-            'SET_TARGET',
-            'SET_DESCRIPTION',
-            'ADD_FIELD'
-        ]),
         title: {
             get() { return this.$store.state.title },
             set(title) { this.$store.commit('SET_TITLE', title) }, 
@@ -203,9 +185,12 @@ export default {
             get() { return this.$store.state.description },
             set(description) { this.$store.commit('SET_DESCRIPTION', description) }
         },
-        form: {
-            get() { return this.$store.state.form },
-            set(input) { this.$store.dispatch('addField', input) }
+        setFields: {
+            get() { return this.$store.state.fields },
+            set(fieldData) { this.$store.commit('SET_FIELDS', fieldData) }
+        },
+        removeField: {
+            // remove selected field
         }
     },
     methods: {
@@ -227,9 +212,6 @@ export default {
                 })
             })
         },
-        showField(value){
-            return (this.value == '' || this.editField == value)
-        },
 
         initializeForm(data) {
             this.title = data.name;
@@ -238,12 +220,14 @@ export default {
         }
     },
     watch: {
-        newInput() {
-            this.form.push(this.input.id)
-        },
         fields() {
             this.formList = _.clone(this.fields);
-            // this.inputFieldData = _.clone(this.fieldData)
+        },
+        formList: {
+            handler() {
+                this.setFields = this.formList
+            },
+            deep: true
         }
     },
 

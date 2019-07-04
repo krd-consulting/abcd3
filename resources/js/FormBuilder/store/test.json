@@ -11,7 +11,7 @@
         "date": "",
         "fields": [
             {
-                "type": "Radio",
+                "name": "Radio",
                 "label": "What is thy gender",
                 "description": "",
                 "reference": [],

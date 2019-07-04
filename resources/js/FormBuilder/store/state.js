@@ -5,5 +5,5 @@ export default {
     	type: '',
     	id: ''
     },
-    form: []
+    fields: []
 }

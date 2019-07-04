@@ -8,7 +8,7 @@ export default {
     SET_TARGET : (state, target) => {
         state.target = target
     },
-    ADD_FIELD : (state, field) => {
-        state.form = this.form.push(this.field)
+    SET_FIELDS : (state, fields) => {
+        state.fields = fields
     }
 }
