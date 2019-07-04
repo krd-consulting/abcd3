@@ -1,7 +1,5 @@
 <template>
     <div id="canvas">
-        <initialize :active.sync="initialize.active" @save="initializeForm"/>
-
         <el-container>
             <el-main>
                 <el-card body-style="padding: 10px;" shadow="hover" >
@@ -102,8 +100,6 @@ import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
 import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
 
-import Initialize from '@/FormBuilder/views/initialize'
-
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
@@ -111,9 +107,6 @@ export default {
         return {
             // title: 'Your Form Title',
             // description: 'Subtext',
-            initialize: {
-                active: true
-            },
             target_type: 'Staff',
             visible: false,
             name: '',
@@ -176,7 +169,6 @@ export default {
         MatrixField,
         TimePicker,
         FileUpload,
-        Initialize
     },
     computed: {
         ...mapState ([
@@ -230,12 +222,6 @@ export default {
         showField(value){
             return (this.value == '' || this.editField == value)
         },
-
-        initializeForm(data) {
-            this.title = data.name;
-            this.description = data.description;
-            this.target = data.target;
-        }
     },
     watch: {
         newInput() {

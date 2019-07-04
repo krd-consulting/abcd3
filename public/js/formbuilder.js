@@ -4515,8 +4515,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/timePicker.vue */ "./resources/js/FormBuilder/components/canvas/fields/timePicker.vue");
 /* harmony import */ var _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/fileUpload.vue */ "./resources/js/FormBuilder/components/canvas/fields/fileUpload.vue");
 /* harmony import */ var _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/SectionDivider.vue */ "./resources/js/FormBuilder/components/canvas/fields/SectionDivider.vue");
-/* harmony import */ var _FormBuilder_views_initialize__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/FormBuilder/views/initialize */ "./resources/js/FormBuilder/views/initialize.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -4605,9 +4604,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-
 
 
 
@@ -4629,9 +4625,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       // title: 'Your Form Title',
       // description: 'Subtext',
-      initialize: {
-        active: true
-      },
       target_type: 'Staff',
       visible: false,
       name: '',
@@ -4697,10 +4690,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     DatePicker: _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
     MatrixField: _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
     TimePicker: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
-    FileUpload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
-    Initialize: _FormBuilder_views_initialize__WEBPACK_IMPORTED_MODULE_15__["default"]
+    FileUpload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapState"])(['title', 'target', 'description', 'form']), Object(vuex__WEBPACK_IMPORTED_MODULE_16__["mapMutations"])(['SET_TITLE', 'SET_TARGET', 'SET_DESCRIPTION', 'ADD_FIELD']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_15__["mapState"])(['title', 'target', 'description', 'form']), Object(vuex__WEBPACK_IMPORTED_MODULE_15__["mapMutations"])(['SET_TITLE', 'SET_TARGET', 'SET_DESCRIPTION', 'ADD_FIELD']), {
     title: {
       get: function get() {
         return this.$store.state.title;
@@ -4758,11 +4750,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     showField: function showField(value) {
       return this.value == '' || this.editField == value;
-    },
-    initializeForm: function initializeForm(data) {
-      this.title = data.name;
-      this.description = data.description;
-      this.target = data.target;
     }
   },
   watch: {
@@ -6584,7 +6571,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6744,6 +6730,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   inheritAttrs: false,
@@ -6755,9 +6774,12 @@ __webpack_require__.r(__webpack_exports__);
       request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"](),
       formData: {
         name: '',
-        target: ''
+        description: '',
+        target: '',
+        type: ''
       },
-      targetTypes: []
+      targetTypes: [],
+      types: []
     };
   },
   methods: {
@@ -6767,7 +6789,8 @@ __webpack_require__.r(__webpack_exports__);
       this.formData = {
         name: '',
         description: '',
-        taget: ''
+        target: '',
+        type: ''
       };
     },
     open: function open() {
@@ -6778,7 +6801,8 @@ __webpack_require__.r(__webpack_exports__);
 
       var request = new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
       request.create().then(function (response) {
-        _this.targetTypes = response.data;
+        _this.targetTypes = response.data.target_types;
+        _this.types = response.data.types;
       });
     },
     submit: function submit() {
@@ -87605,16 +87629,6 @@ var render = function() {
     "div",
     { attrs: { id: "canvas" } },
     [
-      _c("initialize", {
-        attrs: { active: _vm.initialize.active },
-        on: {
-          "update:active": function($event) {
-            return _vm.$set(_vm.initialize, "active", $event)
-          },
-          save: _vm.initializeForm
-        }
-      }),
-      _vm._v(" "),
       _c(
         "el-container",
         [
@@ -90669,6 +90683,67 @@ var render = function() {
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
             _c("label", { staticClass: "tw-w-1/5" }, [
+              _vm._v("\n                    Form Type\n                ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tw-w-2/3" },
+              [
+                _c(
+                  "base-select",
+                  {
+                    attrs: { name: "type", placeholder: "Select Form Type" },
+                    on: {
+                      change: function($event) {
+                        return _vm.request.errors.clear("type")
+                      }
+                    },
+                    model: {
+                      value: _vm.formData.type,
+                      callback: function($$v) {
+                        _vm.$set(_vm.formData, "type", $$v)
+                      },
+                      expression: "formData.type"
+                    }
+                  },
+                  _vm._l(_vm.types, function(type, index) {
+                    return _c(
+                      "el-option",
+                      { key: index, attrs: { label: type, value: type } },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(type) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm.request.errors.has("type")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red-500",
+                    domProps: {
+                      textContent: _vm._s(_vm.request.errors.get("type")[0])
+                    }
+                  })
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tw-mb-2" }, [
+          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
+            _c("label", { staticClass: "tw-w-1/5" }, [
               _vm._v(
                 "\n                    This form is about\n                "
               )
@@ -90684,7 +90759,8 @@ var render = function() {
                     attrs: { name: "target", placeholder: "Select Resource" },
                     on: {
                       change: function($event) {
-                        return _vm.request.errors.clear("target")
+                        _vm.request.errors.clear("target.type")
+                        _vm.request.errors.clear("target.type_id")
                       }
                     },
                     model: {
@@ -90718,13 +90794,30 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm.request.errors.has("target")
+          _vm.request.errors.has("target.type")
             ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
                 _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
                   _c("span", {
                     staticClass: "tw-text-xs tw-text-red-500",
                     domProps: {
-                      textContent: _vm._s(_vm.request.errors.get("target")[0])
+                      textContent: _vm._s(
+                        _vm.request.errors.get("target.type")[0]
+                      )
+                    }
+                  })
+                ])
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.request.errors.has("target.type_id")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red-500",
+                    domProps: {
+                      textContent: _vm._s(
+                        _vm.request.errors.get("target.type_id")[0]
+                      )
                     }
                   })
                 ])
@@ -113179,6 +113272,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./routes */ "./resources/js/FormBuilder/routes.js");
+/* harmony import */ var _views_initialize__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./views/initialize */ "./resources/js/FormBuilder/views/initialize.vue");
  // Components
 
 
@@ -113192,6 +113286,7 @@ Vue.component('user-dropdown', __webpack_require__(/*! @/components/userDropdown
 
 
 
+
 Vue.use(_routes__WEBPACK_IMPORTED_MODULE_5__["VueRouter"]);
 Vue.config.productionTip = false;
 Vue.use(vuedraggable__WEBPACK_IMPORTED_MODULE_4___default.a);
@@ -113200,8 +113295,56 @@ var app = new Vue({
   el: '#app',
   router: _routes__WEBPACK_IMPORTED_MODULE_5__["router"],
   store: _store_index_js__WEBPACK_IMPORTED_MODULE_3__["store"],
+  components: {
+    Initialize: _views_initialize__WEBPACK_IMPORTED_MODULE_6__["default"]
+  },
+  computed: {
+    title: {
+      get: function get() {
+        return this.$store.state.title;
+      },
+      set: function set(title) {
+        this.$store.commit('SET_TITLE', title);
+      }
+    },
+    description: {
+      get: function get() {
+        return this.$store.state.description;
+      },
+      set: function set(description) {
+        this.$store.commit('SET_DESCRIPTION', description);
+      }
+    },
+    type: {
+      get: function get() {
+        return this.$store.state.type;
+      },
+      set: function set(type) {
+        this.$store.commit('SET_TYPE', type);
+      }
+    },
+    target: {
+      get: function get() {
+        return this.$store.state.target;
+      },
+      set: function set(target) {
+        this.$store.commit('SET_TARGET', target);
+      }
+    }
+  },
   data: {
-    collapseSidebar: false
+    collapseSidebar: false,
+    initialize: {
+      active: true
+    }
+  },
+  methods: {
+    initializeForm: function initializeForm(data) {
+      this.title = data.name;
+      this.description = data.description;
+      this.type = data.type;
+      this.target = data.target;
+    }
   }
 });
 
@@ -113334,6 +113477,9 @@ var _this = undefined;
   SET_DESCRIPTION: function SET_DESCRIPTION(state, description) {
     state.description = description;
   },
+  SET_TYPE: function SET_TYPE(state, type) {
+    state.type = type;
+  },
   SET_TARGET: function SET_TARGET(state, target) {
     state.target = target;
   },
@@ -113356,6 +113502,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   title: 'Form Title',
   description: 'Subtext',
+  type: '',
   target: {
     type: '',
     id: ''

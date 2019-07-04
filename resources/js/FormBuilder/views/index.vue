@@ -1,7 +1,6 @@
 <template>
     <div id="formCreator">
         <el-container>
-
                 <el-card id="menu-container"> 
                     <!-- <el-aside class="aside"> -->
                         <form-menu id="menu" @add="addField"/>
@@ -51,6 +50,7 @@
                 fields: []
             }
         },
+
         methods: {
             handleSelect(key, keyPath) {
                 console.log(key, keyPath);

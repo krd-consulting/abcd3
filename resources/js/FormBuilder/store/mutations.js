@@ -5,6 +5,9 @@ export default {
     SET_DESCRIPTION : (state, description) => {
         state.description = description
     },
+    SET_TYPE : (state, type) => {
+        state.type = type
+    },
     SET_TARGET : (state, target) => {
         state.target = target
     },

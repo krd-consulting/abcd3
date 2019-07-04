@@ -1,6 +1,6 @@
 import Request from '../core/Request';
 
-class Form extends Request{
+class Form extends Request {
     retrieve() {
         return this.get(`/api/forms`);
     }

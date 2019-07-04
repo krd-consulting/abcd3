@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 use App\FormTargetType;
 
@@ -56,6 +57,10 @@ class InitializeForm extends FormRequest
         return [
             'name' => 'required',
             'description' => '',
+            'type' => [
+                'required',
+                Rule::in(config('app.form_types'))
+            ],
             'target.type' => 'required|exists:form_target_types,id',
             'target.id' => 'exists:record_types,id'
         ];
