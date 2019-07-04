@@ -18,7 +18,7 @@
                 </div>
                 <div v-if="request.errors.has('name')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('name')[0]" class="tw-text-xs tw-text-red"></span>
+                        <span v-text="request.errors.get('name')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                 </div>
                 <div v-if="request.errors.has('description')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('description')[0]" class="tw-text-xs tw-text-red"></span>
+                        <span v-text="request.errors.get('description')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                             v-model="programData.team_id"
                             name="team"
                             placeholder="Select Team"
-                            @change="request.errors.clear('team')"
+                            @change="request.errors.clear('team_id')"
                             :disabled="disableTeam">
                             <el-option
                                 v-for="team in teams"
@@ -64,7 +64,7 @@
                 </div>
                 <div v-if="request.errors.has('team_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red"></span>
+                        <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@
                 </div>
                 <div v-if="request.errors.has('settings.default_client_status_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('settings.default_client_status_id')[0]" class="tw-text-xs tw-text-red"></span>
+                        <span v-text="request.errors.get('settings.default_client_status_id')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
             </div>

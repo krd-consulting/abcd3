@@ -1,6 +1,4 @@
 import VueRouter from 'vue-router';
-// import Forms from './views/Forms.vue'
-// import FormPreview from './views/FormPreview.vue'
 
 import FormPreview from './views/formPreview.vue';
 import FormBuilder from './views';

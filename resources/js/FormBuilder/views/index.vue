@@ -33,62 +33,66 @@
 </template>
 
 <script>
-import draggable from 'vuedraggable'
-import FormCanvas from '@/FormBuilder/components/canvas/index.vue'
-import FormMenu from '@/FormBuilder/components/menu/index.vue'
+    import draggable from 'vuedraggable'
+    import FormCanvas from '@/FormBuilder/components/canvas/index.vue'
+    import FormMenu from '@/FormBuilder/components/menu/index.vue'
 
-export default {
-    name: 'Form',
-    components: {
-        FormCanvas,
-        FormMenu,
-        draggable
-    },
-    data: () => {
-        return {
-            activeIndex: '1',
-            inputOptions: {},
-            fields: []
-        }
-    },
-    methods: {
-        handleSelect(key, keyPath) {
-            console.log(key, keyPath);
+    export default {
+        name: 'Form',
+        components: {
+            FormCanvas,
+            FormMenu,
+            draggable
         },
-        addField(field) {
-            // append to fields arrays
-            this.fields.push(field);
-            // this.$store.dispatch('addField', field)
+        data: () => {
+            return {
+                activeIndex: '1',
+                inputOptions: {},
+                fields: []
+            }
         },
-        setOptions(options) {
-            this.inputOptions.push(options)
-            console.log(this.inputOptions.title);
-            // this.$emit()
-        },
-        updateCanvas(data) {
-            this.canvasInput = data.input;
-            this.inputOptions = data.options;
-        },
-        buildForm() {
-            this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
-                    confirmButtonText: 'OK',
-                    cancelButtonText: 'Cancel',
-                    type: 'info'
-                }).then(() => {
-                    this.$message({
-                        type: 'success',
-                        message: 'Build Successful'
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            addField(field) {
+                // append to fields arrays
+                this.fields.push(field);
+                // this.$store.dispatch('addField', field)
+            },
+            setOptions(options) {
+                this.inputOptions.push(options)
+                console.log(this.inputOptions.title);
+                // this.$emit()
+            },
+            updateCanvas(data) {
+                this.canvasInput = data.input;
+                this.inputOptions = data.options;
+            },
+            buildForm() {
+                this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
+                        confirmButtonText: 'OK',
+                        cancelButtonText: 'Cancel',
+                        type: 'info'
+                    }).then(() => {
+                        this.$message({
+                            type: 'success',
+                            message: 'Build Successful'
+                        });
+                        alert('One day, this form will persist to the database. but alas, tis not this day.')
+                    }).catch(() => {
+                        this.$message({
+                            type: 'info',
+                            message: "Keep doing what you're are doing"
+                        });          
                     });
-                    alert('One day, this form will persist to the database. but alas, tis not this day.')
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: "Keep doing what you're are doing"
-                    });          
-                });
+            }
+        },
+
+        created() {
+
         }
     }
-}
 </script>
 
 <style scoped>

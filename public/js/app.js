@@ -87899,7 +87899,7 @@ var render = function() {
             ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
                 _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
                   _c("span", {
-                    staticClass: "tw-text-xs tw-text-red",
+                    staticClass: "tw-text-xs tw-text-red-500",
                     domProps: {
                       textContent: _vm._s(_vm.request.errors.get("name")[0])
                     }
@@ -87943,7 +87943,7 @@ var render = function() {
             ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
                 _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
                   _c("span", {
-                    staticClass: "tw-text-xs tw-text-red",
+                    staticClass: "tw-text-xs tw-text-red-500",
                     domProps: {
                       textContent: _vm._s(
                         _vm.request.errors.get("description")[0]
@@ -87975,7 +87975,7 @@ var render = function() {
                     },
                     on: {
                       change: function($event) {
-                        return _vm.request.errors.clear("team")
+                        return _vm.request.errors.clear("team_id")
                       }
                     },
                     model: {
@@ -88013,7 +88013,7 @@ var render = function() {
             ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
                 _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
                   _c("span", {
-                    staticClass: "tw-text-xs tw-text-red",
+                    staticClass: "tw-text-xs tw-text-red-500",
                     domProps: {
                       textContent: _vm._s(_vm.request.errors.get("team_id")[0])
                     }
@@ -88089,7 +88089,7 @@ var render = function() {
             ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
                 _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
                   _c("span", {
-                    staticClass: "tw-text-xs tw-text-red",
+                    staticClass: "tw-text-xs tw-text-red-500",
                     domProps: {
                       textContent: _vm._s(
                         _vm.request.errors.get(
@@ -113483,8 +113483,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
