@@ -37,10 +37,9 @@
               </template>
 
                 <component :is="selectedInput.component" 
-                    :inputData="selectedInput"
-                    @outputData="setInputOptions">
+                    :inputData="selectedInput">
                         <template v-slot:default="{ fieldData }">
-                            <el-button type="success" @click="setInputOptions(fieldData)">Set</el-button>
+                            <el-button type="success" @click="addField(fieldData)">Set</el-button>
                         </template>
                 </component>
 
@@ -107,7 +106,6 @@ export default {
         Dropdown
     },
     computed: {
-        
     },
     methods: {
 
@@ -119,16 +117,9 @@ export default {
             this.step = '2';
         },
 
-        setInputOptions(value) {
+        addField(field) {
+            this.$store.commit('ADD_FIELD', field);
 
-            this.fieldData = value;
-
-            const data = {
-                input: _.clone(this.selectedInput),
-                fieldData: _.clone(this.fieldData)
-            };
-
-            this.$emit("add", data);
             this.selectedInput = {}
             this.step = '1';
         },

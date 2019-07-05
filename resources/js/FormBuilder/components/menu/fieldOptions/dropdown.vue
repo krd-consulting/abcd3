@@ -28,6 +28,7 @@ export default {
     data: () => {
         return {
             fieldData: {
+                type: 'Dropdown',
                 label: '',
                 settings: {
                     required: false,

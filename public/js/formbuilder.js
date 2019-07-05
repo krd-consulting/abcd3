@@ -4397,13 +4397,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textfield',
   data: function data() {
     return {
-      value: '',
-      field: []
+      value: ''
     };
   },
   props: {
@@ -4417,12 +4418,28 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
-  },
-  methods: {
-    showField: function showField(value) {
-      return this.field.label[value] == '' || this.editField == value;
+  computed: {
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
     }
   }
 });
@@ -4598,6 +4615,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -4662,12 +4681,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    newInput: Function,
-    fields: {
-      type: Array,
-      "default": []
-    },
-    fieldData: Function
+    newInput: Function // fields: {
+    //     type: Array,
+    //     default: []
+    // },
+
   },
   components: {
     draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a,
@@ -4710,19 +4728,17 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.commit('SET_DESCRIPTION', description);
       }
     },
-    setFields: {
+    fields: {
       get: function get() {
         return this.$store.state.fields;
       },
-      set: function set(fieldData) {
-        this.$store.commit('SET_FIELDS', fieldData);
+      set: function set(fields) {
+        this.$store.commit('SET_FIELDS', fields);
       }
-    },
-    removeField: {// remove selected field
     }
   },
   methods: {
-    removeItem: function removeItem(index) {
+    removeField: function removeField(fieldIndex) {
       var _this = this;
 
       this.$confirm('are you sure you want to remove this field from your form?', 'Warning', {
@@ -4735,7 +4751,7 @@ __webpack_require__.r(__webpack_exports__);
           message: 'Field Successfully Removed'
         });
 
-        _this.fields.splice(index, 1);
+        _this.$store.commit('REMOVE_FIELD', fieldIndex);
       })["catch"](function () {
         _this.$message({
           type: 'info',
@@ -4743,22 +4759,26 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
+    updateField: function updateField(field, fieldIndex) {
+      this.$store.commit({
+        type: 'UPDATE_FIELD',
+        field: field,
+        fieldIndex: fieldIndex
+      });
+      this.$forceUpdate();
+    },
     initializeForm: function initializeForm(data) {
       this.title = data.name;
       this.description = data.description;
       this.target = data.target;
     }
   },
-  watch: {
-    fields: function fields() {
-      this.formList = _.clone(this.fields);
-    },
-    formList: {
-      handler: function handler() {
-        this.setFields = this.formList;
-      },
-      deep: true
-    }
+  watch: {// fields: { 
+    //     handler() {
+    //         this.$store.commit('SET_FIELDS', this.fields) 
+    //     },
+    //     deep: true
+    // }
   },
   created: function created() {
     console.log(this.$route.query);
@@ -4805,6 +4825,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'CheckBox',
         label: '',
         settings: {
           required: false,
@@ -4889,6 +4910,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'DatePicker',
         label: '',
         settings: {
           required: false,
@@ -4961,6 +4983,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'Dropdown',
         label: '',
         settings: {
           required: false,
@@ -5032,6 +5055,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'FileUpload',
         label: '',
         description: '',
         settings: {
@@ -5115,6 +5139,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'MatrixField',
         label: '',
         description: '',
         settings: {
@@ -5189,6 +5214,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'NumericField',
         label: '',
         settings: {
           required: false,
@@ -5256,6 +5282,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'RadioField',
         label: '',
         settings: {
           required: false,
@@ -5317,6 +5344,7 @@ __webpack_require__.r(__webpack_exports__);
   name: 'sectionDivider',
   data: function data() {
     return {
+      type: 'SectionDivider',
       fieldData: {
         label: ''
       }
@@ -5386,6 +5414,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'TextBox',
         label: '',
         settings: {
           required: false,
@@ -5486,6 +5515,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       recordTypes: [],
       fieldData: {
+        type: 'TextField',
         label: '',
         reference: '',
         settings: {
@@ -5565,6 +5595,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'TimePicker',
         label: '',
         settings: {
           required: false
@@ -5613,7 +5644,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fieldOptions_checkBox_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./fieldOptions/checkBox.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue");
 /* harmony import */ var _fieldOptions_radioField_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fieldOptions/radioField.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue");
 /* harmony import */ var _fieldOptions_dropdown_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fieldOptions/dropdown.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue");
-//
 //
 //
 //
@@ -5749,13 +5779,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.selectedInput.name);
       this.step = '2';
     },
-    setInputOptions: function setInputOptions(value) {
-      this.fieldData = value;
-      var data = {
-        input: _.clone(this.selectedInput),
-        fieldData: _.clone(this.fieldData)
-      };
-      this.$emit("add", data);
+    addField: function addField(field) {
+      this.$store.commit('ADD_FIELD', field);
       this.selectedInput = {};
       this.step = '1';
     },
@@ -6454,7 +6479,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6473,14 +6497,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    addField: function addField(field) {
-      // append to fields arrays
-      this.fields.push(field);
-    },
-    updateCanvas: function updateCanvas(data) {
-      this.canvasInput = data.input;
-      this.inputOptions = data.options;
-    },
     buildForm: function buildForm() {
       var _this = this;
 
@@ -9024,7 +9040,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9043,7 +9059,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9062,7 +9078,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9081,7 +9097,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9100,7 +9116,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9138,7 +9154,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9157,7 +9173,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9176,7 +9192,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9195,7 +9211,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9214,7 +9230,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9233,7 +9249,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\r\n    right: 10px; */\n}\r\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\n    right: 10px; */\n}\n", ""]);
 
 // exports
 
@@ -9252,7 +9268,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\r\n        width: auto;\r\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\r\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\n        width: auto;\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -9290,7 +9306,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -9328,7 +9344,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \r\n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\r\n\r\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\n\n", ""]);
 
 // exports
 
@@ -87328,7 +87344,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "Textfield" } },
     [
       _c(
         "el-row",
@@ -87338,26 +87353,22 @@ var render = function() {
             { attrs: { span: 10 } },
             [
               _c(
-                "label",
-                { staticClass: "inputLabel" },
-                [
-                  _c(
-                    "editable-text",
-                    {
-                      staticClass: "tw-cursor-pointer mouseOver",
-                      on: { input: _vm.showField },
-                      model: {
-                        value: _vm.field.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.field, "label", $$v)
-                        },
-                        expression: "field.label"
-                      }
+                "editable-text",
+                {
+                  staticClass: "tw-cursor-pointer mouseOver",
+                  model: {
+                    value: _vm.fieldLabel,
+                    callback: function($$v) {
+                      _vm.fieldLabel = $$v
                     },
-                    [_vm._v(_vm._s(_vm.field.label))]
+                    expression: "fieldLabel"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n              " + _vm._s(_vm.fieldLabel) + "\n          "
                   )
-                ],
-                1
+                ]
               ),
               _vm._v(" "),
               _vm.field.settings.isLimited
@@ -87686,71 +87697,64 @@ var render = function() {
                     {
                       staticClass: "dropArea",
                       model: {
-                        value: _vm.form,
+                        value: _vm.fields,
                         callback: function($$v) {
-                          _vm.form = $$v
+                          _vm.fields = $$v
                         },
-                        expression: "form"
+                        expression: "fields"
                       }
                     },
-                    _vm._l(_vm.formList, function(inputType, index) {
+                    _vm._l(_vm.fields, function(field, index) {
                       return _c(
-                        "div",
-                        { key: index },
+                        "el-row",
+                        { key: index, attrs: { type: "flex", gutter: 2 } },
                         [
                           _c(
-                            "el-row",
-                            { attrs: { type: "flex", gutter: 2 } },
+                            "el-col",
+                            { staticClass: "float-left", attrs: { span: 24 } },
                             [
                               _c(
-                                "el-col",
+                                "el-card",
                                 {
-                                  staticClass: "float-left",
-                                  attrs: { span: 24 }
+                                  staticClass: "cursor-move",
+                                  attrs: {
+                                    "body-style": "padding: 10px;",
+                                    shadow: "hover"
+                                  }
                                 },
                                 [
                                   _c(
-                                    "el-card",
+                                    field.type,
                                     {
-                                      staticClass: "cursor-move",
-                                      attrs: {
-                                        "body-style": "padding: 10px;",
-                                        shadow: "hover"
+                                      tag: "component",
+                                      attrs: { fieldData: field },
+                                      on: {
+                                        update: function($event) {
+                                          return _vm.updateField($event, index)
+                                        }
                                       }
                                     },
                                     [
                                       _c(
-                                        inputType.input.component,
+                                        "el-button",
                                         {
-                                          tag: "component",
+                                          staticClass:
+                                            "button-position tw-float-right hover:tw-text-red-600",
                                           attrs: {
-                                            fieldData: inputType.fieldData
+                                            type: "text",
+                                            icon: "el-icon-close"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.removeField(index)
+                                            }
                                           }
                                         },
                                         [
-                                          _c(
-                                            "el-button",
-                                            {
-                                              staticClass:
-                                                "button-position tw-float-right hover:tw-text-red-600",
-                                              attrs: {
-                                                type: "text",
-                                                icon: "el-icon-close"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.removeItem(index)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                Remove\n                                        "
-                                              )
-                                            ]
+                                          _vm._v(
+                                            "\n                                            Remove\n                                    "
                                           )
-                                        ],
-                                        1
+                                        ]
                                       )
                                     ],
                                     1
@@ -87765,7 +87769,7 @@ var render = function() {
                         1
                       )
                     }),
-                    0
+                    1
                   ),
                   _vm._v(" "),
                   _c("el-divider")
@@ -89276,7 +89280,6 @@ var render = function() {
                 _c(_vm.selectedInput.component, {
                   tag: "component",
                   attrs: { inputData: _vm.selectedInput },
-                  on: { outputData: _vm.setInputOptions },
                   scopedSlots: _vm._u([
                     {
                       key: "default",
@@ -89289,7 +89292,7 @@ var render = function() {
                               attrs: { type: "success" },
                               on: {
                                 click: function($event) {
-                                  return _vm.setInputOptions(fieldData)
+                                  return _vm.addField(fieldData)
                                 }
                               }
                             },
@@ -90334,12 +90337,7 @@ var render = function() {
           _c(
             "el-card",
             { attrs: { id: "menu-container" } },
-            [
-              _c("form-menu", {
-                attrs: { id: "menu" },
-                on: { add: _vm.addField }
-              })
-            ],
+            [_c("form-menu", { attrs: { id: "menu" } })],
             1
           ),
           _vm._v(" "),
@@ -90359,8 +90357,7 @@ var render = function() {
                         "active-text-color": "#409EFF",
                         mode: "horizontal",
                         router: ""
-                      },
-                      on: { select: _vm.handleSelect }
+                      }
                     },
                     [
                       _c(
@@ -111406,15 +111403,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************************!*\
   !*** ./resources/js/FormBuilder/components/canvas/index.vue ***!
   \**************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _index_vue_vue_type_template_id_afee96a4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=afee96a4&scoped=true& */ "./resources/js/FormBuilder/components/canvas/index.vue?vue&type=template&id=afee96a4&scoped=true&");
 /* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/canvas/index.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _index_vue_vue_type_style_index_0_id_afee96a4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.vue?vue&type=style&index=0&id=afee96a4&scoped=true&lang=css& */ "./resources/js/FormBuilder/components/canvas/index.vue?vue&type=style&index=0&id=afee96a4&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _index_vue_vue_type_style_index_0_id_afee96a4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./index.vue?vue&type=style&index=0&id=afee96a4&scoped=true&lang=css& */ "./resources/js/FormBuilder/components/canvas/index.vue?vue&type=style&index=0&id=afee96a4&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -111446,7 +111442,7 @@ component.options.__file = "resources/js/FormBuilder/components/canvas/index.vue
 /*!***************************************************************************************!*\
   !*** ./resources/js/FormBuilder/components/canvas/index.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -113163,7 +113159,6 @@ Vue.component('user-dropdown', __webpack_require__(/*! @/components/userDropdown
 
 
 Vue.use(_routes__WEBPACK_IMPORTED_MODULE_5__["VueRouter"]);
-Vue.config.productionTip = false;
 Vue.use(vuedraggable__WEBPACK_IMPORTED_MODULE_4___default.a);
 Vue.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var app = new Vue({
@@ -113358,6 +113353,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   SET_FIELDS: function SET_FIELDS(state, fields) {
     state.fields = fields;
+  },
+  ADD_FIELD: function ADD_FIELD(state, field) {
+    state.fields.push(field);
+  },
+  UPDATE_FIELD: function UPDATE_FIELD(state, payload) {
+    state.fields[payload.fieldIndex] = payload.field;
+  },
+  REMOVE_FIELD: function REMOVE_FIELD(state, fieldIndex) {
+    state.fields.splice(fieldIndex, 1);
   }
 });
 
@@ -115558,7 +115562,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

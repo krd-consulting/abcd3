@@ -43,6 +43,7 @@ export default {
     data: () => {
         return {
             fieldData: {
+                type: 'MatrixField',
                 label: '',
                 description: '',
                 settings: {

@@ -39,6 +39,7 @@ export default {
     data: () => {
         return {
             fieldData: {
+                type: 'TextBox',
                 label: '',
                 settings: {
                     required: false,

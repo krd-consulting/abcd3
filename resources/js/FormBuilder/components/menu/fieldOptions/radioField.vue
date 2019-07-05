@@ -27,6 +27,7 @@ export default {
     data: () => {
         return {
             fieldData: {
+                type: 'RadioField',
                 label: '',
                 settings: {
                     required: false,

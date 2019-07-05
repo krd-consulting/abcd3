@@ -18,7 +18,6 @@ import Initialize from './views/initialize'
 
 Vue.use(VueRouter);
 
-Vue.config.productionTip = false
 Vue.use(draggable);
 Vue.use(Vuex);
 

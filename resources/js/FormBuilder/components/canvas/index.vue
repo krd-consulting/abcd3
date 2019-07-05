@@ -50,26 +50,28 @@
 
                 <el-divider content-position="left"><span>Your Content</span></el-divider>
 
-                    <draggable class="dropArea" v-model="form">
-                        <div v-for="(inputType, index) in formList" :key="index">
-                            <el-row type="flex" :gutter="2">
+                    <draggable 
+                        class="dropArea" 
+                        v-model="fields">
+                            <el-row v-for="(field, index) in fields" type="flex" :gutter="2" :key="index">
                             <el-col class="float-left" :span="24">
                                 <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
 
-                                    <component :is="inputType.input.component" 
-                                        :fieldData="inputType.fieldData">
-                                            <el-button type="text" 
-                                                @click="removeItem(index)" 
-                                                icon="el-icon-close" 
-                                                class="button-position tw-float-right hover:tw-text-red-600">
-                                                    Remove
-                                            </el-button>
-                                    </component>
+                                <component 
+                                    :is="field.type" 
+                                    :fieldData="field"
+                                    @update="updateField($event, index)">
+                                        <el-button type="text" 
+                                            @click="removeField(index)" 
+                                            icon="el-icon-close" 
+                                            class="button-position tw-float-right hover:tw-text-red-600">
+                                                Remove
+                                        </el-button>
+                                </component>
                                     
                                 </el-card>
                             </el-col>
                         </el-row>
-                    </div>
                 </draggable>
 
                 <el-divider></el-divider>
@@ -145,11 +147,10 @@ export default {
     },
     props: {
         newInput: Function,
-        fields: {
-            type: Array,
-            default: []
-        },
-        fieldData: Function
+        // fields: {
+        //     type: Array,
+        //     default: []
+        // },
     },
     components: {
         draggable,
@@ -180,16 +181,17 @@ export default {
             get() { return this.$store.state.description },
             set(description) { this.$store.commit('SET_DESCRIPTION', description) }
         },
-        setFields: {
-            get() { return this.$store.state.fields },
-            set(fieldData) { this.$store.commit('SET_FIELDS', fieldData) }
+        fields: { 
+            get() {
+                return this.$store.state.fields
+            },
+            set(fields) {
+                this.$store.commit('SET_FIELDS', fields);
+            }
         },
-        removeField: {
-            // remove selected field
-        }
     },
     methods: {
-        removeItem(index) {
+        removeField(fieldIndex) {
             this.$confirm('are you sure you want to remove this field from your form?', 'Warning', {
                 confirmButtonText: 'Remove',
                 cancelButtonText: 'Nevermind',
@@ -199,13 +201,25 @@ export default {
                     type: 'success',
                     message: 'Field Successfully Removed'
                 })
-                this.fields.splice(index, 1);
+
+                this.$store.commit('REMOVE_FIELD', fieldIndex);
+
             }).catch(() => {
                 this.$message({
                     type: 'info',
                     message: "Alright, we'll keep it"
                 })
             })
+        },
+
+        updateField(field, fieldIndex) {
+            this.$store.commit({
+                type: 'UPDATE_FIELD',
+                field,
+                fieldIndex
+            });
+
+            this.$forceUpdate();
         },
 
         initializeForm(data) {
@@ -216,15 +230,13 @@ export default {
 
     },
     watch: {
-        fields() {
-            this.formList = _.clone(this.fields);
-        },
-        formList: {
-            handler() {
-                this.setFields = this.formList
-            },
-            deep: true
-        }
+        // fields: { 
+        //     handler() {
+        //         this.$store.commit('SET_FIELDS', this.fields) 
+        //     },
+
+        //     deep: true
+        // }
     },
 
     created() {

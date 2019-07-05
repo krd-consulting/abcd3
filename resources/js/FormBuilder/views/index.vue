@@ -3,7 +3,7 @@
         <el-container>
                 <el-card id="menu-container"> 
                     <!-- <el-aside class="aside"> -->
-                        <form-menu id="menu" @add="addField"/>
+                        <form-menu id="menu"/>
                     <!-- </el-aside> -->
                 </el-card>
             
@@ -13,7 +13,6 @@
                     background-color="#fff" 
                     active-text-color="#409EFF" 
                     mode="horizontal" 
-                    @select="handleSelect" 
                     router>
                         <el-menu-item default-active index="/forms/create" class="tw-font-bold tw-focus:font-extrabold">Form Builder</el-menu-item>
                         <el-menu-item index="/forms/create/preview" class="tw-font-bold tw-focus:font-extrabold">Preview Form</el-menu-item>
@@ -51,14 +50,6 @@
         },
 
         methods: {
-            addField(field) {
-                // append to fields arrays
-                this.fields.push(field);
-            },
-            updateCanvas(data) {
-                this.canvasInput = data.input;
-                this.inputOptions = data.options;
-            },
             buildForm() {
                 this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
                         confirmButtonText: 'OK',

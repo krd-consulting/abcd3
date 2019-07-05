@@ -68,6 +68,7 @@ export default {
             recordTypes: [],
 
             fieldData: {
+                type: 'TextField',
                 label: '',
                 reference: '',
                 settings: {

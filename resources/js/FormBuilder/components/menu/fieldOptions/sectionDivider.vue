@@ -18,6 +18,7 @@ export default {
     name: 'sectionDivider',
     data: () => {
         return {
+            type: 'SectionDivider',
             fieldData: {
                 label: ''
             },
