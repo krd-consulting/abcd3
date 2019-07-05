@@ -1,14 +1,19 @@
 <template>
     <div id="dropdown">
         <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                {{ fieldLabel }}
+            </editable-text>
         </label>
-        <el-select id="dropdown" v-model="value" placeholder="select">
+        <el-select id="dropdown" v-model="dropItem" placeholder="select">
             <el-option v-for="item in dropdownList" :key="item.id" :label="item.value" :value="item.value"></el-option>
         </el-select>
         <div class="tw-float-right">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="value">{{ value.value }}</editable-text>
-            <el-button v-if="value != ''" class="float-right pr-15" type="text" size="mini" @click="removeItem(value)">Remove Item</el-button>
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="dropItem">
+                {{ dropItem }}
+            </editable-text>
+            <!-- <editable-text class="tw-cursor-pointer mouseOver" v-model="dropItem">{{ dropItem.value }}</editable-text> -->
+            <el-button v-if="dropItem != ''" class="float-right pr-15" type="text" size="mini" @click="removeItem(value)">Remove Item</el-button>
         </div>
         
         <form @submit.prevent="addItem" class="tw-mt-4">
@@ -31,12 +36,14 @@ export default {
     data() {
         return {
             itemText: '',
-            value: '',
+            dropItem: '',
             editField: '',
             dropdownList: [],
             nextItem: 0,
-            field: []
         }
+    },
+    mounted() {
+        this.setDropdownItems(); // calls method upon being rendered in the DOM
     },
     components: {
         EditableText
@@ -44,16 +51,37 @@ export default {
     props: {
         fieldData: {
             type: Array | Object,
-            default: {
-                label: 'Dropdown',
-            }
+            default: {}
         }
     },
-    created() {
-        this.field = _.clone(this.fieldData)
-    },
-    mounted: function() {
-        this.setDropdownItems(); // calls method upon being rendered in the DOM
+    computed: {
+        fieldLabel: {
+            get() { return this.field.label; },
+            set(label) { 
+                console.log('field label edited');
+
+                const fieldCopy = _.clone(this.field);
+
+                fieldCopy.label = label;
+
+                this.field = fieldCopy;
+            }
+        },
+
+        dropItem: {
+            get() {return this.field.choices},
+            set(field) {
+                this.$emit('update', field);
+            }
+        },
+
+        field: {
+            get() { return this.fieldData; },
+            set(field) { 
+                console.log('field edited');
+                this.$emit('update', field); 
+            }
+        },
     },
     methods: {
         addItem: function() {
@@ -62,10 +90,13 @@ export default {
             })
             this.itemText = ''
         },
-        loadItem: function() {
-            this.dropdownList.push({
-                id: this.nextItem++, value: 'item ' + this.nextItem
+        loadItem() {
+            this.field.choices.push({
+                text: this.itemText, value: this.nextItem++
             })
+            // this.dropdownList.push({
+            //     id: this.nextItem++, value: 'item ' + this.nextItem
+            // })
         },
         removeItem(item) {
             var index = this.dropdownList.indexOf(item);
@@ -79,9 +110,6 @@ export default {
                 this.loadItem();
             }
         },
-        showField(value){
-            return (this.dropdownList[value] == '' || this.editField == value)
-        }
     }
 }
 </script>

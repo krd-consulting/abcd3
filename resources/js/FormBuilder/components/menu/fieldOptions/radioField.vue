@@ -33,9 +33,7 @@ export default {
                     required: false,
                     radioNum: 2,
                 },
-                options: {
-                    choices: []
-                },
+                choices: [],
                 rules: {
                     label: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }

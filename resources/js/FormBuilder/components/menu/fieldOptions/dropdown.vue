@@ -34,9 +34,7 @@ export default {
                     required: false,
                     dropdownNum: 2,
                 },
-                options: {
-                    choices: []
-                },
+                choices: [],
                 rules: {
                     label: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }
@@ -49,10 +47,6 @@ export default {
         inputData: Object,
     },
     methods: {
-        handleChange() {
-            console.log('Doing the thing in menu options');
-        },
-
         submitfieldData(fieldData) {
             this.$emit('outputData', this.fieldData);
         }

@@ -3,7 +3,9 @@
         <el-divider>
 
             <span>
-                <editable-text class="tw-cursor-pointer mouseOver" @input="showField" v-model="field.label">{{ field.label}}</editable-text>
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
             </span>
 
         </el-divider>
@@ -17,9 +19,7 @@ import EditableText from '@/components/editableText.vue'
 
 export default {
     data() {
-        return {
-            field: []
-        }
+        return {}
     },
     props: {
         fieldData: {
@@ -30,14 +30,29 @@ export default {
     components: {
         EditableText
     },
-    created() {
-        this.field = _.clone(this.fieldData)
+
+    computed: {
+        fieldLabel: {
+            get() { return this.field.label; },
+            set(label) { 
+                console.log('field label edited');
+
+                const fieldCopy = _.clone(this.field);
+
+                fieldCopy.label = label;
+
+                this.field = fieldCopy;
+            }
+        },
+
+        field: {
+            get() { return this.fieldData; },
+            set(field) { 
+                console.log('field edited');
+                this.$emit('update', field); 
+            }
+        },
     },
-    methods: {
-        showField(value){
-            return (this.field.label[value] == '' || this.editField == value)
-        }
-    }
 }
 </script>
 

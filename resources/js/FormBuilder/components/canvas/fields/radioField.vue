@@ -2,10 +2,11 @@
     <div id="dropdown">
          
         <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                {{ fieldLabel }}
+            </editable-text>
         </label>
 
-        <!-- <el-row> -->
              <el-radio-group id="radioGroup">
                 <el-radio 
                     v-model="item.value" 
@@ -48,7 +49,6 @@ export default {
             editField: '',
             radioList: [],
             nextItem: 0,
-            field: []
         }
     },
     components: {
@@ -62,10 +62,29 @@ export default {
             }
         }
     },
-    created() {
-        this.field = _.clone(this.fieldData)
+    computed: {
+        fieldLabel: {
+            get() { return this.field.label; },
+            set(label) { 
+                console.log('field label edited');
+
+                const fieldCopy = _.clone(this.field);
+
+                fieldCopy.label = label;
+
+                this.field = fieldCopy;
+            }
+        },
+
+        field: {
+            get() { return this.fieldData; },
+            set(field) { 
+                console.log('field edited');
+                this.$emit('update', field); 
+            }
+        },
     },
-    mounted: function() {
+    mounted() {
         this.setRadioItems(); // calls method upon being rendered in the DOM
     },
     methods: {

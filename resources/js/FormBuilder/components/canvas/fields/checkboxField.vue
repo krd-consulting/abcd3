@@ -1,9 +1,9 @@
 <template>
   <div id="checkbox">
         <label class="inputLabel">
-            <el-col>
-                <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
-            </el-col>
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                {{ fieldLabel }}
+            </editable-text>
         </label><br>
 
         <el-checkbox-group id="check" >
@@ -50,10 +50,12 @@ export default {
             itemText: '',
             value: '',
             editField: '',
-            checkList: [],
+            // checkList: [],
             nextItem: 0,
-            field: {}
         }
+    },
+    mounted() {
+        this.setCheckboxItems(); // calls method upon being rendered in the DOM
     },
     components: {
         EditableText
@@ -65,36 +67,73 @@ export default {
             }
         }
     },
-    created() {
-        this.field = _.clone(this.fieldData)
-    },
-    mounted() {
-        this.setCheckboxItems(); // calls method upon being rendered in the DOM
-    },
-    methods: {
-        addItem: function() {
-            this.checkList.push({
-                id: this.nextItem++, value: this.itemText
-            })
-            this.itemText = ''
-        },
-        loadItem: function() {
-            this.checkList.push({
-                id: this.nextItem++, value: 'item ' + this.nextItem + ' '
-            })  
-        },
-        removeItem(item) {
-            var index = this.checkList.indexOf(item);
-            if (index !== -1) {
-                this.checkList.splice(index, 1);
+    computed: {
+
+        field: {
+            get() { return this.fieldData; },
+            set(field) { 
+                console.log('field edited');
+                this.$emit('update', field); 
             }
         },
+
+        fieldLabel: {
+            get() { return this.field.label; },
+            set(label) { 
+                console.log('field label edited');
+
+                const fieldCopy = _.clone(this.field);
+
+                fieldCopy.label = label;
+
+                this.field = fieldCopy;
+            }
+        },
+
+        // itemText: {
+        //     get(){ return this.fieldData.choices.value},
+        //     set(value){
+        //         console.log('choices updated');
+        //         const fieldCopy = _.clone(this.field);
+        //         fieldCopy.choices.value = value;
+        //         this.field = fieldCopy;
+        //     }
+        // },
+
+        checkList: {
+            get() { return this.field.choices},
+            set(field) { this.$emit('update', field)}
+        }
+    },
+    methods: {
         setCheckboxItems() {
             var i;
             for(i= 0; i < this.field.settings.checkboxNum; i++) {
                 this.loadItem();
             }
         },
+
+        loadItem: function() {
+            this.checkList.push({
+                id: this.nextItem++, value: 'item ' + this.nextItem + ' '
+            })
+            this.$store.commit('UPDATE_FIELD', field)
+        },
+
+        addItem: function() {
+            this.checkList.push({
+                id: this.nextItem++, value: this.itemText
+            })
+            this.itemText = ''
+        },
+        
+        removeItem(item) {
+            var index = this.checkList.indexOf(item);
+            if (index !== -1) {
+                this.checkList.splice(index, 1);
+            }
+        },
+        
     }
 }
 </script>

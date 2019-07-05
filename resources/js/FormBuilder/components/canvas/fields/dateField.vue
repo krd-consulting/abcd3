@@ -1,7 +1,9 @@
 <template>
     <div id="datepicker">
         <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                {{ fieldLabel }}
+            </editable-text>
         </label>
         <el-date-picker 
             id="dateField"
@@ -32,7 +34,6 @@ export default {
             rangeSeparator: '',
             startDate: '',
             endDate: '',
-            field: []
         }
     },
     props: {
@@ -55,14 +56,34 @@ export default {
         this.toggleRangeMenu()
     },
     computed: {
-        handlePastFutureToggle() {
-            if(this.field.settings.past_only === true){
-                this.field.settings.future_only === false
+        fieldLabel: {
+            get() { return this.field.label; },
+            set(label) { 
+                console.log('field label edited');
+
+                const fieldCopy = _.clone(this.field);
+
+                fieldCopy.label = label;
+
+                this.field = fieldCopy;
             }
-            if(this.field.settings.future_only === true) {
-                this.field.settings.past_only === false
+        },
+
+        field: {
+            get() { return this.fieldData; },
+            set(field) { 
+                console.log('field edited');
+                this.$emit('update', field); 
             }
-        }
+        },
+        // handlePastFutureToggle() {
+        //     if(this.field.settings.past_only === true){
+        //         this.field.settings.future_only === false
+        //     }
+        //     if(this.field.settings.future_only === true) {
+        //         this.field.settings.past_only === false
+        //     }
+        // }
     },
     methods: {
         togglePastOnly() {

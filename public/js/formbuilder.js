@@ -3503,12 +3503,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      field: []
-    };
+    return {};
   },
   props: {
     fieldData: {
@@ -3519,12 +3519,28 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
-  },
-  methods: {
-    showField: function showField(value) {
-      return this.field.label[value] == '' || this.editField == value;
+  computed: {
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
     }
   }
 });
@@ -3591,10 +3607,12 @@ __webpack_require__.r(__webpack_exports__);
       itemText: '',
       value: '',
       editField: '',
-      checkList: [],
-      nextItem: 0,
-      field: {}
+      // checkList: [],
+      nextItem: 0
     };
+  },
+  mounted: function mounted() {
+    this.setCheckboxItems(); // calls method upon being rendered in the DOM
   },
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -3605,13 +3623,62 @@ __webpack_require__.r(__webpack_exports__);
       "default": {}
     }
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
-  },
-  mounted: function mounted() {
-    this.setCheckboxItems(); // calls method upon being rendered in the DOM
+  computed: {
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
+    },
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    // itemText: {
+    //     get(){ return this.fieldData.choices.value},
+    //     set(value){
+    //         console.log('choices updated');
+    //         const fieldCopy = _.clone(this.field);
+    //         fieldCopy.choices.value = value;
+    //         this.field = fieldCopy;
+    //     }
+    // },
+    checkList: {
+      get: function get() {
+        return this.field.choices;
+      },
+      set: function set(field) {
+        this.$emit('update', field);
+      }
+    }
   },
   methods: {
+    setCheckboxItems: function setCheckboxItems() {
+      var i;
+
+      for (i = 0; i < this.field.settings.checkboxNum; i++) {
+        this.loadItem();
+      }
+    },
+    loadItem: function loadItem() {
+      this.checkList.push({
+        id: this.nextItem++,
+        value: 'item ' + this.nextItem + ' '
+      });
+      this.$store.commit('UPDATE_FIELD', field);
+    },
     addItem: function addItem() {
       this.checkList.push({
         id: this.nextItem++,
@@ -3619,24 +3686,11 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.itemText = '';
     },
-    loadItem: function loadItem() {
-      this.checkList.push({
-        id: this.nextItem++,
-        value: 'item ' + this.nextItem + ' '
-      });
-    },
     removeItem: function removeItem(item) {
       var index = this.checkList.indexOf(item);
 
       if (index !== -1) {
         this.checkList.splice(index, 1);
-      }
-    },
-    setCheckboxItems: function setCheckboxItems() {
-      var i;
-
-      for (i = 0; i < this.field.settings.checkboxNum; i++) {
-        this.loadItem();
       }
     }
   }
@@ -3674,6 +3728,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3685,8 +3741,7 @@ __webpack_require__.r(__webpack_exports__);
       dateFormat: 'yyyy/MM/dd',
       rangeSeparator: '',
       startDate: '',
-      endDate: '',
-      field: []
+      endDate: ''
     };
   },
   props: {
@@ -3705,15 +3760,36 @@ __webpack_require__.r(__webpack_exports__);
     this.togglePastOnly(), this.toggleFutureOnly(), this.toggleQuickMenu(), this.toggleTime(), this.toggleRangeMenu();
   },
   computed: {
-    handlePastFutureToggle: function handlePastFutureToggle() {
-      if (this.field.settings.past_only === true) {
-        this.field.settings.future_only === false;
-      }
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
 
-      if (this.field.settings.future_only === true) {
-        this.field.settings.past_only === false;
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
       }
-    }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
+    } // handlePastFutureToggle() {
+    //     if(this.field.settings.past_only === true){
+    //         this.field.settings.future_only === false
+    //     }
+    //     if(this.field.settings.future_only === true) {
+    //         this.field.settings.past_only === false
+    //     }
+    // }
+
   },
   methods: {
     togglePastOnly: function togglePastOnly() {
@@ -3832,17 +3908,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       itemText: '',
-      value: '',
+      dropItem: '',
       editField: '',
       dropdownList: [],
-      nextItem: 0,
-      field: []
+      nextItem: 0
     };
+  },
+  mounted: function mounted() {
+    this.setDropdownItems(); // calls method upon being rendered in the DOM
   },
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -3850,16 +3933,40 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     fieldData: {
       type: Array | Object,
-      "default": {
-        label: 'Dropdown'
-      }
+      "default": {}
     }
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
-  },
-  mounted: function mounted() {
-    this.setDropdownItems(); // calls method upon being rendered in the DOM
+  computed: {
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    dropItem: {
+      get: function get() {
+        return this.field.choices;
+      },
+      set: function set(field) {
+        this.$emit('update', field);
+      }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
+    }
   },
   methods: {
     addItem: function addItem() {
@@ -3870,10 +3977,12 @@ __webpack_require__.r(__webpack_exports__);
       this.itemText = '';
     },
     loadItem: function loadItem() {
-      this.dropdownList.push({
-        id: this.nextItem++,
-        value: 'item ' + this.nextItem
-      });
+      this.field.choices.push({
+        text: this.itemText,
+        value: this.nextItem++
+      }); // this.dropdownList.push({
+      //     id: this.nextItem++, value: 'item ' + this.nextItem
+      // })
     },
     removeItem: function removeItem(item) {
       var index = this.dropdownList.indexOf(item);
@@ -3888,9 +3997,6 @@ __webpack_require__.r(__webpack_exports__);
       for (i = 0; i < this.field.settings.dropdownNum; i++) {
         this.loadItem();
       }
-    },
-    showField: function showField(value) {
-      return this.dropdownList[value] == '' || this.editField == value;
     }
   }
 });
@@ -3929,12 +4035,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      fileList: [],
-      field: []
+      fileList: []
     };
   },
   props: {
@@ -3946,15 +4055,49 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
+  computed: {
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    fieldDescription: {
+      get: function get() {
+        return this.field.description;
+      },
+      set: function set(description) {
+        console.log('field description edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.description = description;
+        this.field = fieldCopy;
+      }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
+    }
   },
   methods: {
     handleRemove: function handleRemove(file, fileList) {
-      console.log(file, fileList);
+      console.log(file, fileList); // temp methods
     },
     handlePreview: function handlePreview(file) {
-      console.log(file);
+      console.log(file); // temp methods
     },
     handleExceed: function handleExceed(files, fileList) {
       this.$message.warning("The limit is 3, you selected ".concat(files.length, " files this time, add up to ").concat(files.length + fileList.length, " totally"));
@@ -4149,13 +4292,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'numeric',
   data: function data() {
     return {
-      num: 0,
-      field: []
+      num: 0
     };
   },
   props: {
@@ -4167,8 +4311,29 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
+  computed: {
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
+    }
   }
 });
 
@@ -4223,6 +4388,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4231,8 +4397,7 @@ __webpack_require__.r(__webpack_exports__);
       value: '',
       editField: '',
       radioList: [],
-      nextItem: 0,
-      field: []
+      nextItem: 0
     };
   },
   components: {
@@ -4246,8 +4411,29 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
+  computed: {
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
+    }
   },
   mounted: function mounted() {
     this.setRadioItems(); // calls method upon being rendered in the DOM
@@ -4325,34 +4511,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textbox',
   data: function data() {
     return {
-      value: '',
-      field: []
+      value: ''
     };
   },
   props: {
     fieldData: {
       type: Array | Object,
-      "default": {
-        label: 'Text Area'
-      }
+      "default": {}
     }
   },
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
-  },
-  methods: {
-    showField: function showField(value) {
-      return this.field.label[value] == '' || this.editField == value;
+  computed: {
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
     }
-  }
+  } // created() {
+  //     this.field = _.clone(this.fieldData)
+  // },
+  // methods: {
+  //     showField(value){
+  //         return (this.field.label[value] == '' || this.editField == value)
+  //     }
+  // }
+
 });
 
 /***/ }),
@@ -4410,9 +4620,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     fieldData: {
       type: Array | Object,
-      "default": {
-        label: 'Text Field'
-      }
+      "default": {}
     }
   },
   components: {
@@ -4477,12 +4685,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      timeSelection: '',
-      field: []
+      timeSelection: ''
     };
   },
   props: {
@@ -4494,14 +4702,33 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
-  },
-  methods: {
-    showField: function showField(value) {
-      return this.field.label[value] == '' || this.editField == value;
+  computed: {
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
     }
-  }
+  } // created() {
+  //     this.field = _.clone(this.fieldData)
+  // },
+
 });
 
 /***/ }),
@@ -4831,9 +5058,7 @@ __webpack_require__.r(__webpack_exports__);
           required: false,
           checkboxNum: 2
         },
-        options: {
-          choices: []
-        },
+        choices: [],
         rules: {
           label: [{
             required: true,
@@ -4989,9 +5214,7 @@ __webpack_require__.r(__webpack_exports__);
           required: false,
           dropdownNum: 2
         },
-        options: {
-          choices: []
-        },
+        choices: [],
         rules: {
           label: [{
             required: true,
@@ -5006,9 +5229,6 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    handleChange: function handleChange() {
-      console.log('Doing the thing in menu options');
-    },
     submitfieldData: function submitfieldData(fieldData) {
       this.$emit('outputData', this.fieldData);
     }
@@ -5288,9 +5508,7 @@ __webpack_require__.r(__webpack_exports__);
           required: false,
           radioNum: 2
         },
-        options: {
-          choices: []
-        },
+        choices: [],
         rules: {
           label: [{
             required: true,
@@ -5354,9 +5572,6 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    handleChange: function handleChange() {
-      console.log('Doing the thing in menu options');
-    },
     submitfieldData: function submitfieldData(fieldData) {
       this.$emit('outputData', this.fieldData);
     }
@@ -5537,13 +5752,8 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    handleChange: function handleChange() {
-      // used for testing connection. throw away when finished
-      console.log('Doing the thing in menu options');
-    },
     submitfieldData: function submitfieldData(fieldData) {
       this.$emit('inputData', this.fieldData);
-      console.log(this.fieldData);
     },
     retrieveRecordTypes: function retrieveRecordTypes() {
       var _this = this;
@@ -9040,7 +9250,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9059,7 +9269,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9078,7 +9288,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9097,7 +9307,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9116,7 +9326,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9154,7 +9364,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9173,7 +9383,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9192,7 +9402,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9211,7 +9421,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9230,7 +9440,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9249,7 +9459,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\n    right: 10px; */\n}\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\r\n    right: 10px; */\n}\r\n", ""]);
 
 // exports
 
@@ -9268,7 +9478,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\n        width: auto;\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\r\n        width: auto;\r\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\r\n", ""]);
 
 // exports
 
@@ -9306,7 +9516,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
 
 // exports
 
@@ -9344,7 +9554,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\n\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \r\n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -86155,16 +86365,21 @@ var render = function() {
               "editable-text",
               {
                 staticClass: "tw-cursor-pointer mouseOver",
-                on: { input: _vm.showField },
                 model: {
-                  value: _vm.field.label,
+                  value: _vm.fieldLabel,
                   callback: function($$v) {
-                    _vm.$set(_vm.field, "label", $$v)
+                    _vm.fieldLabel = $$v
                   },
-                  expression: "field.label"
+                  expression: "fieldLabel"
                 }
               },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.fieldLabel) +
+                    "\n            "
+                )
+              ]
             )
           ],
           1
@@ -86207,24 +86422,22 @@ var render = function() {
         { staticClass: "inputLabel" },
         [
           _c(
-            "el-col",
-            [
-              _c(
-                "editable-text",
-                {
-                  staticClass: "tw-cursor-pointer mouseOver",
-                  model: {
-                    value: _vm.field.label,
-                    callback: function($$v) {
-                      _vm.$set(_vm.field, "label", $$v)
-                    },
-                    expression: "field.label"
-                  }
+            "editable-text",
+            {
+              staticClass: "tw-cursor-pointer mouseOver",
+              model: {
+                value: _vm.fieldLabel,
+                callback: function($$v) {
+                  _vm.fieldLabel = $$v
                 },
-                [_vm._v(_vm._s(_vm.field.label))]
+                expression: "fieldLabel"
+              }
+            },
+            [
+              _vm._v(
+                "\n              " + _vm._s(_vm.fieldLabel) + "\n          "
               )
-            ],
-            1
+            ]
           )
         ],
         1
@@ -86391,14 +86604,14 @@ var render = function() {
             {
               staticClass: "tw-cursor-pointer mouseOver",
               model: {
-                value: _vm.field.label,
+                value: _vm.fieldLabel,
                 callback: function($$v) {
-                  _vm.$set(_vm.field, "label", $$v)
+                  _vm.fieldLabel = $$v
                 },
-                expression: "field.label"
+                expression: "fieldLabel"
               }
             },
-            [_vm._v(_vm._s(_vm.field.label))]
+            [_vm._v("\n            " + _vm._s(_vm.fieldLabel) + "\n        ")]
           )
         ],
         1
@@ -86464,14 +86677,14 @@ var render = function() {
             {
               staticClass: "tw-cursor-pointer mouseOver",
               model: {
-                value: _vm.field.label,
+                value: _vm.fieldLabel,
                 callback: function($$v) {
-                  _vm.$set(_vm.field, "label", $$v)
+                  _vm.fieldLabel = $$v
                 },
-                expression: "field.label"
+                expression: "fieldLabel"
               }
             },
-            [_vm._v(_vm._s(_vm.field.label))]
+            [_vm._v("\n            " + _vm._s(_vm.fieldLabel) + "\n        ")]
           )
         ],
         1
@@ -86482,11 +86695,11 @@ var render = function() {
         {
           attrs: { id: "dropdown", placeholder: "select" },
           model: {
-            value: _vm.value,
+            value: _vm.dropItem,
             callback: function($$v) {
-              _vm.value = $$v
+              _vm.dropItem = $$v
             },
-            expression: "value"
+            expression: "dropItem"
           }
         },
         _vm._l(_vm.dropdownList, function(item) {
@@ -86507,17 +86720,17 @@ var render = function() {
             {
               staticClass: "tw-cursor-pointer mouseOver",
               model: {
-                value: _vm.value,
+                value: _vm.dropItem,
                 callback: function($$v) {
-                  _vm.value = $$v
+                  _vm.dropItem = $$v
                 },
-                expression: "value"
+                expression: "dropItem"
               }
             },
-            [_vm._v(_vm._s(_vm.value.value))]
+            [_vm._v("\n            " + _vm._s(_vm.dropItem) + "\n        ")]
           ),
           _vm._v(" "),
-          _vm.value != ""
+          _vm.dropItem != ""
             ? _c(
                 "el-button",
                 {
@@ -86633,29 +86846,29 @@ var render = function() {
             {
               staticClass: "tw-cursor-pointer mouseOver",
               model: {
-                value: _vm.field.label,
+                value: _vm.fieldLabel,
                 callback: function($$v) {
-                  _vm.$set(_vm.field, "label", $$v)
+                  _vm.fieldLabel = $$v
                 },
-                expression: "field.label"
+                expression: "fieldLabel"
               }
             },
-            [_vm._v(_vm._s(_vm.field.label))]
+            [_vm._v("\n          " + _vm._s(_vm.fieldLabel) + "\n      ")]
           ),
           _vm._v(" "),
           _c(
             "editable-text",
             {
-              staticClass: "tw-cursor-pointer mouseOver tw-text-xs",
+              staticClass: "tw-cursor-pointer tw-text-xs mouseOver",
               model: {
-                value: _vm.field.description,
+                value: _vm.fieldDescription,
                 callback: function($$v) {
-                  _vm.$set(_vm.field, "description", $$v)
+                  _vm.fieldDescription = $$v
                 },
-                expression: "field.description"
+                expression: "fieldDescription"
               }
             },
-            [_vm._v(_vm._s(_vm.field.description))]
+            [_vm._v("\n          " + _vm._s(_vm.fieldDescription) + "\n      ")]
           )
         ],
         1
@@ -87007,14 +87220,14 @@ var render = function() {
             {
               staticClass: "tw-cursor-pointer mouseOver",
               model: {
-                value: _vm.field.label,
+                value: _vm.fieldLabel,
                 callback: function($$v) {
-                  _vm.$set(_vm.field, "label", $$v)
+                  _vm.fieldLabel = $$v
                 },
-                expression: "field.label"
+                expression: "fieldLabel"
               }
             },
-            [_vm._v(_vm._s(_vm.field.label))]
+            [_vm._v("\n            " + _vm._s(_vm.fieldLabel) + "\n        ")]
           )
         ],
         1
@@ -87082,14 +87295,14 @@ var render = function() {
             {
               staticClass: "tw-cursor-pointer mouseOver",
               model: {
-                value: _vm.field.label,
+                value: _vm.fieldLabel,
                 callback: function($$v) {
-                  _vm.$set(_vm.field, "label", $$v)
+                  _vm.fieldLabel = $$v
                 },
-                expression: "field.label"
+                expression: "fieldLabel"
               }
             },
-            [_vm._v(_vm._s(_vm.field.label))]
+            [_vm._v("\n            " + _vm._s(_vm.fieldLabel) + "\n        ")]
           )
         ],
         1
@@ -87258,22 +87471,25 @@ var render = function() {
                     "editable-text",
                     {
                       staticClass: "tw-cursor-pointer mouseOver",
-                      on: { input: _vm.showField },
                       model: {
-                        value: _vm.field.label,
+                        value: _vm.fieldLabel,
                         callback: function($$v) {
-                          _vm.$set(_vm.field, "label", $$v)
+                          _vm.fieldLabel = $$v
                         },
-                        expression: "field.label"
+                        expression: "fieldLabel"
                       }
                     },
-                    [_vm._v(_vm._s(_vm.field.label))]
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.fieldLabel) +
+                          "\n                "
+                      )
+                    ]
                   )
                 ],
                 1
               ),
-              _vm._v(" "),
-              _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
               _vm._v(" "),
               _vm.field.settings.isLimited
                 ? _c("el-input", {
@@ -87353,22 +87569,31 @@ var render = function() {
             { attrs: { span: 10 } },
             [
               _c(
-                "editable-text",
-                {
-                  staticClass: "tw-cursor-pointer mouseOver",
-                  model: {
-                    value: _vm.fieldLabel,
-                    callback: function($$v) {
-                      _vm.fieldLabel = $$v
-                    },
-                    expression: "fieldLabel"
-                  }
-                },
+                "label",
+                { staticClass: "inputLabel" },
                 [
-                  _vm._v(
-                    "\n              " + _vm._s(_vm.fieldLabel) + "\n          "
+                  _c(
+                    "editable-text",
+                    {
+                      staticClass: "tw-cursor-pointer mouseOver",
+                      model: {
+                        value: _vm.fieldLabel,
+                        callback: function($$v) {
+                          _vm.fieldLabel = $$v
+                        },
+                        expression: "fieldLabel"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                  " +
+                          _vm._s(_vm.fieldLabel) +
+                          "\n              "
+                      )
+                    ]
                   )
-                ]
+                ],
+                1
               ),
               _vm._v(" "),
               _vm.field.settings.isLimited
@@ -87438,7 +87663,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "timePicker" } },
     [
       _c(
         "el-row",
@@ -87451,22 +87675,25 @@ var render = function() {
                 "editable-text",
                 {
                   staticClass: "tw-cursor-pointer mouseOver",
-                  on: { input: _vm.showField },
                   model: {
-                    value: _vm.field.label,
+                    value: _vm.fieldLabel,
                     callback: function($$v) {
-                      _vm.$set(_vm.field, "label", $$v)
+                      _vm.fieldLabel = $$v
                     },
-                    expression: "field.label"
+                    expression: "fieldLabel"
                   }
                 },
-                [_vm._v(_vm._s(_vm.field.label))]
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.fieldLabel) +
+                      "\n            "
+                  )
+                ]
               )
             ],
             1
           ),
-          _vm._v(" "),
-          _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
           _vm._v(" "),
           _c("el-time-picker", {
             attrs: {
@@ -115562,7 +115789,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })
