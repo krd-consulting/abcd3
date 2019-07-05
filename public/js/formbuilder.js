@@ -6705,6 +6705,7 @@ __webpack_require__.r(__webpack_exports__);
         universal: 'Everyone',
         team: 'Users in your team',
         program: 'Users in your program',
+        group: 'Users in your group',
         self: 'Just me'
       };
 

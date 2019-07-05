@@ -11,27 +11,6 @@ class ScopesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('scopes')->insert([
-            [
-                'name' => 'universal',
-                'value' => 5
-            ],
-            [
-                'name' => 'team',
-                'value' => 4
-            ],
-            [
-                'name' => 'program',
-                'value' => 3
-            ],
-            [
-                'name' => 'case load',
-                'value' => 2
-            ],
-            [
-                'name' => 'self',
-                'self' => 1
-            ]
-        ]);
+        DB::table('scopes')->insert(config('auth.scopes'));
     }
 }

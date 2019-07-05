@@ -110,6 +110,11 @@ return [
             'value' => '2'
         ],
 
+        'group' => [
+            'name' => 'group',
+            'value' => '2'
+        ],
+
         'program' => [
             'name' => 'program',
             'value' => '3'
