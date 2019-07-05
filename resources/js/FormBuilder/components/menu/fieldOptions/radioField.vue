@@ -7,10 +7,10 @@
             </el-form-item>
             
             <el-form-item label="This Field is">
-                <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
             
-            <el-form-item>
+            <el-form-item label="Number of Radio Selections">
                 <el-input-number v-model="fieldData.settings.radioNum" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
             </el-form-item>
             
@@ -27,24 +27,14 @@ export default {
     data: () => {
         return {
             fieldData: {
+                type: 'RadioField',
                 label: '',
-                description: '',
-                reference: '',
                 settings: {
                     required: false,
-                    defaultNum: 0,
-                    dropdownNum: 0,
                     radioNum: 2,
-                    checkboxNum: 2,
-                    matrix_questions: 2,
-                    matrix_choices: 5,
-                    isLimited: false,
-                    max: 50,
-                    past_only: false,
-                    future_only: false,
-                    quick_menu: false,
-                    include_time: false,
-                    date_range: false,
+                },
+                options: {
+                    choices: []
                 },
                 rules: {
                     label: [

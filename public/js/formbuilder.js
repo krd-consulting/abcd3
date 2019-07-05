@@ -3593,7 +3593,7 @@ __webpack_require__.r(__webpack_exports__);
       editField: '',
       checkList: [],
       nextItem: 0,
-      field: []
+      field: {}
     };
   },
   components: {
@@ -4397,13 +4397,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textfield',
   data: function data() {
     return {
-      value: '',
-      field: []
+      value: ''
     };
   },
   props: {
@@ -4417,12 +4418,28 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
-  },
-  methods: {
-    showField: function showField(value) {
-      return this.field.label[value] == '' || this.editField == value;
+  computed: {
+    fieldLabel: {
+      get: function get() {
+        return this.field.label;
+      },
+      set: function set(label) {
+        console.log('field label edited');
+
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.label = label;
+        this.field = fieldCopy;
+      }
+    },
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        console.log('field edited');
+        this.$emit('update', field);
+      }
     }
   }
 });
@@ -4500,22 +4517,22 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_sidePanel_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/components/sidePanel.vue */ "./resources/js/components/sidePanel.vue");
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
-/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-click-outside */ "./node_modules/vue-click-outside/index.js");
+/* harmony import */ var vue_click_outside__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_click_outside__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_sidePanel_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/components/sidePanel.vue */ "./resources/js/components/sidePanel.vue");
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_textField_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/textField.vue */ "./resources/js/FormBuilder/components/canvas/fields/textField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/textArea.vue */ "./resources/js/FormBuilder/components/canvas/fields/textArea.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/checkboxField.vue */ "./resources/js/FormBuilder/components/canvas/fields/checkboxField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/dropdownField.vue */ "./resources/js/FormBuilder/components/canvas/fields/dropdownField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_numericField_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/numericField.vue */ "./resources/js/FormBuilder/components/canvas/fields/numericField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_radioField_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/radioField.vue */ "./resources/js/FormBuilder/components/canvas/fields/radioField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/dateField.vue */ "./resources/js/FormBuilder/components/canvas/fields/dateField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/matrixField.vue */ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/timePicker.vue */ "./resources/js/FormBuilder/components/canvas/fields/timePicker.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/fileUpload.vue */ "./resources/js/FormBuilder/components/canvas/fields/fileUpload.vue");
-/* harmony import */ var _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/SectionDivider.vue */ "./resources/js/FormBuilder/components/canvas/fields/SectionDivider.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _FormBuilder_views_initialize__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/FormBuilder/views/initialize */ "./resources/js/FormBuilder/views/initialize.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_textField_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/textField.vue */ "./resources/js/FormBuilder/components/canvas/fields/textField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/textArea.vue */ "./resources/js/FormBuilder/components/canvas/fields/textArea.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/checkboxField.vue */ "./resources/js/FormBuilder/components/canvas/fields/checkboxField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/dropdownField.vue */ "./resources/js/FormBuilder/components/canvas/fields/dropdownField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_numericField_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/numericField.vue */ "./resources/js/FormBuilder/components/canvas/fields/numericField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_radioField_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/radioField.vue */ "./resources/js/FormBuilder/components/canvas/fields/radioField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/dateField.vue */ "./resources/js/FormBuilder/components/canvas/fields/dateField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/matrixField.vue */ "./resources/js/FormBuilder/components/canvas/fields/matrixField.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/timePicker.vue */ "./resources/js/FormBuilder/components/canvas/fields/timePicker.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/fileUpload.vue */ "./resources/js/FormBuilder/components/canvas/fields/fileUpload.vue");
+/* harmony import */ var _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/SectionDivider.vue */ "./resources/js/FormBuilder/components/canvas/fields/SectionDivider.vue");
 //
 //
 //
@@ -4619,10 +4636,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      // title: 'Your Form Title',
-      // description: 'Subtext',
+      initialize: {
+        active: true
+      },
       target_type: 'Staff',
-      visible: false,
       name: '',
       dateCompleted: '',
       formList: [],
@@ -4660,33 +4677,31 @@ __webpack_require__.r(__webpack_exports__);
         value: 'Community Programs',
         label: 'Community Programs'
       }],
-      inputType: {},
-      inputFieldData: {}
+      inputType: {}
     };
   },
   props: {
-    newInput: Function,
-    fields: {
-      type: Array,
-      "default": []
-    },
-    fieldData: Function
+    newInput: Function // fields: {
+    //     type: Array,
+    //     default: []
+    // },
+
   },
   components: {
     draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a,
-    SidePanel: _components_sidePanel_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    SidePanel: _components_sidePanel_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    TextField: _FormBuilder_components_canvas_fields_textField_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    TextBox: _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    SectionDivider: _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
-    NumericField: _FormBuilder_components_canvas_fields_numericField_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-    CheckBox: _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    Dropdown: _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    RadioField: _FormBuilder_components_canvas_fields_radioField_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-    DatePicker: _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
-    MatrixField: _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
-    TimePicker: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
-    FileUpload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
+    TextField: _FormBuilder_components_canvas_fields_textField_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    TextBox: _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    SectionDivider: _FormBuilder_components_canvas_fields_SectionDivider_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+    NumericField: _FormBuilder_components_canvas_fields_numericField_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    CheckBox: _FormBuilder_components_canvas_fields_checkboxField_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    Dropdown: _FormBuilder_components_canvas_fields_dropdownField_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    RadioField: _FormBuilder_components_canvas_fields_radioField_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    DatePicker: _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+    MatrixField: _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
+    TimePicker: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+    FileUpload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
   },
   computed: {
     title: {
@@ -4705,17 +4720,17 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.commit('SET_DESCRIPTION', description);
       }
     },
-    form: {
+    fields: {
       get: function get() {
-        return this.$store.state.form;
+        return this.$store.state.fields;
       },
-      set: function set(input) {
-        this.$store.dispatch('addField', input);
+      set: function set(fields) {
+        this.$store.commit('SET_FIELDS', fields);
       }
     }
   },
   methods: {
-    removeItem: function removeItem(index) {
+    removeField: function removeField(fieldIndex) {
       var _this = this;
 
       this.$confirm('are you sure you want to remove this field from your form?', 'Warning', {
@@ -4728,7 +4743,7 @@ __webpack_require__.r(__webpack_exports__);
           message: 'Field Successfully Removed'
         });
 
-        _this.fields.splice(index, 1);
+        _this.$store.commit('REMOVE_FIELD', fieldIndex);
       })["catch"](function () {
         _this.$message({
           type: 'info',
@@ -4736,17 +4751,26 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    showField: function showField(value) {
-      return this.value == '' || this.editField == value;
+    updateField: function updateField(field, fieldIndex) {
+      this.$store.commit({
+        type: 'UPDATE_FIELD',
+        field: field,
+        fieldIndex: fieldIndex
+      });
+      this.$forceUpdate();
+    },
+    initializeForm: function initializeForm(data) {
+      this.title = data.name;
+      this.description = data.description;
+      this.target = data.target;
     }
   },
-  watch: {
-    newInput: function newInput() {
-      this.form.push(this.input.id);
-    },
-    fields: function fields() {
-      this.formList = _.clone(this.fields); // this.inputFieldData = _.clone(this.fieldData)
-    }
+  watch: {// fields: { 
+    //     handler() {
+    //         this.$store.commit('SET_FIELDS', this.fields) 
+    //     },
+    //     deep: true
+    // }
   },
   created: function created() {}
 });
@@ -4791,24 +4815,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'CheckBox',
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          checkboxNum: 2
+        },
+        options: {
+          choices: []
         },
         rules: {
           label: [{
@@ -4886,19 +4900,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'DatePicker',
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
           past_only: false,
           future_only: false,
           quick_menu: false,
@@ -4968,24 +4973,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'Dropdown',
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          dropdownNum: 2
+        },
+        options: {
+          choices: []
         },
         rules: {
           label: [{
@@ -5050,24 +5045,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'FileUpload',
         label: '',
         description: '',
-        reference: '',
         settings: {
-          required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          required: false
         },
         rules: {
           label: [{
@@ -5147,24 +5129,16 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'MatrixField',
         label: '',
         description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
           matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          matrix_choices: 5
+        },
+        options: {
+          choices: []
         },
         rules: {
           label: [{
@@ -5230,24 +5204,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'NumericField',
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          defaultNum: 0
         },
         rules: {
           label: [{
@@ -5311,24 +5272,14 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'RadioField',
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          radioNum: 2
+        },
+        options: {
+          choices: []
         },
         rules: {
           label: [{
@@ -5383,26 +5334,9 @@ __webpack_require__.r(__webpack_exports__);
   name: 'sectionDivider',
   data: function data() {
     return {
+      type: 'SectionDivider',
       fieldData: {
-        label: '',
-        description: '',
-        reference: '',
-        settings: {
-          required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
-        }
+        label: ''
       }
     };
   },
@@ -5470,24 +5404,12 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'TextBox',
         label: '',
-        description: '',
-        reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
           isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          max: 50
         },
         rules: {
           label: [{
@@ -5583,24 +5505,13 @@ __webpack_require__.r(__webpack_exports__);
     return {
       recordTypes: [],
       fieldData: {
+        type: 'TextField',
         label: '',
-        description: '',
         reference: '',
         settings: {
           required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
           isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          max: 50
         },
         rules: {
           label: [{
@@ -5674,24 +5585,10 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fieldData: {
+        type: 'TimePicker',
         label: '',
-        description: '',
-        reference: '',
         settings: {
-          required: false,
-          defaultNum: 0,
-          dropdownNum: 0,
-          radioNum: 2,
-          checkboxNum: 2,
-          matrix_questions: 2,
-          matrix_choices: 5,
-          isLimited: false,
-          max: 50,
-          past_only: false,
-          future_only: false,
-          quick_menu: false,
-          include_time: false,
-          date_range: false
+          required: false
         },
         rules: {
           label: [{
@@ -5790,7 +5687,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -5809,47 +5705,36 @@ __webpack_require__.r(__webpack_exports__);
       step: '1',
       selectedInput: {},
       inputs: [{
-        id: 0,
         name: 'Text Field',
         component: 'TextField'
       }, {
-        id: 1,
         name: 'Text Area',
         component: 'TextBox'
       }, {
-        id: 2,
         name: 'Numeric',
         component: 'NumericField'
       }, {
-        id: 3,
         name: 'Dropdown',
         component: 'Dropdown'
       }, {
-        id: 4,
         name: 'Radio',
         component: 'RadioField'
       }, {
-        id: 5,
         name: 'Checkbox',
         component: 'CheckBox'
       }, {
-        id: 6,
         name: 'Date Picker',
         component: 'DatePicker'
       }, {
-        id: 7,
         name: 'Time Picker',
         component: 'TimePicker'
       }, {
-        id: 8,
         name: 'Matrix',
         component: 'MatrixField'
       }, {
-        id: 9,
         name: 'File Upload',
         component: 'FileUpload'
       }, {
-        id: 10,
         name: 'Section Divider',
         component: 'SectionDivider'
       }],
@@ -5884,13 +5769,8 @@ __webpack_require__.r(__webpack_exports__);
       console.log(this.selectedInput.name);
       this.step = '2';
     },
-    setInputOptions: function setInputOptions(value) {
-      this.fieldData = value;
-      var data = {
-        input: _.clone(this.selectedInput),
-        fieldData: _.clone(this.fieldData)
-      };
-      this.$emit("add", data);
+    addField: function addField(field) {
+      this.$store.commit('ADD_FIELD', field);
       this.selectedInput = {};
       this.step = '1';
     },
@@ -6376,6 +6256,7 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
 /* harmony import */ var _FormBuilder_components_preview_timePicker_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/FormBuilder/components/preview/timePicker.vue */ "./resources/js/FormBuilder/components/preview/timePicker.vue");
 /* harmony import */ var _FormBuilder_components_preview_upload_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/preview/upload.vue */ "./resources/js/FormBuilder/components/preview/upload.vue");
 /* harmony import */ var _FormBuilder_components_preview_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/FormBuilder/components/preview/sectionDivider.vue */ "./resources/js/FormBuilder/components/preview/sectionDivider.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -6468,6 +6349,8 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
 
 
 
+
+ // import store from '@/FormBuilder/store/index.js'
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -6499,12 +6382,43 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
   },
   created: function created() {// this.getFormData();
   },
+  computed: {// state_fields: {
+    //     get() { return this.$store.state.fields },
+    //     set(formData) { this.$store.commit('SET_FIELDS', formData) }
+    // }
+  },
+  watch: {// formData: {
+    //     handler() {
+    //         this.state_fields = this.formData
+    //     },
+    //     deep: true
+    // }
+  },
   methods: {
     handleSelect: function handleSelect(key, keyPath) {
+      // placeholder
       console.log(key, keyPath);
     },
     buildForm: function buildForm() {
-      alert('One day, this form will persist to the database, thus the application, but alas, tis not this day.');
+      var _this = this;
+
+      this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'info'
+      }).then(function () {
+        _this.$message({
+          type: 'success',
+          message: 'Build Successful'
+        });
+
+        alert('One day, this form will persist to the database. but alas, tis not this day.');
+      })["catch"](function () {
+        _this.$message({
+          type: 'info',
+          message: "Keep doing what you're are doing"
+        });
+      });
     }
   }
 });
@@ -6555,8 +6469,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -6575,21 +6487,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    handleSelect: function handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    addField: function addField(field) {
-      // append to fields arrays
-      this.fields.push(field); // this.$store.dispatch('addField', field)
-    },
-    setOptions: function setOptions(options) {
-      this.inputOptions.push(options);
-      console.log(this.inputOptions.title); // this.$emit()
-    },
-    updateCanvas: function updateCanvas(data) {
-      this.canvasInput = data.input;
-      this.inputOptions = data.options;
-    },
     buildForm: function buildForm() {
       var _this = this;
 
@@ -6622,9 +6519,225 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/views/initialize.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder/views/initialize.vue: Unexpected token, expected \",\" (184:4)\n\n\u001b[0m \u001b[90m 182 | \u001b[39m    }\u001b[0m\n\u001b[0m \u001b[90m 183 | \u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 184 | \u001b[39m    methods\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 185 | \u001b[39m        close() {\u001b[0m\n\u001b[0m \u001b[90m 186 | \u001b[39m            \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39m$emit(\u001b[32m'update:active'\u001b[39m\u001b[33m,\u001b[39m \u001b[36mfalse\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 187 | \u001b[39m\u001b[0m\n    at Parser.raise (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:3851:17)\n    at Parser.unexpected (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5167:16)\n    at Parser.expect (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5153:28)\n    at Parser.parseObj (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:6637:14)\n    at Parser.parseExprAtom (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:6274:21)\n    at Parser.parseExprSubscripts (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5914:23)\n    at Parser.parseMaybeUnary (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5894:21)\n    at Parser.parseExprOps (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5781:23)\n    at Parser.parseMaybeConditional (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5754:23)\n    at Parser.parseMaybeAssign (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:5701:21)\n    at Parser.parseExportDefaultExpression (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:8470:24)\n    at Parser.parseExport (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:8365:31)\n    at Parser.parseStatementContent (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7395:27)\n    at Parser.parseStatement (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7291:17)\n    at Parser.parseBlockOrModuleBlockBody (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7868:25)\n    at Parser.parseBlockBody (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7855:10)\n    at Parser.parseTopLevel (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:7220:10)\n    at Parser.parse (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:8863:17)\n    at parse (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/parser/lib/index.js:11135:38)\n    at parser (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transformation/normalize-file.js:170:34)\n    at normalizeFile (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transformation/normalize-file.js:138:11)\n    at runSync (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transformation/index.js:44:43)\n    at runAsync (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transformation/index.js:35:14)\n    at process.nextTick (/mnt/c/Users/ruper/code/abcd/node_modules/@babel/core/lib/transform.js:34:34)\n    at _combinedTickCallback (internal/process/next_tick.js:131:7)\n    at process._tickCallback (internal/process/next_tick.js:180:9)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  inheritAttrs: false,
+  props: {
+    active: Boolean
+  },
+  data: function data() {
+    return {
+      request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"](),
+      formData: {
+        name: '',
+        description: '',
+        target: '',
+        type: ''
+      },
+      targetTypes: [],
+      types: []
+    };
+  },
+  computed: {},
+  methods: {
+    close: function close() {
+      this.$emit('update:active', false);
+      this.request.errors.clear();
+      this.formData = {
+        name: '',
+        description: '',
+        target: '',
+        type: ''
+      };
+    },
+    open: function open() {
+      this.load();
+    },
+    load: function load() {
+      var _this = this;
+
+      var request = new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
+      request.create().then(function (response) {
+        _this.targetTypes = response.data.target_types;
+        _this.types = response.data.types;
+      });
+    },
+    submit: function submit() {
+      var _this2 = this;
+
+      this.request = new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"](this.formData);
+      this.request.validate().then(function (response) {
+        _this2.$emit('save', response.data);
+
+        _this2.close();
+      })["catch"](function (error) {//
+      });
+    }
+  },
+  created: function created() {
+    this.load();
+  }
+});
 
 /***/ }),
 
@@ -87255,7 +87368,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "Textfield" } },
     [
       _c(
         "el-row",
@@ -87265,26 +87377,22 @@ var render = function() {
             { attrs: { span: 10 } },
             [
               _c(
-                "label",
-                { staticClass: "inputLabel" },
-                [
-                  _c(
-                    "editable-text",
-                    {
-                      staticClass: "tw-cursor-pointer mouseOver",
-                      on: { input: _vm.showField },
-                      model: {
-                        value: _vm.field.label,
-                        callback: function($$v) {
-                          _vm.$set(_vm.field, "label", $$v)
-                        },
-                        expression: "field.label"
-                      }
+                "editable-text",
+                {
+                  staticClass: "tw-cursor-pointer mouseOver",
+                  model: {
+                    value: _vm.fieldLabel,
+                    callback: function($$v) {
+                      _vm.fieldLabel = $$v
                     },
-                    [_vm._v(_vm._s(_vm.field.label))]
+                    expression: "fieldLabel"
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n              " + _vm._s(_vm.fieldLabel) + "\n          "
                   )
-                ],
-                1
+                ]
               ),
               _vm._v(" "),
               _vm.field.settings.isLimited
@@ -87455,7 +87563,6 @@ var render = function() {
                             "editable-text",
                             {
                               staticClass: "tw-cursor-pointer",
-                              on: { input: _vm.showField },
                               model: {
                                 value: _vm.title,
                                 callback: function($$v) {
@@ -87481,7 +87588,6 @@ var render = function() {
                             "editable-text",
                             {
                               staticClass: "tw-cursor-pointer",
-                              on: { input: _vm.showField },
                               model: {
                                 value: _vm.description,
                                 callback: function($$v) {
@@ -87615,71 +87721,64 @@ var render = function() {
                     {
                       staticClass: "dropArea",
                       model: {
-                        value: _vm.form,
+                        value: _vm.fields,
                         callback: function($$v) {
-                          _vm.form = $$v
+                          _vm.fields = $$v
                         },
-                        expression: "form"
+                        expression: "fields"
                       }
                     },
-                    _vm._l(_vm.formList, function(inputType, index) {
+                    _vm._l(_vm.fields, function(field, index) {
                       return _c(
-                        "div",
-                        { key: index },
+                        "el-row",
+                        { key: index, attrs: { type: "flex", gutter: 2 } },
                         [
                           _c(
-                            "el-row",
-                            { attrs: { type: "flex", gutter: 2 } },
+                            "el-col",
+                            { staticClass: "float-left", attrs: { span: 24 } },
                             [
                               _c(
-                                "el-col",
+                                "el-card",
                                 {
-                                  staticClass: "float-left",
-                                  attrs: { span: 24 }
+                                  staticClass: "cursor-move",
+                                  attrs: {
+                                    "body-style": "padding: 10px;",
+                                    shadow: "hover"
+                                  }
                                 },
                                 [
                                   _c(
-                                    "el-card",
+                                    field.type,
                                     {
-                                      staticClass: "cursor-move",
-                                      attrs: {
-                                        "body-style": "padding: 10px;",
-                                        shadow: "hover"
+                                      tag: "component",
+                                      attrs: { fieldData: field },
+                                      on: {
+                                        update: function($event) {
+                                          return _vm.updateField($event, index)
+                                        }
                                       }
                                     },
                                     [
                                       _c(
-                                        inputType.input.component,
+                                        "el-button",
                                         {
-                                          tag: "component",
+                                          staticClass:
+                                            "button-position tw-float-right hover:tw-text-red-600",
                                           attrs: {
-                                            fieldData: inputType.fieldData
+                                            type: "text",
+                                            icon: "el-icon-close"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.removeField(index)
+                                            }
                                           }
                                         },
                                         [
-                                          _c(
-                                            "el-button",
-                                            {
-                                              staticClass:
-                                                "button-position tw-float-right hover:tw-text-red-600",
-                                              attrs: {
-                                                type: "text",
-                                                icon: "el-icon-close"
-                                              },
-                                              on: {
-                                                click: function($event) {
-                                                  return _vm.removeItem(index)
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _vm._v(
-                                                "\n                                                Remove\n                                        "
-                                              )
-                                            ]
+                                          _vm._v(
+                                            "\n                                            Remove\n                                    "
                                           )
-                                        ],
-                                        1
+                                        ]
                                       )
                                     ],
                                     1
@@ -87694,7 +87793,7 @@ var render = function() {
                         1
                       )
                     }),
-                    0
+                    1
                   ),
                   _vm._v(" "),
                   _c("el-divider")
@@ -87779,11 +87878,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -87792,6 +87891,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { attrs: { label: "Number of Checkbox Selections" } },
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
@@ -87888,11 +87988,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -88084,6 +88184,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { attrs: { label: "Number of Menu Selections" } },
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 2, max: 10 },
@@ -88198,11 +88299,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -88306,11 +88407,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -88558,11 +88659,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -88571,6 +88672,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { attrs: { label: "Number of Radio Selections" } },
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
@@ -88735,11 +88837,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -88862,11 +88964,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -89071,11 +89173,11 @@ var render = function() {
                   "inactive-text": "Optional"
                 },
                 model: {
-                  value: _vm.fieldData.required,
+                  value: _vm.fieldData.settings.required,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "required", $$v)
+                    _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
-                  expression: "fieldData.required"
+                  expression: "fieldData.settings.required"
                 }
               })
             ],
@@ -89202,7 +89304,6 @@ var render = function() {
                 _c(_vm.selectedInput.component, {
                   tag: "component",
                   attrs: { inputData: _vm.selectedInput },
-                  on: { outputData: _vm.setInputOptions },
                   scopedSlots: _vm._u([
                     {
                       key: "default",
@@ -89215,7 +89316,7 @@ var render = function() {
                               attrs: { type: "success" },
                               on: {
                                 click: function($event) {
-                                  return _vm.setInputOptions(fieldData)
+                                  return _vm.addField(fieldData)
                                 }
                               }
                             },
@@ -90045,7 +90146,6 @@ var render = function() {
                     {
                       staticClass:
                         "tw-float-right tw-font-bold focus:font-extrabold",
-                      attrs: { index: "/forms" },
                       on: { click: _vm.buildForm }
                     },
                     [
@@ -90261,12 +90361,7 @@ var render = function() {
           _c(
             "el-card",
             { attrs: { id: "menu-container" } },
-            [
-              _c("form-menu", {
-                attrs: { id: "menu" },
-                on: { add: _vm.addField }
-              })
-            ],
+            [_c("form-menu", { attrs: { id: "menu" } })],
             1
           ),
           _vm._v(" "),
@@ -90286,8 +90381,7 @@ var render = function() {
                         "active-text-color": "#409EFF",
                         mode: "horizontal",
                         router: ""
-                      },
-                      on: { select: _vm.handleSelect }
+                      }
                     },
                     [
                       _c(
@@ -90316,7 +90410,7 @@ var render = function() {
                         {
                           staticClass:
                             "float-right tw-font-bold tw-focus:font-extrabold",
-                          attrs: { index: "/forms" },
+                          attrs: { index: "" },
                           on: { click: _vm.buildForm }
                         },
                         [_vm._v("Finish & Build!")]
@@ -90328,10 +90422,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("form-Canvas", {
-                attrs: { fields: _vm.fields, id: "canvas" },
-                on: { inputOptions: _vm.setOptions }
-              })
+              _c("form-Canvas", { attrs: { fields: _vm.fields, id: "canvas" } })
             ],
             1
           )
@@ -113176,7 +113267,6 @@ Vue.component('user-dropdown', __webpack_require__(/*! @/components/userDropdown
 
 
 Vue.use(_routes__WEBPACK_IMPORTED_MODULE_5__["VueRouter"]);
-Vue.config.productionTip = false;
 Vue.use(vuedraggable__WEBPACK_IMPORTED_MODULE_4___default.a);
 Vue.use(vuex__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var app = new Vue({
@@ -113356,8 +113446,6 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var _this = undefined;
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   SET_TITLE: function SET_TITLE(state, title) {
     state.title = title;
@@ -113371,8 +113459,17 @@ var _this = undefined;
   SET_TARGET: function SET_TARGET(state, target) {
     state.target = target;
   },
+  SET_FIELDS: function SET_FIELDS(state, fields) {
+    state.fields = fields;
+  },
   ADD_FIELD: function ADD_FIELD(state, field) {
-    state.form = _this.form.push(_this.field);
+    state.fields.push(field);
+  },
+  UPDATE_FIELD: function UPDATE_FIELD(state, payload) {
+    state.fields[payload.fieldIndex] = payload.field;
+  },
+  REMOVE_FIELD: function REMOVE_FIELD(state, fieldIndex) {
+    state.fields.splice(fieldIndex, 1);
   }
 });
 
@@ -113395,7 +113492,7 @@ __webpack_require__.r(__webpack_exports__);
     type: '',
     id: ''
   },
-  form: []
+  fields: []
 });
 
 /***/ }),
@@ -113407,7 +113504,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! exports provided: form, default */
 /***/ (function(module) {
 
-module.exports = {"form":{"title":"Test Form","description":"Intake form for Shakespeare Slam Poetry Club","target_type":"Client","target_id":"3","form_type":"pre/post","Name":"","team":[],"date":"","fields":[{"type":"Radio","label":"What is thy gender","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Male","value":1},{"id":1,"text":"Female","value":2},{"id":2,"text":"Non-Binary","value":3},{"id":3,"text":"Speaketh not of mine amorous rite","value":4}]}},{"type":"TextField","label":"Wherefore art thee hither ","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TextBox","label":"Pray pardon me thy expectation?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"NumericField","label":"What age is thee?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Dropdown","label":"Is this very much a useful field?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":1,"text":"Aye! We absolutely do","value":1},{"id":2,"text":"Nay! We doth not","value":2},{"id":3,"text":"Oft upon a yonder edge-case","value":3}]}},{"type":"SectionDivider","label":"Just Because","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Checkbox","label":"What notable characters art among thy highest in estimation","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Hamlet","value":1},{"id":1,"text":"Iago","value":2},{"id":2,"text":"Lady Macbeth","value":3},{"id":3,"text":"Mercutio","value":4},{"id":4,"text":"Macbeth","value":5},{"id":5,"text":"Ophelia","value":6},{"id":6,"text":"Othello","value":7},{"id":7,"text":"Viola","value":8},{"id":8,"text":"Benedick","value":9},{"id":9,"text":"Horatio","value":10}]}},{"type":"Datefield","label":"Shall I compare thee to a summer's day?","description":"Or mayhaps a winters eve?","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TimePicker","label":"The Time is nigh","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Matrix","label":"Satisfaction Survey","description":"An assessment of your overall life satisfaction","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[{"id":0,"text":"How for art thou satisfied"},{"id":1,"text":"From whence from thou art satisfied"},{"id":2,"text":"Doth satisfaction thous't cannot attain"}],"choices":[{"id":0,"text":"A pestilent gall to me ","value":1},{"id":1,"text":"Tis but a scratch","value":2},{"id":2,"text":"I doth not care","value":3},{"id":3,"text":"I feeleth well enow ","value":4},{"id":4,"text":"like a silver bow!","value":5}]}},{"type":"Upload","label":"Present your most eloquent self-portrait","description":"This shall be displayed upon thy Slam Poetry Roster card","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}}]}};
+module.exports = {"form":{"title":"Test Form","description":"Intake form for Shakespeare Slam Poetry Club","target_type":"Client","target_id":"3","form_type":"pre/post","Name":"","team":[],"date":"","fields":[{"name":"Radio","label":"What is thy gender","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Male","value":1},{"id":1,"text":"Female","value":2},{"id":2,"text":"Non-Binary","value":3},{"id":3,"text":"Speaketh not of mine amorous rite","value":4}]}},{"type":"TextField","label":"Wherefore art thee hither ","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TextBox","label":"Pray pardon me thy expectation?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"NumericField","label":"What age is thee?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Dropdown","label":"Is this very much a useful field?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":1,"text":"Aye! We absolutely do","value":1},{"id":2,"text":"Nay! We doth not","value":2},{"id":3,"text":"Oft upon a yonder edge-case","value":3}]}},{"type":"SectionDivider","label":"Just Because","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Checkbox","label":"What notable characters art among thy highest in estimation","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[{"id":0,"text":"Hamlet","value":1},{"id":1,"text":"Iago","value":2},{"id":2,"text":"Lady Macbeth","value":3},{"id":3,"text":"Mercutio","value":4},{"id":4,"text":"Macbeth","value":5},{"id":5,"text":"Ophelia","value":6},{"id":6,"text":"Othello","value":7},{"id":7,"text":"Viola","value":8},{"id":8,"text":"Benedick","value":9},{"id":9,"text":"Horatio","value":10}]}},{"type":"Datefield","label":"Shall I compare thee to a summer's day?","description":"Or mayhaps a winters eve?","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"TimePicker","label":"The Time is nigh","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}},{"type":"Matrix","label":"Satisfaction Survey","description":"An assessment of your overall life satisfaction","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[{"id":0,"text":"How for art thou satisfied"},{"id":1,"text":"From whence from thou art satisfied"},{"id":2,"text":"Doth satisfaction thous't cannot attain"}],"choices":[{"id":0,"text":"A pestilent gall to me ","value":1},{"id":1,"text":"Tis but a scratch","value":2},{"id":2,"text":"I doth not care","value":3},{"id":3,"text":"I feeleth well enow ","value":4},{"id":4,"text":"like a silver bow!","value":5}]}},{"type":"Upload","label":"Present your most eloquent self-portrait","description":"This shall be displayed upon thy Slam Poetry Roster card","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"options":{"questions":[],"choices":[]}}]}};
 
 /***/ }),
 
@@ -113589,14 +113686,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/FormBuilder/views/initialize.vue ***!
   \*******************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _initialize_vue_vue_type_template_id_055d3472___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./initialize.vue?vue&type=template&id=055d3472& */ "./resources/js/FormBuilder/views/initialize.vue?vue&type=template&id=055d3472&");
 /* harmony import */ var _initialize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./initialize.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/views/initialize.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _initialize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _initialize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -113626,7 +113724,7 @@ component.options.__file = "resources/js/FormBuilder/views/initialize.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/FormBuilder/views/initialize.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -113651,6 +113749,83 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_initialize_vue_vue_type_template_id_055d3472___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/api/FormRequest.js":
+/*!*****************************************!*\
+  !*** ./resources/js/api/FormRequest.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Form =
+/*#__PURE__*/
+function (_Request) {
+  _inherits(Form, _Request);
+
+  function Form() {
+    _classCallCheck(this, Form);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Form).apply(this, arguments));
+  }
+
+  _createClass(Form, [{
+    key: "retrieve",
+    value: function retrieve() {
+      return this.get("/api/forms");
+    }
+  }, {
+    key: "create",
+    value: function create() {
+      return this.get("/api/forms/create");
+    }
+  }, {
+    key: "validate",
+    value: function validate() {
+      return this.post("/api/forms/create");
+    } // store() {
+    // 	return this.post(`/api/programs/client-statuses`);
+    // }
+    // edit(status) {
+    // 	return this.get(`/api/programs/client-statuses/${status}/edit`);
+    // }
+    // update(status) {
+    // 	return this.patch(`/api/programs/client-statuses/${status}`);
+    // }
+    // destroy(status) {
+    // 	return this.delete(`/api/programs/client-statuses/${status}`);
+    // }
+
+  }]);
+
+  return Form;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Form);
 
 /***/ }),
 

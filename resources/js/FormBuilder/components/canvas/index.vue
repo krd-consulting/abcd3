@@ -7,14 +7,12 @@
                     <el-header class="tw-text-center tw-mb-12">
                         <h1 class="tw-text-4xl">
                             <editable-text class="tw-cursor-pointer" 
-                                @input="showField" 
                                 v-model="title">
                                     {{ title }}
                             </editable-text>
                         </h1>
 
-                        <editable-text v-if="description" class="tw-cursor-pointer" 
-                            @input="showField" 
+                        <editable-text v-if="description" class="tw-cursor-pointer"  
                             v-model="description">
                                 {{ description }}
                         </editable-text>
@@ -52,26 +50,28 @@
 
                 <el-divider content-position="left"><span>Your Content</span></el-divider>
 
-                    <draggable class="dropArea" v-model="form">
-                        <div v-for="(inputType, index) in formList" :key="index">
-                            <el-row type="flex" :gutter="2">
+                    <draggable 
+                        class="dropArea" 
+                        v-model="fields">
+                            <el-row v-for="(field, index) in fields" type="flex" :gutter="2" :key="index">
                             <el-col class="float-left" :span="24">
                                 <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
 
-                                    <component :is="inputType.input.component" 
-                                        :fieldData="inputType.fieldData">
-                                            <el-button type="text" 
-                                                @click="removeItem(index)" 
-                                                icon="el-icon-close" 
-                                                class="button-position tw-float-right hover:tw-text-red-600">
-                                                    Remove
-                                            </el-button>
-                                    </component>
+                                <component 
+                                    :is="field.type" 
+                                    :fieldData="field"
+                                    @update="updateField($event, index)">
+                                        <el-button type="text" 
+                                            @click="removeField(index)" 
+                                            icon="el-icon-close" 
+                                            class="button-position tw-float-right hover:tw-text-red-600">
+                                                Remove
+                                        </el-button>
+                                </component>
                                     
                                 </el-card>
                             </el-col>
                         </el-row>
-                    </div>
                 </draggable>
 
                 <el-divider></el-divider>
@@ -84,9 +84,11 @@
 
 <script>
 import draggable from 'vuedraggable'
-import SidePanel from '@/components/sidePanel.vue'
 import ClickOutside from 'vue-click-outside'
+import SidePanel from '@/components/sidePanel.vue'
 import EditableText from '@/components/editableText.vue'
+
+import Initialize from '@/FormBuilder/views/initialize'
 
 import TextField from '@/FormBuilder/components/canvas/fields/textField.vue'
 import TextBox from '@/FormBuilder/components/canvas/fields/textArea.vue'
@@ -100,15 +102,13 @@ import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
 import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
 
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
-
 export default {
     data: () => {
         return {
-            // title: 'Your Form Title',
-            // description: 'Subtext',
+            initialize: {
+                active: true
+            },
             target_type: 'Staff',
-            visible: false,
             name: '',
             dateCompleted: '',
             formList: [],
@@ -143,16 +143,14 @@ export default {
                 { value: 'Community Programs', label: 'Community Programs'}
             ],
             inputType: {},
-            inputFieldData: {},
         }
     },
     props: {
         newInput: Function,
-        fields: {
-            type: Array,
-            default: []
-        },
-        fieldData: Function
+        // fields: {
+        //     type: Array,
+        //     default: []
+        // },
     },
     components: {
         draggable,
@@ -179,13 +177,17 @@ export default {
             get() { return this.$store.state.description },
             set(description) { this.$store.commit('SET_DESCRIPTION', description) }
         },
-        form: {
-            get() { return this.$store.state.form },
-            set(input) { this.$store.dispatch('addField', input) }
-        }
+        fields: { 
+            get() {
+                return this.$store.state.fields
+            },
+            set(fields) {
+                this.$store.commit('SET_FIELDS', fields);
+            }
+        },
     },
     methods: {
-        removeItem(index) {
+        removeField(fieldIndex) {
             this.$confirm('are you sure you want to remove this field from your form?', 'Warning', {
                 confirmButtonText: 'Remove',
                 cancelButtonText: 'Nevermind',
@@ -195,7 +197,9 @@ export default {
                     type: 'success',
                     message: 'Field Successfully Removed'
                 })
-                this.fields.splice(index, 1);
+
+                this.$store.commit('REMOVE_FIELD', fieldIndex);
+
             }).catch(() => {
                 this.$message({
                     type: 'info',
@@ -203,18 +207,32 @@ export default {
                 })
             })
         },
-        showField(value){
-            return (this.value == '' || this.editField == value)
+
+        updateField(field, fieldIndex) {
+            this.$store.commit({
+                type: 'UPDATE_FIELD',
+                field,
+                fieldIndex
+            });
+
+            this.$forceUpdate();
         },
+
+        initializeForm(data) {
+            this.title = data.name;
+            this.description = data.description;
+            this.target = data.target;
+        }
+
     },
     watch: {
-        newInput() {
-            this.form.push(this.input.id)
-        },
-        fields() {
-            this.formList = _.clone(this.fields);
-            // this.inputFieldData = _.clone(this.fieldData)
-        }
+        // fields: { 
+        //     handler() {
+        //         this.$store.commit('SET_FIELDS', this.fields) 
+        //     },
+
+        //     deep: true
+        // }
     },
 
     created() {

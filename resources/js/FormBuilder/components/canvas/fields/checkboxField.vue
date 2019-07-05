@@ -52,7 +52,7 @@ export default {
             editField: '',
             checkList: [],
             nextItem: 0,
-            field: []
+            field: {}
         }
     },
     components: {
@@ -68,7 +68,7 @@ export default {
     created() {
         this.field = _.clone(this.fieldData)
     },
-    mounted: function() {
+    mounted() {
         this.setCheckboxItems(); // calls method upon being rendered in the DOM
     },
     methods: {
@@ -81,7 +81,7 @@ export default {
         loadItem: function() {
             this.checkList.push({
                 id: this.nextItem++, value: 'item ' + this.nextItem + ' '
-            })
+            })  
         },
         removeItem(item) {
             var index = this.checkList.indexOf(item);

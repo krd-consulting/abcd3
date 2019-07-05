@@ -37,10 +37,9 @@
               </template>
 
                 <component :is="selectedInput.component" 
-                    :inputData="selectedInput"
-                    @outputData="setInputOptions">
+                    :inputData="selectedInput">
                         <template v-slot:default="{ fieldData }">
-                            <el-button type="success" @click="setInputOptions(fieldData)">Set</el-button>
+                            <el-button type="success" @click="addField(fieldData)">Set</el-button>
                         </template>
                 </component>
 
@@ -72,17 +71,17 @@ export default {
             step: '1',
             selectedInput: {},
             inputs: [
-                {id: 0, name: 'Text Field', component: 'TextField'},
-                {id: 1, name: 'Text Area', component: 'TextBox'},
-                {id: 2, name: 'Numeric', component: 'NumericField'},
-                {id: 3, name: 'Dropdown', component: 'Dropdown'},
-                {id: 4, name: 'Radio', component: 'RadioField'},
-                {id: 5, name: 'Checkbox', component: 'CheckBox'},
-                {id: 6, name: 'Date Picker', component: 'DatePicker'},
-                {id: 7, name: 'Time Picker', component: 'TimePicker'},
-                {id: 8, name: 'Matrix', component: 'MatrixField'},
-                {id: 9, name: 'File Upload', component: 'FileUpload'},
-                {id: 10, name: 'Section Divider', component: 'SectionDivider'},
+                {name: 'Text Field', component: 'TextField'},
+                {name: 'Text Area', component: 'TextBox'},
+                {name: 'Numeric', component: 'NumericField'},
+                {name: 'Dropdown', component: 'Dropdown'},
+                {name: 'Radio', component: 'RadioField'},
+                {name: 'Checkbox', component: 'CheckBox'},
+                {name: 'Date Picker', component: 'DatePicker'},
+                {name: 'Time Picker', component: 'TimePicker'},
+                {name: 'Matrix', component: 'MatrixField'},
+                {name: 'File Upload', component: 'FileUpload'},
+                {name: 'Section Divider', component: 'SectionDivider'},
             ],
             // presetInputs: [],
             fieldData: {} //passed from InputOptions component
@@ -107,7 +106,6 @@ export default {
         Dropdown
     },
     computed: {
-        
     },
     methods: {
 
@@ -119,16 +117,9 @@ export default {
             this.step = '2';
         },
 
-        setInputOptions(value) {
+        addField(field) {
+            this.$store.commit('ADD_FIELD', field);
 
-            this.fieldData = value;
-
-            const data = {
-                input: _.clone(this.selectedInput),
-                fieldData: _.clone(this.fieldData)
-            };
-
-            this.$emit("add", data);
             this.selectedInput = {}
             this.step = '1';
         },

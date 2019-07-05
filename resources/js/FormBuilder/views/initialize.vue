@@ -179,7 +179,7 @@
 
         computed: {
             
-        }
+        },
 
         methods: {
             close() {

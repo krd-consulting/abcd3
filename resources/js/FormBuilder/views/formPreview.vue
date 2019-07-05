@@ -18,7 +18,7 @@
                             class="tw-font-bold focus:tw-font-extrabold">
                                 Preview Form
                         </el-menu-item>
-                        <el-menu-item index="/forms" 
+                        <el-menu-item
                             class="tw-float-right tw-font-bold focus:font-extrabold" 
                             @click="buildForm">
                                 Finish and Build!
@@ -94,6 +94,9 @@ import TimePicker from '@/FormBuilder/components/preview/timePicker.vue'
 import Upload from '@/FormBuilder/components/preview/upload.vue'
 import SectionDivider from '@/FormBuilder/components/preview/sectionDivider.vue'
 
+// import store from '@/FormBuilder/store/index.js'
+import { mapState } from 'vuex'
+
 
 export default {
     data: () => {
@@ -125,13 +128,45 @@ export default {
     created() {
         // this.getFormData();
     },
+    computed: {
+        // state_fields: {
+        //     get() { return this.$store.state.fields },
+        //     set(formData) { this.$store.commit('SET_FIELDS', formData) }
+        // }
+    },
+    watch: {
+        // formData: {
+        //     handler() {
+        //         this.state_fields = this.formData
+        //     },
+        //     deep: true
+        // }
+    },
     methods: {
-        handleSelect(key, keyPath) {
+        handleSelect(key, keyPath) { // placeholder
             console.log(key, keyPath);
         },
         buildForm() {
-            alert('One day, this form will persist to the database, thus the application, but alas, tis not this day.')
-        }
+            this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                type: 'info'
+            }).then(() => {
+                this.$message({
+                    type: 'success',
+                    message: 'Build Successful'
+                });
+                alert('One day, this form will persist to the database. but alas, tis not this day.')
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: "Keep doing what you're are doing"
+                });          
+            });
+        },
+        // getFormData() {
+        //     return this.$store.state.fields
+        // }
     }
 }
 </script>
