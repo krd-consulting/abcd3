@@ -6678,7 +6678,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   inheritAttrs: false,
@@ -6692,13 +6691,31 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         description: '',
         target: '',
-        type: ''
+        type: '',
+        scope: ''
       },
       targetTypes: [],
-      types: []
+      types: [],
+      scopes: []
     };
   },
-  computed: {},
+  computed: {
+    formattedScopes: function formattedScopes() {
+      var labels = {
+        universal: 'Everyone',
+        team: 'Users in your team',
+        program: 'Users in your program',
+        self: 'Just me'
+      };
+
+      var scopes = _.clone(this.scopes);
+
+      return scopes.map(function (scope) {
+        scope.label = labels[scope.name];
+        return scope;
+      });
+    }
+  },
   methods: {
     close: function close() {
       this.$emit('update:active', false);
@@ -6707,7 +6724,8 @@ __webpack_require__.r(__webpack_exports__);
         name: '',
         description: '',
         target: '',
-        type: ''
+        type: '',
+        scope: ''
       };
     },
     open: function open() {
@@ -6720,6 +6738,7 @@ __webpack_require__.r(__webpack_exports__);
       request.create().then(function (response) {
         _this.targetTypes = response.data.target_types;
         _this.types = response.data.types;
+        _this.scopes = response.data.scopes;
       });
     },
     submit: function submit() {
@@ -90735,32 +90754,34 @@ var render = function() {
                 _c(
                   "base-select",
                   {
-                    attrs: { name: "target", placeholder: "Select Resource" },
+                    attrs: {
+                      name: "target",
+                      placeholder: "Choose who can see this form."
+                    },
                     on: {
                       change: function($event) {
-                        _vm.request.errors.clear("target.type")
-                        _vm.request.errors.clear("target.type_id")
+                        return _vm.request.errors.clear("scope")
                       }
                     },
                     model: {
-                      value: _vm.formData.target,
+                      value: _vm.formData.scope,
                       callback: function($$v) {
-                        _vm.$set(_vm.formData, "target", $$v)
+                        _vm.$set(_vm.formData, "scope", $$v)
                       },
-                      expression: "formData.target"
+                      expression: "formData.scope"
                     }
                   },
-                  _vm._l(_vm.targetTypes, function(type, index) {
+                  _vm._l(_vm.formattedScopes, function(scope, index) {
                     return _c(
                       "el-option",
                       {
                         key: index,
-                        attrs: { label: type.name, value: type.target }
+                        attrs: { label: scope.label, value: scope.id }
                       },
                       [
                         _vm._v(
                           "\n                            " +
-                            _vm._s(type.name) +
+                            _vm._s(scope.label) +
                             "\n                        "
                         )
                       ]
@@ -90773,15 +90794,13 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm.request.errors.has("target.type")
+          _vm.request.errors.has("scope")
             ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
                 _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
                   _c("span", {
                     staticClass: "tw-text-xs tw-text-red-500",
                     domProps: {
-                      textContent: _vm._s(
-                        _vm.request.errors.get("target.type")[0]
-                      )
+                      textContent: _vm._s(_vm.request.errors.get("scope")[0])
                     }
                   })
                 ])

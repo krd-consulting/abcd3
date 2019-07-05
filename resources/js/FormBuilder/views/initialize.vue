@@ -114,24 +114,23 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="formData.target"
+                            v-model="formData.scope"
                             name="target"
-                            placeholder="Select Resource"
-                            @change="request.errors.clear('target.type');
-                                request.errors.clear('target.type_id')">
+                            placeholder="Choose who can see this form."
+                            @change="request.errors.clear('scope');">
                             <el-option
-                                v-for="(type, index) in targetTypes"
+                                v-for="(scope, index) in formattedScopes"
                                 :key="index"
-                                :label="type.name"
-                                :value="type.target">
-                                {{ type.name }}
+                                :label="scope.label"
+                                :value="scope.id">
+                                {{ scope.label }}
                             </el-option>
                         </base-select>
                     </div>
                 </div>
-                <div v-if="request.errors.has('target.type')" class="tw-flex tw-justify-end">
+                <div v-if="request.errors.has('scope')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('target.type')[0]" class="tw-text-xs tw-text-red-500"></span>
+                        <span v-text="request.errors.get('scope')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
                 <div v-if="request.errors.has('target.type_id')" class="tw-flex tw-justify-end">
@@ -170,15 +169,32 @@
                     name: '',
                     description: '',
                     target: '',
-                    type: ''
+                    type: '',
+                    scope: ''
                 },
                 targetTypes: [],
-                types: []
+                types: [],
+                scopes: []
             }
         },
 
         computed: {
-            
+            formattedScopes() {
+                const labels  = {
+                    universal : 'Everyone',
+                    team: 'Users in your team',
+                    program: 'Users in your program',
+                    self: 'Just me'
+                };
+
+                const scopes = _.clone(this.scopes);
+
+                return scopes.map((scope) => {
+                    scope.label = labels[scope.name];
+
+                    return scope;
+                });
+            }
         },
 
         methods: {
@@ -191,7 +207,8 @@
                     name: '',
                     description: '',
                     target: '',
-                    type: ''
+                    type: '',
+                    scope: ''
                 };
             },
 
@@ -205,6 +222,7 @@
                 request.create().then((response) => {
                     this.targetTypes = response.data.target_types;
                     this.types = response.data.types;
+                    this.scopes = response.data.scopes;
                 });
             },
 

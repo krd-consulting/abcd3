@@ -71,7 +71,7 @@ class FormController extends Controller
             'data' => [
                 'target_types' => $targetTypes,
                 'types' => config('app.form_types'),
-                'scopes' => Scope::all()
+                'scopes' => Scope::where('name', '!=', config('auth.scopes.case-load.name'))->get()
             ]
         ];
     }
