@@ -3604,10 +3604,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      itemText: '',
-      value: '',
-      editField: '',
-      // checkList: [],
       nextItem: 0
     };
   },
@@ -3629,7 +3625,6 @@ __webpack_require__.r(__webpack_exports__);
         return this.fieldData;
       },
       set: function set(field) {
-        console.log('field edited');
         this.$emit('update', field);
       }
     },
@@ -3638,31 +3633,52 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.label;
       },
       set: function set(label) {
-        console.log('field label edited');
-
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.label = label;
         this.field = fieldCopy;
       }
     },
-    // itemText: {
-    //     get(){ return this.fieldData.choices.value},
-    //     set(value){
-    //         console.log('choices updated');
-    //         const fieldCopy = _.clone(this.field);
-    //         fieldCopy.choices.value = value;
-    //         this.field = fieldCopy;
-    //     }
-    // },
-    checkList: {
+    choices: {
       get: function get() {
         return this.field.choices;
       },
-      set: function set(field) {
-        this.$emit('update', field);
+      set: function set(choices) {
+        // console.log('choices updated');
+        // this.$emit('update', field)
+        var fieldValue = _.clone(this.field.choices);
+
+        fieldValue.choices = choices;
+        this.field.choices = fieldValue;
       }
-    }
+    },
+    itemText: {
+      get: function get() {
+        return this.field.choices.value;
+      },
+      set: function set(value) {
+        var fieldValue = _.clone(this.field);
+
+        fieldValue.choices.value = value;
+        this.field = fieldValue;
+      }
+    },
+    value: {
+      get: function get() {
+        return this.field.choices.value;
+      },
+      set: function set(value) {
+        var fieldValue = _.clone(this.field);
+
+        fieldValue.choices.value = value;
+        this.field = fieldValue;
+        this.$emit('updateChoices', field);
+      }
+    } // updateItem(){
+    //     this.choices.value = value;
+    //     this.$store.commit('UPDATE_FIELD_CHOICES', this.field.choices)
+    // },
+
   },
   methods: {
     setCheckboxItems: function setCheckboxItems() {
@@ -3673,24 +3689,24 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     loadItem: function loadItem() {
-      this.checkList.push({
+      this.choices.push({
         id: this.nextItem++,
-        value: 'item ' + this.nextItem + ' '
+        value: 'item ' + this.nextItem
       });
-      this.$store.commit('UPDATE_FIELD', field);
+      this.$store.commit('UPDATE_FIELD', this.field);
     },
     addItem: function addItem() {
-      this.checkList.push({
+      this.choices.push({
         id: this.nextItem++,
         value: this.itemText
       });
       this.itemText = '';
     },
     removeItem: function removeItem(item) {
-      var index = this.checkList.indexOf(item);
+      var index = this.choices.indexOf(item);
 
       if (index !== -1) {
-        this.checkList.splice(index, 1);
+        this.choices.splice(index, 1);
       }
     }
   }
@@ -3912,15 +3928,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      itemText: '',
-      dropItem: '',
-      editField: '',
-      dropdownList: [],
+      // itemText: '',
+      // dropItem: '',
+      // editField: '',
+      // // choices: [],
       nextItem: 0
     };
   },
@@ -3937,40 +3952,64 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    field: {
+      get: function get() {
+        return this.fieldData;
+      },
+      set: function set(field) {
+        this.$emit('update', field);
+      }
+    },
     fieldLabel: {
       get: function get() {
         return this.field.label;
       },
       set: function set(label) {
-        console.log('field label edited');
-
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.label = label;
         this.field = fieldCopy;
       }
     },
-    dropItem: {
+    choices: {
       get: function get() {
         return this.field.choices;
       },
-      set: function set(field) {
-        this.$emit('update', field);
+      set: function set(choices) {
+        // console.log('choices updated');
+        // this.$emit('update', field)
+        var fieldValue = _.clone(this.field.choices);
+
+        fieldValue.value = value;
+        this.field.choices = fieldValue;
       }
     },
-    field: {
+    itemText: {
       get: function get() {
-        return this.fieldData;
+        return this.field.choices.value;
       },
-      set: function set(field) {
-        console.log('field edited');
-        this.$emit('update', field);
+      set: function set(value) {
+        var fieldValue = _.clone(this.field);
+
+        fieldValue.choices.value = value;
+        this.field = fieldValue;
+      }
+    },
+    dropItem: {
+      get: function get() {
+        return this.field.choices.value;
+      },
+      set: function set(value) {
+        var fieldValue = _.clone(this.field);
+
+        fieldValue.choices.value = value;
+        this.field = fieldValue;
       }
     }
   },
   methods: {
     addItem: function addItem() {
-      this.dropdownList.push({
+      this.choices.push({
         id: this.nextItem++,
         value: this.itemText
       });
@@ -3978,17 +4017,16 @@ __webpack_require__.r(__webpack_exports__);
     },
     loadItem: function loadItem() {
       this.field.choices.push({
-        text: this.itemText,
-        value: this.nextItem++
-      }); // this.dropdownList.push({
-      //     id: this.nextItem++, value: 'item ' + this.nextItem
-      // })
+        id: this.nextItem++,
+        value: 'item ' + this.nextItem
+      });
+      this.$store.commit('UPDATE_FIELD', this.field);
     },
     removeItem: function removeItem(item) {
-      var index = this.dropdownList.indexOf(item);
+      var index = this.choices.indexOf(item);
 
       if (index !== -1) {
-        this.dropdownList.splice(index, 1);
+        this.choices.splice(index, 1);
       }
     },
     setDropdownItems: function setDropdownItems() {
@@ -4844,6 +4882,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4989,6 +5028,14 @@ __webpack_require__.r(__webpack_exports__);
     updateField: function updateField(field, fieldIndex) {
       this.$store.commit({
         type: 'UPDATE_FIELD',
+        field: field,
+        fieldIndex: fieldIndex
+      });
+      this.$forceUpdate();
+    },
+    updateFieldChoices: function updateFieldChoices(field, fieldIndex) {
+      this.$store.commit({
+        type: 'UPDATE_FIELD_CHOICES',
         field: field,
         fieldIndex: fieldIndex
       });
@@ -86447,18 +86494,18 @@ var render = function() {
       _c(
         "el-checkbox-group",
         { attrs: { id: "check" } },
-        _vm._l(_vm.checkList, function(item) {
+        _vm._l(_vm.choices, function(item) {
           return _c(
             "el-checkbox",
             {
               key: item.value,
               attrs: { label: item.value },
               model: {
-                value: item.value,
+                value: _vm.value,
                 callback: function($$v) {
-                  _vm.$set(item, "value", $$v)
+                  _vm.value = $$v
                 },
-                expression: "item.value"
+                expression: "value"
               }
             },
             [
@@ -86702,7 +86749,7 @@ var render = function() {
             expression: "dropItem"
           }
         },
-        _vm._l(_vm.dropdownList, function(item) {
+        _vm._l(_vm.choices, function(item) {
           return _c("el-option", {
             key: item.id,
             attrs: { label: item.value, value: item.value }
@@ -87958,6 +88005,12 @@ var render = function() {
                                       on: {
                                         update: function($event) {
                                           return _vm.updateField($event, index)
+                                        },
+                                        updateChoices: function($event) {
+                                          return _vm.updateFieldChoices(
+                                            $event,
+                                            index
+                                          )
                                         }
                                       }
                                     },
@@ -88391,7 +88444,6 @@ var render = function() {
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 2, max: 10 },
-                on: { change: _vm.handleChange },
                 model: {
                   value: _vm.fieldData.settings.dropdownNum,
                   callback: function($$v) {
@@ -113586,6 +113638,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   UPDATE_FIELD: function UPDATE_FIELD(state, payload) {
     state.fields[payload.fieldIndex] = payload.field;
+  },
+  // not being referenced
+  UPDATE_FIELD_CHOICES: function UPDATE_FIELD_CHOICES(state, payload) {
+    state.fields[payload.fieldIndex].choices = payload.field.choices;
   },
   REMOVE_FIELD: function REMOVE_FIELD(state, fieldIndex) {
     state.fields.splice(fieldIndex, 1);

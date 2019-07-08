@@ -24,6 +24,11 @@ export default {
         state.fields[payload.fieldIndex] = payload.field;
     },
 
+    // not being referenced
+    UPDATE_FIELD_CHOICES :  (state, payload) => {
+        state.fields[payload.fieldIndex].choices = payload.field.choices;
+    },
+
     REMOVE_FIELD : (state, fieldIndex) => {
         state.fields.splice(fieldIndex, 1);
     }

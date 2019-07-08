@@ -11,7 +11,7 @@
             </el-form-item>
             
             <el-form-item label="Number of Menu Selections">
-                <el-input-number v-model="fieldData.settings.dropdownNum" controls-position="right" @change="handleChange" :min="2" :max="10"></el-input-number>
+                <el-input-number v-model="fieldData.settings.dropdownNum" controls-position="right" :min="2" :max="10"></el-input-number>
             </el-form-item>
 
             <el-form-item>

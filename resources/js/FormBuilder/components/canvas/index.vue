@@ -60,7 +60,8 @@
                                 <component 
                                     :is="field.type" 
                                     :fieldData="field"
-                                    @update="updateField($event, index)">
+                                    @update="updateField($event, index)"
+                                    @updateChoices="updateFieldChoices($event, index)">
                                         <el-button type="text" 
                                             @click="removeField(index)" 
                                             icon="el-icon-close" 
@@ -182,12 +183,8 @@ export default {
             set(description) { this.$store.commit('SET_DESCRIPTION', description) }
         },
         fields: { 
-            get() {
-                return this.$store.state.fields
-            },
-            set(fields) {
-                this.$store.commit('SET_FIELDS', fields);
-            }
+            get() { return this.$store.state.fields },
+            set(fields) { this.$store.commit('SET_FIELDS', fields); }
         },
     },
     methods: {
@@ -215,6 +212,16 @@ export default {
         updateField(field, fieldIndex) {
             this.$store.commit({
                 type: 'UPDATE_FIELD',
+                field,
+                fieldIndex
+            });
+
+            this.$forceUpdate();
+        },
+
+        updateFieldChoices(field, fieldIndex) {
+            this.$store.commit({
+                type: 'UPDATE_FIELD_CHOICES',
                 field,
                 fieldIndex
             });

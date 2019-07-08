@@ -8,8 +8,8 @@
 
         <el-checkbox-group id="check" >
             <el-checkbox 
-                v-model="item.value" 
-                v-for="item in checkList" 
+                v-model="value" 
+                v-for="item in choices" 
                 :key="item.value" 
                 :label="item.value">
                     <editable-text 
@@ -47,10 +47,6 @@ import EditableText from '@/components/editableText.vue'
 export default {
     data() {
         return {
-            itemText: '',
-            value: '',
-            editField: '',
-            // checkList: [],
             nextItem: 0,
         }
     },
@@ -63,47 +59,61 @@ export default {
     props: {
         fieldData: {
             type: Array | Object,
-            default: {
-            }
+            default: {}
         }
     },
     computed: {
 
         field: {
             get() { return this.fieldData; },
-            set(field) { 
-                console.log('field edited');
-                this.$emit('update', field); 
-            }
+            set(field) { this.$emit('update', field); }
         },
 
         fieldLabel: {
             get() { return this.field.label; },
-            set(label) { 
-                console.log('field label edited');
-
+            set(label) {
                 const fieldCopy = _.clone(this.field);
-
                 fieldCopy.label = label;
-
                 this.field = fieldCopy;
             }
         },
 
-        // itemText: {
-        //     get(){ return this.fieldData.choices.value},
-        //     set(value){
-        //         console.log('choices updated');
-        //         const fieldCopy = _.clone(this.field);
-        //         fieldCopy.choices.value = value;
-        //         this.field = fieldCopy;
-        //     }
+        choices: {
+            get() { return this.field.choices},
+            set(choices) { 
+                // console.log('choices updated');
+                // this.$emit('update', field)
+
+                const fieldValue = _.clone(this.field.choices);
+                fieldValue.choices = choices;
+                this.field.choices = fieldValue;
+            }
+        },
+
+        itemText: {
+            get(){ return this.field.choices.value},
+            set(value){
+                const fieldValue = _.clone(this.field);
+                fieldValue.choices.value = value;
+                this.field = fieldValue;
+            }
+        },
+
+        value: {
+            get(){ return this.field.choices.value},
+            set(value){
+                const fieldValue = _.clone(this.field);
+                fieldValue.choices.value = value;
+                this.field = fieldValue;
+                this.$emit('updateChoices', field);
+            }
+        },
+
+        // updateItem(){
+        //     this.choices.value = value;
+        //     this.$store.commit('UPDATE_FIELD_CHOICES', this.field.choices)
         // },
 
-        checkList: {
-            get() { return this.field.choices},
-            set(field) { this.$emit('update', field)}
-        }
     },
     methods: {
         setCheckboxItems() {
@@ -113,24 +123,25 @@ export default {
             }
         },
 
-        loadItem: function() {
-            this.checkList.push({
-                id: this.nextItem++, value: 'item ' + this.nextItem + ' '
+        loadItem() {
+            this.choices.push({
+                id: this.nextItem++, value: 'item ' + this.nextItem
             })
-            this.$store.commit('UPDATE_FIELD', field)
+            this.$store.commit('UPDATE_FIELD', this.field)
+            
         },
 
-        addItem: function() {
-            this.checkList.push({
+        addItem() {
+            this.choices.push({
                 id: this.nextItem++, value: this.itemText
             })
             this.itemText = ''
         },
         
         removeItem(item) {
-            var index = this.checkList.indexOf(item);
+            var index = this.choices.indexOf(item);
             if (index !== -1) {
-                this.checkList.splice(index, 1);
+                this.choices.splice(index, 1);
             }
         },
         

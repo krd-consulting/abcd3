@@ -6,13 +6,12 @@
             </editable-text>
         </label>
         <el-select id="dropdown" v-model="dropItem" placeholder="select">
-            <el-option v-for="item in dropdownList" :key="item.id" :label="item.value" :value="item.value"></el-option>
+            <el-option v-for="item in choices" :key="item.id" :label="item.value" :value="item.value"></el-option>
         </el-select>
         <div class="tw-float-right">
             <editable-text class="tw-cursor-pointer mouseOver" v-model="dropItem">
                 {{ dropItem }}
             </editable-text>
-            <!-- <editable-text class="tw-cursor-pointer mouseOver" v-model="dropItem">{{ dropItem.value }}</editable-text> -->
             <el-button v-if="dropItem != ''" class="float-right pr-15" type="text" size="mini" @click="removeItem(value)">Remove Item</el-button>
         </div>
         
@@ -35,10 +34,10 @@ import EditableText from '@/components/editableText.vue'
 export default {
     data() {
         return {
-            itemText: '',
-            dropItem: '',
-            editField: '',
-            dropdownList: [],
+            // itemText: '',
+            // dropItem: '',
+            // editField: '',
+            // // choices: [],
             nextItem: 0,
         }
     },
@@ -55,53 +54,68 @@ export default {
         }
     },
     computed: {
+        field: {
+            get() { return this.fieldData; },
+            set(field) { this.$emit('update', field); }
+        },
+
         fieldLabel: {
             get() { return this.field.label; },
-            set(label) { 
-                console.log('field label edited');
-
+            set(label) {
                 const fieldCopy = _.clone(this.field);
-
                 fieldCopy.label = label;
-
                 this.field = fieldCopy;
             }
         },
 
-        dropItem: {
-            get() {return this.field.choices},
-            set(field) {
-                this.$emit('update', field);
+        choices: {
+            get() { return this.field.choices},
+            set(choices) { 
+                // console.log('choices updated');
+                // this.$emit('update', field)
+
+                const fieldValue = _.clone(this.field.choices);
+                fieldValue.value = value;
+                this.field.choices = fieldValue;
             }
         },
 
-        field: {
-            get() { return this.fieldData; },
-            set(field) { 
-                console.log('field edited');
-                this.$emit('update', field); 
+        itemText: {
+            get(){ return this.field.choices.value},
+            set(value){
+                const fieldValue = _.clone(this.field);
+                fieldValue.choices.value = value;
+                this.field = fieldValue;
+            }
+        },
+
+        dropItem: {
+            get(){ return this.field.choices.value},
+            set(value){
+
+                const fieldValue = _.clone(this.field);
+                fieldValue.choices.value = value;
+                this.field = fieldValue;
             }
         },
     },
     methods: {
-        addItem: function() {
-            this.dropdownList.push({
+        addItem() {
+            this.choices.push({
                 id: this.nextItem++, value: this.itemText
             })
             this.itemText = ''
         },
         loadItem() {
             this.field.choices.push({
-                text: this.itemText, value: this.nextItem++
+                 id: this.nextItem++, value: 'item ' + this.nextItem
             })
-            // this.dropdownList.push({
-            //     id: this.nextItem++, value: 'item ' + this.nextItem
-            // })
+            this.$store.commit('UPDATE_FIELD', this.field)
         },
         removeItem(item) {
-            var index = this.dropdownList.indexOf(item);
+            var index = this.choices.indexOf(item);
             if (index !== -1) {
-                this.dropdownList.splice(index, 1);
+                this.choices.splice(index, 1);
             }
         },
         setDropdownItems() {
