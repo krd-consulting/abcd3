@@ -60,8 +60,7 @@
                                 <component 
                                     :is="field.type" 
                                     :fieldData="field"
-                                    @update="updateField($event, index)"
-                                    @updateChoices="updateFieldChoices($event, index)">
+                                    @update="updateField($event, index)">
                                         <el-button type="text" 
                                             @click="removeField(index)" 
                                             icon="el-icon-close" 

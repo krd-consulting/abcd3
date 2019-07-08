@@ -9,12 +9,13 @@
         <el-checkbox-group id="check" >
             <el-checkbox 
                 v-model="value" 
-                v-for="item in choices" 
+                v-for="(item, index) in choices" 
                 :key="item.value" 
                 :label="item.value">
                     <editable-text 
                         class="tw-cursor-pointer mouseOver"
-                        v-model="item.value">
+                        v-model="item.value"
+                        @input="updateChoiceValue($event, index)">
                             {{ item.value }}
                     </editable-text>
                     <el-button 
@@ -31,7 +32,7 @@
             <el-row>
                 <el-col :span="12">
                     <label for="newItem">Add Item <el-button class="tw-ml-2" type="text" @click="addItem">Add</el-button></label>
-                    <el-input id="newItem" v-model="itemText"></el-input>  
+                    <el-input id="newItem" v-model="newItemText"></el-input>  
                 </el-col>
             </el-row>
         </form>
@@ -48,6 +49,7 @@ export default {
     data() {
         return {
             nextItem: 0,
+            newItemText: ''
         }
     },
     mounted() {
@@ -81,21 +83,9 @@ export default {
         choices: {
             get() { return this.field.choices},
             set(choices) { 
-                // console.log('choices updated');
-                // this.$emit('update', field)
-
-                const fieldValue = _.clone(this.field.choices);
-                fieldValue.choices = choices;
-                this.field.choices = fieldValue;
-            }
-        },
-
-        itemText: {
-            get(){ return this.field.choices.value},
-            set(value){
-                const fieldValue = _.clone(this.field);
-                fieldValue.choices.value = value;
-                this.field = fieldValue;
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.choices = choices;
+                this.field = fieldCopy;
             }
         },
 
@@ -132,10 +122,15 @@ export default {
         },
 
         addItem() {
-            this.choices.push({
-                id: this.nextItem++, value: this.itemText
-            })
-            this.itemText = ''
+            const choicesCopy = _.clone(this.choices);
+
+            choicesCopy.push({
+                id: this.nextItem++, value: this.newItemText
+            });
+
+            this.choices = choicesCopy;
+
+            this.newItemText = ''
         },
         
         removeItem(item) {
@@ -144,6 +139,13 @@ export default {
                 this.choices.splice(index, 1);
             }
         },
+
+        updateChoiceValue(value, index)
+        {
+            const fieldCopy = _.clone(this.field);
+            fieldCopy.choices[index].value = value;
+            this.choices = fieldCopy.choices;
+        }
         
     }
 }
