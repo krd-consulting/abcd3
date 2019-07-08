@@ -19,13 +19,15 @@ class CreateFormFieldsTable extends Migration
             $table->text('label')->nullable();
             $table->text('description')->nullable();
             $table->string('type', 10);
-            $table->integer('target_type_id')->unsigned();
+            $table->bigInteger('target_type_id')->unsigned();
             $table->integer('target_id')->unsigned()->nullable();
             $table->json('options');
             $table->json('settings');
             $table->json('validation_rules');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('target_type_id')->references('id')->on('form_target_types');
         });
     }
 
@@ -36,6 +38,8 @@ class CreateFormFieldsTable extends Migration
      */
     public function down()
     {
+        $table->dropForeign(['target_type_id']);
+
         Schema::dropIfExists('form_fields');
     }
 }

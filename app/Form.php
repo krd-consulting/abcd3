@@ -16,41 +16,37 @@ class Form extends Model
     	return $this->belongsTo($this->target_type->model);
     }
 
+    public function teams()
+    {
+        return $this->belongsToMany('App\Team')
+            ->withTimestamps();
+    }
+
+    public function programs()
+    {
+        return $this->belongsToMany('App\Program')
+            ->withTimestamps();
+    }
+
     public function groups()
     {
         return $this->belongsToMany('App\Group')
             ->withTimestamps();
     }
 
-    public function programs()
-    {
-        return $this->belongsToMany('App\Programs')
-            ->withTimestamps();
-    }
-
     public function scopeAvailableFor($query, $user) {
-        return $query;
+        $universal = $query;
+        $teams = (clone $query)->inTeams($user->teams);
+        $programs = (clone $query)->inPrograms($user->programs);
+        $groups = (clone $query)->inGroups($user->groups);
+        $self = (clone $query)->inSelf($user);
 
-        $scope = $user->scope;
-
-        switch($scope) {
-            case 'universal':
-                return $query;
-
-            case 'team':
-                $teams = $user->teams;
-                return $query->inTeams($teams);
-
-            case 'program':
-                $programs = $user->programs;
-                return $query->inPrograms($programs);
-
-            case 'case load':
-                return $query->inCaseloadOrSelf($user);
-
-            case 'self':
-                return $user->forms;
-        }
+        return 
+            $universal
+                ->union($teams);
+                // ->union($programs)
+                // ->union($groups)
+                // ->union($self);
     }
 
     public function scopeInPrograms($query, $programs)
@@ -67,26 +63,23 @@ class Form extends Model
                 });
     }
 
-    public function scopeInCaseloadOrSelf($query, $user)
+    public function scopeInSelf($query, $user)
     {
         return $query
                 ->select(
-                    'records.id',
+                    'forms.id',
                     'field_1_value',
                     'field_2_value',
                     'field_3_value',
                     'record_type_id',
-                    'records.created_at',
-                    'records.updated_at'
+                    'forms.created_at',
+                    'forms.updated_at'
                 )
-                ->leftJoin('group_record as load_group', 'records.id', 'load_group.record_id')
-                ->leftJoin('cases', 'records.id', '=', 'cases.record_id')
+                ->leftJoin('cases', 'forms.id', '=', 'cases.record_id')
                 ->where(function ($query) use ($user) {
-                    $query->whereColumn('records.id', 'cases.record_id')
-                        ->whereIn('owner_id', $user->records()->pluck('id'));
-                })->orWhere(function ($query) use ($user) {
-                    $query->whereIn('load_group.group_id', $user->groups()->pluck('groups.id'));
-                })->orWhereIn('records.id', $user->records()->pluck('id'));
+                    $query->whereColumn('forms.id', 'cases.record_id')
+                        ->whereIn('owner_id', $user->forms()->pluck('id'));
+                })->orWhereIn('forms.id', $user->forms()->pluck('id'));
     }
 
     public function scopeSort($query, $column, $ascending)
