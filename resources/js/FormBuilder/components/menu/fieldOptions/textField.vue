@@ -69,6 +69,7 @@ export default {
 
             fieldData: {
                 type: 'TextField',
+                name: 'text_field',
                 label: '',
                 reference: '',
                 settings: {

@@ -32,7 +32,7 @@
             <el-row>
                 <el-col :span="12">
                     <label for="newItem">Add Item <el-button class="tw-ml-2" type="text" @click="addItem">Add</el-button></label>
-                    <el-input id="newItem" v-model="newItemText"></el-input>  
+                    <el-input id="newItem" v-model="itemText"></el-input>  
                 </el-col>
             </el-row>
         </form>
@@ -49,11 +49,11 @@ export default {
     data() {
         return {
             nextItem: 0,
-            newItemText: ''
+            itemText: ''
         }
     },
     mounted() {
-        this.setCheckboxItems(); // calls method upon being rendered in the DOM
+        this.getCheckboxItems(); // calls method upon being rendered in the DOM
     },
     components: {
         EditableText
@@ -81,7 +81,7 @@ export default {
         },
 
         choices: {
-            get() { return this.field.choices},
+            get() { return this.field.choices },
             set(choices) { 
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.choices = choices;
@@ -98,15 +98,9 @@ export default {
                 this.$emit('updateChoices', field);
             }
         },
-
-        // updateItem(){
-        //     this.choices.value = value;
-        //     this.$store.commit('UPDATE_FIELD_CHOICES', this.field.choices)
-        // },
-
     },
     methods: {
-        setCheckboxItems() {
+        getCheckboxItems() {
             var i;
             for(i= 0; i < this.field.settings.checkboxNum; i++) {
                 this.loadItem();
@@ -115,7 +109,8 @@ export default {
 
         loadItem() {
             this.choices.push({
-                id: this.nextItem++, value: 'item ' + this.nextItem
+                id: this.nextItem++, 
+                value: 'item ' + this.nextItem
             })
             this.$store.commit('UPDATE_FIELD', this.field)
             
@@ -125,12 +120,11 @@ export default {
             const choicesCopy = _.clone(this.choices);
 
             choicesCopy.push({
-                id: this.nextItem++, value: this.newItemText
+                id: this.nextItem++, value: this.itemText
             });
 
             this.choices = choicesCopy;
-
-            this.newItemText = ''
+            this.itemText = ''
         },
         
         removeItem(item) {
@@ -140,8 +134,7 @@ export default {
             }
         },
 
-        updateChoiceValue(value, index)
-        {
+        updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;

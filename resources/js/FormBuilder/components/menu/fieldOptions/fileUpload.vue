@@ -28,7 +28,8 @@ export default {
     data: () => {
         return {
             fieldData: {
-                type: 'FileUpload',
+                type: 'Upload',
+                name: 'file_upload',
                 label: '',
                 description: '',
                 settings: {

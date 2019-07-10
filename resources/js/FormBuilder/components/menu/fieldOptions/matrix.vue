@@ -17,15 +17,13 @@
             <el-form-item label="Number of Questions" >
                 <el-input-number v-model="fieldData.settings.matrix_questions"
                     controls-position="right" 
-                    @change="handleChange" 
                     :min="1">
                 </el-input-number>
             </el-form-item>
             
             <el-form-item label="Number of Choices Per Question">
                 <el-input-number v-model="fieldData.settings.matrix_choices"
-                    controls-position="right" 
-                    @change="handleChange" 
+                    controls-position="right"  
                     :min="1" :max="10">
                 </el-input-number>
             </el-form-item>
@@ -43,7 +41,8 @@ export default {
     data: () => {
         return {
             fieldData: {
-                type: 'MatrixField',
+                type: 'Matrix',
+                name: 'matrix_field',
                 label: '',
                 description: '',
                 settings: {
@@ -51,9 +50,8 @@ export default {
                     matrix_questions: 2,
                     matrix_choices: 5,
                 },
-                options: {
-                    choices: []
-                },
+                questions: [],
+                choices: [],
                 rules: {
                     label: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }
@@ -66,9 +64,6 @@ export default {
         inputData: Object,
     },
     methods: {
-        handleChange() {
-            console.log('Doing the thing in menu options');
-        },
         submitfieldData(fieldData) {
             this.$emit('inputData', this.fieldData);
         }

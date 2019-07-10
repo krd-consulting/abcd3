@@ -9,7 +9,10 @@
             <el-option v-for="item in choices" :key="item.id" :label="item.value" :value="item.value"></el-option>
         </el-select>
         <div class="tw-float-right">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="dropItem">
+            <editable-text 
+                class="tw-cursor-pointer mouseOver" 
+                v-model="dropItem"
+                @input="updateChoiceValue(dropItem)">
                 {{ dropItem }}
             </editable-text>
             <el-button v-if="dropItem != ''" class="float-right pr-15" type="text" size="mini" @click="removeItem(value)">Remove Item</el-button>
@@ -19,7 +22,8 @@
             <el-row>
                 <el-col :span="12">
                     <label for="newItem">Add Item <el-button class="tw-ml-2" type="text" @click="addItem">Add</el-button></label>
-                    <el-input id="newItem" v-model="itemText"></el-input>
+                    <el-input id="newItem" v-model="itemText">
+                    </el-input>
                 </el-col>
             </el-row>
         </form>
@@ -34,10 +38,7 @@ import EditableText from '@/components/editableText.vue'
 export default {
     data() {
         return {
-            // itemText: '',
-            // dropItem: '',
-            // editField: '',
-            // // choices: [],
+            itemText: '',
             nextItem: 0,
         }
     },
@@ -69,30 +70,17 @@ export default {
         },
 
         choices: {
-            get() { return this.field.choices},
+            get() { return this.field.choices },
             set(choices) { 
-                // console.log('choices updated');
-                // this.$emit('update', field)
-
-                const fieldValue = _.clone(this.field.choices);
-                fieldValue.value = value;
-                this.field.choices = fieldValue;
-            }
-        },
-
-        itemText: {
-            get(){ return this.field.choices.value},
-            set(value){
-                const fieldValue = _.clone(this.field);
-                fieldValue.choices.value = value;
-                this.field = fieldValue;
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.choices = choices;
+                this.field = fieldCopy;
             }
         },
 
         dropItem: {
             get(){ return this.field.choices.value},
             set(value){
-
                 const fieldValue = _.clone(this.field);
                 fieldValue.choices.value = value;
                 this.field = fieldValue;
@@ -101,9 +89,13 @@ export default {
     },
     methods: {
         addItem() {
-            this.choices.push({
+            const choicesCopy = _.clone(this.choices);
+
+            choicesCopy.push({
                 id: this.nextItem++, value: this.itemText
-            })
+            });
+
+            this.choices = choicesCopy;
             this.itemText = ''
         },
         loadItem() {
@@ -124,6 +116,12 @@ export default {
                 this.loadItem();
             }
         },
+        updateChoiceValue(value) {
+            var index = this.choices.indexOf(value);
+            const fieldCopy = _.clone(this.field);
+            fieldCopy.choices[index].value = value;
+            this.choices = fieldCopy.choices;
+        }
     }
 }
 </script>

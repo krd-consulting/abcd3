@@ -29,6 +29,7 @@ export default {
         return {
             fieldData: {
                 type: 'CheckBox',
+                name: 'check_box',
                 label: '',
                 settings: {
                     required: false,

@@ -36,17 +36,19 @@
 
     export default {
         name: 'Form',
+        
+        data: () => {
+            return {
+                activeIndex: '1',
+                // inputOptions: {},
+                fields: []
+            }
+        },
+
         components: {
             FormCanvas,
             FormMenu,
             draggable
-        },
-        data: () => {
-            return {
-                activeIndex: '1',
-                inputOptions: {},
-                fields: []
-            }
         },
 
         methods: {
@@ -69,10 +71,6 @@
                     });
             }
         },
-
-        created() {
-
-        }
     }
 </script>
 

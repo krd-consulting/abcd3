@@ -5,7 +5,7 @@
         <el-radio-group id="radioGroup" 
             class="tw-mr-8" 
             v-model="select" 
-            v-for="item in field.options.responses" 
+            v-for="item in field.choices" 
             :key="item.id">
                 <el-radio :label="item.text"></el-radio>
         </el-radio-group>

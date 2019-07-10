@@ -9,19 +9,25 @@
 
              <el-radio-group id="radioGroup">
                 <el-radio 
-                    v-model="item.value" 
-                    v-for="item in radioList" 
+                    v-model="value" 
+                    v-for="(item, index) in choices" 
                     :key="item.value" 
                     :label="item.value" 
                     class="tw-mx-4">
                         <editable-text 
                             class="tw-cursor-pointer mouseOver"
-                            v-model="item.value">
+                            v-model="item.value"
+                            @input="updateChoiceValue($event, index)">
                                 {{ item.value }}
                         </editable-text>
-                        <el-button class="float-right pr-15" type="text" size="mini" @click="removeItem(item)">Remove</el-button>
+                        <el-button 
+                            class="float-right pr-15" 
+                            type="text" 
+                            size="mini" 
+                            @click="removeItem(item)">
+                                Remove
+                        </el-button>
                 </el-radio>
-                
             </el-radio-group>
         
         
@@ -45,11 +51,11 @@ export default {
     data() {
         return {
             itemText: '',
-            value: '',
-            editField: '',
-            radioList: [],
             nextItem: 0,
         }
+    },
+    mounted() {
+        this.setRadioItems(); // calls method upon being rendered in the DOM
     },
     components: {
       EditableText
@@ -57,12 +63,19 @@ export default {
     props: {
         fieldData: {
             type: Array | Object,
-            default: {
-                label: 'Radio List'
-            }
+            default: {}
         }
     },
     computed: {
+
+        field: {
+            get() { return this.fieldData; },
+            set(field) { 
+                console.log('field edited');
+                this.$emit('update', field); 
+            }
+        },
+
         fieldLabel: {
             get() { return this.field.label; },
             set(label) { 
@@ -76,41 +89,64 @@ export default {
             }
         },
 
-        field: {
-            get() { return this.fieldData; },
-            set(field) { 
-                console.log('field edited');
-                this.$emit('update', field); 
+        choices: {
+            get() { return this.field.choices},
+            set(choices) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.choices = choices;
+                this.field = fieldCopy;
             }
         },
-    },
-    mounted() {
-        this.setRadioItems(); // calls method upon being rendered in the DOM
+
+        value: {
+            get(){ return this.field.choices.value},
+            set(value){
+                const fieldValue = _.clone(this.field);
+                fieldValue.choices.value = value;
+                this.field = fieldValue;
+                this.$emit('updateChoices', field);
+            }
+        },
     },
     methods: {
-        addItem: function() {
-            this.radioList.push({
-                id: this.nextItem++, value: this.itemText
-            })
-            this.itemText = ''
-        },
-        loadItem: function() {
-            this.radioList.push({
-                id: this.nextItem++, value: 'item ' + this.nextItem + ' '
-            })
-        },
-        removeItem(item) {
-            var index = this.radioList.indexOf(item);
-            if (index !== -1) {
-                this.radioList.splice(index, 1);
-            }
-        },
         setRadioItems() {
             var i;
             for(i= 0; i < this.field.settings.radioNum; i++) {
                 this.loadItem();
             }
         },
+
+        loadItem() {
+            this.choices.push({
+                id: this.nextItem++, value: 'item ' + this.nextItem
+            })
+            this.$store.commit('UPDATE_FIELD', this.field)
+        },
+
+        addItem: function() {
+            const choicesCopy = _.clone(this.choices);
+
+            choicesCopy.push({
+                id: this.nextItem++, value: this.itemText
+            });
+
+            this.choices = choicesCopy;
+            this.itemText = ''
+        },
+        
+        removeItem(item) {
+            var index = this.choices.indexOf(item);
+            if (index !== -1) {
+                this.choices.splice(index, 1);
+            }
+        },
+
+        updateChoiceValue(value, index) {
+            const fieldCopy = _.clone(this.field);
+            fieldCopy.choices[index].value = value;
+            this.choices = fieldCopy.choices;
+        }
+        
     }
 }
 </script>

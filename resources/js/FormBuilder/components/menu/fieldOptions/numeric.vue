@@ -29,7 +29,8 @@ name: 'Numeric',
     data: () => {
         return {
             fieldData: {
-                type: 'NumericField',
+                type: 'Numeric',
+                name: 'numeric_field',
                 label: '',
                 settings: {
                     required: false,

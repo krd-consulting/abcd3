@@ -4,24 +4,24 @@
         <el-row class="tw-mt-24">
            <el-col :span="24">
                 <label for="matrix-table" class="inputLabel">{{ field.label }}</label><br>
-                <sup>{{ field.fieldDescription }}</sup>
+                <sup>{{ field.description }}</sup>
                     <table id="matrix-table">
                     <thead>
                         <tr class="tw-max-w-sm">
                             <th></th>
-                            <th v-for="(item, index) in field.options.responses" :key="index" >
+                            <th v-for="(item, index) in field.choices" :key="index" >
                                 <el-col>
-                                    {{ item.text }}
+                                    {{ item.value }}
                                 </el-col>  
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="(question, questionIndex) in field.options.questions" :key="questionIndex">
+                        <tr v-for="(question, questionIndex) in field.questions" :key="questionIndex">
                             <td>
                                 {{ question.text }}
                             </td>
-                            <td v-for="(response, index) in field.options.responses" 
+                            <td v-for="(response, index) in field.choices" 
                                 :key="response.id" 
                                 class="tw-text-center">
                                 <el-radio :value="index" 

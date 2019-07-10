@@ -29,6 +29,7 @@ export default {
         return {
             fieldData: {
                 type: 'Dropdown',
+                name: 'dropdown',
                 label: '',
                 settings: {
                     required: false,

@@ -94,10 +94,10 @@ import TextField from '@/FormBuilder/components/canvas/fields/textField.vue'
 import TextBox from '@/FormBuilder/components/canvas/fields/textArea.vue'
 import CheckBox from '@/FormBuilder/components/canvas/fields/checkboxField.vue'
 import Dropdown from '@/FormBuilder/components/canvas/fields/dropdownField.vue'
-import NumericField from '@/FormBuilder/components/canvas/fields/numericField.vue'
-import RadioField from '@/FormBuilder/components/canvas/fields/radioField.vue'
+import Numeric from '@/FormBuilder/components/canvas/fields/numericField.vue'
+import Radio from '@/FormBuilder/components/canvas/fields/radioField.vue'
 import DatePicker from '@/FormBuilder/components/canvas/fields/dateField.vue'
-import MatrixField from '@/FormBuilder/components/canvas/fields/matrixField.vue'
+import Matrix from '@/FormBuilder/components/canvas/fields/matrixField.vue'
 import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
 import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
@@ -159,12 +159,12 @@ export default {
         TextField,
         TextBox,
         SectionDivider,
-        NumericField,
+        Numeric,
         CheckBox,
         Dropdown,
-        RadioField,
+        Radio,
         DatePicker,
-        MatrixField,
+        Matrix,
         TimePicker,
         FileUpload,
     },
@@ -235,19 +235,10 @@ export default {
         }
 
     },
-    watch: {
-        // fields: { 
-        //     handler() {
-        //         this.$store.commit('SET_FIELDS', this.fields) 
-        //     },
 
-        //     deep: true
-        // }
-    },
-
-    created() {
-        console.log(this.$route.query);
-    }
+    // created() {
+    //     console.log(this.$route.query);
+    // }
 }
 </script>
 

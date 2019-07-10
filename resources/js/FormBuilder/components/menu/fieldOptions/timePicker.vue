@@ -25,6 +25,7 @@ export default {
         return {
             fieldData: {
                 type: 'TimePicker',
+                name: 'time_picker',
                 label: '',
                 settings: {
                     required: false,

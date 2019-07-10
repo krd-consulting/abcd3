@@ -8,7 +8,7 @@
                     background-color="#fff" 
                     active-text-color="#409EFF" 
                     mode="horizontal" 
-                    @select="handleSelect" router>
+                    router>
                         <el-menu-item default-active 
                             index="/forms/create" 
                             class="tw-font-bold focus:tw-font-extrabold">
@@ -25,17 +25,18 @@
                         </el-menu-item>
                 </el-menu>
 
-                <div v-for="data in formData" :key="data.title">
+                <div>
                     <el-header class="tw-text-center tw-mb-12">
-                        <h1 class="tw-text-4xl">{{ data.title }}</h1>
-                        <p>{{ data.description }}</p>
+                        <h1 class="tw-text-4xl">{{ title }}</h1>
+                        <p>{{ description }}</p>
                         <el-divider></el-divider>
                     </el-header>
                     
                     <el-main>
                         <el-row :gutter="20" class="tw-mb-4">
                             <el-col :span="2">
-                                <span class="input-label">{{ data.targetType }} Name</span>
+                                <span class="input-label">  Name</span>
+                                {{ target.type }}
                             </el-col>  
                             <el-col :span="10">
                                 <el-input class="inputField" v-model="clientName"></el-input>
@@ -59,12 +60,12 @@
                             </el-col>
                         </el-row>
                         
-                        <div class="tw-mt-4" v-for="field in data.fields" :key="field.fieldType">
+                        <div class="tw-mt-4" v-for="field in fields" :key="field.type">
 
                             <div class="tw-my-8">
                                 <component
                                     :field="field"
-                                    :is="field.fieldType">
+                                    :is="field.type">
                                 </component>
                             </div>
                         </div>
@@ -82,26 +83,27 @@
 
 <script>
 import test from '@/FormBuilder/store/test.json'
+
 import Matrix from '@/FormBuilder/components/preview/matrix.vue'
 import Radio from '@/FormBuilder/components/preview/radio.vue'
 import TextField from '@/FormBuilder/components/preview/textField.vue'
 import TextBox from '@/FormBuilder/components/preview/textBox.vue'
-import NumericField from '@/FormBuilder/components/preview/numeric.vue'
+import Numeric from '@/FormBuilder/components/preview/numeric.vue'
 import Dropdown from '@/FormBuilder/components/preview/dropdown.vue'
 import Checkbox from '@/FormBuilder/components/preview/checkbox.vue'
-import Datefield from '@/FormBuilder/components/preview/datefield.vue'
+import DatePicker from '@/FormBuilder/components/preview/datePicker.vue'
 import TimePicker from '@/FormBuilder/components/preview/timePicker.vue'
 import Upload from '@/FormBuilder/components/preview/upload.vue'
 import SectionDivider from '@/FormBuilder/components/preview/sectionDivider.vue'
 
-// import store from '@/FormBuilder/store/index.js'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
+// import { store } from '@/FormBuilder/store/state.js';
 
 
 export default {
     data: () => {
         return {
-            formData: test,
+            // formData: store.state,
             clientName: '',
             teams: [],
             dateCompleted: '',
@@ -117,22 +119,31 @@ export default {
         Radio,
         TextField,
         TextBox,
-        NumericField,
+        Numeric,
         Dropdown,
         Checkbox,
-        Datefield,
+        DatePicker,
         TimePicker,
         Upload,
         SectionDivider
     },
-    created() {
-        // this.getFormData();
-    },
     computed: {
-        // state_fields: {
-        //     get() { return this.$store.state.fields },
-        //     set(formData) { this.$store.commit('SET_FIELDS', formData) }
-        // }
+        title: {
+            get() { return this.$store.state.title },
+            set(title) { this.$store.commit('SET_TITLE', title) }, 
+        },
+        target: {
+            get() { return this.$store.state.target },
+            set(target) { this.$store.commit('SET_TARGET', target) }, 
+        },
+        description: {
+            get() { return this.$store.state.description },
+            set(description) { this.$store.commit('SET_DESCRIPTION', description) }
+        },
+        fields: { 
+            get() { return this.$store.state.fields },
+            set(fields) { this.$store.commit('SET_FIELDS', fields); }
+        },
     },
     watch: {
         // formData: {
@@ -143,9 +154,6 @@ export default {
         // }
     },
     methods: {
-        handleSelect(key, keyPath) { // placeholder
-            console.log(key, keyPath);
-        },
         buildForm() {
             this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
                 confirmButtonText: 'OK',
@@ -165,7 +173,7 @@ export default {
             });
         },
         // getFormData() {
-        //     return this.$store.state.fields
+        //     return this.$store.state
         // }
     }
 }
