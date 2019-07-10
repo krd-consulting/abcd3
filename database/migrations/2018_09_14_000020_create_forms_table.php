@@ -40,9 +40,11 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
-        $table->dropForeign(['target_type_id']);
-        $table->dropForeign(['scope_id']);
-        
+        Schema::table('form_team', function (Blueprint $table) {
+            $table->dropForeign(['target_type_id']);
+            $table->dropForeign(['scope_id']);
+        });
+
         Schema::dropIfExists('forms');
     }
 }

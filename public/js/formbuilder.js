@@ -6703,9 +6703,9 @@ __webpack_require__.r(__webpack_exports__);
     formattedScopes: function formattedScopes() {
       var labels = {
         universal: 'Everyone',
-        team: 'Users in your team',
-        program: 'Users in your program',
-        group: 'Users in your group',
+        team: 'Users in my team',
+        program: 'Users in my program',
+        group: 'Users in my group',
         self: 'Just me'
       };
 
@@ -113706,15 +113706,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************************!*\
   !*** ./resources/js/FormBuilder/views/initialize.vue ***!
   \*******************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _initialize_vue_vue_type_template_id_055d3472___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./initialize.vue?vue&type=template&id=055d3472& */ "./resources/js/FormBuilder/views/initialize.vue?vue&type=template&id=055d3472&");
 /* harmony import */ var _initialize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./initialize.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/views/initialize.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _initialize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _initialize_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -113744,7 +113743,7 @@ component.options.__file = "resources/js/FormBuilder/views/initialize.vue"
 /*!********************************************************************************!*\
   !*** ./resources/js/FormBuilder/views/initialize.vue?vue&type=script&lang=js& ***!
   \********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

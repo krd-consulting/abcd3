@@ -61,6 +61,22 @@ class User extends Authenticatable implements Auditable
         return $this->hasManyDeep('App\Group', ['App\Record', 'group_record']);
     }
 
+    public function teamGroups()
+    {
+        return $this->hasManyDeepFromRelations(
+            $this->teamPrograms(), 
+            (new Program)->groups()
+        );
+    }
+
+    public function programGroups()
+    {
+        return $this->hasManyDeepFromRelations(
+            $this->programs(), 
+            (new Program)->groups()
+        );
+    }
+
     public function records()
     {
         return $this->hasMany('App\Record');
@@ -91,6 +107,29 @@ class User extends Authenticatable implements Auditable
         return $this->hasManyDeepFromRelations($this->records(), (new Record)->forms());
     }
 
+    public function availableTeams(?int $limit) 
+    {
+        $teams;
+
+        $scope = $this->scope;
+
+        switch($scope) {
+            case 'universal':
+                $teams = new Team;
+                break;
+
+            default:
+                $teams = $this->teams();
+                break;
+        }
+
+        if(isset($limit)) {
+            $teams = $teams->limit($limit);
+        }
+
+        return $teams;
+    }
+
     public function availablePrograms(?int $limit)
     {
         $programs;
@@ -117,6 +156,36 @@ class User extends Authenticatable implements Auditable
         return $programs;
     }
 
+    public function availableGroups(?int $limit)
+    {
+        $groups;
+
+        $scope = $this->scope;
+
+        switch($scope) {
+            case 'universal':
+                $groups = new Group;
+                break;
+
+            case 'team':
+                $groups = $this->teamGroups();
+                break;
+
+            case 'program':
+                $groups = $this->programGroups();
+                break;
+
+            default:
+                $groups = $this->groups();
+        }
+
+        if(isset($limit)) {
+            $groups = $groups->limit($limit);
+        }
+
+        return $groups;
+    }
+
     // Getters
 
     public function getAvailableProgramsAttribute()
@@ -126,21 +195,12 @@ class User extends Authenticatable implements Auditable
 
     public function getAvailableTeamsAttribute()
     {
-        $teams;
+        return $this->availableTeams(null)->get();
+    }
 
-        $scope = $this->scope;
-
-        switch($scope) {
-            case 'universal':
-                $teams = Team::all();
-                break;
-
-            default:
-                $teams = $this->teams;
-                break;
-        }
-
-        return $teams;
+    public function getAvailableGroupsAttribute()
+    {
+        return $this->availableGroups(null)->get();
     }
 
     public function getScopeAttribute()

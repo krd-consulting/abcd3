@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Scope;
+
 class Form extends Model
 {
     public function target_type()
@@ -34,52 +36,69 @@ class Form extends Model
             ->withTimestamps();
     }
 
-    public function scopeAvailableFor($query, $user) {
-        $universal = $query;
-        $teams = (clone $query)->inTeams($user->teams);
-        $programs = (clone $query)->inPrograms($user->programs);
-        $groups = (clone $query)->inGroups($user->groups);
-        $self = (clone $query)->inSelf($user);
-
-        return 
-            $universal
-                ->union($teams);
-                // ->union($programs)
-                // ->union($groups)
-                // ->union($self);
+    public function users()
+    {
+        return $this->belongsToMany('App\User')
+            ->withTimestamps();
     }
 
-    public function scopeInPrograms($query, $programs)
-    {
-        return $query->whereHas('programs', function ($query) use ($programs) {
-                    return $query->whereIn('program_id', $programs);
-                });
+    public function scopeAvailableFor($query, $user) {
+        $universal = 
+            (clone $query)
+                ->where('scope_id', Scope::where('name', config('auth.scopes.universal.name'))->first()->id);
+        $teams = (clone $query)->inTeams($user->availableTeams);
+        $programs = (clone $query)->inPrograms($user->availablePrograms);
+        $groups = (clone $query)->inGroups($user->availableGroups);
+        $self = (clone $query)->inSelf($user);
+
+        $query = 
+            $universal
+                ->union($teams)
+                ->union($programs)
+                ->union($groups)
+                ->union($self);
+
+        return $query;
     }
 
     public function scopeInTeams($query, $teams)
     {
-        return $query->whereHas('teams', function ($query) use ($teams) {
-                    return $query->whereIn('team_id', $teams);
+        return 
+            $query
+                ->where('scope_id', Scope::where('name', config('auth.scopes.team.name'))->first()->id)
+                ->whereHas('teams', function ($query) use ($teams) {
+                    return $query->whereIn('team_id', $teams->pluck('id'));
+                });
+    }
+
+    public function scopeInPrograms($query, $programs)
+    {
+        return 
+            $query
+                ->where('scope_id', Scope::where('name', config('auth.scopes.program.name'))->first()->id)
+                ->whereHas('programs', function ($query) use ($programs) {
+                    return $query->whereIn('program_id', $programs->pluck('id'));
+                });
+    }
+
+    public function scopeInGroups($query, $groups)
+    {
+        return 
+            $query
+                ->where('scope_id', Scope::where('name', config('auth.scopes.group.name'))->first()->id)
+                ->whereHas('groups', function ($query) use ($groups) {
+                    return $query->whereIn('group_id', $groups->pluck('id'));
                 });
     }
 
     public function scopeInSelf($query, $user)
     {
-        return $query
-                ->select(
-                    'forms.id',
-                    'field_1_value',
-                    'field_2_value',
-                    'field_3_value',
-                    'record_type_id',
-                    'forms.created_at',
-                    'forms.updated_at'
-                )
-                ->leftJoin('cases', 'forms.id', '=', 'cases.record_id')
-                ->where(function ($query) use ($user) {
-                    $query->whereColumn('forms.id', 'cases.record_id')
-                        ->whereIn('owner_id', $user->forms()->pluck('id'));
-                })->orWhereIn('forms.id', $user->forms()->pluck('id'));
+        return 
+            $query
+                ->where('scope_id', Scope::where('name', config('auth.scopes.self.name'))->first()->id)
+                ->whereHas('users', function ($query) use ($user) {
+                    return $query->where('user_id', $user);
+                });
     }
 
     public function scopeSort($query, $column, $ascending)
