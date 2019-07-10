@@ -29,7 +29,7 @@
             </el-form-item>
             
             <el-form-item>
-                <slot :fieldData="fieldData"></slot>
+                <el-button type="success" @click="save">Set</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -49,6 +49,8 @@ export default {
                     required: false,
                     matrix_questions: 2,
                     matrix_choices: 5,
+                    nextQuestion: 0,
+                    nextChoice: 0,
                 },
                 questions: [],
                 choices: [],
@@ -63,9 +65,35 @@ export default {
     props: {
         inputData: Object,
     },
+
     methods: {
         submitfieldData(fieldData) {
             this.$emit('inputData', this.fieldData);
+        },
+
+        setQuestions() {
+
+            for(let i = 0; i < this.fieldData.settings.matrix_questions; i++) {
+                this.fieldData.questions.push({
+                    id: this.fieldData.settings.nextQuestion++, text: 'Question ' + this.fieldData.settings.nextQuestion
+                })
+            }
+        },
+
+        setChoices() {
+
+            for(let i = 1; i <= this.fieldData.settings.matrix_choices; i++) {
+                this.fieldData.choices.push({
+                    id: this.fieldData.settings.nextChoice++, value: 'Item ' + this.fieldData.settings.nextChoice
+                })
+            }
+        },
+
+        save() {
+            this.setQuestions();
+            this.setChoices();
+
+            this.$emit('save', this.fieldData);
         }
     }
 }

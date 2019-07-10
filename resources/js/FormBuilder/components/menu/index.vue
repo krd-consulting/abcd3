@@ -37,10 +37,11 @@
               </template>
 
                 <component :is="selectedInput.component" 
-                    :inputData="selectedInput">
-                        <template v-slot:default="{ fieldData }">
+                    :inputData="selectedInput"
+                    @save="addField">
+                        <!--<template v-slot:default="{ fieldData }">
                             <el-button type="success" @click="addField(fieldData)">Set</el-button>
-                        </template>
+                        </template>-->
                 </component>
 
             </el-collapse-item>

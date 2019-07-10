@@ -76,8 +76,6 @@ import EditableText from '@/components/editableText.vue'
 export default {
     data() {
         return {
-            nextQuestion: 0,
-            nextChoice: 0,
             radioSelect: 1,
             itemText: '',
             isMounted: false
@@ -150,27 +148,6 @@ export default {
     },
     methods: {
 
-        getMatrixItems() {
-            var i;
-            // if(!isMounted) {
-                for(i = 0; i < this.field.settings.matrix_questions; i++) {
-                    this.questions.push({
-                        id: this.nextQuestion++, text: 'Question ' + this.nextQuestion
-                    })
-                }
-
-                for(i = 1; i <= this.field.settings.matrix_choices; i++) {
-                    this.choices.push({
-                        id: this.nextChoice++, value: 'Item ' + this.nextChoice
-                    })
-                }
-
-                this.$store.commit('UPDATE_FIELD', this.field)
-            //     return this.isMounted = true
-            // }
-            
-        },
-
         addQuestion() {
             const questionsCopy = _.clone(this.questions);
 
@@ -179,7 +156,9 @@ export default {
             });
 
             this.questions = questionsCopy;
-            this.itemText = ''
+            this.itemText = '';
+
+            this.$forceUpdate();
         },
         
         removeQuestion(item) {
@@ -192,7 +171,9 @@ export default {
                 this.questions.splice(index, 1);
             }
             // this.questions = questionsCopy;
-            this.$store.commit('UPDATE_FIELD', this.field)
+            this.$store.commit('UPDATE_FIELD', this.field);
+
+            this.$forceUpdate();
         },
 
         addChoice() {
@@ -204,6 +185,8 @@ export default {
 
             console.log(choicesCopy)
             this.choices = choicesCopy;
+
+            this.$forceUpdate();
         },
 
         removeChoice(item) {
@@ -213,18 +196,24 @@ export default {
                 this.choices.splice(index, 1);
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
+
+            this.$forceUpdate();
         },
         
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
+
+            this.$forceUpdate();
         },
 
         updateQuestionValue(value, index) {
             const fieldCopy = _.clone(this.field);
             fieldCopy.questions[index].value = value;
             this.questions = fieldCopy.questions;
+
+            this.$forceUpdate();
         }
         
     }

@@ -90,7 +90,7 @@ import TextField from '@/FormBuilder/components/preview/textField.vue'
 import TextBox from '@/FormBuilder/components/preview/textBox.vue'
 import Numeric from '@/FormBuilder/components/preview/numeric.vue'
 import Dropdown from '@/FormBuilder/components/preview/dropdown.vue'
-import Checkbox from '@/FormBuilder/components/preview/checkbox.vue'
+import CheckBox from '@/FormBuilder/components/preview/checkbox.vue'
 import DatePicker from '@/FormBuilder/components/preview/datePicker.vue'
 import TimePicker from '@/FormBuilder/components/preview/timePicker.vue'
 import Upload from '@/FormBuilder/components/preview/upload.vue'
@@ -121,7 +121,7 @@ export default {
         TextBox,
         Numeric,
         Dropdown,
-        Checkbox,
+        CheckBox,
         DatePicker,
         TimePicker,
         Upload,

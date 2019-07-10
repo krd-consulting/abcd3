@@ -4227,8 +4227,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      nextQuestion: 0,
-      nextChoice: 0,
       radioSelect: 1,
       itemText: '',
       isMounted: false
@@ -4314,26 +4312,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    getMatrixItems: function getMatrixItems() {
-      var i; // if(!isMounted) {
-
-      for (i = 0; i < this.field.settings.matrix_questions; i++) {
-        this.questions.push({
-          id: this.nextQuestion++,
-          text: 'Question ' + this.nextQuestion
-        });
-      }
-
-      for (i = 1; i <= this.field.settings.matrix_choices; i++) {
-        this.choices.push({
-          id: this.nextChoice++,
-          value: 'Item ' + this.nextChoice
-        });
-      }
-
-      this.$store.commit('UPDATE_FIELD', this.field); //     return this.isMounted = true
-      // }
-    },
     addQuestion: function addQuestion() {
       var questionsCopy = _.clone(this.questions);
 
@@ -4343,6 +4321,7 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.questions = questionsCopy;
       this.itemText = '';
+      this.$forceUpdate();
     },
     removeQuestion: function removeQuestion(item) {
       // TODO: fix
@@ -4355,6 +4334,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
       this.$store.commit('UPDATE_FIELD', this.field);
+      this.$forceUpdate();
     },
     addChoice: function addChoice() {
       var choicesCopy = _.clone(this.choices);
@@ -4365,6 +4345,7 @@ __webpack_require__.r(__webpack_exports__);
       });
       console.log(choicesCopy);
       this.choices = choicesCopy;
+      this.$forceUpdate();
     },
     removeChoice: function removeChoice(item) {
       var index = this.choices.indexOf(item);
@@ -4373,18 +4354,22 @@ __webpack_require__.r(__webpack_exports__);
         this.choices.splice(index, 1);
         this.$store.commit('UPDATE_FIELD', this.field);
       }
+
+      this.$forceUpdate();
     },
     updateChoiceValue: function updateChoiceValue(value, index) {
       var fieldCopy = _.clone(this.field);
 
       fieldCopy.choices[index].value = value;
       this.choices = fieldCopy.choices;
+      this.$forceUpdate();
     },
     updateQuestionValue: function updateQuestionValue(value, index) {
       var fieldCopy = _.clone(this.field);
 
       fieldCopy.questions[index].value = value;
       this.questions = fieldCopy.questions;
+      this.$forceUpdate();
     }
   }
 });
@@ -5529,7 +5514,9 @@ __webpack_require__.r(__webpack_exports__);
         settings: {
           required: false,
           matrix_questions: 2,
-          matrix_choices: 5
+          matrix_choices: 5,
+          nextQuestion: 0,
+          nextChoice: 0
         },
         questions: [],
         choices: [],
@@ -5549,6 +5536,27 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     submitfieldData: function submitfieldData(fieldData) {
       this.$emit('inputData', this.fieldData);
+    },
+    setQuestions: function setQuestions() {
+      for (var i = 0; i < this.fieldData.settings.matrix_questions; i++) {
+        this.fieldData.questions.push({
+          id: this.fieldData.settings.nextQuestion++,
+          text: 'Question ' + this.fieldData.settings.nextQuestion
+        });
+      }
+    },
+    setChoices: function setChoices() {
+      for (var i = 1; i <= this.fieldData.settings.matrix_choices; i++) {
+        this.fieldData.choices.push({
+          id: this.fieldData.settings.nextChoice++,
+          value: 'Item ' + this.fieldData.settings.nextChoice
+        });
+      }
+    },
+    save: function save() {
+      this.setQuestions();
+      this.setChoices();
+      this.$emit('save', this.fieldData);
     }
   }
 });
@@ -6020,6 +6028,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fieldOptions_checkBox_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./fieldOptions/checkBox.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue");
 /* harmony import */ var _fieldOptions_radioField_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fieldOptions/radioField.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue");
 /* harmony import */ var _fieldOptions_dropdown_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fieldOptions/dropdown.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue");
+//
 //
 //
 //
@@ -6754,7 +6763,7 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
     TextBox: _FormBuilder_components_preview_textBox_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     Numeric: _FormBuilder_components_preview_numeric_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     Dropdown: _FormBuilder_components_preview_dropdown_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    Checkbox: _FormBuilder_components_preview_checkbox_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    CheckBox: _FormBuilder_components_preview_checkbox_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
     DatePicker: _FormBuilder_components_preview_datePicker_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     TimePicker: _FormBuilder_components_preview_timePicker_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
     Upload: _FormBuilder_components_preview_upload_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
@@ -9432,7 +9441,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9451,7 +9460,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9470,7 +9479,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9489,7 +9498,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9508,7 +9517,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9546,7 +9555,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9565,7 +9574,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9584,7 +9593,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9603,7 +9612,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9622,7 +9631,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -9641,7 +9650,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\r\n    right: 10px; */\n}\r\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\n    right: 10px; */\n}\n", ""]);
 
 // exports
 
@@ -9660,7 +9669,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\r\n        width: auto;\r\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\r\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\n        width: auto;\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -9698,7 +9707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -9736,7 +9745,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \r\n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\r\n\r\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\n\n", ""]);
 
 // exports
 
@@ -88879,8 +88888,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -89725,28 +89740,7 @@ var render = function() {
                 _c(_vm.selectedInput.component, {
                   tag: "component",
                   attrs: { inputData: _vm.selectedInput },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(ref) {
-                        var fieldData = ref.fieldData
-                        return [
-                          _c(
-                            "el-button",
-                            {
-                              attrs: { type: "success" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.addField(fieldData)
-                                }
-                              }
-                            },
-                            [_vm._v("Set")]
-                          )
-                        ]
-                      }
-                    }
-                  ])
+                  on: { save: _vm.addField }
                 })
               ],
               2
@@ -116003,7 +115997,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })
