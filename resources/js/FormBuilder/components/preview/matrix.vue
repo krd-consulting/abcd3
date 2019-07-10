@@ -1,5 +1,5 @@
 <template>
-    <div id="matrix">
+    <div id="matrix" class="tw-my-8">
         <br>
         <el-row class="tw-mt-24">
            <el-col :span="24">

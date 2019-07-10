@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tw-my-8">
         <el-row class="tw-my-8">
             <el-divider>
                 <span>

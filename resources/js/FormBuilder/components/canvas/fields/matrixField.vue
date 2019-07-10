@@ -81,10 +81,10 @@ export default {
             isMounted: false
         }
     },
-    mounted() {
-        // calls methods upon being rendered in the DOM
-        this.getMatrixItems(); 
-    },
+    // mounted() {
+    //     // calls methods upon being rendered in the DOM
+    //     this.getMatrixItems(); 
+    // },
     components: {
         EditableText
     },

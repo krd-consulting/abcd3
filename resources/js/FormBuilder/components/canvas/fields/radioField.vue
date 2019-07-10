@@ -24,7 +24,7 @@
                             class="float-right pr-15" 
                             type="text" 
                             size="mini" 
-                            @click="removeItem(item)">
+                            @click="removeChoice(item)">
                                 Remove
                         </el-button>
                 </el-radio>
@@ -53,9 +53,6 @@ export default {
             itemText: '',
             nextItem: 0,
         }
-    },
-    mounted() {
-        this.setRadioItems(); // calls method upon being rendered in the DOM
     },
     components: {
       EditableText
@@ -109,19 +106,6 @@ export default {
         },
     },
     methods: {
-        setRadioItems() {
-            var i;
-            for(i= 0; i < this.field.settings.radioNum; i++) {
-                this.loadItem();
-            }
-        },
-
-        loadItem() {
-            this.choices.push({
-                id: this.nextItem++, value: 'item ' + this.nextItem
-            })
-            this.$store.commit('UPDATE_FIELD', this.field)
-        },
 
         addItem: function() {
             const choicesCopy = _.clone(this.choices);
@@ -134,11 +118,15 @@ export default {
             this.itemText = ''
         },
         
-        removeItem(item) {
+        removeChoice(item) {
             var index = this.choices.indexOf(item);
+
             if (index !== -1) {
                 this.choices.splice(index, 1);
+                this.$store.commit('UPDATE_FIELD', this.field)
             }
+
+            this.$forceUpdate();
         },
 
         updateChoiceValue(value, index) {

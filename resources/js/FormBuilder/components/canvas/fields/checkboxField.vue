@@ -22,7 +22,7 @@
                         class="float-right pr-15" 
                         type="text" 
                         size="mini" 
-                        @click="removeItem(item)">
+                        @click="removeChoice(item)">
                             Remove
                     </el-button>
             </el-checkbox>
@@ -52,9 +52,9 @@ export default {
             itemText: ''
         }
     },
-    mounted() {
-        this.getCheckboxItems(); // calls method upon being rendered in the DOM
-    },
+    // mounted() {
+    //     this.getCheckboxItems(); // calls method upon being rendered in the DOM
+    // },
     components: {
         EditableText
     },
@@ -127,11 +127,15 @@ export default {
             this.itemText = ''
         },
         
-        removeItem(item) {
+        removeChoice(item) {
             var index = this.choices.indexOf(item);
+
             if (index !== -1) {
                 this.choices.splice(index, 1);
+                this.$store.commit('UPDATE_FIELD', this.field)
             }
+
+            this.$forceUpdate();
         },
 
         updateChoiceValue(value, index) {

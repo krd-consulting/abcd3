@@ -15,7 +15,7 @@
                 @input="updateChoiceValue(dropItem)">
                 {{ dropItem }}
             </editable-text>
-            <el-button v-if="dropItem != ''" class="float-right pr-15" type="text" size="mini" @click="removeItem(value)">Remove Item</el-button>
+            <el-button v-if="dropItem != ''" class="float-right pr-15" type="text" size="mini" @click="removeChoice(value)">Remove Item</el-button>
         </div>
         
         <form @submit.prevent="addItem" class="tw-mt-4">
@@ -41,9 +41,6 @@ export default {
             itemText: '',
             nextItem: 0,
         }
-    },
-    mounted() {
-        this.setDropdownItems(); // calls method upon being rendered in the DOM
     },
     components: {
         EditableText
@@ -98,23 +95,21 @@ export default {
             this.choices = choicesCopy;
             this.itemText = ''
         },
-        loadItem() {
-            this.field.choices.push({
-                 id: this.nextItem++, value: 'item ' + this.nextItem
-            })
-            this.$store.commit('UPDATE_FIELD', this.field)
-        },
-        removeItem(item) {
+        // loadItem() {
+        //     this.field.choices.push({
+        //          id: this.nextItem++, value: 'item ' + this.nextItem
+        //     })
+        //     this.$store.commit('UPDATE_FIELD', this.field)
+        // },
+        removeChoice(item) {
             var index = this.choices.indexOf(item);
+
             if (index !== -1) {
                 this.choices.splice(index, 1);
+                this.$store.commit('UPDATE_FIELD', this.field)
             }
-        },
-        setDropdownItems() {
-            var i;
-            for(i= 0; i < this.field.settings.dropdownNum; i++) {
-                this.loadItem();
-            }
+
+            this.$forceUpdate();
         },
         updateChoiceValue(value) {
             var index = this.choices.indexOf(value);

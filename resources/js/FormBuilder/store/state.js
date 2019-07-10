@@ -2,7 +2,7 @@ export default {
     title: 'Form Title',
     description: 'Subtext',
     target: {
-    	type: 'Client',
+    	type: '',
     	id: 0
     },
     type: 'pre/post',

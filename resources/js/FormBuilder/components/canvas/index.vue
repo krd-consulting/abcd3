@@ -26,7 +26,7 @@
                         
                     <el-row :gutter="10">
                         <el-col :span="10">
-                            <span class="input-label"> {{ target_type }} Name</span>
+                            <span class="input-label"> {{ target.type }} Name</span>
                             <el-input class="inputField"></el-input>
                         </el-col>
                         
@@ -99,7 +99,7 @@ import Radio from '@/FormBuilder/components/canvas/fields/radioField.vue'
 import DatePicker from '@/FormBuilder/components/canvas/fields/dateField.vue'
 import Matrix from '@/FormBuilder/components/canvas/fields/matrixField.vue'
 import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
-import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
+import Upload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
 
 export default {
@@ -108,7 +108,7 @@ export default {
             initialize: {
                 active: true
             },
-            target_type: 'Staff',
+            // target_type: 'Staff',
             name: '',
             dateCompleted: '',
             formList: [],
@@ -166,7 +166,7 @@ export default {
         DatePicker,
         Matrix,
         TimePicker,
-        FileUpload,
+        Upload,
     },
     computed: {
         title: {

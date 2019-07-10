@@ -1,20 +1,24 @@
 <template>
-    <div id="datepicker">
-        <el-col :span="12">
-            <label for="dateField" class="inputLabel">{{ field.label }}</label><br>
-            <sup>{{ field.fieldDescription }}</sup><br>
-            <el-date-picker 
-                id="dateField"
-                v-model="value" 
-                :type="dateType" 
-                :picker-options="dateOptions" 
-                :placeholder="datePlaceHolder"
-                :range-separator="rangeSeparator"
-                :start-placeholder="startDate"
-                :end-placeholder="endDate"
-                :format="dateFormat">
-            </el-date-picker>
-        </el-col>
+    <div id="datepicker" class="tw-my-8">
+        <el-row>
+            <el-col :span="6">
+                <label for="dateField" class="inputLabel">{{ field.label }}</label>
+            </el-col>
+
+            <el-col :span="10">
+                <el-date-picker 
+                    id="dateField"
+                    v-model="value" 
+                    :type="dateType" 
+                    :picker-options="dateOptions" 
+                    :placeholder="datePlaceHolder"
+                    :range-separator="rangeSeparator"
+                    :start-placeholder="startDate"
+                    :end-placeholder="endDate"
+                    :format="dateFormat">
+                </el-date-picker>
+            </el-col>
+        </el-row>
     </div>
 </template>
 

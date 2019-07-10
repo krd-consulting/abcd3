@@ -1,9 +1,11 @@
 <template>
-    <div id="textBox">
+    <div id="textBox" class="tw-my-8">
         <el-row>
-            <el-col :span="14">
+            <el-col :span="6">
                 <label for="textArea" class="inputLabel">{{ field.label }}</label>
-                <sup>{{ field.description }}</sup>
+            </el-col>
+
+            <el-col :span="10">
                 <el-input id="textArea"  
                     type="textarea" 
                     :rows="3" 

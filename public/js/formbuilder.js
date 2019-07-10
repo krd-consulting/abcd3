@@ -3609,9 +3609,9 @@ __webpack_require__.r(__webpack_exports__);
       itemText: ''
     };
   },
-  mounted: function mounted() {
-    this.getCheckboxItems(); // calls method upon being rendered in the DOM
-  },
+  // mounted() {
+  //     this.getCheckboxItems(); // calls method upon being rendered in the DOM
+  // },
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -3690,12 +3690,15 @@ __webpack_require__.r(__webpack_exports__);
       this.choices = choicesCopy;
       this.itemText = '';
     },
-    removeItem: function removeItem(item) {
+    removeChoice: function removeChoice(item) {
       var index = this.choices.indexOf(item);
 
       if (index !== -1) {
         this.choices.splice(index, 1);
+        this.$store.commit('UPDATE_FIELD', this.field);
       }
+
+      this.$forceUpdate();
     },
     updateChoiceValue: function updateChoiceValue(value, index) {
       var fieldCopy = _.clone(this.field);
@@ -3934,9 +3937,6 @@ __webpack_require__.r(__webpack_exports__);
       nextItem: 0
     };
   },
-  mounted: function mounted() {
-    this.setDropdownItems(); // calls method upon being rendered in the DOM
-  },
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -4000,26 +4000,21 @@ __webpack_require__.r(__webpack_exports__);
       this.choices = choicesCopy;
       this.itemText = '';
     },
-    loadItem: function loadItem() {
-      this.field.choices.push({
-        id: this.nextItem++,
-        value: 'item ' + this.nextItem
-      });
-      this.$store.commit('UPDATE_FIELD', this.field);
-    },
-    removeItem: function removeItem(item) {
+    // loadItem() {
+    //     this.field.choices.push({
+    //          id: this.nextItem++, value: 'item ' + this.nextItem
+    //     })
+    //     this.$store.commit('UPDATE_FIELD', this.field)
+    // },
+    removeChoice: function removeChoice(item) {
       var index = this.choices.indexOf(item);
 
       if (index !== -1) {
         this.choices.splice(index, 1);
+        this.$store.commit('UPDATE_FIELD', this.field);
       }
-    },
-    setDropdownItems: function setDropdownItems() {
-      var i;
 
-      for (i = 0; i < this.field.settings.dropdownNum; i++) {
-        this.loadItem();
-      }
+      this.$forceUpdate();
     },
     updateChoiceValue: function updateChoiceValue(value) {
       var index = this.choices.indexOf(value);
@@ -4232,10 +4227,10 @@ __webpack_require__.r(__webpack_exports__);
       isMounted: false
     };
   },
-  mounted: function mounted() {
-    // calls methods upon being rendered in the DOM
-    this.getMatrixItems();
-  },
+  // mounted() {
+  //     // calls methods upon being rendered in the DOM
+  //     this.getMatrixItems(); 
+  // },
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -4514,9 +4509,6 @@ __webpack_require__.r(__webpack_exports__);
       nextItem: 0
     };
   },
-  mounted: function mounted() {
-    this.setRadioItems(); // calls method upon being rendered in the DOM
-  },
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -4574,20 +4566,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    setRadioItems: function setRadioItems() {
-      var i;
-
-      for (i = 0; i < this.field.settings.radioNum; i++) {
-        this.loadItem();
-      }
-    },
-    loadItem: function loadItem() {
-      this.choices.push({
-        id: this.nextItem++,
-        value: 'item ' + this.nextItem
-      });
-      this.$store.commit('UPDATE_FIELD', this.field);
-    },
     addItem: function addItem() {
       var choicesCopy = _.clone(this.choices);
 
@@ -4598,12 +4576,15 @@ __webpack_require__.r(__webpack_exports__);
       this.choices = choicesCopy;
       this.itemText = '';
     },
-    removeItem: function removeItem(item) {
+    removeChoice: function removeChoice(item) {
       var index = this.choices.indexOf(item);
 
       if (index !== -1) {
         this.choices.splice(index, 1);
+        this.$store.commit('UPDATE_FIELD', this.field);
       }
+
+      this.$forceUpdate();
     },
     updateChoiceValue: function updateChoiceValue(value, index) {
       var fieldCopy = _.clone(this.field);
@@ -5011,7 +4992,7 @@ __webpack_require__.r(__webpack_exports__);
       initialize: {
         active: true
       },
-      target_type: 'Staff',
+      // target_type: 'Staff',
       name: '',
       dateCompleted: '',
       formList: [],
@@ -5073,7 +5054,7 @@ __webpack_require__.r(__webpack_exports__);
     DatePicker: _FormBuilder_components_canvas_fields_dateField_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
     Matrix: _FormBuilder_components_canvas_fields_matrixField_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
     TimePicker: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
-    FileUpload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
+    Upload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
   },
   computed: {
     title: {
@@ -5203,7 +5184,8 @@ __webpack_require__.r(__webpack_exports__);
         label: '',
         settings: {
           required: false,
-          checkboxNum: 2
+          checkboxNum: 2,
+          nextChoice: 0
         },
         choices: [],
         rules: {
@@ -5220,11 +5202,17 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    handleChange: function handleChange() {
-      console.log('Doing the thing in menu options');
+    setChoices: function setChoices() {
+      for (var i = 1; i <= this.fieldData.settings.checkboxNum; i++) {
+        this.fieldData.choices.push({
+          id: this.fieldData.settings.nextChoice++,
+          value: 'Item ' + this.fieldData.settings.nextChoice
+        });
+      }
     },
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('outputData', this.fieldData);
+    save: function save() {
+      this.setChoices();
+      this.$emit('save', this.fieldData);
     }
   }
 });
@@ -5307,11 +5295,8 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    handleChange: function handleChange() {
-      console.log('Doing the thing in menu options');
-    },
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('inputData', this.fieldData);
+    save: function save() {
+      this.$emit('save', this.fieldData);
     }
   }
 });
@@ -5361,7 +5346,8 @@ __webpack_require__.r(__webpack_exports__);
         label: '',
         settings: {
           required: false,
-          dropdownNum: 2
+          dropdownNum: 2,
+          nextChoice: 0
         },
         choices: [],
         rules: {
@@ -5378,8 +5364,17 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('outputData', this.fieldData);
+    setChoices: function setChoices() {
+      for (var i = 1; i <= this.fieldData.settings.dropdownNum; i++) {
+        this.fieldData.choices.push({
+          id: this.fieldData.settings.nextChoice++,
+          value: 'Item ' + this.fieldData.settings.nextChoice
+        });
+      }
+    },
+    save: function save() {
+      this.setChoices();
+      this.$emit('save', this.fieldData);
     }
   }
 });
@@ -5445,11 +5440,8 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    handleChange: function handleChange() {
-      console.log('Doing the thing in menu options');
-    },
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('outputData', this.fieldData);
+    save: function save() {
+      this.$emit('save', this.fieldData);
     }
   }
 });
@@ -5534,9 +5526,6 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('inputData', this.fieldData);
-    },
     setQuestions: function setQuestions() {
       for (var i = 0; i < this.fieldData.settings.matrix_questions; i++) {
         this.fieldData.questions.push({
@@ -5623,11 +5612,8 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    handleChange: function handleChange() {
-      console.log('Doing the thing in menu options');
-    },
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('inputData', this.fieldData);
+    save: function save() {
+      this.$emit('save', this.fieldData);
     }
   }
 });
@@ -5676,7 +5662,8 @@ __webpack_require__.r(__webpack_exports__);
         label: '',
         settings: {
           required: false,
-          radioNum: 2
+          radioNum: 2,
+          nextChoice: 0
         },
         choices: [],
         rules: {
@@ -5693,11 +5680,17 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    handleChange: function handleChange() {
-      console.log('Doing the thing in menu options');
+    setChoices: function setChoices() {
+      for (var i = 1; i <= this.fieldData.settings.radioNum; i++) {
+        this.fieldData.choices.push({
+          id: this.fieldData.settings.nextChoice++,
+          value: 'Item ' + this.fieldData.settings.nextChoice
+        });
+      }
     },
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('outputData', this.fieldData);
+    save: function save() {
+      this.setChoices();
+      this.$emit('save', this.fieldData);
     }
   }
 });
@@ -5743,8 +5736,8 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('outputData', this.fieldData);
+    save: function save() {
+      this.$emit('save', this.fieldData);
     }
   }
 });
@@ -5820,6 +5813,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     inputData: Object
+  },
+  methods: {
+    save: function save() {
+      this.$emit('save', this.fieldData);
+    }
   }
 });
 
@@ -5925,8 +5923,8 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('inputData', this.fieldData);
+    save: function save() {
+      this.$emit('save', this.fieldData);
     },
     retrieveRecordTypes: function retrieveRecordTypes() {
       var _this = this;
@@ -5998,8 +5996,8 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    submitfieldData: function submitfieldData(fieldData) {
-      this.$emit('inputData', this.fieldData);
+    save: function save() {
+      this.$emit('save', this.fieldData);
     }
   }
 });
@@ -6028,10 +6026,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fieldOptions_checkBox_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./fieldOptions/checkBox.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue");
 /* harmony import */ var _fieldOptions_radioField_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./fieldOptions/radioField.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/radioField.vue");
 /* harmony import */ var _fieldOptions_dropdown_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fieldOptions/dropdown.vue */ "./resources/js/FormBuilder/components/menu/fieldOptions/dropdown.vue");
-//
-//
-//
-//
 //
 //
 //
@@ -6193,6 +6187,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6215,6 +6218,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -6264,6 +6271,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6373,6 +6386,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6395,6 +6413,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6482,6 +6508,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6504,6 +6532,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -6554,6 +6583,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -6576,6 +6609,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6645,6 +6685,25 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
 /* harmony import */ var _FormBuilder_components_preview_upload_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/preview/upload.vue */ "./resources/js/FormBuilder/components/preview/upload.vue");
 /* harmony import */ var _FormBuilder_components_preview_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/FormBuilder/components/preview/sectionDivider.vue */ "./resources/js/FormBuilder/components/preview/sectionDivider.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6746,7 +6805,7 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
   data: function data() {
     return {
       // formData: store.state,
-      clientName: '',
+      inputName: '',
       teams: [],
       dateCompleted: '',
       pickerOptions: {
@@ -6769,47 +6828,7 @@ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__P
     Upload: _FormBuilder_components_preview_upload_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
     SectionDivider: _FormBuilder_components_preview_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
   },
-  computed: {
-    title: {
-      get: function get() {
-        return this.$store.state.title;
-      },
-      set: function set(title) {
-        this.$store.commit('SET_TITLE', title);
-      }
-    },
-    target: {
-      get: function get() {
-        return this.$store.state.target;
-      },
-      set: function set(target) {
-        this.$store.commit('SET_TARGET', target);
-      }
-    },
-    description: {
-      get: function get() {
-        return this.$store.state.description;
-      },
-      set: function set(description) {
-        this.$store.commit('SET_DESCRIPTION', description);
-      }
-    },
-    fields: {
-      get: function get() {
-        return this.$store.state.fields;
-      },
-      set: function set(fields) {
-        this.$store.commit('SET_FIELDS', fields);
-      }
-    }
-  },
-  watch: {// formData: {
-    //     handler() {
-    //         this.state_fields = this.formData
-    //     },
-    //     deep: true
-    // }
-  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_12__["mapState"])(['title', 'description', 'target', 'fields'])),
   methods: {
     buildForm: function buildForm() {
       var _this = this;
@@ -6850,8 +6869,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _FormBuilder_components_canvas_index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/FormBuilder/components/canvas/index.vue */ "./resources/js/FormBuilder/components/canvas/index.vue");
 /* harmony import */ var _FormBuilder_components_menu_index_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/FormBuilder/components/menu/index.vue */ "./resources/js/FormBuilder/components/menu/index.vue");
-//
-//
 //
 //
 //
@@ -9441,7 +9458,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-063dce86]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9460,7 +9477,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-a431cd16]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9479,7 +9496,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7e2120ea]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9498,7 +9515,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-785f2e32]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9517,7 +9534,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9555,7 +9572,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-338e21df]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9574,7 +9591,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-de86f99e]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9593,7 +9610,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9612,7 +9629,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9631,7 +9648,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -9650,7 +9667,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\n    right: 10px; */\n}\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.button-position[data-v-afee96a4] {\n  position: relative;\n  /* bottom: -10px;\r\n    right: 10px; */\n}\r\n", ""]);
 
 // exports
 
@@ -9669,7 +9686,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\n        width: auto;\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n  /* Ipad size */\n}\n@media (min-width: 1024px){\n  /* Standard monitor size */\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  max-width: 260px;\n  min-width: 160px;\n}\n.el-collapse[data-v-1ff48ab5] {\n  width: 250px;\n}\n\n/* #menu-stepper {\r\n        width: auto;\r\n    } */\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  border-color: #badcff;\n  font-size: 120%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 18px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\r\n", ""]);
 
 // exports
 
@@ -9707,7 +9724,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "ul {\n  list-style-type: none;\n}\n", ""]);
+exports.push([module.i, "ul {\n  list-style-type: none;\n}\r\n", ""]);
 
 // exports
 
@@ -9745,7 +9762,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\n\n", ""]);
+exports.push([module.i, "@media (min-width: 768px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    /* \r\n        margin-right: 30px; */\n    margin: 0 auto;\n    margin-left: 5px;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 5px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    margin: 0 auto;\n    min-width: 240px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 289;\n}\n}\n@media (min-width: 1024px){\n#formCreator[data-v-0c2f292a] {\n    display: flex;\n    flex-direction: row;\n    /* align-items: center; */\n    /* align-items: flex-start; */\n    justify-content: center;\n    align-items: center;\n}\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 10%;\n    min-width: 500px;\n}\n#canvas[data-v-0c2f292a] {\n    width: 100%;\n    padding-right: 15px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 20%;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 10%;\n    width: 300px;\n    max-height: 900px;\n    position: -webkit-sticky !important;\n    position: sticky !important;\n    top: 0 !important;\n    align-self: flex-start !important;\n    z-index: 1;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -86686,7 +86703,7 @@ var render = function() {
                   attrs: { type: "text", size: "mini" },
                   on: {
                     click: function($event) {
-                      return _vm.removeItem(item)
+                      return _vm.removeChoice(item)
                     }
                   }
                 },
@@ -86939,7 +86956,7 @@ var render = function() {
                   attrs: { type: "text", size: "mini" },
                   on: {
                     click: function($event) {
-                      return _vm.removeItem(_vm.value)
+                      return _vm.removeChoice(_vm.value)
                     }
                   }
                 },
@@ -87581,7 +87598,7 @@ var render = function() {
                   attrs: { type: "text", size: "mini" },
                   on: {
                     click: function($event) {
-                      return _vm.removeItem(item)
+                      return _vm.removeChoice(item)
                     }
                   }
                 },
@@ -88074,7 +88091,7 @@ var render = function() {
                         { attrs: { span: 10 } },
                         [
                           _c("span", { staticClass: "input-label" }, [
-                            _vm._v(" " + _vm._s(_vm.target_type) + " Name")
+                            _vm._v(" " + _vm._s(_vm.target.type) + " Name")
                           ]),
                           _vm._v(" "),
                           _c("el-input", { staticClass: "inputField" })
@@ -88328,7 +88345,6 @@ var render = function() {
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
-                on: { change: _vm.handleChange },
                 model: {
                   value: _vm.fieldData.settings.checkboxNum,
                   callback: function($$v) {
@@ -88343,8 +88359,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -88526,8 +88548,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -88635,8 +88663,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -88744,8 +88778,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -89017,8 +89057,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -89112,7 +89158,6 @@ var render = function() {
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
-                on: { change: _vm.handleChange },
                 model: {
                   value: _vm.fieldData.settings.radioNum,
                   callback: function($$v) {
@@ -89127,8 +89172,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -89194,8 +89245,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -89322,8 +89379,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -89530,8 +89593,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -89622,8 +89691,14 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            [_vm._t("default", null, { fieldData: _vm.fieldData })],
-            2
+            [
+              _c(
+                "el-button",
+                { attrs: { type: "success" }, on: { click: _vm.save } },
+                [_vm._v("Set")]
+              )
+            ],
+            1
           )
         ],
         1
@@ -89707,7 +89782,7 @@ var render = function() {
                           _vm._v(
                             "\n                      " +
                               _vm._s(input.name) +
-                              "\n                "
+                              "\n                  "
                           )
                         ]
                       )
@@ -89777,39 +89852,53 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "radio" } },
+    { staticClass: "tw-my-8" },
     [
-      _c("label", { staticClass: "inputLabel", attrs: { for: "check" } }, [
-        _vm._v(_vm._s(_vm.field.label))
-      ]),
-      _c("br"),
-      _vm._v(" "),
-      _vm._l(_vm.field.choices, function(item) {
-        return _c(
-          "el-checkbox-group",
-          {
-            key: item.id,
-            staticClass: "tw-h-8",
-            attrs: { id: "check" },
-            model: {
-              value: _vm.select,
-              callback: function($$v) {
-                _vm.select = $$v
-              },
-              expression: "select"
-            }
-          },
-          [
-            _c("el-checkbox", {
-              staticClass: "tw-my-2 tw-ml-8 tw-text-lg",
-              attrs: { label: item.text }
-            })
-          ],
-          1
-        )
-      })
+      _c(
+        "el-row",
+        [
+          _c("el-col", { attrs: { span: 6 } }, [
+            _c(
+              "label",
+              { staticClass: "inputLabel", attrs: { for: "check" } },
+              [_vm._v(_vm._s(_vm.field.label))]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "el-col",
+            { attrs: { span: 10 } },
+            _vm._l(_vm.field.choices, function(item) {
+              return _c(
+                "el-checkbox-group",
+                {
+                  key: item.id,
+                  staticClass: "tw-h-8",
+                  attrs: { id: "check" },
+                  model: {
+                    value: _vm.select,
+                    callback: function($$v) {
+                      _vm.select = $$v
+                    },
+                    expression: "select"
+                  }
+                },
+                [
+                  _c("el-checkbox", {
+                    staticClass: "tw-my-2 tw-ml-8 tw-text-lg",
+                    attrs: { label: item.value }
+                  })
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      )
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -89836,41 +89925,45 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "datepicker" } },
+    { staticClass: "tw-my-8", attrs: { id: "datepicker" } },
     [
       _c(
-        "el-col",
-        { attrs: { span: 12 } },
+        "el-row",
         [
+          _c("el-col", { attrs: { span: 6 } }, [
+            _c(
+              "label",
+              { staticClass: "inputLabel", attrs: { for: "dateField" } },
+              [_vm._v(_vm._s(_vm.field.label))]
+            )
+          ]),
+          _vm._v(" "),
           _c(
-            "label",
-            { staticClass: "inputLabel", attrs: { for: "dateField" } },
-            [_vm._v(_vm._s(_vm.field.label))]
-          ),
-          _c("br"),
-          _vm._v(" "),
-          _c("sup", [_vm._v(_vm._s(_vm.field.fieldDescription))]),
-          _c("br"),
-          _vm._v(" "),
-          _c("el-date-picker", {
-            attrs: {
-              id: "dateField",
-              type: _vm.dateType,
-              "picker-options": _vm.dateOptions,
-              placeholder: _vm.datePlaceHolder,
-              "range-separator": _vm.rangeSeparator,
-              "start-placeholder": _vm.startDate,
-              "end-placeholder": _vm.endDate,
-              format: _vm.dateFormat
-            },
-            model: {
-              value: _vm.value,
-              callback: function($$v) {
-                _vm.value = $$v
-              },
-              expression: "value"
-            }
-          })
+            "el-col",
+            { attrs: { span: 10 } },
+            [
+              _c("el-date-picker", {
+                attrs: {
+                  id: "dateField",
+                  type: _vm.dateType,
+                  "picker-options": _vm.dateOptions,
+                  placeholder: _vm.datePlaceHolder,
+                  "range-separator": _vm.rangeSeparator,
+                  "start-placeholder": _vm.startDate,
+                  "end-placeholder": _vm.endDate,
+                  format: _vm.dateFormat
+                },
+                model: {
+                  value: _vm.value,
+                  callback: function($$v) {
+                    _vm.value = $$v
+                  },
+                  expression: "value"
+                }
+              })
+            ],
+            1
+          )
         ],
         1
       )
@@ -89902,33 +89995,47 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "dropdown" } },
+    { staticClass: "tw-my-8", attrs: { id: "dropdown" } },
     [
-      _c("label", { staticClass: "inputLabel", attrs: { for: "dropdown" } }, [
-        _vm._v(_vm._s(_vm.field.label))
-      ]),
-      _c("br"),
-      _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
-      _vm._v(" "),
       _c(
-        "el-select",
-        {
-          attrs: { id: "dropdown", placeholder: "select" },
-          model: {
-            value: _vm.value,
-            callback: function($$v) {
-              _vm.value = $$v
-            },
-            expression: "value"
-          }
-        },
-        _vm._l(_vm.field.choices, function(item) {
-          return _c("el-option", {
-            key: item.id,
-            attrs: { label: item.text, value: item.text }
-          })
-        }),
+        "el-row",
+        [
+          _c("el-col", { attrs: { span: 6 } }, [
+            _c(
+              "label",
+              { staticClass: "inputLabel", attrs: { for: "dropdown" } },
+              [_vm._v(_vm._s(_vm.field.label))]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "el-col",
+            { attrs: { span: 10 } },
+            [
+              _c(
+                "el-select",
+                {
+                  attrs: { id: "dropdown", placeholder: "select" },
+                  model: {
+                    value: _vm.value,
+                    callback: function($$v) {
+                      _vm.value = $$v
+                    },
+                    expression: "value"
+                  }
+                },
+                _vm._l(_vm.field.choices, function(item) {
+                  return _c("el-option", {
+                    key: item.id,
+                    attrs: { label: item.value, value: item.value }
+                  })
+                }),
+                1
+              )
+            ],
+            1
+          )
+        ],
         1
       )
     ],
@@ -89959,7 +90066,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "matrix" } },
+    { staticClass: "tw-my-8", attrs: { id: "matrix" } },
     [
       _c("br"),
       _vm._v(" "),
@@ -90089,25 +90196,39 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "numeric" } },
+    { staticClass: "tw-my-8", attrs: { id: "numeric" } },
     [
-      _c("label", { staticClass: "inputLabel", attrs: { for: "numfield" } }, [
-        _vm._v(_vm._s(_vm.field.label))
-      ]),
-      _c("br"),
-      _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
-      _vm._v(" "),
-      _c("el-input-number", {
-        attrs: { id: "numfield" },
-        model: {
-          value: _vm.value,
-          callback: function($$v) {
-            _vm.value = $$v
-          },
-          expression: "value"
-        }
-      })
+      _c(
+        "el-row",
+        [
+          _c("el-col", { attrs: { span: 6 } }, [
+            _c(
+              "label",
+              { staticClass: "inputLabel", attrs: { for: "numfield" } },
+              [_vm._v(_vm._s(_vm.field.label))]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "el-col",
+            { attrs: { span: 10 } },
+            [
+              _c("el-input-number", {
+                attrs: { id: "numfield" },
+                model: {
+                  value: _vm.value,
+                  callback: function($$v) {
+                    _vm.value = $$v
+                  },
+                  expression: "value"
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -90136,36 +90257,50 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "radio" } },
+    { staticClass: "tw-my-8", attrs: { id: "radio" } },
     [
-      _c("label", { staticClass: "inputLabel", attrs: { for: "radioGroup" } }, [
-        _vm._v(_vm._s(_vm.field.label))
-      ]),
-      _c("br"),
+      _c(
+        "el-row",
+        [
+          _c("el-col", { attrs: { span: 6 } }, [
+            _c(
+              "label",
+              { staticClass: "inputLabel", attrs: { for: "radioGroup" } },
+              [_vm._v(_vm._s(_vm.field.label))]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "el-col",
+            { attrs: { span: 10 } },
+            _vm._l(_vm.field.choices, function(item) {
+              return _c(
+                "el-radio-group",
+                {
+                  key: item.id,
+                  staticClass: "tw-mr-8",
+                  attrs: { id: "radioGroup" },
+                  model: {
+                    value: _vm.select,
+                    callback: function($$v) {
+                      _vm.select = $$v
+                    },
+                    expression: "select"
+                  }
+                },
+                [_c("el-radio", { attrs: { label: item.value } })],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
-      _vm._v(" "),
-      _vm._l(_vm.field.choices, function(item) {
-        return _c(
-          "el-radio-group",
-          {
-            key: item.id,
-            staticClass: "tw-mr-8",
-            attrs: { id: "radioGroup" },
-            model: {
-              value: _vm.select,
-              callback: function($$v) {
-                _vm.select = $$v
-              },
-              expression: "select"
-            }
-          },
-          [_c("el-radio", { attrs: { label: item.text } })],
-          1
-        )
-      })
+      _c("br")
     ],
-    2
+    1
   )
 }
 var staticRenderFns = []
@@ -90192,6 +90327,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "tw-my-8" },
     [
       _c(
         "el-row",
@@ -90237,23 +90373,23 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "textBox" } },
+    { staticClass: "tw-my-8", attrs: { id: "textBox" } },
     [
       _c(
         "el-row",
         [
+          _c("el-col", { attrs: { span: 6 } }, [
+            _c(
+              "label",
+              { staticClass: "inputLabel", attrs: { for: "textArea" } },
+              [_vm._v(_vm._s(_vm.field.label))]
+            )
+          ]),
+          _vm._v(" "),
           _c(
             "el-col",
-            { attrs: { span: 14 } },
+            { attrs: { span: 10 } },
             [
-              _c(
-                "label",
-                { staticClass: "inputLabel", attrs: { for: "textArea" } },
-                [_vm._v(_vm._s(_vm.field.label))]
-              ),
-              _vm._v(" "),
-              _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
-              _vm._v(" "),
               _c("el-input", {
                 attrs: {
                   id: "textArea",
@@ -90305,24 +90441,21 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "textField" } },
+    { staticClass: "tw-my-8", attrs: { id: "textField" } },
     [
       _c(
         "el-row",
         [
+          _c("el-col", { attrs: { span: 6 } }, [
+            _c("label", { staticClass: "inputLabel", attrs: { for: "text" } }, [
+              _vm._v(_vm._s(_vm.field.label))
+            ])
+          ]),
+          _vm._v(" "),
           _c(
             "el-col",
             { attrs: { span: 10 } },
             [
-              _c(
-                "label",
-                { staticClass: "inputLabel", attrs: { for: "text" } },
-                [_vm._v(_vm._s(_vm.field.label))]
-              ),
-              _c("br"),
-              _vm._v(" "),
-              _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
-              _vm._v(" "),
               _c("el-input", {
                 attrs: { id: "text" },
                 model: {
@@ -90367,35 +90500,41 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "tw-my-8" },
     [
       _c(
-        "el-col",
-        { staticClass: "tw-mt-6", attrs: { span: 12 } },
+        "el-row",
         [
+          _c("el-col", { attrs: { span: 6 } }, [
+            _c(
+              "label",
+              { staticClass: "inputLabel", attrs: { for: "time-picker" } },
+              [_vm._v(_vm._s(_vm.field.label))]
+            )
+          ]),
+          _vm._v(" "),
           _c(
-            "label",
-            { staticClass: "inputLabel", attrs: { for: "time-picker" } },
-            [_vm._v(_vm._s(_vm.field.label))]
-          ),
-          _c("br"),
-          _vm._v(" "),
-          _c("sup", [_vm._v(_vm._s(_vm.field.fieldDescription))]),
-          _vm._v(" "),
-          _c("el-time-picker", {
-            attrs: {
-              id: "time-picker",
-              "arrow-control": "",
-              "picker-options": { selectableRange: "18:30:00 - 20:30:00" },
-              placeholder: "Pick a time"
-            },
-            model: {
-              value: _vm.value,
-              callback: function($$v) {
-                _vm.value = $$v
-              },
-              expression: "value"
-            }
-          })
+            "el-col",
+            { attrs: { span: 10 } },
+            [
+              _c("el-time-picker", {
+                attrs: {
+                  id: "time-picker",
+                  "arrow-control": "",
+                  "picker-options": { selectableRange: "18:30:00 - 20:30:00" },
+                  placeholder: "Pick a time"
+                },
+                model: {
+                  value: _vm.value,
+                  callback: function($$v) {
+                    _vm.value = $$v
+                  },
+                  expression: "value"
+                }
+              })
+            ],
+            1
+          )
         ],
         1
       )
@@ -90427,43 +90566,62 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "fileUpload" } },
+    { staticClass: "tw-my-8", attrs: { id: "fileUpload" } },
     [
-      _c("label", { staticClass: "inputLabel", attrs: { for: "dropdown" } }, [
-        _vm._v(_vm._s(_vm.field.label))
-      ]),
-      _c("br"),
-      _vm._v(" "),
-      _c("sup", [_vm._v(_vm._s(_vm.field.fieldDescription))]),
-      _vm._v(" "),
       _c(
-        "el-upload",
-        {
-          attrs: {
-            disabled: "",
-            action: "https://jsonplaceholder.typicode.com/posts/",
-            "on-preview": _vm.handlePreview,
-            "on-remove": _vm.handleRemove,
-            "before-remove": _vm.beforeRemove,
-            multiple: "",
-            limit: 3,
-            "on-exceed": _vm.handleExceed,
-            "file-list": _vm.fileList
-          }
-        },
+        "el-row",
         [
-          _c("el-button", { attrs: { size: "small", type: "primary" } }, [
-            _vm._v("Click to upload")
+          _c("el-col", { attrs: { span: 6 } }, [
+            _c(
+              "label",
+              { staticClass: "inputLabel", attrs: { for: "dropdown" } },
+              [_vm._v(_vm._s(_vm.field.label))]
+            ),
+            _c("br"),
+            _vm._v(" "),
+            _c("sup", [_vm._v(_vm._s(_vm.field.fieldDescription))])
           ]),
           _vm._v(" "),
           _c(
-            "div",
-            {
-              staticClass: "el-upload__tip",
-              attrs: { slot: "tip" },
-              slot: "tip"
-            },
-            [_vm._v("jpg/png files with a size less than 500kb")]
+            "el-col",
+            { attrs: { span: 10 } },
+            [
+              _c(
+                "el-upload",
+                {
+                  attrs: {
+                    disabled: "",
+                    action: "https://jsonplaceholder.typicode.com/posts/",
+                    "on-preview": _vm.handlePreview,
+                    "on-remove": _vm.handleRemove,
+                    "before-remove": _vm.beforeRemove,
+                    multiple: "",
+                    limit: 3,
+                    "on-exceed": _vm.handleExceed,
+                    "file-list": _vm.fileList
+                  }
+                },
+                [
+                  _c(
+                    "el-button",
+                    { attrs: { size: "small", type: "primary" } },
+                    [_vm._v("Click to upload")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "el-upload__tip",
+                      attrs: { slot: "tip" },
+                      slot: "tip"
+                    },
+                    [_vm._v("jpg/png files with a size less than 500kb")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
           )
         ],
         1
@@ -90587,46 +90745,60 @@ var render = function() {
                     [
                       _c(
                         "el-row",
-                        { staticClass: "tw-mb-4", attrs: { gutter: 20 } },
+                        { staticClass: "tw-mb-4" },
                         [
-                          _c("el-col", { attrs: { span: 2 } }, [
-                            _c("span", { staticClass: "input-label" }, [
-                              _vm._v("  Name")
-                            ]),
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(_vm.target.type) +
-                                "\n                        "
+                          _c("el-col", { attrs: { span: 6 } }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "input-label tw-mt-4",
+                                attrs: { for: "name" }
+                              },
+                              [_vm._v(" " + _vm._s(_vm.target.type) + " Name")]
                             )
                           ]),
                           _vm._v(" "),
                           _c(
                             "el-col",
-                            { attrs: { span: 10 } },
+                            { attrs: { span: 8 } },
                             [
                               _c("el-input", {
                                 staticClass: "inputField",
+                                attrs: { id: "name" },
                                 model: {
-                                  value: _vm.clientName,
+                                  value: _vm.inputName,
                                   callback: function($$v) {
-                                    _vm.clientName = $$v
+                                    _vm.inputName = $$v
                                   },
-                                  expression: "clientName"
+                                  expression: "inputName"
                                 }
                               })
                             ],
                             1
-                          ),
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-row",
+                        { staticClass: "tw-my-4" },
+                        [
+                          _c("el-col", { attrs: { span: 6 } }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "input-label",
+                                attrs: { for: "teamSelect" }
+                              },
+                              [_vm._v("Team")]
+                            )
+                          ]),
                           _vm._v(" "),
                           _c(
                             "el-col",
                             { attrs: { span: 6 } },
                             [
-                              _c("span", { staticClass: "input-label" }, [
-                                _vm._v("Team")
-                              ]),
-                              _c("br"),
-                              _vm._v(" "),
                               _c(
                                 "el-select",
                                 { attrs: { value: "", placeholder: "Select" } },
@@ -90650,19 +90822,26 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "el-row",
-                        { attrs: { guttter: 10 } },
+                        { staticClass: "tw-my-4" },
                         [
+                          _c("el-col", { attrs: { span: 6 } }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "input-label",
+                                attrs: { for: "formDate" }
+                              },
+                              [_vm._v("Date Completed")]
+                            )
+                          ]),
+                          _vm._v(" "),
                           _c(
                             "el-col",
-                            { attrs: { span: 6 } },
+                            { attrs: { span: 8 } },
                             [
-                              _c("span", { staticClass: "input-label" }, [
-                                _vm._v("Date Completed")
-                              ]),
-                              _c("br"),
-                              _vm._v(" "),
                               _c("el-date-picker", {
                                 attrs: {
+                                  id: "formDate",
                                   type: "date",
                                   placeholder: "Pick a day",
                                   "picker-options": _vm.pickerOptions
@@ -90687,20 +90866,19 @@ var render = function() {
                           "div",
                           { key: field.type, staticClass: "tw-mt-4" },
                           [
-                            _c(
-                              "div",
-                              { staticClass: "tw-my-8" },
-                              [
-                                _c(field.type, {
-                                  tag: "component",
-                                  attrs: { field: field }
-                                })
-                              ],
-                              1
-                            )
-                          ]
+                            _c(field.type, {
+                              tag: "component",
+                              staticClass: "tw-my-8",
+                              attrs: { field: field }
+                            })
+                          ],
+                          1
                         )
                       }),
+                      _vm._v(" "),
+                      _c("br"),
+                      _vm._v(" "),
+                      _c("br"),
                       _vm._v(" "),
                       _c(
                         "div",
@@ -113812,7 +113990,7 @@ __webpack_require__.r(__webpack_exports__);
   title: 'Form Title',
   description: 'Subtext',
   target: {
-    type: 'Client',
+    type: '',
     id: 0
   },
   type: 'pre/post',
@@ -115997,7 +116175,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })
