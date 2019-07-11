@@ -3,11 +3,11 @@
     <el-row>
         <el-col :span="10">
             
-            
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-                {{ fieldLabel }}
-            </editable-text>
-            
+            <label class="inputLabel">   
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
+            </label>    
 
             <el-input v-if="field.settings.isLimited"
                 id="input"
@@ -44,9 +44,7 @@ export default {
     props: {
         fieldData: {
             type: Array | Object,
-            default: {
-                label: 'Text Field'
-            }
+            default: {}
         }
     },
 

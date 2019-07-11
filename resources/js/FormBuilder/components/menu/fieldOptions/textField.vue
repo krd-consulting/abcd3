@@ -69,6 +69,7 @@ export default {
 
             fieldData: {
                 type: 'TextField',
+                name: 'text_field',
                 label: '',
                 reference: '',
                 settings: {
@@ -88,12 +89,8 @@ export default {
         inputData: Object,
     },
     methods: {
-        handleChange() {    // used for testing connection. throw away when finished
-        console.log('Doing the thing in menu options');
-        },
         submitfieldData(fieldData) {
             this.$emit('inputData', this.fieldData);
-            console.log(this.fieldData)
         },
 
         retrieveRecordTypes() {

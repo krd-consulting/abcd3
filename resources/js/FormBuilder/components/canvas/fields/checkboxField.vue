@@ -1,20 +1,21 @@
 <template>
   <div id="checkbox">
         <label class="inputLabel">
-            <el-col>
-                <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
-            </el-col>
+            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                {{ fieldLabel }}
+            </editable-text>
         </label><br>
 
         <el-checkbox-group id="check" >
             <el-checkbox 
-                v-model="item.value" 
-                v-for="item in checkList" 
+                v-model="value" 
+                v-for="(item, index) in choices" 
                 :key="item.value" 
                 :label="item.value">
                     <editable-text 
                         class="tw-cursor-pointer mouseOver"
-                        v-model="item.value">
+                        v-model="item.value"
+                        @input="updateChoiceValue($event, index)">
                             {{ item.value }}
                     </editable-text>
                     <el-button 
@@ -47,13 +48,12 @@ import EditableText from '@/components/editableText.vue'
 export default {
     data() {
         return {
-            itemText: '',
-            value: '',
-            editField: '',
-            checkList: [],
             nextItem: 0,
-            field: {}
+            itemText: ''
         }
+    },
+    mounted() {
+        this.getCheckboxItems(); // calls method upon being rendered in the DOM
     },
     components: {
         EditableText
@@ -61,40 +61,85 @@ export default {
     props: {
         fieldData: {
             type: Array | Object,
-            default: {
-            }
+            default: {}
         }
     },
-    created() {
-        this.field = _.clone(this.fieldData)
-    },
-    mounted() {
-        this.setCheckboxItems(); // calls method upon being rendered in the DOM
-    },
-    methods: {
-        addItem: function() {
-            this.checkList.push({
-                id: this.nextItem++, value: this.itemText
-            })
-            this.itemText = ''
+    computed: {
+
+        field: {
+            get() { return this.fieldData; },
+            set(field) { this.$emit('update', field); }
         },
-        loadItem: function() {
-            this.checkList.push({
-                id: this.nextItem++, value: 'item ' + this.nextItem + ' '
-            })  
-        },
-        removeItem(item) {
-            var index = this.checkList.indexOf(item);
-            if (index !== -1) {
-                this.checkList.splice(index, 1);
+
+        fieldLabel: {
+            get() { return this.field.label; },
+            set(label) {
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.label = label;
+                this.field = fieldCopy;
             }
         },
-        setCheckboxItems() {
+
+        choices: {
+            get() { return this.field.choices },
+            set(choices) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.choices = choices;
+                this.field = fieldCopy;
+            }
+        },
+
+        value: {
+            get(){ return this.field.choices.value},
+            set(value){
+                const fieldValue = _.clone(this.field);
+                fieldValue.choices.value = value;
+                this.field = fieldValue;
+                this.$emit('updateChoices', field);
+            }
+        },
+    },
+    methods: {
+        getCheckboxItems() {
             var i;
             for(i= 0; i < this.field.settings.checkboxNum; i++) {
                 this.loadItem();
             }
         },
+
+        loadItem() {
+            this.choices.push({
+                id: this.nextItem++, 
+                value: 'item ' + this.nextItem
+            })
+            this.$store.commit('UPDATE_FIELD', this.field)
+            
+        },
+
+        addItem() {
+            const choicesCopy = _.clone(this.choices);
+
+            choicesCopy.push({
+                id: this.nextItem++, value: this.itemText
+            });
+
+            this.choices = choicesCopy;
+            this.itemText = ''
+        },
+        
+        removeItem(item) {
+            var index = this.choices.indexOf(item);
+            if (index !== -1) {
+                this.choices.splice(index, 1);
+            }
+        },
+
+        updateChoiceValue(value, index) {
+            const fieldCopy = _.clone(this.field);
+            fieldCopy.choices[index].value = value;
+            this.choices = fieldCopy.choices;
+        }
+        
     }
 }
 </script>

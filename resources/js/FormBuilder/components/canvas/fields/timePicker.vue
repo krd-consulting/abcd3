@@ -1,12 +1,13 @@
 <template>
-    <div id="timePicker">
+    <div>
         <el-row>
 
             <label class="inputLabel">
-                <editable-text class="tw-cursor-pointer mouseOver" @input="showField" v-model="field.label">{{ field.label }}</editable-text>
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
             </label>
 
-            <sup>{{ field.description }}</sup>
             <el-time-picker
                 arrow-control
                 v-model="timeSelection"
@@ -26,7 +27,6 @@ export default {
     data: () => {
         return {
             timeSelection: '',
-            field: [],
         }
     },
     props: {
@@ -38,14 +38,31 @@ export default {
     components: {
         EditableText
     },
-    created() {
-        this.field = _.clone(this.fieldData)
+    computed: {
+        fieldLabel: {
+            get() { return this.field.label; },
+            set(label) { 
+                console.log('field label edited');
+
+                const fieldCopy = _.clone(this.field);
+
+                fieldCopy.label = label;
+
+                this.field = fieldCopy;
+            }
+        },
+
+        field: {
+            get() { return this.fieldData; },
+            set(field) { 
+                console.log('field edited');
+                this.$emit('update', field); 
+            }
+        },
     },
-    methods: {
-        showField(value){
-            return (this.field.label[value] == '' || this.editField == value)
-        }
-    }
+    // created() {
+    //     this.field = _.clone(this.fieldData)
+    // },
 }
 </script>
 

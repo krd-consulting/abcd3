@@ -37,10 +37,11 @@
               </template>
 
                 <component :is="selectedInput.component" 
-                    :inputData="selectedInput">
-                        <template v-slot:default="{ fieldData }">
+                    :inputData="selectedInput"
+                    @save="addField">
+                        <!--<template v-slot:default="{ fieldData }">
                             <el-button type="success" @click="addField(fieldData)">Set</el-button>
-                        </template>
+                        </template>-->
                 </component>
 
             </el-collapse-item>
@@ -83,14 +84,16 @@ export default {
                 {name: 'File Upload', component: 'FileUpload'},
                 {name: 'Section Divider', component: 'SectionDivider'},
             ],
-            // presetInputs: [],
-            fieldData: {} //passed from InputOptions component
+            
+            fieldData: {} 
         }
     },
+
     props: {
         outputData: Object,
         inputData: Object
     },
+    
     components: {
         draggable,
         TextField,
@@ -105,8 +108,7 @@ export default {
         RadioField,
         Dropdown
     },
-    computed: {
-    },
+    
     methods: {
 
         selectInput(input) {
@@ -124,10 +126,9 @@ export default {
             this.step = '1';
         },
 
-        submitfieldData(fieldData) {
-            this.$emit('inputData', this.fieldData);
-            
-        }
+        // submitfieldData(fieldData) {
+        //     this.$emit('inputData', this.fieldData);
+        // }
     }
 }
 </script>

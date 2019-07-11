@@ -3,7 +3,7 @@
         <label for="dropdown" class="inputLabel">{{ field.label }}</label><br>
         <sup>{{ field.description }}</sup>
         <el-select id="dropdown" v-model="value" placeholder="select">
-            <el-option v-for="item in field.options.responses" 
+            <el-option v-for="item in field.choices" 
                 :key="item.id" 
                 :label="item.text" 
                 :value="item.text">

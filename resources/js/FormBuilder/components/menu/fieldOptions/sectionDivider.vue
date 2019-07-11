@@ -19,6 +19,7 @@ export default {
     data: () => {
         return {
             type: 'SectionDivider',
+            name: 'section_divider',
             fieldData: {
                 label: ''
             },
@@ -28,9 +29,6 @@ export default {
         inputData: Object,
     },
     methods: {
-        handleChange() {
-            console.log('Doing the thing in menu options');
-        },
 
         submitfieldData(fieldData) {
             this.$emit('outputData', this.fieldData);

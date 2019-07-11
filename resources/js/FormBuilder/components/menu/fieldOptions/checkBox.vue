@@ -29,14 +29,13 @@ export default {
         return {
             fieldData: {
                 type: 'CheckBox',
+                name: 'check_box',
                 label: '',
                 settings: {
                     required: false,
                     checkboxNum: 2,
                 },
-                options: {
-                    choices: []
-                },
+                choices: [],
                 rules: {
                     label: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }

@@ -1,10 +1,14 @@
 export default {
     title: 'Form Title',
     description: 'Subtext',
-    type: '',
     target: {
-    	type: '',
-    	id: ''
+    	type: 'Client',
+    	id: 0
     },
+    type: 'pre/post',
+    name: '',
+    teams: [],
+    date: '',
+    
     fields: []
 }

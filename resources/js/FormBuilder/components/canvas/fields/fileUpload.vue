@@ -1,8 +1,12 @@
 <template>
     <div id="fileUpload">
       <label class="inputLabel">
-          <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
-          <editable-text class="tw-cursor-pointer mouseOver tw-text-xs" v-model="field.description">{{ field.description }}</editable-text>
+          <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+              {{ fieldLabel }}
+          </editable-text>
+          <editable-text class="tw-cursor-pointer tw-text-xs mouseOver" v-model="fieldDescription">
+              {{ fieldDescription }}
+          </editable-text>
       </label>
       <el-upload disabled
           action="https://jsonplaceholder.typicode.com/posts/"
@@ -27,7 +31,6 @@ export default {
     data() {
       return {
         fileList: [],
-        field: []
       };
     },
     props: {
@@ -39,15 +42,47 @@ export default {
     components: {
       EditableText
     },
-    created() {
-        this.field = _.clone(this.fieldData)
+    computed: {
+        fieldLabel: {
+            get() { return this.field.label; },
+            set(label) { 
+                console.log('field label edited');
+
+                const fieldCopy = _.clone(this.field);
+
+                fieldCopy.label = label;
+
+                this.field = fieldCopy;
+            }
+        },
+
+        fieldDescription: {
+            get() { return this.field.description; },
+            set(description) { 
+                console.log('field description edited');
+
+                const fieldCopy = _.clone(this.field);
+
+                fieldCopy.description = description;
+
+                this.field = fieldCopy;
+            }
+        },
+
+        field: {
+            get() { return this.fieldData; },
+            set(field) { 
+                console.log('field edited');
+                this.$emit('update', field); 
+            }
+        },
     },
     methods: {
       handleRemove(file, fileList) {
-        console.log(file, fileList);
+        console.log(file, fileList); // temp methods
       },
       handlePreview(file) {
-        console.log(file);
+        console.log(file); // temp methods
       },
       handleExceed(files, fileList) {
         this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);

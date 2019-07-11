@@ -26,7 +26,7 @@
                         
                     <el-row :gutter="10">
                         <el-col :span="10">
-                            <span class="input-label"> {{ target_type }} Name</span>
+                            <span class="input-label"> {{ targetTitle }} Name</span>
                             <el-input class="inputField"></el-input>
                         </el-col>
                         
@@ -94,10 +94,10 @@ import TextField from '@/FormBuilder/components/canvas/fields/textField.vue'
 import TextBox from '@/FormBuilder/components/canvas/fields/textArea.vue'
 import CheckBox from '@/FormBuilder/components/canvas/fields/checkboxField.vue'
 import Dropdown from '@/FormBuilder/components/canvas/fields/dropdownField.vue'
-import NumericField from '@/FormBuilder/components/canvas/fields/numericField.vue'
-import RadioField from '@/FormBuilder/components/canvas/fields/radioField.vue'
+import Numeric from '@/FormBuilder/components/canvas/fields/numericField.vue'
+import Radio from '@/FormBuilder/components/canvas/fields/radioField.vue'
 import DatePicker from '@/FormBuilder/components/canvas/fields/dateField.vue'
-import MatrixField from '@/FormBuilder/components/canvas/fields/matrixField.vue'
+import Matrix from '@/FormBuilder/components/canvas/fields/matrixField.vue'
 import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
 import FileUpload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
@@ -159,12 +159,12 @@ export default {
         TextField,
         TextBox,
         SectionDivider,
-        NumericField,
+        Numeric,
         CheckBox,
         Dropdown,
-        RadioField,
+        Radio,
         DatePicker,
-        MatrixField,
+        Matrix,
         TimePicker,
         FileUpload,
     },
@@ -173,18 +173,24 @@ export default {
             get() { return this.$store.state.title },
             set(title) { this.$store.commit('SET_TITLE', title) }, 
         },
+        target: {
+            get() { return this.$store.state.target },
+            set(target) { this.$store.commit('SET_TARGET', target) }, 
+        },
         description: {
             get() { return this.$store.state.description },
             set(description) { this.$store.commit('SET_DESCRIPTION', description) }
         },
         fields: { 
-            get() {
-                return this.$store.state.fields
-            },
-            set(fields) {
-                this.$store.commit('SET_FIELDS', fields);
-            }
+            get() { return this.$store.state.fields },
+            set(fields) { this.$store.commit('SET_FIELDS', fields); }
         },
+        targetTitle() {
+            if(this.target.name != null)
+                return this.target.name;
+
+            return this.target.type.name;
+        }
     },
     methods: {
         removeField(fieldIndex) {
@@ -218,21 +224,22 @@ export default {
             this.$forceUpdate();
         },
 
+        updateFieldChoices(field, fieldIndex) {
+            this.$store.commit({
+                type: 'UPDATE_FIELD_CHOICES',
+                field,
+                fieldIndex
+            });
+
+            this.$forceUpdate();
+        },
+
         initializeForm(data) {
             this.title = data.name;
             this.description = data.description;
             this.target = data.target;
         }
 
-    },
-    watch: {
-        // fields: { 
-        //     handler() {
-        //         this.$store.commit('SET_FIELDS', this.fields) 
-        //     },
-
-        //     deep: true
-        // }
     },
 
     created() {

@@ -11,7 +11,7 @@
             </el-form-item>
             
             <el-form-item label="Number of Menu Selections">
-                <el-input-number v-model="fieldData.settings.dropdownNum" controls-position="right" @change="handleChange" :min="2" :max="10"></el-input-number>
+                <el-input-number v-model="fieldData.settings.dropdownNum" controls-position="right" :min="2" :max="10"></el-input-number>
             </el-form-item>
 
             <el-form-item>
@@ -29,14 +29,13 @@ export default {
         return {
             fieldData: {
                 type: 'Dropdown',
+                name: 'dropdown',
                 label: '',
                 settings: {
                     required: false,
                     dropdownNum: 2,
                 },
-                options: {
-                    choices: []
-                },
+                choices: [],
                 rules: {
                     label: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }
@@ -49,10 +48,6 @@ export default {
         inputData: Object,
     },
     methods: {
-        handleChange() {
-            console.log('Doing the thing in menu options');
-        },
-
         submitfieldData(fieldData) {
             this.$emit('outputData', this.fieldData);
         }

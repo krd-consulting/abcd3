@@ -40,6 +40,7 @@ export default {
         return {
             fieldData: {
                 type: 'TextBox',
+                name: 'text_box',
                 label: '',
                 settings: {
                     required: false,

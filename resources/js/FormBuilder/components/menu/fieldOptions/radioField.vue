@@ -27,15 +27,14 @@ export default {
     data: () => {
         return {
             fieldData: {
-                type: 'RadioField',
+                type: 'Radio',
+                name: 'radio_field',
                 label: '',
                 settings: {
                     required: false,
                     radioNum: 2,
                 },
-                options: {
-                    choices: []
-                },
+                choices: [],
                 rules: {
                     label: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }

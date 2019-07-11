@@ -5,7 +5,7 @@ export default {
     getDescription: state => {
         return state.description
     },
-    getForm: state => {
-        return state.formList
+    formData: state => {
+        return state
     }
 }

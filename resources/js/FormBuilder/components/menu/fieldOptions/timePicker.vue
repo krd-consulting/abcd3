@@ -25,6 +25,7 @@ export default {
         return {
             fieldData: {
                 type: 'TimePicker',
+                name: 'time_picker',
                 label: '',
                 settings: {
                     required: false,
@@ -43,7 +44,7 @@ export default {
     methods: {
         submitfieldData(fieldData) {
             this.$emit('inputData', this.fieldData);
-        }
+        },
     }
 }
 </script>

@@ -3,15 +3,17 @@
     {
         "title": "Test Form",
         "description": "Intake form for Shakespeare Slam Poetry Club",
-        "target_type": "Client",
-        "target_id": "3",
+        "target" : {
+            "type": "Client",
+            "id": 0
+        },
         "form_type": "pre/post",
         "Name": "",
         "team": [],
         "date": "",
         "fields": [
             {
-                "name": "Radio",
+                "type": "Radio",
                 "label": "What is thy gender",
                 "description": "",
                 "reference": [],
@@ -34,15 +36,13 @@
                         "date_range": false
                     }
                 },
-                "options": {
-                    "questions": [],
-                    "choices": [
-                        {"id": 0, "text": "Male", "value": 1},
-                        {"id": 1, "text": "Female", "value": 2},
-                        {"id": 2, "text": "Non-Binary", "value": 3},
-                        {"id": 3, "text": "Speaketh not of mine amorous rite", "value": 4}
-                    ]
-                }
+                "questions": [],
+                "choices": [
+                    {"id": 0, "text": "Male", "value": 1},
+                    {"id": 1, "text": "Female", "value": 2},
+                    {"id": 2, "text": "Non-Binary", "value": 3},
+                    {"id": 3, "text": "Speaketh not of mine amorous rite", "value": 4}
+                ]
             },
             {
                 "type": "TextField",
@@ -68,10 +68,8 @@
                         "date_range": false
                     }
                 },
-                "options": {
-                    "questions": [],
-                    "choices": []
-                }
+                "questions": [],
+                "choices": []
             },
             {
                 "type": "TextBox",
@@ -97,10 +95,8 @@
                         "date_range": false
                     }
                 },
-                "options": {
-                    "questions": [],
-                    "choices": []
-                }
+                "questions": [],
+                "choices": []
             },
             {
                 "type": "NumericField",
@@ -126,10 +122,8 @@
                         "date_range": false
                     }
                 },
-                "options": {
-                    "questions": [],
-                    "choices": []
-                }
+                "questions": [],
+                "choices": []
             },
             {
                 "type": "Dropdown",
@@ -155,14 +149,11 @@
                         "date_range": false
                     }
                 },
-                "options": {
-                    "questions": [],
-                    "choices": [
-                        {"id": 1, "text": "Aye! We absolutely do", "value": 1},
-                        {"id": 2, "text": "Nay! We doth not", "value": 2},
-                        {"id": 3, "text": "Oft upon a yonder edge-case", "value": 3}
-                    ]
-                }
+                "choices": [
+                    {"id": 1, "text": "Aye! We absolutely do", "value": 1},
+                    {"id": 2, "text": "Nay! We doth not", "value": 2},
+                    {"id": 3, "text": "Oft upon a yonder edge-case", "value": 3}
+                ]
             },
             {
                 "type": "SectionDivider",
@@ -188,10 +179,9 @@
                         "date_range": false
                     }
                 },
-                "options": {
+                
                     "questions": [],
                     "choices": []
-                }
             },
             {
                 "type": "Checkbox",
@@ -217,22 +207,19 @@
                         "date_range": false
                     }
                 },
-                "options": {
-                    "questions": [],
-                    "choices": [
-                        {"id": 0, "text": "Hamlet", "value": 1},
-                        {"id": 1, "text": "Iago", "value": 2},
-                        {"id": 2, "text": "Lady Macbeth", "value": 3},
-                        {"id": 3, "text": "Mercutio", "value": 4},
-                        {"id": 4, "text": "Macbeth", "value": 5},
-                        {"id": 5, "text": "Ophelia", "value": 6},
-                        {"id": 6, "text": "Othello", "value": 7},
-                        {"id": 7, "text": "Viola", "value": 8},
-                        {"id": 8, "text": "Benedick", "value": 9},
-                        {"id": 9, "text": "Horatio", "value": 10}
-                    ]
-                }
-            },
+                "choices": [
+                    {"id": 0, "text": "Hamlet", "value": 1},
+                    {"id": 1, "text": "Iago", "value": 2},
+                    {"id": 2, "text": "Lady Macbeth", "value": 3},
+                    {"id": 3, "text": "Mercutio", "value": 4},
+                    {"id": 4, "text": "Macbeth", "value": 5},
+                    {"id": 5, "text": "Ophelia", "value": 6},
+                    {"id": 6, "text": "Othello", "value": 7},
+                    {"id": 7, "text": "Viola", "value": 8},
+                    {"id": 8, "text": "Benedick", "value": 9},
+                    {"id": 9, "text": "Horatio", "value": 10}
+                ]
+        },
             {
                 "type": "Datefield",
                 "label": "Shall I compare thee to a summer's day?",
@@ -257,10 +244,8 @@
                         "date_range": false
                     }
                 },
-                "options": {
-                    "questions": [],
-                    "choices": []
-                }
+                "questions": [],
+                "choices": []
             },
             {
                 "type": "TimePicker",
@@ -286,10 +271,8 @@
                         "date_range": false
                     }
                 },
-                "options": {
-                    "questions": [],
-                    "choices": []
-                }
+                "questions": [],
+                "choices": []
             },
             {
                 "type": "Matrix",
@@ -316,23 +299,19 @@
                         "date_range": false
                     }
                 },
-                "options": 
-                {
-                    "questions": [
+                "questions": [
                         {"id": 0, "text": "How for art thou satisfied"},
                         {"id": 1, "text": "From whence from thou art satisfied"},
                         {"id": 2, "text": "Doth satisfaction thous't cannot attain"}
-
-                    ],
+                ],
                     
-                    "choices": [
-                        {"id": 0, "text": "A pestilent gall to me ", "value": 1},
-                        {"id": 1, "text": "Tis but a scratch", "value": 2},
-                        {"id": 2, "text": "I doth not care", "value": 3},
-                        {"id": 3, "text": "I feeleth well enow ", "value": 4},
-                        {"id": 4, "text": "like a silver bow!", "value": 5}
-                    ]
-                }
+                "choices": [
+                    {"id": 0, "text": "A pestilent gall to me ", "value": 1},
+                    {"id": 1, "text": "Tis but a scratch", "value": 2},
+                    {"id": 2, "text": "I doth not care", "value": 3},
+                    {"id": 3, "text": "I feeleth well enow ", "value": 4},
+                    {"id": 4, "text": "like a silver bow!", "value": 5}
+                ]
             },
             {
                 "type": "Upload",
@@ -358,11 +337,6 @@
                         "include_time": false,
                         "date_range": false
                     }
-                },
-                "options": 
-                {
-                    "questions": [],
-                    "choices": []
                 }
             }
             

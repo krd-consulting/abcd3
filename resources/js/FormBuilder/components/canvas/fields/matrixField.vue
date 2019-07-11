@@ -1,21 +1,34 @@
 <template>
-    <div id="textarea">
+    <div id="matrix">
         <label class="inputLabel">
-          <editable-text class="tw-cursor-pointer mouseOver" v-model="field.label">{{ field.label}}</editable-text>
-          <editable-text class="tw-cursor-pointer mouseOver tw-text-xs" v-model="field.description">{{ field.description }}</editable-text>
+            <editable-text 
+                class="tw-cursor-pointer mouseOver" 
+                v-model="fieldLabel">
+                    {{ fieldLabel }}
+            </editable-text>
+
+            <editable-text 
+                class="tw-cursor-pointer mouseOver tw-text-xs" 
+                v-model="fieldDescription">
+                    {{ fieldDescription }}
+            </editable-text>
       </label>
         <table id="matrix-table">
             <thead>
                 <tr class="tw-max-w-sm">
-                    <th><el-button type="text" class="tw-ml-4" @click="addColumn">Add Radio Column</el-button></th>
-                    <th v-for="item in radioList" :key="item.key" >
+                    <th><el-button type="text" class="tw-ml-4" @click="addChoice">Add Radio Column</el-button></th>
+                    <th v-for="(item, index) in choices" :key="item.index" >
                         <el-col>
-                            <editable-text class="tw-cursor-pointer mouseOver" v-model="item.text"/>
+                            <editable-text 
+                                class="tw-cursor-pointer mouseOver" 
+                                v-model="item.value"
+                                @input="updateChoiceValue($event, index)"
+                            />
                             <el-button 
                                 class="tw-pr-15" 
                                 type="text" 
                                 size="mini" 
-                                @click="removeColumn(item)">
+                                @click="removeChoice(item)">
                                     Remove
                             </el-button>
                         </el-col>  
@@ -23,19 +36,23 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in matrix" :key="item.id">
+                <tr v-for="(item, index) in questions" :key="item.index">
                     <td>
-                        <editable-text class="tw-cursor-pointer mouseOver" v-model="item.question"/>
-                        <el-button type="text" size="mini" @click="removeRow(item)">Remove</el-button>
+                        <editable-text 
+                            class="tw-cursor-pointer mouseOver" 
+                            v-model="item.text"
+                            @input="updateQuestionValue($event, index)"
+                        />
+                        <el-button type="text" size="mini" @click="removeQuestion(item)">Remove</el-button>
                     </td>
-                    <td v-for="radio in radioList" :key="radio" class="tw-text-center">
+                    <td v-for="radio in choices" :key="radio.index" class="tw-text-center">
                         <el-radio v-model="radioSelect" disabled></el-radio>
                     </td>
                 </tr>
             </tbody>
         </table>
 
-         <form @submit.prevent="addItem" class="tw-inline-block tw-my-4">
+         <form @submit.prevent="addQuestion" class="tw-inline-block tw-my-4">
             <el-row>
                 <label for="add-item">Add a new question</label>
                 <el-col :span="16" class="tw-float-left">
@@ -43,7 +60,7 @@
                 </el-col>
                 <el-col :span="1.5" class="tw-float-right">
                     <el-tooltip content="Alternatively, you can press enter after typing in this field to add items to the list">
-                        <el-button type="success" @click="addItem">Add</el-button>
+                        <el-button type="text" @click="addQuestion">Add</el-button>
                     </el-tooltip>
                 </el-col>
             </el-row>
@@ -59,14 +76,14 @@ import EditableText from '@/components/editableText.vue'
 export default {
     data() {
         return {
-            matrix: [],
-            nextItem: 0,
             radioSelect: 1,
-            radioList: [],
-            editField: '',
             itemText: '',
-            field: []
+            isMounted: false
         }
+    },
+    mounted() {
+        // calls methods upon being rendered in the DOM
+        this.getMatrixItems(); 
     },
     components: {
         EditableText
@@ -77,62 +94,128 @@ export default {
             default: {}
         }
     },
-    created() {
-        this.field = _.clone(this.fieldData)
-    },
-    mounted() {
-        // calls methods upon being rendered in the DOM
-        this.getMatrixItems(); 
-        this.getRadioList();
+    computed: {
+        field: {
+            get() { return this.fieldData; },
+            set(field) { this.$emit('update', field); }
+        },
+
+        fieldLabel: {
+            get() { return this.field.label },
+            set(label) {
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.label = label;
+                this.field = fieldCopy;
+            }
+        },
+
+        fieldDescription: {
+            get() { return this.field.description },
+            set(description) {
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.description = description;
+                this.field = fieldCopy;
+            }
+        },
+
+        choices: {
+            get() { return this.field.choices },
+            set(choices) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.choices = choices;
+                this.field = fieldCopy;
+            }
+        },
+
+        questions: {
+            get() { return this.field.questions },
+            set(questions) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.questions = questions;
+                this.field = fieldCopy;
+            }
+        },
+
+        value: {
+            get(){ return this.field.choices.value},
+            set(value){
+                const fieldValue = _.clone(this.field);
+                fieldValue.choices.value = value;
+                this.field = fieldValue;
+                this.$emit('updateChoices', field);
+            }
+        },
     },
     methods: {
-        addItem() {
-            this.matrix.push({
-                id: this.nextItem++, question: this.itemText, response: ''
-            })
-            this.itemText = ''
-        },
-        loadItem() {
-            this.matrix.push({
-                id: this.nextItem++, question: 'Question ' + this.nextItem, response: this.radioList
-            })
-        },
-        removeRow(item) {
-            var index = this.matrix.indexOf(item);
-            if (index !== -1) {
-                this.matrix.splice(index, 1);
-            }
-        },
-        addColumn() {
-            // this.getRadioList();
-            this.radioList.push({
-                key: this.field.settings.matrix_choices++,
-                text: 'Item ' + this.field.settings.matrix_choices
-            })
-        },
-        removeColumn(item) {
-            var index = this.radioList.indexOf(item);
-            if (index !== -1) {
-                this.radioList.splice(index, 1);
-            }
-        },
-        getMatrixItems() {
-            var i;
-            for(i = 0; i < this.field.settings.matrix_questions; i++) {
-                this.loadItem();
-            }
-        },
-        getRadioList() {
-            var i;
-            this.radioList = []
 
-            for(i = 1; i <= this.field.settings.matrix_choices; i++) {
-                this.radioList.push({
-                    key: i,
-                    text: 'Item ' + i
-                })
-            }
+        addQuestion() {
+            const questionsCopy = _.clone(this.questions);
+
+            questionsCopy.push({
+                id: this.nextQuestion++, text: this.itemText
+            });
+
+            this.questions = questionsCopy;
+            this.itemText = '';
+
+            this.$forceUpdate();
         },
+        
+        removeQuestion(item) {
+            // TODO: fix
+            // const questionsCopy = _.clone(this.questions);
+
+            var index = this.questions.indexOf(item);
+
+            if (index !== -1) {
+                this.questions.splice(index, 1);
+            }
+            // this.questions = questionsCopy;
+            this.$store.commit('UPDATE_FIELD', this.field);
+
+            this.$forceUpdate();
+        },
+
+        addChoice() {
+            const choicesCopy = _.clone(this.choices);
+
+            choicesCopy.push({
+                id: this.nextQuestion++, value: 'New Item'
+            });
+
+            console.log(choicesCopy)
+            this.choices = choicesCopy;
+
+            this.$forceUpdate();
+        },
+
+        removeChoice(item) {
+            var index = this.choices.indexOf(item);
+
+            if (index !== -1) {
+                this.choices.splice(index, 1);
+                this.$store.commit('UPDATE_FIELD', this.field)
+            }
+
+            this.$forceUpdate();
+        },
+        
+        updateChoiceValue(value, index) {
+            const fieldCopy = _.clone(this.field);
+            fieldCopy.choices[index].value = value;
+            this.choices = fieldCopy.choices;
+
+            this.$forceUpdate();
+        },
+
+        updateQuestionValue(value, index) {
+            const fieldCopy = _.clone(this.field);
+            fieldCopy.questions[index].value = value;
+            this.questions = fieldCopy.questions;
+
+            this.$forceUpdate();
+        }
+        
     }
 }
 </script>
