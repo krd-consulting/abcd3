@@ -5107,6 +5107,10 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(fields) {
         this.$store.commit('SET_FIELDS', fields);
       }
+    },
+    targetTitle: function targetTitle() {
+      if (this.target.name != null) return this.target.name;
+      return this.target.type.name;
     }
   },
   methods: {
@@ -88074,7 +88078,7 @@ var render = function() {
                         { attrs: { span: 10 } },
                         [
                           _c("span", { staticClass: "input-label" }, [
-                            _vm._v(" " + _vm._s(_vm.target_type) + " Name")
+                            _vm._v(" " + _vm._s(_vm.targetTitle) + " Name")
                           ]),
                           _vm._v(" "),
                           _c("el-input", { staticClass: "inputField" })

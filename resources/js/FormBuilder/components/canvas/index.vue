@@ -26,7 +26,7 @@
                         
                     <el-row :gutter="10">
                         <el-col :span="10">
-                            <span class="input-label"> {{ target_type }} Name</span>
+                            <span class="input-label"> {{ targetTitle }} Name</span>
                             <el-input class="inputField"></el-input>
                         </el-col>
                         
@@ -185,6 +185,12 @@ export default {
             get() { return this.$store.state.fields },
             set(fields) { this.$store.commit('SET_FIELDS', fields); }
         },
+        targetTitle() {
+            if(this.target.name != null)
+                return this.target.name;
+
+            return this.target.type.name;
+        }
     },
     methods: {
         removeField(fieldIndex) {
