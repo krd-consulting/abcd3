@@ -3,11 +3,11 @@
       <el-row>
         <el-col :span="6">
           <label for="dropdown" class="inputLabel">{{ field.label }}</label><br>
-              <sup>{{ field.fieldDescription }}</sup>
+              <sup>{{ field.description }}</sup>
         </el-col>
 
         <el-col :span="10">
-          <el-upload disabled
+          <el-upload 
               action="https://jsonplaceholder.typicode.com/posts/"
               :on-preview="handlePreview"
               :on-remove="handleRemove"

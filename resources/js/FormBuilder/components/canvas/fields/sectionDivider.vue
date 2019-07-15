@@ -6,6 +6,7 @@
                 <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
                     {{ fieldLabel }}
                 </editable-text>
+                
             </span>
 
         </el-divider>
@@ -32,6 +33,14 @@ export default {
     },
 
     computed: {
+        field: {
+            get() { return this.fieldData; },
+            set(field) { 
+                console.log('field edited');
+                this.$emit('update', field); 
+            }
+        },
+
         fieldLabel: {
             get() { return this.field.label; },
             set(label) { 
@@ -42,14 +51,6 @@ export default {
                 fieldCopy.label = label;
 
                 this.field = fieldCopy;
-            }
-        },
-
-        field: {
-            get() { return this.fieldData; },
-            set(field) { 
-                console.log('field edited');
-                this.$emit('update', field); 
             }
         },
     },

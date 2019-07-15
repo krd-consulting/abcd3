@@ -15,7 +15,8 @@
                     :range-separator="rangeSeparator"
                     :start-placeholder="startDate"
                     :end-placeholder="endDate"
-                    :format="dateFormat">
+                    :format="dateFormat"
+                    :required="isRequired">
                 </el-date-picker>
             </el-col>
         </el-row>
@@ -39,7 +40,32 @@ export default {
     props: { 
         field: Object
     },
-
+    computed: {
+        isRequired: {
+            get() { return this.field.settings.required }
+        },
+        dateType: {
+            get() { return this.field.settings.dateType} 
+        },
+        dateOptions: {
+            get() { return this.field.settings.dateOptions } 
+        },
+        datePlaceHolder: {
+            get() { return this.field.settings.datePlaceHolder } 
+        },
+        rangeSeparator: {
+            get() { return this.field.settings.rangeSeparator } 
+        },
+        startDate: {
+            get() { return this.field.settings.startDate } 
+        },
+        endDate: {
+            get() { return this.field.settings.endDate } 
+        },
+        dateFormat: {
+            get() { return this.field.settings.dateFormat } 
+        },
+    }
 }
 </script>
 

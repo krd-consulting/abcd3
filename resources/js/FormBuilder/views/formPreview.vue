@@ -19,7 +19,7 @@
                                 Preview Form
                         </el-menu-item>
                         <el-menu-item
-                            class="tw-float-right tw-font-bold focus:font-extrabold" 
+                            class="float-right tw-font-bold focus:font-extrabold" 
                             @click="buildForm">
                                 Finish and Build!
                         </el-menu-item>
@@ -42,18 +42,33 @@
                             </el-col>
                         </el-row>
                             
-                            <el-row class="tw-my-4">
-                                <el-col :span="6">
-                                    <label for="teamSelect" class="input-label">Team</label>
-                                </el-col>
-                                <el-col :span="6">
-                                    <el-select value="" placeholder="Select">
-                                        <el-option v-for="team in teams" :key="team.value"
-                                        :label="team.label" :value="team.value">
-                                        </el-option>
-                                    </el-select>
-                                </el-col>
-                            </el-row>
+                        <el-row class="tw-my-4">
+                            <el-col :span="6">
+                                <label for="teamSelect" class="input-label">Team</label>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-select value="" placeholder="Select">
+                                    <el-option v-for="team in teams" :key="team.value"
+                                    :label="team.label" :value="team.value">
+                                    </el-option>
+                                </el-select>
+                            </el-col>
+                        </el-row>
+
+                        <el-row class="tw-my-4">
+                            <el-col :span="6">
+                                <label for="pre-post" class="input-label">Completed for</label>
+                            </el-col>
+                            <el-col :span="6">
+                                <el-select id="pre-post" v-model="value" placeholder="Select">
+                                    <el-option v-for="select in prePost" 
+                                        :key="select.value"
+                                        :label="select.value" 
+                                        :value="select.value">
+                                    </el-option>
+                                </el-select>
+                            </el-col>
+                        </el-row>
 
                         <el-row class="tw-my-4">
                             <el-col :span="6">
@@ -119,9 +134,15 @@ export default {
     data: () => {
         return {
             // formData: store.state,
+            value: '',
             inputName: '',
             teams: [],
             dateCompleted: '',
+            prePost: [
+                {id: 0, value: 'Pre-test'},
+                {id: 1, value: 'Intermittent'},
+                {id: 2, value: 'Post-test'},
+            ],
             pickerOptions: {
                 disabledDate(time) {
                     return time.getTime() > Date.now();
@@ -190,16 +211,33 @@ export default {
 </script>
 
 <style scoped>
-    #preview {
+#preview {
         display: flex;
         position: absolute;
         top: 50;
         left: 0;
         min-height: 85%;
         width: 100%;
+}
+#preview-form {
+    margin: 0 auto;
+    width: 1000px;
+}
+.float-right {
+        float: right !important;
     }
-    #preview-form {
-        margin: 0 auto;
-        width: 1000px;
-    }
+
+@media (min-width: 768px){
+    
+}
+ 
+@media (min-width: 1024px){
+
+    
+}
+ 
+@media (min-width: 1200px){
+
+ 
+}
 </style>

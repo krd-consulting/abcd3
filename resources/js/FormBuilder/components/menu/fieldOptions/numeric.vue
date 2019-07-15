@@ -34,7 +34,7 @@ name: 'Numeric',
                 label: '',
                 settings: {
                     required: false,
-                    defaultNum: 0,
+                    defaultNum: 5,
                 },
                 rules: {
                     label: [

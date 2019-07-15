@@ -23,10 +23,21 @@
                 placeholder="Your text here" 
                 v-model="value">
             </el-input>
-                
+
         </el-col>
-            <slot></slot>
     </el-row>
+
+    <el-switch 
+        v-model="field.settings.required" 
+        active-text="Required" 
+        inactive-text="Optional"
+        class="tw-float-right button-top">
+    </el-switch>
+
+    <div class="footer">
+        <slot></slot>
+    </div>
+    
   </div>
 </template>
 
@@ -82,5 +93,15 @@ export default {
     color: #409EFF;
     text-decoration: underline;
     font-size: 110%;
+}
+.button-top {
+    position: absolute;
+    top: 30px;;
+    right: 10px;
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    right: 10px;
 }
 </style>

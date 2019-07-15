@@ -18,10 +18,13 @@ export default {
     name: 'sectionDivider',
     data: () => {
         return {
-            type: 'SectionDivider',
-            name: 'section_divider',
             fieldData: {
-                label: ''
+                type: 'SectionDivider',
+                name: 'section_divider',
+                label: '',
+                settings: {
+                    required: false,
+                },
             },
         }
     },

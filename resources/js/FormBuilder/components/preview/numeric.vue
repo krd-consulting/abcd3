@@ -6,7 +6,18 @@
             </el-col>
 
             <el-col :span="10">
-                <el-input-number id="numfield" v-model="value"></el-input-number>
+                <el-input-number 
+                    v-if="limit"
+                    id="numfield" 
+                    v-model="useDefault"
+                    :required="isRequired">
+                </el-input-number>
+                <el-input-number 
+                    v-else
+                    id="numfield" 
+                    v-model="value"
+                    :required="isRequired">
+                </el-input-number>
             </el-col>
         </el-row>
     </div>
@@ -22,6 +33,17 @@ export default {
     props: { 
         field: Object
     },
+    computed: {
+        useDefault: {
+            get() { return this.field.settings.defaultNum }
+        },
+        isRequired: {
+            get() { return this.field.settings.required }
+        },
+        limit: {
+            get() { return this.field.settings.isLimited }
+        }
+    }
 }
 </script>
 

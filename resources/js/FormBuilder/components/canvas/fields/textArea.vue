@@ -1,5 +1,5 @@
 <template>
-    <div id="Textbox">
+    <div id="Textbox" class="tw-mb-4">
         <el-row>
             <el-col :span="10">
 
@@ -15,19 +15,28 @@
                     :rows="2" 
                     :maxlength="field.settings.max" 
                     show-word-limit 
-                    placeholder="Your text here" 
-                    v-model="value">
+                    placeholder="Your text here">
                 </el-input>
                 <el-input id="textBox" 
-                    v-else type="textarea" 
+                    type="textarea" 
+                    v-else
                     :rows="2" 
-                    placeholder="Your text here" 
-                    v-model="value">
+                    placeholder="Your text here" >
                 </el-input>
             </el-col>
-            
-            <slot></slot>
         </el-row>
+
+            <el-switch 
+                v-model="field.settings.required" 
+                active-text="Required" 
+                inactive-text="Optional"
+                class="tw-float-right button-top">
+            </el-switch>
+            
+            <div class="footer">
+                <slot></slot>
+            </div>
+        
     </div>
 </template>
 
@@ -88,5 +97,15 @@ export default {
     color: #409EFF;
     text-decoration: underline;
     font-size: 110%;
+}
+.button-top {
+    position: absolute;
+    top: 30px;;
+    right: 10px;
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    right: 10px;
 }
 </style>

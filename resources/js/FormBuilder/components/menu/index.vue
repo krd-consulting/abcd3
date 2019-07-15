@@ -8,7 +8,7 @@
                 </template>
 
                 <div v-for="input in inputs" :key="input.id" @click="selectInput(input)">
-                    <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="hover">
+                    <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="never">
                         {{ input.name }}
                     </el-card>
                 </div>
@@ -28,7 +28,7 @@
 
         </el-collapse-item>
 
-        <el-collapse-item name="2">
+        <el-collapse-item name="2" disabled class="tw-cursor-default">
             <template slot="title">
                 <p v-if="!selectedInput.name" class="menu-title">Field Requirements</p>
                 <p v-if="selectedInput.name" class="menu-title">{{ selectedInput.name }} Settings</p>
@@ -162,9 +162,10 @@ export default {
     } */
     .el-card {
         margin: 5px;
+        border: none;
     }
     .el-card:hover {
-        border-color: #badcff;
+        /* border-color: #badcff; */
         font-size: 120%;
     }
     .cursor-pointer {

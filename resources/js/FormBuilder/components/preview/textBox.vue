@@ -8,9 +8,17 @@
             <el-col :span="10">
                 <el-input id="textArea"  
                     type="textarea" 
-                    :rows="3" 
-                    :maxlength="field.settings.setLength" 
+                    v-if="limit"
+                    :autosize="{ minRows: 3, maxRows: 5}"
+                    :maxlength="max" 
                     show-word-limit 
+                    placeholder="Your text here" 
+                    v-model="value">
+                </el-input>
+                <el-input id="textArea"  
+                    type="textarea" 
+                    v-else
+                    :autosize="{ minRows: 3, maxRows: 6}" 
                     placeholder="Your text here" 
                     v-model="value">
                 </el-input>
@@ -29,6 +37,17 @@ export default {
     props: { 
         field: Object
     },
+    computed: {
+        max: {
+            get() { return this.field.settings.max }
+        },
+        isRequired: {
+            get() { return this.field.settings.required }
+        },
+        limit: {
+            get() { return this.field.settings.isLimited }
+        }
+    }
 }
 </script>
 

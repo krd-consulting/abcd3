@@ -1,22 +1,39 @@
 <template>
     <div id="datepicker">
-        <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-                {{ fieldLabel }}
-            </editable-text>
-        </label>
-        <el-date-picker 
-            id="dateField"
-            v-model="dateSelection" 
-            :type="dateType" 
-            :picker-options="dateOptions" 
-            :placeholder="datePlaceHolder"
-            :range-separator="rangeSeparator"
-            :start-placeholder="startDate"
-            :end-placeholder="endDate"
-            :format="dateFormat">
-        </el-date-picker>
-            <slot></slot>
+        
+            <el-col :span="18">
+                <label class="inputLabel">
+                    <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                        {{ fieldLabel }}
+                    </editable-text>
+                </label>
+                <el-date-picker 
+                    id="dateField"
+                    v-model="dateSelection" 
+                    :type="dateType" 
+                    :picker-options="dateOptions" 
+                    :placeholder="datePlaceHolder"
+                    :range-separator="rangeSeparator"
+                    :start-placeholder="startDate"
+                    :end-placeholder="endDate"
+                    :format="dateFormat">
+                </el-date-picker>
+            </el-col>
+            
+
+        
+            <el-switch 
+                v-model="field.settings.required" 
+                active-text="Required" 
+                inactive-text="Optional"
+                class="tw-float-right button-top">
+            </el-switch>
+            
+            <el-col>
+                <slot></slot>
+            </el-col>
+        
+        
     </div>
 </template>
 
@@ -179,5 +196,10 @@ export default {
     color: #409EFF;
     text-decoration: underline;
     font-size: 110%;
+}
+.button-top {
+    position: absolute;
+    top: 30px;;
+    right: 10px;
 }
 </style>

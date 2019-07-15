@@ -29,16 +29,25 @@
                             <span class="input-label"> {{ target.type }} Name</span>
                             <el-input class="inputField"></el-input>
                         </el-col>
-                        
+                    </el-row>
+
+                    <el-row>    
                         <el-col :span="6">
                             <span class="input-label">Team</span><br>
                             <el-select value="" placeholder="Select">
                                 <el-option v-for="team in teams" :key="team.value"
-                                :label="team.label" :value="team.value">
+                                    :label="team.label" :value="team.value">
                                 </el-option>
                             </el-select>
                         </el-col>
                     </el-row>
+
+                    <el-row v-if="type === 'pre/post'">
+                        <el-col :span="6">
+                            hey
+                        </el-col>
+                    </el-row>
+
                     <el-row :guttter="10">
                         <el-col :span="6">
                             <span class="input-label">Date Completed</span><br>
@@ -64,7 +73,7 @@
                                         <el-button type="text" 
                                             @click="removeField(index)" 
                                             icon="el-icon-close" 
-                                            class="button-position tw-float-right hover:tw-text-red-600">
+                                            class="tw-float-right hover:tw-text-red-600">
                                                 Remove
                                         </el-button>
                                 </component>
@@ -92,15 +101,15 @@ import Initialize from '@/FormBuilder/views/initialize'
 
 import TextField from '@/FormBuilder/components/canvas/fields/textField.vue'
 import TextBox from '@/FormBuilder/components/canvas/fields/textArea.vue'
-import CheckBox from '@/FormBuilder/components/canvas/fields/checkboxField.vue'
-import Dropdown from '@/FormBuilder/components/canvas/fields/dropdownField.vue'
-import Numeric from '@/FormBuilder/components/canvas/fields/numericField.vue'
-import Radio from '@/FormBuilder/components/canvas/fields/radioField.vue'
-import DatePicker from '@/FormBuilder/components/canvas/fields/dateField.vue'
-import Matrix from '@/FormBuilder/components/canvas/fields/matrixField.vue'
+import CheckBox from '@/FormBuilder/components/canvas/fields/checkbox.vue'
+import Dropdown from '@/FormBuilder/components/canvas/fields/dropdown.vue'
+import Numeric from '@/FormBuilder/components/canvas/fields/numeric.vue'
+import Radio from '@/FormBuilder/components/canvas/fields/radio.vue'
+import DatePicker from '@/FormBuilder/components/canvas/fields/datePicker.vue'
+import Matrix from '@/FormBuilder/components/canvas/fields/matrix.vue'
 import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
 import Upload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
-import SectionDivider from '@/FormBuilder/components/canvas/fields/SectionDivider.vue'
+import SectionDivider from '@/FormBuilder/components/canvas/fields/sectionDivider.vue'
 
 export default {
     data: () => {
@@ -173,13 +182,17 @@ export default {
             get() { return this.$store.state.title },
             set(title) { this.$store.commit('SET_TITLE', title) }, 
         },
+        description: {
+            get() { return this.$store.state.description },
+            set(description) { this.$store.commit('SET_DESCRIPTION', description) }
+        },
         target: {
             get() { return this.$store.state.target },
             set(target) { this.$store.commit('SET_TARGET', target) }, 
         },
-        description: {
-            get() { return this.$store.state.description },
-            set(description) { this.$store.commit('SET_DESCRIPTION', description) }
+        type: {
+            get() { return this.$store.state.type },
+            set(type) { this.$store.commit('SET_TYPE', type) }, 
         },
         fields: { 
             get() { return this.$store.state.fields },
@@ -266,10 +279,5 @@ export default {
   }
   .canvas-card {
       font-size: 110%;
-  }
-  .button-position {
-    position: relative;
-    /* bottom: -10px;
-    right: 10px; */
   }
 </style>

@@ -10,7 +10,11 @@
                     id="time-picker"
                     arrow-control
                     v-model="value"
-                    :picker-options="{selectableRange: '18:30:00 - 20:30:00'}"
+                    :picker-options="{  
+                        start: '01:00',
+                        step: '00:15',
+                        end: '24:45'
+                    }"
                     placeholder="Pick a time">
                 </el-time-picker>
             </el-col>

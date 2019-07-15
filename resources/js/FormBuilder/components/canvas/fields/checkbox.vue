@@ -1,35 +1,56 @@
 <template>
-    <div id="dropdown">
-        <label class="inputLabel">
+  <div id="checkbox">
+      <el-col :span="18">
+          <label class="inputLabel">
             <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
                 {{ fieldLabel }}
             </editable-text>
         </label>
-        <el-select id="dropdown" v-model="dropItem" placeholder="select">
-            <el-option v-for="item in choices" :key="item.id" :label="item.value" :value="item.value"></el-option>
-        </el-select>
-        <div class="tw-float-right">
-            <editable-text 
-                class="tw-cursor-pointer mouseOver" 
-                v-model="dropItem"
-                @input="updateChoiceValue(dropItem)">
-                {{ dropItem }}
-            </editable-text>
-            <el-button v-if="dropItem != ''" class="float-right pr-15" type="text" size="mini" @click="removeChoice(value)">Remove Item</el-button>
-        </div>
-        
+      </el-col>
+        <br><br>
+
+        <el-checkbox-group 
+            id="check" 
+            v-for="(item, index) in choices" 
+            :key="item.value">
+
+            <el-checkbox 
+                v-model="value" 
+                :label="item.value">
+                    <editable-text 
+                        class="tw-cursor-pointer mouseOver"
+                        v-model="item.value"
+                        @input="updateChoiceValue($event, index)">
+                            {{ item.value }}
+                    </editable-text>
+            </el-checkbox>
+            <el-button 
+                type="text" 
+                size="mini" 
+                @click="removeChoice(item)">
+                    Remove
+            </el-button>
+        </el-checkbox-group>
+
+        <el-switch 
+            v-model="field.settings.required" 
+            active-text="Required" 
+            inactive-text="Optional"
+            class="tw-float-right button-top">
+        </el-switch>
+
         <form @submit.prevent="addItem" class="tw-mt-4">
             <el-row>
-                <el-col :span="12">
+                <el-col :span="10">
                     <label for="newItem">Add Item <el-button class="tw-ml-2" type="text" @click="addItem">Add</el-button></label>
-                    <el-input id="newItem" v-model="itemText">
-                    </el-input>
+                    <el-input id="newItem" v-model="itemText"></el-input>  
                 </el-col>
             </el-row>
         </form>
+        
+    <slot class="tw-float-right button-bottom"></slot>
 
-        <slot></slot>
-    </div>
+  </div>
 </template>
 
 <script>
@@ -38,8 +59,8 @@ import EditableText from '@/components/editableText.vue'
 export default {
     data() {
         return {
-            itemText: '',
             nextItem: 0,
+            itemText: ''
         }
     },
     components: {
@@ -52,6 +73,7 @@ export default {
         }
     },
     computed: {
+
         field: {
             get() { return this.fieldData; },
             set(field) { this.$emit('update', field); }
@@ -75,16 +97,33 @@ export default {
             }
         },
 
-        dropItem: {
+        value: {
             get(){ return this.field.choices.value},
             set(value){
                 const fieldValue = _.clone(this.field);
                 fieldValue.choices.value = value;
                 this.field = fieldValue;
+                this.$emit('updateChoices', field);
             }
         },
     },
     methods: {
+        getCheckboxItems() {
+            var i;
+            for(i= 0; i < this.field.settings.checkboxNum; i++) {
+                this.loadItem();
+            }
+        },
+
+        loadItem() {
+            this.choices.push({
+                id: this.nextItem++, 
+                value: 'item ' + this.nextItem
+            })
+            this.$store.commit('UPDATE_FIELD', this.field)
+            
+        },
+
         addItem() {
             const choicesCopy = _.clone(this.choices);
 
@@ -95,12 +134,7 @@ export default {
             this.choices = choicesCopy;
             this.itemText = ''
         },
-        // loadItem() {
-        //     this.field.choices.push({
-        //          id: this.nextItem++, value: 'item ' + this.nextItem
-        //     })
-        //     this.$store.commit('UPDATE_FIELD', this.field)
-        // },
+        
         removeChoice(item) {
             var index = this.choices.indexOf(item);
 
@@ -111,12 +145,13 @@ export default {
 
             this.$forceUpdate();
         },
-        updateChoiceValue(value) {
-            var index = this.choices.indexOf(value);
+
+        updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
         }
+        
     }
 }
 </script>
@@ -127,6 +162,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
+.button-top {
+    position: absolute;
+    top: 30px;;
+    right: 10px;
+}
 </style>
-
-

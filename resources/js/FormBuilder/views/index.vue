@@ -13,9 +13,21 @@
                         active-text-color="#409EFF" 
                         mode="horizontal" 
                         router>
-                            <el-menu-item default-active index="/forms/create" class="tw-font-bold tw-focus:font-extrabold">Form Builder</el-menu-item>
-                            <el-menu-item index="/forms/create/preview" class="tw-font-bold tw-focus:font-extrabold">Preview Form</el-menu-item>
-                            <el-menu-item index="" @click="buildForm" class="float-right tw-font-bold tw-focus:font-extrabold">Finish &#38; Build!</el-menu-item>
+                            <el-menu-item default-active 
+                                index="/forms/create" 
+                                class="tw-font-bold tw-focus:font-extrabold">
+                                    Form Builder
+                            </el-menu-item>
+                            <el-menu-item 
+                                index="/forms/create/preview" 
+                                class="tw-font-bold tw-focus:font-extrabold">
+                                    Preview Form
+                            </el-menu-item>
+                            <el-menu-item 
+                                @click="buildForm" 
+                                class="float-right tw-font-bold tw-focus:font-extrabold">
+                                    Finish &#38; Build!
+                            </el-menu-item>
                     </el-menu>
                 </el-header>   
 
