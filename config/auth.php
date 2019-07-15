@@ -152,6 +152,11 @@ return [
             'guard_name' => 'web'
         ],
 
+        'write-forms' => [
+            'name' => 'write forms',
+            'guard_name' => 'web'
+        ],
+
         'write-roles' => [
             'name' => 'write roles',
             'guard_name' => 'web'

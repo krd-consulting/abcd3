@@ -8,6 +8,11 @@ use App\Scope;
 
 class Form extends Model
 {
+    public function fields()
+    {
+        return $this->hasMany('App\FormField');
+    }
+
     public function target_type()
     {
     	return $this->belongsTo('App\FormTargetType');

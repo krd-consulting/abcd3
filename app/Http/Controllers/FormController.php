@@ -6,7 +6,13 @@ use App\Form;
 use App\FormTargetType;
 use App\Scope;
 
+use App\Http\Requests\StoreForm;
+
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class FormController extends Controller
 {
@@ -74,5 +80,58 @@ class FormController extends Controller
                 'scopes' => Scope::where('name', '!=', config('auth.scopes.case-load.name'))->get()
             ]
         ];
+    }
+
+    public function store(StoreForm $request)
+    {
+        $this->authorize('create', Form::class);
+
+        $request = $request->validated();
+
+        $form = new Form;
+        $form->name = $request['name'];
+        $form->description = $request['description'];
+        $form->type = $request['type'];
+        $form->table_name =  'form_' . (DB::table($form->getTable())->max('id')+1);
+        $form->target_type_id = $request['target_type_id'];;
+        $form->target_id = $request['target_id'];
+        $form->scope_id = $request['scope_id'];
+        
+
+        DB::transaction(function () use ($form, $request) {
+            $form->save();
+
+            // add form to team.
+            $form->teams()->attach([$request['team_id']]);
+
+            // insert fields into field registry
+            $form->fields()->createMany($request['fields']);
+
+            $fields = $form->fields;
+
+            Schema::create($form->table_name, function (Blueprint $table) use ($fields) {
+                $table->bigIncrements('id');
+
+                foreach($fields as $field) {
+                    if($field->type == 'SectionDivider') {
+                        continue;
+                    }
+
+                    $columnType = $field->columnType;
+
+                    if($field->type == 'MatrixField') {
+                        foreach($field->options['questions'] as $key=>$question) {
+                            $table->$columnType('field_' . $field->id . '_' . $key);
+                        }
+
+                        continue;
+                    }
+
+                    $table->$columnType('field_' . $field->id, $field->settings['max']);
+                }
+            });
+        });
+
+        return $form;
     }
 }

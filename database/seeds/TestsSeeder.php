@@ -16,6 +16,7 @@ class TestsSeeder extends Seeder
         $this->call(PermissionsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
         $this->call(ClientStatusTableSeeder::class);
+        $this->call(FormTargetTypeSeeder::class);
         
         $this->call(RecordIdentitiesTableSeeder::class);
         $this->call(RecordTypesTableSeeder::class);

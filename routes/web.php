@@ -89,6 +89,7 @@ Route::prefix('api')
         Route::get('forms', 'FormController@index');
         Route::get('forms/create', 'FormController@create');
         Route::post('forms/create', 'ValidateForm');
+        Route::post('forms', 'FormController@store');
 
         Route::resource('roles', 'RoleController');
 

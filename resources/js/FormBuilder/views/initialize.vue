@@ -182,9 +182,9 @@
             formattedScopes() {
                 const labels  = {
                     universal : 'Everyone',
-                    team: 'Users in my team',
-                    program: 'Users in my program',
-                    group: 'Users in my group',
+                    team: 'Users in this form\'s teams',
+                    program: 'Users in this form\'s programs',
+                    group: 'Users in this form\'s groups',
                     self: 'Just me'
                 };
 
