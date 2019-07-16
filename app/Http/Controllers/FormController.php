@@ -18,7 +18,7 @@ class FormController extends Controller
 {
     public function index()
     {
-		$forms = (new Form);
+		$forms = new Form;
 
 		// Search
         $search = request('search');
