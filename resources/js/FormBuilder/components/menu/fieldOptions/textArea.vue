@@ -26,7 +26,7 @@
             </el-form-item>
 
             <el-form-item>
-                <slot :fieldData="fieldData"></slot>
+                <el-button type="success" @click="save">Set</el-button>
             </el-form-item>
 
         </el-form>
@@ -58,6 +58,12 @@ export default {
     props: {
         inputData: Object,
     },
+    methods: {
+
+        save() {
+            this.$emit('save', this.fieldData);
+        }
+    }
 }
 </script>
 

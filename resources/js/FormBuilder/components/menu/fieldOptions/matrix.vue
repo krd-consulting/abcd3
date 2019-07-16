@@ -67,9 +67,6 @@ export default {
     },
 
     methods: {
-        submitfieldData(fieldData) {
-            this.$emit('inputData', this.fieldData);
-        },
 
         setQuestions() {
 

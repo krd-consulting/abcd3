@@ -1,9 +1,25 @@
 <template>
-    <div id="numeric">
-        <label for="numfield" class="inputLabel">{{ field.label }}</label><br>
-        <sup>{{ field.description }}</sup>
-        
-        <el-input-number id="numfield" v-model="value"></el-input-number>
+    <div id="numeric" class="tw-my-8">
+        <el-row>
+            <el-col :span="6">
+                <label for="numfield" class="inputLabel">{{ field.label }}</label>
+            </el-col>
+
+            <el-col :span="10">
+                <el-input-number 
+                    v-if="limit"
+                    id="numfield" 
+                    v-model="useDefault"
+                    :required="isRequired">
+                </el-input-number>
+                <el-input-number 
+                    v-else
+                    id="numfield" 
+                    v-model="value"
+                    :required="isRequired">
+                </el-input-number>
+            </el-col>
+        </el-row>
     </div>
 </template>
 
@@ -17,6 +33,17 @@ export default {
     props: { 
         field: Object
     },
+    computed: {
+        useDefault: {
+            get() { return this.field.settings.defaultNum }
+        },
+        isRequired: {
+            get() { return this.field.settings.required }
+        },
+        limit: {
+            get() { return this.field.settings.isLimited }
+        }
+    }
 }
 </script>
 

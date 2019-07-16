@@ -16,7 +16,7 @@
             </el-form-item>
 
             <el-form-item>
-                <slot :fieldData="fieldData"></slot>
+                <el-button type="success" @click="save">Set</el-button>
             </el-form-item>
 
         </el-form>
@@ -34,7 +34,7 @@ name: 'Numeric',
                 label: '',
                 settings: {
                     required: false,
-                    defaultNum: 0,
+                    defaultNum: 5,
                 },
                 rules: {
                     label: [
@@ -48,11 +48,8 @@ name: 'Numeric',
         inputData: Object,
     },
     methods: {
-        handleChange() {
-            console.log('Doing the thing in menu options');
-        },
-        submitfieldData(fieldData) {
-            this.$emit('inputData', this.fieldData);
+        save() {
+            this.$emit('save', this.fieldData);
         }
     }
 }

@@ -1,19 +1,17 @@
 <template>
   <div id="menu">
     <div id="menu-container">
-      <!-- <el-row class="tw-flex-1 tw-max-w-full"> -->
-        <!-- <el-col> -->
-          <el-collapse v-model="step" accordion id="menu-stepper">
+        <el-collapse v-model="step" accordion id="menu-stepper">
             <el-collapse-item name="1">
-              <template slot="title">
-                  <p class="menu-title">Select a Field</p>
-              </template>
+                <template slot="title">
+                    <p class="menu-title">Select a Field</p>
+                </template>
 
-              <div v-for="input in inputs" :key="input.id" @click="selectInput(input)">
-                  <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="hover">
+                <div v-for="input in inputs" :key="input.id" @click="selectInput(input)">
+                    <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="never">
                         {{ input.name }}
-                  </el-card>
-              </div>
+                    </el-card>
+                </div>
             
                 <!-- TODO:  Post-MVP feature
                     integrate this feature with the ability to save input option settings and create
@@ -28,13 +26,13 @@
                   </el-card>
               </div> -->
 
-          </el-collapse-item>
+        </el-collapse-item>
 
-          <el-collapse-item name="2">
-              <template slot="title">
-                  <p v-if="!selectedInput.name" class="menu-title">Field Requirements</p>
-                  <p v-if="selectedInput.name" class="menu-title">{{ selectedInput.name }} Settings</p>
-              </template>
+        <el-collapse-item name="2" disabled class="tw-cursor-default">
+            <template slot="title">
+                <p v-if="!selectedInput.name" class="menu-title">Field Requirements</p>
+                <p v-if="selectedInput.name" class="menu-title">{{ selectedInput.name }} Settings</p>
+            </template>
 
                 <component :is="selectedInput.component" 
                     :inputData="selectedInput"
@@ -46,8 +44,6 @@
 
             </el-collapse-item>
           </el-collapse>
-        <!-- </el-col> -->
-      <!-- </el-row> -->
     </div>            
   </div>
 </template>
@@ -166,9 +162,10 @@ export default {
     } */
     .el-card {
         margin: 5px;
+        border: none;
     }
     .el-card:hover {
-        border-color: #badcff;
+        /* border-color: #badcff; */
         font-size: 120%;
     }
     .cursor-pointer {
