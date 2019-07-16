@@ -1,5 +1,5 @@
-<el-header class="main-nav">
-    <div class="main-logo-container tw-py-4">
+<el-header class="main-nav" style="height: 80px;">
+    <div class="main-logo-container">
         <base-button class="tw-border-none tw-bg-transparent tw-align-middle" @click="collapseSidebar = !collapseSidebar">
             <base-icon>menu</base-icon>
         </base-button>
@@ -7,7 +7,7 @@
             ABCD
         </a>
     </div>
-    <div class="tw-px-4 tw-flex tw-flex-1 tw-justify-between">
+    <div class="tw-flex tw-flex-1 tw-justify-between">
         <div class="tw-w-1/2">
             <global-search></global-search>
         </div>

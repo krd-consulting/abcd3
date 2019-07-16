@@ -3,7 +3,7 @@
         :value="value"
         @input="handleInput($event)"
         class="tw-no-shrink tw-mr-2"
-        :placeholder="`Search for something`">
+        :placeholder="`Search`">
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
     </base-input>
 </template>

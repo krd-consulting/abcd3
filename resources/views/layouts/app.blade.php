@@ -16,7 +16,7 @@
     <style>body {height: 100%;}</style>
 </head>
 <body>
-    <base-container id="app" class="tw-h-screen tw-max-h-screen">
+    <base-container id="app" class="tw-h-screen">
         @section('main-nav')
         @show
 

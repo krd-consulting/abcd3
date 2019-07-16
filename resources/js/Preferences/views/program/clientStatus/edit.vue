@@ -1,7 +1,7 @@
 <template>
-    <base-dialog :visible="active" @close="close">
+    <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Create Client Status
+            <base-icon class="tw-align-middle">person_add</base-icon> Edit Client Status
         </div>
         <form>
             <div class="tw-mb-2">
@@ -11,7 +11,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="programClientStatusData['name']"
+                            v-model="newClientStatusData['name']"
                             name="name"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -29,7 +29,7 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-input
-                            v-model="programClientStatusData['description']"
+                            v-model="newClientStatusData['description']"
                             name="description"
                             @keydown.native="request.errors.clear($event.target.name)"/>
                     </div>
@@ -57,14 +57,13 @@
     export default {
         props: {
             active: Boolean,
-
-
+            clientStatusId: Number | String
         },
 
         data() {
             return {
                 request: new Request(),
-                programClientStatusData: {
+                newClientStatusData: {
                     name: '',
                     description: '',
                 },
@@ -77,16 +76,31 @@
 
                 this.request.errors.clear();
 
-                this.programClientStatusData = {
+                this.newClientStatusData = {
                     name: '',
                     description: '',
                 };
             },
 
-            store(status) {
-                this.request = new Request(this.programClientStatusData);
+            open() {
+                this.retrieve();
+            },
+            initializeWithData(data) {
+                this.newClientStatusData.id = data.id;
+                this.newClientStatusData.name = data.name;
+                this.newClientStatusData.description = data.description;
+            },
+            retrieve() {
+                let request = new Request({});
+                request.edit(this.clientStatusId).then((response) => {
+                    this.initializeWithData(response.data);
+                });
+            },
 
-                this.request.update(status)
+            store(status) {
+                this.request = new Request(this.newClientStatusData);
+
+                this.request.update(this.newClientStatusData.id)
                     .then((response) => {
                         this.$emit('update');
                         this.$message({

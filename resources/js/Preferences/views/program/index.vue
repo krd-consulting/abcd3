@@ -6,6 +6,7 @@
 
         <edit-status 
             :active.sync="edit.active"
+            :client-status-id="edit.status"
             @update="retrieve()"/>
 
 		<list
@@ -15,13 +16,21 @@
             :has-list-columns="false"
             has-add
             has-delete
+            has-remove
             :hasSearch="false"
             @add="createStatus"
+            @edit="editStatus"
             @delete="confirmDelete"
             @page-change="retrieve()"
             :total="total">
             <template slot="header-text">Client Statuses</template>
             <template slot="options-add-text">Create Client Status</template>
+
+            <template slot="empty-placeholder">
+                <div class="tw-text-center tw-py-16 tw-bg-gray-100 tw-rounded tw-mx-4 tw-my-4"> 
+                    No client statuses have been disabled.
+                </div>
+            </template>
 
             <template v-slot:list-item-primary-data="{ item:status }">
                 {{ status.name }}
@@ -29,7 +38,7 @@
 
             <template v-slot:option-remove-button="{ item:status }">
                 <base-button
-                    class="tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
+                    class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
                     @click="toggleDisable(status)">
                     <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">{{ disableIcon(status.disabled_at) }}</base-icon>
                     <span class="tw-text-xs tw-align-middle">{{ disableText(status.disabled_at) }}</span>

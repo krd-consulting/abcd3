@@ -1,13 +1,13 @@
 <template>
     <div class="tw-flex tw-items-center tw-bg-white tw-border-b">
-        <router-link tag="div" class="tw-flex tw-w-1/6 tw-items-top tw-cursor-pointer" :to="to">
+        <router-link tag="div" class="tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer" :to="to">
             <div>
                 <slot name="image">
                 </slot>
             </div>
             <div>
                 <slot name="primary-data" :item="item">
-                    <span class="tw-mb-2 tw-block tw-font-semibold">
+                    <span class="tw-block">
                         <slot>{{ primaryData }}</slot>
                     </span>
                 </slot>

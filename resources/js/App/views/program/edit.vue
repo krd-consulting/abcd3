@@ -237,8 +237,6 @@
                 });
             },
             store() {
-                console.log(this.newProgramData);
-
                 this.request = new Request(this.newProgramData);
                 this.request.update(this.newProgramData.id)
                     .then((response) => {
