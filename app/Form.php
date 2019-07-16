@@ -6,8 +6,58 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Scope;
 
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+
 class Form extends Model
 {
+    public function createUsingRequest($request)
+    {
+        $this->name = $request->name;
+        $this->description = $request->description;
+        $this->type = $request->type;
+        $this->table_name =  'form_' . (DB::table($this->getTable())->max('id')+1);
+        $this->target_type_id = $request->target_type_id;
+        $this->target_id = $request->target_id;
+        $this->scope_id = $request->scope_id;
+
+        DB::transaction(function () use ($request) {
+            $this->save();
+
+            // add form to team.
+            $this->teams()->attach([$request['team_id']]);
+
+            // insert fields into field registry
+            $this->fields()->createMany($request['fields']);
+
+            $fields = $this->fields;
+
+            // create form entry table for form
+            Schema::create($this->table_name, function (Blueprint $table) use ($fields) {
+                $table->bigIncrements('id');
+
+                foreach($fields as $field) {
+                    if($field->type == 'SectionDivider') {
+                        continue;
+                    }
+
+                    $columnType = $field->columnType;
+
+                    if($field->type == 'MatrixField') {
+                        foreach($field->options['questions'] as $key=>$question) {
+                            $table->$columnType('field_' . $field->id . '_' . $key);
+                        }
+
+                        continue;
+                    }
+
+                    $table->$columnType('field_' . $field->id, $field->settings['max']);
+                }
+            });
+        });
+    }
+
     public function fields()
     {
         return $this->hasMany('App\FormField');

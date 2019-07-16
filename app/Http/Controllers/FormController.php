@@ -41,6 +41,27 @@ class FormController extends Controller
 
     public function create()
     {
+        return [
+            'data' => [
+                'target_types' => $this->generateTargetTypes(),
+                'types' => config('app.form_types'),
+                'scopes' => Scope::where('name', '!=', config('auth.scopes.case-load.name'))->get()
+            ]
+        ];
+    }
+
+    public function store(StoreForm $request)
+    {
+        $this->authorize('create', Form::class);
+
+        $form = new Form;
+        $form->createUsingRequest($request);
+
+        return $form;
+    }
+
+    protected function generateTargetTypes()
+    {
         $targetTypes = FormTargetType::select('id', 'name')->get();
 
         $targetTypes = $targetTypes->filter(function($value, $key) {
@@ -73,65 +94,7 @@ class FormController extends Controller
             return $type;
         });
 
-        return [
-            'data' => [
-                'target_types' => $targetTypes,
-                'types' => config('app.form_types'),
-                'scopes' => Scope::where('name', '!=', config('auth.scopes.case-load.name'))->get()
-            ]
-        ];
-    }
+        return $targetTypes;
 
-    public function store(StoreForm $request)
-    {
-        $this->authorize('create', Form::class);
-
-        $request = $request->validated();
-
-        $form = new Form;
-        $form->name = $request['name'];
-        $form->description = $request['description'];
-        $form->type = $request['type'];
-        $form->table_name =  'form_' . (DB::table($form->getTable())->max('id')+1);
-        $form->target_type_id = $request['target_type_id'];;
-        $form->target_id = $request['target_id'];
-        $form->scope_id = $request['scope_id'];
-        
-
-        DB::transaction(function () use ($form, $request) {
-            $form->save();
-
-            // add form to team.
-            $form->teams()->attach([$request['team_id']]);
-
-            // insert fields into field registry
-            $form->fields()->createMany($request['fields']);
-
-            $fields = $form->fields;
-
-            Schema::create($form->table_name, function (Blueprint $table) use ($fields) {
-                $table->bigIncrements('id');
-
-                foreach($fields as $field) {
-                    if($field->type == 'SectionDivider') {
-                        continue;
-                    }
-
-                    $columnType = $field->columnType;
-
-                    if($field->type == 'MatrixField') {
-                        foreach($field->options['questions'] as $key=>$question) {
-                            $table->$columnType('field_' . $field->id . '_' . $key);
-                        }
-
-                        continue;
-                    }
-
-                    $table->$columnType('field_' . $field->id, $field->settings['max']);
-                }
-            });
-        });
-
-        return $form;
     }
 }
