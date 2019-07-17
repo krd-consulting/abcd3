@@ -52,7 +52,11 @@ class Form extends Model
                         continue;
                     }
 
-                    $table->$columnType('field_' . $field->id, $field->settings['max']);
+                    $table->$columnType('field_' . $field->id);
+
+                    // pre-interim-post
+                    // timestamps
+                    // targets
                 }
             });
         });
