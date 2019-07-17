@@ -16,17 +16,17 @@
     <style>body {height: 100%;}</style>
 </head>
 <body>
-    <base-container id="app" class="tw-h-screen">
+    <div id="app">
         @section('main-nav')
         @show
 
-        <base-container>
+        <base-container class="tw-min-h-screen">
             @section('main-sidebar')
             @show
 
             @yield('content')
         </base-container>
-    </base-container>
+    </div>
 
     <!-- Scripts -->
     @section('scripts')
