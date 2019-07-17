@@ -7,15 +7,15 @@
             </el-form-item>
             
             <el-form-item label="This Field is">
-                <el-switch v-model="fieldData.required" active-text="Required" inactive-text="Optional"></el-switch>
+                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
             
-            <el-form-item label="Number of Menu Selections">
+            <!-- <el-form-item label="Number of Menu Selections">
                 <el-input-number v-model="fieldData.settings.dropdownNum" controls-position="right" :min="2" :max="10"></el-input-number>
-            </el-form-item>
+            </el-form-item> -->
 
             <el-form-item>
-                <slot :fieldData="fieldData"></slot>
+                <el-button type="success" @click="save">Set</el-button>
             </el-form-item>
 
         </el-form>
@@ -33,7 +33,8 @@ export default {
                 label: '',
                 settings: {
                     required: false,
-                    dropdownNum: 2,
+                    // dropdownNum: 2,
+                    nextChoice: 0
                 },
                 choices: [],
                 rules: {
@@ -48,8 +49,19 @@ export default {
         inputData: Object,
     },
     methods: {
-        submitfieldData(fieldData) {
-            this.$emit('outputData', this.fieldData);
+
+        setChoices() {
+            for(let i = 1; i <= this.fieldData.settings.dropdownNum; i++) {
+                this.fieldData.choices.push({
+                    id: this.fieldData.settings.nextChoice++, value: 'Item ' + this.fieldData.settings.nextChoice
+                })
+            }
+        },
+
+        save() {
+            this.setChoices();
+
+            this.$emit('save', this.fieldData);
         }
     }
 }

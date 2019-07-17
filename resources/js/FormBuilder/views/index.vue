@@ -1,31 +1,41 @@
 <template>
     <div id="formCreator">
         <el-container>
-                <el-card id="menu-container"> 
-                    <!-- <el-aside class="aside"> -->
-                        <form-menu id="menu"/>
-                    <!-- </el-aside> -->
-                </el-card>
+
+            <el-card id="menu-container"> 
+                <form-menu id="menu"/>
+            </el-card>
             
-        <el-card id="canvas-container">
-            <el-header>
-                <el-menu :default-active="$route.path" 
-                    background-color="#fff" 
-                    active-text-color="#409EFF" 
-                    mode="horizontal" 
-                    router>
-                        <el-menu-item default-active index="/forms/create" class="tw-font-bold tw-focus:font-extrabold">Form Builder</el-menu-item>
-                        <el-menu-item index="/forms/create/preview" class="tw-font-bold tw-focus:font-extrabold">Preview Form</el-menu-item>
-                        <el-menu-item index="" @click="buildForm" class="float-right tw-font-bold tw-focus:font-extrabold">Finish &#38; Build!</el-menu-item>
-                </el-menu>
-            </el-header>   
+            <el-card id="canvas-container">
+                <el-header>
+                    <el-menu :default-active="$route.path" 
+                        background-color="#fff" 
+                        active-text-color="#409EFF" 
+                        mode="horizontal" 
+                        router>
+                            <el-menu-item default-active 
+                                index="/forms/create" 
+                                class="tw-font-bold tw-focus:font-extrabold">
+                                    Form Builder
+                            </el-menu-item>
+                            <el-menu-item 
+                                index="/forms/create/preview" 
+                                class="tw-font-bold tw-focus:font-extrabold">
+                                    Preview Form
+                            </el-menu-item>
+                            <el-menu-item 
+                                @click="buildForm" 
+                                class="float-right tw-font-bold tw-focus:font-extrabold">
+                                    Finish &#38; Build!
+                            </el-menu-item>
+                    </el-menu>
+                </el-header>   
 
-            <form-Canvas :fields="fields" id="canvas"/>
-        
-        </el-card>
-
-    </el-container>
-        
+                <form-Canvas :fields="fields" id="canvas"/>
+            
+            </el-card>
+            
+        </el-container>
     </div>
 </template>
 

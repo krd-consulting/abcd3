@@ -11,11 +11,11 @@
             </el-form-item>
             
             <el-form-item label="Number of Checkbox Selections">
-                <el-input-number v-model="fieldData.settings.checkboxNum" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+                <el-input-number v-model="fieldData.settings.checkboxNum" controls-position="right" :min="1" :max="10"></el-input-number>
             </el-form-item>
             
             <el-form-item>
-                <slot :fieldData="fieldData"></slot>
+                <el-button type="success" @click="save">Set</el-button>
             </el-form-item>
 
         </el-form>
@@ -34,6 +34,7 @@ export default {
                 settings: {
                     required: false,
                     checkboxNum: 2,
+                    nextChoice: 0,
                 },
                 choices: [],
                 rules: {
@@ -48,13 +49,23 @@ export default {
         inputData: Object,
     },
     methods: {
-        handleChange() {
-            console.log('Doing the thing in menu options');
+
+        setChoices() {
+            for(let i = 1; i <= this.fieldData.settings.checkboxNum; i++) {
+                this.fieldData.choices.push({
+                    id: this.fieldData.settings.nextChoice++, value: 'Item ' + this.fieldData.settings.nextChoice
+                })
+            }
         },
 
-        submitfieldData(fieldData) {
-            this.$emit('outputData', this.fieldData);
-        }
+        save() {
+            this.setChoices();
+            this.$emit('save', this.fieldData);
+        },
+
+        // submitfieldData(fieldData) {
+        //     this.$emit('inputData', this.fieldData);
+        // },
     }
 }
 </script>

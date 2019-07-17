@@ -11,11 +11,11 @@
             </el-form-item>
             
             <el-form-item label="Number of Radio Selections">
-                <el-input-number v-model="fieldData.settings.radioNum" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+                <el-input-number v-model="fieldData.settings.radioNum" controls-position="right" :min="1" :max="10"></el-input-number>
             </el-form-item>
             
             <el-form-item>
-                <slot :fieldData="fieldData"></slot>
+                <el-button type="success" @click="save">Set</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -33,6 +33,7 @@ export default {
                 settings: {
                     required: false,
                     radioNum: 2,
+                    nextChoice: 0
                 },
                 choices: [],
                 rules: {
@@ -47,12 +48,18 @@ export default {
         inputData: Object,
     },
     methods: {
-        handleChange() {
-            console.log('Doing the thing in menu options');
+        setChoices() {
+            for(let i = 1; i <= this.fieldData.settings. radioNum; i++) {
+                this.fieldData.choices.push({
+                    id: this.fieldData.settings.nextChoice++, value: 'Item ' + this.fieldData.settings.nextChoice
+                })
+            }
         },
 
-        submitfieldData(fieldData) {
-            this.$emit('outputData', this.fieldData);
+        save() {
+            this.setChoices();
+
+            this.$emit('save', this.fieldData);
         }
     }
 }

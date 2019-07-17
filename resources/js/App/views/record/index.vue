@@ -34,11 +34,11 @@
             </template>
 
             <template v-slot:list-item-primary-data="{ item:record }">
-                <primary-data :record="record" :fields="fields"/>
+                <primary-data class="tw-font-semibold" :record="record" :fields="fields"/>
             </template>
 
              <template v-slot:list-item-secondary-data="{ item:record }">
-                <secondary-data class="tw-text-xs" :record="record" :fields="fields"/>
+                <secondary-data class="tw-text-xs tw-text-gray-600" :record="record" :fields="fields"/>
             </template>
         </list>
     </div>
@@ -118,8 +118,8 @@
             },
 
             confirmDelete(recordType, record) {
-                this.$confirm('Are you sure you want to delete this record?', 'Delete Record', {
-                    confirmButtonText: 'Delete',
+                this.$confirm('Are you sure you want to archive this record?', 'Archive Record', {
+                    confirmButtonText: 'Archive',
                     cancelButtonText: 'Wait, no!',
                     type: 'warning'
                 }).then(() => {

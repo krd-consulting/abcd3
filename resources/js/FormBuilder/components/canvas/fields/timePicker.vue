@@ -1,22 +1,38 @@
 <template>
     <div>
         <el-row>
+            <el-col :span="18">
+                <label class="inputLabel">
+                    <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                        {{ fieldLabel }}
+                    </editable-text>
+                </label>
+            </el-col>
+            
 
-            <label class="inputLabel">
-                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-                    {{ fieldLabel }}
-                </editable-text>
-            </label>
-
-            <el-time-picker
+            <el-time-select
                 arrow-control
                 v-model="timeSelection"
-                :picker-options="{selectableRange: '18:30:00 - 20:30:00'}"
+                :picker-options="{  
+                    start: '01:00',
+                    step: '00:15',
+                    end: '24:45'
+                }"
                 placeholder="Pick a time">
-            </el-time-picker>
-
-            <slot></slot>
+            </el-time-select>
         </el-row>
+
+            <el-switch 
+                v-model="field.settings.required" 
+                active-text="Required" 
+                inactive-text="Optional"
+                class="tw-float-right button-top">
+            </el-switch>
+
+            <div class="footer">
+                <slot></slot>
+            </div>
+        
     </div>
 </template>
 
@@ -71,5 +87,15 @@ export default {
     color: #409EFF;
     text-decoration: underline;
     font-size: 110%;
+}
+.button-top {
+    position: absolute;
+    top: 30px;;
+    right: 10px;
+}
+.footer{
+    position: absolute;
+    bottom: 0;
+    right: 10px;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
-    <div id="matrix">
+    <div id="matrix" class="tw-my-8">
         <br>
-        <el-row class="tw-mt-24">
+        <el-row>
            <el-col :span="24">
                 <label for="matrix-table" class="inputLabel">{{ field.label }}</label><br>
                 <sup>{{ field.description }}</sup>

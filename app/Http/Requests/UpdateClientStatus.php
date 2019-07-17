@@ -24,8 +24,13 @@ class UpdateClientStatus extends FormRequest
     public function rules()
     {
         return [
+// <<<<<<< HEAD
             'id' => 'exists:client_statuses,id',
             'name' => 'unique:teams,name,' . $this->input('id'),
+// =======
+//             'id' => 'required|exists:client_statuses,id',
+//             'name' => 'unique:client_statuses,name,' . $this->input('id'),
+// >>>>>>> styles/june-11
             'description' => '',
             'enabled' => 'boolean'
         ];

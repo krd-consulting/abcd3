@@ -14571,6 +14571,13 @@ video {
   height: auto;
 }
 
+*,
+.el-input__inner,
+.el-tabs__item,
+.el-switch__label *{
+  font-size: 1.125rem;
+}
+
 .el-button+.el-button {
   margin: 0;
 }
@@ -14581,6 +14588,11 @@ video {
 
 .el-dialog__footer {
   padding: 0;
+}
+
+.el-tabs .el-tabs__nav {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .el-tabs__header {
@@ -14596,8 +14608,8 @@ video {
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
 }
 
-html {
-  color: #2d3748;
+body {
+  font-size: 1.125rem;
   font-family: 'Inter UI', sans-serif;
 }
 
@@ -14632,12 +14644,29 @@ a:hover {
 }
 
 .main-nav {
+  font-size: 1.125rem;
   display: flex;
   justify-content: flex-start;
   border-bottom-width: 1px;
   align-items: center;
   padding-left: 0;
   padding-right: 0;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 50;
+}
+
+.main-sidebar-menu {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 80px;
+}
+
+.main-sidebar-menu .el-menu-item, 
+.main-sidebar-menu .el-submenu__title {
+  font-size: 1.125rem;
 }
 
 .base-table {
@@ -14650,7 +14679,7 @@ a:hover {
   padding-bottom: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   text-transform: uppercase;
   background-color: #edf2f7;
   color: #4a5568;
@@ -21242,23 +21271,23 @@ a:hover {
 }
 
 .tw-text-xs{
-  font-size: 0.75rem;
-}
-
-.tw-text-sm{
   font-size: 0.875rem;
 }
 
-.tw-text-base{
-  font-size: 1rem;
+.tw-text-sm{
+  font-size: 0.9rem;
 }
 
-.tw-text-lg{
+.tw-text-base{
   font-size: 1.125rem;
 }
 
-.tw-text-xl{
+.tw-text-lg{
   font-size: 1.25rem;
+}
+
+.tw-text-xl{
+  font-size: 1.5rem;
 }
 
 .tw-text-2xl{
@@ -28182,23 +28211,23 @@ a:hover {
   }
 
   .sm\:tw-text-xs{
-    font-size: 0.75rem;
-  }
-
-  .sm\:tw-text-sm{
     font-size: 0.875rem;
   }
 
-  .sm\:tw-text-base{
-    font-size: 1rem;
+  .sm\:tw-text-sm{
+    font-size: 0.9rem;
   }
 
-  .sm\:tw-text-lg{
+  .sm\:tw-text-base{
     font-size: 1.125rem;
   }
 
-  .sm\:tw-text-xl{
+  .sm\:tw-text-lg{
     font-size: 1.25rem;
+  }
+
+  .sm\:tw-text-xl{
+    font-size: 1.5rem;
   }
 
   .sm\:tw-text-2xl{
@@ -35108,23 +35137,23 @@ a:hover {
   }
 
   .md\:tw-text-xs{
-    font-size: 0.75rem;
-  }
-
-  .md\:tw-text-sm{
     font-size: 0.875rem;
   }
 
-  .md\:tw-text-base{
-    font-size: 1rem;
+  .md\:tw-text-sm{
+    font-size: 0.9rem;
   }
 
-  .md\:tw-text-lg{
+  .md\:tw-text-base{
     font-size: 1.125rem;
   }
 
-  .md\:tw-text-xl{
+  .md\:tw-text-lg{
     font-size: 1.25rem;
+  }
+
+  .md\:tw-text-xl{
+    font-size: 1.5rem;
   }
 
   .md\:tw-text-2xl{
@@ -42034,23 +42063,23 @@ a:hover {
   }
 
   .lg\:tw-text-xs{
-    font-size: 0.75rem;
-  }
-
-  .lg\:tw-text-sm{
     font-size: 0.875rem;
   }
 
-  .lg\:tw-text-base{
-    font-size: 1rem;
+  .lg\:tw-text-sm{
+    font-size: 0.9rem;
   }
 
-  .lg\:tw-text-lg{
+  .lg\:tw-text-base{
     font-size: 1.125rem;
   }
 
-  .lg\:tw-text-xl{
+  .lg\:tw-text-lg{
     font-size: 1.25rem;
+  }
+
+  .lg\:tw-text-xl{
+    font-size: 1.5rem;
   }
 
   .lg\:tw-text-2xl{
@@ -48960,23 +48989,23 @@ a:hover {
   }
 
   .xl\:tw-text-xs{
-    font-size: 0.75rem;
-  }
-
-  .xl\:tw-text-sm{
     font-size: 0.875rem;
   }
 
-  .xl\:tw-text-base{
-    font-size: 1rem;
+  .xl\:tw-text-sm{
+    font-size: 0.9rem;
   }
 
-  .xl\:tw-text-lg{
+  .xl\:tw-text-base{
     font-size: 1.125rem;
   }
 
-  .xl\:tw-text-xl{
+  .xl\:tw-text-lg{
     font-size: 1.25rem;
+  }
+
+  .xl\:tw-text-xl{
+    font-size: 1.5rem;
   }
 
   .xl\:tw-text-2xl{

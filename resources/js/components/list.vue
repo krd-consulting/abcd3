@@ -2,13 +2,11 @@
     <div class="tw-shadow tw-rounded tw-bg-white">
         <div v-if="hasHeader" class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b">
             <slot name="header">
-                <h2 class="tw-font-bold tw-text-xl tw-w-1/2">
+                <h2 class="tw-font-bold tw-text-xl tw-w-1/4">
                     <slot name="header-text"></slot>
                 </h2>
-                <div class="tw-flex-no-wrap tw-w-1/2">
-                    <slot name="options">
-                    </slot>
-                </div>
+                <slot name="options">
+                </slot>
             </slot>
         </div>
         <div v-if="total == 0">

@@ -20,6 +20,14 @@
           <el-button size="small" type="primary">Click to upload</el-button>
           <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
       </el-upload>
+
+      <el-switch 
+            v-model="field.settings.required" 
+            active-text="Required" 
+            inactive-text="Optional"
+            class="tw-float-right button-top">
+        </el-switch>
+
         <slot></slot>
     </div>
 </template>
@@ -99,5 +107,10 @@ export default {
     color: #409EFF;
     text-decoration: underline;
     font-size: 110%;
+}
+.button-top {
+    position: absolute;
+    top: 30px;;
+    right: 10px;
 }
 </style>

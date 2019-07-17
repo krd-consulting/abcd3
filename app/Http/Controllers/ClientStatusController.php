@@ -32,6 +32,13 @@ class ClientStatusController extends Controller
     	return $status;
     }
 
+    public function edit(ClientStatus $status)
+    {
+        $this->authorize('write', $status);
+
+        return [ 'data' => $status];
+    }
+
     public function update(ClientStatus $status, UpdateClientStatus $request)
     {
         $this->authorize('write', $status);

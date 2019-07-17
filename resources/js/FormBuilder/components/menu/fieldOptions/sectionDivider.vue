@@ -7,7 +7,7 @@
             </el-form-item>
             
             <el-form-item>
-                <slot :fieldData="fieldData"></slot>
+                <el-button type="success" @click="save">Set</el-button>
             </el-form-item>
        </el-form>
    </div>
@@ -18,10 +18,13 @@ export default {
     name: 'sectionDivider',
     data: () => {
         return {
-            type: 'SectionDivider',
-            name: 'section_divider',
             fieldData: {
-                label: ''
+                type: 'SectionDivider',
+                name: 'section_divider',
+                label: '',
+                settings: {
+                    required: false,
+                },
             },
         }
     },
@@ -30,8 +33,8 @@ export default {
     },
     methods: {
 
-        submitfieldData(fieldData) {
-            this.$emit('outputData', this.fieldData);
+        save() {
+            this.$emit('save', this.fieldData);
         }
     }
 }

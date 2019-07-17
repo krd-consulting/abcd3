@@ -13,6 +13,14 @@
 
 @tailwind base;
 
+*,
+.el-input__inner,
+.el-tabs__item,
+.el-switch__label *{
+    @apply 
+        tw-text-base;
+}
+
 @import url('https://rsms.me/inter/inter-ui.css');
 
 .el-button+.el-button {
@@ -30,6 +38,11 @@
         tw-p-0;
 }
 
+.el-tabs .el-tabs__nav {
+    @apply 
+        tw-py-2;
+}
+
 .el-tabs__header {
     @apply
         tw-m-0;
@@ -44,8 +57,8 @@
         tw-shadow;
 }
 
-html {
-    @apply tw-text-gray-800;
+body {
+    @apply tw-text-base;
     font-family: 'Inter UI', sans-serif;
 
 }
@@ -80,11 +93,28 @@ a:hover {
 
 .main-nav {
     @apply
+        tw-text-base
         tw-flex
         tw-justify-start
         tw-border-b
         tw-items-center
-        tw-px-0;
+        tw-px-0
+        tw-sticky
+        tw-top-0
+        tw-bg-white
+        tw-z-50;
+}
+
+.main-sidebar-menu {
+    @apply
+        tw-sticky;
+    top: 80px;
+}
+
+.main-sidebar-menu .el-menu-item, 
+.main-sidebar-menu .el-submenu__title {
+    @apply
+        tw-text-base;
 }
 
 

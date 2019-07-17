@@ -3645,9 +3645,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 
 
@@ -3959,12 +3956,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    active: Boolean
+    active: Boolean,
+    clientStatusId: Number | String
   },
   data: function data() {
     return {
       request: new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_0__["default"](),
-      programClientStatusData: {
+      newClientStatusData: {
         name: '',
         description: ''
       }
@@ -3974,24 +3972,40 @@ __webpack_require__.r(__webpack_exports__);
     close: function close() {
       this.$emit('update:active', false);
       this.request.errors.clear();
-      this.programClientStatusData = {
+      this.newClientStatusData = {
         name: '',
         description: ''
       };
     },
-    store: function store(status) {
+    open: function open() {
+      this.retrieve();
+    },
+    initializeWithData: function initializeWithData(data) {
+      this.newClientStatusData.id = data.id;
+      this.newClientStatusData.name = data.name;
+      this.newClientStatusData.description = data.description;
+    },
+    retrieve: function retrieve() {
       var _this = this;
 
-      this.request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_0__["default"](this.programClientStatusData);
-      this.request.update(status).then(function (response) {
-        _this.$emit('update');
+      var request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
+      request.edit(this.clientStatusId).then(function (response) {
+        _this.initializeWithData(response.data);
+      });
+    },
+    store: function store(status) {
+      var _this2 = this;
 
-        _this.$message({
+      this.request = new _api_ClientStatusRequest__WEBPACK_IMPORTED_MODULE_0__["default"](this.newClientStatusData);
+      this.request.update(this.newClientStatusData.id).then(function (response) {
+        _this2.$emit('update');
+
+        _this2.$message({
           type: 'success',
           message: 'Client Status updated successfully!'
         });
 
-        _this.close();
+        _this2.close();
       })["catch"](function (error) {//
       });
     }
@@ -4018,6 +4032,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4956,8 +4979,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -80747,20 +80768,6 @@ var render = function() {
                             },
                             [
                               _c(
-                                "base-icon",
-                                {
-                                  staticClass:
-                                    "tw-text-sm tw-align-middle tw-mr-1"
-                                },
-                                [
-                                  _vm._t("empty-placeholder-add-button-icon", [
-                                    _vm._v("add")
-                                  ])
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
                                 "span",
                                 { staticClass: "tw-text-xs tw-align-middle" },
                                 [
@@ -80770,8 +80777,7 @@ var render = function() {
                                 ],
                                 2
                               )
-                            ],
-                            1
+                            ]
                           )
                         ])
                       ],
@@ -80792,89 +80798,78 @@ var render = function() {
           ),
           _vm._v(" "),
           _vm.hasOptions
-            ? _c("template", { slot: "options" }, [
-                _c(
-                  "div",
-                  {
-                    directives: [
-                      {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.showListHeaderOptions,
-                        expression: "showListHeaderOptions"
-                      }
-                    ],
-                    staticClass: "tw-flex tw-justify-end"
-                  },
-                  [
-                    _vm.hasSearch
-                      ? _vm._t("options-search", [
-                          _c("search", {
-                            on: {
-                              input: function($event) {
-                                return _vm.handleSearch(_vm.search)
-                              }
-                            },
-                            model: {
-                              value: _vm.search,
-                              callback: function($$v) {
-                                _vm.search = $$v
-                              },
-                              expression: "search"
-                            }
-                          })
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.hasAdd
-                      ? _vm._t("options-add", [
-                          _c(
-                            "base-button",
-                            {
-                              staticClass:
-                                "tw-py-2 tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue-500 tw-no-shrink",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$emit("add")
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "base-icon",
-                                {
-                                  staticClass:
-                                    "tw-text-base tw-font-bold tw-align-middle"
-                                },
-                                [
-                                  _vm._t("options-add-icon", [
-                                    _vm._v(
-                                      "\n                                add\n                            "
-                                    )
-                                  ])
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "tw-align-middle" },
-                                [
-                                  _vm._t("options-add-text", [
-                                    _vm._v("Add Resource")
-                                  ])
-                                ],
-                                2
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      : _vm._e()
+            ? _c(
+                "template",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.showListHeaderOptions,
+                      expression: "showListHeaderOptions"
+                    }
                   ],
-                  2
-                )
-              ])
+                  slot: "options"
+                },
+                [
+                  _vm.hasSearch
+                    ? _vm._t("options-search", [
+                        _c("search", {
+                          staticClass: "tw-w-1/2",
+                          on: {
+                            input: function($event) {
+                              return _vm.handleSearch(_vm.search)
+                            }
+                          },
+                          model: {
+                            value: _vm.search,
+                            callback: function($$v) {
+                              _vm.search = $$v
+                            },
+                            expression: "search"
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.hasAdd
+                    ? _vm._t("options-add", [
+                        _c(
+                          "div",
+                          { staticClass: "tw-w-1/4 tw-text-right" },
+                          [
+                            _c(
+                              "base-button",
+                              {
+                                staticClass:
+                                  "tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue-500 tw-no-shrink",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.$emit("add")
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "span",
+                                  { staticClass: "tw-align-middle" },
+                                  [
+                                    _vm._t("options-add-text", [
+                                      _vm._v("Add Resource")
+                                    ])
+                                  ],
+                                  2
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    : _vm._e()
+                ],
+                2
+              )
             : _vm._e(),
           _vm._v(" "),
           _vm.hasListColumns
@@ -80889,7 +80884,7 @@ var render = function() {
                     _c(
                       "div",
                       {
-                        staticClass: "tw-w-1/6",
+                        staticClass: "tw-w-1/4",
                         attrs: { column: _vm.primaryDataColumn }
                       },
                       [
@@ -80900,7 +80895,7 @@ var render = function() {
                       2
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "tw-flex tw-w-5/6" }, [
+                    _c("div", { staticClass: "tw-flex tw-w-3/4" }, [
                       _c(
                         "div",
                         { staticClass: "tw-flex tw-flex-grow" },
@@ -80968,7 +80963,7 @@ var render = function() {
                   _c("template", { slot: "secondary-data" }, [
                     _c(
                       "span",
-                      { staticClass: "tw-text-sm tw-text-gray" },
+                      { staticClass: "tw-text-sm" },
                       [
                         _vm._t("list-item-secondary-data", null, { item: item })
                       ],
@@ -81009,8 +81004,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none",
-                              attrs: { item: item },
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -81048,8 +81042,7 @@ var render = function() {
                                 "base-button",
                                 {
                                   staticClass:
-                                    "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
-                                  attrs: { item: item },
+                                    "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
                                   on: {
                                     click: function($event) {
                                       return _vm.$emit(
@@ -81066,7 +81059,12 @@ var render = function() {
                                       staticClass:
                                         "tw-text-xs tw-mr-1 tw-align-middle"
                                     },
-                                    [_vm._v("close")]
+                                    [
+                                      _vm._t("options-remove-icon", [
+                                        _vm._v("close")
+                                      ])
+                                    ],
+                                    2
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -81074,7 +81072,12 @@ var render = function() {
                                     {
                                       staticClass: "tw-text-xs tw-align-middle"
                                     },
-                                    [_vm._v("Remove")]
+                                    [
+                                      _vm._t("options-remove-text", [
+                                        _vm._v("Remove")
+                                      ])
+                                    ],
+                                    2
                                   )
                                 ],
                                 1
@@ -81089,8 +81092,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
-                              attrs: { item: item },
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -81107,13 +81109,23 @@ var render = function() {
                                   staticClass:
                                     "tw-text-xs tw-mr-1 tw-align-middle"
                                 },
-                                [_vm._v("delete")]
+                                [
+                                  _vm._t("options-delete-icon", [
+                                    _vm._v("archive")
+                                  ])
+                                ],
+                                2
                               ),
                               _vm._v(" "),
                               _c(
                                 "span",
                                 { staticClass: "tw-text-xs tw-align-middle" },
-                                [_vm._v("Delete")]
+                                [
+                                  _vm._t("options-delete-text", [
+                                    _vm._v("Archive")
+                                  ])
+                                ],
+                                2
                               )
                             ],
                             1
@@ -81204,7 +81216,7 @@ var render = function() {
     "base-input",
     {
       staticClass: "tw-no-shrink tw-mr-2",
-      attrs: { value: _vm.value, placeholder: "Search for something" },
+      attrs: { value: _vm.value, placeholder: "Search" },
       on: {
         input: function($event) {
           return _vm.handleInput($event)
@@ -81420,7 +81432,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "base-dialog",
-    { attrs: { visible: _vm.active }, on: { close: _vm.close } },
+    {
+      attrs: { visible: _vm.active },
+      on: { close: _vm.close, open: _vm.open }
+    },
     [
       _c(
         "div",
@@ -81429,7 +81444,7 @@ var render = function() {
           _c("base-icon", { staticClass: "tw-align-middle" }, [
             _vm._v("person_add")
           ]),
-          _vm._v(" Create Client Status\n    ")
+          _vm._v(" Edit Client Status\n    ")
         ],
         1
       ),
@@ -81453,11 +81468,11 @@ var render = function() {
                     }
                   },
                   model: {
-                    value: _vm.programClientStatusData["name"],
+                    value: _vm.newClientStatusData["name"],
                     callback: function($$v) {
-                      _vm.$set(_vm.programClientStatusData, "name", $$v)
+                      _vm.$set(_vm.newClientStatusData, "name", $$v)
                     },
-                    expression: "programClientStatusData['name']"
+                    expression: "newClientStatusData['name']"
                   }
                 })
               ],
@@ -81497,11 +81512,11 @@ var render = function() {
                     }
                   },
                   model: {
-                    value: _vm.programClientStatusData["description"],
+                    value: _vm.newClientStatusData["description"],
                     callback: function($$v) {
-                      _vm.$set(_vm.programClientStatusData, "description", $$v)
+                      _vm.$set(_vm.newClientStatusData, "description", $$v)
                     },
-                    expression: "programClientStatusData['description']"
+                    expression: "newClientStatusData['description']"
                   }
                 })
               ],
@@ -81610,7 +81625,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("edit-status", {
-        attrs: { active: _vm.edit.active },
+        attrs: { active: _vm.edit.active, "client-status-id": _vm.edit.status },
         on: {
           "update:active": function($event) {
             return _vm.$set(_vm.edit, "active", $event)
@@ -81631,6 +81646,7 @@ var render = function() {
             "has-list-columns": false,
             "has-add": "",
             "has-delete": "",
+            "has-remove": "",
             hasSearch: false,
             total: _vm.total
           },
@@ -81639,6 +81655,7 @@ var render = function() {
               return _vm.$set(_vm.params, "page", $event)
             },
             add: _vm.createStatus,
+            edit: _vm.editStatus,
             delete: _vm.confirmDelete,
             "page-change": function($event) {
               return _vm.retrieve()
@@ -81667,7 +81684,7 @@ var render = function() {
                     "base-button",
                     {
                       staticClass:
-                        "tw-py-2 tw-px-2 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                        "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
                       on: {
                         click: function($event) {
                           return _vm.toggleDisable(status)
@@ -81699,6 +81716,21 @@ var render = function() {
           _vm._v(" "),
           _c("template", { slot: "options-add-text" }, [
             _vm._v("Create Client Status")
+          ]),
+          _vm._v(" "),
+          _c("template", { slot: "empty-placeholder" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "tw-text-center tw-py-16 tw-bg-gray-100 tw-rounded tw-mx-4 tw-my-4"
+              },
+              [
+                _vm._v(
+                  " \n                    No client statuses have been disabled.\n                "
+                )
+              ]
+            )
           ]),
           _vm._v(" "),
           _vm._v(" "),
@@ -82886,17 +82918,12 @@ var render = function() {
               _vm._t("header", [
                 _c(
                   "h2",
-                  { staticClass: "tw-font-bold tw-text-xl tw-w-1/2" },
+                  { staticClass: "tw-font-bold tw-text-xl tw-w-1/4" },
                   [_vm._t("header-text")],
                   2
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-flex-no-wrap tw-w-1/2" },
-                  [_vm._t("options")],
-                  2
-                )
+                _vm._t("options")
               ])
             ],
             2
@@ -82983,7 +83010,7 @@ var render = function() {
       _c(
         "router-link",
         {
-          staticClass: "tw-flex tw-w-1/6 tw-items-top tw-cursor-pointer",
+          staticClass: "tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer",
           attrs: { tag: "div", to: _vm.to }
         },
         [
@@ -82997,7 +83024,7 @@ var render = function() {
                 [
                   _c(
                     "span",
-                    { staticClass: "tw-mb-2 tw-block tw-font-semibold" },
+                    { staticClass: "tw-block" },
                     [_vm._t("default", [_vm._v(_vm._s(_vm.primaryData))])],
                     2
                   )
