@@ -50,6 +50,36 @@
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5">
+                        Team
+                    </label>
+                    <div class="tw-w-2/3">
+                        <base-select
+                            v-model="formData.team_id"
+                            filterable
+                            remote
+                            :remote-method="retrieveTeams"
+                            name="type"
+                            placeholder="Select Team"
+                            @change="request.errors.clear('team_id')">
+                            <el-option
+                                v-for="(team, index) in teams"
+                                :key="index"
+                                :label="team.name"
+                                :value="team.id">
+                                {{ team.name }}
+                            </el-option>
+                        </base-select>
+                    </div>
+                </div>
+                <div v-if="request.errors.has('team_id')" class="tw-flex tw-justify-end">
+                    <div class="tw-w-4/5 tw-py-2">
+                        <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red-500"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="tw-mb-2">
+                <div class="tw-flex tw-items-center tw-w-full">
+                    <label class="tw-w-1/5">
                         Form Type
                     </label>
                     <div class="tw-w-2/3">
@@ -114,10 +144,10 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="formData.scope"
+                            v-model="formData.scope_id"
                             name="target"
                             placeholder="Choose who can see this form."
-                            @change="request.errors.clear('scope');">
+                            @change="request.errors.clear('scope_id');">
                             <el-option
                                 v-for="(scope, index) in formattedScopes"
                                 :key="index"
@@ -128,9 +158,9 @@
                         </base-select>
                     </div>
                 </div>
-                <div v-if="request.errors.has('scope')" class="tw-flex tw-justify-end">
+                <div v-if="request.errors.has('scope_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('scope')[0]" class="tw-text-xs tw-text-red-500"></span>
+                        <span v-text="request.errors.get('scope_id')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
                 <div v-if="request.errors.has('target.type_id')" class="tw-flex tw-justify-end">
@@ -154,6 +184,7 @@
 </template>
 <script>
     import Request from '@/api/FormRequest';
+    import TeamRequest from '@/api/TeamRequest';
 
     export default {
         inheritAttrs: false,
@@ -165,6 +196,15 @@
         data() {
             return {
                 request: new Request(),
+                teamRequest: new TeamRequest(),
+                // TODO: implement dropdown search for teams
+                teamRequestParams: {
+                    ascending: true,
+                    sortBy: 'name',
+                    page: 1,
+                    perPage: 10,
+                    search: ''
+                },
                 formData: {
                     name: '',
                     description: '',
@@ -174,7 +214,8 @@
                 },
                 targetTypes: [],
                 types: [],
-                scopes: []
+                scopes: [],
+                teams: []
             }
         },
 
@@ -199,6 +240,18 @@
         },
 
         methods: {
+            retrieveTeams(keywords) {
+                this.teamRequestParams.search = keywords;
+
+                this.teamRequest.setFields({
+                    params: {...this.teamRequestParams }
+                });
+
+                this.teamRequest.retrieve().then(response => {
+                    this.teams = response.data;
+                });
+            },
+
             close() {
                 this.$emit('update:active', false);
 
@@ -209,7 +262,8 @@
                     description: '',
                     target: '',
                     type: '',
-                    scope: ''
+                    team_id: '',
+                    scope_id: '',
                 };
             },
 

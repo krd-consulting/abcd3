@@ -57,12 +57,14 @@ class InitializeForm extends FormRequest
         return [
             'name' => 'required',
             'description' => '',
+            'team_id' => 'required|exists:teams,id',
             'type' => [
                 'required',
                 Rule::in(config('app.form_types'))
             ],
             'target.type' => 'required|exists:form_target_types,id',
-            'target.id' => 'exists:record_types,id'
+            'target.id' => 'exists:record_types,id',
+            'scope_id' => 'required|exists:scopes,id'
         ];
     }
 }

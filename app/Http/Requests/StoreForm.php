@@ -30,7 +30,10 @@ class StoreForm extends FormRequest
             'description' => '',
             'target_type_id' => 'required|exists:form_target_types,id',
             'target_id' => 'nullable|exists:record_types,id',
-            'type' => 'required|in:pre-post,static',
+            'type' => [
+                'required',
+                Rule::in(config('app.form_types'))
+            ],
             'team_id' => 'required|exists:teams,id',
             'scope_id' => 'required|exists:scopes,id',
             'fields.*.type' => 'required',

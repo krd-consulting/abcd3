@@ -28,6 +28,9 @@ class ValidateForm extends Controller
         $data = [
             'name' => $form->validated()['name'],
             'description' => $form->validated()['description'],
+            'type' => $form->validated()['type'],
+            'team_id' => $form->validated()['team_id'],
+            'scope_id' => $form->validated()['scope_id'],
             'target' => $target
         ];
 

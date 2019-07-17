@@ -7265,6 +7265,41 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
+/* harmony import */ var _api_TeamRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/api/TeamRequest */ "./resources/js/api/TeamRequest.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7420,6 +7455,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   inheritAttrs: false,
   props: {
@@ -7428,6 +7464,15 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"](),
+      teamRequest: new _api_TeamRequest__WEBPACK_IMPORTED_MODULE_1__["default"](),
+      // TODO: implement dropdown search for teams
+      teamRequestParams: {
+        ascending: true,
+        sortBy: 'name',
+        page: 1,
+        perPage: 10,
+        search: ''
+      },
       formData: {
         name: '',
         description: '',
@@ -7437,16 +7482,17 @@ __webpack_require__.r(__webpack_exports__);
       },
       targetTypes: [],
       types: [],
-      scopes: []
+      scopes: [],
+      teams: []
     };
   },
   computed: {
     formattedScopes: function formattedScopes() {
       var labels = {
         universal: 'Everyone',
-        team: 'Users in my team',
-        program: 'Users in my program',
-        group: 'Users in my group',
+        team: 'Users in this form\'s teams',
+        program: 'Users in this form\'s programs',
+        group: 'Users in this form\'s groups',
         self: 'Just me'
       };
 
@@ -7459,6 +7505,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    retrieveTeams: function retrieveTeams(keywords) {
+      var _this = this;
+
+      this.teamRequestParams.search = keywords;
+      this.teamRequest.setFields({
+        params: _objectSpread({}, this.teamRequestParams)
+      });
+      this.teamRequest.retrieve().then(function (response) {
+        _this.teams = response.data;
+      });
+    },
     close: function close() {
       this.$emit('update:active', false);
       this.request.errors.clear();
@@ -7467,30 +7524,31 @@ __webpack_require__.r(__webpack_exports__);
         description: '',
         target: '',
         type: '',
-        scope: ''
+        team_id: '',
+        scope_id: ''
       };
     },
     open: function open() {
       this.load();
     },
     load: function load() {
-      var _this = this;
+      var _this2 = this;
 
       var request = new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
       request.create().then(function (response) {
-        _this.targetTypes = response.data.target_types;
-        _this.types = response.data.types;
-        _this.scopes = response.data.scopes;
+        _this2.targetTypes = response.data.target_types;
+        _this2.types = response.data.types;
+        _this2.scopes = response.data.scopes;
       });
     },
     submit: function submit() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.request = new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"](this.formData);
       this.request.validate().then(function (response) {
-        _this2.$emit('save', response.data);
+        _this3.$emit('save', response.data);
 
-        _this2.close();
+        _this3.close();
       })["catch"](function (error) {//
       });
     }
@@ -7709,6 +7767,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -91853,6 +91915,76 @@ var render = function() {
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
             _c("label", { staticClass: "tw-w-1/5" }, [
+              _vm._v("\n                    Team\n                ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tw-w-2/3" },
+              [
+                _c(
+                  "base-select",
+                  {
+                    attrs: {
+                      filterable: "",
+                      remote: "",
+                      "remote-method": _vm.retrieveTeams,
+                      name: "type",
+                      placeholder: "Select Team"
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.request.errors.clear("team_id")
+                      }
+                    },
+                    model: {
+                      value: _vm.formData.team_id,
+                      callback: function($$v) {
+                        _vm.$set(_vm.formData, "team_id", $$v)
+                      },
+                      expression: "formData.team_id"
+                    }
+                  },
+                  _vm._l(_vm.teams, function(team, index) {
+                    return _c(
+                      "el-option",
+                      {
+                        key: index,
+                        attrs: { label: team.name, value: team.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(team.name) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm.request.errors.has("team_id")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red-500",
+                    domProps: {
+                      textContent: _vm._s(_vm.request.errors.get("team_id")[0])
+                    }
+                  })
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tw-mb-2" }, [
+          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
+            _c("label", { staticClass: "tw-w-1/5" }, [
               _vm._v("\n                    Form Type\n                ")
             ]),
             _vm._v(" "),
@@ -92016,15 +92148,15 @@ var render = function() {
                     },
                     on: {
                       change: function($event) {
-                        return _vm.request.errors.clear("scope")
+                        return _vm.request.errors.clear("scope_id")
                       }
                     },
                     model: {
-                      value: _vm.formData.scope,
+                      value: _vm.formData.scope_id,
                       callback: function($$v) {
-                        _vm.$set(_vm.formData, "scope", $$v)
+                        _vm.$set(_vm.formData, "scope_id", $$v)
                       },
-                      expression: "formData.scope"
+                      expression: "formData.scope_id"
                     }
                   },
                   _vm._l(_vm.formattedScopes, function(scope, index) {
@@ -92050,13 +92182,13 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm.request.errors.has("scope")
+          _vm.request.errors.has("scope_id")
             ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
                 _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
                   _c("span", {
                     staticClass: "tw-text-xs tw-text-red-500",
                     domProps: {
-                      textContent: _vm._s(_vm.request.errors.get("scope")[0])
+                      textContent: _vm._s(_vm.request.errors.get("scope_id")[0])
                     }
                   })
                 ])
@@ -114586,6 +114718,22 @@ var app = new Vue({
         this.$store.commit('SET_DESCRIPTION', description);
       }
     },
+    team_id: {
+      get: function get() {
+        return this.$store.state.team_id;
+      },
+      set: function set(team_id) {
+        this.$store.commit('SET_TEAM_ID', team_id);
+      }
+    },
+    scope_id: {
+      get: function get() {
+        return this.$store.state.scope_id;
+      },
+      set: function set(scope_id) {
+        this.$store.commit('SET_SCOPE_ID', scope_id);
+      }
+    },
     type: {
       get: function get() {
         return this.$store.state.type;
@@ -114613,6 +114761,8 @@ var app = new Vue({
     initializeForm: function initializeForm(data) {
       this.title = data.name;
       this.description = data.description;
+      this.team_id = data.team_id;
+      this.scope_id = data.scope_id;
       this.type = data.type;
       this.target = data.target;
     }
@@ -114746,6 +114896,12 @@ __webpack_require__.r(__webpack_exports__);
   SET_DESCRIPTION: function SET_DESCRIPTION(state, description) {
     state.description = description;
   },
+  SET_TEAM_ID: function SET_TEAM_ID(state, team) {
+    state.team_id = team;
+  },
+  SET_SCOPE_ID: function SET_SCOPE_ID(state, scope) {
+    state.scope_id = scope;
+  },
   SET_TYPE: function SET_TYPE(state, type) {
     state.type = type;
   },
@@ -114784,6 +114940,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   title: 'Form Title',
   description: 'Subtext',
+  team_id: '',
+  scope_id: '',
   target: {
     type: '',
     id: 0
@@ -115180,6 +115338,86 @@ function (_Request) {
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (RecordType);
+
+/***/ }),
+
+/***/ "./resources/js/api/TeamRequest.js":
+/*!*****************************************!*\
+  !*** ./resources/js/api/TeamRequest.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var TeamRequest =
+/*#__PURE__*/
+function (_Request) {
+  _inherits(TeamRequest, _Request);
+
+  function TeamRequest() {
+    _classCallCheck(this, TeamRequest);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(TeamRequest).apply(this, arguments));
+  }
+
+  _createClass(TeamRequest, [{
+    key: "retrieve",
+    value: function retrieve() {
+      return this.get("/api/teams");
+    }
+  }, {
+    key: "show",
+    value: function show(team) {
+      return this.get("/api/teams/".concat(team));
+    }
+  }, {
+    key: "edit",
+    value: function edit(team) {
+      return this.get("/api/teams/".concat(team, "/edit"));
+    }
+  }, {
+    key: "store",
+    value: function store() {
+      return this.post('/api/teams');
+    }
+  }, {
+    key: "update",
+    value: function update(team) {
+      return this.patch("/api/teams/".concat(team));
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(team) {
+      return this["delete"]("/api/teams/".concat(team));
+    }
+  }]);
+
+  return TeamRequest;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (TeamRequest);
 
 /***/ }),
 
