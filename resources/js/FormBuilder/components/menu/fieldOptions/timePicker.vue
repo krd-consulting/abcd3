@@ -24,7 +24,7 @@ export default {
     data: () => {
         return {
             fieldData: {
-                type: 'TimePicker',
+                type: 'TimeField',
                 name: 'time_picker',
                 label: '',
                 settings: {

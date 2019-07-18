@@ -41,7 +41,7 @@ export default {
     data: () => {
         return {
             fieldData: {
-                type: 'DatePicker',
+                type: 'DateField',
                 name: 'date_picker',
                 label: '',
                 settings: {

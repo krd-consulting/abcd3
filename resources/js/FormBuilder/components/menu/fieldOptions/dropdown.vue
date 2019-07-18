@@ -28,7 +28,7 @@ export default {
     data: () => {
         return {
             fieldData: {
-                type: 'Dropdown',
+                type: 'DropdownField',
                 name: 'dropdown',
                 label: '',
                 settings: {

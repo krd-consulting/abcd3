@@ -114,16 +114,16 @@
 <script>
 import test from '@/FormBuilder/store/test.json'
 
-import Matrix from '@/FormBuilder/components/preview/matrix.vue'
-import Radio from '@/FormBuilder/components/preview/radio.vue'
+import MatrixField from '@/FormBuilder/components/preview/matrix.vue'
+import RadioField from '@/FormBuilder/components/preview/radio.vue'
 import TextField from '@/FormBuilder/components/preview/textField.vue'
 import TextBox from '@/FormBuilder/components/preview/textBox.vue'
-import Numeric from '@/FormBuilder/components/preview/numeric.vue'
-import Dropdown from '@/FormBuilder/components/preview/dropdown.vue'
-import CheckBox from '@/FormBuilder/components/preview/checkbox.vue'
-import DatePicker from '@/FormBuilder/components/preview/datePicker.vue'
-import TimePicker from '@/FormBuilder/components/preview/timePicker.vue'
-import Upload from '@/FormBuilder/components/preview/upload.vue'
+import NumberField from '@/FormBuilder/components/preview/numeric.vue'
+import DropdownField from '@/FormBuilder/components/preview/dropdown.vue'
+import CheckBoxField from '@/FormBuilder/components/preview/checkbox.vue'
+import DateField from '@/FormBuilder/components/preview/datePicker.vue'
+import TimeField from '@/FormBuilder/components/preview/timePicker.vue'
+import FileField from '@/FormBuilder/components/preview/upload.vue'
 import SectionDivider from '@/FormBuilder/components/preview/sectionDivider.vue'
 
 import { mapState } from 'vuex'
@@ -151,38 +151,22 @@ export default {
         }
     },
     components: {
-        Matrix,
-        Radio,
+        MatrixField,
+        RadioField,
         TextField,
         TextBox,
-        Numeric,
-        Dropdown,
-        CheckBox,
-        DatePicker,
-        TimePicker,
-        Upload,
+        NumberField,
+        DropdownField,
+        CheckBoxField,
+        DateField,
+        TimeField,
+        FileField,
         SectionDivider
     },
     computed: {
         ...mapState ([
             'title', 'description', 'target', 'fields'
         ])
-        // title: {
-        //     get() { return this.$store.state.title },
-        //     set(title) { this.$store.commit('SET_TITLE', title) }, 
-        // },
-        // target: {
-        //     get() { return this.$store.state.target },
-        //     set(target) { this.$store.commit('SET_TARGET', target) }, 
-        // },
-        // description: {
-        //     get() { return this.$store.state.description },
-        //     set(description) { this.$store.commit('SET_DESCRIPTION', description) }
-        // },
-        // fields: { 
-        //     get() { return this.$store.state.fields },
-        //     set(fields) { this.$store.commit('SET_FIELDS', fields); }
-        // },
     },
     methods: {
         buildForm() {

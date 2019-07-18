@@ -74,7 +74,7 @@
                             <el-row v-for="(field, index) in fields" type="flex" :gutter="2" :key="index">
                             <el-col class="float-left" :span="24">
                                 <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
-                                    <el-button class="handle tw-float-right hover:tw-cursor-move" size="mini" icon="el-icon-rank">Drag Field</el-button>
+                                    <el-button class="handle tw-float-right" size="mini" icon="el-icon-rank">Drag Field</el-button>
                                 <component 
                                     :is="field.type" 
                                     :fieldData="field"
@@ -306,5 +306,8 @@ export default {
   .handle {
       position: relative;
       z-index: 10;
+  }
+  .handle:hover {
+      cursor: move;
   }
 </style>

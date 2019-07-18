@@ -30,7 +30,7 @@ export default {
     data: () => {
         return {
             fieldData: {
-                type: 'CheckBox',
+                type: 'CheckBoxField',
                 name: 'check_box',
                 label: '',
                 settings: {
