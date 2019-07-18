@@ -8,7 +8,7 @@
                 </template>
 
                 <div v-for="input in inputs" :key="input.id" @click="selectInput(input)">
-                    <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="never">
+                    <el-card class="fields cursor-pointer hover:tw-bg-gray-400" body-style="padding: 5px;" shadow="never">
                         {{ input.name }}
                     </el-card>
                 </div>
@@ -30,8 +30,8 @@
 
         <el-collapse-item name="2" disabled class="tw-cursor-default">
             <template slot="title">
-                <p v-if="!selectedInput.name" class="menu-title">Field Requirements</p>
-                <p v-if="selectedInput.name" class="menu-title">{{ selectedInput.name }} Settings</p>
+                <!-- <p v-if="!selectedInput.name" class="menu-title">Settings</p> -->
+                <p class="menu-title">{{ selectedInput.name }} Settings</p>
             </template>
 
                 <component :is="selectedInput.component" 
@@ -77,8 +77,8 @@ export default {
                 {name: 'Date Picker', component: 'DatePicker'},
                 {name: 'Time Picker', component: 'TimePicker'},
                 {name: 'Matrix', component: 'MatrixField'},
-                {name: 'File Upload', component: 'FileUpload'},
-                {name: 'Section Divider', component: 'SectionDivider'},
+                {name: 'File Uploader', component: 'FileUpload'},
+                {name: 'Divider', component: 'SectionDivider'},
             ],
             
             fieldData: {} 
@@ -130,16 +130,48 @@ export default {
 </script>
 
 <style scoped>
- 
+#menu {
+    overflow: hidden;
+    display: flex;
+    /* max-width: 460px;
+    min-width: 260px; */
+}
+.el-card {
+    margin: 5px;
+    border: none;
+}
+.el-card:hover {
+    /* border-color: #badcff; */
+    font-size: 110%;
+}
+.cursor-pointer {
+        cursor: pointer;
+}
+.menu-title {
+    padding-left: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+.fields {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Ipad size */
 @media (min-width: 768px){
-    
-    /* Ipad size */
+     .el-collapse {
+        width: 300px;
+    } 
  
 }
- 
+
+ /* Standard monitor size */
 @media (min-width: 1024px){
-    
-    /* Standard monitor size */
+   .el-collapse {
+        width: 300px;
+    } 
+   
 
 }
  
@@ -148,37 +180,4 @@ export default {
     /* large monitor size */
  
 }
-    #menu {
-        overflow: hidden;
-        display: flex;
-        max-width: 260px;
-        min-width: 160px;
-    }
-    .el-collapse {
-        width: 250px;
-    }
-    /* #menu-stepper {
-        width: auto;
-    } */
-    .el-card {
-        margin: 5px;
-        border: none;
-    }
-    .el-card:hover {
-        /* border-color: #badcff; */
-        font-size: 120%;
-    }
-    .cursor-pointer {
-        cursor: pointer;
-    }
-    .menu-title {
-        padding-left: 5px;
-        font-size: 18px;
-        font-weight: bold;
-        color: #2c3e50;
-    }
-    .fields {
-        font-size: 13px;
-        font-weight: bold;
-    }
 </style>

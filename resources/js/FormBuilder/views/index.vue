@@ -5,14 +5,21 @@
             <el-card id="menu-container"> 
                 <form-menu id="menu"/>
             </el-card>
-            
             <el-card id="canvas-container">
                 <el-header>
+                    
                     <el-menu :default-active="$route.path" 
                         background-color="#fff" 
                         active-text-color="#409EFF" 
                         mode="horizontal" 
                         router>
+                        
+                        <!-- <el-menu-item > -->
+                            <menu-panel class="mobile-menu tw-float-left">
+                                <form-menu id="menu"/>
+                            </menu-panel>
+                        <!-- </el-menu-item> -->
+
                             <el-menu-item default-active 
                                 index="/forms/create" 
                                 class="tw-font-bold tw-focus:font-extrabold">
@@ -43,6 +50,7 @@
     import draggable from 'vuedraggable'
     import FormCanvas from '@/FormBuilder/components/canvas/index.vue'
     import FormMenu from '@/FormBuilder/components/menu/index.vue'
+    import menuPanel from '@/FormBuilder/components/menu/mobileMenu.vue'
 
     export default {
         name: 'Form',
@@ -58,7 +66,8 @@
         components: {
             FormCanvas,
             FormMenu,
-            draggable
+            draggable,
+            menuPanel
         },
 
         methods: {
@@ -85,77 +94,60 @@
 </script>
 
 <style scoped>
- 
-@media (min-width: 768px){
-    #formCreator {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-    #canvas-container {
-        flex: 80%;
-        /* 
-        margin-right: 30px; */
-        margin: 0 auto;
-        margin-left: 5px;
-        min-width: 500px;
-    }
-    #canvas {
-        width: 100%;
-        padding-right: 5px;
-    }
-    .el-header {
-        min-width: 500px;
-    }
-    #menu-container {
-        flex: 20%;
-        padding-top: 60px;
-        margin: 0 auto;
-        min-width: 240px;
-        max-height: 900px;
-        position: -webkit-sticky !important;
-        position: sticky !important;
-        top: 0 !important;
-        align-self: flex-start !important;
-        z-index: 289;
-    }
+
+#formCreator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#canvas {
+    width: 100%;
+    padding-right: 15px;
 }
  
-@media (min-width: 1024px){
-    #formCreator {
-        display: flex;
-        flex-direction: row;
-        /* align-items: center; */
-        /* align-items: flex-start; */
-        justify-content: center;
-        align-items: center;
+@media (min-width: 768px){
+
+    #canvas-container {
+        flex: 100%;
+        margin-left: 5%;
+        margin-right: 5%;
+        min-width: 500px;
     }
+    .mobile-menu {
+        display: inherit;
+        margin: 0 auto;
+        margin-top: 10px;
+    }
+    #menu-container {
+        display: none;
+    } 
+}
+
+/* Standard Desktop View */
+@media (min-width: 1024px){
     #canvas-container {
         flex: 80%;
         margin-left: 10px;
-        margin-right: 10%;
+        margin-right: 5%;
         min-width: 500px;
     }
-    #canvas {
-        width: 100%;
-        padding-right: 15px;
-    }
+    
     .el-header {
         min-width: 500px;
     }
+    .mobile-menu {
+        display: none;
+    }
     #menu-container {
-        flex: 20%;
+        flex: 22%;
+        display: block;
         padding-top: 60px;
         padding-bottom: 10px;
         margin: 0 auto;
-        margin-left: 10%;
-        width: 300px;
-        max-height: 900px;
-        position: -webkit-sticky !important;
-        position: sticky !important;
-        top: 0 !important;
-        align-self: flex-start !important; 
-        z-index: 1;
+        margin-left: 5%;
+        max-width: 450px;
+        /* min-width: 400px; */
+        max-height: 900px; 
     }
 
     .float-right {

@@ -16,7 +16,7 @@
             <el-form-item label="Set Character Limit">
                 <el-switch v-model="fieldData.settings.isLimited" 
                     inactive-text="No Limit" 
-                    active-text="Set Character Limit">
+                    active-text="Limit">
                 </el-switch>
                 <el-input-number v-model="fieldData.settings.max"
                     :disabled="!fieldData.settings.isLimited" 
@@ -25,8 +25,8 @@
                 </el-input-number>
             </el-form-item>
 
-            <el-form-item>
-                <el-button type="success" @click="save">Set</el-button>
+            <el-form-item class="tw-relative tw-text-center tw-mt-12">
+                <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
             </el-form-item>
 
         </el-form>

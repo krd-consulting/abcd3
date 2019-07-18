@@ -6,8 +6,8 @@
                 <el-input v-model="fieldData.label"></el-input>
             </el-form-item>
             
-            <el-form-item>
-                <el-button type="success" @click="save">Set</el-button>
+            <el-form-item class="tw-relative tw-text-center tw-mt-12">
+                <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
             </el-form-item>
        </el-form>
    </div>

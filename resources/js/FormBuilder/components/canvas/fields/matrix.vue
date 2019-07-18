@@ -56,7 +56,7 @@
             v-model="field.settings.required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right button-top">
+            class="tw-float-right tw-mr-48 button-top">
         </el-switch>
 
          <form @submit.prevent="addQuestion" class="tw-inline-block tw-my-4">
@@ -64,8 +64,6 @@
                 <label for="add-item">Add a new question</label>
                 <el-col :span="16" class="tw-float-left">
                     <el-input id="add-item" v-model="itemText"></el-input>
-                </el-col>
-                <el-col :span="1.5" class="tw-float-right">
                     <el-tooltip content="Alternatively, you can press enter after typing in this field to add items to the list">
                         <el-button type="text" @click="addQuestion">Add</el-button>
                     </el-tooltip>
@@ -244,18 +242,18 @@ export default {
         background: #9ebdef;
     }
     .mouseOver:hover {
-    color: #409EFF;
-    text-decoration: underline;
-    font-size: 110%;
-}
-.button-top {
-    position: absolute;
-    top: 30px;;
-    right: 10px;
-}
-.footer{
-    position: absolute;
-    bottom: 0;
-    right: 10px;
-}
+        color: #409EFF;
+        text-decoration: underline;
+        font-size: 110%;
+    }
+    .button-top {
+        position: absolute;
+        top: 30px;;
+        right: 10px;
+    }
+    .footer{
+        position: absolute;
+        bottom: 0;
+        right: 10px;
+    }
 </style>

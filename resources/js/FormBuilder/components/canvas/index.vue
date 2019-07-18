@@ -6,13 +6,14 @@
 
                     <el-header class="tw-text-center tw-mb-12">
                         <h1 class="tw-text-4xl">
-                            <editable-text class="tw-cursor-pointer" 
+                            <editable-text class="tw-cursor-pointer mouseOver tw-text-4xl" 
                                 v-model="title">
                                     {{ title }}
                             </editable-text>
                         </h1>
 
-                        <editable-text v-if="description" class="tw-cursor-pointer"  
+                        <editable-text v-if="description" 
+                            class="tw-cursor-pointer mouseOver tw-text-xs"  
                             v-model="description">
                                 {{ description }}
                         </editable-text>
@@ -44,7 +45,14 @@
 
                     <el-row v-if="type === 'pre/post'">
                         <el-col :span="6">
-                            hey
+                            <span class="input-label">Complete for</span><br>
+                            <el-select id="pre-post" value="" placeholder="Select">
+                                    <el-option v-for="select in prePost" 
+                                        :key="select.value"
+                                        :label="select.value" 
+                                        :value="select.value">
+                                    </el-option>
+                                </el-select>
                         </el-col>
                     </el-row>
 
@@ -61,11 +69,12 @@
 
                     <draggable 
                         class="dropArea" 
-                        v-model="fields">
+                        v-model="fields"
+                        handle=".handle">
                             <el-row v-for="(field, index) in fields" type="flex" :gutter="2" :key="index">
                             <el-col class="float-left" :span="24">
                                 <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
-
+                                    <el-button class="handle tw-float-right hover:tw-cursor-move" size="mini" icon="el-icon-rank">Drag Field</el-button>
                                 <component 
                                     :is="field.type" 
                                     :fieldData="field"
@@ -117,11 +126,9 @@ export default {
             initialize: {
                 active: true
             },
-            // target_type: 'Staff',
             name: '',
             dateCompleted: '',
             formList: [],
-            // form: [],
             pickerOptions: {
                 disabledDate(time) {
                     return time.getTime() > Date.now();
@@ -150,6 +157,11 @@ export default {
             teams: [ // TODO: replace with data pulled from backend
                 { value: 'Counselling', label: 'Counselling'},
                 { value: 'Community Programs', label: 'Community Programs'}
+            ],
+            prePost: [
+                {id: 0, value: 'Pre-test'},
+                {id: 1, value: 'Intermittent'},
+                {id: 2, value: 'Post-test'},
             ],
             inputType: {},
         }
@@ -269,6 +281,11 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
 }
+.mouseOver:hover {
+    color: #409EFF;
+    text-decoration: underline;
+    font-size: 110%;
+}
 .el-row {
     margin: 5px;
   }
@@ -285,5 +302,9 @@ export default {
   }
   .canvas-card {
       font-size: 110%;
+  }
+  .handle {
+      position: relative;
+      z-index: 10;
   }
 </style>

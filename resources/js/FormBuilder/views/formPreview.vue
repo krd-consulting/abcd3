@@ -35,7 +35,7 @@
                     <el-main>
                         <el-row class="tw-mb-4">
                             <el-col :span="6">
-                                <label for="name" class="input-label tw-mt-4"> {{ target.type }} Name</label>
+                                <label for="name" class="input-label tw-mt-4"> {{ target.name }} Name</label>
                             </el-col>  
                             <el-col :span="8">
                                 <el-input id="name" class="inputField" v-model="inputName"></el-input>
@@ -55,7 +55,7 @@
                             </el-col>
                         </el-row>
 
-                        <el-row class="tw-my-4">
+                        <el-row class="tw-my-4" >
                             <el-col :span="6">
                                 <label for="pre-post" class="input-label">Completed for</label>
                             </el-col>

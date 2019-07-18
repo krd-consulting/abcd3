@@ -14,8 +14,8 @@
                 <el-input-number v-model="fieldData.settings.dropdownNum" controls-position="right" :min="2" :max="10"></el-input-number>
             </el-form-item> -->
 
-            <el-form-item>
-                <el-button type="success" @click="save">Set</el-button>
+            <el-form-item class="tw-relative tw-text-center tw-mt-12">
+                <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
             </el-form-item>
 
         </el-form>

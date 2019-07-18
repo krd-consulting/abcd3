@@ -34,14 +34,17 @@
             v-model="field.settings.required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right button-top">
+            class="tw-float-right tw-mr-48 button-top">
         </el-switch>
         
         <form @submit.prevent="addItem" class="tw-mt-4">
-            <el-row>
-                <el-col :span="12">
-                    <label for="newItem">Add Item <el-button class="tw-ml-2" type="text" @click="addItem">Add</el-button></label>
-                    <el-input id="newItem" v-model="itemText"></el-input>
+            <el-row> 
+                <el-col :span="6" class="tw-float-left">
+                    <label for="add-item">Add a new Item</label>
+                    <el-input id="add-item" v-model="itemText"></el-input>
+                    <el-tooltip content="Alternatively, you can press enter after typing in this field to add items to the list">
+                        <el-button type="text" @click="addItem">Add</el-button>
+                    </el-tooltip>
                 </el-col>
             </el-row>
         </form>

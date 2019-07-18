@@ -11,12 +11,12 @@
             </el-form-item>
 
             <el-form-item label="Set Default Value">
-                <el-switch v-model="fieldData.settings.isLimited" inactive-text="No Default" active-text="Set Default"></el-switch>
+                <el-switch v-model="fieldData.settings.isLimited" inactive-text="No Default" active-text="Set Default"></el-switch><br>
                 <el-input-number :disabled="!fieldData.settings.isLimited" v-model="fieldData.settings.defaultNum"></el-input-number>
             </el-form-item>
 
-            <el-form-item>
-                <el-button type="success" @click="save">Set</el-button>
+            <el-form-item class="tw-relative tw-text-center tw-mt-12">
+                <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
             </el-form-item>
 
         </el-form>

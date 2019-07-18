@@ -36,7 +36,7 @@
             v-model="field.settings.required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right button-top">
+            class="tw-float-right tw-mr-48 button-top">
         </el-switch>
         
         <form @submit.prevent="addItem" class="tw-mt-4">
