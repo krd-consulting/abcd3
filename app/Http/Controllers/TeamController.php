@@ -16,7 +16,22 @@ class TeamController extends Controller
 {
     public function index() 
     {
-    	$teams = (new Team)->availableFor(auth()->user())->get();
+    	$teams = new Team;
+
+        // Search
+        $search = request('search');
+        $teams = $teams->search($search);
+
+        // Sort per request.
+        $ascending = request('ascending');
+        $sortBy = request('sortBy');
+        $teams = $teams->sort($sortBy, $ascending);
+
+        $teams = $teams->availableFor(auth()->user());
+
+        // Paginate per request.
+        $perPage = request('perPage');
+        $teams = $teams->paginate($perPage);
 
     	return (new Teams($teams));
     }

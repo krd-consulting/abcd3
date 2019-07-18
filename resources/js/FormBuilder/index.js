@@ -41,6 +41,16 @@ const app = new Vue({
             set(description) { this.$store.commit('SET_DESCRIPTION', description) }
         },
 
+        team_id: {
+            get() { return this.$store.state.team_id },
+            set(team_id) { this.$store.commit('SET_TEAM_ID', team_id) }
+        },
+
+        scope_id: {
+            get() { return this.$store.state.scope_id },
+            set(scope_id) { this.$store.commit('SET_SCOPE_ID', scope_id) }
+        },
+
         type: {
             get() { return this.$store.state.type },
             set(type) { this.$store.commit('SET_TYPE', type) }
@@ -63,6 +73,8 @@ const app = new Vue({
     	initializeForm(data) {
             this.title = data.name;
             this.description = data.description;
+            this.team_id = data.team_id;
+            this.scope_id = data.scope_id; 
             this.type = data.type;
             this.target = data.target;
         }

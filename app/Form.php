@@ -4,8 +4,85 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Scope;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+
 class Form extends Model
 {
+    public function createUsingRequest($request)
+    {
+        $this->name = $request->name;
+        $this->description = $request->description;
+        $this->type = $request->type;
+        $this->table_name =  'form_' . (DB::table($this->getTable())->max('id')+1);
+        $this->target_type_id = $request->target_type_id;
+        $this->target_id = $request->target_id;
+        $this->scope_id = $request->scope_id;
+
+        DB::transaction(function () use ($request) {
+            $this->save();
+
+            // add form to team.
+            $this->teams()->attach([$request['team_id']]);
+
+            // insert fields into field registry
+            $this->fields()->createMany($request['fields']);
+
+            $fields = $this->fields;
+
+            // create form entry table for form
+            Schema::create($this->table_name, function (Blueprint $table) use ($fields) {
+                $table->bigIncrements('id');
+
+                foreach($fields as $field) {
+                    $table->string('type');
+                    $table->timestamps();
+                    $table->softDeletes();
+
+                    if($field->type == 'SectionDivider') {
+                        continue;
+                    }
+
+                    $columnType = $field->columnType;
+
+                    if($field->type == 'MatrixField') {
+                        foreach($field->options['questions'] as $key=>$question) {
+                            $table->$columnType('field_' . $field->id . '_' . $key);
+                        }
+
+                        continue;
+                    }
+
+                    $columnName = 'field_' . $field->id;
+
+                    $table->$columnType($columnName);
+
+                    // foreign keys
+                    if(!empty($field->target_type)) {
+
+                        if($field->target_type->name != config('app.form_target_types.form_field.name')) {
+                            $class = $field->target_type->model;
+                            $model = new $class;
+
+                            $table
+                            ->foreign($columnName)
+                            ->references($model->getFormReferenceField())
+                            ->on($model->getFormReferenceTable());
+                        }
+                    }
+                }
+            });
+        });
+    }
+
+    public function fields()
+    {
+        return $this->hasMany('App\FormField');
+    }
+
     public function target_type()
     {
     	return $this->belongsTo('App\FormTargetType');
@@ -16,77 +93,87 @@ class Form extends Model
     	return $this->belongsTo($this->target_type->model);
     }
 
+    public function teams()
+    {
+        return $this->belongsToMany('App\Team')
+            ->withTimestamps();
+    }
+
+    public function programs()
+    {
+        return $this->belongsToMany('App\Program')
+            ->withTimestamps();
+    }
+
     public function groups()
     {
         return $this->belongsToMany('App\Group')
             ->withTimestamps();
     }
 
-    public function programs()
+    public function users()
     {
-        return $this->belongsToMany('App\Programs')
+        return $this->belongsToMany('App\User')
             ->withTimestamps();
     }
 
     public function scopeAvailableFor($query, $user) {
+        $universal = 
+            (clone $query)
+                ->where('scope_id', Scope::where('name', config('auth.scopes.universal.name'))->first()->id);
+        $teams = (clone $query)->inTeams($user->availableTeams);
+        $programs = (clone $query)->inPrograms($user->availablePrograms);
+        $groups = (clone $query)->inGroups($user->availableGroups);
+        $self = (clone $query)->inSelf($user);
+
+        $query = 
+            $universal
+                ->union($teams)
+                ->union($programs)
+                ->union($groups)
+                ->union($self);
+
         return $query;
-
-        $scope = $user->scope;
-
-        switch($scope) {
-            case 'universal':
-                return $query;
-
-            case 'team':
-                $teams = $user->teams;
-                return $query->inTeams($teams);
-
-            case 'program':
-                $programs = $user->programs;
-                return $query->inPrograms($programs);
-
-            case 'case load':
-                return $query->inCaseloadOrSelf($user);
-
-            case 'self':
-                return $user->forms;
-        }
-    }
-
-    public function scopeInPrograms($query, $programs)
-    {
-        return $query->whereHas('programs', function ($query) use ($programs) {
-                    return $query->whereIn('program_id', $programs);
-                });
     }
 
     public function scopeInTeams($query, $teams)
     {
-        return $query->whereHas('teams', function ($query) use ($teams) {
-                    return $query->whereIn('team_id', $teams);
+        return 
+            $query
+                ->where('scope_id', Scope::where('name', config('auth.scopes.team.name'))->first()->id)
+                ->whereHas('teams', function ($query) use ($teams) {
+                    return $query->whereIn('team_id', $teams->pluck('id'));
                 });
     }
 
-    public function scopeInCaseloadOrSelf($query, $user)
+    public function scopeInPrograms($query, $programs)
     {
-        return $query
-                ->select(
-                    'records.id',
-                    'field_1_value',
-                    'field_2_value',
-                    'field_3_value',
-                    'record_type_id',
-                    'records.created_at',
-                    'records.updated_at'
-                )
-                ->leftJoin('group_record as load_group', 'records.id', 'load_group.record_id')
-                ->leftJoin('cases', 'records.id', '=', 'cases.record_id')
-                ->where(function ($query) use ($user) {
-                    $query->whereColumn('records.id', 'cases.record_id')
-                        ->whereIn('owner_id', $user->records()->pluck('id'));
-                })->orWhere(function ($query) use ($user) {
-                    $query->whereIn('load_group.group_id', $user->groups()->pluck('groups.id'));
-                })->orWhereIn('records.id', $user->records()->pluck('id'));
+        return 
+            $query
+                ->where('scope_id', Scope::where('name', config('auth.scopes.program.name'))->first()->id)
+                ->whereHas('programs', function ($query) use ($programs) {
+                    return $query->whereIn('program_id', $programs->pluck('id'));
+                });
+    }
+
+    public function scopeInGroups($query, $groups)
+    {
+        return 
+            $query
+                ->where('scope_id', Scope::where('name', config('auth.scopes.group.name'))->first()->id)
+                ->whereHas('groups', function ($query) use ($groups) {
+                    return $query->whereIn('group_id', $groups->pluck('id'));
+                });
+    }
+
+    public function scopeInSelf($query, $user)
+    {
+        return 
+            $query
+                ->where('scope_id', Scope::where('name', config('auth.scopes.self.name'))->first()->id)
+                ->whereHas('users', function ($query) use ($user) {
+                    return $query->where('user_id', $user);
+                });
     }
 
     public function scopeSort($query, $column, $ascending)

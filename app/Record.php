@@ -203,6 +203,10 @@ class Record extends Model
                 $programs = $user->programs;
                 return $query->inPrograms($programs);
 
+            case 'group':
+                $groups = $user->groups;
+                return $query->inGroups($groups);
+
             case 'case load':
                 return $query->inCaseloadOrSelf($user);
 
@@ -225,6 +229,15 @@ class Record extends Model
                 });
     }
 
+    public function scopeInGroups($query, $groups)
+    {
+        return $query
+            ->leftJoin('group_record as load_group', 'records.id', 'load_group.record_id')
+            ->where(function ($query) use ($groups) {
+                $query->whereIn('load_group.group_id', $groups);
+            });
+    }
+
     public function scopeInCaseloadOrSelf($query, $user)
     {
         return $query
@@ -237,13 +250,10 @@ class Record extends Model
                     'records.created_at',
                     'records.updated_at'
                 )
-                ->leftJoin('group_record as load_group', 'records.id', 'load_group.record_id')
                 ->leftJoin('cases', 'records.id', '=', 'cases.record_id')
                 ->where(function ($query) use ($user) {
                     $query->whereColumn('records.id', 'cases.record_id')
                         ->whereIn('owner_id', $user->records()->pluck('id'));
-                })->orWhere(function ($query) use ($user) {
-                    $query->whereIn('load_group.group_id', $user->groups()->pluck('groups.id'));
                 })->orWhereIn('records.id', $user->records()->pluck('id'));
     }
 

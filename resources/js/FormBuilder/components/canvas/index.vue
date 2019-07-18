@@ -267,9 +267,8 @@ export default {
 
     },
 
-    // created() {
-    //     console.log(this.$route.query);
-    // }
+    created() {
+    }
 }
 </script>
 

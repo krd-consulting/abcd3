@@ -14,11 +14,10 @@ use App\Http\Resources\Teams;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TeamTest extends TestCase
 {
-    use WithFaker, RefreshDatabase;
+    use WithFaker;
 
     /** @test */
     public function user_with_universal_scope_can_see_all_teams()

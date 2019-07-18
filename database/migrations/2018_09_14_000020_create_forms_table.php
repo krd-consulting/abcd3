@@ -19,13 +19,17 @@ class CreateFormsTable extends Migration
             $table->text('description')->nullable();
             $table->string('table_name', 50);
             $table->string('type', 10)->default('static');
-            $table->integer('target_type_id')->unsigned();
+            $table->bigInteger('target_type_id')->unsigned();
             $table->integer('target_id')->unsigned()->nullable();
+            $table->integer('scope_id')->unsigned();
             //$table->integer('scheduler_id')->unsigned()->nullable();
-            $table->json('extra_data')->nullable();
+            $table->schemalessAttributes('extra_data')->nullable();
             $table->timestamp('disabled_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('target_type_id')->references('id')->on('form_target_types');
+            $table->foreign('scope_id')->references('id')->on('scopes');
         });
     }
 
@@ -36,6 +40,11 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
+        Schema::table('form_team', function (Blueprint $table) {
+            $table->dropForeign(['target_type_id']);
+            $table->dropForeign(['scope_id']);
+        });
+
         Schema::dropIfExists('forms');
     }
 }

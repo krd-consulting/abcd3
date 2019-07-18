@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Form;
 use App\FormTargetType;
+use App\Scope;
+
+use App\Http\Requests\StoreForm;
 
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class FormController extends Controller
 {
     public function index()
     {
-		$forms = (new Form);
+		$forms = new Form;
 
 		// Search
         $search = request('search');
@@ -33,6 +40,27 @@ class FormController extends Controller
     }
 
     public function create()
+    {
+        return [
+            'data' => [
+                'target_types' => $this->generateTargetTypes(),
+                'types' => config('app.form_types'),
+                'scopes' => Scope::where('name', '!=', config('auth.scopes.case-load.name'))->get()
+            ]
+        ];
+    }
+
+    public function store(StoreForm $request)
+    {
+        $this->authorize('create', Form::class);
+
+        $form = new Form;
+        $form->createUsingRequest($request);
+
+        return $form;
+    }
+
+    protected function generateTargetTypes()
     {
         $targetTypes = FormTargetType::select('id', 'name')->get();
 
@@ -66,11 +94,7 @@ class FormController extends Controller
             return $type;
         });
 
-        return [
-            'data' => [
-                'target_types' => $targetTypes,
-                'types' => config('app.form_types')
-            ]
-        ];
+        return $targetTypes;
+
     }
 }

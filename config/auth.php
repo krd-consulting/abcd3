@@ -110,6 +110,11 @@ return [
             'value' => '2'
         ],
 
+        'group' => [
+            'name' => 'group',
+            'value' => '2'
+        ],
+
         'program' => [
             'name' => 'program',
             'value' => '3'
@@ -144,6 +149,11 @@ return [
 
         'write-teams' => [
             'name' => 'write teams',
+            'guard_name' => 'web'
+        ],
+
+        'write-forms' => [
+            'name' => 'write forms',
             'guard_name' => 'web'
         ],
 

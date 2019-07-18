@@ -4,12 +4,15 @@ namespace App;
 
 use App\Model;
 
+use App\Contracts\FormReference;
+use App\Traits\Models\FormReference as FormReferenceTrait;
+
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class RecordType extends Model
+class RecordType extends Model implements FormReference
 {
-    use HasSlug;
+    use HasSlug, FormReferenceTrait;
 
     public function records()
     {
@@ -39,5 +42,10 @@ class RecordType extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getFormReferenceTable()
+    {
+        return $this->records()->getRelated()->getTable();
     }
 }

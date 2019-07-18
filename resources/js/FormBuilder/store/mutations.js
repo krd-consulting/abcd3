@@ -5,6 +5,12 @@ export default {
     SET_DESCRIPTION : (state, description) => {
         state.description = description
     },
+    SET_TEAM_ID : (state, team) => {
+        state.team_id = team;
+    },
+    SET_SCOPE_ID : (state, scope) => {
+        state.scope_id = scope;
+    },
     SET_TYPE : (state, type) => {
         state.type = type
     },
