@@ -35,7 +35,7 @@ class FormField extends Model
 
     public function target_type()
     {
-    	return $this->belongsTo('App\FormTargetType');
+    	return $this->belongsTo('App\FieldTargetType');
     }
 
     public function target()
@@ -60,6 +60,17 @@ class FormField extends Model
 
     public function getColumnTypeAttribute() 
     {
+        if(
+            $this->type == 'TextField' && 
+            !empty($this->target_type) &&
+            $this->target_type->name != config('app.form_target_types.form_field.name')
+        ) {
+            dump($this->target_type->name);
+
+            return 'bigInteger';
+        }
+
+
         return $this->columnTypes[$this->type];
     }
 }

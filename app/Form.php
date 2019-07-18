@@ -38,6 +38,10 @@ class Form extends Model
                 $table->bigIncrements('id');
 
                 foreach($fields as $field) {
+                    $table->string('type');
+                    $table->timestamps();
+                    $table->softDeletes();
+
                     if($field->type == 'SectionDivider') {
                         continue;
                     }
@@ -52,11 +56,23 @@ class Form extends Model
                         continue;
                     }
 
-                    $table->$columnType('field_' . $field->id);
+                    $columnName = 'field_' . $field->id;
 
-                    // pre-interim-post
-                    // timestamps
-                    // targets
+                    $table->$columnType($columnName);
+
+                    // foreign keys
+                    if(!empty($field->target_type)) {
+
+                        if($field->target_type->name != config('app.form_target_types.form_field.name')) {
+                            $class = $field->target_type->model;
+                            $model = new $class;
+
+                            $table
+                            ->foreign($columnName)
+                            ->references($model->getFormReferenceField())
+                            ->on($model->getFormReferenceTable());
+                        }
+                    }
                 }
             });
         });

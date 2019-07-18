@@ -232,8 +232,8 @@ return [
     ],
 
     'form_types' => [
-        'static' => 'Static',
-        'pre-post' => 'Pre-post'
+        'static' => 'static',
+        'pre-post' => 'pre-post'
     ],
 
     'form_target_types' => [

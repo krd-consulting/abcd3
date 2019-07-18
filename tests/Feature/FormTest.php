@@ -195,4 +195,130 @@ class FormTest extends TestCase
             $this->assertDatabaseHas('form_fields', $field);
         }
     }
+
+    /** @test */
+    public function authorized_user_can_store_a_form_with_text_reference_text()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->create_authorized_user();
+        $scope = $user->roles()->first()->scope;
+        $team = $user->teams()->first();
+
+        $name = $this->faker->word;
+        $description = $this->faker->sentence;
+
+        $fields = [
+            [
+                'type' => 'TextField',
+                'label' => 'Test Text in Form 1',
+                'description' => 'Test Text Field in Form 1',
+                'target_type_id' => NULL,
+                'target_id' => NULL,
+            ]
+        ];
+
+        $form = [
+            'name' => $name,
+            'description' => $description,
+            'type' => 'static',
+            'target_type_id' => 3,
+            'target_id' => '',
+            'scope_id' => $scope->id,
+            'team_id' => $team->id,
+            'fields' => $fields
+        ];
+
+        $response = $this->actingAs($user)->post('/api/forms', $form);
+
+        $response->assertStatus(201);
+
+        $form = [
+            'name' => $name,
+            'description' => $description,
+            'type' => 'static',
+            'target_type_id' => 3,
+            'target_id' => NULL,
+            'scope_id' => $scope->id
+        ];
+
+        $this->assertDatabaseHas('forms', $form);
+        $this->assertDatabaseHas('form_team', [
+            'form_id' => $response->decodeResponseJson()['id'],
+            'team_id' => $team->id,
+        ]);
+
+        $fields = [
+            [
+                'type' => 'TextField',
+                'label' => 'Test Text in Form 1',
+                'description' => 'Test Text Field in Form 1',
+                'target_type_id' => NULL,
+                'target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ]
+        ];
+
+        foreach($fields as $field) {
+            $this->assertDatabaseHas('form_fields', $field);
+        }
+
+        $name = $this->faker->word;
+        $description = $this->faker->sentence;
+
+        $fields = [
+            [
+                'type' => 'TextField',
+                'label' => 'Test Text in Form 2',
+                'description' => 'Test Text Field in Form 2',
+                'target_type_id' => 5,
+                'target_id' => 1,
+            ]
+        ];
+
+        $form = [
+            'name' => $name,
+            'description' => $description,
+            'type' => 'static',
+            'target_type_id' => 3,
+            'target_id' => '',
+            'scope_id' => $scope->id,
+            'team_id' => $team->id,
+            'fields' => $fields
+        ];
+
+        $response = $this->actingAs($user)->post('/api/forms', $form);
+
+        $response->assertStatus(201);
+
+        $form = [
+            'name' => $name,
+            'description' => $description,
+            'type' => 'static',
+            'target_type_id' => 3,
+            'target_id' => NULL,
+            'scope_id' => $scope->id
+        ];
+
+        $this->assertDatabaseHas('forms', $form);
+        $this->assertDatabaseHas('form_team', [
+            'form_id' => $response->decodeResponseJson()['id'],
+            'team_id' => $team->id,
+        ]);
+
+        $fields = [
+            [
+                'type' => 'TextField',
+                'label' => 'Test Text in Form 2',
+                'description' => 'Test Text Field in Form 2',
+                'target_type_id' => 5,
+                'target_id' => 1,
+                'form_id' => $response->decodeResponseJson()['id']
+            ]
+        ];
+
+        foreach($fields as $field) {
+            $this->assertDatabaseHas('form_fields', $field);
+        }
+    }
 }
