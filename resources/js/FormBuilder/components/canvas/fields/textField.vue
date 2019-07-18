@@ -67,12 +67,8 @@ export default {
         fieldLabel: {
             get() { return this.field.label; },
             set(label) { 
-                console.log('field label edited');
-
                 const fieldCopy = _.clone(this.field);
-
                 fieldCopy.label = label;
-
                 this.field = fieldCopy;
             }
         },

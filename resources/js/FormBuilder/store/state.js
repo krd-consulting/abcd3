@@ -7,7 +7,7 @@ export default {
     	type: '',
     	id: 0
     },
-    type: 'pre/post',
+    type: '',
     name: '',
     teams: [],
     date: '',

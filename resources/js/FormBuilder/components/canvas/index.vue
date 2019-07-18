@@ -110,14 +110,14 @@ import Initialize from '@/FormBuilder/views/initialize'
 
 import TextField from '@/FormBuilder/components/canvas/fields/textField.vue'
 import TextBox from '@/FormBuilder/components/canvas/fields/textArea.vue'
-import CheckBox from '@/FormBuilder/components/canvas/fields/checkbox.vue'
-import Dropdown from '@/FormBuilder/components/canvas/fields/dropdown.vue'
-import Numeric from '@/FormBuilder/components/canvas/fields/numeric.vue'
-import Radio from '@/FormBuilder/components/canvas/fields/radio.vue'
-import DatePicker from '@/FormBuilder/components/canvas/fields/datePicker.vue'
-import Matrix from '@/FormBuilder/components/canvas/fields/matrix.vue'
-import TimePicker from '@/FormBuilder/components/canvas/fields/timePicker.vue'
-import Upload from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
+import CheckBoxField from '@/FormBuilder/components/canvas/fields/checkbox.vue'
+import DropdownField from '@/FormBuilder/components/canvas/fields/dropdown.vue'
+import NumberField from '@/FormBuilder/components/canvas/fields/numeric.vue'
+import RadioField from '@/FormBuilder/components/canvas/fields/radio.vue'
+import DateField from '@/FormBuilder/components/canvas/fields/datePicker.vue'
+import MatrixField from '@/FormBuilder/components/canvas/fields/matrix.vue'
+import TimeField from '@/FormBuilder/components/canvas/fields/timePicker.vue'
+import FileField from '@/FormBuilder/components/canvas/fields/fileUpload.vue'
 import SectionDivider from '@/FormBuilder/components/canvas/fields/sectionDivider.vue'
 
 export default {
@@ -180,14 +180,14 @@ export default {
         TextField,
         TextBox,
         SectionDivider,
-        Numeric,
-        CheckBox,
-        Dropdown,
-        Radio,
-        DatePicker,
-        Matrix,
-        TimePicker,
-        Upload,
+        NumberField,
+        CheckBoxField,
+        DropdownField,
+        RadioField,
+        DateField,
+        MatrixField,
+        TimeField,
+        FileField,
     },
     computed: {
         title: {
@@ -266,19 +266,17 @@ export default {
         }
 
     },
-
-    created() {
-    }
 }
 </script>
 
 <style scoped>
 #canvas {
     font-family: 'Inter UI', Arial, sans-serif;
-    /* font-weight: bold; */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
+    max-height: 900px;
+    overflow-y: scroll;
 }
 .mouseOver:hover {
     color: #409EFF;

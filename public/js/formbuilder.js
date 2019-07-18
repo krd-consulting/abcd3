@@ -3912,12 +3912,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       itemText: '',
-      dropItem: '',
+      value: '',
       nextItem: 0
     };
   },
@@ -3963,7 +3965,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     dropItem: {
       get: function get() {
-        return this.field.choices.value;
+        return this.choices.value;
+      },
+      set: function set(value) {
+        var choicesCopy = _.clone(this.choices);
+
+        choicesCopy.value = value;
+        this.choices = choicesCopy;
+        this.$forceUpdate();
       }
     }
   },
@@ -3977,23 +3986,25 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.choices = choicesCopy;
       this.itemText = '';
+      this.$forceUpdate();
     },
     removeChoice: function removeChoice(item, index) {
-      var index = this.choices.indexOf(item);
-
+      // var index = this.choices.indexOf(item);
       if (index !== -1) {
         this.choices.splice(index, 1);
         this.$store.commit('UPDATE_FIELD', this.field);
       }
 
+      this.dropItem = '';
       this.$forceUpdate();
     },
-    updateChoiceValue: function updateChoiceValue(value) {
+    updateChoiceValue: function updateChoiceValue(value, index) {
       // var index = this.choices.indexOf(value);
       var fieldCopy = _.clone(this.field);
 
-      fieldCopy.choices.value = value;
+      fieldCopy.choices[index].value = value;
       this.choices = fieldCopy.choices;
+      this.dropItem = value;
       this.$forceUpdate();
     }
   }
@@ -4633,6 +4644,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4856,8 +4868,6 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.label;
       },
       set: function set(label) {
-        console.log('field label edited');
-
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.label = label;
@@ -5187,14 +5197,14 @@ __webpack_require__.r(__webpack_exports__);
     TextField: _FormBuilder_components_canvas_fields_textField_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
     TextBox: _FormBuilder_components_canvas_fields_textArea_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
     SectionDivider: _FormBuilder_components_canvas_fields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
-    Numeric: _FormBuilder_components_canvas_fields_numeric_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-    CheckBox: _FormBuilder_components_canvas_fields_checkbox_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    Dropdown: _FormBuilder_components_canvas_fields_dropdown_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-    Radio: _FormBuilder_components_canvas_fields_radio_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
-    DatePicker: _FormBuilder_components_canvas_fields_datePicker_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
-    Matrix: _FormBuilder_components_canvas_fields_matrix_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
-    TimePicker: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
-    Upload: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
+    NumberField: _FormBuilder_components_canvas_fields_numeric_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    CheckBoxField: _FormBuilder_components_canvas_fields_checkbox_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    DropdownField: _FormBuilder_components_canvas_fields_dropdown_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    RadioField: _FormBuilder_components_canvas_fields_radio_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    DateField: _FormBuilder_components_canvas_fields_datePicker_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+    MatrixField: _FormBuilder_components_canvas_fields_matrix_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
+    TimeField: _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+    FileField: _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_14__["default"]
   },
   computed: {
     title: {
@@ -5285,8 +5295,7 @@ __webpack_require__.r(__webpack_exports__);
       this.description = data.description;
       this.target = data.target;
     }
-  },
-  created: function created() {}
+  }
 });
 
 /***/ }),
@@ -7166,6 +7175,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7178,12 +7200,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
- // import { store } from '@/FormBuilder/store/state.js';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      // formData: store.state,
+      isVisible: false,
       value: '',
       inputName: '',
       teams: [],
@@ -7204,6 +7225,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
     };
+  },
+  created: function created() {
+    window.addEventListener('scroll', this.watchScroll);
   },
   components: {
     MatrixField: _FormBuilder_components_preview_matrix_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -7239,6 +7263,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           type: 'info',
           message: "Keep doing what you're are doing"
         });
+      });
+    },
+    watchScroll: function watchScroll(event) {
+      if (window.scrollY > 10) {
+        return this.isVisible = true;
+      } else {
+        return this.isVisible = false;
+      }
+    },
+    backToTop: function backToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
       });
     }
   }
@@ -7308,6 +7345,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -7317,7 +7355,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       activeIndex: '1',
-      // inputOptions: {},
       fields: []
     };
   },
@@ -7339,9 +7376,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.$message({
           type: 'success',
           message: 'Build Successful'
-        });
+        }); // alert('One day, this form will persist to the database. but alas, tis maybe this day?')
 
-        alert('One day, this form will persist to the database. but alas, tis not this day.');
+
+        _this.$store.dispatch('submitForm');
       })["catch"](function () {
         _this.$message({
           type: 'info',
@@ -9986,7 +10024,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-e97e2c96] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-e97e2c96]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-e97e2c96] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-e97e2c96]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10005,7 +10043,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5ce99664] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5ce99664] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10024,7 +10062,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5bdc3b03] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5bdc3b03] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10043,7 +10081,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-120ae50f] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-120ae50f] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10081,7 +10119,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-1c3cc70b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-1c3cc70b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-1c3cc70b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-1c3cc70b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10100,7 +10138,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7d675a79] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7d675a79]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7d675a79] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7d675a79]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10119,7 +10157,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -10138,7 +10176,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7a7b55cc] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7a7b55cc]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7a7b55cc] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7a7b55cc]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10157,7 +10195,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-28f88a4b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-28f88a4b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-28f88a4b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-28f88a4b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10176,7 +10214,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-2da47d2d] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-2da47d2d] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10195,7 +10233,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  /* font-weight: bold; */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 900px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\r\n", ""]);
 
 // exports
 
@@ -10214,7 +10252,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  /* max-width: 460px;\n    min-width: 260px; */\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  /* border-color: #badcff; */\n  font-size: 110%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 768px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  /* max-width: 460px;\r\n    min-width: 260px; */\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  /* border-color: #badcff; */\n  font-size: 110%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 768px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\r\n", ""]);
 
 // exports
 
@@ -10252,7 +10290,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -10290,7 +10328,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -10309,7 +10347,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\n", ""]);
+exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\r\n", ""]);
 
 // exports
 
@@ -10328,7 +10366,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n@media (min-width: 768px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 5%;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Standard Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    max-width: 450px;\n    /* min-width: 400px; */\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\n\n", ""]);
+exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n@media (min-width: 768px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Standard Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -87580,14 +87618,14 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.dropItem != ""
+              _vm.dropItem != null
                 ? _c(
                     "el-button",
                     {
                       attrs: { type: "text", size: "mini" },
                       on: {
                         click: function($event) {
-                          return _vm.removeChoice(_vm.dropItem)
+                          return _vm.removeChoice(_vm.dropItem, _vm.index)
                         }
                       }
                     },
@@ -87634,28 +87672,14 @@ var render = function() {
             [
               _c(
                 "el-col",
-                { attrs: { span: 10 } },
+                { staticClass: "tw-float-left", attrs: { span: 6 } },
                 [
-                  _c(
-                    "label",
-                    { attrs: { for: "newItem" } },
-                    [
-                      _vm._v("Add Item "),
-                      _c(
-                        "el-button",
-                        {
-                          staticClass: "tw-ml-2",
-                          attrs: { type: "text" },
-                          on: { click: _vm.addItem }
-                        },
-                        [_vm._v("Add")]
-                      )
-                    ],
-                    1
-                  ),
+                  _c("label", { attrs: { for: "add-item" } }, [
+                    _vm._v("Add a new Item")
+                  ]),
                   _vm._v(" "),
                   _c("el-input", {
-                    attrs: { id: "newItem" },
+                    attrs: { id: "add-item" },
                     model: {
                       value: _vm.itemText,
                       callback: function($$v) {
@@ -87663,7 +87687,25 @@ var render = function() {
                       },
                       expression: "itemText"
                     }
-                  })
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "el-tooltip",
+                    {
+                      attrs: {
+                        content:
+                          "Alternatively, you can press enter after typing in this field to add items to the list"
+                      }
+                    },
+                    [
+                      _c(
+                        "el-button",
+                        { attrs: { type: "text" }, on: { click: _vm.addItem } },
+                        [_vm._v("Add")]
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -88397,6 +88439,8 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("br"),
+      _vm._v(" "),
       _c("el-divider", [
         _c(
           "span",
@@ -91662,7 +91706,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "preview" } },
+    { staticClass: "preview_top", attrs: { id: "preview" } },
     [
       _c(
         "el-container",
@@ -91961,6 +92005,30 @@ var render = function() {
                 ],
                 1
               )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "transition",
+            { attrs: { name: "fade" } },
+            [
+              _vm.isVisible
+                ? _c(
+                    "el-button",
+                    {
+                      staticClass: "backToTop",
+                      attrs: {
+                        type: "primary",
+                        transition: "toTop",
+                        icon: "el-icon-caret-top",
+                        round: ""
+                      },
+                      on: { click: _vm.backToTop }
+                    },
+                    [_vm._v("\n                    Top\n            ")]
+                  )
+                : _vm._e()
             ],
             1
           )
@@ -115226,9 +115294,29 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_FormRequest_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormRequest.js */ "./resources/js/api/FormRequest.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   addField: function addField(field) {
     field.commit('ADD_FIELD');
+  },
+  submitForm: function submitForm(_ref) {
+    var state = _ref.state;
+    // console.log(state)
+    var formData = {
+      name: state.title,
+      description: state.description,
+      team_id: state.team_id,
+      scope_id: state.scope_id,
+      type: state.type,
+      target_type_id: state.target.type.id,
+      target_id: state.target.id,
+      fields: state.fields
+    };
+    var request = new _api_FormRequest_js__WEBPACK_IMPORTED_MODULE_0__["default"](formData);
+    request.store().then(function (response) {//    return Promise('')
+    })["catch"](function (error) {//
+    });
   }
 });
 
@@ -115301,7 +115389,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   SET_TITLE: function SET_TITLE(state, title) {
-    state.title = title;
+    state.name = title;
   },
   SET_DESCRIPTION: function SET_DESCRIPTION(state, description) {
     state.description = description;
@@ -115356,7 +115444,7 @@ __webpack_require__.r(__webpack_exports__);
     type: '',
     id: 0
   },
-  type: 'pre/post',
+  type: '',
   name: '',
   teams: [],
   date: '',
@@ -115674,10 +115762,12 @@ function (_Request) {
     key: "validate",
     value: function validate() {
       return this.post("/api/forms/create");
-    } // store() {
-    // 	return this.post(`/api/programs/client-statuses`);
-    // }
-    // edit(status) {
+    }
+  }, {
+    key: "store",
+    value: function store() {
+      return this.post("/api/forms");
+    } // edit(status) {
     // 	return this.get(`/api/programs/client-statuses/${status}/edit`);
     // }
     // update(status) {
@@ -117618,7 +117708,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

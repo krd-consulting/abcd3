@@ -1,5 +1,5 @@
 <template>
-    <div id="preview">
+    <div id="preview" class="preview_top">
         <el-container>
 
             <el-card id="preview-form" class="sm:tw-w-11/12 tw-w-5/6 xl:tw-w-5/12" shadow="always">
@@ -107,6 +107,19 @@
 
             </el-card>
 
+            <transition name="fade">
+                <el-button 
+                    @click="backToTop" 
+                    v-if="isVisible"
+                    type="primary"
+                    transition="toTop"
+                    icon="el-icon-caret-top" 
+                    class="backToTop"
+                    round>
+                        Top
+                </el-button>
+            </transition>
+            
         </el-container>
     </div>
 </template>
@@ -127,13 +140,11 @@ import FileField from '@/FormBuilder/components/preview/upload.vue'
 import SectionDivider from '@/FormBuilder/components/preview/sectionDivider.vue'
 
 import { mapState } from 'vuex'
-// import { store } from '@/FormBuilder/store/state.js';
-
 
 export default {
     data: () => {
         return {
-            // formData: store.state,
+            isVisible: false,
             value: '',
             inputName: '',
             teams: [],
@@ -149,6 +160,9 @@ export default {
                 }
             }
         }
+    },
+    created() {
+        window.addEventListener('scroll', this.watchScroll);
     },
     components: {
         MatrixField,
@@ -187,9 +201,20 @@ export default {
                 });          
             });
         },
-        // getFormData() {
-        //     return this.$store.state
-        // }
+        watchScroll(event) {
+            if(window.scrollY > 10) {
+                return this.isVisible = true;
+            } else {
+                return this.isVisible = false;
+            }
+        },
+        backToTop() {
+            window.scrollTo({
+                top: 0, 
+                behavior: 'smooth'
+            });
+            
+        }
     }
 }
 </script>
@@ -208,8 +233,21 @@ export default {
     width: 1000px;
 }
 .float-right {
-        float: right !important;
-    }
+    float: right !important;
+}
+.backToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    
+    height: 50px;
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+}
 
 @media (min-width: 768px){
     

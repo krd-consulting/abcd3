@@ -1,6 +1,6 @@
 export default {
     SET_TITLE : (state, title) => {
-        state.title = title
+        state.name = title
     },
     SET_DESCRIPTION : (state, description) => {
         state.description = description

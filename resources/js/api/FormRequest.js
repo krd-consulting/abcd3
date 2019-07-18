@@ -13,9 +13,9 @@ class Form extends Request {
         return this.post(`/api/forms/create`);
     }
 
-    // store() {
-    // 	return this.post(`/api/programs/client-statuses`);
-    // }
+    store() {
+    	return this.post(`/api/forms`);
+    }
 
     // edit(status) {
     // 	return this.get(`/api/programs/client-statuses/${status}/edit`);

@@ -22,10 +22,10 @@
                     {{ dropItem }}
                 </editable-text>
                 <el-button 
-                    v-if="dropItem != ''" 
+                    v-if="dropItem != null" 
                     type="text" 
                     size="mini" 
-                    @click="removeChoice(dropItem)">
+                    @click="removeChoice(dropItem, index)">
                             Remove Item
                 </el-button>
             </div>
@@ -40,11 +40,13 @@
         </el-switch>
         
         <form @submit.prevent="addItem" class="tw-mt-4">
-            <el-row>
-                <el-col :span="10">
-                    <label for="newItem">Add Item <el-button class="tw-ml-2" type="text" @click="addItem">Add</el-button></label>
-                    <el-input id="newItem" v-model="itemText">
-                    </el-input>
+            <el-row> 
+                <el-col :span="6" class="tw-float-left">
+                    <label for="add-item">Add a new Item</label>
+                    <el-input id="add-item" v-model="itemText"></el-input>
+                    <el-tooltip content="Alternatively, you can press enter after typing in this field to add items to the list">
+                        <el-button type="text" @click="addItem">Add</el-button>
+                    </el-tooltip>
                 </el-col>
             </el-row>
         </form>
@@ -60,7 +62,7 @@ export default {
     data() {
         return {
             itemText: '',
-            dropItem: '',
+            value: '',
             nextItem: 0,
         }
     },
@@ -98,14 +100,14 @@ export default {
         },
 
         dropItem: {
-            get(){ return this.field.choices.value},
-            // set(dropItem){
-            //     const fieldCopy = _.clone(this.field);
-            //     fieldCopy.choices.value = dropItem;
-            //     this.choices = fieldCopy.choices;
+            get(){ return this.choices.value},
+            set(value){
+                const choicesCopy = _.clone(this.choices);
+                choicesCopy.value = value;
+                this.choices = choicesCopy;
 
-            //     this.$forceUpdate();
-            // }
+                this.$forceUpdate();
+            }
         },
     },
     methods: {
@@ -118,23 +120,24 @@ export default {
 
             this.choices = choicesCopy;
             this.itemText = ''
+            this.$forceUpdate();
         },
         removeChoice(item, index) {
-            var index = this.choices.indexOf(item);
+            // var index = this.choices.indexOf(item);
 
             if (index !== -1) {
                 this.choices.splice(index, 1);
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
-
+            this.dropItem = '';
             this.$forceUpdate();
         },
-        updateChoiceValue(value) {
+        updateChoiceValue(value, index) {
             // var index = this.choices.indexOf(value);
             const fieldCopy = _.clone(this.field);
-            fieldCopy.choices.value = value;
+            fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
-
+            this.dropItem = value;
             this.$forceUpdate();
         }
     }

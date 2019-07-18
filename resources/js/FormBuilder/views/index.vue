@@ -5,6 +5,7 @@
             <el-card id="menu-container"> 
                 <form-menu id="menu"/>
             </el-card>
+
             <el-card id="canvas-container">
                 <el-header>
                     
@@ -47,6 +48,7 @@
 </template>
 
 <script>
+    
     import draggable from 'vuedraggable'
     import FormCanvas from '@/FormBuilder/components/canvas/index.vue'
     import FormMenu from '@/FormBuilder/components/menu/index.vue'
@@ -58,7 +60,6 @@
         data: () => {
             return {
                 activeIndex: '1',
-                // inputOptions: {},
                 fields: []
             }
         },
@@ -81,7 +82,8 @@
                             type: 'success',
                             message: 'Build Successful'
                         });
-                        alert('One day, this form will persist to the database. but alas, tis not this day.')
+                        // alert('One day, this form will persist to the database. but alas, tis maybe this day?')
+                        this.$store.dispatch('submitForm')
                     }).catch(() => {
                         this.$message({
                             type: 'info',
@@ -109,8 +111,8 @@
 
     #canvas-container {
         flex: 100%;
-        margin-left: 5%;
-        margin-right: 5%;
+        margin-left: 1%;
+        margin-right: 1%;
         min-width: 500px;
     }
     .mobile-menu {
@@ -146,7 +148,6 @@
         margin: 0 auto;
         margin-left: 5%;
         max-width: 450px;
-        /* min-width: 400px; */
         max-height: 900px; 
     }
 
