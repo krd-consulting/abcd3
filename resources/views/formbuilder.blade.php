@@ -8,7 +8,7 @@
     <el-main class="main">
          <router-view></router-view>
     </el-main>
-    <!-- <initialize :active.sync="initialize.active" @save="initializeForm"/> -->
+    <initialize :active.sync="initialize.active" @save="initializeForm"/>
 @endsection
 
 @section('scripts')

@@ -7714,6 +7714,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.types = response.data.types;
         _this2.scopes = response.data.scopes;
       });
+      this.retrieveTeams();
     },
     submit: function submit() {
       var _this3 = this;
