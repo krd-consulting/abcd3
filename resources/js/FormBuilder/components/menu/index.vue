@@ -121,10 +121,6 @@ export default {
             this.selectedInput = {}
             this.step = '1';
         },
-
-        // submitfieldData(fieldData) {
-        //     this.$emit('inputData', this.fieldData);
-        // }
     }
 }
 </script>
@@ -133,15 +129,12 @@ export default {
 #menu {
     overflow: hidden;
     display: flex;
-    /* max-width: 460px;
-    min-width: 260px; */
 }
 .el-card {
     margin: 5px;
     border: none;
 }
 .el-card:hover {
-    /* border-color: #badcff; */
     font-size: 110%;
 }
 .cursor-pointer {

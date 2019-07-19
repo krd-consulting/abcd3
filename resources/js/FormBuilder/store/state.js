@@ -8,7 +8,6 @@ export default {
     	id: 0
     },
     type: '',
-    name: '',
     teams: [],
     date: '',
     
