@@ -26,10 +26,11 @@ class Form extends Model
             $this->save();
 
             // add form to team.
-            $this->teams()->attach([$request['team_id']]);
+            $this->teams()->attach([$request->team_id]);
 
             // insert fields into field registry
-            $this->fields()->createMany($request['fields']);
+            if(isset($request->validated()['fields']))
+                $this->fields()->createMany($request->validated()['fields']);
 
             $fields = $this->fields;
 
