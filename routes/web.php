@@ -86,6 +86,8 @@ Route::prefix('api')
         Route::get('teams/{team}/groups', 'TeamGroupsController@index');
         Route::get('teams/{team}/groups/create', 'GroupController@create');
 
+        Route::get('forms/fields/target_types', 'FormFieldTargetTypeController@index');
+
         Route::get('forms', 'FormController@index');
         Route::get('forms/create', 'FormController@create');
         Route::post('forms/create', 'ValidateForm');
