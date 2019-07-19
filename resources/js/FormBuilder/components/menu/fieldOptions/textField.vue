@@ -26,7 +26,7 @@
             </el-form-item>
 
             <el-form-item label="Field Refers To:">
-                <el-select v-model="fieldData.reference">
+                <!-- <el-select v-model="fieldData.reference">
                     <el-option label="No Reference" value="noRef"></el-option>
                     <el-option label="Another Form" value="form"></el-option>
                     <el-option 
@@ -34,7 +34,20 @@
                         :label="type.name" 
                         :value="type.slug"
                         :key="type.slug"></el-option>
-                </el-select>
+                </el-select> -->
+
+                <base-select
+                    v-model="target"
+                    name="target"
+                    placeholder="Select Resource">
+                    <el-option
+                        v-for="(type, index) in targetTypes"
+                        :key="index"
+                        :label="type.name"
+                        :value="type.target">
+                        {{ type.name }}
+                    </el-option>
+                </base-select>
 
                 <div v-if="fieldData.reference === 'form'">
                     <p>New Select Menu with list of available <b>forms</b> from back end</p>
@@ -59,19 +72,20 @@
 </template>
 
 <script>
-import RecordTypeRequest from '@/api/RecordTypeRequest';
+import Request from '@/api/FormFieldTargetTypeRequest';
 
 export default {
     name: 'textField',
     data: () => {
         return {
-            recordTypes: [],
+            targetTypes: [],
+
+            target: '',
 
             fieldData: {
                 type: 'TextField',
                 name: 'text_field',
                 label: '',
-                reference: '',
                 settings: {
                     required: false,
                     isLimited: false,
@@ -88,23 +102,45 @@ export default {
     props: {
         inputData: Object,
     },
+    computed: {
+        target_type_id() {
+            if(!this.target.toString().includes('_')) {
+                return this.target;
+            }
+
+            const target = this.target.toString().split('_');
+
+            return target[0];
+        },
+
+        target_id() {
+            if(this.target.toString().includes('_')) {
+                const target = this.target.toString().split('_')
+                return target[1];
+            }
+
+            return null;
+        }
+    },
     methods: {
         
         save() {
+            this.fieldData['target_type_id'] = this.target_type_id;
+            this.fieldData['target_id'] = this.target_id;
             this.$emit('save', this.fieldData);
         },
 
-        retrieveRecordTypes() {
-            const request = new RecordTypeRequest({});
+        retrieve() {
+            const request = new Request({});
 
             request.retrieve().then((response) => {
-                this.recordTypes = response;
+                this.targetTypes = response.data;
             });
         },
     },
 
     created() {
-        this.retrieveRecordTypes();
+        this.retrieve();
     }
 }
 </script>
