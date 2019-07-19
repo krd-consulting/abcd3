@@ -37,12 +37,9 @@ class Form extends Model
             // create form entry table for form
             Schema::create($this->table_name, function (Blueprint $table) use ($fields) {
                 $table->bigIncrements('id');
+                $table->string('type');
 
                 foreach($fields as $field) {
-                    $table->string('type');
-                    $table->timestamps();
-                    $table->softDeletes();
-
                     if($field->type == 'SectionDivider') {
                         continue;
                     }
@@ -75,6 +72,10 @@ class Form extends Model
                         }
                     }
                 }
+
+
+                $table->timestamps();
+                $table->softDeletes();
             });
         });
     }
