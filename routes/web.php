@@ -22,7 +22,7 @@ Route::prefix('api')
         Route::delete('records/{recordType}/{record}', 'RecordController@destroy');
 
         Route::get('records/{recordType}/{record}/programs', 'RecordProgramsController@index');
-        Route::get('records/{recordType}/{record}/available-programs', 'ProgramsAvailableForRecord');   
+        Route::get('records/{recordType}/{record}/available-programs', 'ProgramsAvailableForRecord');
         Route::post('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@store');
         Route::delete('records/{recordType}/{record}/programs/{program}', 'RecordProgramsController@destroy');
 
@@ -37,7 +37,7 @@ Route::prefix('api')
         Route::delete('records/{recordType}/{record}/teams/{team}', 'RecordTeamsController@destroy');
 
         Route::get('records/{recordType}/{record}/teams', 'RecordTeamsController@index');
-        Route::get('records/{recordType}/{record}/available-teams', 'TeamsAvailableForRecord');  
+        Route::get('records/{recordType}/{record}/available-teams', 'TeamsAvailableForRecord');
 
         Route::get('programs/client-statuses', 'ClientStatusController@index');
         Route::get('programs/client-statuses/{status}/edit', 'ClientStatusController@edit');
@@ -50,13 +50,13 @@ Route::prefix('api')
         Route::get('programs/{program}/groups', 'ProgramGroupsController@index');
 
         Route::get(
-            'programs/{program}/records/{recordType}/{record}/available-cases', 
+            'programs/{program}/records/{recordType}/{record}/available-cases',
             'RecordsAvailableForCaseload'
         );
         Route::get('programs/{program}/records/{recordType}/{record}/cases', 'CaseController@index');
         Route::post('programs/{program}/records/{recordType}/{record}/cases/{case}', 'CaseController@store');
         Route::delete(
-            'programs/{program}/records/{recordType}/{record}/cases/{case}', 
+            'programs/{program}/records/{recordType}/{record}/cases/{case}',
             'CaseController@destroy'
         );
 
@@ -91,7 +91,7 @@ Route::prefix('api')
         Route::post('forms/create', 'ValidateForm');
         Route::post('forms', 'FormController@store');
 
-        Route::resource('roles', 'RoleController');
+        Route::resource('roles', 'RoleController')->except('show');
 
         Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');
         Route::delete('roles/{role}/permissions/{permission}', 'RolePermissionController@destroy');

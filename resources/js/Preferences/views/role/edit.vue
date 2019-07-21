@@ -96,7 +96,7 @@
             load() {
                 let request = new Request({});
 
-                request.edit().then((response) => {
+                request.edit(this.role.id).then((response) => {
                     this.scopes = response.scopes;
                 });
             },

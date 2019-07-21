@@ -4474,7 +4474,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var request = new _api_RoleRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
-      request.edit().then(function (response) {
+      request.edit(this.role.id).then(function (response) {
         _this.scopes = response.scopes;
       });
     },
@@ -82409,7 +82409,6 @@ var render = function() {
                           { staticClass: "tw-py-4 tw-text-right tw-pr-4" },
                           [
                             _c("base-switch", {
-                              attrs: { on: permission.permitted },
                               on: {
                                 change: function($event) {
                                   return _vm.toggleRolePermission(
@@ -82420,6 +82419,13 @@ var render = function() {
                                     permissionIndex
                                   )
                                 }
+                              },
+                              model: {
+                                value: permission.permitted,
+                                callback: function($$v) {
+                                  _vm.$set(permission, "permitted", $$v)
+                                },
+                                expression: "permission.permitted"
                               }
                             })
                           ],
@@ -98787,8 +98793,8 @@ function (_Request) {
     }
   }, {
     key: "edit",
-    value: function edit() {
-      return this.get('/api/roles/edit');
+    value: function edit(role) {
+      return this.get("/api/roles/".concat(role, "/edit"));
     }
   }, {
     key: "update",
@@ -100476,7 +100482,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\Preferences */"./resources/js/Preferences/index.js");
+module.exports = __webpack_require__(/*! /Users/rupert/www/sites/abcd/resources/js/Preferences */"./resources/js/Preferences/index.js");
 
 
 /***/ })
