@@ -113467,8 +113467,13 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! /Users/rupert/www/sites/abcd/resources/js/App */"./resources/js/App/index.js");
 module.exports = __webpack_require__(/*! /Users/rupert/www/sites/abcd/resources/css/app.css */"./resources/css/app.css");
+=======
+__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
+>>>>>>> 52406a083e8008eab16b585e0b73b4bac635a74b
 
 
 /***/ })

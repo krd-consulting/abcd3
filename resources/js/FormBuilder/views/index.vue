@@ -82,12 +82,16 @@
                             type: 'success',
                             message: 'Build Successful'
                         });
-                        // alert('One day, this form will persist to the database. but alas, tis maybe this day?')
                         this.$store.dispatch('submitForm')
                     }).catch(() => {
                         this.$message({
                             type: 'info',
                             message: "Keep doing what you're are doing"
+                        }).then(() => {
+                            this.$message({
+                                type: 'warning',
+                                message: "Woops, Something went wrong. Please try submitting again"
+                            })
                         });          
                     });
             }

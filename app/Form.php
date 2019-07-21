@@ -26,22 +26,20 @@ class Form extends Model
             $this->save();
 
             // add form to team.
-            $this->teams()->attach([$request['team_id']]);
+            $this->teams()->attach([$request->team_id]);
 
             // insert fields into field registry
-            $this->fields()->createMany($request['fields']);
+            if(isset($request->validated()['fields']))
+                $this->fields()->createMany($request->validated()['fields']);
 
             $fields = $this->fields;
 
             // create form entry table for form
             Schema::create($this->table_name, function (Blueprint $table) use ($fields) {
                 $table->bigIncrements('id');
+                $table->string('type');
 
                 foreach($fields as $field) {
-                    $table->string('type');
-                    $table->timestamps();
-                    $table->softDeletes();
-
                     if($field->type == 'SectionDivider') {
                         continue;
                     }
@@ -74,6 +72,10 @@ class Form extends Model
                         }
                     }
                 }
+
+
+                $table->timestamps();
+                $table->softDeletes();
             });
         });
     }

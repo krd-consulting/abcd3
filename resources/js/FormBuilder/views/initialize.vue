@@ -279,6 +279,8 @@
                     this.types = response.data.types;
                     this.scopes = response.data.scopes;
                 });
+
+                this.retrieveTeams();
             },
 
             submit() {

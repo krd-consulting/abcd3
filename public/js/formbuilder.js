@@ -5996,7 +5996,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/RecordTypeRequest */ "./resources/js/api/RecordTypeRequest.js");
+/* harmony import */ var _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormFieldTargetTypeRequest */ "./resources/js/api/FormFieldTargetTypeRequest.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6062,12 +6075,12 @@ __webpack_require__.r(__webpack_exports__);
   name: 'textField',
   data: function data() {
     return {
-      recordTypes: [],
+      targetTypes: [],
+      target: '',
       fieldData: {
         type: 'TextField',
         name: 'text_field',
         label: '',
-        reference: '',
         settings: {
           required: false,
           isLimited: false,
@@ -6086,21 +6099,41 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     inputData: Object
   },
+  computed: {
+    target_type_id: function target_type_id() {
+      if (!this.target.toString().includes('_')) {
+        return this.target;
+      }
+
+      var target = this.target.toString().split('_');
+      return target[0];
+    },
+    target_id: function target_id() {
+      if (this.target.toString().includes('_')) {
+        var target = this.target.toString().split('_');
+        return target[1];
+      }
+
+      return null;
+    }
+  },
   methods: {
     save: function save() {
+      this.fieldData['target_type_id'] = this.target_type_id;
+      this.fieldData['target_id'] = this.target_id;
       this.$emit('save', this.fieldData);
     },
-    retrieveRecordTypes: function retrieveRecordTypes() {
+    retrieve: function retrieve() {
       var _this = this;
 
-      var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
+      var request = new _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
       request.retrieve().then(function (response) {
-        _this.recordTypes = response;
+        _this.targetTypes = response.data;
       });
     }
   },
   created: function created() {
-    this.retrieveRecordTypes();
+    this.retrieve();
   }
 });
 
@@ -7257,7 +7290,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           message: 'Build Successful'
         });
 
-        alert('One day, this form will persist to the database. but alas, tis not this day.');
+        _this.$store.dispatch('submitForm');
       })["catch"](function () {
         _this.$message({
           type: 'info',
@@ -7376,14 +7409,18 @@ __webpack_require__.r(__webpack_exports__);
         _this.$message({
           type: 'success',
           message: 'Build Successful'
-        }); // alert('One day, this form will persist to the database. but alas, tis maybe this day?')
-
+        });
 
         _this.$store.dispatch('submitForm');
       })["catch"](function () {
         _this.$message({
           type: 'info',
           message: "Keep doing what you're are doing"
+        }).then(function () {
+          _this.$message({
+            type: 'warning',
+            message: "Woops, Something went wrong. Please try submitting again"
+          });
         });
       });
     }
@@ -7677,6 +7714,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.types = response.data.types;
         _this2.scopes = response.data.scopes;
       });
+      this.retrieveTeams();
     },
     submit: function submit() {
       var _this3 = this;
@@ -10252,7 +10290,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  /* max-width: 460px;\n    min-width: 260px; */\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  /* border-color: #badcff; */\n  font-size: 110%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 768px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 110%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 768px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n", ""]);
 
 // exports
 
@@ -90432,33 +90470,34 @@ var render = function() {
             { attrs: { label: "Field Refers To:" } },
             [
               _c(
-                "el-select",
+                "base-select",
                 {
+                  attrs: { name: "target", placeholder: "Select Resource" },
                   model: {
-                    value: _vm.fieldData.reference,
+                    value: _vm.target,
                     callback: function($$v) {
-                      _vm.$set(_vm.fieldData, "reference", $$v)
+                      _vm.target = $$v
                     },
-                    expression: "fieldData.reference"
+                    expression: "target"
                   }
                 },
-                [
-                  _c("el-option", {
-                    attrs: { label: "No Reference", value: "noRef" }
-                  }),
-                  _vm._v(" "),
-                  _c("el-option", {
-                    attrs: { label: "Another Form", value: "form" }
-                  }),
-                  _vm._v(" "),
-                  _vm._l(_vm.recordTypes, function(type) {
-                    return _c("el-option", {
-                      key: type.slug,
-                      attrs: { label: type.name, value: type.slug }
-                    })
-                  })
-                ],
-                2
+                _vm._l(_vm.targetTypes, function(type, index) {
+                  return _c(
+                    "el-option",
+                    {
+                      key: index,
+                      attrs: { label: type.name, value: type.target }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(type.name) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                }),
+                1
               ),
               _vm._v(" "),
               _vm.fieldData.reference === "form"
@@ -115389,7 +115428,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   SET_TITLE: function SET_TITLE(state, title) {
-    state.name = title;
+    state.title = title;
   },
   SET_DESCRIPTION: function SET_DESCRIPTION(state, description) {
     state.description = description;
@@ -115445,7 +115484,6 @@ __webpack_require__.r(__webpack_exports__);
     id: 0
   },
   type: '',
-  name: '',
   teams: [],
   date: '',
   fields: []
@@ -115707,6 +115745,61 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/FormFieldTargetTypeRequest.js":
+/*!********************************************************!*\
+  !*** ./resources/js/api/FormFieldTargetTypeRequest.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var FormFieldTargetType =
+/*#__PURE__*/
+function (_Request) {
+  _inherits(FormFieldTargetType, _Request);
+
+  function FormFieldTargetType() {
+    _classCallCheck(this, FormFieldTargetType);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(FormFieldTargetType).apply(this, arguments));
+  }
+
+  _createClass(FormFieldTargetType, [{
+    key: "retrieve",
+    value: function retrieve() {
+      return this.get("/api/forms/fields/target_types");
+    }
+  }]);
+
+  return FormFieldTargetType;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (FormFieldTargetType);
+
+/***/ }),
+
 /***/ "./resources/js/api/FormRequest.js":
 /*!*****************************************!*\
   !*** ./resources/js/api/FormRequest.js ***!
@@ -115783,61 +115876,6 @@ function (_Request) {
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Form);
-
-/***/ }),
-
-/***/ "./resources/js/api/RecordTypeRequest.js":
-/*!***********************************************!*\
-  !*** ./resources/js/api/RecordTypeRequest.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var RecordType =
-/*#__PURE__*/
-function (_Request) {
-  _inherits(RecordType, _Request);
-
-  function RecordType() {
-    _classCallCheck(this, RecordType);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(RecordType).apply(this, arguments));
-  }
-
-  _createClass(RecordType, [{
-    key: "retrieve",
-    value: function retrieve() {
-      return this.get("/api/record-types");
-    }
-  }]);
-
-  return RecordType;
-}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (RecordType);
 
 /***/ }),
 

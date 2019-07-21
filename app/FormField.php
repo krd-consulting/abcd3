@@ -58,6 +58,11 @@ class FormField extends Model
         return SchemalessAttributes::createForModel($this, 'options');
     }
 
+    public function getSettingsAttribute(): SchemalessAttributes
+    {
+        return SchemalessAttributes::createForModel($this, 'settings');
+    }
+
     public function getColumnTypeAttribute() 
     {
         if(

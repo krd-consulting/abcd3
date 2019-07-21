@@ -193,7 +193,7 @@ export default {
                     type: 'success',
                     message: 'Build Successful'
                 });
-                alert('One day, this form will persist to the database. but alas, tis not this day.')
+                this.$store.dispatch('submitForm')
             }).catch(() => {
                 this.$message({
                     type: 'info',
