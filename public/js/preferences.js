@@ -100482,11 +100482,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! /Users/rupert/www/sites/abcd/resources/js/Preferences */"./resources/js/Preferences/index.js");
-=======
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/Preferences */"./resources/js/Preferences/index.js");
->>>>>>> 52406a083e8008eab16b585e0b73b4bac635a74b
 
 
 /***/ })

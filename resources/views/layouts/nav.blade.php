@@ -1,4 +1,4 @@
-<el-header class="main-nav" style="height: 80px;">
+<el-header class="main-nav" style="height: 80px;" v-if="!loading">
     <div class="main-logo-container">
         <base-button class="tw-border-none tw-bg-transparent tw-align-middle" @click="collapseSidebar = !collapseSidebar">
             <base-icon>menu</base-icon>

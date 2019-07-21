@@ -29,6 +29,7 @@ return array(
     'App\\Http\\Controllers\\ClientStatusController' => $baseDir . '/app/Http/Controllers/ClientStatusController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\FormController' => $baseDir . '/app/Http/Controllers/FormController.php',
+    'App\\Http\\Controllers\\FormFieldTargetTypeController' => $baseDir . '/app/Http/Controllers/FormFieldTargetTypeController.php',
     'App\\Http\\Controllers\\GroupController' => $baseDir . '/app/Http/Controllers/GroupController.php',
     'App\\Http\\Controllers\\GroupRecordsController' => $baseDir . '/app/Http/Controllers/GroupRecordsController.php',
     'App\\Http\\Controllers\\GroupsAvailableForRecord' => $baseDir . '/app/Http/Controllers/GroupsAvailableForRecord.php',

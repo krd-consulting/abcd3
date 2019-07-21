@@ -439,6 +439,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'App\\Http\\Controllers\\ClientStatusController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClientStatusController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FormController' => __DIR__ . '/../..' . '/app/Http/Controllers/FormController.php',
+        'App\\Http\\Controllers\\FormFieldTargetTypeController' => __DIR__ . '/../..' . '/app/Http/Controllers/FormFieldTargetTypeController.php',
         'App\\Http\\Controllers\\GroupController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupController.php',
         'App\\Http\\Controllers\\GroupRecordsController' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupRecordsController.php',
         'App\\Http\\Controllers\\GroupsAvailableForRecord' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupsAvailableForRecord.php',
