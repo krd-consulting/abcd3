@@ -4,7 +4,7 @@
             :items="forms"
             :page.sync="params.page"
             :per-page="params.perPage"
-            has-add
+            :has-add="total > 0"
             has-delete
             :has-list-columns="false"
             :hasSearch="false"

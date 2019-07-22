@@ -12,6 +12,7 @@ use App\Observers\ProgramClientObserver;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Database\Schema\Blueprint;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -46,6 +47,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //ProgramClient::observe(ProgramClientObserver::class);
+        Blueprint::macro('byAttributes', function () {
+            $this->bigInteger('created_by')->unsigned();
+            $this->bigInteger('updated_by')->unsigned();
+
+            $this->foreign('created_by')->references('id')->on('users');
+            $this->foreign('updated_by')->references('id')->on('users');
+        });
     }
 }

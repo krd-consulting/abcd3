@@ -3655,6 +3655,10 @@ __webpack_require__.r(__webpack_exports__);
     Search: _components_search__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
+    loading: {
+      type: Boolean,
+      deafult: false
+    },
     resourceIdentifier: {
       type: String,
       "default": 'id'
@@ -80758,32 +80762,39 @@ var render = function() {
                     _c(
                       "div",
                       [
-                        _vm._t("empty-placeholder-add-button", [
-                          _c(
-                            "base-button",
-                            {
-                              staticClass:
-                                "tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$emit("add")
-                                }
-                              }
-                            },
-                            [
+                        _vm.total == 0 &&
+                        _vm.search == "" &&
+                        _vm.loading == false
+                          ? _vm._t("empty-placeholder-add-button", [
                               _c(
-                                "span",
-                                { staticClass: "tw-text-xs tw-align-middle" },
+                                "base-button",
+                                {
+                                  staticClass:
+                                    "tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$emit("add")
+                                    }
+                                  }
+                                },
                                 [
-                                  _vm._t("empty-placeholder-add-button-text", [
-                                    _vm._v("Add")
-                                  ])
-                                ],
-                                2
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "tw-text-xs tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t(
+                                        "empty-placeholder-add-button-text",
+                                        [_vm._v("Add")]
+                                      )
+                                    ],
+                                    2
+                                  )
+                                ]
                               )
-                            ]
-                          )
-                        ])
+                            ])
+                          : _vm._e()
                       ],
                       2
                     )
@@ -100478,7 +100489,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\Preferences */"./resources/js/Preferences/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/Preferences */"./resources/js/Preferences/index.js");
 
 
 /***/ })

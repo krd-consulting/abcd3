@@ -8,14 +8,18 @@ use App\User;
 use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 
+use App\Contracts\FormReference;
+use App\Traits\Models\FormReference as FormReferenceTrait;
+
 use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Group extends Model
+class Group extends Model implements FormReference
 {
     use SoftDeletes;
     use Search;
     use Sort;
+    use FormReferenceTrait;
 
     protected $appends = ['path'];
 

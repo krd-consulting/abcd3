@@ -10,13 +10,17 @@ use App\Model;
 use App\Record;
 use App\RecordIdentity;
 
+use App\Contracts\FormReference;
+use App\Traits\Models\FormReference as FormReferenceTrait;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Program extends Model
+class Program extends Model implements FormReference
 {
     use SoftDeletes;
     use Search;
     use Sort;
+    use FormReferenceTrait;
 
     private $recordType;
 

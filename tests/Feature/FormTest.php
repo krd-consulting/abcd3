@@ -53,10 +53,12 @@ class FormTest extends TestCase
         $fields = [
             [
                 'type' => 'MatrixField',
-                'label' => 'Test Matrix',
+                'title' => 'Test Matrix',
                 'description' => 'Test Matrix Field',
-                'target_type_id' => NULL,
-                'target_id' => NULL,
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'settings' => [],
+                'rules' => [],
                 'questions' => [
                     [
                         'text' => 'question 1'
@@ -115,10 +117,10 @@ class FormTest extends TestCase
         $fields = [
             [
                 'type' => 'MatrixField',
-                'label' => 'Test Matrix',
+                'title' => 'Test Matrix',
                 'description' => 'Test Matrix Field',
-                'target_type_id' => NULL,
-                'target_id' => NULL,
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
                 'form_id' => $response->decodeResponseJson()['id']
             ]
         ];
@@ -143,7 +145,7 @@ class FormTest extends TestCase
         $fields = [
             [
                 'type' => 'TextField',
-                'label' => 'Test Text',
+                'title' => 'Test Text',
                 'description' => 'Test Text Field',
                 'target_type_id' => NULL,
                 'target_id' => NULL,
@@ -183,7 +185,7 @@ class FormTest extends TestCase
         $fields = [
             [
                 'type' => 'TextField',
-                'label' => 'Test Text',
+                'title' => 'Test Text',
                 'description' => 'Test Text Field',
                 'target_type_id' => NULL,
                 'target_id' => NULL,
@@ -211,7 +213,7 @@ class FormTest extends TestCase
         $fields = [
             [
                 'type' => 'TextField',
-                'label' => 'Test Text in Form 1',
+                'title' => 'Test Text in Form 1',
                 'description' => 'Test Text Field in Form 1',
                 'target_type_id' => NULL,
                 'target_id' => NULL,
@@ -251,7 +253,7 @@ class FormTest extends TestCase
         $fields = [
             [
                 'type' => 'TextField',
-                'label' => 'Test Text in Form 1',
+                'title' => 'Test Text in Form 1',
                 'description' => 'Test Text Field in Form 1',
                 'target_type_id' => NULL,
                 'target_id' => NULL,
@@ -269,7 +271,7 @@ class FormTest extends TestCase
         $fields = [
             [
                 'type' => 'TextField',
-                'label' => 'Test Text in Form 2',
+                'title' => 'Test Text in Form 2',
                 'description' => 'Test Text Field in Form 2',
                 'target_type_id' => 5,
                 'target_id' => 1,
@@ -309,7 +311,7 @@ class FormTest extends TestCase
         $fields = [
             [
                 'type' => 'TextField',
-                'label' => 'Test Text in Form 2',
+                'title' => 'Test Text in Form 2',
                 'description' => 'Test Text Field in Form 2',
                 'target_type_id' => 5,
                 'target_id' => 1,

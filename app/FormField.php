@@ -28,6 +28,18 @@ class FormField extends Model
         'FileField' => 'string'
     ];
 
+    protected $fieldTypes = [
+        'TextField' => 'text',
+        'TextBox' => 'textbox',
+        'NumberField' => 'number',
+        'DropdownField' => 'dropdown',
+        'RadioField' => 'radio',
+        'CheckBoxField' => 'checkbox',
+        'DateField' => 'date',
+        'TimeField' => 'time',
+        'FileField' => 'file'
+    ];
+
     public function form()
     {
         return $this->belongsTo('App\Form');

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Model;
 
 use App\Scope;
 
@@ -17,7 +17,7 @@ class Form extends Model
         $this->name = $request->name;
         $this->description = $request->description;
         $this->type = $request->type;
-        $this->table_name =  'form_' . (DB::table($this->getTable())->max('id')+1);
+        $this->setTableName(DB::table($this->getTable())->max('id')+1);
         $this->target_type_id = $request->target_type_id;
         $this->target_id = $request->target_id;
         $this->scope_id = $request->scope_id;
@@ -28,9 +28,34 @@ class Form extends Model
             // add form to team.
             $this->teams()->attach([$request->team_id]);
 
+            $fields = collect($request->validated()['fields']);
+
+            $replace = collect([]);
+
+            $fields->transform(function($item, $key) {
+                if($item['type'] == 'MatrixField') {
+                    $fields = collect($item['questions']);
+                    $fields = $fields->map(function ($values) use ($item){
+                        $field['title'] = $values['text'];
+                        $field['type'] = 'RadioField';
+                        $field['settings'] = $item['settings'];
+                        $field['choices'] = $item['choices'];
+                        $field['rules'] = $item['rules'];
+
+                        return $field;
+                    });
+
+                    return $fields;
+                }
+
+                return $item;
+            });
+
+        dump($fields);
+
             // insert fields into field registry
-            if(isset($request->validated()['fields']))
-                $this->fields()->createMany($request->validated()['fields']);
+            if(!empty($fields->toArray()))
+                $this->fields()->createMany($fields->toArray());
 
             $fields = $this->fields;
 
@@ -38,6 +63,7 @@ class Form extends Model
             Schema::create($this->table_name, function (Blueprint $table) use ($fields) {
                 $table->bigIncrements('id');
                 $table->string('type');
+                $table->bigInteger('target_id');
 
                 foreach($fields as $field) {
                     if($field->type == 'SectionDivider') {
@@ -66,13 +92,22 @@ class Form extends Model
                             $model = new $class;
 
                             $table
-                            ->foreign($columnName)
-                            ->references($model->getFormReferenceField())
-                            ->on($model->getFormReferenceTable());
+                                ->foreign($columnName)
+                                ->references($model->getFormReferenceField())
+                                ->on($model->getFormReferenceTable());
                         }
                     }
+
+                    $table->byAttributes();
                 }
 
+                $class = $this->target_type->model;
+                $model = new $class;
+
+                $table
+                    ->foreign('target_id')
+                    ->references($model->getFormReferenceField())
+                    ->on($model->getFormReferenceTable());
 
                 $table->timestamps();
                 $table->softDeletes();
@@ -117,6 +152,11 @@ class Form extends Model
     {
         return $this->belongsToMany('App\User')
             ->withTimestamps();
+    }
+
+    protected function setTableName($id)
+    {
+        $this->table_name = str_pad($id, 3, STR_PAD_LEFT);
     }
 
     public function scopeAvailableFor($query, $user) {

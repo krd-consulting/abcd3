@@ -3945,6 +3945,10 @@ __webpack_require__.r(__webpack_exports__);
     Search: _components_search__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
+    loading: {
+      type: Boolean,
+      deafult: false
+    },
     resourceIdentifier: {
       type: String,
       "default": 'id'
@@ -7239,6 +7243,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -7267,6 +7272,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       fields: [],
       records: [],
       request: new _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({}),
+      loading: false,
       params: {
         ascending: true,
         sortBy: 'field_1_value',
@@ -7285,6 +7291,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var recordType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$route.params.recordType;
+      this.loading = true;
       this.request.setFields({
         params: _objectSpread({}, this.params)
       });
@@ -7293,6 +7300,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.records = response.data;
         _this.total = response.meta.total;
         _this.type = response.record_type;
+        _this.loading = false;
       });
     },
     createRecord: function createRecord() {
@@ -85478,32 +85486,39 @@ var render = function() {
                     _c(
                       "div",
                       [
-                        _vm._t("empty-placeholder-add-button", [
-                          _c(
-                            "base-button",
-                            {
-                              staticClass:
-                                "tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$emit("add")
-                                }
-                              }
-                            },
-                            [
+                        _vm.total == 0 &&
+                        _vm.search == "" &&
+                        _vm.loading == false
+                          ? _vm._t("empty-placeholder-add-button", [
                               _c(
-                                "span",
-                                { staticClass: "tw-text-xs tw-align-middle" },
+                                "base-button",
+                                {
+                                  staticClass:
+                                    "tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$emit("add")
+                                    }
+                                  }
+                                },
                                 [
-                                  _vm._t("empty-placeholder-add-button-text", [
-                                    _vm._v("Add")
-                                  ])
-                                ],
-                                2
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "tw-text-xs tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t(
+                                        "empty-placeholder-add-button-text",
+                                        [_vm._v("Add")]
+                                      )
+                                    ],
+                                    2
+                                  )
+                                ]
                               )
-                            ]
-                          )
-                        ])
+                            ])
+                          : _vm._e()
                       ],
                       2
                     )
@@ -86718,7 +86733,7 @@ var render = function() {
             items: _vm.forms,
             page: _vm.params.page,
             "per-page": _vm.params.perPage,
-            "has-add": "",
+            "has-add": _vm.total > 0,
             "has-delete": "",
             "has-list-columns": false,
             hasSearch: false,
@@ -89982,6 +89997,7 @@ var render = function() {
             page: _vm.params.page,
             "per-page": _vm.params.perPage,
             "search-terms": _vm.params.search,
+            loading: _vm.loading,
             "has-add": "",
             "has-delete": "",
             "has-list-columns": false,
@@ -113454,8 +113470,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

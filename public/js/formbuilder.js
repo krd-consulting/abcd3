@@ -6064,9 +6064,151 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\resources\\js\\FormBuilder\\components\\menu\\fieldOptions\\textField.vue: Unexpected token (88:0)\n\n\u001b[0m \u001b[90m 86 | \u001b[39m                type\u001b[33m:\u001b[39m \u001b[32m'TextField'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 87 | \u001b[39m                name\u001b[33m:\u001b[39m \u001b[32m'text_field'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 88 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 89 | \u001b[39m                title\u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 90 | \u001b[39m                reference\u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 91 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\u001b[0m\n    at Parser.raise (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:3851:17)\n    at Parser.unexpected (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5167:16)\n    at Parser.parseIdentifierName (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7007:18)\n    at Parser.parseIdentifier (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6985:23)\n    at Parser.parseMaybePrivateName (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6350:19)\n    at Parser.parsePropertyName (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6806:98)\n    at Parser.parseObjectMember (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6707:10)\n    at Parser.parseObj (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6641:25)\n    at Parser.parseExprAtom (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6274:21)\n    at Parser.parseExprSubscripts (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5914:23)\n    at Parser.parseMaybeUnary (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5894:21)\n    at Parser.parseExprOps (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5781:23)\n    at Parser.parseMaybeConditional (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5754:23)\n    at Parser.parseMaybeAssign (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5701:21)\n    at Parser.parseObjectProperty (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6768:101)\n    at Parser.parseObjPropValue (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6793:101)\n    at Parser.parseObjectMember (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6717:10)\n    at Parser.parseObj (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6641:25)\n    at Parser.parseExprAtom (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6274:21)\n    at Parser.parseExprSubscripts (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5914:23)\n    at Parser.parseMaybeUnary (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5894:21)\n    at Parser.parseExprOps (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5781:23)\n    at Parser.parseMaybeConditional (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5754:23)\n    at Parser.parseMaybeAssign (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5701:21)\n    at Parser.parseExpression (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5649:23)\n    at Parser.parseReturnStatement (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7660:28)\n    at Parser.parseStatementContent (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7339:21)\n    at Parser.parseStatement (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7291:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7868:25)\n    at Parser.parseBlockBody (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7855:10)\n    at Parser.parseBlock (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7839:10)\n    at Parser.parseFunctionBody (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6909:24)\n    at Parser.parseArrowExpression (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6851:10)\n    at Parser.parseParenAndDistinguishExpression (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6489:12)\n    at Parser.parseExprAtom (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6260:21)\n    at Parser.parseExprSubscripts (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5914:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormFieldTargetTypeRequest */ "./resources/js/api/FormFieldTargetTypeRequest.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'textField',
+  data: function data() {
+    return {
+      targetTypes: [],
+      target: '',
+      fieldData: {
+        type: 'TextField',
+        name: 'text_field',
+        title: '',
+        reference: '',
+        settings: {
+          required: false,
+          isLimited: false,
+          max: 50
+        },
+        rules: {
+          title: [{
+            required: true,
+            message: 'Please input Question or title',
+            trigger: 'blur'
+          }]
+        }
+      }
+    };
+  },
+  props: {
+    inputData: Object
+  },
+  computed: {
+    target_type_id: function target_type_id() {
+      if (!this.target.toString().includes('_')) {
+        return this.target;
+      }
+
+      var target = this.target.toString().split('_');
+      return target[0];
+    },
+    target_id: function target_id() {
+      if (this.target.toString().includes('_')) {
+        var target = this.target.toString().split('_');
+        return target[1];
+      }
+
+      return null;
+    }
+  },
+  methods: {
+    save: function save() {
+      this.fieldData['target_type_id'] = this.target_type_id;
+      this.fieldData['target_id'] = this.target_id;
+      this.$emit('save', this.fieldData);
+    },
+    retrieve: function retrieve() {
+      var _this = this;
+
+      var request = new _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
+      request.retrieve().then(function (response) {
+        _this.targetTypes = response.data;
+      });
+    }
+  },
+  created: function created() {
+    this.retrieve();
+  }
+});
 
 /***/ }),
 
@@ -10010,7 +10152,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-e97e2c96] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-e97e2c96]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-e97e2c96] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-e97e2c96]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10029,7 +10171,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5ce99664] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5ce99664] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10048,7 +10190,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5bdc3b03] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5bdc3b03] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10067,7 +10209,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-120ae50f] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-120ae50f] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10105,7 +10247,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-1c3cc70b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-1c3cc70b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-1c3cc70b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-1c3cc70b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10124,7 +10266,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7d675a79] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7d675a79]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7d675a79] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7d675a79]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10143,7 +10285,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -10162,7 +10304,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7a7b55cc] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7a7b55cc]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7a7b55cc] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7a7b55cc]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10181,7 +10323,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-28f88a4b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-28f88a4b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-28f88a4b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-28f88a4b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10200,7 +10342,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-2da47d2d] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-2da47d2d] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10219,7 +10361,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 900px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\r\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 900px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\n", ""]);
 
 // exports
 
@@ -10238,7 +10380,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 110%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\r\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 110%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n", ""]);
 
 // exports
 
@@ -10276,7 +10418,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -10314,7 +10456,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -10333,7 +10475,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\r\n", ""]);
+exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\n", ""]);
 
 // exports
 
@@ -10352,7 +10494,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\r\n\r\n", ""]);
+exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -115745,6 +115887,61 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/FormFieldTargetTypeRequest.js":
+/*!********************************************************!*\
+  !*** ./resources/js/api/FormFieldTargetTypeRequest.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var FormFieldTargetType =
+/*#__PURE__*/
+function (_Request) {
+  _inherits(FormFieldTargetType, _Request);
+
+  function FormFieldTargetType() {
+    _classCallCheck(this, FormFieldTargetType);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(FormFieldTargetType).apply(this, arguments));
+  }
+
+  _createClass(FormFieldTargetType, [{
+    key: "retrieve",
+    value: function retrieve() {
+      return this.get("/api/forms/fields/target_types");
+    }
+  }]);
+
+  return FormFieldTargetType;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (FormFieldTargetType);
+
+/***/ }),
+
 /***/ "./resources/js/api/FormRequest.js":
 /*!*****************************************!*\
   !*** ./resources/js/api/FormRequest.js ***!
@@ -117691,7 +117888,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

@@ -85,12 +85,8 @@ export default {
             fieldData: {
                 type: 'TextField',
                 name: 'text_field',
-<<<<<<< HEAD
                 title: '',
                 reference: '',
-=======
-                label: '',
->>>>>>> d6e378839f01e92ae5d32384812ea54f0b0acb53
                 settings: {
                     required: false,
                     isLimited: false,

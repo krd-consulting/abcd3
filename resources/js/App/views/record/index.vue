@@ -17,6 +17,7 @@
             :page.sync="params.page"
             :per-page="params.perPage"
             :search-terms.sync="params.search"
+            :loading="loading"
             has-add
             has-delete
             :has-list-columns="false"
@@ -77,6 +78,7 @@
                 fields: [],
                 records: [],
                 request: new Request({}),
+                loading: false,
                 params: {
                     ascending: true,
                     sortBy: 'field_1_value',
@@ -93,6 +95,8 @@
 
         methods: {
             retrieve(recordType = this.$route.params.recordType) {
+                this.loading = true;
+
                 this.request.setFields({
                     params: {...this.params}
                 });
@@ -102,6 +106,8 @@
                     this.records = response.data;
                     this.total = response.meta.total;
                     this.type = response.record_type;
+
+                    this.loading = false;
                 });
 
             },
