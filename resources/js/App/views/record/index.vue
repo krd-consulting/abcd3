@@ -24,13 +24,12 @@
             @edit="editRecord"
             @delete="confirmDelete(type.slug, $event)"
             @page-change="retrieve()"
-            @search="retrieve()"
             :total="total">
             <template slot="header-text">{{ type.name }}</template>
             <template slot="options-add-text">Add {{ type.name }}</template>
 
             <template v-slot:list-item-image="{ item:record }">
-                <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-base" :record="record" :fields="fields" />
+                <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-base" :record="record" :fields="fields"/>
             </template>
 
             <template v-slot:list-item-primary-data="{ item:record }">
@@ -146,6 +145,10 @@
 
                 return request.destroy(recordType, record);
             },
+
+            test() {
+                alert('hello');
+            }
         },
 
         created() {

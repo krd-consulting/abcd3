@@ -1,4 +1,4 @@
-<template>    
+<template>
     <div class="tw-shadow tw-rounded tw-bg-white">
         <div v-if="hasHeader" class="tw-flex tw-items-center tw-justify-between tw-p-4 tw-border-b">
             <slot name="header">
@@ -20,7 +20,7 @@
         <div class="tw-flex tw-justify-between">
             <slot v-if="total > 0" name="pagination">
                 <base-pagination
-                    class="tw-py-2"   
+                    class="tw-py-2"
                     v-show="showPagination"
                     :current-page="page"
                     @current-change="handlePageChange"

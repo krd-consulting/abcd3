@@ -4022,8 +4022,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      search: '',
-      optionsWidth: ''
+      optionsWidth: '',
+      search: ''
     };
   },
   methods: {
@@ -4031,11 +4031,11 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('update:page', page);
       this.$emit('page-change', page);
     },
-    handleSearch: function handleSearch(search) {
+    handleSearch: _.debounce(function () {
+      this.$emit('update:search-terms', this.search);
+      this.$emit('search', this.search);
       this.handlePageChange(1);
-      this.$emit('update:search-terms', search);
-      this.$emit('search', search);
-    }
+    }, 300)
   }
 });
 
@@ -5347,7 +5347,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -6579,7 +6578,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -7241,7 +7239,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -7331,6 +7328,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     deleteRecord: function deleteRecord(recordType, record) {
       var request = new _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
       return request.destroy(recordType, record);
+    },
+    test: function test() {
+      alert('hello');
     }
   },
   created: function created() {
@@ -9165,7 +9165,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -85541,11 +85540,7 @@ var render = function() {
                     ? _vm._t("options-search", [
                         _c("search", {
                           staticClass: "tw-w-1/2",
-                          on: {
-                            input: function($event) {
-                              return _vm.handleSearch(_vm.search)
-                            }
-                          },
+                          on: { input: _vm.handleSearch },
                           model: {
                             value: _vm.search,
                             callback: function($$v) {
@@ -85662,7 +85657,7 @@ var render = function() {
                 "list-item",
                 {
                   key: index,
-                  staticClass: "tw-py-4 tw-px-4",
+                  staticClass: "tw-py-4 tw-px-4 hover:tw-bg-blue-100",
                   attrs: { to: item.path }
                 },
                 [
@@ -85729,7 +85724,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none",
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -85767,7 +85762,7 @@ var render = function() {
                                 "base-button",
                                 {
                                   staticClass:
-                                    "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                                    "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 tw-bg-transparent tw-border-none",
                                   on: {
                                     click: function($event) {
                                       return _vm.$emit(
@@ -85817,7 +85812,7 @@ var render = function() {
                             "base-button",
                             {
                               staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 tw-bg-transparent tw-border-none",
                               on: {
                                 click: function($event) {
                                   return _vm.$emit(
@@ -87715,9 +87710,6 @@ var render = function() {
             },
             "page-change": function($event) {
               return _vm.retrieve()
-            },
-            search: function($event) {
-              return _vm.retrieve()
             }
           },
           scopedSlots: _vm._u([
@@ -89186,9 +89178,6 @@ var render = function() {
             },
             "page-change": function($event) {
               return _vm.retrieve()
-            },
-            search: function($event) {
-              return _vm.retrieve()
             }
           },
           scopedSlots: _vm._u([
@@ -90014,9 +90003,6 @@ var render = function() {
               return _vm.confirmDelete(_vm.type.slug, $event)
             },
             "page-change": function($event) {
-              return _vm.retrieve()
-            },
-            search: function($event) {
               return _vm.retrieve()
             }
           },
@@ -91601,9 +91587,6 @@ var render = function() {
               return _vm.confirmDelete(_vm.recordType.slug, $event)
             },
             "page-change": function($event) {
-              return _vm.retrieve()
-            },
-            search: function($event) {
               return _vm.retrieve()
             }
           },
