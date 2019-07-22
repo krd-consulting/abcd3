@@ -4,6 +4,7 @@ export default {
     addField(field) {
         field.commit('ADD_FIELD')
     },
+    
     submitForm({ state }) {
         // console.log(state)
         
@@ -13,8 +14,8 @@ export default {
             team_id: state.team_id,
             scope_id: state.scope_id,
             type: state.type,
-            target_type_id: state.target.type.id,
-            target_id: state.target.id,
+            reference_target_type_id: state.target.type.id,
+            reference_target_id: state.target.id,
             fields: state.fields
         }
 
@@ -22,7 +23,7 @@ export default {
 
         request.store()
             .then((response) => {
-            //    return Promise('')
+                //  return Promise('')
                 
             })
             .catch((error) => {

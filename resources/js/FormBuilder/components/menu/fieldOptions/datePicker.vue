@@ -2,8 +2,8 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
             
-            <el-form-item label="Question/Title" prop="label">
-                <el-input v-model="fieldData.label"></el-input>
+            <el-form-item label="Question/Title" prop="title">
+                <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
             
             <el-form-item label="This Field is">
@@ -43,7 +43,7 @@ export default {
             fieldData: {
                 type: 'DateField',
                 name: 'date_picker',
-                label: '',
+                title: '',
                 settings: {
                     required: false,
                     past_only: false,
@@ -52,8 +52,18 @@ export default {
                     include_time: false,
                     date_range: false,
                 } ,
+                format: {
+                    dateSelection: '',
+                    dateType: 'date',
+                    dateOptions: {},
+                    datePlaceHolder: 'Pick a day',
+                    dateFormat: 'yyyy/MM/dd',
+                    rangeSeparator: '',
+                    startDate: '',
+                    endDate: '',
+                },
                 rules: {
-                    label: [
+                    title: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }
                     ]
                 }

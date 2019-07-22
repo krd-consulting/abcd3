@@ -3,7 +3,7 @@
         <br>
         <el-row>
            <el-col :span="24">
-                <label for="matrix-table" class="inputLabel">{{ field.label }}</label><br>
+                <label for="matrix-table" class="inputLabel">{{ field.title }}</label><br>
                 <sup>{{ field.description }}</sup>
                     <table id="matrix-table">
                     <thead>

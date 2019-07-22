@@ -43,7 +43,7 @@
                         </el-col>
                     </el-row>
 
-                    <el-row v-if="type === 'pre/post'">
+                    <el-row v-if="type === 'pre-post'">
                         <el-col :span="6">
                             <span class="input-label">Complete for</span><br>
                             <el-select id="pre-post" value="" placeholder="Select">

@@ -65,10 +65,10 @@ export default {
 
     computed: {
         fieldLabel: {
-            get() { return this.field.label; },
-            set(label) { 
+            get() { return this.field.title; },
+            set(title) { 
                 const fieldCopy = _.clone(this.field);
-                fieldCopy.label = label;
+                fieldCopy.title = title;
                 this.field = fieldCopy;
             }
         },

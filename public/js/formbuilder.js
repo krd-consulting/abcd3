@@ -3577,12 +3577,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
+      set: function set(title) {
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -3605,8 +3605,7 @@ __webpack_require__.r(__webpack_exports__);
         var fieldValue = _.clone(this.field);
 
         fieldValue.choices.value = value;
-        this.field = fieldValue;
-        this.$emit('updateChoices', field);
+        this.field = fieldValue; // this.$emit('updateChoices', field);
       }
     }
   },
@@ -3704,17 +3703,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dateSelection: '',
-      dateType: 'date',
-      dateOptions: {},
-      datePlaceHolder: 'Pick a day',
-      dateFormat: 'yyyy/MM/dd',
-      rangeSeparator: '',
+      // dateType: 'date',
+      // dateOptions: {},
+      // datePlaceHolder: 'Pick a day',
+      // dateFormat: 'yyyy/MM/dd',
+      // rangeSeparator: '',
       startDate: '',
       endDate: ''
     };
@@ -3728,42 +3726,110 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  created: function created() {
-    this.field = _.clone(this.fieldData);
-  },
+  // created() {
+  //     this.field = _.clone(this.fieldData)
+  // },
   mounted: function mounted() {
     this.togglePastOnly(), this.toggleFutureOnly(), this.toggleQuickMenu(), this.toggleTime(), this.toggleRangeMenu();
   },
   computed: {
-    fieldLabel: {
-      get: function get() {
-        return this.field.label;
-      },
-      set: function set(label) {
-        console.log('field label edited');
-
-        var fieldCopy = _.clone(this.field);
-
-        fieldCopy.label = label;
-        this.field = fieldCopy;
-      }
-    },
     field: {
       get: function get() {
         return this.fieldData;
       },
       set: function set(field) {
-        console.log('field edited');
         this.$emit('update', field);
       }
-    } // handlePastFutureToggle() {
-    //     if(this.field.settings.past_only === true){
-    //         this.field.settings.future_only === false
+    },
+    fieldLabel: {
+      get: function get() {
+        return this.field.title;
+      },
+      set: function set(title) {
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.title = title;
+        this.field = fieldCopy;
+      }
+    },
+    // dateSelection: {
+    //     get() { return this.field.format.dateSelection; },
+    //     set(dateSelection) { 
+    //         const fieldCopy = _.clone(this.field);
+    //         fieldCopy.format.dateSelection = dateSelection;
+    //         this.field = fieldCopy;
     //     }
-    //     if(this.field.settings.future_only === true) {
-    //         this.field.settings.past_only === false
+    // },
+    dateType: {
+      get: function get() {
+        return this.field.format.dateType;
+      },
+      set: function set(dateType) {
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.format.dateType = dateType;
+        this.field = fieldCopy;
+      }
+    },
+    dateOptions: {
+      get: function get() {
+        return this.field.format.dateOptions;
+      },
+      set: function set(dateOptions) {
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.format.dateOptions = dateOptions;
+        this.field = fieldCopy;
+      }
+    },
+    datePlaceHolder: {
+      get: function get() {
+        return this.field.format.datePlaceHolder;
+      },
+      set: function set(datePlaceHolder) {
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.format.datePlaceHolder = datePlaceHolder;
+        this.field = fieldCopy;
+      }
+    },
+    dateFormat: {
+      get: function get() {
+        return this.field.format.dateFormat;
+      },
+      set: function set(dateFormat) {
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.format.dateFormat = dateFormat;
+        this.field = fieldCopy;
+      }
+    },
+    rangeSeparator: {
+      get: function get() {
+        return this.field.format.rangeSeparator;
+      },
+      set: function set(rangeSeparator) {
+        var fieldCopy = _.clone(this.field);
+
+        fieldCopy.format.rangeSeparator = rangeSeparator;
+        this.field = fieldCopy;
+      }
+    } // startDate: {
+    //     get() { return this.field.format.startDate; },
+    //     set(startDate) { 
+    //         const fieldCopy = _.clone(this.field);
+    //         fieldCopy.format.startDate = startDate;
+    //         this.field = fieldCopy;
     //     }
-    // }
+    // },
+    // endDate: {
+    //     get() { return this.field.format.endDate; },
+    //     set(endDate) { 
+    //         const fieldCopy = _.clone(this.field);
+    //         fieldCopy.format.endDate = endDate;
+    //         this.field = fieldCopy;
+    //     }
+    // },
 
   },
   methods: {
@@ -3943,12 +4009,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
+      set: function set(title) {
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -4075,14 +4141,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
-        console.log('field label edited');
-
+      set: function set(title) {
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -4217,6 +4281,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4226,10 +4294,6 @@ __webpack_require__.r(__webpack_exports__);
       isMounted: false
     };
   },
-  // mounted() {
-  //     // calls methods upon being rendered in the DOM
-  //     this.getMatrixItems(); 
-  // },
   components: {
     EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -4250,12 +4314,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
+      set: function set(title) {
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -4318,14 +4382,11 @@ __webpack_require__.r(__webpack_exports__);
       this.$forceUpdate();
     },
     removeQuestion: function removeQuestion(item) {
-      // TODO: fix
-      // const questionsCopy = _.clone(this.questions);
       var index = this.questions.indexOf(item);
 
       if (index !== -1) {
         this.questions.splice(index, 1);
-      } // this.questions = questionsCopy;
-
+      }
 
       this.$store.commit('UPDATE_FIELD', this.field);
       this.$forceUpdate();
@@ -4429,14 +4490,14 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
+      set: function set(title) {
         console.log('field label edited');
 
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -4550,11 +4611,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
-        console.log('field label edited');
-
+      set: function set(title) {
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.label = label;
@@ -4671,14 +4730,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
+      set: function set(title) {
         console.log('field label edited');
 
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     }
@@ -4759,14 +4818,14 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
+      set: function set(title) {
         console.log('field label edited');
 
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -4865,12 +4924,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
+      set: function set(title) {
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -4936,6 +4995,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4955,14 +5021,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     fieldLabel: {
       get: function get() {
-        return this.field.label;
+        return this.field.title;
       },
-      set: function set(label) {
-        console.log('field label edited');
-
+      set: function set(title) {
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -4974,11 +5038,13 @@ __webpack_require__.r(__webpack_exports__);
         console.log('field edited');
         this.$emit('update', field);
       }
+    },
+    exactTime: {
+      get: function get() {
+        return this.field.settings.exact_time;
+      }
     }
-  } // created() {
-  //     this.field = _.clone(this.fieldData)
-  // },
-
+  }
 });
 
 /***/ }),
@@ -5342,7 +5408,7 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'CheckBoxField',
         name: 'check_box',
-        label: '',
+        title: '',
         settings: {
           required: false,
           checkboxNum: 2,
@@ -5350,7 +5416,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         choices: [],
         rules: {
-          label: [{
+          title: [{
             required: true,
             message: 'Please input Question or title',
             trigger: 'blur'
@@ -5433,7 +5499,7 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'DateField',
         name: 'date_picker',
-        label: '',
+        title: '',
         settings: {
           required: false,
           past_only: false,
@@ -5442,8 +5508,18 @@ __webpack_require__.r(__webpack_exports__);
           include_time: false,
           date_range: false
         },
+        format: {
+          dateSelection: '',
+          dateType: 'date',
+          dateOptions: {},
+          datePlaceHolder: 'Pick a day',
+          dateFormat: 'yyyy/MM/dd',
+          rangeSeparator: '',
+          startDate: '',
+          endDate: ''
+        },
         rules: {
-          label: [{
+          title: [{
             required: true,
             message: 'Please input Question or title',
             trigger: 'blur'
@@ -5493,10 +5569,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'dropdown',
   data: function data() {
@@ -5504,7 +5576,7 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'DropdownField',
         name: 'dropdown',
-        label: '',
+        title: '',
         settings: {
           required: false,
           // dropdownNum: 2,
@@ -5512,7 +5584,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         choices: [],
         rules: {
-          label: [{
+          title: [{
             required: true,
             message: 'Please input Question or title',
             trigger: 'blur'
@@ -5582,13 +5654,13 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'FileField',
         name: 'file_upload',
-        label: '',
+        title: '',
         description: '',
         settings: {
           required: false
         },
         rules: {
-          label: [{
+          title: [{
             required: true,
             message: 'Please input Question or title',
             trigger: 'blur'
@@ -5662,7 +5734,7 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'MatrixField',
         name: 'matrix_field',
-        label: '',
+        title: '',
         description: '',
         settings: {
           required: false,
@@ -5674,7 +5746,7 @@ __webpack_require__.r(__webpack_exports__);
         questions: [],
         choices: [],
         rules: {
-          label: [{
+          title: [{
             required: true,
             message: 'Please input Question or title',
             trigger: 'blur'
@@ -5754,13 +5826,13 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'NumberField',
         name: 'numeric_field',
-        label: '',
+        title: '',
         settings: {
           required: false,
           defaultNum: 5
         },
         rules: {
-          label: [{
+          title: [{
             required: true,
             message: 'Please input Question or title',
             trigger: 'blur'
@@ -5820,7 +5892,7 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'RadioField',
         name: 'radio_field',
-        label: '',
+        title: '',
         settings: {
           required: false,
           radioNum: 2,
@@ -5828,7 +5900,7 @@ __webpack_require__.r(__webpack_exports__);
         },
         choices: [],
         rules: {
-          label: [{
+          title: [{
             required: true,
             message: 'Please input Question or title',
             trigger: 'blur'
@@ -5889,10 +5961,10 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'SectionDivider',
         name: 'section_divider',
-        label: '',
-        settings: {
-          required: false
-        }
+        title: '' // settings: {
+        //     required: false,
+        // },
+
       }
     };
   },
@@ -5959,14 +6031,14 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'TextBox',
         name: 'text_box',
-        label: '',
+        title: '',
         settings: {
           required: false,
           isLimited: false,
           max: 50
         },
         rules: {
-          label: [{
+          title: [{
             required: true,
             message: 'Please input Question or title',
             trigger: 'blur'
@@ -6066,7 +6138,7 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'TextField',
         name: 'text_field',
-        label: '',
+        title: '',
         reference: '',
         settings: {
           required: false,
@@ -6074,7 +6146,7 @@ __webpack_require__.r(__webpack_exports__);
           max: 50
         },
         rules: {
-          label: [{
+          title: [{
             required: true,
             message: 'Please input Question or title',
             trigger: 'blur'
@@ -6135,6 +6207,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'timePicker',
   data: function data() {
@@ -6144,7 +6222,8 @@ __webpack_require__.r(__webpack_exports__);
         name: 'time_picker',
         label: '',
         settings: {
-          required: false
+          required: false,
+          exact_time: false
         },
         rules: {
           label: [{
@@ -6486,14 +6565,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      value: '',
-      dateType: 'date',
-      dateOptions: '',
-      datePlaceHolder: 'Select a date',
-      rangeSeparator: '',
-      startDate: '',
-      endDate: '',
-      dateFormat: ''
+      value: ''
     };
   },
   props: {
@@ -6507,37 +6579,37 @@ __webpack_require__.r(__webpack_exports__);
     },
     dateType: {
       get: function get() {
-        return this.field.settings.dateType;
+        return this.field.format.dateType;
       }
     },
     dateOptions: {
       get: function get() {
-        return this.field.settings.dateOptions;
+        return this.field.format.dateOptions;
       }
     },
     datePlaceHolder: {
       get: function get() {
-        return this.field.settings.datePlaceHolder;
+        return this.field.format.datePlaceHolder;
       }
     },
     rangeSeparator: {
       get: function get() {
-        return this.field.settings.rangeSeparator;
+        return this.field.format.rangeSeparator;
       }
     },
     startDate: {
       get: function get() {
-        return this.field.settings.startDate;
+        return this.field.format.startDate;
       }
     },
     endDate: {
       get: function get() {
-        return this.field.settings.endDate;
+        return this.field.format.endDate;
       }
     },
     dateFormat: {
       get: function get() {
-        return this.field.settings.dateFormat;
+        return this.field.format.dateFormat;
       }
     }
   }
@@ -6960,6 +7032,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7044,20 +7121,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/FormBuilder/store/test.json */ "./resources/js/FormBuilder/store/test.json");
-var _FormBuilder_store_test_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! @/FormBuilder/store/test.json */ "./resources/js/FormBuilder/store/test.json", 1);
-/* harmony import */ var _FormBuilder_components_preview_matrix_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/FormBuilder/components/preview/matrix.vue */ "./resources/js/FormBuilder/components/preview/matrix.vue");
-/* harmony import */ var _FormBuilder_components_preview_radio_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/FormBuilder/components/preview/radio.vue */ "./resources/js/FormBuilder/components/preview/radio.vue");
-/* harmony import */ var _FormBuilder_components_preview_textField_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/FormBuilder/components/preview/textField.vue */ "./resources/js/FormBuilder/components/preview/textField.vue");
-/* harmony import */ var _FormBuilder_components_preview_textBox_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/FormBuilder/components/preview/textBox.vue */ "./resources/js/FormBuilder/components/preview/textBox.vue");
-/* harmony import */ var _FormBuilder_components_preview_numeric_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/FormBuilder/components/preview/numeric.vue */ "./resources/js/FormBuilder/components/preview/numeric.vue");
-/* harmony import */ var _FormBuilder_components_preview_dropdown_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/FormBuilder/components/preview/dropdown.vue */ "./resources/js/FormBuilder/components/preview/dropdown.vue");
-/* harmony import */ var _FormBuilder_components_preview_checkbox_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/FormBuilder/components/preview/checkbox.vue */ "./resources/js/FormBuilder/components/preview/checkbox.vue");
-/* harmony import */ var _FormBuilder_components_preview_datePicker_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/FormBuilder/components/preview/datePicker.vue */ "./resources/js/FormBuilder/components/preview/datePicker.vue");
-/* harmony import */ var _FormBuilder_components_preview_timePicker_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/FormBuilder/components/preview/timePicker.vue */ "./resources/js/FormBuilder/components/preview/timePicker.vue");
-/* harmony import */ var _FormBuilder_components_preview_upload_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/preview/upload.vue */ "./resources/js/FormBuilder/components/preview/upload.vue");
-/* harmony import */ var _FormBuilder_components_preview_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/FormBuilder/components/preview/sectionDivider.vue */ "./resources/js/FormBuilder/components/preview/sectionDivider.vue");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _FormBuilder_components_preview_matrix_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/FormBuilder/components/preview/matrix.vue */ "./resources/js/FormBuilder/components/preview/matrix.vue");
+/* harmony import */ var _FormBuilder_components_preview_radio_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/FormBuilder/components/preview/radio.vue */ "./resources/js/FormBuilder/components/preview/radio.vue");
+/* harmony import */ var _FormBuilder_components_preview_textField_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/FormBuilder/components/preview/textField.vue */ "./resources/js/FormBuilder/components/preview/textField.vue");
+/* harmony import */ var _FormBuilder_components_preview_textBox_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/FormBuilder/components/preview/textBox.vue */ "./resources/js/FormBuilder/components/preview/textBox.vue");
+/* harmony import */ var _FormBuilder_components_preview_numeric_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/FormBuilder/components/preview/numeric.vue */ "./resources/js/FormBuilder/components/preview/numeric.vue");
+/* harmony import */ var _FormBuilder_components_preview_dropdown_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/FormBuilder/components/preview/dropdown.vue */ "./resources/js/FormBuilder/components/preview/dropdown.vue");
+/* harmony import */ var _FormBuilder_components_preview_checkbox_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/FormBuilder/components/preview/checkbox.vue */ "./resources/js/FormBuilder/components/preview/checkbox.vue");
+/* harmony import */ var _FormBuilder_components_preview_datePicker_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/FormBuilder/components/preview/datePicker.vue */ "./resources/js/FormBuilder/components/preview/datePicker.vue");
+/* harmony import */ var _FormBuilder_components_preview_timePicker_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/FormBuilder/components/preview/timePicker.vue */ "./resources/js/FormBuilder/components/preview/timePicker.vue");
+/* harmony import */ var _FormBuilder_components_preview_upload_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/FormBuilder/components/preview/upload.vue */ "./resources/js/FormBuilder/components/preview/upload.vue");
+/* harmony import */ var _FormBuilder_components_preview_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/preview/sectionDivider.vue */ "./resources/js/FormBuilder/components/preview/sectionDivider.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -7200,7 +7275,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7230,19 +7304,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     window.addEventListener('scroll', this.watchScroll);
   },
   components: {
-    MatrixField: _FormBuilder_components_preview_matrix_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    RadioField: _FormBuilder_components_preview_radio_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
-    TextField: _FormBuilder_components_preview_textField_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    TextBox: _FormBuilder_components_preview_textBox_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    NumberField: _FormBuilder_components_preview_numeric_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    DropdownField: _FormBuilder_components_preview_dropdown_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    CheckBoxField: _FormBuilder_components_preview_checkbox_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    DateField: _FormBuilder_components_preview_datePicker_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-    TimeField: _FormBuilder_components_preview_timePicker_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-    FileField: _FormBuilder_components_preview_upload_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
-    SectionDivider: _FormBuilder_components_preview_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+    MatrixField: _FormBuilder_components_preview_matrix_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    RadioField: _FormBuilder_components_preview_radio_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    TextField: _FormBuilder_components_preview_textField_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TextBox: _FormBuilder_components_preview_textBox_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
+    NumberField: _FormBuilder_components_preview_numeric_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
+    DropdownField: _FormBuilder_components_preview_dropdown_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+    CheckBoxField: _FormBuilder_components_preview_checkbox_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
+    DateField: _FormBuilder_components_preview_datePicker_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    TimeField: _FormBuilder_components_preview_timePicker_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    FileField: _FormBuilder_components_preview_upload_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    SectionDivider: _FormBuilder_components_preview_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_12__["mapState"])(['title', 'description', 'target', 'fields'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_11__["mapState"])(['title', 'description', 'target', 'type', 'fields'])),
   methods: {
     buildForm: function buildForm() {
       var _this = this;
@@ -7258,10 +7332,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
 
         _this.$store.dispatch('submitForm');
+
+        window.location.href = '/forms/';
       })["catch"](function () {
         _this.$message({
           type: 'info',
           message: "Keep doing what you're are doing"
+        }).then(function () {
+          _this.$message({
+            type: 'warning',
+            message: "Woops, Something went wrong. Please try submitting again"
+          });
         });
       });
     },
@@ -7342,10 +7423,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -7364,6 +7441,16 @@ __webpack_require__.r(__webpack_exports__);
     draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_0___default.a,
     menuPanel: _FormBuilder_components_menu_mobileMenu_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
+
+  /* test method used when examining responsive behavior */
+  // computed: {
+  //     screenWidth: {
+  //         get() { return window.innerWidth },
+  //         set(screenWidth) {
+  //             this.screenWidth = window.innerWidth
+  //         }
+  //     } 
+  // },
   methods: {
     buildForm: function buildForm() {
       var _this = this;
@@ -7379,6 +7466,8 @@ __webpack_require__.r(__webpack_exports__);
         });
 
         _this.$store.dispatch('submitForm');
+
+        window.location.href = '/forms/';
       })["catch"](function () {
         _this.$message({
           type: 'info',
@@ -10256,7 +10345,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 110%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 768px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\r\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 110%;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\r\n", ""]);
 
 // exports
 
@@ -10275,7 +10364,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(-100%);\n          transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 99999999;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 0;\n  right: 15px;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(-100%);\n          transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 100;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 2px !important;\n  right: 15px !important;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -10370,7 +10459,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n@media (min-width: 768px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Standard Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n@media (min-width: 1200px){\n}\r\n\r\n", ""]);
+exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -87435,7 +87524,7 @@ var render = function() {
     [
       _c(
         "el-col",
-        { attrs: { span: 18 } },
+        { attrs: { span: 10 } },
         [
           _c(
             "label",
@@ -87865,48 +87954,58 @@ var render = function() {
     { attrs: { id: "matrix" } },
     [
       _c(
-        "label",
-        { staticClass: "inputLabel" },
+        "el-row",
         [
-          _c(
-            "editable-text",
-            {
-              staticClass: "tw-cursor-pointer mouseOver",
-              model: {
-                value: _vm.fieldLabel,
-                callback: function($$v) {
-                  _vm.fieldLabel = $$v
-                },
-                expression: "fieldLabel"
-              }
-            },
-            [
-              _vm._v(
-                "\n                " + _vm._s(_vm.fieldLabel) + "\n        "
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "editable-text",
-            {
-              staticClass: "tw-cursor-pointer mouseOver tw-text-xs",
-              model: {
-                value: _vm.fieldDescription,
-                callback: function($$v) {
-                  _vm.fieldDescription = $$v
-                },
-                expression: "fieldDescription"
-              }
-            },
-            [
-              _vm._v(
-                "\n                " +
-                  _vm._s(_vm.fieldDescription) +
-                  "\n        "
-              )
-            ]
-          )
+          _c("el-col", { attrs: { span: 10 } }, [
+            _c(
+              "label",
+              { staticClass: "inputLabel" },
+              [
+                _c(
+                  "editable-text",
+                  {
+                    staticClass: "tw-cursor-pointer mouseOver",
+                    model: {
+                      value: _vm.fieldLabel,
+                      callback: function($$v) {
+                        _vm.fieldLabel = $$v
+                      },
+                      expression: "fieldLabel"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.fieldLabel) +
+                        "\n                "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "editable-text",
+                  {
+                    staticClass: "tw-cursor-pointer mouseOver tw-text-xs",
+                    model: {
+                      value: _vm.fieldDescription,
+                      callback: function($$v) {
+                        _vm.fieldDescription = $$v
+                      },
+                      expression: "fieldDescription"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.fieldDescription) +
+                        "\n                "
+                    )
+                  ]
+                )
+              ],
+              1
+            )
+          ])
         ],
         1
       ),
@@ -88726,54 +88825,70 @@ var render = function() {
       _c(
         "el-row",
         [
-          _c("el-col", { attrs: { span: 18 } }, [
-            _c(
-              "label",
-              { staticClass: "inputLabel" },
-              [
-                _c(
-                  "editable-text",
-                  {
-                    staticClass: "tw-cursor-pointer mouseOver",
-                    model: {
-                      value: _vm.fieldLabel,
-                      callback: function($$v) {
-                        _vm.fieldLabel = $$v
+          _c(
+            "el-col",
+            { attrs: { span: 6 } },
+            [
+              _c(
+                "label",
+                { staticClass: "inputLabel" },
+                [
+                  _c(
+                    "editable-text",
+                    {
+                      staticClass: "tw-cursor-pointer mouseOver",
+                      model: {
+                        value: _vm.fieldLabel,
+                        callback: function($$v) {
+                          _vm.fieldLabel = $$v
+                        },
+                        expression: "fieldLabel"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.fieldLabel) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm.exactTime === false
+                ? _c("el-time-select", {
+                    attrs: {
+                      "arrow-control": "",
+                      "picker-options": {
+                        start: "01:00",
+                        step: "00:15",
+                        end: "24:45"
                       },
-                      expression: "fieldLabel"
+                      placeholder: "Pick a time"
+                    },
+                    model: {
+                      value: _vm.timeSelection,
+                      callback: function($$v) {
+                        _vm.timeSelection = $$v
+                      },
+                      expression: "timeSelection"
                     }
-                  },
-                  [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.fieldLabel) +
-                        "\n                "
-                    )
-                  ]
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _c("el-time-select", {
-            attrs: {
-              "arrow-control": "",
-              "picker-options": {
-                start: "01:00",
-                step: "00:15",
-                end: "24:45"
-              },
-              placeholder: "Pick a time"
-            },
-            model: {
-              value: _vm.timeSelection,
-              callback: function($$v) {
-                _vm.timeSelection = $$v
-              },
-              expression: "timeSelection"
-            }
-          })
+                  })
+                : _c("el-time-picker", {
+                    attrs: { "arrow-control": "", placeholder: "Pick a time" },
+                    model: {
+                      value: _vm.timeSelection,
+                      callback: function($$v) {
+                        _vm.timeSelection = $$v
+                      },
+                      expression: "timeSelection"
+                    }
+                  })
+            ],
+            1
+          )
         ],
         1
       ),
@@ -88964,7 +89079,7 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _vm.type === "pre/post"
+                  _vm.type === "pre-post"
                     ? _c(
                         "el-row",
                         [
@@ -89195,7 +89310,7 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c(
                 "el-col",
@@ -89203,11 +89318,11 @@ var render = function() {
                 [
                   _c("el-input", {
                     model: {
-                      value: _vm.fieldData.label,
+                      value: _vm.fieldData.title,
                       callback: function($$v) {
-                        _vm.$set(_vm.fieldData, "label", $$v)
+                        _vm.$set(_vm.fieldData, "title", $$v)
                       },
-                      expression: "fieldData.label"
+                      expression: "fieldData.title"
                     }
                   })
                 ],
@@ -89322,15 +89437,15 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -89516,15 +89631,15 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -89619,15 +89734,15 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -89738,15 +89853,15 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -89893,15 +90008,15 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -90028,15 +90143,15 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -90149,11 +90264,11 @@ var render = function() {
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -90227,15 +90342,15 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -90362,15 +90477,15 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -90617,6 +90732,30 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { attrs: { label: "Do you need the exact time?" } },
+            [
+              _c(
+                "el-row",
+                [
+                  _c("el-switch", {
+                    attrs: { "active-text": "Exact Time" },
+                    model: {
+                      value: _vm.fieldData.settings.exact_time,
+                      callback: function($$v) {
+                        _vm.$set(_vm.fieldData.settings, "exact_time", $$v)
+                      },
+                      expression: "fieldData.settings.exact_time"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
             { staticClass: "tw-relative tw-text-center tw-mt-12" },
             [
               _c(
@@ -90668,7 +90807,7 @@ var render = function() {
         _c(
           "el-collapse",
           {
-            attrs: { accordion: "", id: "menu-stepper" },
+            attrs: { accordion: "" },
             model: {
               value: _vm.step,
               callback: function($$v) {
@@ -90813,12 +90952,13 @@ var render = function() {
               "el-button",
               {
                 staticClass: "close hover:tw-text-red-600",
-                attrs: { type: "text" },
+                attrs: { type: "text", icon: "el-icon-close" },
                 on: { click: _vm.hide }
               },
               [_vm._v("Close")]
             ),
             _vm._v(" "),
+            _c("br"),
             _c("br"),
             _vm._v(" "),
             _vm._t("default")
@@ -90863,7 +91003,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "inputLabel", attrs: { for: "check" } },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
           _vm._v(" "),
@@ -90938,7 +91078,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "inputLabel", attrs: { for: "dateField" } },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
           _vm._v(" "),
@@ -91009,7 +91149,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "inputLabel", attrs: { for: "dropdown" } },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
           _vm._v(" "),
@@ -91086,7 +91226,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "inputLabel", attrs: { for: "matrix-table" } },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [_vm._v(_vm._s(_vm.field.title))]
             ),
             _c("br"),
             _vm._v(" "),
@@ -91213,7 +91353,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "inputLabel", attrs: { for: "numfield" } },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
           _vm._v(" "),
@@ -91285,7 +91425,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "inputLabel", attrs: { for: "radioGroup" } },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
           _vm._v(" "),
@@ -91358,7 +91498,7 @@ var render = function() {
             _c("span", [
               _vm._v(
                 "\n                " +
-                  _vm._s(_vm.field.label) +
+                  _vm._s(_vm.field.title) +
                   "\n            "
               )
             ])
@@ -91403,7 +91543,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "inputLabel", attrs: { for: "textArea" } },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
           _vm._v(" "),
@@ -91485,7 +91625,7 @@ var render = function() {
         [
           _c("el-col", { attrs: { span: 6 } }, [
             _c("label", { staticClass: "inputLabel", attrs: { for: "text" } }, [
-              _vm._v(_vm._s(_vm.field.label))
+              _vm._v(_vm._s(_vm.field.title))
             ])
           ]),
           _vm._v(" "),
@@ -91562,7 +91702,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "inputLabel", attrs: { for: "time-picker" } },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
           _vm._v(" "),
@@ -91570,25 +91710,35 @@ var render = function() {
             "el-col",
             { attrs: { span: 10 } },
             [
-              _c("el-time-picker", {
-                attrs: {
-                  id: "time-picker",
-                  "arrow-control": "",
-                  "picker-options": {
-                    start: "01:00",
-                    step: "00:15",
-                    end: "24:45"
-                  },
-                  placeholder: "Pick a time"
-                },
-                model: {
-                  value: _vm.value,
-                  callback: function($$v) {
-                    _vm.value = $$v
-                  },
-                  expression: "value"
-                }
-              })
+              _vm.field.settings.exact_time === false
+                ? _c("el-time-select", {
+                    attrs: {
+                      "arrow-control": "",
+                      "picker-options": {
+                        start: "01:00",
+                        step: "00:15",
+                        end: "24:45"
+                      },
+                      placeholder: "Pick a time"
+                    },
+                    model: {
+                      value: _vm.timeSelection,
+                      callback: function($$v) {
+                        _vm.timeSelection = $$v
+                      },
+                      expression: "timeSelection"
+                    }
+                  })
+                : _c("el-time-picker", {
+                    attrs: { "arrow-control": "", placeholder: "Pick a time" },
+                    model: {
+                      value: _vm.timeSelection,
+                      callback: function($$v) {
+                        _vm.timeSelection = $$v
+                      },
+                      expression: "timeSelection"
+                    }
+                  })
             ],
             1
           )
@@ -91632,7 +91782,7 @@ var render = function() {
             _c(
               "label",
               { staticClass: "inputLabel", attrs: { for: "dropdown" } },
-              [_vm._v(_vm._s(_vm.field.label))]
+              [_vm._v(_vm._s(_vm.field.title))]
             ),
             _c("br"),
             _vm._v(" "),
@@ -91876,57 +92026,59 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _c(
-                        "el-row",
-                        { staticClass: "tw-my-4" },
-                        [
-                          _c("el-col", { attrs: { span: 6 } }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass: "input-label",
-                                attrs: { for: "pre-post" }
-                              },
-                              [_vm._v("Completed for")]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "el-col",
-                            { attrs: { span: 6 } },
+                      _vm.type === "pre-post"
+                        ? _c(
+                            "el-row",
+                            { staticClass: "tw-my-4" },
                             [
-                              _c(
-                                "el-select",
-                                {
-                                  attrs: {
-                                    id: "pre-post",
-                                    placeholder: "Select"
+                              _c("el-col", { attrs: { span: 6 } }, [
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "input-label",
+                                    attrs: { for: "pre-post" }
                                   },
-                                  model: {
-                                    value: _vm.value,
-                                    callback: function($$v) {
-                                      _vm.value = $$v
+                                  [_vm._v("Completed for")]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "el-col",
+                                { attrs: { span: 6 } },
+                                [
+                                  _c(
+                                    "el-select",
+                                    {
+                                      attrs: {
+                                        id: "pre-post",
+                                        placeholder: "Select"
+                                      },
+                                      model: {
+                                        value: _vm.value,
+                                        callback: function($$v) {
+                                          _vm.value = $$v
+                                        },
+                                        expression: "value"
+                                      }
                                     },
-                                    expression: "value"
-                                  }
-                                },
-                                _vm._l(_vm.prePost, function(select) {
-                                  return _c("el-option", {
-                                    key: select.value,
-                                    attrs: {
-                                      label: select.value,
-                                      value: select.value
-                                    }
-                                  })
-                                }),
+                                    _vm._l(_vm.prePost, function(select) {
+                                      return _c("el-option", {
+                                        key: select.value,
+                                        attrs: {
+                                          label: select.value,
+                                          value: select.value
+                                        }
+                                      })
+                                    }),
+                                    1
+                                  )
+                                ],
                                 1
                               )
                             ],
                             1
                           )
-                        ],
-                        1
-                      ),
+                        : _vm._e(),
                       _vm._v(" "),
                       _c(
                         "el-row",
@@ -115313,12 +115465,12 @@ __webpack_require__.r(__webpack_exports__);
       team_id: state.team_id,
       scope_id: state.scope_id,
       type: state.type,
-      target_type_id: state.target.type.id,
-      target_id: state.target.id,
+      reference_target_type_id: state.target.type.id,
+      reference_target_id: state.target.id,
       fields: state.fields
     };
     var request = new _api_FormRequest_js__WEBPACK_IMPORTED_MODULE_0__["default"](formData);
-    request.store().then(function (response) {//    return Promise('')
+    request.store().then(function (response) {//  return Promise('')
     })["catch"](function (error) {//
     });
   }
@@ -115453,17 +115605,6 @@ __webpack_require__.r(__webpack_exports__);
   date: '',
   fields: []
 });
-
-/***/ }),
-
-/***/ "./resources/js/FormBuilder/store/test.json":
-/*!**************************************************!*\
-  !*** ./resources/js/FormBuilder/store/test.json ***!
-  \**************************************************/
-/*! exports provided: form, default */
-/***/ (function(module) {
-
-module.exports = {"form":{"title":"Test Form","description":"Intake form for Shakespeare Slam Poetry Club","target":{"type":"Client","id":0},"form_type":"pre/post","Name":"","team":[],"date":"","fields":[{"type":"Radio","label":"What is thy gender","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"questions":[],"choices":[{"id":0,"text":"Male","value":1},{"id":1,"text":"Female","value":2},{"id":2,"text":"Non-Binary","value":3},{"id":3,"text":"Speaketh not of mine amorous rite","value":4}]},{"type":"TextField","label":"Wherefore art thee hither ","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"questions":[],"choices":[]},{"type":"TextBox","label":"Pray pardon me thy expectation?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"questions":[],"choices":[]},{"type":"NumericField","label":"What age is thee?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"questions":[],"choices":[]},{"type":"Dropdown","label":"Is this very much a useful field?","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"choices":[{"id":1,"text":"Aye! We absolutely do","value":1},{"id":2,"text":"Nay! We doth not","value":2},{"id":3,"text":"Oft upon a yonder edge-case","value":3}]},{"type":"SectionDivider","label":"Just Because","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":150,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"questions":[],"choices":[]},{"type":"Checkbox","label":"What notable characters art among thy highest in estimation","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"choices":[{"id":0,"text":"Hamlet","value":1},{"id":1,"text":"Iago","value":2},{"id":2,"text":"Lady Macbeth","value":3},{"id":3,"text":"Mercutio","value":4},{"id":4,"text":"Macbeth","value":5},{"id":5,"text":"Ophelia","value":6},{"id":6,"text":"Othello","value":7},{"id":7,"text":"Viola","value":8},{"id":8,"text":"Benedick","value":9},{"id":9,"text":"Horatio","value":10}]},{"type":"Datefield","label":"Shall I compare thee to a summer's day?","description":"Or mayhaps a winters eve?","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"questions":[],"choices":[]},{"type":"TimePicker","label":"The Time is nigh","description":"","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"questions":[],"choices":[]},{"type":"Matrix","label":"Satisfaction Survey","description":"An assessment of your overall life satisfaction","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}},"questions":[{"id":0,"text":"How for art thou satisfied"},{"id":1,"text":"From whence from thou art satisfied"},{"id":2,"text":"Doth satisfaction thous't cannot attain"}],"choices":[{"id":0,"text":"A pestilent gall to me ","value":1},{"id":1,"text":"Tis but a scratch","value":2},{"id":2,"text":"I doth not care","value":3},{"id":3,"text":"I feeleth well enow ","value":4},{"id":4,"text":"like a silver bow!","value":5}]},{"type":"Upload","label":"Present your most eloquent self-portrait","description":"This shall be displayed upon thy Slam Poetry Roster card","reference":[],"validation":[],"settings":{"required":false,"defaultNum":0,"dropdownNum":0,"radioNum":2,"checkboxNum":2,"matrix_questions":2,"matrix_choices":5,"isLimited":false,"max":50,"date":{"past_only":false,"future_only":false,"quick_menu":false,"include_time":false,"date_range":false}}}]}};
 
 /***/ }),
 

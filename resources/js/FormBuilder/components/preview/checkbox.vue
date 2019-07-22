@@ -2,7 +2,7 @@
     <div class="tw-my-8">
         <el-row>
             <el-col :span="5">
-                <label for="check" class="inputLabel">{{ field.label }}</label>
+                <label for="check" class="inputLabel">{{ field.title }}</label>
             </el-col>
             <el-col :span="10">
                 <div class="zone">

@@ -2,17 +2,13 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
             
-            <el-form-item label="Question/Title" prop="label">
-                <el-input v-model="fieldData.label"></el-input>
+            <el-form-item label="Question/Title" prop="title">
+                <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
             
             <el-form-item label="This Field is">
                 <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
-            
-            <!-- <el-form-item label="Number of Menu Selections">
-                <el-input-number v-model="fieldData.settings.dropdownNum" controls-position="right" :min="2" :max="10"></el-input-number>
-            </el-form-item> -->
 
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
                 <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
@@ -30,7 +26,7 @@ export default {
             fieldData: {
                 type: 'DropdownField',
                 name: 'dropdown',
-                label: '',
+                title: '',
                 settings: {
                     required: false,
                     // dropdownNum: 2,
@@ -38,7 +34,7 @@ export default {
                 },
                 choices: [],
                 rules: {
-                    label: [
+                    title: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }
                     ]
                 }

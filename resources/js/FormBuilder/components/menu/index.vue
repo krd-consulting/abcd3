@@ -1,7 +1,7 @@
 <template>
   <div id="menu">
     <div id="menu-container">
-        <el-collapse v-model="step" accordion id="menu-stepper">
+        <el-collapse v-model="step" accordion>
             <el-collapse-item name="1">
                 <template slot="title">
                     <p class="menu-title">Select a Field</p>
@@ -152,7 +152,7 @@ export default {
 }
 
 /* Ipad size */
-@media (min-width: 768px){
+@media (min-width: 640px){
      .el-collapse {
         width: 300px;
     } 
@@ -162,7 +162,9 @@ export default {
  /* Standard monitor size */
 @media (min-width: 1024px){
    .el-collapse {
-        width: 300px;
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
     } 
    
 

@@ -1,25 +1,21 @@
 <template>
     <div id="formCreator">
         <el-container>
-
             <el-card id="menu-container"> 
                 <form-menu id="menu"/>
             </el-card>
 
             <el-card id="canvas-container">
                 <el-header>
-                    
                     <el-menu :default-active="$route.path" 
                         background-color="#fff" 
                         active-text-color="#409EFF" 
                         mode="horizontal" 
                         router>
                         
-                        <!-- <el-menu-item > -->
                             <menu-panel class="mobile-menu tw-float-left">
                                 <form-menu id="menu"/>
                             </menu-panel>
-                        <!-- </el-menu-item> -->
 
                             <el-menu-item default-active 
                                 index="/forms/create" 
@@ -31,8 +27,8 @@
                                 class="tw-font-bold tw-focus:font-extrabold">
                                     Preview Form
                             </el-menu-item>
-                            <el-menu-item 
-                                @click="buildForm" 
+                            <el-menu-item
+                                @click="buildForm"
                                 class="float-right tw-font-bold tw-focus:font-extrabold">
                                     Finish &#38; Build!
                             </el-menu-item>
@@ -56,11 +52,10 @@
 
     export default {
         name: 'Form',
-        
         data: () => {
             return {
                 activeIndex: '1',
-                fields: []
+                fields: [],
             }
         },
 
@@ -70,30 +65,39 @@
             draggable,
             menuPanel
         },
-
+        /* test method used when examining responsive behavior */
+        // computed: {
+        //     screenWidth: {
+        //         get() { return window.innerWidth },
+        //         set(screenWidth) {
+        //             this.screenWidth = window.innerWidth
+        //         }
+        //     } 
+        // },
         methods: {
             buildForm() {
                 this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
-                        confirmButtonText: 'OK',
-                        cancelButtonText: 'Cancel',
-                        type: 'info'
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    type: 'info'
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: 'Build Successful'
+                    });
+                    this.$store.dispatch('submitForm')
+                    window.location.href = '/forms/';
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: "Keep doing what you're are doing"
                     }).then(() => {
                         this.$message({
-                            type: 'success',
-                            message: 'Build Successful'
-                        });
-                        this.$store.dispatch('submitForm')
-                    }).catch(() => {
-                        this.$message({
-                            type: 'info',
-                            message: "Keep doing what you're are doing"
-                        }).then(() => {
-                            this.$message({
-                                type: 'warning',
-                                message: "Woops, Something went wrong. Please try submitting again"
-                            })
-                        });          
-                    });
+                            type: 'warning',
+                            message: "Woops, Something went wrong. Please try submitting again"
+                        })
+                    });          
+                });
             }
         },
     }
@@ -110,8 +114,9 @@
     width: 100%;
     padding-right: 15px;
 }
- 
-@media (min-width: 768px){
+
+/* Tablet/Reduced Screen View */
+@media (min-width: 500px){
 
     #canvas-container {
         flex: 100%;
@@ -129,7 +134,7 @@
     } 
 }
 
-/* Standard Desktop View */
+/* Desktop View */
 @media (min-width: 1024px){
     #canvas-container {
         flex: 80%;
@@ -151,18 +156,13 @@
         padding-bottom: 10px;
         margin: 0 auto;
         margin-left: 5%;
+        min-width: 300px;
         max-width: 450px;
         max-height: 900px; 
     }
-
     .float-right {
         float: right !important;
     }
-}
- 
-@media (min-width: 1200px){
-
- 
 }
 
 </style>

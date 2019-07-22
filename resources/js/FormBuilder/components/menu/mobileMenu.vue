@@ -13,9 +13,9 @@
         <transition name="toggle">
             <div v-click-outside="hide" v-show="opened" class="panel">
                 
-                <el-button type="text" class="close hover:tw-text-red-600" @click="hide">Close</el-button>
+                <el-button type="text" class="close hover:tw-text-red-600" icon="el-icon-close" @click="hide">Close</el-button>
                 
-                <br>
+                <br><br>
                 <slot></slot>
             </div>
         </transition>
@@ -76,7 +76,7 @@ export default {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
         text-align: left;
         padding-left: 20px;
-        z-index: 99999999;
+        z-index: 100;
     }
 
     .panel a {
@@ -96,8 +96,8 @@ export default {
     .close {
         position: absolute !important;
         padding-bottom: 50px;
-        top: 0;
-        right: 15px;
+        top: 2px !important;
+        right: 15px !important;
         font-size: 36px;
         font-weight: bold;
     }

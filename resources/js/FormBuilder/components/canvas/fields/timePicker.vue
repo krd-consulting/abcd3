@@ -1,25 +1,32 @@
 <template>
     <div>
         <el-row>
-            <el-col :span="18">
+            <el-col :span="6">
                 <label class="inputLabel">
                     <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
                         {{ fieldLabel }}
                     </editable-text>
                 </label>
-            </el-col>
             
 
-            <el-time-select
-                arrow-control
-                v-model="timeSelection"
-                :picker-options="{  
-                    start: '01:00',
-                    step: '00:15',
-                    end: '24:45'
-                }"
-                placeholder="Pick a time">
-            </el-time-select>
+                <el-time-select v-if="exactTime === false"
+                    arrow-control
+                    v-model="timeSelection"
+                    :picker-options="{  
+                        start: '01:00',
+                        step: '00:15',
+                        end: '24:45'
+                    }"
+                    placeholder="Pick a time">
+                </el-time-select>
+                
+                <el-time-picker v-else
+                    arrow-control
+                    v-model="timeSelection"
+                    placeholder="Pick a time">
+                </el-time-picker>
+                
+            </el-col>
         </el-row>
 
             <el-switch 
@@ -56,14 +63,10 @@ export default {
     },
     computed: {
         fieldLabel: {
-            get() { return this.field.label; },
-            set(label) { 
-                console.log('field label edited');
-
+            get() { return this.field.title; },
+            set(title) { 
                 const fieldCopy = _.clone(this.field);
-
-                fieldCopy.label = label;
-
+                fieldCopy.title = title;
                 this.field = fieldCopy;
             }
         },
@@ -75,10 +78,16 @@ export default {
                 this.$emit('update', field); 
             }
         },
+
+        exactTime: {
+            get() { return this.field.settings.exact_time; },
+            // set(exactTime) { 
+            //     const fieldCopy = _.clone(this.field);
+            //     fieldCopy.settings.exact_time = exactTime;
+            //     this.field = fieldCopy;
+            // }
+        }
     },
-    // created() {
-    //     this.field = _.clone(this.fieldData)
-    // },
 }
 </script>
 

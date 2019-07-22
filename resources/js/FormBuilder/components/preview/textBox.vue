@@ -2,7 +2,7 @@
     <div id="textBox" class="tw-my-8">
         <el-row>
             <el-col :span="6">
-                <label for="textArea" class="inputLabel">{{ field.label }}</label>
+                <label for="textArea" class="inputLabel">{{ field.title }}</label>
             </el-col>
 
             <el-col :span="10">

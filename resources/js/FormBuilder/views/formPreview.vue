@@ -55,7 +55,7 @@
                             </el-col>
                         </el-row>
 
-                        <el-row class="tw-my-4" >
+                        <el-row class="tw-my-4" v-if="type === 'pre-post'">
                             <el-col :span="6">
                                 <label for="pre-post" class="input-label">Completed for</label>
                             </el-col>
@@ -125,7 +125,6 @@
 </template>
 
 <script>
-import test from '@/FormBuilder/store/test.json'
 
 import MatrixField from '@/FormBuilder/components/preview/matrix.vue'
 import RadioField from '@/FormBuilder/components/preview/radio.vue'
@@ -179,7 +178,7 @@ export default {
     },
     computed: {
         ...mapState ([
-            'title', 'description', 'target', 'fields'
+            'title', 'description', 'target', 'type', 'fields'
         ])
     },
     methods: {
@@ -194,10 +193,16 @@ export default {
                     message: 'Build Successful'
                 });
                 this.$store.dispatch('submitForm')
+                window.location.href = '/forms/';
             }).catch(() => {
                 this.$message({
                     type: 'info',
                     message: "Keep doing what you're are doing"
+                }).then(() => {
+                    this.$message({
+                        type: 'warning',
+                        message: "Woops, Something went wrong. Please try submitting again"
+                    })
                 });          
             });
         },

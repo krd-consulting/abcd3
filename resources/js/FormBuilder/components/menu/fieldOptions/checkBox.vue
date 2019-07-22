@@ -2,9 +2,9 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
         
-            <el-form-item label="Question/Title" prop="label">
+            <el-form-item label="Question/Title" prop="title">
                 <el-col :span="24">
-                    <el-input v-model="fieldData.label"></el-input>
+                    <el-input v-model="fieldData.title"></el-input>
                 </el-col>
             </el-form-item>
             
@@ -32,7 +32,7 @@ export default {
             fieldData: {
                 type: 'CheckBoxField',
                 name: 'check_box',
-                label: '',
+                title: '',
                 settings: {
                     required: false,
                     checkboxNum: 2,
@@ -40,7 +40,7 @@ export default {
                 },
                 choices: [],
                 rules: {
-                    label: [
+                    title: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }
                     ]
                 }

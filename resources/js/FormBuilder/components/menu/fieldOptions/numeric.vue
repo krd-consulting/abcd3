@@ -2,8 +2,8 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
             
-            <el-form-item label="Question/Title" prop="label">
-                <el-input v-model="fieldData.label"></el-input>
+            <el-form-item label="Question/Title" prop="title">
+                <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
 
             <el-form-item label="This Field is">
@@ -31,13 +31,13 @@ name: 'Numeric',
             fieldData: {
                 type: 'NumberField',
                 name: 'numeric_field',
-                label: '',
+                title: '',
                 settings: {
                     required: false,
                     defaultNum: 5,
                 },
                 rules: {
-                    label: [
+                    title: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }
                     ]
                 }

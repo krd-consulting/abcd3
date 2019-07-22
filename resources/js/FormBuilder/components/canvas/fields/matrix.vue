@@ -1,18 +1,22 @@
 <template>
     <div id="matrix">
-        <label class="inputLabel">
-            <editable-text 
-                class="tw-cursor-pointer mouseOver" 
-                v-model="fieldLabel">
-                    {{ fieldLabel }}
-            </editable-text>
+        <el-row>
+            <el-col :span="10">
+                <label class="inputLabel">
+                    <editable-text 
+                        class="tw-cursor-pointer mouseOver" 
+                        v-model="fieldLabel">
+                            {{ fieldLabel }}
+                    </editable-text>
 
-            <editable-text 
-                class="tw-cursor-pointer mouseOver tw-text-xs" 
-                v-model="fieldDescription">
-                    {{ fieldDescription }}
-            </editable-text>
-      </label>
+                    <editable-text 
+                        class="tw-cursor-pointer mouseOver tw-text-xs" 
+                        v-model="fieldDescription">
+                            {{ fieldDescription }}
+                    </editable-text>
+                </label>
+            </el-col>
+        </el-row>
         <table id="matrix-table">
             <thead>
                 <tr class="tw-max-w-sm">
@@ -89,10 +93,6 @@ export default {
             isMounted: false
         }
     },
-    // mounted() {
-    //     // calls methods upon being rendered in the DOM
-    //     this.getMatrixItems(); 
-    // },
     components: {
         EditableText
     },
@@ -109,10 +109,10 @@ export default {
         },
 
         fieldLabel: {
-            get() { return this.field.label },
-            set(label) {
+            get() { return this.field.title },
+            set(title) {
                 const fieldCopy = _.clone(this.field);
-                fieldCopy.label = label;
+                fieldCopy.title = title;
                 this.field = fieldCopy;
             }
         },
@@ -170,15 +170,12 @@ export default {
         },
         
         removeQuestion(item) {
-            // TODO: fix
-            // const questionsCopy = _.clone(this.questions);
 
             var index = this.questions.indexOf(item);
 
             if (index !== -1) {
                 this.questions.splice(index, 1);
             }
-            // this.questions = questionsCopy;
             this.$store.commit('UPDATE_FIELD', this.field);
 
             this.$forceUpdate();

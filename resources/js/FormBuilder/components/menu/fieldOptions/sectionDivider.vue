@@ -3,7 +3,7 @@
        <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
             
             <el-form-item label="Section label">
-                <el-input v-model="fieldData.label"></el-input>
+                <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
@@ -21,10 +21,10 @@ export default {
             fieldData: {
                 type: 'SectionDivider',
                 name: 'section_divider',
-                label: '',
-                settings: {
-                    required: false,
-                },
+                title: '',
+                // settings: {
+                //     required: false,
+                // },
             },
         }
     },

@@ -2,8 +2,8 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
             
-            <el-form-item label="Question/Title" prop="label">
-                <el-input v-model="fieldData.label"></el-input>
+            <el-form-item label="Question/Title" prop="title">
+                <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
             
             <el-form-item label="Additional Title Information">
@@ -43,7 +43,7 @@ export default {
             fieldData: {
                 type: 'MatrixField',
                 name: 'matrix_field',
-                label: '',
+                title: '',
                 description: '',
                 settings: {
                     required: false,
@@ -55,7 +55,7 @@ export default {
                 questions: [],
                 choices: [],
                 rules: {
-                    label: [
+                    title: [
                         { required: true, message: 'Please input Question or title', trigger: 'blur' }
                     ]
                 }

@@ -2,7 +2,7 @@
     <div id="textField" class="tw-my-8">
         <el-row>
             <el-col :span="6">
-                <label for="text" class="inputLabel">{{ field.label }}</label>
+                <label for="text" class="inputLabel">{{ field.title }}</label>
             </el-col>
             <el-col :span="10">
                 <el-input id="text"

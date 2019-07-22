@@ -1,7 +1,7 @@
 <template>
     <div id="datepicker">
         
-            <el-col :span="18">
+            <el-col :span="10">
                 <label class="inputLabel">
                     <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
                         {{ fieldLabel }}
@@ -20,7 +20,6 @@
                 </el-date-picker>
             </el-col>
             
-
         
             <el-switch 
                 v-model="field.settings.required" 
@@ -44,11 +43,11 @@ export default {
     data: () => {
         return {
             dateSelection: '',
-            dateType: 'date',
-            dateOptions: {},
-            datePlaceHolder: 'Pick a day',
-            dateFormat: 'yyyy/MM/dd',
-            rangeSeparator: '',
+            // dateType: 'date',
+            // dateOptions: {},
+            // datePlaceHolder: 'Pick a day',
+            // dateFormat: 'yyyy/MM/dd',
+            // rangeSeparator: '',
             startDate: '',
             endDate: '',
         }
@@ -62,9 +61,9 @@ export default {
     components: {
         EditableText
     },
-    created() {
-        this.field = _.clone(this.fieldData)
-    },
+    // created() {
+    //     this.field = _.clone(this.fieldData)
+    // },
     mounted() {
         this.togglePastOnly(),
         this.toggleFutureOnly(),
@@ -73,34 +72,85 @@ export default {
         this.toggleRangeMenu()
     },
     computed: {
+        field: {
+            get() { return this.fieldData; },
+            set(field) { this.$emit('update', field); }
+        },
+
         fieldLabel: {
-            get() { return this.field.label; },
-            set(label) { 
-                console.log('field label edited');
-
+            get() { return this.field.title; },
+            set(title) { 
                 const fieldCopy = _.clone(this.field);
-
-                fieldCopy.label = label;
-
+                fieldCopy.title = title;
                 this.field = fieldCopy;
             }
         },
 
-        field: {
-            get() { return this.fieldData; },
-            set(field) { 
-                console.log('field edited');
-                this.$emit('update', field); 
+        // dateSelection: {
+        //     get() { return this.field.format.dateSelection; },
+        //     set(dateSelection) { 
+        //         const fieldCopy = _.clone(this.field);
+        //         fieldCopy.format.dateSelection = dateSelection;
+        //         this.field = fieldCopy;
+        //     }
+        // },
+        dateType: {
+            get() { return this.field.format.dateType; },
+            set(dateType) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.format.dateType = dateType;
+                this.field = fieldCopy;
             }
         },
-        // handlePastFutureToggle() {
-        //     if(this.field.settings.past_only === true){
-        //         this.field.settings.future_only === false
+        dateOptions: {
+            get() { return this.field.format.dateOptions; },
+            set(dateOptions) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.format.dateOptions = dateOptions;
+                this.field = fieldCopy;
+            }
+        },
+        datePlaceHolder: {
+            get() { return this.field.format.datePlaceHolder; },
+            set(datePlaceHolder) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.format.datePlaceHolder = datePlaceHolder;
+                this.field = fieldCopy;
+            }
+        },
+        dateFormat: {
+            get() { return this.field.format.dateFormat; },
+            set(dateFormat) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.format.dateFormat = dateFormat;
+                this.field = fieldCopy;
+            }
+        },
+        rangeSeparator: {
+            get() { return this.field.format.rangeSeparator; },
+            set(rangeSeparator) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.format.rangeSeparator = rangeSeparator;
+                this.field = fieldCopy;
+            }
+        },
+        // startDate: {
+        //     get() { return this.field.format.startDate; },
+        //     set(startDate) { 
+        //         const fieldCopy = _.clone(this.field);
+        //         fieldCopy.format.startDate = startDate;
+        //         this.field = fieldCopy;
         //     }
-        //     if(this.field.settings.future_only === true) {
-        //         this.field.settings.past_only === false
+        // },
+        // endDate: {
+        //     get() { return this.field.format.endDate; },
+        //     set(endDate) { 
+        //         const fieldCopy = _.clone(this.field);
+        //         fieldCopy.format.endDate = endDate;
+        //         this.field = fieldCopy;
         //     }
-        // }
+        // },
+
     },
     methods: {
         togglePastOnly() {

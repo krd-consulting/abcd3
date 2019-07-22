@@ -85,10 +85,10 @@ export default {
         },
 
         fieldLabel: {
-            get() { return this.field.label; },
-            set(label) {
+            get() { return this.field.title; },
+            set(title) {
                 const fieldCopy = _.clone(this.field);
-                fieldCopy.label = label;
+                fieldCopy.title = title;
                 this.field = fieldCopy;
             }
         },
@@ -108,7 +108,7 @@ export default {
                 const fieldValue = _.clone(this.field);
                 fieldValue.choices.value = value;
                 this.field = fieldValue;
-                this.$emit('updateChoices', field);
+                // this.$emit('updateChoices', field);
             }
         },
     },

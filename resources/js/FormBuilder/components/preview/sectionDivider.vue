@@ -3,7 +3,7 @@
         <el-row class="tw-my-8">
             <el-divider>
                 <span>
-                    {{ field.label }}
+                    {{ field.title }}
                 </span>
             </el-divider>
         </el-row>
