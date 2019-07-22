@@ -27,8 +27,7 @@
             @add="addRecord"
             @edit="editRecord"
             @remove="confirmDelete(recordType.slug, $event)"
-            @page-change="retrieve()"
-            @search="retrieve()">
+            @page-change="retrieve()">
             <template slot="header-text">{{ recordType.name }}</template>
             <template slot="options-add-text">Add {{ recordType.name }}</template>
 
@@ -122,7 +121,7 @@
                         return [ 'Hours Per Month', 'Hours Per Year', 'Enrollment Date'];
                         break;
 
-                    default: 
+                    default:
                         return ['Enrollment Date'];
                 }
             },

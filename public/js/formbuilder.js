@@ -6064,117 +6064,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/textField.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/RecordTypeRequest */ "./resources/js/api/RecordTypeRequest.js");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'textField',
-  data: function data() {
-    return {
-      recordTypes: [],
-      fieldData: {
-        type: 'TextField',
-        name: 'text_field',
-        title: '',
-        reference: '',
-        settings: {
-          required: false,
-          isLimited: false,
-          max: 50
-        },
-        rules: {
-          title: [{
-            required: true,
-            message: 'Please input Question or title',
-            trigger: 'blur'
-          }]
-        }
-      }
-    };
-  },
-  props: {
-    inputData: Object
-  },
-  methods: {
-    save: function save() {
-      this.$emit('save', this.fieldData);
-    },
-    retrieveRecordTypes: function retrieveRecordTypes() {
-      var _this = this;
-
-      var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
-      request.retrieve().then(function (response) {
-        _this.recordTypes = response;
-      });
-    }
-  },
-  created: function created() {
-    this.retrieveRecordTypes();
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\resources\\js\\FormBuilder\\components\\menu\\fieldOptions\\textField.vue: Unexpected token (88:0)\n\n\u001b[0m \u001b[90m 86 | \u001b[39m                type\u001b[33m:\u001b[39m \u001b[32m'TextField'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 87 | \u001b[39m                name\u001b[33m:\u001b[39m \u001b[32m'text_field'\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 88 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 89 | \u001b[39m                title\u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 90 | \u001b[39m                reference\u001b[33m:\u001b[39m \u001b[32m''\u001b[39m\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 91 | \u001b[39m\u001b[33m===\u001b[39m\u001b[33m===\u001b[39m\u001b[33m=\u001b[39m\u001b[0m\n    at Parser.raise (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:3851:17)\n    at Parser.unexpected (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5167:16)\n    at Parser.parseIdentifierName (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7007:18)\n    at Parser.parseIdentifier (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6985:23)\n    at Parser.parseMaybePrivateName (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6350:19)\n    at Parser.parsePropertyName (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6806:98)\n    at Parser.parseObjectMember (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6707:10)\n    at Parser.parseObj (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6641:25)\n    at Parser.parseExprAtom (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6274:21)\n    at Parser.parseExprSubscripts (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5914:23)\n    at Parser.parseMaybeUnary (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5894:21)\n    at Parser.parseExprOps (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5781:23)\n    at Parser.parseMaybeConditional (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5754:23)\n    at Parser.parseMaybeAssign (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5701:21)\n    at Parser.parseObjectProperty (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6768:101)\n    at Parser.parseObjPropValue (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6793:101)\n    at Parser.parseObjectMember (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6717:10)\n    at Parser.parseObj (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6641:25)\n    at Parser.parseExprAtom (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6274:21)\n    at Parser.parseExprSubscripts (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5914:23)\n    at Parser.parseMaybeUnary (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5894:21)\n    at Parser.parseExprOps (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5781:23)\n    at Parser.parseMaybeConditional (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5754:23)\n    at Parser.parseMaybeAssign (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5701:21)\n    at Parser.parseExpression (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5649:23)\n    at Parser.parseReturnStatement (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7660:28)\n    at Parser.parseStatementContent (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7339:21)\n    at Parser.parseStatement (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7291:17)\n    at Parser.parseBlockOrModuleBlockBody (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7868:25)\n    at Parser.parseBlockBody (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7855:10)\n    at Parser.parseBlock (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:7839:10)\n    at Parser.parseFunctionBody (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6909:24)\n    at Parser.parseArrowExpression (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6851:10)\n    at Parser.parseParenAndDistinguishExpression (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6489:12)\n    at Parser.parseExprAtom (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:6260:21)\n    at Parser.parseExprSubscripts (C:\\Users\\KRD-Developer\\Desktop\\WorkSpace\\abcd\\node_modules\\@babel\\parser\\lib\\index.js:5914:23)");
 
 /***/ }),
 
@@ -7770,6 +7662,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.types = response.data.types;
         _this2.scopes = response.data.scopes;
       });
+      this.retrieveTeams();
     },
     submit: function submit() {
       var _this3 = this;
@@ -90551,33 +90444,34 @@ var render = function() {
             { attrs: { label: "Field Refers To:" } },
             [
               _c(
-                "el-select",
+                "base-select",
                 {
+                  attrs: { name: "target", placeholder: "Select Resource" },
                   model: {
-                    value: _vm.fieldData.reference,
+                    value: _vm.target,
                     callback: function($$v) {
-                      _vm.$set(_vm.fieldData, "reference", $$v)
+                      _vm.target = $$v
                     },
-                    expression: "fieldData.reference"
+                    expression: "target"
                   }
                 },
-                [
-                  _c("el-option", {
-                    attrs: { label: "No Reference", value: "noRef" }
-                  }),
-                  _vm._v(" "),
-                  _c("el-option", {
-                    attrs: { label: "Another Form", value: "form" }
-                  }),
-                  _vm._v(" "),
-                  _vm._l(_vm.recordTypes, function(type) {
-                    return _c("el-option", {
-                      key: type.slug,
-                      attrs: { label: type.name, value: type.slug }
-                    })
-                  })
-                ],
-                2
+                _vm._l(_vm.targetTypes, function(type, index) {
+                  return _c(
+                    "el-option",
+                    {
+                      key: index,
+                      attrs: { label: type.name, value: type.target }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(type.name) +
+                          "\n                "
+                      )
+                    ]
+                  )
+                }),
+                1
               ),
               _vm._v(" "),
               _vm.fieldData.reference === "form"
@@ -115927,61 +115821,6 @@ function (_Request) {
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Form);
-
-/***/ }),
-
-/***/ "./resources/js/api/RecordTypeRequest.js":
-/*!***********************************************!*\
-  !*** ./resources/js/api/RecordTypeRequest.js ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var RecordType =
-/*#__PURE__*/
-function (_Request) {
-  _inherits(RecordType, _Request);
-
-  function RecordType() {
-    _classCallCheck(this, RecordType);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(RecordType).apply(this, arguments));
-  }
-
-  _createClass(RecordType, [{
-    key: "retrieve",
-    value: function retrieve() {
-      return this.get("/api/record-types");
-    }
-  }]);
-
-  return RecordType;
-}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (RecordType);
 
 /***/ }),
 

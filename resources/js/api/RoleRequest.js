@@ -13,8 +13,8 @@ class RoleRequest extends Request{
         return this.post('/api/roles');
     }
 
-    edit() {
-        return this.get('/api/roles/edit');
+    edit(role) {
+        return this.get(`/api/roles/${role}/edit`);
     }
 
     update(role) {

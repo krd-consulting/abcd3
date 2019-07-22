@@ -20,8 +20,7 @@
             @add="addRecord"
             @edit="editRecord"
             @remove="confirmDelete($event)"
-            @page-change="retrieve()"
-            @search="retrieve()">
+            @page-change="retrieve()">
             <template slot="header-text">{{ recordType.name }}</template>
             <template slot="options-add-text">Add {{ recordType.name }}</template>
 

@@ -17,7 +17,7 @@
 .el-input__inner,
 .el-tabs__item,
 .el-switch__label *{
-    @apply 
+    @apply
         tw-text-base;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .el-tabs .el-tabs__nav {
-    @apply 
+    @apply
         tw-py-2;
 }
 
@@ -111,7 +111,7 @@ a:hover {
     top: 80px;
 }
 
-.main-sidebar-menu .el-menu-item, 
+.main-sidebar-menu .el-menu-item,
 .main-sidebar-menu .el-submenu__title {
     @apply
         tw-text-base;

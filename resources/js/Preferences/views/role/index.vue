@@ -49,7 +49,7 @@
                                 <td width="75%" class="tw-py-4 tw-text-sm tw-capitalize">{{ permission.name }}</td>
                                 <td class="tw-py-4 tw-text-right tw-pr-4">
                                     <base-switch
-                                        :on="permission.permitted"
+                                        v-model="permission.permitted"
                                         @change="toggleRolePermission(role, permission, $event, roleIndex, permissionIndex)"/>
                                 </td>
                             </tr>

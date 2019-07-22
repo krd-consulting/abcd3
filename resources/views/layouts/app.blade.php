@@ -12,15 +12,13 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-    <style>body {height: 100%;}</style>
 </head>
-<body>
+<body onload="load()">
     <div id="app">
         @section('main-nav')
         @show
 
-        <base-container class="tw-min-h-screen">
+        <base-container class="tw-min-h-screen" v-if="!loading">
             @section('main-sidebar')
             @show
 
@@ -29,6 +27,13 @@
     </div>
 
     <!-- Scripts -->
+    <script type="text/javascript">
+        document.getElementById('app').style.opacity = 0;
+
+        function load() {
+            document.getElementById('app').style.opacity = 100;
+        }
+    </script>
     @section('scripts')
     @show
 </body>

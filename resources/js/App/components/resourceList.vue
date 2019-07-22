@@ -36,12 +36,12 @@
 
             <template slot="options" v-if="hasOptions" v-show="showListHeaderOptions">
                 <slot v-if="hasSearch" name="options-search">
-                    <search v-model="search" @input="handleSearch(search)" class="tw-w-1/2"/>
+                    <search v-model="search" @input="handleSearch" class="tw-w-1/2"/>
                 </slot>
                 <slot v-if="hasAdd" name="options-add">
                     <div class="tw-w-1/4 tw-text-right">
-                        <base-button 
-                            class="tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue-500 tw-no-shrink" 
+                        <base-button
+                            class="tw-px-4 tw-bg-white tw-border-none tw-text-white tw-bg-blue-500 tw-no-shrink"
                             @click="$emit('add')">
                             <span class="tw-align-middle">
                                 <slot name="options-add-text">Add Resource</slot>
@@ -54,12 +54,12 @@
             <slot v-if="hasListColumns" name="list-columns">
                 <div class="tw-flex tw-pt-6 tw-pb-2 tw-px-4 tw-text-xs tw-text-gray-500 tw-uppercase tw-font-semibold">
                     <div class="tw-w-1/4" :column="primaryDataColumn">
-                        <slot name="list-column-primary-data">{{ primaryDataColumn }}</slot>   
+                        <slot name="list-column-primary-data">{{ primaryDataColumn }}</slot>
                     </div>
                     <div class="tw-flex tw-w-3/4">
                         <div class="tw-flex tw-flex-grow">
-                            <span 
-                                v-for="column in tertiaryColumns" 
+                            <span
+                                v-for="column in tertiaryColumns"
                                 :column="column"
                                 class="tw-flex-1">
                                 {{ column }}
@@ -73,9 +73,9 @@
             </slot>
 
             <slot name="list" :items="items">
-                <list-item 
-                    v-for="(item, index) in items" 
-                    :key="index" class="tw-py-4 tw-px-4"
+                <list-item
+                    v-for="(item, index) in items"
+                    :key="index" class="tw-py-4 tw-px-4 hover:tw-bg-blue-100"
                     :to="item.path">
 
                     <template slot="image">
@@ -95,14 +95,14 @@
                     <template slot="tertiary-data">
                         <slot name="list-item-tertiary-data-container" :item="item">
                             <div class="tw-flex tw-flex-grow">
-                                <slot name="list-item-tertiary-data" :item="item"></slot>          
-                            </div>      
-                        </slot>      
+                                <slot name="list-item-tertiary-data" :item="item"></slot>
+                            </div>
+                        </slot>
                     </template>
 
                     <template slot="options">
-                        <base-button v-if="hasEdit" 
-                            class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none" 
+                        <base-button v-if="hasEdit"
+                            class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none"
                             @click="$emit('edit', item[resourceIdentifier])">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
                             <span class="tw-text-xs tw-align-middle">Edit</span>
@@ -110,7 +110,7 @@
                         <slot name="option-remove-button" :item="item">
                             <base-button
                                 v-if="hasRemove"
-                                class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
+                                class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 tw-bg-transparent tw-border-none"
                                 @click="$emit('remove', item[resourceIdentifier])">
                                 <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
                                     <slot name="options-remove-icon">close</slot>
@@ -122,7 +122,7 @@
                         </slot>
                         <base-button
                             v-if="hasDelete"
-                            class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
+                            class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 tw-bg-transparent tw-border-none"
                             @click="$emit('delete', item[resourceIdentifier])">
                             <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
                                 <slot name="options-delete-icon">archive</slot>
@@ -255,17 +255,17 @@
                 if(!this.hasListHeader)
                     return false;
 
-                if(this.searchTerms.length == 0 && this.total == 0) 
+                if(this.searchTerms.length == 0 && this.total == 0)
                     return false;
 
                 return true;
-            }
+            },
         },
 
         data() {
             return {
-                search: '',
-                optionsWidth: ''
+                optionsWidth: '',
+                search: ''
             }
         },
 
@@ -275,11 +275,11 @@
                 this.$emit('page-change', page);
             },
 
-            handleSearch(search) {
+            handleSearch: _.debounce(function() {
+                this.$emit('update:search-terms', this.search);
+                this.$emit('search', this.search);
                 this.handlePageChange(1);
-                this.$emit('update:search-terms', search);
-                this.$emit('search', search);
-            },
+            }, 300)
         },
 
     }

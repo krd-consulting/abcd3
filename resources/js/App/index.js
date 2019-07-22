@@ -17,6 +17,10 @@ const app = new Vue({
     el: '#app',
     router,
     data: {
-    	collapseSidebar: false
+    	collapseSidebar: false,
+        loading: true
+    },
+    mounted() {
+        this.loading = false;
     }
 });
