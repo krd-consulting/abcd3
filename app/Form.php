@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
+use Spatie\SchemalessAttributes\SchemalessAttributes;
+
 class Form extends Model
 {
     public function createUsingRequest($request)
@@ -21,12 +23,16 @@ class Form extends Model
         $this->target_type_id = $request->target_type_id;
         $this->target_id = $request->target_id;
         $this->scope_id = $request->scope_id;
+        $this->field_layout = $request->fields;
 
         DB::transaction(function () use ($request) {
             $this->save();
 
             // add form to team.
             $this->teams()->attach([$request->team_id]);
+
+            if(empty($request->validated()['fields']))
+                return;
 
             $fields = collect($request->validated()['fields']);
 
@@ -41,7 +47,7 @@ class Form extends Model
                     $radioField['type'] = 'RadioField';
                     $radioField['choices'] = $item['choices'];
                     $radioField['settings'] = $item['settings'];
-                    $radioField['validation_rules'] = $item['validation_rules'];
+                    // $radioField['validation_rules'] = $item['validation_rules'];
                     return $radioField;
                 });
 
@@ -92,6 +98,16 @@ class Form extends Model
                     ->on($model->getFormReferenceTable());
             });
         });
+    }
+
+    public function setFieldLayoutAttribute($value)
+    {
+        $this->attributes['field_layout'] = json_encode($value);
+    }
+
+    public function getFieldLayoutAttribute(): SchemalessAttributes
+    {
+        return SchemalessAttributes::createForModel($this, 'field_layout');
     }
 
     public function fields()

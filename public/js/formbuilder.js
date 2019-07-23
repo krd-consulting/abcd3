@@ -7499,9 +7499,8 @@ __webpack_require__.r(__webpack_exports__);
           message: 'Build Successful'
         });
 
-        _this.$store.dispatch('submitForm');
+        _this.$store.dispatch('submitForm'); //window.location.href = '/forms/';
 
-        window.location.href = '/forms/';
       })["catch"](function () {
         _this.$message({
           type: 'info',
@@ -115501,8 +115500,8 @@ __webpack_require__.r(__webpack_exports__);
       team_id: state.team_id,
       scope_id: state.scope_id,
       type: state.type,
-      reference_target_type_id: state.target.type.id,
-      reference_target_id: state.target.id,
+      target_type_id: state.target.type.id,
+      target_id: state.target.id,
       fields: state.fields
     };
     var request = new _api_FormRequest_js__WEBPACK_IMPORTED_MODULE_0__["default"](formData);

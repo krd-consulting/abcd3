@@ -86,7 +86,7 @@
                         message: 'Build Successful'
                     });
                     this.$store.dispatch('submitForm')
-                    window.location.href = '/forms/';
+                    //window.location.href = '/forms/';
                 }).catch(() => {
                     this.$message({
                         type: 'info',

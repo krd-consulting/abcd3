@@ -14,8 +14,8 @@ export default {
             team_id: state.team_id,
             scope_id: state.scope_id,
             type: state.type,
-            reference_target_type_id: state.target.type.id,
-            reference_target_id: state.target.id,
+            target_type_id: state.target.type.id,
+            target_id: state.target.id,
             fields: state.fields
         }
 

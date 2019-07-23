@@ -24,6 +24,7 @@ class CreateFormsTable extends Migration
             $table->integer('scope_id')->unsigned();
             //$table->integer('scheduler_id')->unsigned()->nullable();
             $table->schemalessAttributes('extra_data')->nullable();
+            $table->schemalessAttributes('field_layout');
             $table->timestamp('disabled_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
