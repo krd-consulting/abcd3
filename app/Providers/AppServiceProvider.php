@@ -6,8 +6,10 @@ use App\Program;
 use App\ProgramClient;
 use App\RecordType;
 use App\Team;
+use App\FormField;
 
 use App\Observers\ProgramClientObserver;
+use App\Observers\FormFieldObserver;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -38,6 +40,8 @@ class AppServiceProvider extends ServiceProvider
                 );
             }
         });
+
+        FormField::observe(FormFieldObserver::class);
     }
 
     /**

@@ -22,7 +22,7 @@ class Form extends Model
         $this->target_id = $request->target_id;
         $this->scope_id = $request->scope_id;
 
-        DB::transaction(function () use ($request) {
+        //DB::transaction(function () use ($request) {
             $this->save();
 
             // add form to team.
@@ -86,7 +86,7 @@ class Form extends Model
                 $table->timestamps();
                 $table->softDeletes();
             });
-        });
+        //});
     }
 
     public function fields()

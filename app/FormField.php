@@ -10,6 +10,8 @@ class FormField extends Model
 {
 	protected $guarded = [];
 
+    public $timestamps = false;
+
 	public $casts = [
         'options' => 'array',
         'settings' => 'array',
@@ -70,15 +72,20 @@ class FormField extends Model
         return SchemalessAttributes::createForModel($this, 'options');
     }
 
+    public function getRulesAttribute(): SchemalessAttributes
+    {
+        return SchemalessAttributes::createForModel($this, 'rules');
+    }
+
     public function getSettingsAttribute(): SchemalessAttributes
     {
         return SchemalessAttributes::createForModel($this, 'settings');
     }
 
-    public function getColumnTypeAttribute() 
+    public function getColumnTypeAttribute()
     {
         if(
-            $this->type == 'TextField' && 
+            $this->type == 'TextField' &&
             !empty($this->target_type) &&
             $this->target_type->name != config('app.form_target_types.form_field.name')
         ) {
