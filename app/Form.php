@@ -28,34 +28,8 @@ class Form extends Model
             // add form to team.
             $this->teams()->attach([$request->team_id]);
 
-            $fields = collect($request->validated()['fields']);
-
-            $replace = collect([]);
-
-            $fields->transform(function($item, $key) {
-                if($item['type'] == 'MatrixField') {
-                    $fields = collect($item['questions']);
-                    $fields = $fields->map(function ($values) use ($item){
-                        $field['title'] = $values['text'];
-                        $field['type'] = 'RadioField';
-                        $field['settings'] = $item['settings'];
-                        $field['choices'] = $item['choices'];
-                        $field['rules'] = $item['rules'];
-
-                        return $field;
-                    });
-
-                    return $fields;
-                }
-
-                return $item;
-            });
-
-        dump($fields);
-
-            // insert fields into field registry
-            if(!empty($fields->toArray()))
-                $this->fields()->createMany($fields->toArray());
+            if(isset($request->validated()['fields']))
+                $this->fields()->createMany($request->validated()['fields']);
 
             $fields = $this->fields;
 
@@ -160,7 +134,7 @@ class Form extends Model
     }
 
     public function scopeAvailableFor($query, $user) {
-        $universal = 
+        $universal =
             (clone $query)
                 ->where('scope_id', Scope::where('name', config('auth.scopes.universal.name'))->first()->id);
         $teams = (clone $query)->inTeams($user->availableTeams);
@@ -168,7 +142,7 @@ class Form extends Model
         $groups = (clone $query)->inGroups($user->availableGroups);
         $self = (clone $query)->inSelf($user);
 
-        $query = 
+        $query =
             $universal
                 ->union($teams)
                 ->union($programs)
@@ -180,7 +154,7 @@ class Form extends Model
 
     public function scopeInTeams($query, $teams)
     {
-        return 
+        return
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.team.name'))->first()->id)
                 ->whereHas('teams', function ($query) use ($teams) {
@@ -190,7 +164,7 @@ class Form extends Model
 
     public function scopeInPrograms($query, $programs)
     {
-        return 
+        return
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.program.name'))->first()->id)
                 ->whereHas('programs', function ($query) use ($programs) {
@@ -200,7 +174,7 @@ class Form extends Model
 
     public function scopeInGroups($query, $groups)
     {
-        return 
+        return
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.group.name'))->first()->id)
                 ->whereHas('groups', function ($query) use ($groups) {
@@ -210,7 +184,7 @@ class Form extends Model
 
     public function scopeInSelf($query, $user)
     {
-        return 
+        return
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.self.name'))->first()->id)
                 ->whereHas('users', function ($query) use ($user) {
