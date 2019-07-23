@@ -16,7 +16,7 @@ class CreateFormProgramTable extends Migration
         Schema::create('form_program', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('form_id')->unsigned();
-            $table->integer('program_id')->unsigned();
+            $table->bigInteger('program_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('form_id')->references('id')->on('forms');

@@ -16,7 +16,7 @@ class CreateFormGroupTable extends Migration
         Schema::create('form_group', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('form_id')->unsigned();
-            $table->integer('group_id')->unsigned();
+            $table->bigInteger('group_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('form_id')->references('id')->on('forms');

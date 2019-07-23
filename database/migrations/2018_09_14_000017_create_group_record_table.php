@@ -14,8 +14,8 @@ class CreateGroupRecordTable extends Migration
     public function up()
     {
         Schema::create('group_record', function (Blueprint $table) {
-            $table->integer('group_id')->unsigned();
-            $table->integer('record_id')->unsigned();
+            $table->bigInteger('group_id')->unsigned();
+            $table->bigInteger('record_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('group_id')->references('id')->on('groups');

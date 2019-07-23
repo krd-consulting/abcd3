@@ -15,7 +15,7 @@ class CreateRecordsTable extends Migration
     {
         Schema::create('records', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->integer('record_type_id')->unsigned();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('field_1_value', 100);

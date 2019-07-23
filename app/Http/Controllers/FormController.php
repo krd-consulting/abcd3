@@ -55,6 +55,7 @@ class FormController extends Controller
         $this->authorize('create', Form::class);
 
         $form = new Form;
+
         $form->createUsingRequest($request);
 
         return $form;

@@ -14,7 +14,7 @@ class CreateRecordTeamTable extends Migration
     public function up()
     {
         Schema::create('record_team', function (Blueprint $table) {
-            $table->integer('record_id')->unsigned();
+            $table->bigInteger('record_id')->unsigned();
             $table->integer('team_id')->unsigned();
             $table->timestamps();
 

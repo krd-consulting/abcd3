@@ -22,14 +22,33 @@ class Form extends Model
         $this->target_id = $request->target_id;
         $this->scope_id = $request->scope_id;
 
-        //DB::transaction(function () use ($request) {
+        DB::transaction(function () use ($request) {
             $this->save();
 
             // add form to team.
             $this->teams()->attach([$request->team_id]);
 
-            if(isset($request->validated()['fields']))
-                $this->fields()->createMany($request->validated()['fields']);
+            $fields = collect($request->validated()['fields']);
+
+            $fields->each(function($item, $key) use ($fields) {
+                if($item['type'] != 'MatrixField')
+                    return;
+
+                $radioFields = [];
+                $radioFields = collect($item['questions'])->map(function($question, $key) use ($item){
+                    $radioField = [];
+                    $radioField['title'] = $question['text'];
+                    $radioField['type'] = 'RadioField';
+                    $radioField['choices'] = $item['choices'];
+                    $radioField['settings'] = $item['settings'];
+                    $radioField['validation_rules'] = $item['validation_rules'];
+                    return $radioField;
+                });
+
+                $fields->splice($key, 1, $radioFields->toArray());
+            });
+
+            $this->fields()->createMany($fields->toArray());
 
             $fields = $this->fields;
 
@@ -37,23 +56,10 @@ class Form extends Model
             Schema::create($this->table_name, function (Blueprint $table) use ($fields) {
                 $table->bigIncrements('id');
                 $table->string('type');
-                $table->bigInteger('target_id');
+                $table->bigInteger('target_id')->unsigned();
 
                 foreach($fields as $field) {
-                    if($field->type == 'SectionDivider') {
-                        continue;
-                    }
-
                     $columnType = $field->columnType;
-
-                    if($field->type == 'MatrixField') {
-                        foreach($field->options['questions'] as $key=>$question) {
-                            $table->$columnType('field_' . $field->id . '_' . $key);
-                        }
-
-                        continue;
-                    }
-
                     $columnName = 'field_' . $field->id;
 
                     $table->$columnType($columnName);
@@ -71,9 +77,11 @@ class Form extends Model
                                 ->on($model->getFormReferenceTable());
                         }
                     }
-
-                    $table->byAttributes();
                 }
+
+                $table->timestamps();
+                $table->softDeletes();
+                $table->byAttributes();
 
                 $class = $this->target_type->model;
                 $model = new $class;
@@ -82,11 +90,8 @@ class Form extends Model
                     ->foreign('target_id')
                     ->references($model->getFormReferenceField())
                     ->on($model->getFormReferenceTable());
-
-                $table->timestamps();
-                $table->softDeletes();
             });
-        //});
+        });
     }
 
     public function fields()
@@ -130,7 +135,7 @@ class Form extends Model
 
     protected function setTableName($id)
     {
-        $this->table_name = str_pad($id, 3, STR_PAD_LEFT);
+        $this->table_name = 'form_' . str_pad($id, 3, '0', STR_PAD_LEFT);
     }
 
     public function scopeAvailableFor($query, $user) {

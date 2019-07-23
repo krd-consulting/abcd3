@@ -15,9 +15,9 @@ class CreateCasesTable extends Migration
     {
         Schema::create('cases', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('owner_id')->unsigned();
-            $table->integer('record_id')->unsigned();
-            $table->integer('program_id')->unsigned();
+            $table->bigInteger('owner_id')->unsigned();
+            $table->bigInteger('record_id')->unsigned();
+            $table->bigInteger('program_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('owner_id')->references('id')->on('records');

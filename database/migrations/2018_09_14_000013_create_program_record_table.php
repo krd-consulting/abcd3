@@ -15,8 +15,8 @@ class CreateProgramRecordTable extends Migration
     {
         Schema::create('program_record', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('record_id')->unsigned();
-            $table->integer('program_id')->unsigned();
+            $table->bigInteger('record_id')->unsigned();
+            $table->bigInteger('program_id')->unsigned();
             $table->timestamp('enrolled_at')->nullable();
             $table->timestamps();
             $table->softDeletes();

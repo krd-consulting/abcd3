@@ -18,16 +18,15 @@ class FormField extends Model
     ];
 
     protected $columnTypes = [
-        'TextField' => 'string',
-        'TextBox' => 'text',
-        'NumberField' => 'decimal',
-        'DropdownField' => 'string',
-        'RadioField' => 'string',
-        'CheckBoxField' => 'string',
-        'DateField' => 'string',
-        'TimeField' => 'string',
-        'MatrixField' => 'string',
-        'FileField' => 'string'
+        'text' => 'string',
+        'textbox' => 'text',
+        'number' => 'decimal',
+        'dropdown' => 'string',
+        'radio' => 'string',
+        'checkbox' => 'string',
+        'date' => 'date',
+        'time' => 'time',
+        'file' => 'bigInteger'
     ];
 
     protected $fieldTypes = [
@@ -38,6 +37,7 @@ class FormField extends Model
         'RadioField' => 'radio',
         'CheckBoxField' => 'checkbox',
         'DateField' => 'date',
+        'DateTimeField', 'datetime',
         'TimeField' => 'time',
         'FileField' => 'file'
     ];
@@ -57,9 +57,9 @@ class FormField extends Model
     	return $this->belongsTo($this->target_type->model);
     }
 
-    public function setQuestionsAttribute($value)
+    public function setTypeAttribute($value)
     {
-    	$this->options['questions'] = $value;
+        $this->attributes['type'] = $this->fieldTypes[$value];
     }
 
     public function setChoicesAttribute($value)
@@ -67,14 +67,24 @@ class FormField extends Model
     	$this->options['choices'] = $value;
     }
 
+    public function setValidationRulesAttribute($value)
+    {
+        $this->validation_rules = $value;
+    }
+
+    public function setSettingsAttribute($value)
+    {
+        $this->settings = $value;
+    }
+
     public function getOptionsAttribute(): SchemalessAttributes
     {
         return SchemalessAttributes::createForModel($this, 'options');
     }
 
-    public function getRulesAttribute(): SchemalessAttributes
+    public function getValidationRulesAttribute(): SchemalessAttributes
     {
-        return SchemalessAttributes::createForModel($this, 'rules');
+        return SchemalessAttributes::createForModel($this, 'validation_rules');
     }
 
     public function getSettingsAttribute(): SchemalessAttributes

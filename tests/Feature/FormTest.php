@@ -54,11 +54,12 @@ class FormTest extends TestCase
             [
                 'type' => 'MatrixField',
                 'title' => 'Test Matrix',
-                'description' => 'Test Matrix Field',
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'settings' => [],
-                'rules' => [],
+                'validation_rules' => [
+                    'test' => 'test'
+                ],
                 'questions' => [
                     [
                         'text' => 'question 1'
@@ -81,6 +82,109 @@ class FormTest extends TestCase
                         'value ' => 3
                     ]
                 ]
+            ],
+        ];
+
+        $form = [
+            'name' => $name,
+            'description' => $description,
+            'type' => 'static',
+            'target_type_id' => 3,
+            'target_id' => '',
+            'scope_id' => $scope->id,
+            'team_id' => $team->id,
+            'fields' => $fields
+        ];
+
+        $response = $this->actingAs($user)->post('/api/forms', $form);
+
+        $response->assertStatus(201);
+
+        $form = [
+            'name' => $name,
+            'description' => $description,
+            'type' => 'static',
+            'target_type_id' => 3,
+            'target_id' => NULL,
+            'scope_id' => $scope->id
+        ];
+
+        $this->assertDatabaseHas('forms', $form);
+        $this->assertDatabaseHas('form_team', [
+            'form_id' => $response->decodeResponseJson()['id'],
+            'team_id' => $team->id,
+        ]);
+
+        $fields = [
+            [
+                'type' => 'radio',
+                'title' => 'question 1',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
+            [
+                'type' => 'radio',
+                'title' => 'question 2',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
+        ];
+
+        foreach($fields as $field) {
+            $this->assertDatabaseHas('form_fields', $field);
+        }
+    }
+
+    /** @test */
+    public function authorized_user_can_store_a_form_with_matrix_and_text()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->create_authorized_user();
+        $scope = $user->roles()->first()->scope;
+        $team = $user->teams()->first();
+
+        $name = $this->faker->word;
+        $description = $this->faker->sentence;
+
+        $fields = [
+            [
+                'type' => 'MatrixField',
+                'title' => 'Test Matrix',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'settings' => [],
+                'validation_rules' => [],
+                'questions' => [
+                    [
+                        'text' => 'question 1'
+                    ],
+                    [
+                        'text' => 'question 2'
+                    ]
+                ],
+                'choices' => [
+                    [
+                        'text' => 'choice 1',
+                        'value ' => 1
+                    ],
+                    [
+                        'text' => 'choice 2',
+                        'value ' => 2
+                    ],
+                    [
+                        'text' => 'choice 3',
+                        'value ' => 3
+                    ]
+                ]
+            ],
+            [
+                'type' => 'TextField',
+                'title' => 'Test Text',
+                'target_type_id' => NULL,
+                'target_id' => NULL,
             ]
         ];
 
@@ -116,9 +220,22 @@ class FormTest extends TestCase
 
         $fields = [
             [
-                'type' => 'MatrixField',
-                'title' => 'Test Matrix',
-                'description' => 'Test Matrix Field',
+                'type' => 'radio',
+                'title' => 'question 1',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
+            [
+                'type' => 'radio',
+                'title' => 'question 2',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
+            [
+                'type' => 'text',
+                'title' => 'Test Text',
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'form_id' => $response->decodeResponseJson()['id']
@@ -146,9 +263,8 @@ class FormTest extends TestCase
             [
                 'type' => 'TextField',
                 'title' => 'Test Text',
-                'description' => 'Test Text Field',
-                'target_type_id' => NULL,
-                'target_id' => NULL,
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
             ]
         ];
 
@@ -184,11 +300,10 @@ class FormTest extends TestCase
 
         $fields = [
             [
-                'type' => 'TextField',
+                'type' => 'text',
                 'title' => 'Test Text',
-                'description' => 'Test Text Field',
-                'target_type_id' => NULL,
-                'target_id' => NULL,
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
                 'form_id' => $response->decodeResponseJson()['id']
             ]
         ];
@@ -214,9 +329,8 @@ class FormTest extends TestCase
             [
                 'type' => 'TextField',
                 'title' => 'Test Text in Form 1',
-                'description' => 'Test Text Field in Form 1',
-                'target_type_id' => NULL,
-                'target_id' => NULL,
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
             ]
         ];
 
@@ -252,11 +366,10 @@ class FormTest extends TestCase
 
         $fields = [
             [
-                'type' => 'TextField',
+                'type' => 'text',
                 'title' => 'Test Text in Form 1',
-                'description' => 'Test Text Field in Form 1',
-                'target_type_id' => NULL,
-                'target_id' => NULL,
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
                 'form_id' => $response->decodeResponseJson()['id']
             ]
         ];
@@ -272,9 +385,8 @@ class FormTest extends TestCase
             [
                 'type' => 'TextField',
                 'title' => 'Test Text in Form 2',
-                'description' => 'Test Text Field in Form 2',
-                'target_type_id' => 5,
-                'target_id' => 1,
+                'reference_target_type_id' => 5,
+                'reference_target_id' => 1,
             ]
         ];
 
@@ -310,11 +422,10 @@ class FormTest extends TestCase
 
         $fields = [
             [
-                'type' => 'TextField',
+                'type' => 'text',
                 'title' => 'Test Text in Form 2',
-                'description' => 'Test Text Field in Form 2',
-                'target_type_id' => 5,
-                'target_id' => 1,
+                'reference_target_type_id' => 5,
+                'reference_target_id' => 1,
                 'form_id' => $response->decodeResponseJson()['id']
             ]
         ];
