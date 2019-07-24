@@ -67,6 +67,7 @@ const app = new Vue({
         initialize: {
             active: true
         },
+        loading: false
     },
 
     methods: {
@@ -78,5 +79,9 @@ const app = new Vue({
             this.type = data.type;
             this.target = data.target;
         }
+    },
+
+    mounted() {
+        this.loading = false;
     }
 });

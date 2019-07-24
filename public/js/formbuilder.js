@@ -115424,7 +115424,8 @@ var app = new Vue({
     collapseSidebar: false,
     initialize: {
       active: true
-    }
+    },
+    loading: false
   },
   methods: {
     initializeForm: function initializeForm(data) {
@@ -115435,6 +115436,9 @@ var app = new Vue({
       this.type = data.type;
       this.target = data.target;
     }
+  },
+  mounted: function mounted() {
+    this.loading = false;
   }
 });
 

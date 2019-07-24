@@ -47,7 +47,7 @@ class Form extends Model
                     $radioField['type'] = 'RadioField';
                     $radioField['choices'] = $item['choices'];
                     $radioField['settings'] = $item['settings'];
-                    // $radioField['validation_rules'] = $item['validation_rules'];
+                    $radioField['validation_rules'] = $item['validation_rules'];
                     return $radioField;
                 });
 

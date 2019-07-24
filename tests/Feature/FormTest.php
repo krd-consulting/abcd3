@@ -57,9 +57,7 @@ class FormTest extends TestCase
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'settings' => [],
-                'validation_rules' => [
-                    'test' => 'test'
-                ],
+                'validation_rules' => 'sometimes',
                 'questions' => [
                     [
                         'text' => 'question 1'
