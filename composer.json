@@ -16,7 +16,8 @@
         "spatie/laravel-schemaless-attributes": "^1.4",
         "spatie/laravel-sluggable": "^2.1",
         "staudenmeir/eloquent-has-many-deep": "^1.5",
-        "tightenco/parental": "0.7"
+        "tightenco/parental": "0.7",
+        "wildside/userstamps": "^0.5.5"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

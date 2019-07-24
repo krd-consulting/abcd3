@@ -36,6 +36,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'W' => 
         array (
             'Wnx\\LaravelStats\\' => 17,
+            'Wildside\\Userstamps\\' => 20,
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
@@ -163,6 +164,10 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'Wnx\\LaravelStats\\' => 
         array (
             0 => __DIR__ . '/..' . '/wnx/laravel-stats/src',
+        ),
+        'Wildside\\Userstamps\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wildside/userstamps/src',
         ),
         'Whoops\\' => 
         array (
@@ -4485,6 +4490,11 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Wildside\\Userstamps\\Listeners\\Creating' => __DIR__ . '/..' . '/wildside/userstamps/src/Listeners/Creating.php',
+        'Wildside\\Userstamps\\Listeners\\Deleting' => __DIR__ . '/..' . '/wildside/userstamps/src/Listeners/Deleting.php',
+        'Wildside\\Userstamps\\Listeners\\Restoring' => __DIR__ . '/..' . '/wildside/userstamps/src/Listeners/Restoring.php',
+        'Wildside\\Userstamps\\Listeners\\Updating' => __DIR__ . '/..' . '/wildside/userstamps/src/Listeners/Updating.php',
+        'Wildside\\Userstamps\\Userstamps' => __DIR__ . '/..' . '/wildside/userstamps/src/Userstamps.php',
         'Wnx\\LaravelStats\\Classifier' => __DIR__ . '/..' . '/wnx/laravel-stats/src/Classifier.php',
         'Wnx\\LaravelStats\\Classifiers\\BrowserKitTestClassifier' => __DIR__ . '/..' . '/wnx/laravel-stats/src/Classifiers/BrowserKitTestClassifier.php',
         'Wnx\\LaravelStats\\Classifiers\\CommandClassifier' => __DIR__ . '/..' . '/wnx/laravel-stats/src/Classifiers/CommandClassifier.php',

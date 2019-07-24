@@ -27,6 +27,7 @@ class CreateFormsTable extends Migration
             $table->schemalessAttributes('field_layout');
             $table->timestamp('disabled_at')->nullable();
             $table->timestamps();
+            $table->userstamps();
             $table->softDeletes();
 
             $table->foreign('target_type_id')->references('id')->on('form_target_types');

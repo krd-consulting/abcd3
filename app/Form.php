@@ -11,9 +11,13 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
 use Spatie\SchemalessAttributes\SchemalessAttributes;
+use Wildside\Userstamps\Userstamps;
+
 
 class Form extends Model
 {
+    use Userstamps;
+
     protected $fieldNumber = 1;
 
     public function createUsingRequest($request)
@@ -111,7 +115,7 @@ class Form extends Model
 
                 $table->timestamps();
                 $table->softDeletes();
-                $table->byAttributes();
+                $table->userstamps();
 
                 $class = $this->target_type->model;
                 $model = new $class;
