@@ -1,6 +1,6 @@
 <template>
   <div id="checkbox">
-      <el-col :span="18">
+      <el-col :span="8">
           <label class="inputLabel">
             <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
                 {{ fieldLabel }}

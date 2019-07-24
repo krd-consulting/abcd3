@@ -80,6 +80,16 @@ export default {
                 this.$emit('update', field); 
             }
         },
+
+        // required: {
+        //     get() { return this.field.settings.requires; },
+        //     set(title) { 
+        //         const fieldCopy = _.clone(this.field);
+        //         fieldCopy.title = title;
+        //         this.field = fieldCopy;
+        //     }
+        // },
+
     },
 }
 </script>

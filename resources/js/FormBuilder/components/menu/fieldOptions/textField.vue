@@ -100,9 +100,11 @@ export default {
             },
         }
     },
+
     props: {
         inputData: Object,
     },
+    
     computed: {
         target_type_id() {
             if(!this.target.toString().includes('_')) {

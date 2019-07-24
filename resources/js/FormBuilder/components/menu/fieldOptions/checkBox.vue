@@ -64,10 +64,6 @@ export default {
             this.setChoices();
             this.$emit('save', this.fieldData);
         },
-
-        // submitfieldData(fieldData) {
-        //     this.$emit('inputData', this.fieldData);
-        // },
     }
 }
 </script>

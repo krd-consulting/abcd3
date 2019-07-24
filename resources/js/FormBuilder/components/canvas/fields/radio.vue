@@ -1,12 +1,12 @@
 <template>
     <div id="dropdown">
-         
-        <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-                {{ fieldLabel }}
-            </editable-text>
-        </label>
-
+        <el-col :span="8">
+            <label class="inputLabel">
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
+            </label>
+        </el-col><br><br>
              <el-radio-group id="radioGroup">
                 <el-radio 
                     v-model="value" 
@@ -37,7 +37,7 @@
             class="tw-float-right tw-mr-48 button-top">
         </el-switch>
         
-        <form @submit.prevent="addItem" class="tw-mt-4">
+        <form @submit.prevent="addItem" class=" tw-mt-4">
             <el-row> 
                 <el-col :span="6" class="tw-float-left">
                     <label for="add-item">Add a new Item</label>

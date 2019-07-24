@@ -38,25 +38,25 @@ export default {
             get() { return this.field.settings.required }
         },
         dateType: {
-            get() { return this.field.format.dateType} 
+            get() { return this.field.settings.dateType} 
         },
         dateOptions: {
-            get() { return this.field.format.dateOptions } 
+            get() { return this.field.settings.dateOptions } 
         },
         datePlaceHolder: {
-            get() { return this.field.format.datePlaceHolder } 
+            get() { return this.field.settings.datePlaceHolder } 
         },
         rangeSeparator: {
-            get() { return this.field.format.rangeSeparator } 
+            get() { return this.field.settings.rangeSeparator } 
         },
         startDate: {
-            get() { return this.field.format.startDate } 
+            get() { return this.field.settings.startDate } 
         },
         endDate: {
-            get() { return this.field.format.endDate } 
+            get() { return this.field.settings.endDate } 
         },
         dateFormat: {
-            get() { return this.field.format.dateFormat } 
+            get() { return this.field.settings.dateFormat } 
         },
     }
 }

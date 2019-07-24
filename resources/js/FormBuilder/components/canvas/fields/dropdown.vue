@@ -1,20 +1,23 @@
 <template>
     <div id="dropdown">
-        <div>
-            <el-col :span="18">
-                <label class="inputLabel">
-                    <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-                        {{ fieldLabel }}
-                    </editable-text>
-                </label>
-            </el-col>
-            <div class="tw-inline-block">
+        <el-row>
+        <el-col :span="6">
+            <label class="inputLabel">
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
+            </label>
+        
+
+        
+            <div class="tw-inline">
                 <el-select id="dropdown" v-model="dropItem" placeholder="select">
                     <el-option v-for="(item, index) in choices" :key="index" :label="item.value" :value="item.value"></el-option>
                 </el-select>
             </div>
+            </el-col>
 
-            <div class="tw-inline-block">
+            <el-col :span="6" class="tw-inline" v-if="dropItem != null">
                 <editable-text 
                     class="tw-cursor-pointer mouseOver" 
                     v-model="dropItem"
@@ -22,15 +25,14 @@
                     {{ dropItem }}
                 </editable-text>
                 <el-button 
-                    v-if="dropItem != null" 
                     type="text" 
                     size="mini" 
                     @click="removeChoice(dropItem, index)">
                             Remove Item
                 </el-button>
-            </div>
+            </el-col>
 
-        </div>
+        </el-row>
 
         <el-switch 
             v-model="field.settings.required" 
@@ -41,7 +43,7 @@
         
         <form @submit.prevent="addItem" class="tw-mt-4">
             <el-row> 
-                <el-col :span="6" class="tw-float-left">
+                <el-col :span="6" class="">
                     <label for="add-item">Add a new Item</label>
                     <el-input id="add-item" v-model="itemText"></el-input>
                     <el-tooltip content="Alternatively, you can press enter after typing in this field to add items to the list">
@@ -129,7 +131,7 @@ export default {
                 this.choices.splice(index, 1);
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
-            this.dropItem = '';
+            this.dropItem = null;
             this.$forceUpdate();
         },
         updateChoiceValue(value, index) {
