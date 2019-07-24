@@ -103,7 +103,7 @@
 <script>
 import draggable from 'vuedraggable'
 import ClickOutside from 'vue-click-outside'
-import SidePanel from '@/components/sidePanel.vue'
+import SidePanel from '@/components/base/sidePanel.vue'
 import EditableText from '@/components/editableText.vue'
 
 import Initialize from '@/FormBuilder/views/initialize'

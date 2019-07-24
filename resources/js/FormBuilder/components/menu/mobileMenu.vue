@@ -2,7 +2,7 @@
     This is a Global Component
 -->
 <template>
-    <div id="menu">
+    <div id="mobileMenu">
         
         
         <!-- <slot name="button"> -->
@@ -26,7 +26,7 @@
 import ClickOutside from 'vue-click-outside'
 
 export default {
-    name: 'menu',
+    name: 'mobileMenu',
     data() {
         return {
             opened: false,

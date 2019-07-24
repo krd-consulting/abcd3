@@ -1,5 +1,5 @@
 <template>
-  <div id="menu">
+  <div id="menuSelect">
     <div id="menu-container">
         <el-collapse v-model="step" accordion>
             <el-collapse-item name="1">
@@ -37,9 +37,7 @@
                 <component :is="selectedInput.component" 
                     :inputData="selectedInput"
                     @save="addField">
-                        <!--<template v-slot:default="{ fieldData }">
-                            <el-button type="success" @click="addField(fieldData)">Set</el-button>
-                        </template>-->
+                        
                 </component>
 
             </el-collapse-item>
