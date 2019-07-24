@@ -42,7 +42,7 @@ class StoreForm extends FormRequest
             'fields.*.reference_target_id' => 'nullable|exists:record_types,id',
             'fields.*.settings' => 'nullable',
             'fields.*.settings.max' => 'integer',
-            'fields.*.validation_rules' => 'nullable',
+            'fields.*.validation_rules' => 'sometimes',
             'fields.*.questions.*.text' => 'required_if:fields.*.type,matrix',
             'fields.*.choices.*.text' => 'required_if:fields.*.type,matrix,radio,checkbox,dropdown',
             'fields.*.choices.*.value' => 'required_if:fields.*.type,matrix,radio,checkbox,dropdown',

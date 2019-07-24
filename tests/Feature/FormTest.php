@@ -57,7 +57,6 @@ class FormTest extends TestCase
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'settings' => [],
-                'validation_rules' => 'sometimes',
                 'questions' => [
                     [
                         'text' => 'question 1'
@@ -149,12 +148,17 @@ class FormTest extends TestCase
 
         $fields = [
             [
+                'type' => 'TextField',
+                'title' => 'Test Text',
+                'target_type_id' => NULL,
+                'target_id' => NULL,
+            ],
+            [
                 'type' => 'MatrixField',
                 'title' => 'Test Matrix',
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'settings' => [],
-                'validation_rules' => [],
                 'questions' => [
                     [
                         'text' => 'question 1'
@@ -180,7 +184,7 @@ class FormTest extends TestCase
             ],
             [
                 'type' => 'TextField',
-                'title' => 'Test Text',
+                'title' => 'Test Text 2',
                 'target_type_id' => NULL,
                 'target_id' => NULL,
             ]
@@ -218,6 +222,13 @@ class FormTest extends TestCase
 
         $fields = [
             [
+                'type' => 'text',
+                'title' => 'Test Text',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
+            [
                 'type' => 'radio',
                 'title' => 'question 1',
                 'reference_target_type_id' => NULL,
@@ -233,7 +244,7 @@ class FormTest extends TestCase
             ],
             [
                 'type' => 'text',
-                'title' => 'Test Text',
+                'title' => 'Test Text 2',
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'form_id' => $response->decodeResponseJson()['id']

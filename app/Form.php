@@ -14,6 +14,8 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
 
 class Form extends Model
 {
+    protected $fieldNumber = 1;
+
     public function createUsingRequest($request)
     {
         $this->name = $request->name;
@@ -35,24 +37,46 @@ class Form extends Model
                 return;
 
             $fields = collect($request->validated()['fields']);
+            $toBeRemoved = [];
+            $toBeFlattened = [];
 
-            $fields->each(function($item, $key) use ($fields) {
-                if($item['type'] != 'MatrixField')
-                    return;
+            $fields = $fields->reject(function($item, $key) {
+                return $item['type'] == 'SectionDivider';
+            });
+
+            $fields->transform(function($item, $key) use (&$toBeRemoved, &$toBeFlattened) {
+                if($item['type'] != 'MatrixField'){
+                    $item['column_name'] = $this->generateFieldColumnName($this->fieldNumber++);
+                    return $item;
+                }
 
                 $radioFields = [];
-                $radioFields = collect($item['questions'])->map(function($question, $key) use ($item){
-                    $radioField = [];
-                    $radioField['title'] = $question['text'];
-                    $radioField['type'] = 'RadioField';
-                    $radioField['choices'] = $item['choices'];
-                    $radioField['settings'] = $item['settings'];
-                    $radioField['validation_rules'] = $item['validation_rules'];
-                    return $radioField;
-                });
+                $radioFields = collect($item['questions'])
+                    ->map(function($question, $key) use ($item){
+                        $radioField = [];
+                        $radioField['title'] = $question['text'];
+                        $radioField['type'] = 'RadioField';
+                        $radioField['choices'] = $item['choices'];
+                        $radioField['settings'] = $item['settings'];
+                        $radioField['validation_rules'] 
+                            = isset($item['validation_rules']) ? $item['validation_rules'] : NULL;
+                        $radioField['column_name'] = $this->generateFieldColumnName($this->fieldNumber++);
+                        return $radioField;
+                    });
 
-                $fields->splice($key, 1, $radioFields->toArray());
+                array_push($toBeFlattened, $key);
+
+                return $radioFields;
             });
+
+            $added = 0;
+            foreach($toBeFlattened as $key) 
+            {
+                $adjustedKey = $key + $added;
+
+                $fields->splice($adjustedKey, 1, $fields[$adjustedKey]->toArray());
+                $added = sizeOf($fields[$adjustedKey]) - 1;
+            }
 
             $this->fields()->createMany($fields->toArray());
 
@@ -65,8 +89,8 @@ class Form extends Model
                 $table->bigInteger('target_id')->unsigned();
 
                 foreach($fields as $field) {
-                    $columnType = $field->columnType;
-                    $columnName = 'field_' . $field->id;
+                    $columnType = $field->column_type;
+                    $columnName = $field->column_name;
 
                     $table->$columnType($columnName);
 
@@ -98,6 +122,11 @@ class Form extends Model
                     ->on($model->getFormReferenceTable());
             });
         });
+    }
+
+    protected function generateFieldColumnName($fieldNumber) 
+    {
+        return 'field_' . $fieldNumber;
     }
 
     public function setFieldLayoutAttribute($value)
