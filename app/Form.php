@@ -22,6 +22,10 @@ class Form extends Model
         'name'
     ];
 
+    public $casts = [
+        'field_layout' => 'array',
+    ];
+
     protected $fieldNumber = 1;
 
     public function createUsingRequest($request)
@@ -66,7 +70,7 @@ class Form extends Model
                         $radioField['type'] = 'RadioField';
                         $radioField['choices'] = $item['choices'];
                         $radioField['settings'] = $item['settings'];
-                        $radioField['validation_rules'] 
+                        $radioField['validation_rules']
                             = isset($item['validation_rules']) ? $item['validation_rules'] : NULL;
                         $radioField['column_name'] = $this->generateFieldColumnName($this->fieldNumber++);
                         return $radioField;
@@ -78,7 +82,7 @@ class Form extends Model
             });
 
             $added = 0;
-            foreach($toBeFlattened as $key) 
+            foreach($toBeFlattened as $key)
             {
                 $adjustedKey = $key + $added;
 
@@ -132,7 +136,7 @@ class Form extends Model
         });
     }
 
-    protected function generateFieldColumnName($fieldNumber) 
+    protected function generateFieldColumnName($fieldNumber)
     {
         return 'field_' . $fieldNumber;
     }
@@ -267,5 +271,10 @@ class Form extends Model
 
         return $query->where('name', 'LIKE' , '%' . $term . '%')
         ->orWhere('description', 'LIKE', '%' . $term . '%');
+    }
+
+    public function getPathAttribute()
+    {
+        return "/$this->table/$this->id";
     }
 }

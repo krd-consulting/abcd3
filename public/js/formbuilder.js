@@ -115992,6 +115992,11 @@ function (_Request) {
       return this.get("/api/forms");
     }
   }, {
+    key: "show",
+    value: function show(form) {
+      return this.get("/api/forms/".concat(form));
+    }
+  }, {
     key: "create",
     value: function create() {
       return this.get("/api/forms/create");
@@ -117891,7 +117896,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /Users/rupert/www/sites/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

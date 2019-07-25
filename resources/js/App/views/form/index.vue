@@ -11,7 +11,19 @@
             @page-change="retrieve()"
             :total="total">
             <template slot="header-text">Forms</template>
-            <template slot="options-add-text">Create Form</template>
+            <template slot="options-add">
+                <a href="/forms/create">
+                    <base-button
+                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none">
+                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">
+                            <slot name="empty-placeholder-add-button-icon">add</slot>
+                        </base-icon>
+                        <span class="tw-text-xs tw-align-middle">
+                            <slot name="empty-placeholder-add-button-text">Create Form</slot>
+                        </span>
+                    </base-button>
+                </a>
+            </template>
 
             <template slot="empty-placeholder-add-button">
                 <a href="/forms/create">

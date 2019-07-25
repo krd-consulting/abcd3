@@ -5,6 +5,10 @@ class Form extends Request {
         return this.get(`/api/forms`);
     }
 
+    show(form) {
+        return this.get(`/api/forms/${form}`);
+    }
+
     create() {
         return this.get(`/api/forms/create`);
     }
