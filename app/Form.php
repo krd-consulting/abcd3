@@ -11,9 +11,23 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 
 use Spatie\SchemalessAttributes\SchemalessAttributes;
+use Wildside\Userstamps\Userstamps;
+
 
 class Form extends Model
 {
+    use Userstamps;
+
+    protected $searchColumns = [
+        'name'
+    ];
+
+    public $casts = [
+        'field_layout' => 'array',
+    ];
+
+    protected $fieldNumber = 1;
+
     public function createUsingRequest($request)
     {
         $this->name = $request->name;
@@ -35,24 +49,46 @@ class Form extends Model
                 return;
 
             $fields = collect($request->validated()['fields']);
+            $toBeRemoved = [];
+            $toBeFlattened = [];
 
-            $fields->each(function($item, $key) use ($fields) {
-                if($item['type'] != 'MatrixField')
-                    return;
+            $fields = $fields->reject(function($item, $key) {
+                return $item['type'] == 'SectionDivider';
+            });
+
+            $fields->transform(function($item, $key) use (&$toBeRemoved, &$toBeFlattened) {
+                if($item['type'] != 'MatrixField'){
+                    $item['column_name'] = $this->generateFieldColumnName($this->fieldNumber++);
+                    return $item;
+                }
 
                 $radioFields = [];
-                $radioFields = collect($item['questions'])->map(function($question, $key) use ($item){
-                    $radioField = [];
-                    $radioField['title'] = $question['text'];
-                    $radioField['type'] = 'RadioField';
-                    $radioField['choices'] = $item['choices'];
-                    $radioField['settings'] = $item['settings'];
-                    $radioField['validation_rules'] = $item['validation_rules'];
-                    return $radioField;
-                });
+                $radioFields = collect($item['questions'])
+                    ->map(function($question, $key) use ($item){
+                        $radioField = [];
+                        $radioField['title'] = $question['text'];
+                        $radioField['type'] = 'RadioField';
+                        $radioField['choices'] = $item['choices'];
+                        $radioField['settings'] = $item['settings'];
+                        $radioField['validation_rules']
+                            = isset($item['validation_rules']) ? $item['validation_rules'] : NULL;
+                        $radioField['column_name'] = $this->generateFieldColumnName($this->fieldNumber++);
+                        return $radioField;
+                    });
 
-                $fields->splice($key, 1, $radioFields->toArray());
+                array_push($toBeFlattened, $key);
+
+                return $radioFields;
             });
+
+            $added = 0;
+            foreach($toBeFlattened as $key)
+            {
+                $adjustedKey = $key + $added;
+
+                $added = sizeOf($fields[$adjustedKey]) - 1;
+                $fields->splice($adjustedKey, 1, $fields[$adjustedKey]->toArray());
+            }
 
             $this->fields()->createMany($fields->toArray());
 
@@ -65,8 +101,8 @@ class Form extends Model
                 $table->bigInteger('target_id')->unsigned();
 
                 foreach($fields as $field) {
-                    $columnType = $field->columnType;
-                    $columnName = 'field_' . $field->id;
+                    $columnType = $field->column_type;
+                    $columnName = $field->column_name;
 
                     $table->$columnType($columnName);
 
@@ -87,7 +123,11 @@ class Form extends Model
 
                 $table->timestamps();
                 $table->softDeletes();
-                $table->byAttributes();
+                $table->userstamps();
+
+                // add foreign key for file upload column
+                if($field->type == 'file')
+                    $table->foreign($columnName)->references('id')->on('files');
 
                 $class = $this->target_type->model;
                 $model = new $class;
@@ -98,6 +138,11 @@ class Form extends Model
                     ->on($model->getFormReferenceTable());
             });
         });
+    }
+
+    protected function generateFieldColumnName($fieldNumber)
+    {
+        return 'field_' . $fieldNumber;
     }
 
     public function setFieldLayoutAttribute($value)
@@ -127,25 +172,43 @@ class Form extends Model
 
     public function teams()
     {
-        return $this->belongsToMany('App\Team')
+        return 
+            $this
+            ->morphedByMany(
+                'App\Team', 
+                'model',
+                'model_has_forms',
+                'form_id',
+                'model_id'
+            )
             ->withTimestamps();
     }
 
     public function programs()
     {
-        return $this->belongsToMany('App\Program')
+        return 
+            $this
+            ->morphedByMany(
+                'App\Program', 
+                'model',
+                'model_has_forms',
+                'form_id',
+                'model_id'
+            )
             ->withTimestamps();
     }
 
     public function groups()
     {
-        return $this->belongsToMany('App\Group')
-            ->withTimestamps();
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany('App\User')
+        return 
+            $this
+            ->morphedByMany(
+                'App\Group', 
+                'model',
+                'model_has_forms',
+                'form_id',
+                'model_id'
+            )
             ->withTimestamps();
     }
 
@@ -179,7 +242,7 @@ class Form extends Model
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.team.name'))->first()->id)
                 ->whereHas('teams', function ($query) use ($teams) {
-                    return $query->whereIn('team_id', $teams->pluck('id'));
+                    return $query->whereIn('model_id', $teams->pluck('id'));
                 });
     }
 
@@ -189,7 +252,7 @@ class Form extends Model
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.program.name'))->first()->id)
                 ->whereHas('programs', function ($query) use ($programs) {
-                    return $query->whereIn('program_id', $programs->pluck('id'));
+                    return $query->whereIn('model_id', $programs->pluck('id'));
                 });
     }
 
@@ -199,7 +262,7 @@ class Form extends Model
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.group.name'))->first()->id)
                 ->whereHas('groups', function ($query) use ($groups) {
-                    return $query->whereIn('group_id', $groups->pluck('id'));
+                    return $query->whereIn('model_id', $groups->pluck('id'));
                 });
     }
 
@@ -207,10 +270,7 @@ class Form extends Model
     {
         return
             $query
-                ->where('scope_id', Scope::where('name', config('auth.scopes.self.name'))->first()->id)
-                ->whereHas('users', function ($query) use ($user) {
-                    return $query->where('user_id', $user);
-                });
+                ->where('created_by', $user->id);
     }
 
     public function scopeSort($query, $column, $ascending)
@@ -233,5 +293,10 @@ class Form extends Model
 
         return $query->where('name', 'LIKE' , '%' . $term . '%')
         ->orWhere('description', 'LIKE', '%' . $term . '%');
+    }
+
+    public function getPathAttribute()
+    {
+        return "/$this->table/$this->id";
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFormUserTable extends Migration
+class CreateModelHasFormsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateFormUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('form_user', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('model_has_forms', function (Blueprint $table) {
             $table->bigInteger('form_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('model_id');
+            $table->string('model_type');
             $table->timestamps();
 
             $table->foreign('form_id')->references('id')->on('forms');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->primary(['form_id', 'model_id', 'model_type']);
         });
     }
 
@@ -31,11 +31,6 @@ class CreateFormUserTable extends Migration
      */
     public function down()
     {
-        Schema::table('form_user', function (Blueprint $table) {
-            $table->dropForeign(['form_id']);
-            $table->dropForeign(['user_id']);
-        });
-
-        Schema::dropIfExists('form_user');
+        Schema::dropIfExists('model_has_forms');
     }
 }

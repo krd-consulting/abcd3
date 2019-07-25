@@ -36,6 +36,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'W' => 
         array (
             'Wnx\\LaravelStats\\' => 17,
+            'Wildside\\Userstamps\\' => 20,
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
@@ -163,6 +164,10 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'Wnx\\LaravelStats\\' => 
         array (
             0 => __DIR__ . '/..' . '/wnx/laravel-stats/src',
+        ),
+        'Wildside\\Userstamps\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wildside/userstamps/src',
         ),
         'Whoops\\' => 
         array (
@@ -514,6 +519,8 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'App\\Http\\Requests\\UpdateRole' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateRole.php',
         'App\\Http\\Requests\\UpdateRolePermission' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateRolePermission.php',
         'App\\Http\\Requests\\UpdateTeam' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateTeam.php',
+        'App\\Http\\Resources\\Form' => __DIR__ . '/../..' . '/app/Http/Resources/Form.php',
+        'App\\Http\\Resources\\Forms' => __DIR__ . '/../..' . '/app/Http/Resources/Forms.php',
         'App\\Http\\Resources\\Groups' => __DIR__ . '/../..' . '/app/Http/Resources/Groups.php',
         'App\\Http\\Resources\\Program' => __DIR__ . '/../..' . '/app/Http/Resources/Program.php',
         'App\\Http\\Resources\\Programs' => __DIR__ . '/../..' . '/app/Http/Resources/Programs.php',
@@ -4485,6 +4492,11 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Wildside\\Userstamps\\Listeners\\Creating' => __DIR__ . '/..' . '/wildside/userstamps/src/Listeners/Creating.php',
+        'Wildside\\Userstamps\\Listeners\\Deleting' => __DIR__ . '/..' . '/wildside/userstamps/src/Listeners/Deleting.php',
+        'Wildside\\Userstamps\\Listeners\\Restoring' => __DIR__ . '/..' . '/wildside/userstamps/src/Listeners/Restoring.php',
+        'Wildside\\Userstamps\\Listeners\\Updating' => __DIR__ . '/..' . '/wildside/userstamps/src/Listeners/Updating.php',
+        'Wildside\\Userstamps\\Userstamps' => __DIR__ . '/..' . '/wildside/userstamps/src/Userstamps.php',
         'Wnx\\LaravelStats\\Classifier' => __DIR__ . '/..' . '/wnx/laravel-stats/src/Classifier.php',
         'Wnx\\LaravelStats\\Classifiers\\BrowserKitTestClassifier' => __DIR__ . '/..' . '/wnx/laravel-stats/src/Classifiers/BrowserKitTestClassifier.php',
         'Wnx\\LaravelStats\\Classifiers\\CommandClassifier' => __DIR__ . '/..' . '/wnx/laravel-stats/src/Classifiers/CommandClassifier.php',

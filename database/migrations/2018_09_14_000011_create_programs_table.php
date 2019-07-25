@@ -17,7 +17,7 @@ class CreateProgramsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 32);
             $table->text('description')->nullable();
-            $table->integer('team_id')->unsigned();
+            $table->bigInteger('team_id')->unsigned();
             $table->integer('default_client_status_id')->unsigned();
             $table->integer('group_client_status_id')->unsigned()->nullable();
             $table->integer('case_client_status_id')->unsigned()->nullable();

@@ -6,6 +6,9 @@ use App\Form;
 use App\FormTargetType;
 use App\Scope;
 
+use App\Http\Resources\Form as FormResource;
+use App\Http\Resources\Forms;
+
 use App\Http\Requests\StoreForm;
 
 use Illuminate\Http\Request;
@@ -35,8 +38,13 @@ class FormController extends Controller
         $perPage = request('perPage');
         $forms = $forms->paginate($perPage);
 
-        return $forms;
+        return (new Forms($forms));
 
+    }
+
+    public function show(Form $form)
+    {
+        return (new FormResource($form));
     }
 
     public function create()
@@ -70,7 +78,7 @@ class FormController extends Controller
         });
 
         $recordType = FormTargetType::where(
-                'name', 
+                'name',
                 config('app.form_target_types.record.name')
             )->first();
 

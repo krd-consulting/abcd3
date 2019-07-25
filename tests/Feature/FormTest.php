@@ -57,7 +57,6 @@ class FormTest extends TestCase
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'settings' => [],
-                'validation_rules' => 'sometimes',
                 'questions' => [
                     [
                         'text' => 'question 1'
@@ -154,7 +153,6 @@ class FormTest extends TestCase
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'settings' => [],
-                'validation_rules' => [],
                 'questions' => [
                     [
                         'text' => 'question 1'
@@ -181,6 +179,41 @@ class FormTest extends TestCase
             [
                 'type' => 'TextField',
                 'title' => 'Test Text',
+                'target_type_id' => NULL,
+                'target_id' => NULL,
+            ],
+            [
+                'type' => 'MatrixField',
+                'title' => 'Test Matrix',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'settings' => [],
+                'questions' => [
+                    [
+                        'text' => 'question 1'
+                    ],
+                    [
+                        'text' => 'question 2'
+                    ]
+                ],
+                'choices' => [
+                    [
+                        'text' => 'choice 1',
+                        'value ' => 1
+                    ],
+                    [
+                        'text' => 'choice 2',
+                        'value ' => 2
+                    ],
+                    [
+                        'text' => 'choice 3',
+                        'value ' => 3
+                    ]
+                ]
+            ],
+            [
+                'type' => 'TextField',
+                'title' => 'Test Text 2',
                 'target_type_id' => NULL,
                 'target_id' => NULL,
             ]
@@ -234,6 +267,27 @@ class FormTest extends TestCase
             [
                 'type' => 'text',
                 'title' => 'Test Text',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
+            [
+                'type' => 'radio',
+                'title' => 'question 1',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
+            [
+                'type' => 'radio',
+                'title' => 'question 2',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
+            [
+                'type' => 'text',
+                'title' => 'Test Text 2',
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'form_id' => $response->decodeResponseJson()['id']
