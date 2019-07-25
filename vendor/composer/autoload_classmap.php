@@ -84,6 +84,8 @@ return array(
     'App\\Http\\Requests\\UpdateRole' => $baseDir . '/app/Http/Requests/UpdateRole.php',
     'App\\Http\\Requests\\UpdateRolePermission' => $baseDir . '/app/Http/Requests/UpdateRolePermission.php',
     'App\\Http\\Requests\\UpdateTeam' => $baseDir . '/app/Http/Requests/UpdateTeam.php',
+    'App\\Http\\Resources\\Form' => $baseDir . '/app/Http/Resources/Form.php',
+    'App\\Http\\Resources\\Forms' => $baseDir . '/app/Http/Resources/Forms.php',
     'App\\Http\\Resources\\Groups' => $baseDir . '/app/Http/Resources/Groups.php',
     'App\\Http\\Resources\\Program' => $baseDir . '/app/Http/Resources/Program.php',
     'App\\Http\\Resources\\Programs' => $baseDir . '/app/Http/Resources/Programs.php',

@@ -125,6 +125,10 @@ class Form extends Model
                 $table->softDeletes();
                 $table->userstamps();
 
+                // add foreign key for file upload column
+                if($field->type == 'file')
+                    $table->foreign($columnName)->references('id')->on('files');
+
                 $class = $this->target_type->model;
                 $model = new $class;
 

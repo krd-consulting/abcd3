@@ -519,6 +519,8 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'App\\Http\\Requests\\UpdateRole' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateRole.php',
         'App\\Http\\Requests\\UpdateRolePermission' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateRolePermission.php',
         'App\\Http\\Requests\\UpdateTeam' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateTeam.php',
+        'App\\Http\\Resources\\Form' => __DIR__ . '/../..' . '/app/Http/Resources/Form.php',
+        'App\\Http\\Resources\\Forms' => __DIR__ . '/../..' . '/app/Http/Resources/Forms.php',
         'App\\Http\\Resources\\Groups' => __DIR__ . '/../..' . '/app/Http/Resources/Groups.php',
         'App\\Http\\Resources\\Program' => __DIR__ . '/../..' . '/app/Http/Resources/Program.php',
         'App\\Http\\Resources\\Programs' => __DIR__ . '/../..' . '/app/Http/Resources/Programs.php',
