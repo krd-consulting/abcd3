@@ -15,7 +15,7 @@ class CreateRecordTeamTable extends Migration
     {
         Schema::create('record_team', function (Blueprint $table) {
             $table->bigInteger('record_id')->unsigned();
-            $table->integer('team_id')->unsigned();
+            $table->bigInteger('team_id')->unsigned();
             $table->timestamps();
 
             // Foreign Key Constraints

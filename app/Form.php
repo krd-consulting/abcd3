@@ -172,25 +172,43 @@ class Form extends Model
 
     public function teams()
     {
-        return $this->belongsToMany('App\Team')
+        return 
+            $this
+            ->morphedByMany(
+                'App\Team', 
+                'model',
+                'model_has_forms',
+                'form_id',
+                'model_id'
+            )
             ->withTimestamps();
     }
 
     public function programs()
     {
-        return $this->belongsToMany('App\Program')
+        return 
+            $this
+            ->morphedByMany(
+                'App\Program', 
+                'model',
+                'model_has_forms',
+                'form_id',
+                'model_id'
+            )
             ->withTimestamps();
     }
 
     public function groups()
     {
-        return $this->belongsToMany('App\Group')
-            ->withTimestamps();
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany('App\User')
+        return 
+            $this
+            ->morphedByMany(
+                'App\Group', 
+                'model',
+                'model_has_forms',
+                'form_id',
+                'model_id'
+            )
             ->withTimestamps();
     }
 
@@ -224,7 +242,7 @@ class Form extends Model
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.team.name'))->first()->id)
                 ->whereHas('teams', function ($query) use ($teams) {
-                    return $query->whereIn('team_id', $teams->pluck('id'));
+                    return $query->whereIn('model_id', $teams->pluck('id'));
                 });
     }
 
@@ -234,7 +252,7 @@ class Form extends Model
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.program.name'))->first()->id)
                 ->whereHas('programs', function ($query) use ($programs) {
-                    return $query->whereIn('program_id', $programs->pluck('id'));
+                    return $query->whereIn('model_id', $programs->pluck('id'));
                 });
     }
 
@@ -244,7 +262,7 @@ class Form extends Model
             $query
                 ->where('scope_id', Scope::where('name', config('auth.scopes.group.name'))->first()->id)
                 ->whereHas('groups', function ($query) use ($groups) {
-                    return $query->whereIn('group_id', $groups->pluck('id'));
+                    return $query->whereIn('model_id', $groups->pluck('id'));
                 });
     }
 

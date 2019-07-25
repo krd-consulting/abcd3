@@ -42,10 +42,6 @@
             <template v-slot:list-item-primary-data="{ item:form }">
                     {{ form.name }}
             </template>
-
-            <template v-slot:list-item-secondary-data="{ item:form }">
-                    <base-icon class="tw-text-xs align-middle">people</base-icon>
-            </template>
         </list>
     </div>
 </template>

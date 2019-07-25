@@ -4525,10 +4525,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -86851,17 +86847,6 @@ var render = function() {
                   _vm._v(
                     "\n                " + _vm._s(form.name) + "\n        "
                   )
-                ]
-              }
-            },
-            {
-              key: "list-item-secondary-data",
-              fn: function(ref) {
-                var form = ref.item
-                return [
-                  _c("base-icon", { staticClass: "tw-text-xs align-middle" }, [
-                    _vm._v("people")
-                  ])
                 ]
               }
             }
