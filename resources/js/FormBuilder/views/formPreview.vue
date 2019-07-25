@@ -3,27 +3,7 @@
         <el-container>
 
             <el-card id="preview-form" class="sm:tw-w-11/12 tw-w-5/6 xl:tw-w-5/12" shadow="always">
-                <el-menu :default-active="$route.path" 
-                    class="w-full" 
-                    background-color="#fff" 
-                    active-text-color="#409EFF" 
-                    mode="horizontal" 
-                    router>
-                        <el-menu-item default-active 
-                            index="/forms/create" 
-                            class="tw-font-bold focus:tw-font-extrabold">
-                                Form Builder
-                        </el-menu-item>
-                        <el-menu-item index="/forms/create/preview" 
-                            class="tw-font-bold focus:tw-font-extrabold">
-                                Preview Form
-                        </el-menu-item>
-                        <el-menu-item
-                            class="float-right tw-font-bold focus:font-extrabold" 
-                            @click="buildForm">
-                                Finish and Build!
-                        </el-menu-item>
-                </el-menu>
+                <nav-bar/>
 
                 <div>
                     <el-header class="tw-text-center tw-mb-12">
@@ -137,6 +117,7 @@ import DateField from '@/FormBuilder/components/preview/datePicker.vue'
 import TimeField from '@/FormBuilder/components/preview/timePicker.vue'
 import FileField from '@/FormBuilder/components/preview/upload.vue'
 import SectionDivider from '@/FormBuilder/components/preview/sectionDivider.vue'
+import NavBar from '@/FormBuilder/components/navbar.vue'
 
 import { mapState } from 'vuex'
 
@@ -174,7 +155,8 @@ export default {
         DateField,
         TimeField,
         FileField,
-        SectionDivider
+        SectionDivider,
+        NavBar
     },
     computed: {
         ...mapState ([

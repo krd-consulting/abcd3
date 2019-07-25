@@ -119,6 +119,7 @@ export default {
         },
 
     },
+    
     methods: {
         togglePastOnly() {
             if(this.field.settings.pastOnly === true) {

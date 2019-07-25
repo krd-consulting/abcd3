@@ -33,7 +33,7 @@
         </el-checkbox-group>
 
         <el-switch 
-            v-model="field.settings.required" 
+            v-model="required" 
             active-text="Required" 
             inactive-text="Optional"
             class="tw-float-right tw-mr-48 button-top">
@@ -111,6 +111,15 @@ export default {
                 // this.$emit('updateChoices', field);
             }
         },
+
+        required: {
+            get() { return this.field.settings.required; },
+            set(required) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.settings.required = required;
+                this.field = fieldCopy;
+            }
+        }
     },
     methods: {
         getCheckboxItems() {

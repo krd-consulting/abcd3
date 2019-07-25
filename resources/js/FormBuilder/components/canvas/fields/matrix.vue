@@ -153,6 +153,15 @@ export default {
                 this.$emit('updateChoices', field);
             }
         },
+
+        required: {
+            get() { return this.field.settings.required; },
+            set(required) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.settings.required = required;
+                this.field = fieldCopy;
+            }
+        }
     },
     methods: {
 

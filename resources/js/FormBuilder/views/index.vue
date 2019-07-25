@@ -7,35 +7,10 @@
 
             <el-card id="canvas-container">
                 <el-header>
-                    <el-menu :default-active="$route.path" 
-                        background-color="#fff" 
-                        active-text-color="#409EFF" 
-                        mode="horizontal" 
-                        router>
-                        
-                            <menu-panel class="mobile-menu tw-float-left">
-                                <form-menu id="menu"/>
-                            </menu-panel>
-
-                            <el-menu-item default-active 
-                                index="/forms/create" 
-                                class="tw-font-bold tw-focus:font-extrabold">
-                                    Form Builder
-                            </el-menu-item>
-                            <el-menu-item 
-                                index="/forms/create/preview" 
-                                class="tw-font-bold tw-focus:font-extrabold">
-                                    Preview Form
-                            </el-menu-item>
-                            <el-menu-item
-                                @click="buildForm"
-                                class="float-right tw-font-bold tw-focus:font-extrabold">
-                                    Finish &#38; Build!
-                            </el-menu-item>
-                    </el-menu>
+                    <nav-bar/>
                 </el-header>   
 
-                <form-Canvas :fields="fields" id="canvas"/>
+                <form-canvas :fields="fields" id="canvas"/>
             
             </el-card>
             
@@ -44,11 +19,11 @@
 </template>
 
 <script>
-    
     import draggable from 'vuedraggable'
     import FormCanvas from '@/FormBuilder/components/canvas/index.vue'
     import FormMenu from '@/FormBuilder/components/menu/index.vue'
-    import menuPanel from '@/FormBuilder/components/menu/mobileMenu.vue'
+    import MenuPanel from '@/FormBuilder/components/menu/mobileMenu.vue'
+    import NavBar from '@/FormBuilder/components/navbar.vue'
 
     export default {
         name: 'Form',
@@ -63,7 +38,8 @@
             FormCanvas,
             FormMenu,
             draggable,
-            menuPanel
+            MenuPanel,
+            NavBar
         },
         /* test method used when examining responsive behavior */
         // computed: {
@@ -74,32 +50,6 @@
         //         }
         //     } 
         // },
-        methods: {
-            buildForm() {
-                this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
-                    confirmButtonText: 'OK',
-                    cancelButtonText: 'Cancel',
-                    type: 'info'
-                }).then(() => {
-                    this.$message({
-                        type: 'success',
-                        message: 'Build Successful'
-                    });
-                    this.$store.dispatch('submitForm')
-                    //window.location.href = '/forms/';
-                }).catch(() => {
-                    this.$message({
-                        type: 'info',
-                        message: "Keep doing what you're are doing"
-                    }).then(() => {
-                        this.$message({
-                            type: 'warning',
-                            message: "Woops, Something went wrong. Please try submitting again"
-                        })
-                    });          
-                });
-            }
-        },
     }
 </script>
 
