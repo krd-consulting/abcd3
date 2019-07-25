@@ -18,6 +18,10 @@ class Form extends Model
 {
     use Userstamps;
 
+    protected $searchColumns = [
+        'name'
+    ];
+
     protected $fieldNumber = 1;
 
     public function createUsingRequest($request)

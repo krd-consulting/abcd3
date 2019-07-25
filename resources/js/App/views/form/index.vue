@@ -32,13 +32,13 @@
             </template>
 
             <template v-slot:list-item-secondary-data="{ item:form }">
-                    <base-icon class="tw-text-xs align-middle">people</base-icon>{{ form.team.name }}
+                    <base-icon class="tw-text-xs align-middle">people</base-icon>
             </template>
         </list>
     </div>
 </template>
 <script>
-        //import Request from '@/api/FormRequest';
+        import Request from '@/api/FormRequest';
 
         import List from '@/App/components/resourceList';
 
@@ -50,10 +50,10 @@
                 data() {
                     return {
                         forms: [],
-                        //request: new Request({}),
+                        request: new Request({}),
                         params: {
                                 ascending: true,
-                                sortBy: 'field_1_value',
+                                sortBy: 'name',
                                 page: 1,
                                 perPage: 5
                         },
@@ -65,10 +65,20 @@
                 },
 
                 methods: {
+                    retrieve() {
+                        this.request.setFields({
+                            params: {...this.params}
+                        });
 
+                        this.request.retrieve().then(response => {
+                            this.forms = response.data;
+                            this.total = response.data.length;
+                        });
+                    },
                 },
 
                 created() {
+                    this.retrieve();
                 }
         }
 </script>

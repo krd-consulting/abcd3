@@ -39,6 +39,14 @@ class FormController extends Controller
 
     }
 
+    public function show(Form $form) 
+    {
+
+        return [
+            'data' => $form
+        ];
+    }
+
     public function create()
     {
         return [

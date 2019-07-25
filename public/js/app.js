@@ -4432,7 +4432,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _App_components_resourceList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/App/components/resourceList */ "./resources/js/App/components/resourceList.vue");
+/* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
+/* harmony import */ var _App_components_resourceList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/App/components/resourceList */ "./resources/js/App/components/resourceList.vue");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4472,19 +4477,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//import Request from '@/api/FormRequest';
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    List: _App_components_resourceList__WEBPACK_IMPORTED_MODULE_0__["default"]
+    List: _App_components_resourceList__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
       forms: [],
-      //request: new Request({}),
+      request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({}),
       params: {
         ascending: true,
-        sortBy: 'field_1_value',
+        sortBy: 'name',
         page: 1,
         perPage: 5
       },
@@ -4494,8 +4499,22 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  methods: {},
-  created: function created() {}
+  methods: {
+    retrieve: function retrieve() {
+      var _this = this;
+
+      this.request.setFields({
+        params: _objectSpread({}, this.params)
+      });
+      this.request.retrieve().then(function (response) {
+        _this.forms = response.data;
+        _this.total = response.data.length;
+      });
+    }
+  },
+  created: function created() {
+    this.retrieve();
+  }
 });
 
 /***/ }),
@@ -86766,8 +86785,7 @@ var render = function() {
                 return [
                   _c("base-icon", { staticClass: "tw-text-xs align-middle" }, [
                     _vm._v("people")
-                  ]),
-                  _vm._v(_vm._s(form.team.name) + "\n        ")
+                  ])
                 ]
               }
             }
@@ -110414,6 +110432,85 @@ function (_Request) {
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (ClientStatus);
+
+/***/ }),
+
+/***/ "./resources/js/api/FormRequest.js":
+/*!*****************************************!*\
+  !*** ./resources/js/api/FormRequest.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var Form =
+/*#__PURE__*/
+function (_Request) {
+  _inherits(Form, _Request);
+
+  function Form() {
+    _classCallCheck(this, Form);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(Form).apply(this, arguments));
+  }
+
+  _createClass(Form, [{
+    key: "retrieve",
+    value: function retrieve() {
+      return this.get("/api/forms");
+    }
+  }, {
+    key: "create",
+    value: function create() {
+      return this.get("/api/forms/create");
+    }
+  }, {
+    key: "validate",
+    value: function validate() {
+      return this.post("/api/forms/create");
+    }
+  }, {
+    key: "store",
+    value: function store() {
+      return this.post("/api/forms");
+    } // edit(status) {
+    // 	return this.get(`/api/programs/client-statuses/${status}/edit`);
+    // }
+    // update(status) {
+    // 	return this.patch(`/api/programs/client-statuses/${status}`);
+    // }
+    // destroy(status) {
+    // 	return this.delete(`/api/programs/client-statuses/${status}`);
+    // }
+
+  }]);
+
+  return Form;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (Form);
 
 /***/ }),
 

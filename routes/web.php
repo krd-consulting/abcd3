@@ -89,6 +89,7 @@ Route::prefix('api')
         Route::get('forms/fields/target_types', 'FormFieldTargetTypeController@index');
 
         Route::get('forms', 'FormController@index');
+        Route::get('forms/{form}', 'FormController@show');
         Route::get('forms/create', 'FormController@create');
         Route::post('forms/create', 'ValidateForm');
         Route::post('forms', 'FormController@store');
