@@ -78,8 +78,8 @@ class Form extends Model
             {
                 $adjustedKey = $key + $added;
 
-                $fields->splice($adjustedKey, 1, $fields[$adjustedKey]->toArray());
                 $added = sizeOf($fields[$adjustedKey]) - 1;
+                $fields->splice($adjustedKey, 1, $fields[$adjustedKey]->toArray());
             }
 
             $this->fields()->createMany($fields->toArray());
@@ -240,10 +240,7 @@ class Form extends Model
     {
         return
             $query
-                ->where('scope_id', Scope::where('name', config('auth.scopes.self.name'))->first()->id)
-                ->whereHas('users', function ($query) use ($user) {
-                    return $query->where('user_id', $user);
-                });
+                ->where('created_by', $user->id);
     }
 
     public function scopeSort($query, $column, $ascending)

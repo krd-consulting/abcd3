@@ -148,6 +148,35 @@ class FormTest extends TestCase
 
         $fields = [
             [
+                'type' => 'MatrixField',
+                'title' => 'Test Matrix',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'settings' => [],
+                'questions' => [
+                    [
+                        'text' => 'question 1'
+                    ],
+                    [
+                        'text' => 'question 2'
+                    ]
+                ],
+                'choices' => [
+                    [
+                        'text' => 'choice 1',
+                        'value ' => 1
+                    ],
+                    [
+                        'text' => 'choice 2',
+                        'value ' => 2
+                    ],
+                    [
+                        'text' => 'choice 3',
+                        'value ' => 3
+                    ]
+                ]
+            ],
+            [
                 'type' => 'TextField',
                 'title' => 'Test Text',
                 'target_type_id' => NULL,
@@ -221,6 +250,20 @@ class FormTest extends TestCase
         ]);
 
         $fields = [
+            [
+                'type' => 'radio',
+                'title' => 'question 1',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
+            [
+                'type' => 'radio',
+                'title' => 'question 2',
+                'reference_target_type_id' => NULL,
+                'reference_target_id' => NULL,
+                'form_id' => $response->decodeResponseJson()['id']
+            ],
             [
                 'type' => 'text',
                 'title' => 'Test Text',
