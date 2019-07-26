@@ -81,11 +81,11 @@ export default {
 
         exactTime: {
             get() { return this.field.settings.exact_time; },
-            // set(exactTime) { 
-            //     const fieldCopy = _.clone(this.field);
-            //     fieldCopy.settings.exact_time = exactTime;
-            //     this.field = fieldCopy;
-            // }
+            set(exactTime) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.settings.exact_time = exactTime;
+                this.field = fieldCopy;
+            }
         },
 
         required: {
