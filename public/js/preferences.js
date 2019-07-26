@@ -3645,6 +3645,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -81010,43 +81016,61 @@ var render = function() {
                     "template",
                     { slot: "options" },
                     [
-                      _vm.hasEdit
-                        ? _c(
-                            "base-button",
-                            {
-                              staticClass:
-                                "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none",
-                              on: {
-                                click: function($event) {
-                                  return _vm.$emit(
-                                    "edit",
-                                    item[_vm.resourceIdentifier]
-                                  )
-                                }
-                              }
-                            },
-                            [
-                              _c(
-                                "base-icon",
+                      _vm._t(
+                        "options-edit-button",
+                        [
+                          _vm.hasEdit
+                            ? _c(
+                                "base-button",
                                 {
                                   staticClass:
-                                    "tw-text-xs tw-mr-1 tw-align-middle"
+                                    "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$emit(
+                                        "edit",
+                                        item[_vm.resourceIdentifier]
+                                      )
+                                    }
+                                  }
                                 },
-                                [_vm._v("edit")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "tw-text-xs tw-align-middle" },
-                                [_vm._v("Edit")]
+                                [
+                                  _c(
+                                    "base-icon",
+                                    {
+                                      staticClass:
+                                        "tw-text-xs tw-mr-1 tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-edit-icon", [
+                                        _vm._v("edit")
+                                      ])
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "tw-text-xs tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-edit-text", [
+                                        _vm._v("Edit")
+                                      ])
+                                    ],
+                                    2
+                                  )
+                                ],
+                                1
                               )
-                            ],
-                            1
-                          )
-                        : _vm._e(),
+                            : _vm._e()
+                        ],
+                        { item: item }
+                      ),
                       _vm._v(" "),
                       _vm._t(
-                        "option-remove-button",
+                        "options-remove-button",
                         [
                           _vm.hasRemove
                             ? _c(
@@ -81687,7 +81711,7 @@ var render = function() {
               }
             },
             {
-              key: "option-remove-button",
+              key: "options-remove-button",
               fn: function(ref) {
                 var status = ref.item
                 return [
@@ -83082,7 +83106,7 @@ var render = function() {
             [
               _c(
                 "div",
-                { staticClass: "tw-text-right tw-w-1/6" },
+                { staticClass: "tw-text-right" },
                 [_vm._t("options")],
                 2
               )

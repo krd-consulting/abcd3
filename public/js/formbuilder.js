@@ -7791,7 +7791,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"](),
       teamRequest: new _api_TeamRequest__WEBPACK_IMPORTED_MODULE_1__["default"](),
-      // TODO: implement dropdown search for teams
       teamRequestParams: {
         ascending: true,
         sortBy: 'name',
@@ -7804,7 +7803,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         description: '',
         target: '',
         type: '',
-        scope: ''
+        team_id: '',
+        scope_id: ''
       },
       targetTypes: [],
       types: [],
@@ -116193,13 +116193,17 @@ function (_Request) {
     key: "store",
     value: function store() {
       return this.post("/api/forms");
-    } // edit(status) {
-    // 	return this.get(`/api/programs/client-statuses/${status}/edit`);
-    // }
-    // update(status) {
-    // 	return this.patch(`/api/programs/client-statuses/${status}`);
-    // }
-    // destroy(status) {
+    }
+  }, {
+    key: "edit",
+    value: function edit(form) {
+      return this.get("/api/forms/".concat(form, "/edit"));
+    }
+  }, {
+    key: "update",
+    value: function update(form) {
+      return this.patch("/api/forms/".concat(form));
+    } // destroy(status) {
     // 	return this.delete(`/api/programs/client-statuses/${status}`);
     // }
 

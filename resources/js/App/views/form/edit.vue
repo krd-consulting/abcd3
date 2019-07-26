@@ -1,14 +1,7 @@
 <template>
-    <base-dialog 
-        v-bind="$attrs" 
-        :close-on-click-modal="false"
-        :show-close="false"
-        :close-on-press-escape="false"
-        :visible="active" 
-        @close="close" 
-        @open="open">
+    <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Create Form
+            <base-icon class="tw-align-middle">person_add</base-icon> Edit Form Information
         </div>
         <form>
             <div class="tw-mb-2">
@@ -44,36 +37,6 @@
                 <div v-if="request.errors.has('description')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
                         <span v-text="request.errors.get('description')[0]" class="tw-text-xs tw-text-red-500"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="tw-mb-2">
-                <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
-                        Team
-                    </label>
-                    <div class="tw-w-2/3">
-                        <base-select
-                            v-model="formData.team_id"
-                            filterable
-                            remote
-                            :remote-method="retrieveTeams"
-                            name="type"
-                            placeholder="Select Team"
-                            @change="request.errors.clear('team_id')">
-                            <el-option
-                                v-for="(team, index) in teams"
-                                :key="index"
-                                :label="team.name"
-                                :value="team.id">
-                                {{ team.name }}
-                            </el-option>
-                        </base-select>
-                    </div>
-                </div>
-                <div v-if="request.errors.has('team_id')" class="tw-flex tw-justify-end">
-                    <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
             </div>
@@ -171,9 +134,11 @@
             </div>
         </form>
         <div slot="footer" class="tw-border-t tw-px-4 tw-py-4 tw-bg-gray-100 tw-rounded-b">
-            <a href="javascript:history.back()" class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-gray-700 tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue tw-text-xs">
+            <base-button  
+                @click="close"
+                class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-gray-700 tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue tw-text-xs">
                 Nevermind
-            </a>
+            </base-button>
             <base-button 
                 class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none"
                 @click="submit">
@@ -187,12 +152,10 @@
     import TeamRequest from '@/api/TeamRequest';
 
     export default {
-        inheritAttrs: false,
-
         props: {
             active: Boolean,
+            formId: Number | String
         },
-
         data() {
             return {
                 request: new Request(),
@@ -209,7 +172,6 @@
                     description: '',
                     target: '',
                     type: '',
-                    team_id: '',
                     scope_id: ''
                 },
                 targetTypes: [],
@@ -262,33 +224,49 @@
                     description: '',
                     target: '',
                     type: '',
-                    team_id: '',
-                    scope_id: '',
+                    scope_id: ''
                 };
             },
 
             open() {
-                this.load();
+                this.retrieve();
+                this.retrieveTeams();
             },
 
-            load() {
+            initializeWithData(data) {
+                this.formData.id = data.form.id;
+                this.formData.name = data.form.name;
+                this.formData.description = data.form.description;
+                this.formData.type = data.form.type;
+                
+                if(data.form.target == null) {
+                    this.formData.target = data.form.target_type_id;
+                }else {
+                    this.formData.target = `${data.form.target_type_id}_${data.form.target_id}`;
+                }
+
+                this.formData.team_id = data.form.team_id;
+                this.formData.scope_id = data.form.scope_id;
+
+                this.targetTypes = data.target_types;
+                this.types = data.types;
+                this.scopes = data.scopes;
+            },
+
+            retrieve() {
                 let request = new Request({});
 
-                request.create().then((response) => {
-                    this.targetTypes = response.data.target_types;
-                    this.types = response.data.types;
-                    this.scopes = response.data.scopes;
+                request.edit(this.formId).then((response) => {
+                    this.initializeWithData(response.data);
                 });
-
-                this.retrieveTeams();
             },
 
             submit() {
                 this.request = new Request(this.formData);
 
-                this.request.validate()
+                this.request.update(this.formData.id)
                     .then((response) => {
-                        this.$emit('save', response.data);
+                        this.$emit('update', response.data);
                         this.close();
                     })
                     .catch((error) => {
@@ -296,9 +274,7 @@
                     });
             }
         },
-
         created() {
-            this.load();
         }
     }
 </script>

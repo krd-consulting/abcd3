@@ -22,7 +22,7 @@
             <slot name="tertiary-data" :item="item">
             </slot>
             <slot name="options-container" :item="item">
-                <div class="tw-text-right tw-w-1/6">
+                <div class="tw-text-right">
                     <slot name="options">
                     </slot>
                 </div>

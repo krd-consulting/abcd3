@@ -36,7 +36,7 @@
                 {{ status.name }}
             </template>
 
-            <template v-slot:option-remove-button="{ item:status }">
+            <template v-slot:options-remove-button="{ item:status }">
                 <base-button
                     class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none"
                     @click="toggleDisable(status)">

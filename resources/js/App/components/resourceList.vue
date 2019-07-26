@@ -101,13 +101,19 @@
                     </template>
 
                     <template slot="options">
-                        <base-button v-if="hasEdit"
-                            class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none"
-                            @click="$emit('edit', item[resourceIdentifier])">
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">edit</base-icon>
-                            <span class="tw-text-xs tw-align-middle">Edit</span>
-                        </base-button>
-                        <slot name="option-remove-button" :item="item">
+                        <slot name="options-edit-button" :item="item">
+                            <base-button v-if="hasEdit"
+                                class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none"
+                                @click="$emit('edit', item[resourceIdentifier])">
+                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
+                                    <slot name="options-edit-icon">edit</slot>
+                                </base-icon>
+                                <span class="tw-text-xs tw-align-middle">
+                                    <slot name="options-edit-text">Edit</slot>
+                                </span>
+                            </base-button>
+                        </slot>
+                        <slot name="options-remove-button" :item="item">
                             <base-button
                                 v-if="hasRemove"
                                 class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-red-500 tw-bg-transparent tw-border-none"

@@ -91,8 +91,10 @@ Route::prefix('api')
         Route::get('forms', 'FormController@index');
         Route::get('forms/create', 'FormController@create');
         Route::get('forms/{form}', 'FormController@show');
+        Route::get('forms/{form}/edit', 'FormController@edit');
         Route::post('forms/create', 'ValidateForm');
         Route::post('forms', 'FormController@store');
+        Route::patch('forms/{form}', 'FormController@update');
 
         Route::resource('roles', 'RoleController')->except('show');
 
