@@ -8,14 +8,14 @@
                 </template>
 
                 <div v-for="input in inputs" :key="input.id" @click="selectInput(input)">
-                    <el-card class="fields cursor-pointer hover:tw-bg-gray-400" body-style="padding: 5px 0 0 15px;" shadow="never">
+                    <el-card class="fields cursor-pointer hover:tw-bg-gray-400 hover:tw-text-blue-500" body-style="padding: 5px 0 0 15px;" shadow="never">
                         {{ input.name }}
                     </el-card>
                 </div>
             
                 <!-- TODO:  Post-MVP feature
                     integrate this feature with the ability to save input option settings and create
-                    persisted presets that are reusable in other forms.
+                    persisted pre-sets that are reusable in other forms.
                     eg: user knows they need a checklist of the same contents accross multiple forms,
                     they can create it once, and save it into 'presetInputs' 
                 -->
@@ -132,10 +132,10 @@ export default {
     border: none;
 }
 .el-card:hover {
-    font-size: 110%;
+    font-size: 14px;
 }
 .cursor-pointer {
-        cursor: pointer;
+    cursor: pointer;
 }
 .menu-title {
     padding-left: 5px;

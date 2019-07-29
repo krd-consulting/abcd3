@@ -127,7 +127,6 @@ export default {
         TimeField,
         FileField,
         SectionDivider,
-        
     },
 
     computed: {
