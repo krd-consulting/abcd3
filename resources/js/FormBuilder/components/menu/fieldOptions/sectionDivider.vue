@@ -7,7 +7,7 @@
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
+                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
             </el-form-item>
        </el-form>
    </div>

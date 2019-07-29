@@ -5490,7 +5490,7 @@ __webpack_require__.r(__webpack_exports__);
         rules: {
           title: [{
             required: true,
-            message: 'Please input Question or title',
+            message: 'Please enter question title',
             trigger: 'blur'
           }]
         }
@@ -5656,7 +5656,7 @@ __webpack_require__.r(__webpack_exports__);
         rules: {
           title: [{
             required: true,
-            message: 'Please input Question or title',
+            message: 'Please enter question title',
             trigger: 'blur'
           }]
         }
@@ -5732,7 +5732,7 @@ __webpack_require__.r(__webpack_exports__);
         rules: {
           title: [{
             required: true,
-            message: 'Please input Question or title',
+            message: 'Please input question title',
             trigger: 'blur'
           }]
         }
@@ -5818,7 +5818,7 @@ __webpack_require__.r(__webpack_exports__);
         rules: {
           title: [{
             required: true,
-            message: 'Please input Question or title',
+            message: 'Please input question title',
             trigger: 'blur'
           }]
         }
@@ -5904,7 +5904,7 @@ __webpack_require__.r(__webpack_exports__);
         rules: {
           title: [{
             required: true,
-            message: 'Please input Question or title',
+            message: 'Please input question title',
             trigger: 'blur'
           }]
         }
@@ -5972,7 +5972,7 @@ __webpack_require__.r(__webpack_exports__);
         rules: {
           title: [{
             required: true,
-            message: 'Please input Question or title',
+            message: 'Please input question title',
             trigger: 'blur'
           }]
         }
@@ -6110,7 +6110,7 @@ __webpack_require__.r(__webpack_exports__);
         rules: {
           title: [{
             required: true,
-            message: 'Please input Question or title',
+            message: 'Please input question title',
             trigger: 'blur'
           }]
         }
@@ -6232,7 +6232,7 @@ __webpack_require__.r(__webpack_exports__);
         rules: {
           title: [{
             required: true,
-            message: 'Please input Question or title',
+            message: 'Please input question title',
             trigger: 'blur'
           }]
         }
@@ -6442,34 +6442,31 @@ __webpack_require__.r(__webpack_exports__);
         name: 'Text Field',
         component: 'TextField'
       }, {
-        name: 'Text Area',
-        component: 'TextBox'
-      }, {
-        name: 'Numeric',
+        name: 'Numeric Field',
         component: 'NumericField'
       }, {
-        name: 'Dropdown',
-        component: 'Dropdown'
-      }, {
-        name: 'Radio',
-        component: 'RadioField'
-      }, {
-        name: 'Checkbox',
-        component: 'CheckBox'
-      }, {
-        name: 'Date Picker',
+        name: 'Date',
         component: 'DatePicker'
       }, {
-        name: 'Time Picker',
-        component: 'TimePicker'
+        name: 'Multiple Choice (dropdown)',
+        component: 'Dropdown'
+      }, {
+        name: 'Multiple Choice (radio)',
+        component: 'RadioField'
+      }, {
+        name: 'Multiple Choice (checkbox)',
+        component: 'CheckBox'
       }, {
         name: 'Matrix',
         component: 'MatrixField'
       }, {
-        name: 'File Uploader',
+        name: 'Paragraph',
+        component: 'TextBox'
+      }, {
+        name: 'File Upload',
         component: 'FileUpload'
       }, {
-        name: 'Divider',
+        name: 'Section Divider',
         component: 'SectionDivider'
       }],
       fieldData: {}
@@ -89517,7 +89514,7 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { label: "Question/Title:", prop: "title" } },
             [
               _c(
                 "el-col",
@@ -89541,7 +89538,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This Field is" } },
+            { attrs: { label: "This field is:" } },
             [
               _c("el-switch", {
                 attrs: {
@@ -89562,7 +89559,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Number of Checkbox Selections" } },
+            { attrs: { label: "Number of choices:" } },
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
@@ -89589,7 +89586,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -89661,7 +89658,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This Field is" } },
+            { attrs: { label: "This field is" } },
             [
               _c("el-switch", {
                 attrs: {
@@ -89688,7 +89685,7 @@ var render = function() {
                 "el-row",
                 [
                   _c("el-switch", {
-                    attrs: { "active-text": "Up to current day" },
+                    attrs: { "active-text": "Past dates only" },
                     model: {
                       value: _vm.fieldData.settings.pastOnly,
                       callback: function($$v) {
@@ -89705,7 +89702,7 @@ var render = function() {
                 "el-row",
                 [
                   _c("el-switch", {
-                    attrs: { "active-text": "Beyond current day" },
+                    attrs: { "active-text": "Future dates only" },
                     model: {
                       value: _vm.fieldData.settings.futureOnly,
                       callback: function($$v) {
@@ -89722,7 +89719,7 @@ var render = function() {
                 "el-row",
                 [
                   _c("el-switch", {
-                    attrs: { "active-text": "Quick menu" },
+                    attrs: { "active-text": "Include shortcuts" },
                     model: {
                       value: _vm.fieldData.settings.quickMenu,
                       callback: function($$v) {
@@ -89756,7 +89753,7 @@ var render = function() {
                 "el-row",
                 [
                   _c("el-switch", {
-                    attrs: { "active-text": "Date Range" },
+                    attrs: { "active-text": "Set a date range" },
                     model: {
                       value: _vm.fieldData.settings.dateRange,
                       callback: function($$v) {
@@ -89783,7 +89780,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -89838,7 +89835,7 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { label: "Question:", prop: "title" } },
             [
               _c("el-input", {
                 model: {
@@ -89855,7 +89852,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This Field is" } },
+            { attrs: { label: "This field is:" } },
             [
               _c("el-switch", {
                 attrs: {
@@ -89885,7 +89882,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -89958,24 +89955,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Field Description" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.fieldData.description,
-                  callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "description", $$v)
-                  },
-                  expression: "fieldData.description"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "This Field is" } },
+            { attrs: { label: "This field is" } },
             [
               _c("el-switch", {
                 attrs: {
@@ -90005,7 +89985,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -90077,7 +90057,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Additional Title Information" } },
+            { attrs: { label: "Additional information" } },
             [
               _c("el-input", {
                 model: {
@@ -90094,7 +90074,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This Field is" } },
+            { attrs: { label: "This field is" } },
             [
               _c("el-switch", {
                 attrs: {
@@ -90115,7 +90095,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Number of Questions" } },
+            { attrs: { label: "Number of questions" } },
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1 },
@@ -90133,7 +90113,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Number of Choices Per Question" } },
+            { attrs: { label: "Number of choices per question" } },
             [
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
@@ -90160,7 +90140,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -90232,7 +90212,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This Field is" } },
+            { attrs: { label: "This field is" } },
             [
               _c("el-switch", {
                 attrs: {
@@ -90295,7 +90275,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -90388,10 +90368,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Number of Radio Selections" } },
+            { attrs: { label: "Number of choices" } },
             [
               _c("el-input-number", {
-                attrs: { "controls-position": "right", min: 1, max: 10 },
+                attrs: { "controls-position": "right", min: 1, max: 30 },
                 model: {
                   value: _vm.fieldData.settings.radioNum,
                   callback: function($$v) {
@@ -90415,7 +90395,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -90493,7 +90473,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -90566,7 +90546,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This Field is" } },
+            { attrs: { label: "This field is" } },
             [
               _c("el-switch", {
                 attrs: {
@@ -90587,7 +90567,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Set Character Limit" } },
+            { attrs: { label: "Set character limit" } },
             [
               _c("el-switch", {
                 attrs: { "inactive-text": "No Limit", "active-text": "Limit" },
@@ -90629,7 +90609,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -90701,7 +90681,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This Field is" } },
+            { attrs: { label: "This field is" } },
             [
               _c("el-switch", {
                 attrs: {
@@ -90722,7 +90702,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Set Character Limit" } },
+            { attrs: { label: "Set character limit" } },
             [
               _c("el-switch", {
                 attrs: { "inactive-text": "No Limit", "active-text": "Limit" },
@@ -90755,12 +90735,12 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Field Refers To:" } },
+            { attrs: { label: "Field fefers To:" } },
             [
               _c(
                 "base-select",
                 {
-                  attrs: { name: "target", placeholder: "Select Resource" },
+                  attrs: { name: "target", placeholder: "Select resource" },
                   model: {
                     value: _vm.target,
                     callback: function($$v) {
@@ -90846,7 +90826,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -90919,7 +90899,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This Field is" } },
+            { attrs: { label: "This field is" } },
             [
               _c("el-switch", {
                 attrs: {
@@ -90940,30 +90920,6 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Do you need the exact time?" } },
-            [
-              _c(
-                "el-row",
-                [
-                  _c("el-switch", {
-                    attrs: { "active-text": "Exact Time" },
-                    model: {
-                      value: _vm.fieldData.settings.exact_time,
-                      callback: function($$v) {
-                        _vm.$set(_vm.fieldData.settings, "exact_time", $$v)
-                      },
-                      expression: "fieldData.settings.exact_time"
-                    }
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
             { staticClass: "tw-relative tw-text-center tw-mt-12" },
             [
               _c(
@@ -90973,7 +90929,7 @@ var render = function() {
                   attrs: { type: "success" },
                   on: { click: _vm.save }
                 },
-                [_vm._v("Set")]
+                [_vm._v("Add it!")]
               )
             ],
             1
@@ -91031,7 +90987,7 @@ var render = function() {
               [
                 _c("template", { slot: "title" }, [
                   _c("p", { staticClass: "menu-title" }, [
-                    _vm._v("Select a Field")
+                    _vm._v("1. Choose a field")
                   ])
                 ]),
                 _vm._v(" "),
@@ -91053,7 +91009,7 @@ var render = function() {
                           staticClass:
                             "fields cursor-pointer hover:tw-bg-gray-400",
                           attrs: {
-                            "body-style": "padding: 5px;",
+                            "body-style": "padding: 5px 0 0 15px;",
                             shadow: "never"
                           }
                         },
@@ -91082,7 +91038,7 @@ var render = function() {
               [
                 _c("template", { slot: "title" }, [
                   _c("p", { staticClass: "menu-title" }, [
-                    _vm._v(_vm._s(_vm.selectedInput.name) + " Settings")
+                    _vm._v(" 2. Set Options")
                   ])
                 ]),
                 _vm._v(" "),
@@ -118171,7 +118127,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /var/www/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

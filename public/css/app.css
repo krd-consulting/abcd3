@@ -14578,6 +14578,10 @@ video {
   font-size: 1.125rem;
 }
 
+.el-card__body, .el-card__body:hover {
+  font-size: 1.15em;
+}
+
 .el-button+.el-button {
   margin: 0;
 }

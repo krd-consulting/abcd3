@@ -2,22 +2,22 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
         
-            <el-form-item label="Question/Title" prop="title">
+            <el-form-item label="Question/Title:" prop="title">
                 <el-col :span="24">
                     <el-input v-model="fieldData.title"></el-input>
                 </el-col>
             </el-form-item>
             
-            <el-form-item label="This Field is">
+            <el-form-item label="This field is:">
                 <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
             
-            <el-form-item label="Number of Checkbox Selections">
+            <el-form-item label="Number of choices:">
                 <el-input-number v-model="fieldData.settings.checkboxNum" controls-position="right" :min="1" :max="10"></el-input-number>
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
+                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
             </el-form-item>
 
         </el-form>
@@ -41,7 +41,7 @@ export default {
                 choices: [],
                 rules: {
                     title: [
-                        { required: true, message: 'Please input Question or title', trigger: 'blur' }
+                        { required: true, message: 'Please enter question title', trigger: 'blur' }
                     ]
                 }
             },

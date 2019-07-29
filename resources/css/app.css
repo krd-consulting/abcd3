@@ -13,6 +13,7 @@
 
 @tailwind base;
 
+
 *,
 .el-input__inner,
 .el-tabs__item,
@@ -22,6 +23,10 @@
 }
 
 @import url('https://rsms.me/inter/inter-ui.css');
+
+.el-card__body, .el-card__body:hover {
+    font-size: 1.15em;
+}
 
 .el-button+.el-button {
     @apply

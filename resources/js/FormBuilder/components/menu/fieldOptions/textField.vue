@@ -6,14 +6,14 @@
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
 
-            <el-form-item label="This Field is">
+            <el-form-item label="This field is">
                 <el-switch v-model="fieldData.settings.required" 
                     active-text="Required" 
                     inactive-text="Optional">
                 </el-switch>
             </el-form-item>
 
-            <el-form-item label="Set Character Limit">
+            <el-form-item label="Set character limit">
                 <el-switch v-model="fieldData.settings.isLimited" 
                     inactive-text="No Limit" 
                     active-text="Limit">
@@ -25,7 +25,7 @@
                 </el-input-number>
             </el-form-item>
 
-            <el-form-item label="Field Refers To:">
+            <el-form-item label="Field fefers To:">
                 <!-- <el-select v-model="fieldData.reference">
                     <el-option label="No Reference" value="noRef"></el-option>
                     <el-option label="Another Form" value="form"></el-option>
@@ -39,7 +39,7 @@
                 <base-select
                     v-model="target"
                     name="target"
-                    placeholder="Select Resource">
+                    placeholder="Select resource">
                     <el-option
                         v-for="(type, index) in targetTypes"
                         :key="index"
@@ -65,7 +65,7 @@
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
+                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -94,7 +94,7 @@ export default {
                 },
                 rules: {
                     title: [
-                        { required: true, message: 'Please input Question or title', trigger: 'blur' }
+                        { required: true, message: 'Please input question title', trigger: 'blur' }
                     ]
                 }
             },

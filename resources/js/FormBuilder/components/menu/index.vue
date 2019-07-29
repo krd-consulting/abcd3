@@ -4,11 +4,11 @@
         <el-collapse v-model="step" accordion>
             <el-collapse-item name="1">
                 <template slot="title">
-                    <p class="menu-title">Select a Field</p>
+                    <p class="menu-title">1. Choose a field</p>
                 </template>
 
                 <div v-for="input in inputs" :key="input.id" @click="selectInput(input)">
-                    <el-card class="fields cursor-pointer hover:tw-bg-gray-400" body-style="padding: 5px;" shadow="never">
+                    <el-card class="fields cursor-pointer hover:tw-bg-gray-400" body-style="padding: 5px 0 0 15px;" shadow="never">
                         {{ input.name }}
                     </el-card>
                 </div>
@@ -21,7 +21,7 @@
                 -->
               <!-- <h3>Preset Inputs</h3>
               <div v-for="input in presetInputs" :key="input.id" @click="selectInput(input)">
-                  <el-card class="fields cursor-pointer" body-style="padding: 5px;" shadow="hover">
+                  <el-card class="fields cursor-pointer" body-style="padding: 5px 0 0 15px;" shadow="hover">
                       {{ input.name }}
                   </el-card>
               </div> -->
@@ -31,7 +31,7 @@
         <el-collapse-item name="2" disabled class="tw-cursor-default">
             <template slot="title">
                 <!-- <p v-if="!selectedInput.name" class="menu-title">Settings</p> -->
-                <p class="menu-title">{{ selectedInput.name }} Settings</p>
+                <p class="menu-title"><!--{{ selectedInput.name }} --> 2. Set Options</p>
             </template>
 
                 <component :is="selectedInput.component" 
@@ -67,16 +67,15 @@ export default {
             selectedInput: {},
             inputs: [
                 {name: 'Text Field', component: 'TextField'},
-                {name: 'Text Area', component: 'TextBox'},
-                {name: 'Numeric', component: 'NumericField'},
-                {name: 'Dropdown', component: 'Dropdown'},
-                {name: 'Radio', component: 'RadioField'},
-                {name: 'Checkbox', component: 'CheckBox'},
-                {name: 'Date Picker', component: 'DatePicker'},
-                {name: 'Time Picker', component: 'TimePicker'},
+                {name: 'Numeric Field', component: 'NumericField'},
+                {name: 'Date', component: 'DatePicker'},
+                {name: 'Multiple Choice (dropdown)', component: 'Dropdown'},
+                {name: 'Multiple Choice (radio)', component: 'RadioField'},
+                {name: 'Multiple Choice (checkbox)', component: 'CheckBox'},
                 {name: 'Matrix', component: 'MatrixField'},
-                {name: 'File Uploader', component: 'FileUpload'},
-                {name: 'Divider', component: 'SectionDivider'},
+                {name: 'Paragraph', component: 'TextBox'},
+                {name: 'File Upload', component: 'FileUpload'},
+                {name: 'Section Divider', component: 'SectionDivider'},
             ],
             
             fieldData: {} 
