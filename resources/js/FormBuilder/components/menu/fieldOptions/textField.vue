@@ -201,7 +201,7 @@ export default {
 
             this.formRequest.retrieve().then((response) => {
                 this.forms = response.data;
-            });;
+            });
         },
 
         retrieveFields(keywords){

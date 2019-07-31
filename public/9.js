@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[4],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
-/***/ "./resources/js/api/CasesRequest.js":
-/*!******************************************!*\
-  !*** ./resources/js/api/CasesRequest.js ***!
-  \******************************************/
+/***/ "./resources/js/api/RoleRequest.js":
+/*!*****************************************!*\
+  !*** ./resources/js/api/RoleRequest.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,38 +30,53 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var CasesRequest =
+var RoleRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(CasesRequest, _Request);
+  _inherits(RoleRequest, _Request);
 
-  function CasesRequest() {
-    _classCallCheck(this, CasesRequest);
+  function RoleRequest() {
+    _classCallCheck(this, RoleRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(CasesRequest).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(RoleRequest).apply(this, arguments));
   }
 
-  _createClass(CasesRequest, [{
+  _createClass(RoleRequest, [{
     key: "retrieve",
-    value: function retrieve(program, recordType, record) {
-      return this.get("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record, "/cases"));
+    value: function retrieve() {
+      return this.get('/api/roles');
+    }
+  }, {
+    key: "create",
+    value: function create() {
+      return this.get('/api/roles/create');
     }
   }, {
     key: "store",
-    value: function store(program, recordType, record, recordCase) {
-      return this.post("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record, "/cases/").concat(recordCase));
+    value: function store() {
+      return this.post('/api/roles');
+    }
+  }, {
+    key: "edit",
+    value: function edit(role) {
+      return this.get("/api/roles/".concat(role, "/edit"));
+    }
+  }, {
+    key: "update",
+    value: function update(role) {
+      return this.patch("/api/roles/".concat(role));
     }
   }, {
     key: "destroy",
-    value: function destroy(program, recordType, record, recordCase) {
-      return this["delete"]("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record, "/cases/").concat(recordCase));
+    value: function destroy(role) {
+      return this["delete"]("/api/roles/".concat(role));
     }
   }]);
 
-  return CasesRequest;
+  return RoleRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (CasesRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RoleRequest);
 
 /***/ })
 

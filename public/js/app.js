@@ -4734,6 +4734,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormBuilder_components_preview_fields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/FormBuilder/components/preview/fields/sectionDivider.vue */ "./resources/js/FormBuilder/components/preview/fields/sectionDivider.vue");
 /* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
 /* harmony import */ var _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/api/FormEntryRequest */ "./resources/js/api/FormEntryRequest.js");
+/* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
 //
 //
 //
@@ -4818,6 +4819,43 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -4836,7 +4874,33 @@ __webpack_require__.r(__webpack_exports__);
     return {
       request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_11__["default"]({}),
       entryRequest: new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"]({}),
-      form: {},
+      form: {
+        target_type: {
+          name: null
+        },
+        target: {
+          name: null
+        }
+      },
+      targetRequest: {},
+      targetParams: {
+        ascending: true,
+        sortBy: 'name',
+        page: 1,
+        perPage: 10,
+        search: ''
+      },
+      recordParams: {
+        ascending: true,
+        sortBy: 'field_1_value',
+        page: 1,
+        perPage: 10,
+        search: ''
+      },
+      targetItems: [],
+      entryData: {
+        target_id: ''
+      },
       value: '',
       inputName: '',
       teams: [],
@@ -4858,6 +4922,11 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
+  computed: {
+    targetName: function targetName() {
+      return this.form.target_type.name;
+    }
+  },
   components: {
     MatrixField: _FormBuilder_components_preview_fields_matrix_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     RadioField: _FormBuilder_components_preview_fields_radio_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
@@ -4869,9 +4938,21 @@ __webpack_require__.r(__webpack_exports__);
     DateField: _FormBuilder_components_preview_fields_datePicker_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
     TimeField: _FormBuilder_components_preview_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     FileField: _FormBuilder_components_preview_fields_upload_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
-    SectionDivider: _FormBuilder_components_preview_fields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
+    SectionDivider: _FormBuilder_components_preview_fields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    RecordPrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_13__["default"]
   },
   methods: {
+    getPrimaryData: function getPrimaryData(record, fields) {
+      var remainingFields = [];
+      if ('first_name' in fields) remainingFields.push('first_name');
+      if ('last_name' in fields) remainingFields.push('last_name');
+      if ('business_name' in fields) remainingFields.push('business_name');
+      var data = '';
+      remainingFields.forEach(function (field) {
+        data += record[field] + ' ';
+      });
+      return data.trim();
+    },
     retrieve: function retrieve() {
       var _this = this;
 
@@ -4880,14 +4961,38 @@ __webpack_require__.r(__webpack_exports__);
         _this.form = response.data;
       });
     },
-    submit: function submit() {
+    retrieveFormTargetItems: function retrieveFormTargetItems(keywords, callback) {
       var _this2 = this;
+
+      __webpack_require__("./resources/js/api lazy recursive ^\\.\\/.*Request$")("./".concat(this.targetName, "Request")).then(function (foo) {
+        _this2.targetRequest = new foo["default"]({});
+        _this2.targetParams.search = keywords;
+        var params = _this2.targetParams;
+
+        if (_this2.targetName == 'Record') {
+          _this2.recordParams.search = keywords;
+          params = _this2.recordParams;
+        }
+
+        _this2.targetRequest.setFields({
+          params: params
+        });
+
+        var args = _this2.form.target != null ? _this2.form.target.name : null;
+
+        _this2.targetRequest.retrieve(args).then(function (response) {
+          _this2.targetItems = response.data;
+        });
+      });
+    },
+    submit: function submit() {
+      var _this3 = this;
 
       this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.form);
       this.entryRequest.store().then(function (response) {
-        _this2.$emit('store', response.data);
+        _this3.$emit('store', response.data);
 
-        _this2.close();
+        _this3.close();
 
         console.log('eyyy we did it');
       })["catch"](function (error) {//
@@ -4917,6 +5022,9 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
 //
 //
 //
@@ -88553,17 +88661,99 @@ var render = function() {
                     "el-col",
                     { attrs: { span: 8 } },
                     [
-                      _c("el-input", {
-                        staticClass: "inputField",
-                        attrs: { id: "name" },
-                        model: {
-                          value: _vm.inputName,
-                          callback: function($$v) {
-                            _vm.inputName = $$v
-                          },
-                          expression: "inputName"
-                        }
-                      })
+                      _vm.targetName != "Record"
+                        ? _c(
+                            "base-select",
+                            {
+                              attrs: {
+                                filterable: "",
+                                remote: "",
+                                "remote-method": _vm.retrieveFormTargetItems,
+                                name: "type",
+                                placeholder: "Input " + _vm.targetName
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.request.errors.clear("team_id")
+                                }
+                              },
+                              nativeOn: {
+                                click: function($event) {
+                                  return _vm.retrieveFormTargetItems($event)
+                                }
+                              },
+                              model: {
+                                value: _vm.entryData.target_id,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.entryData, "target_id", $$v)
+                                },
+                                expression: "entryData.target_id"
+                              }
+                            },
+                            _vm._l(_vm.targetItems, function(item, index) {
+                              return _c(
+                                "el-option",
+                                {
+                                  key: index,
+                                  attrs: { label: item.name, value: item.id }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(item.name) +
+                                      "\n                        "
+                                  )
+                                ]
+                              )
+                            }),
+                            1
+                          )
+                        : _c(
+                            "base-select",
+                            {
+                              attrs: {
+                                filterable: "",
+                                remote: "",
+                                "remote-method": _vm.retrieveFormTargetItems,
+                                name: "type",
+                                placeholder: "Input " + _vm.targetName
+                              },
+                              on: {
+                                change: function($event) {
+                                  return _vm.request.errors.clear("team_id")
+                                }
+                              },
+                              model: {
+                                value: _vm.entryData.target_id,
+                                callback: function($$v) {
+                                  _vm.$set(_vm.entryData, "target_id", $$v)
+                                },
+                                expression: "entryData.target_id"
+                              }
+                            },
+                            _vm._l(_vm.targetItems, function(item, index) {
+                              return _c(
+                                "el-option",
+                                {
+                                  key: index,
+                                  attrs: {
+                                    label: _vm.getPrimaryData(
+                                      item,
+                                      item.fields
+                                    ),
+                                    value: item.id
+                                  }
+                                },
+                                [
+                                  _c("record-primary-data", {
+                                    attrs: { record: item, fields: item.fields }
+                                  })
+                                ],
+                                1
+                              )
+                            }),
+                            1
+                          )
                     ],
                     1
                   )
@@ -88608,7 +88798,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm.type === "pre-post"
+              _vm.form.type === "pre-post"
                 ? _c(
                     "el-row",
                     { staticClass: "tw-my-4" },
@@ -88811,6 +89001,19 @@ var render = function() {
                 var form = ref.item
                 return [
                   _vm._v("\n            " + _vm._s(form.name) + "\n        ")
+                ]
+              }
+            },
+            {
+              key: "list-item-secondary-data",
+              fn: function(ref) {
+                var form = ref.item
+                return [
+                  _vm._v(
+                    "\n            About " +
+                      _vm._s(form.target_name) +
+                      "\n        "
+                  )
                 ]
               }
             },
@@ -114397,6 +114600,130 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_upload_vue_vue_type_template_id_66a8c266___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/api lazy recursive ^\\.\\/.*Request$":
+/*!****************************************************************!*\
+  !*** ./resources/js/api lazy ^\.\/.*Request$ namespace object ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./CasesRequest": [
+		"./resources/js/api/CasesRequest.js",
+		4
+	],
+	"./ClientStatusRequest": [
+		"./resources/js/api/ClientStatusRequest.js"
+	],
+	"./FormEntryRequest": [
+		"./resources/js/api/FormEntryRequest.js"
+	],
+	"./FormFieldRequest": [
+		"./resources/js/api/FormFieldRequest.js",
+		5
+	],
+	"./FormFieldTargetTypeRequest": [
+		"./resources/js/api/FormFieldTargetTypeRequest.js",
+		6
+	],
+	"./FormRequest": [
+		"./resources/js/api/FormRequest.js"
+	],
+	"./GroupRecordsRequest": [
+		"./resources/js/api/GroupRecordsRequest.js"
+	],
+	"./GroupRequest": [
+		"./resources/js/api/GroupRequest.js"
+	],
+	"./GroupsAvailableForRecordRequest": [
+		"./resources/js/api/GroupsAvailableForRecordRequest.js"
+	],
+	"./ProgramGroupsRequest": [
+		"./resources/js/api/ProgramGroupsRequest.js"
+	],
+	"./ProgramRecordsRequest": [
+		"./resources/js/api/ProgramRecordsRequest.js"
+	],
+	"./ProgramRequest": [
+		"./resources/js/api/ProgramRequest.js"
+	],
+	"./ProgramsAvailableForRecordRequest": [
+		"./resources/js/api/ProgramsAvailableForRecordRequest.js"
+	],
+	"./RecordGroupsRequest": [
+		"./resources/js/api/RecordGroupsRequest.js"
+	],
+	"./RecordProgramsRequest": [
+		"./resources/js/api/RecordProgramsRequest.js"
+	],
+	"./RecordRequest": [
+		"./resources/js/api/RecordRequest.js"
+	],
+	"./RecordTeamsRequest": [
+		"./resources/js/api/RecordTeamsRequest.js"
+	],
+	"./RecordTypeRequest": [
+		"./resources/js/api/RecordTypeRequest.js"
+	],
+	"./RecordsAvailableForCaseloadRequest": [
+		"./resources/js/api/RecordsAvailableForCaseloadRequest.js",
+		7
+	],
+	"./RecordsAvailableForGroupRequest": [
+		"./resources/js/api/RecordsAvailableForGroupRequest.js"
+	],
+	"./RecordsAvailableForProgramRequest": [
+		"./resources/js/api/RecordsAvailableForProgramRequest.js"
+	],
+	"./RecordsAvailableForTeamRequest": [
+		"./resources/js/api/RecordsAvailableForTeamRequest.js"
+	],
+	"./RolePermissionRequest": [
+		"./resources/js/api/RolePermissionRequest.js",
+		8
+	],
+	"./RoleRequest": [
+		"./resources/js/api/RoleRequest.js",
+		9
+	],
+	"./TeamGroupsRequest": [
+		"./resources/js/api/TeamGroupsRequest.js"
+	],
+	"./TeamProgramsRequest": [
+		"./resources/js/api/TeamProgramsRequest.js"
+	],
+	"./TeamRecordsRequest": [
+		"./resources/js/api/TeamRecordsRequest.js"
+	],
+	"./TeamRequest": [
+		"./resources/js/api/TeamRequest.js"
+	],
+	"./TeamsAvailableForRecordRequest": [
+		"./resources/js/api/TeamsAvailableForRecordRequest.js"
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(function() {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
+		return __webpack_require__(id);
+	});
+}
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = "./resources/js/api lazy recursive ^\\.\\/.*Request$";
+module.exports = webpackAsyncContext;
 
 /***/ }),
 

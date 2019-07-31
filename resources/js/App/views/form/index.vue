@@ -48,6 +48,9 @@
             <template v-slot:list-item-primary-data="{ item:form }">
                 {{ form.name }}
             </template>
+            <template v-slot:list-item-secondary-data="{ item:form }">
+                About {{ form.target_name }}
+            </template>
 
             <template v-slot:options-edit-button="{ item:form }">
                 <router-link :to="`${form.path}/new`"

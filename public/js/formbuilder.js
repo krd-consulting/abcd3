@@ -5385,7 +5385,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.commit('SET_FIELDS', fields);
       }
     },
-    targetTitle: function targetTitle() {
+    targetName: function targetName() {
       if (this.target.name != null) return this.target.name;
       return this.target.type.name;
     }
@@ -6334,7 +6334,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.formRequest.retrieve().then(function (response) {
         _this2.forms = response.data;
       });
-      ;
     },
     retrieveFields: function retrieveFields(keywords) {
       var _this3 = this;
@@ -89317,7 +89316,7 @@ var render = function() {
                         { attrs: { span: 10 } },
                         [
                           _c("span", { staticClass: "input-label" }, [
-                            _vm._v(" " + _vm._s(_vm.targetTitle) + " Name")
+                            _vm._v(" " + _vm._s(_vm.targetName) + " Name")
                           ]),
                           _vm._v(" "),
                           _c("el-input", { staticClass: "inputField" })

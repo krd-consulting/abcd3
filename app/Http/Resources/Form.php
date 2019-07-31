@@ -26,6 +26,7 @@ class Form extends JsonResource
             'target_type' => $this->target_type,
             'target_id' => $this->target_id,
             'target' => $this->target,
+            'target_name' => $this->target != null ? $this->target->name : $this->target_type->name . 's', 
             'field_layout' => $this->field_layout->all(),
             'path' => $this->path,
             'created_at' => $this->created_at,
