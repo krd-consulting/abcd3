@@ -2,15 +2,25 @@
 
 namespace App;
 
+use App\Traits\Models\Search;
+use App\Traits\Models\Sort;
+
 use Illuminate\Database\Eloquent\Model;
 
 use Spatie\SchemalessAttributes\SchemalessAttributes;
 
 class FormField extends Model
 {
+    use Search;
+    use Sort;
+
 	protected $guarded = [];
 
     public $timestamps = false;
+
+    protected $searchColumns = [
+        'title'
+    ];
 
 	public $casts = [
         'options' => 'array',
@@ -106,5 +116,14 @@ class FormField extends Model
 
 
         return $this->columnTypes[$this->type];
+    }
+
+    public function scopeFilter($query, $terms)
+    {   
+        foreach($terms as $column=>$term) {
+            $query->where($column, $term);
+        }
+
+        return $query;
     }
 }

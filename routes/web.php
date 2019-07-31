@@ -96,6 +96,8 @@ Route::prefix('api')
         Route::post('forms', 'FormController@store');
         Route::patch('forms/{form}', 'FormController@update');
 
+        Route::get('forms/{form}/fields', 'FormFieldController@index');
+
         Route::resource('roles', 'RoleController')->except('show');
 
         Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');

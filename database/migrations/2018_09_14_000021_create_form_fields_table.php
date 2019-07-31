@@ -14,6 +14,7 @@ class CreateFormFieldsTable extends Migration
     public function up()
     {
         Schema::create('form_fields', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->bigInteger('form_id')->unsigned();
             $table->string('column_name');
             $table->text('title')->nullable();
@@ -25,7 +26,7 @@ class CreateFormFieldsTable extends Migration
             $table->schemalessAttributes('settings');
             $table->schemalessAttributes('validation_rules');
 
-            $table->primary(['form_id', 'column_name']);
+            $table->unique(['form_id', 'column_name']);
             $table->foreign('reference_target_type_id')->references('id')->on('form_target_types');
             $table->foreign('form_id')->references('id')->on('forms');
         });

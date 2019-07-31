@@ -25,17 +25,7 @@
                 </el-input-number>
             </el-form-item>
 
-            <el-form-item label="Field fefers To:">
-                <!-- <el-select v-model="fieldData.reference">
-                    <el-option label="No Reference" value="noRef"></el-option>
-                    <el-option label="Another Form" value="form"></el-option>
-                    <el-option 
-                        v-for="type in recordTypes" 
-                        :label="type.name" 
-                        :value="type.slug"
-                        :key="type.slug"></el-option>
-                </el-select> -->
-
+            <el-form-item label="Field refers to:">
                 <base-select
                     v-model="target"
                     name="target"
@@ -49,19 +39,40 @@
                     </el-option>
                 </base-select>
 
-                <div v-if="fieldData.reference === 'form'">
-                    <p>New Select Menu with list of available <b>forms</b> from back end</p>
-                    <p>From there, available fields within that form</p>
-                </div>
-                <div v-if="fieldData.reference === 'volunteer'">
-                    <p>Link to available <b>volunteers</b> from back end</p>
-                </div>
-                <div v-if="fieldData.reference === 'client'">
-                    <p>Link to available <b>Clients</b> from back end</p>
-                </div>
-                <div v-if="fieldData.reference === 'staff'">
-                    <p>Link to available <b>Staff Members</b> from back end</p>
-                </div>
+                <base-select
+                    v-if="targetName == 'Form Field'"
+                    v-model="form_id"
+                    @change="retrieveFields(''); fieldData.reference_target_id = null"
+                    name="form"
+                    filterable
+                    remote
+                    :remote-method="retrieveForms"
+                    placeholder="Select form">
+                    <el-option
+                        v-for="(form, index) in forms"
+                        :key="index"
+                        :label="form.name"
+                        :value="form.id">
+                        {{ form.name }}
+                    </el-option>
+                </base-select>
+
+                <base-select
+                    v-if="targetName == 'Form Field' && form_id != null"
+                    v-model="fieldData.reference_target_id"
+                    name="field"
+                    filterable
+                    remote
+                    :remote-method="retrieveFields"
+                    placeholder="Select form field">
+                    <el-option
+                        v-for="(field, index) in fields"
+                        :key="index"
+                        :label="field.title"
+                        :value="field.id">
+                        {{ field.title }}
+                    </el-option>
+                </base-select>
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
@@ -72,21 +83,45 @@
 </template>
 
 <script>
-import Request from '@/api/FormFieldTargetTypeRequest';
+import FormFieldTargetTypesRequest from '@/api/FormFieldTargetTypeRequest';
+import FormRequest from '@/api/FormRequest';
+import FieldRequest from '@/api/FormFieldRequest';
 
 export default {
     name: 'textField',
     data: () => {
         return {
             targetTypes: [],
-
             target: '',
+            formRequest: new FormRequest({}),
+            formParams: {
+                ascending: true,
+                sortBy: 'name',
+                page: 1,
+                perPage: 10,
+                search: ''
+            },
+            forms: [],
+            form_id: null,
+
+            fieldRequest: new FieldRequest({}),
+            fieldParams: {
+                ascending: true,
+                sortBy: 'title',
+                page: 1,
+                perPage: 10,
+                search: '',
+                field_type: 'text'
+            },
+            fields: [],
+            field_id: null,
 
             fieldData: {
                 type: 'TextField',
                 name: 'text_field',
                 title: '',
-                reference: '',
+                reference_target_type_id: '',
+                reference_target_id: '',
                 settings: {
                     required: false,
                     isLimited: false,
@@ -108,10 +143,13 @@ export default {
     computed: {
         target_type_id() {
             if(!this.target.toString().includes('_')) {
+                this.fieldData.reference_target_type_id = this.target;
                 return this.target;
             }
 
             const target = this.target.toString().split('_');
+
+            this.fieldData.reference_target_type_id = target;
 
             return target[0];
         },
@@ -123,27 +161,66 @@ export default {
             }
 
             return null;
+        },
+
+        targetName() {
+            let targetType = null;
+
+            targetType = _.find(this.targetTypes, _.matchesProperty('target', this.target));
+
+            if(targetType == null)
+                return null;
+
+            if(targetType.name == 'Form Field')
+                this.retrieveForms();
+
+            return targetType.name;
         }
     },
-    methods: {
-        
+    methods: {        
         save() {
             this.fieldData['target_type_id'] = this.target_type_id;
             this.fieldData['target_id'] = this.target_id;
             this.$emit('save', this.fieldData);
         },
 
-        retrieve() {
-            const request = new Request({});
+        retrieveTargetTypes() {
+            const request = new FormFieldTargetTypesRequest({});
 
             request.retrieve().then((response) => {
                 this.targetTypes = response.data;
             });
         },
+
+        retrieveForms(keywords){
+            this.formParams.search = keywords;
+
+            this.formRequest.setFields({
+                params: {...this.formParams}
+            });
+
+            this.formRequest.retrieve().then((response) => {
+                this.forms = response.data;
+            });;
+        },
+
+        retrieveFields(keywords){
+            this.fieldParams.search = keywords;
+
+            console.log('kini');
+
+            this.fieldRequest.setFields({
+                params: {...this.fieldParams}
+            });
+
+            this.fieldRequest.retrieve(this.form_id).then((response) => {
+                this.fields = response.data;
+            });;
+        }
     },
 
     created() {
-        this.retrieve();
+        this.retrieveTargetTypes();
     }
 }
 </script>

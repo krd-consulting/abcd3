@@ -6139,6 +6139,23 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormFieldTargetTypeRequest */ "./resources/js/api/FormFieldTargetTypeRequest.js");
+/* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
+/* harmony import */ var _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/api/FormFieldRequest */ "./resources/js/api/FormFieldRequest.js");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6213,17 +6230,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'textField',
   data: function data() {
     return {
       targetTypes: [],
       target: '',
+      formRequest: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({}),
+      formParams: {
+        ascending: true,
+        sortBy: 'name',
+        page: 1,
+        perPage: 10,
+        search: ''
+      },
+      forms: [],
+      form_id: null,
+      fieldRequest: new _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_2__["default"]({}),
+      fieldParams: {
+        ascending: true,
+        sortBy: 'title',
+        page: 1,
+        perPage: 10,
+        search: '',
+        field_type: 'text'
+      },
+      fields: [],
+      field_id: null,
       fieldData: {
         type: 'TextField',
         name: 'text_field',
         title: '',
-        reference: '',
+        reference_target_type_id: '',
+        reference_target_id: '',
         settings: {
           required: false,
           isLimited: false,
@@ -6245,10 +6286,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     target_type_id: function target_type_id() {
       if (!this.target.toString().includes('_')) {
+        this.fieldData.reference_target_type_id = this.target;
         return this.target;
       }
 
       var target = this.target.toString().split('_');
+      this.fieldData.reference_target_type_id = target;
       return target[0];
     },
     target_id: function target_id() {
@@ -6258,6 +6301,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return null;
+    },
+    targetName: function targetName() {
+      var targetType = null;
+      targetType = _.find(this.targetTypes, _.matchesProperty('target', this.target));
+      if (targetType == null) return null;
+      if (targetType.name == 'Form Field') this.retrieveForms();
+      return targetType.name;
     }
   },
   methods: {
@@ -6266,17 +6316,42 @@ __webpack_require__.r(__webpack_exports__);
       this.fieldData['target_id'] = this.target_id;
       this.$emit('save', this.fieldData);
     },
-    retrieve: function retrieve() {
+    retrieveTargetTypes: function retrieveTargetTypes() {
       var _this = this;
 
       var request = new _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
       request.retrieve().then(function (response) {
         _this.targetTypes = response.data;
       });
+    },
+    retrieveForms: function retrieveForms(keywords) {
+      var _this2 = this;
+
+      this.formParams.search = keywords;
+      this.formRequest.setFields({
+        params: _objectSpread({}, this.formParams)
+      });
+      this.formRequest.retrieve().then(function (response) {
+        _this2.forms = response.data;
+      });
+      ;
+    },
+    retrieveFields: function retrieveFields(keywords) {
+      var _this3 = this;
+
+      this.fieldParams.search = keywords;
+      console.log('kini');
+      this.fieldRequest.setFields({
+        params: _objectSpread({}, this.fieldParams)
+      });
+      this.fieldRequest.retrieve(this.form_id).then(function (response) {
+        _this3.fields = response.data;
+      });
+      ;
     }
   },
   created: function created() {
-    this.retrieve();
+    this.retrieveTargetTypes();
   }
 });
 
@@ -10230,7 +10305,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-e97e2c96] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-e97e2c96]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-e97e2c96] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-e97e2c96]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10249,7 +10324,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5ce99664] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5ce99664] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10268,7 +10343,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5bdc3b03] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5bdc3b03] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10287,7 +10362,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-120ae50f] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-120ae50f] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10325,7 +10400,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-1c3cc70b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-1c3cc70b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-1c3cc70b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-1c3cc70b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10344,7 +10419,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7d675a79] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7d675a79]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7d675a79] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7d675a79]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10363,7 +10438,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -10382,7 +10457,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7a7b55cc] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7a7b55cc]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7a7b55cc] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7a7b55cc]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10401,7 +10476,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-28f88a4b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-28f88a4b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-28f88a4b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-28f88a4b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10420,7 +10495,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-2da47d2d] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-2da47d2d] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10439,7 +10514,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 900px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\r\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 900px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\n", ""]);
 
 // exports
 
@@ -10458,7 +10533,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\r\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n", ""]);
 
 // exports
 
@@ -10515,7 +10590,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -10553,7 +10628,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -10572,7 +10647,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\r\n", ""]);
+exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\n", ""]);
 
 // exports
 
@@ -10591,7 +10666,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\r\n\r\n", ""]);
+exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -90735,7 +90810,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Field fefers To:" } },
+            { attrs: { label: "Field refers to:" } },
             [
               _c(
                 "base-select",
@@ -90768,48 +90843,88 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm.fieldData.reference === "form"
-                ? _c("div", [
-                    _c("p", [
-                      _vm._v("New Select Menu with list of available "),
-                      _c("b", [_vm._v("forms")]),
-                      _vm._v(" from back end")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", [
-                      _vm._v("From there, available fields within that form")
-                    ])
-                  ])
+              _vm.targetName == "Form Field"
+                ? _c(
+                    "base-select",
+                    {
+                      attrs: {
+                        name: "form",
+                        filterable: "",
+                        remote: "",
+                        "remote-method": _vm.retrieveForms,
+                        placeholder: "Select form"
+                      },
+                      on: {
+                        change: function($event) {
+                          _vm.retrieveFields("")
+                          _vm.fieldData.reference_target_id = null
+                        }
+                      },
+                      model: {
+                        value: _vm.form_id,
+                        callback: function($$v) {
+                          _vm.form_id = $$v
+                        },
+                        expression: "form_id"
+                      }
+                    },
+                    _vm._l(_vm.forms, function(form, index) {
+                      return _c(
+                        "el-option",
+                        {
+                          key: index,
+                          attrs: { label: form.name, value: form.id }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(form.name) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    }),
+                    1
+                  )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.fieldData.reference === "volunteer"
-                ? _c("div", [
-                    _c("p", [
-                      _vm._v("Link to available "),
-                      _c("b", [_vm._v("volunteers")]),
-                      _vm._v(" from back end")
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.fieldData.reference === "client"
-                ? _c("div", [
-                    _c("p", [
-                      _vm._v("Link to available "),
-                      _c("b", [_vm._v("Clients")]),
-                      _vm._v(" from back end")
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.fieldData.reference === "staff"
-                ? _c("div", [
-                    _c("p", [
-                      _vm._v("Link to available "),
-                      _c("b", [_vm._v("Staff Members")]),
-                      _vm._v(" from back end")
-                    ])
-                  ])
+              _vm.targetName == "Form Field" && _vm.form_id != null
+                ? _c(
+                    "base-select",
+                    {
+                      attrs: {
+                        name: "field",
+                        filterable: "",
+                        remote: "",
+                        "remote-method": _vm.retrieveFields,
+                        placeholder: "Select form field"
+                      },
+                      model: {
+                        value: _vm.fieldData.reference_target_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.fieldData, "reference_target_id", $$v)
+                        },
+                        expression: "fieldData.reference_target_id"
+                      }
+                    },
+                    _vm._l(_vm.fields, function(field, index) {
+                      return _c(
+                        "el-option",
+                        {
+                          key: index,
+                          attrs: { label: field.title, value: field.id }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(field.title) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    }),
+                    1
+                  )
                 : _vm._e()
             ],
             1
@@ -116117,6 +116232,61 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/api/FormFieldRequest.js":
+/*!**********************************************!*\
+  !*** ./resources/js/api/FormFieldRequest.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var FormField =
+/*#__PURE__*/
+function (_Request) {
+  _inherits(FormField, _Request);
+
+  function FormField() {
+    _classCallCheck(this, FormField);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(FormField).apply(this, arguments));
+  }
+
+  _createClass(FormField, [{
+    key: "retrieve",
+    value: function retrieve(form) {
+      return this.get("/api/forms/".concat(form, "/fields"));
+    }
+  }]);
+
+  return FormField;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (FormField);
+
+/***/ }),
+
 /***/ "./resources/js/api/FormFieldTargetTypeRequest.js":
 /*!********************************************************!*\
   !*** ./resources/js/api/FormFieldTargetTypeRequest.js ***!
@@ -118127,7 +118297,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })
