@@ -4993,8 +4993,6 @@ __webpack_require__.r(__webpack_exports__);
         _this3.$emit('store', response.data);
 
         _this3.close();
-
-        console.log('eyyy we did it');
       })["catch"](function (error) {//
       });
     }
@@ -12980,7 +12978,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -13018,7 +13016,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -95267,7 +95265,12 @@ var render = function() {
     [
       _c(
         "el-menu-item",
-        _vm._b({}, "el-menu-item", _vm.$attrs, false),
+        _vm._b(
+          { staticClass: "tw-text-white" },
+          "el-menu-item",
+          _vm.$attrs,
+          false
+        ),
         [_vm._t("default")],
         2
       )
@@ -117998,8 +118001,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

@@ -1,6 +1,6 @@
 <template>
     <router-link tag="a" :to="route">
-        <el-menu-item v-bind="$attrs">
+        <el-menu-item v-bind="$attrs" class="tw-text-white">
             <slot></slot>
         </el-menu-item>
     </router-link>
@@ -13,3 +13,5 @@
         }
     }
 </script>
+
+

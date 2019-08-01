@@ -1,9 +1,9 @@
-<el-header class="main-nav" style="height: 80px;" v-if="!loading">
+<el-header class="main-nav tw-bg-blue-700" style="height: 80px;" v-if="!loading">
     <div class="main-logo-container">
-        <base-button class="tw-border-none tw-bg-transparent tw-align-middle" @click="collapseSidebar = !collapseSidebar">
-            <base-icon>menu</base-icon>
+        <base-button class="tw-border-none tw-bg-blue-700 tw-align-middle" @click="collapseSidebar = !collapseSidebar">
+            <base-icon class="tw-text-yellow-200">menu</base-icon>
         </base-button>
-        <a href="/" class="tw-text-3xl tw-font-bold tw-align-middle tw-inline-block">
+        <a href="/" class="tw-text-3xl tw-font-bold tw-text-white tw-align-middle tw-inline-block">
             ABCD
         </a>
     </div>
@@ -14,16 +14,16 @@
         <div>
             <div class="tw-inline-block tw-align-middle tw-mr-2">
                 <el-dropdown class="main-nav-dropdown" trigger="click" placement="bottom-end">
-                    <base-icon class="tw-text-lg">notifications</base-icon>
+                    <base-icon class="tw-text-lg tw-text-white">notifications</base-icon>
                     <el-dropdown-menu slot="dropdown">
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
             <div class="tw-inline-block tw-align-middle">
                 <base-menu mode="horizontal">
-                    <el-dropdown class="main-nav-dropdown" trigger="click" placement="bottom-end">
-                        <span>
-                            <profile-picture class="tw-w-8 tw-h-8 tw-bg-blue-500 tw-text-white" username="{{ Auth::user()->name }}"></profile-picture>
+                    <el-dropdown class="main-nav-dropdown tw-bg-blue-700" trigger="click" placement="bottom-end">
+                        <span class="">
+                            <profile-picture class="tw-w-8 tw-h-8 tw-bg-green-200 tw-text-white" username="{{ Auth::user()->name }}"></profile-picture>
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <a>

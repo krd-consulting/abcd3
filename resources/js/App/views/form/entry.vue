@@ -272,7 +272,6 @@
                     .then((response) => {
                         this.$emit('store', response.data);
                         this.close();
-                        console.log('eyyy we did it')
                     })
                     .catch((error) => {
                         //
