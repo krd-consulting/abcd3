@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./resources/js/api/RecordsAvailableForCaseloadRequest.js":
-/*!****************************************************************!*\
-  !*** ./resources/js/api/RecordsAvailableForCaseloadRequest.js ***!
-  \****************************************************************/
+/***/ "./resources/js/api/RolePermissionRequest.js":
+/*!***************************************************!*\
+  !*** ./resources/js/api/RolePermissionRequest.js ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,40 +30,33 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var RecordsAvailableForCaseloadRequest =
+var RolePermissionRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(RecordsAvailableForCaseloadRequest, _Request);
+  _inherits(RolePermissionRequest, _Request);
 
-  function RecordsAvailableForCaseloadRequest() {
-    _classCallCheck(this, RecordsAvailableForCaseloadRequest);
+  function RolePermissionRequest() {
+    _classCallCheck(this, RolePermissionRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(RecordsAvailableForCaseloadRequest).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(RolePermissionRequest).apply(this, arguments));
   }
 
-  _createClass(RecordsAvailableForCaseloadRequest, [{
-    key: "retrieve",
-    value: function retrieve(program, recordType, record) {
-      return this.get("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record, "/available-cases"));
-    } // store() {
-    // 	return this.post(`/api/programs/client-statuses`);
-    // }
-    // edit(status) {
-    // 	return this.get(`/api/programs/client-statuses/${status}/edit`);
-    // }
-    // update(status) {
-    // 	return this.patch(`/api/programs/client-statuses/${status}`);
-    // }
-    // destroy(status) {
-    // 	return this.delete(`/api/programs/client-statuses/${status}`);
-    // }
-
+  _createClass(RolePermissionRequest, [{
+    key: "store",
+    value: function store(role, permission) {
+      return this.post("/api/roles/".concat(role, "/permissions/").concat(permission));
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(role, permission) {
+      return this["delete"]("/api/roles/".concat(role, "/permissions/").concat(permission));
+    }
   }]);
 
-  return RecordsAvailableForCaseloadRequest;
+  return RolePermissionRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RecordsAvailableForCaseloadRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RolePermissionRequest);
 
 /***/ })
 

@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ "./resources/js/api/RolePermissionRequest.js":
-/*!***************************************************!*\
-  !*** ./resources/js/api/RolePermissionRequest.js ***!
-  \***************************************************/
+/***/ "./resources/js/api/RoleRequest.js":
+/*!*****************************************!*\
+  !*** ./resources/js/api/RoleRequest.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,33 +30,53 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var RolePermissionRequest =
+var RoleRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(RolePermissionRequest, _Request);
+  _inherits(RoleRequest, _Request);
 
-  function RolePermissionRequest() {
-    _classCallCheck(this, RolePermissionRequest);
+  function RoleRequest() {
+    _classCallCheck(this, RoleRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(RolePermissionRequest).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(RoleRequest).apply(this, arguments));
   }
 
-  _createClass(RolePermissionRequest, [{
+  _createClass(RoleRequest, [{
+    key: "retrieve",
+    value: function retrieve() {
+      return this.get('/api/roles');
+    }
+  }, {
+    key: "create",
+    value: function create() {
+      return this.get('/api/roles/create');
+    }
+  }, {
     key: "store",
-    value: function store(role, permission) {
-      return this.post("/api/roles/".concat(role, "/permissions/").concat(permission));
+    value: function store() {
+      return this.post('/api/roles');
+    }
+  }, {
+    key: "edit",
+    value: function edit(role) {
+      return this.get("/api/roles/".concat(role, "/edit"));
+    }
+  }, {
+    key: "update",
+    value: function update(role) {
+      return this.patch("/api/roles/".concat(role));
     }
   }, {
     key: "destroy",
-    value: function destroy(role, permission) {
-      return this["delete"]("/api/roles/".concat(role, "/permissions/").concat(permission));
+    value: function destroy(role) {
+      return this["delete"]("/api/roles/".concat(role));
     }
   }]);
 
-  return RolePermissionRequest;
+  return RoleRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RolePermissionRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RoleRequest);
 
 /***/ })
 

@@ -10735,6 +10735,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/api/RecordTypeRequest */ "./resources/js/api/RecordTypeRequest.js");
 /* harmony import */ var _api_RecordRequest__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/api/RecordRequest */ "./resources/js/api/RecordRequest.js");
 /* harmony import */ var _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/api/FormFieldRequest */ "./resources/js/api/FormFieldRequest.js");
+/* harmony import */ var _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/api/FormFieldEntryRequest */ "./resources/js/api/FormFieldEntryRequest.js");
 //
 //
 //
@@ -10797,6 +10798,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -10815,7 +10817,8 @@ __webpack_require__.r(__webpack_exports__);
       requests: {
         Program: _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_1__["default"],
         Group: _api_GroupRequest__WEBPACK_IMPORTED_MODULE_2__["default"],
-        Record: _api_RecordRequest__WEBPACK_IMPORTED_MODULE_4__["default"]
+        Record: _api_RecordRequest__WEBPACK_IMPORTED_MODULE_4__["default"],
+        'Form Field': _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_6__["default"]
       },
       targetParams: {
         ascending: true,
@@ -10901,14 +10904,14 @@ __webpack_require__.r(__webpack_exports__);
         this.fieldParams.search = keywords;
         params = this.fieldParams;
 
-        var _request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_3__["default"]({});
+        var _request = new _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_5__["default"]({});
 
         _request.show(this.field.reference_target_id).then(function (response) {
           _this2.targetRequest.setFields({
             params: params
           });
 
-          _this2.targetRequest.retrieve(response.data.slug).then(function (response) {
+          _this2.targetRequest.retrieve(response.data.form.id).then(function (response) {
             _this2.targetItems = response.data;
           });
         });
@@ -114075,8 +114078,7 @@ var map = {
 		"./resources/js/api/FormEntryRequest.js"
 	],
 	"./FormFieldEntryRequest": [
-		"./resources/js/api/FormFieldEntryRequest.js",
-		5
+		"./resources/js/api/FormFieldEntryRequest.js"
 	],
 	"./FormFieldRequest": [
 		"./resources/js/api/FormFieldRequest.js"
@@ -114125,7 +114127,7 @@ var map = {
 	],
 	"./RecordsAvailableForCaseloadRequest": [
 		"./resources/js/api/RecordsAvailableForCaseloadRequest.js",
-		6
+		5
 	],
 	"./RecordsAvailableForGroupRequest": [
 		"./resources/js/api/RecordsAvailableForGroupRequest.js"
@@ -114138,11 +114140,11 @@ var map = {
 	],
 	"./RolePermissionRequest": [
 		"./resources/js/api/RolePermissionRequest.js",
-		7
+		6
 	],
 	"./RoleRequest": [
 		"./resources/js/api/RoleRequest.js",
-		8
+		7
 	],
 	"./TeamGroupsRequest": [
 		"./resources/js/api/TeamGroupsRequest.js"
@@ -114309,6 +114311,61 @@ function (_Request) {
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (FormEntry);
+
+/***/ }),
+
+/***/ "./resources/js/api/FormFieldEntryRequest.js":
+/*!***************************************************!*\
+  !*** ./resources/js/api/FormFieldEntryRequest.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var FormFieldEntry =
+/*#__PURE__*/
+function (_Request) {
+  _inherits(FormFieldEntry, _Request);
+
+  function FormFieldEntry() {
+    _classCallCheck(this, FormFieldEntry);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(FormFieldEntry).apply(this, arguments));
+  }
+
+  _createClass(FormFieldEntry, [{
+    key: "retrieve",
+    value: function retrieve(form, field) {
+      return this.get("/api/forms/".concat(form, "/fields/").concat(field, "/entries"));
+    }
+  }]);
+
+  return FormFieldEntry;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (FormFieldEntry);
 
 /***/ }),
 

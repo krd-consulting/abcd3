@@ -68,6 +68,7 @@
     import RecordTypeRequest from '@/api/RecordTypeRequest';
     import RecordRequest from '@/api/RecordRequest';
     import FormFieldRequest from '@/api/FormFieldRequest';
+    import FormFieldEntryRequest from '@/api/FormFieldEntryRequest';
 
     export default {
 
@@ -82,7 +83,8 @@
                 requests: {
                     Program: ProgramRequest,
                     Group: GroupRequest,
-                    Record: RecordRequest
+                    Record: RecordRequest,
+                    'Form Field': FormFieldEntryRequest
                 },
                 targetParams: {
                     ascending: true,
@@ -160,17 +162,17 @@
                     });
 
                     return;
-                }else if(this.targetName == 'Form Field') {
+                } else if(this.targetName == 'Form Field') {
                     this.fieldParams.search = keywords;
                     params = this.fieldParams;
 
-                    const request = new RecordTypeRequest({});
+                    const request = new FormFieldRequest({});
                     request.show(this.field.reference_target_id).then((response) => {
                         this.targetRequest.setFields({
                             params
                         });
 
-                        this.targetRequest.retrieve(response.data.slug).then((response) => {
+                        this.targetRequest.retrieve(response.data.form.id, ).then((response) => {
                             this.targetItems = response.data;
                         });
                     });
