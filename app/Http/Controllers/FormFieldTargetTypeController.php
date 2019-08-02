@@ -46,4 +46,11 @@ class FormFieldTargetTypeController extends Controller
             'data' => $targetTypes
         ];
     }
+
+    public function show(FieldTargetType $targetType)
+    {
+        return [
+            'data' => $targetType
+        ];
+    }
 }

@@ -1,20 +1,24 @@
 <template>
     <div id="numeric">
-        <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-                {{ fieldLabel }}
-            </editable-text>
-        </label>
-        <el-input-number id="numfield" v-if="field.settings.isLimited" 
-            v-model="field.settings.defaultNum">
-        </el-input-number>
-        <el-input-number id="numfield" 
-            v-else 
-            v-model="num">
-        </el-input-number>
+        <el-col :span="8">
+            <label class="inputLabel">
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
+            </label>
+        
+        
+            <el-input-number id="numfield" v-if="field.settings.isLimited" 
+                v-model="field.settings.defaultNum">
+            </el-input-number>
+            <el-input-number id="numfield" 
+                v-else 
+                v-model="num">
+            </el-input-number>
+        </el-col> 
 
         <el-switch 
-            v-model="field.settings.required" 
+            v-model="required" 
             active-text="Required" 
             inactive-text="Optional"
             class="tw-float-right tw-mr-48 button-top">
@@ -67,6 +71,15 @@ export default {
                 this.$emit('update', field); 
             }
         },
+
+        required: {
+            get() { return this.field.settings.required; },
+            set(required) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.settings.required = required;
+                this.field = fieldCopy;
+            }
+        }
     },
 }
 </script>

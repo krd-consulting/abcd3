@@ -30,7 +30,7 @@
         </el-row>
 
             <el-switch 
-                v-model="field.settings.required" 
+                v-model="required" 
                 active-text="Required" 
                 inactive-text="Optional"
                 class="tw-float-right tw-mr-48 button-top">
@@ -81,11 +81,20 @@ export default {
 
         exactTime: {
             get() { return this.field.settings.exact_time; },
-            // set(exactTime) { 
-            //     const fieldCopy = _.clone(this.field);
-            //     fieldCopy.settings.exact_time = exactTime;
-            //     this.field = fieldCopy;
-            // }
+            set(exactTime) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.settings.exact_time = exactTime;
+                this.field = fieldCopy;
+            }
+        },
+
+        required: {
+            get() { return this.field.settings.required; },
+            set(required) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.settings.required = required;
+                this.field = fieldCopy;
+            }
         }
     },
 }

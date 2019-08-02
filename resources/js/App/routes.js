@@ -81,7 +81,7 @@ const routes = [
         path: '/forms/', component: FormList,
     },
     {
-        path: '/forms/:form', component: FormEntry,
+        path: '/forms/:form/new', component: FormEntry,
     }
 ];
 

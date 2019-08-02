@@ -35,13 +35,18 @@ class RecordType extends Model implements FormReference
     }
 
     /**
-     * Get the route key for the model.
+     * Retrieve the model for a bound value.
      *
-     * @return string
+     * @param  mixed  $value
+     * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function getRouteKeyName()
+    public function resolveRouteBinding($value)
     {
-        return 'slug';
+        return 
+            $this
+                ->where('id', $value)
+                ->orWhere('slug', $value)
+                ->first() ?? abort(404);
     }
 
     public function getFormReferenceTable()

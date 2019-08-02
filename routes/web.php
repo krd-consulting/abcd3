@@ -12,6 +12,7 @@ Route::prefix('api')
     ->middleware('auth')
     ->group( function() {
         Route::get('record-types', 'RecordTypeController@index');
+        Route::get('record-types/{recordType}', 'RecordTypeController@show');
 
         Route::get('records/{recordType}', 'RecordTypeRecordController@index');
         Route::get('records/{recordType}/create', 'RecordController@create');
@@ -87,12 +88,17 @@ Route::prefix('api')
         Route::get('teams/{team}/groups/create', 'GroupController@create');
 
         Route::get('forms/fields/target_types', 'FormFieldTargetTypeController@index');
+        Route::get('forms/fields/target_types/{targetType}', 'FormFieldTargetTypeController@show');
 
         Route::get('forms', 'FormController@index');
         Route::get('forms/create', 'FormController@create');
         Route::get('forms/{form}', 'FormController@show');
+        Route::get('forms/{form}/edit', 'FormController@edit');
         Route::post('forms/create', 'ValidateForm');
         Route::post('forms', 'FormController@store');
+        Route::patch('forms/{form}', 'FormController@update');
+
+        Route::get('forms/{form}/fields', 'FormFieldController@index');
 
         Route::resource('roles', 'RoleController')->except('show');
 

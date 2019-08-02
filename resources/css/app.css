@@ -13,6 +13,7 @@
 
 @tailwind base;
 
+
 *,
 .el-input__inner,
 .el-tabs__item,
@@ -22,6 +23,15 @@
 }
 
 @import url('https://rsms.me/inter/inter-ui.css');
+
+.el-card__body, .el-card__body:hover {
+    font-size: 1.15em;
+}
+
+.el-submenu__title i, .el-menu-item i {
+    /* color: #Fff; */
+    color: #FEDF97;
+}
 
 .el-button+.el-button {
     @apply
@@ -89,6 +99,7 @@ a:hover {
 .main-logo-container,
 .preferences-sidebar-menu:not(.el-menu--collapse) {
     width: 276px;
+    
 }
 
 .main-nav {
@@ -96,25 +107,32 @@ a:hover {
         tw-text-base
         tw-flex
         tw-justify-start
-        tw-border-b
         tw-items-center
         tw-px-0
         tw-sticky
         tw-top-0
-        tw-bg-white
         tw-z-50;
+    /* background-color: #428FBC; 
+        tw-border-b*/
 }
 
 .main-sidebar-menu {
     @apply
         tw-sticky;
     top: 80px;
+    /* background-color: #2D607D; */
+    background-color: #254F67;
+    /* background-color: #244E66; */
+    height: 885px;
 }
 
 .main-sidebar-menu .el-menu-item,
 .main-sidebar-menu .el-submenu__title {
     @apply
         tw-text-base;
+    /* background-color: #2D607D; */
+    background-color: #254F67;
+    /* background-color: #244E66; */
 }
 
 

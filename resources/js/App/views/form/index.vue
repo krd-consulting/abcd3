@@ -1,5 +1,10 @@
 <template>
     <div>
+        <edit-form
+            :active.sync="edit.active"
+            :form-id="edit.form"
+            @update="retrieve()"/>
+
         <list
             :items="forms"
             :page.sync="params.page"
@@ -8,6 +13,7 @@
             has-delete
             :has-list-columns="false"
             :hasSearch="false"
+            @edit="editForm"
             @page-change="retrieve()"
             :total="total">
             <template slot="header-text">Forms</template>
@@ -40,53 +46,110 @@
             </template>
 
             <template v-slot:list-item-primary-data="{ item:form }">
-                    {{ form.name }}
+                {{ form.name }}
+            </template>
+            <template v-slot:list-item-secondary-data="{ item:form }">
+                About {{ form.target_name }}
+            </template>
+
+            <template v-slot:options-edit-button="{ item:form }">
+                <router-link :to="`${form.path}/new`"
+                    class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none"
+                    @click="$emit('edit', item[resourceIdentifier])">
+                    <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
+                        add
+                    </base-icon>
+                    <span class="tw-text-xs tw-align-middle">
+                        Enter Data
+                    </span>
+                </router-link>
+            </template>
+
+            <template v-slot:options-remove-button="{ item:form }">
+                <el-dropdown :key="form.id" placement="bottom-end">
+                    <span class="tw-text-gray-600 tw-text-xs tw-align-middle">
+                        <base-icon class="tw-text-gray-600 tw-text-xs tw-mr-1 tw-align-middle">
+                            edit
+                        </base-icon>
+                        Edit Form
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                        <el-dropdown-item @click.native="editForm(form.id)">
+                            <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
+                                edit
+                            </base-icon>
+                            <span class="tw-text-xs tw-align-middle">
+                                Edit Form Information
+                            </span>
+                        </el-dropdown-item>
+                        <el-dropdown-item>
+                            <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
+                                edit
+                            </base-icon>
+                            <span class="tw-text-xs tw-align-middle">
+                                Edit Form Fields
+                            </span>
+                        </el-dropdown-item>
+                    </el-dropdown-menu>
+                </el-dropdown>
             </template>
         </list>
     </div>
 </template>
 <script>
-        import Request from '@/api/FormRequest';
+    import Request from '@/api/FormRequest';
 
-        import List from '@/App/components/resourceList';
+    import List from '@/App/components/resourceList';
+    import EditForm from './edit';
 
-        export default {
-                components: {
-                    List,
+    export default {
+        components: {
+            List,
+            EditForm
+        },
+
+        data() {
+            return {
+                edit: {
+                    active: false,
+                    form: ''
                 },
-
-                data() {
-                    return {
-                        forms: [],
-                        request: new Request({}),
-                        params: {
-                                ascending: true,
-                                sortBy: 'name',
-                                page: 1,
-                                perPage: 5
-                        },
-                        total: 0,
-                        type: {
-                                name: ''
-                        },
-                    }
+                forms: [],
+                request: new Request({}),
+                params: {
+                    ascending: true,
+                    sortBy: 'name',
+                    page: 1,
+                    perPage: 5,
                 },
-
-                methods: {
-                    retrieve() {
-                        this.request.setFields({
-                            params: {...this.params}
-                        });
-
-                        this.request.retrieve().then(response => {
-                            this.forms = response.data;
-                            this.total = response.data.length;
-                        });
-                    },
+                total: 0,
+                type: {
+                    name: ''
                 },
+            }
+        },
 
-                created() {
-                    this.retrieve();
-                }
+        methods: {
+            editForm(form) {
+                this.edit.form = form;
+
+                this.edit.active = true;
+            },
+
+            retrieve() {
+                this.request.setFields({
+                    params: {...this.params}
+                });
+
+                this.request.retrieve().then(response => {
+                    this.forms = response.data;
+                    this.total = response.meta.total;
+                });
+            },
+        },
+
+        created() {
+            this.retrieve();
         }
+    }
 </script>

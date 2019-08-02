@@ -21,13 +21,13 @@ class Form extends Request {
     	return this.post(`/api/forms`);
     }
 
-    // edit(status) {
-    // 	return this.get(`/api/programs/client-statuses/${status}/edit`);
-    // }
+    edit(form) {
+    	return this.get(`/api/forms/${form}/edit`);
+    }
 
-    // update(status) {
-    // 	return this.patch(`/api/programs/client-statuses/${status}`);
-    // }
+    update(form) {
+    	return this.patch(`/api/forms/${form}`);
+    }
 
     // destroy(status) {
     // 	return this.delete(`/api/programs/client-statuses/${status}`);

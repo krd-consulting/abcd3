@@ -197,7 +197,6 @@
             return {
                 request: new Request(),
                 teamRequest: new TeamRequest(),
-                // TODO: implement dropdown search for teams
                 teamRequestParams: {
                     ascending: true,
                     sortBy: 'name',
@@ -210,7 +209,8 @@
                     description: '',
                     target: '',
                     type: '',
-                    scope: ''
+                    team_id: '',
+                    scope_id: ''
                 },
                 targetTypes: [],
                 types: [],

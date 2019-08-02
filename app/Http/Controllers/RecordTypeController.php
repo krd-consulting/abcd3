@@ -11,4 +11,10 @@ class RecordTypeController extends Controller
     public function index() {
         return RecordType::all();
     }
+
+    public function show(RecordType $recordType) {
+    	return [
+    		'data' => $recordType
+    	];
+    }
 }

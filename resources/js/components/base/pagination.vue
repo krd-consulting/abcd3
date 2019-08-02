@@ -2,6 +2,8 @@
     <el-pagination
         background
         v-bind="$attrs"
+        :current-page="currentPage"
+        :page-size="pageSize"
         :total="total"
         @current-change="handleCurrentChange">
         <slot name="pagination-info" :paginationInfo="paginationInfo">{{ paginationInfo }}</slot>

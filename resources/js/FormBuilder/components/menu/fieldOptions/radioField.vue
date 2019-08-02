@@ -10,12 +10,12 @@
                 <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
             
-            <el-form-item label="Number of Radio Selections">
-                <el-input-number v-model="fieldData.settings.radioNum" controls-position="right" :min="1" :max="10"></el-input-number>
+            <el-form-item label="Number of choices">
+                <el-input-number v-model="fieldData.settings.radioNum" controls-position="right" :min="1" :max="30"></el-input-number>
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
+                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -38,7 +38,7 @@ export default {
                 choices: [],
                 rules: {
                     title: [
-                        { required: true, message: 'Please input Question or title', trigger: 'blur' }
+                        { required: true, message: 'Please input question title', trigger: 'blur' }
                     ]
                 }
             },

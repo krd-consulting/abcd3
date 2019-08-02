@@ -1,25 +1,29 @@
 <template>
     <div id="fileUpload">
-      <label class="inputLabel">
-          <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-              {{ fieldLabel }}
-          </editable-text>
-          <editable-text class="tw-cursor-pointer tw-text-xs mouseOver" v-model="fieldDescription">
-              {{ fieldDescription }}
-          </editable-text>
-      </label>
-      <el-upload disabled
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :on-preview="handlePreview"
-          :on-remove="handleRemove"
-          :before-remove="beforeRemove"
-          multiple
-          :limit="3"
-          :on-exceed="handleExceed"
-          :file-list="fileList">
-          <el-button size="small" type="primary">Click to upload</el-button>
-          <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
-      </el-upload>
+        <el-col :span="8">
+            <label class="inputLabel">
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
+                <editable-text class="tw-cursor-pointer tw-text-xs mouseOver" v-model="fieldDescription">
+                    {{ fieldDescription }}
+                </editable-text>
+            </label>
+        
+      
+        <el-upload disabled
+            action="https://jsonplaceholder.typicode.com/posts/"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :before-remove="beforeRemove"
+            multiple
+            :limit="3"
+            :on-exceed="handleExceed"
+            :file-list="fileList">
+            <el-button size="small" type="primary">Click to upload</el-button>
+            <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+        </el-upload>
+      </el-col>
 
       <el-switch 
             v-model="field.settings.required" 
@@ -80,6 +84,15 @@ export default {
                 this.$emit('update', field); 
             }
         },
+
+        required: {
+            get() { return this.field.settings.required; },
+            set(required) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.settings.required = required;
+                this.field = fieldCopy;
+            }
+        }
     },
     methods: {
       handleRemove(file, fileList) {

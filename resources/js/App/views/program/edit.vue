@@ -1,7 +1,7 @@
 <template>
     <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Edit Program
+            <base-icon class="tw-align-middle">person_add</base-icon> Edit Form
         </div>
         <form>
             <div class="tw-mb-2">

@@ -10,6 +10,7 @@ use App\Http\Resources\Form as FormResource;
 use App\Http\Resources\Forms;
 
 use App\Http\Requests\StoreForm;
+use App\Http\Requests\UpdateForm;
 
 use Illuminate\Http\Request;
 
@@ -67,6 +68,33 @@ class FormController extends Controller
         $form->createUsingRequest($request);
 
         return $form;
+    }
+
+    public function edit(Form $form)
+    {
+        return [
+            'data' => [
+                'form' => (new FormResource($form)),
+                'target_types' => $this->generateTargetTypes(),
+                'types' => config('app.form_types'),
+                'scopes' => Scope::where('name', '!=', config('auth.scopes.case-load.name'))->get()
+            ]
+        ];
+    }
+
+    public function update(Form $form, UpdateForm $request)
+    {
+        // authorize
+
+        $form->name = $request->name;
+        $form->description = $request->description;
+        $form->type = $request->type;
+        $form->target_type_id = $request->target_type_id;
+        $form->target_id = $request->target_id;
+        $form->scope_id = $request->scope_id;
+        $form->save();
+
+        return (new FormResource($form));
     }
 
     protected function generateTargetTypes()

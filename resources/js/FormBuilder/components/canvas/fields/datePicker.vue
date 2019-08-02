@@ -16,7 +16,7 @@
                     :range-separator="rangeSeparator"
                     :start-placeholder="startDate"
                     :end-placeholder="endDate"
-                    :format="dateFormat">
+                    :settings="dateFormat">
                 </el-date-picker>
             </el-col>
             
@@ -43,11 +43,6 @@ export default {
     data: () => {
         return {
             dateSelection: '',
-            // dateType: 'date',
-            // dateOptions: {},
-            // datePlaceHolder: 'Pick a day',
-            // dateFormat: 'yyyy/MM/dd',
-            // rangeSeparator: '',
             startDate: '',
             endDate: '',
         }
@@ -61,15 +56,12 @@ export default {
     components: {
         EditableText
     },
-    // created() {
-    //     this.field = _.clone(this.fieldData)
-    // },
     mounted() {
         this.togglePastOnly(),
         this.toggleFutureOnly(),
         this.toggleQuickMenu(),
         this.toggleTime(),
-        this.toggleRangeMenu()
+        this.toggleRange()
     },
     computed: {
         field: {
@@ -85,93 +77,64 @@ export default {
                 this.field = fieldCopy;
             }
         },
-
-        // dateSelection: {
-        //     get() { return this.field.format.dateSelection; },
-        //     set(dateSelection) { 
-        //         const fieldCopy = _.clone(this.field);
-        //         fieldCopy.format.dateSelection = dateSelection;
-        //         this.field = fieldCopy;
-        //     }
-        // },
         dateType: {
-            get() { return this.field.format.dateType; },
+            get() { return this.field.settings.dateType; },
             set(dateType) { 
                 const fieldCopy = _.clone(this.field);
-                fieldCopy.format.dateType = dateType;
+                fieldCopy.settings.dateType = dateType;
                 this.field = fieldCopy;
             }
         },
         dateOptions: {
-            get() { return this.field.format.dateOptions; },
+            get() { return this.field.settings.dateOptions; },
             set(dateOptions) { 
                 const fieldCopy = _.clone(this.field);
-                fieldCopy.format.dateOptions = dateOptions;
+                fieldCopy.settings.dateOptions = dateOptions;
                 this.field = fieldCopy;
             }
         },
         datePlaceHolder: {
-            get() { return this.field.format.datePlaceHolder; },
+            get() { return this.field.settings.datePlaceHolder; },
             set(datePlaceHolder) { 
                 const fieldCopy = _.clone(this.field);
-                fieldCopy.format.datePlaceHolder = datePlaceHolder;
+                fieldCopy.settings.datePlaceHolder = datePlaceHolder;
                 this.field = fieldCopy;
             }
         },
         dateFormat: {
-            get() { return this.field.format.dateFormat; },
+            get() { return this.field.settings.dateFormat; },
             set(dateFormat) { 
                 const fieldCopy = _.clone(this.field);
-                fieldCopy.format.dateFormat = dateFormat;
+                fieldCopy.settings.dateFormat = dateFormat;
                 this.field = fieldCopy;
             }
         },
         rangeSeparator: {
-            get() { return this.field.format.rangeSeparator; },
+            get() { return this.field.settings.rangeSeparator; },
             set(rangeSeparator) { 
                 const fieldCopy = _.clone(this.field);
-                fieldCopy.format.rangeSeparator = rangeSeparator;
+                fieldCopy.settings.rangeSeparator = rangeSeparator;
                 this.field = fieldCopy;
             }
         },
-        // startDate: {
-        //     get() { return this.field.format.startDate; },
-        //     set(startDate) { 
-        //         const fieldCopy = _.clone(this.field);
-        //         fieldCopy.format.startDate = startDate;
-        //         this.field = fieldCopy;
-        //     }
-        // },
-        // endDate: {
-        //     get() { return this.field.format.endDate; },
-        //     set(endDate) { 
-        //         const fieldCopy = _.clone(this.field);
-        //         fieldCopy.format.endDate = endDate;
-        //         this.field = fieldCopy;
-        //     }
-        // },
 
     },
+    
     methods: {
         togglePastOnly() {
-            if(this.field.settings.past_only === true) {
+            if(this.field.settings.pastOnly === true) {
                 this.dateOptions = Object.assign({}, this.dateOptions, {
                     disabledDate(time) { 
                         return time.getTime() > Date.now() 
                     },
                 });
-                this.dateType = "date",
+                this.dateType = "date"
                 this.datePlaceHolder = "Pick a day"
-            } else {
-                this.dateOptions = Object.assign({}, this.dateOptions, {
-                    disabledDate: {}
-                });
-                this.dateType = "date",
-                this.datePlaceHolder = "Pick a day"
+                this.$store.commit('UPDATE_FIELD', this.field)
             }
         },
         toggleFutureOnly() {
-            if(this.field.settings.future_only === true) {
+            if(this.field.settings.futureOnly === true) {
                 this.dateOptions = Object.assign({}, this.dateOptions, {
                     disabledDate(time) { 
                         return time.getTime() < Date.now() 
@@ -179,16 +142,11 @@ export default {
                 });
                 this.dateType = "date",
                 this.datePlaceHolder = "Pick a day"
-            } else {
-                this.dateOptions = Object.assign({}, this.dateOptions, {
-                    disabledDate: {}
-                });
-                this.dateType = "date",
-                this.datePlaceHolder = "Pick a day"
+                this.$store.commit('UPDATE_FIELD', this.field)
             }
         },
         toggleQuickMenu() {
-            if(this.field.settings.quick_menu === true) {
+            if(this.field.settings.quickMenu === true) {
                 this.dateOptions = Object.assign({}, this.dateOptions, {
                     shortcuts: [
                         { text: 'Today', onClick(picker) 
@@ -209,32 +167,26 @@ export default {
                 });
                 this.dateType = "date",
                 this.datePlaceHolder = "Pick a day"
-            } else {
-                this.datesettings.Object.assign({}, this.dateOptions, {
-                    shortcuts: {}
-                });
-                this.dateType = "date",
-                this.datePlaceHolder = "Pick a day"
+                this.$store.commit('UPDATE_FIELD', this.field)
             }
         },
         toggleTime() {
-            if(this.field.settings.include_time === true) {
+            if(this.field.settings.includeTime === true) {
                 this.dateType = "datetime",
                 this.datePlaceHolder = "Pick a day and time"
                 this.dateFormat = "yyyy/MM/dd hh:mm:ss a"
-            } else {
-                this.dateType = "date",
-                this.datePlaceHolder = "Pick a day"
-            }
+                this.$store.commit('UPDATE_FIELD', this.field)
+            } 
             
         },
-        toggleRangeMenu() {
-            if(this.field.settings.date_range === true){
+        toggleRange() {
+            if(this.field.settings.dateRange === true){
                 this.dateType = 'daterange',
                 this.rangeSeparator = 'to',
                 this.dateFormat = "yyyy/MM/dd",
                 this.startDate = 'Start date',
                 this.endDate = 'End date'
+                this.$store.commit('UPDATE_FIELD', this.field)
             }
         }
     }

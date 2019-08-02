@@ -2,12 +2,12 @@
     <sidebar-list :collapse="collapseSidebar" class="main-sidebar-menu">
         <sidebar-list-item index="dashboard" :route="{ path: '/dashboard' }">
             <base-icon class="tw-text-xl tw-mr-2">dashboard</base-icon>
-            <span slot="title">Dashboard</span>
+            <span slot="title" class="tw-text-white">Dashboard</span>
         </sidebar-list-item>
         <base-submenu index="/records/">
             <template slot="title">
                 <base-icon class="tw-text-xl tw-mr-2">folder</base-icon>
-                <span slot="title">Records</span>
+                <span slot="title" class="tw-text-white">Records</span>
             </template>
             @foreach($recordTypes as $type)
                 <sidebar-list-item
@@ -22,7 +22,7 @@
         <base-submenu index="/programs/">
             <template slot="title">
                 <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
-                <span slot="title">Programs</span>
+                <span slot="title" class="tw-text-white">Programs</span>
             </template>
             @foreach($programs as $program)
                 <sidebar-list-item
@@ -47,13 +47,13 @@
         </base-submenu>
         <sidebar-list-item index="/groups/" :route="{ path: '/groups' }">
             <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
-            <span slot="title">Groups</span>
+            <span slot="title" class="tw-text-white">Groups</span>
         </sidebar-list-item>
         @if(count($teams) > 1)
             <base-submenu index="/teams/">
                 <template slot="title">
                     <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
-                    <span slot="title">Teams</span>
+                    <span slot="title" class="tw-text-white">Teams</span>
                 </template>
                 @foreach($teams as $team)
                     <sidebar-list-item
@@ -68,8 +68,7 @@
         @endif
         <sidebar-list-item index="/forms/" :route="{ path: '/forms' }">
             <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
-            <span slot="title">Forms</span>
+            <span slot="title" class="tw-text-white">Forms</span>
         </sidebar-list-item>
     </sidebar-list>
 </nav>
-

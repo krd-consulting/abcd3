@@ -1,3 +1,5 @@
+const { colors } = require('tailwindcss/defaultTheme')
+
 module.exports = {
   prefix: 'tw-',
   important: false,
@@ -15,5 +17,57 @@ module.exports = {
 		'5xl': '3rem',
 		'6xl': '4rem',
 	},
+	colors: {
+		black: colors.black,
+		white: colors.white,
+		gray: colors.gray,
+		red: colors.red,
+		yellow: {
+			'100': '#FEECC0',
+			'200': '#FEDF97',
+			'300': '#FED36D',
+			'400': '#FEC644',
+			'500': ' #feba1b',
+			'600': '#E7AA19',
+			'700': '#D09917',
+			'800': '#A27712',
+			'900': '#74550D',
+		},
+		orange: {
+			'100': '#FBE4BB',
+			'200': '#F8D28D',
+			'300': '#F6C060',
+			'400': '#F3AE33',
+			'500': '#f19d06',
+			'600': '#DC8F06',
+			'700': '#B07305',
+			'800': '#845604',
+			'900': '#583A03',
+		},
+		green: {
+			'100': '#AABC78',
+			'200': '#9EB364',
+			'300': '#92A951',
+			'400': '#86A03E',
+			'500': '#7a972b',
+			'600': '#6F8A28',
+			'700': '#647C24',
+			'800': '#596E20',
+			'900': '#4E611C',
+		},
+		blue: {
+			'100': '#9FB6C3',
+			'200': '#668BA0',
+			'300': '#537C94',
+			'400': '#406E88',
+			'500': '#2d607d',
+			'600': '#295872',
+			'700': '#254F67',
+			'800': '#21465B',
+			'900': '#193545',
+		},
+		indigo: colors.indigo,
+		purple: colors.purple,
+	}
   }
 }

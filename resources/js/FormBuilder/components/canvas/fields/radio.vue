@@ -1,12 +1,12 @@
 <template>
     <div id="dropdown">
-         
-        <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-                {{ fieldLabel }}
-            </editable-text>
-        </label>
-
+        <el-col :span="8">
+            <label class="inputLabel">
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
+            </label>
+        </el-col><br><br>
              <el-radio-group id="radioGroup">
                 <el-radio 
                     v-model="value" 
@@ -31,13 +31,13 @@
             </el-radio-group>
         
         <el-switch 
-            v-model="field.settings.required" 
+            v-model="required" 
             active-text="Required" 
             inactive-text="Optional"
             class="tw-float-right tw-mr-48 button-top">
         </el-switch>
         
-        <form @submit.prevent="addItem" class="tw-mt-4">
+        <form @submit.prevent="addItem" class=" tw-mt-4">
             <el-row> 
                 <el-col :span="6" class="tw-float-left">
                     <label for="add-item">Add a new Item</label>
@@ -111,6 +111,15 @@ export default {
                 this.$emit('updateChoices', field);
             }
         },
+
+        required: {
+            get() { return this.field.settings.required; },
+            set(required) { 
+                const fieldCopy = _.clone(this.field);
+                fieldCopy.settings.required = required;
+                this.field = fieldCopy;
+            }
+        }
     },
     methods: {
 

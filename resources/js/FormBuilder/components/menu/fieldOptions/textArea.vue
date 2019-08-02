@@ -6,14 +6,14 @@
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
 
-            <el-form-item label="This Field is">
+            <el-form-item label="This field is">
                 <el-switch v-model="fieldData.settings.required" 
                     active-text="Required" 
                     inactive-text="Optional">
                 </el-switch>
             </el-form-item>
 
-            <el-form-item label="Set Character Limit">
+            <el-form-item label="Set character limit">
                 <el-switch v-model="fieldData.settings.isLimited" 
                     inactive-text="No Limit" 
                     active-text="Limit">
@@ -26,7 +26,7 @@
             </el-form-item>
 
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Set</el-button>
+                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
             </el-form-item>
 
         </el-form>
@@ -49,7 +49,7 @@ export default {
                 },
                 rules: {
                     title: [
-                        { required: true, message: 'Please input Question or title', trigger: 'blur' }
+                        { required: true, message: 'Please input question title', trigger: 'blur' }
                     ]
             }
             }

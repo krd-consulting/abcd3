@@ -151,10 +151,6 @@
 
                 return request.destroy(recordType, record);
             },
-
-            test() {
-                alert('hello');
-            }
         },
 
         created() {
