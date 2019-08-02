@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
-/***/ "./resources/js/api/FormFieldRequest.js":
-/*!**********************************************!*\
-  !*** ./resources/js/api/FormFieldRequest.js ***!
-  \**********************************************/
+/***/ "./resources/js/api/FormFieldTargetTypeRequest.js":
+/*!********************************************************!*\
+  !*** ./resources/js/api/FormFieldTargetTypeRequest.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,28 +30,33 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var FormField =
+var FormFieldTargetType =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(FormField, _Request);
+  _inherits(FormFieldTargetType, _Request);
 
-  function FormField() {
-    _classCallCheck(this, FormField);
+  function FormFieldTargetType() {
+    _classCallCheck(this, FormFieldTargetType);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(FormField).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(FormFieldTargetType).apply(this, arguments));
   }
 
-  _createClass(FormField, [{
+  _createClass(FormFieldTargetType, [{
     key: "retrieve",
-    value: function retrieve(form) {
-      return this.get("/api/forms/".concat(form, "/fields"));
+    value: function retrieve() {
+      return this.get("/api/forms/fields/target_types");
+    }
+  }, {
+    key: "show",
+    value: function show(target_type) {
+      return this.get("/api/forms/fields/target_types/".concat(target_type));
     }
   }]);
 
-  return FormField;
+  return FormFieldTargetType;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (FormField);
+/* harmony default export */ __webpack_exports__["default"] = (FormFieldTargetType);
 
 /***/ })
 

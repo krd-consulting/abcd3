@@ -81,17 +81,17 @@
 </template>
 
 <script>
-import MatrixField from '@/FormBuilder/components/preview/fields/matrix.vue'
-import RadioField from '@/FormBuilder/components/preview/fields/radio.vue'
-import TextField from '@/FormBuilder/components/preview/fields/textField.vue'
-import TextBox from '@/FormBuilder/components/preview/fields/textBox.vue'
-import NumberField from '@/FormBuilder/components/preview/fields/numeric.vue'
-import DropdownField from '@/FormBuilder/components/preview/fields/dropdown.vue'
-import CheckBoxField from '@/FormBuilder/components/preview/fields/checkbox.vue'
-import DateField from '@/FormBuilder/components/preview/fields/datePicker.vue'
-import TimeField from '@/FormBuilder/components/preview/fields/timePicker.vue'
-import FileField from '@/FormBuilder/components/preview/fields/upload.vue'
-import SectionDivider from '@/FormBuilder/components/preview/fields/sectionDivider.vue'
+import MatrixField from '@/components/formFields/matrix.vue'
+import RadioField from '@/components/formFields/radio.vue'
+import TextField from '@/components/formFields/textField.vue'
+import TextBox from '@/components/formFields/textBox.vue'
+import NumberField from '@/components/formFields/numeric.vue'
+import DropdownField from '@/components/formFields/dropdown.vue'
+import CheckBoxField from '@/components/formFields/checkbox.vue'
+import DateField from '@/components/formFields/datePicker.vue'
+import TimeField from '@/components/formFields/timePicker.vue'
+import FileField from '@/components/formFields/upload.vue'
+import SectionDivider from '@/components/formFields/sectionDivider.vue'
 
 import { mapState } from 'vuex'
 

@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[16],{
 
-/***/ "./resources/js/api/GroupRequest.js":
-/*!******************************************!*\
-  !*** ./resources/js/api/GroupRequest.js ***!
-  \******************************************/
+/***/ "./resources/js/api/RecordProgramsRequest.js":
+/*!***************************************************!*\
+  !*** ./resources/js/api/RecordProgramsRequest.js ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,60 +30,38 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var GroupRequest =
+var RecordProgramsRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(GroupRequest, _Request);
+  _inherits(RecordProgramsRequest, _Request);
 
-  function GroupRequest() {
-    _classCallCheck(this, GroupRequest);
+  function RecordProgramsRequest() {
+    _classCallCheck(this, RecordProgramsRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GroupRequest).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(RecordProgramsRequest).apply(this, arguments));
   }
 
-  _createClass(GroupRequest, [{
+  _createClass(RecordProgramsRequest, [{
     key: "retrieve",
-    value: function retrieve() {
-      return this.get("/api/groups");
-    }
-  }, {
-    key: "show",
-    value: function show(group) {
-      return this.get("/api/groups/".concat(group));
-    }
-  }, {
-    key: "create",
-    value: function create() {
-      var team = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      if (team != null) return this.get("/api/teams/".concat(team, "/groups/create"));
-      return this.get('/api/groups/create');
+    value: function retrieve(recordType, record) {
+      return this.get("/api/records/".concat(recordType, "/").concat(record, "/programs"));
     }
   }, {
     key: "store",
-    value: function store() {
-      return this.post('/api/groups');
-    }
-  }, {
-    key: "edit",
-    value: function edit(group) {
-      return this.get("/api/groups/".concat(group, "/edit"));
-    }
-  }, {
-    key: "update",
-    value: function update(group) {
-      return this.patch("/api/groups/".concat(group));
+    value: function store(recordType, record, program) {
+      return this.post("/api/records/".concat(recordType, "/").concat(record, "/programs/").concat(program));
     }
   }, {
     key: "destroy",
-    value: function destroy(group) {
-      return this["delete"]("/api/groups/".concat(group));
+    value: function destroy(recordType, record, program) {
+      return this["delete"]("/api/records/".concat(recordType, "/").concat(record, "/programs/").concat(program));
     }
   }]);
 
-  return GroupRequest;
+  return RecordProgramsRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (GroupRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RecordProgramsRequest);
 
 /***/ })
 

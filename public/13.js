@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
-/***/ "./resources/js/api/GroupRequest.js":
-/*!******************************************!*\
-  !*** ./resources/js/api/GroupRequest.js ***!
-  \******************************************/
+/***/ "./resources/js/api/ProgramRequest.js":
+/*!********************************************!*\
+  !*** ./resources/js/api/ProgramRequest.js ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,60 +30,58 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var GroupRequest =
+var ProgramRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(GroupRequest, _Request);
+  _inherits(ProgramRequest, _Request);
 
-  function GroupRequest() {
-    _classCallCheck(this, GroupRequest);
+  function ProgramRequest() {
+    _classCallCheck(this, ProgramRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GroupRequest).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(ProgramRequest).apply(this, arguments));
   }
 
-  _createClass(GroupRequest, [{
+  _createClass(ProgramRequest, [{
     key: "retrieve",
     value: function retrieve() {
-      return this.get("/api/groups");
+      return this.get('/api/programs');
     }
   }, {
     key: "show",
-    value: function show(group) {
-      return this.get("/api/groups/".concat(group));
+    value: function show(id) {
+      return this.get('/api/programs/' + id);
     }
   }, {
     key: "create",
     value: function create() {
-      var team = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      if (team != null) return this.get("/api/teams/".concat(team, "/groups/create"));
-      return this.get('/api/groups/create');
+      return this.get('/api/programs/create');
+    }
+  }, {
+    key: "edit",
+    value: function edit(program) {
+      return this.get("/api/programs/".concat(program, "/edit"));
     }
   }, {
     key: "store",
     value: function store() {
-      return this.post('/api/groups');
-    }
-  }, {
-    key: "edit",
-    value: function edit(group) {
-      return this.get("/api/groups/".concat(group, "/edit"));
+      return this.post('/api/programs');
     }
   }, {
     key: "update",
-    value: function update(group) {
-      return this.patch("/api/groups/".concat(group));
+    value: function update(program) {
+      return this.put("/api/programs/".concat(program));
     }
   }, {
     key: "destroy",
-    value: function destroy(group) {
-      return this["delete"]("/api/groups/".concat(group));
+    value: function destroy(id) {
+      return this["delete"]('/api/programs/' + id);
     }
   }]);
 
-  return GroupRequest;
+  return ProgramRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (GroupRequest);
+/* harmony default export */ __webpack_exports__["default"] = (ProgramRequest);
 
 /***/ })
 

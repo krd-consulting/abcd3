@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\FormField;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Form extends JsonResource

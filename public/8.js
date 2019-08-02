@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./resources/js/api/RolePermissionRequest.js":
-/*!***************************************************!*\
-  !*** ./resources/js/api/RolePermissionRequest.js ***!
-  \***************************************************/
+/***/ "./resources/js/api/GroupRecordsRequest.js":
+/*!*************************************************!*\
+  !*** ./resources/js/api/GroupRecordsRequest.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,33 +30,38 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var RolePermissionRequest =
+var GroupRecordsRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(RolePermissionRequest, _Request);
+  _inherits(GroupRecordsRequest, _Request);
 
-  function RolePermissionRequest() {
-    _classCallCheck(this, RolePermissionRequest);
+  function GroupRecordsRequest() {
+    _classCallCheck(this, GroupRecordsRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(RolePermissionRequest).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(GroupRecordsRequest).apply(this, arguments));
   }
 
-  _createClass(RolePermissionRequest, [{
+  _createClass(GroupRecordsRequest, [{
+    key: "retrieve",
+    value: function retrieve(group, recordType) {
+      return this.get("/api/groups/".concat(group, "/records/").concat(recordType));
+    }
+  }, {
     key: "store",
-    value: function store(role, permission) {
-      return this.post("/api/roles/".concat(role, "/permissions/").concat(permission));
+    value: function store(group, recordType, record) {
+      return this.post("/api/groups/".concat(group, "/records/").concat(recordType, "/").concat(record));
     }
   }, {
     key: "destroy",
-    value: function destroy(role, permission) {
-      return this["delete"]("/api/roles/".concat(role, "/permissions/").concat(permission));
+    value: function destroy(group, recordType, record) {
+      return this["delete"]("/api/groups/".concat(group, "/records/").concat(recordType, "/").concat(record));
     }
   }]);
 
-  return RolePermissionRequest;
+  return GroupRecordsRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RolePermissionRequest);
+/* harmony default export */ __webpack_exports__["default"] = (GroupRecordsRequest);
 
 /***/ })
 

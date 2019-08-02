@@ -179,8 +179,8 @@ export default {
     },
     methods: {        
         save() {
-            this.fieldData['target_type_id'] = this.target_type_id;
-            this.fieldData['target_id'] = this.target_id;
+            this.fieldData['reference_target_type_id'] = this.target_type_id;
+            this.fieldData['reference_target_id'] = this.target_id;
             this.$emit('save', this.fieldData);
         },
 

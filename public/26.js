@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[26],{
 
-/***/ "./resources/js/api/GroupRequest.js":
-/*!******************************************!*\
-  !*** ./resources/js/api/GroupRequest.js ***!
-  \******************************************/
+/***/ "./resources/js/api/TeamGroupsRequest.js":
+/*!***********************************************!*\
+  !*** ./resources/js/api/TeamGroupsRequest.js ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,48 +30,21 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var GroupRequest =
+var TeamGroupsRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(GroupRequest, _Request);
+  _inherits(TeamGroupsRequest, _Request);
 
-  function GroupRequest() {
-    _classCallCheck(this, GroupRequest);
+  function TeamGroupsRequest() {
+    _classCallCheck(this, TeamGroupsRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GroupRequest).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(TeamGroupsRequest).apply(this, arguments));
   }
 
-  _createClass(GroupRequest, [{
+  _createClass(TeamGroupsRequest, [{
     key: "retrieve",
-    value: function retrieve() {
-      return this.get("/api/groups");
-    }
-  }, {
-    key: "show",
-    value: function show(group) {
-      return this.get("/api/groups/".concat(group));
-    }
-  }, {
-    key: "create",
-    value: function create() {
-      var team = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      if (team != null) return this.get("/api/teams/".concat(team, "/groups/create"));
-      return this.get('/api/groups/create');
-    }
-  }, {
-    key: "store",
-    value: function store() {
-      return this.post('/api/groups');
-    }
-  }, {
-    key: "edit",
-    value: function edit(group) {
-      return this.get("/api/groups/".concat(group, "/edit"));
-    }
-  }, {
-    key: "update",
-    value: function update(group) {
-      return this.patch("/api/groups/".concat(group));
+    value: function retrieve(team) {
+      return this.get("/api/teams/".concat(team, "/groups"));
     }
   }, {
     key: "destroy",
@@ -80,10 +53,10 @@ function (_Request) {
     }
   }]);
 
-  return GroupRequest;
+  return TeamGroupsRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (GroupRequest);
+/* harmony default export */ __webpack_exports__["default"] = (TeamGroupsRequest);
 
 /***/ })
 

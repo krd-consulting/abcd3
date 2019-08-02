@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./resources/js/api/FormFieldTargetTypeRequest.js":
-/*!********************************************************!*\
-  !*** ./resources/js/api/FormFieldTargetTypeRequest.js ***!
-  \********************************************************/
+/***/ "./resources/js/api/FormEntryRequest.js":
+/*!**********************************************!*\
+  !*** ./resources/js/api/FormEntryRequest.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,28 +30,28 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var FormFieldTargetType =
+var FormEntry =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(FormFieldTargetType, _Request);
+  _inherits(FormEntry, _Request);
 
-  function FormFieldTargetType() {
-    _classCallCheck(this, FormFieldTargetType);
+  function FormEntry() {
+    _classCallCheck(this, FormEntry);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(FormFieldTargetType).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(FormEntry).apply(this, arguments));
   }
 
-  _createClass(FormFieldTargetType, [{
-    key: "retrieve",
-    value: function retrieve() {
-      return this.get("/api/forms/fields/target_types");
+  _createClass(FormEntry, [{
+    key: "store",
+    value: function store(form) {
+      return this.post("/api/forms/".concat(form));
     }
   }]);
 
-  return FormFieldTargetType;
+  return FormEntry;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (FormFieldTargetType);
+/* harmony default export */ __webpack_exports__["default"] = (FormEntry);
 
 /***/ })
 

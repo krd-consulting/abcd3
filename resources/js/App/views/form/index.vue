@@ -92,11 +92,6 @@
                         </el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
-
-                <!-- <base-button
-                    class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none"
-                    @click="$emit('edit', item[resourceIdentifier])">
-                </base-button> -->
             </template>
         </list>
     </div>
@@ -125,7 +120,7 @@
                     ascending: true,
                     sortBy: 'name',
                     page: 1,
-                    perPage: 5
+                    perPage: 5,
                 },
                 total: 0,
                 type: {
@@ -148,7 +143,7 @@
 
                 this.request.retrieve().then(response => {
                     this.forms = response.data;
-                    this.total = response.data.length;
+                    this.total = response.meta.total;
                 });
             },
         },

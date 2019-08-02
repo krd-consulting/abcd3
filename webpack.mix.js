@@ -11,8 +11,6 @@ const mix = require('laravel-mix');
  |
  */
 
-const tailwindcss = require('tailwindcss');
-
 mix.webpackConfig({
    resolve: {
        alias: {
@@ -24,12 +22,14 @@ mix.webpackConfig({
    }
 });
 
-mix.js('resources/js/App', 'public/js/app.js')
-    .js('resources/js/Preferences', 'public/js/preferences.js')
-    .js('resources/js/FormBuilder', 'public/js/formbuilder.js')
+mix
     .postCss('resources/css/app.css', 'public/css', [
-        tailwindcss,
-    ]);
+        require('tailwindcss'),
+    ])
+    .js('resources/js/App', 'public/js/app.js')
+    .js('resources/js/Preferences', 'public/js/preferences.js')
+    .js('resources/js/FormBuilder', 'public/js/formbuilder.js');
+    
 
 if(mix.inProduction()) {
     mix.version();

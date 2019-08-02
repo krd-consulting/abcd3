@@ -81,7 +81,7 @@
 
                 this.request.retrieve().then(response => {
                     this.programs = response.data;
-                    this.total = response.data.length;
+                    this.total = response.meta.total;
                 });
             },
 

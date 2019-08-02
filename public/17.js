@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[17],{
 
-/***/ "./resources/js/api/GroupRequest.js":
-/*!******************************************!*\
-  !*** ./resources/js/api/GroupRequest.js ***!
-  \******************************************/
+/***/ "./resources/js/api/RecordRequest.js":
+/*!*******************************************!*\
+  !*** ./resources/js/api/RecordRequest.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,60 +30,58 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var GroupRequest =
+var RecordRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(GroupRequest, _Request);
+  _inherits(RecordRequest, _Request);
 
-  function GroupRequest() {
-    _classCallCheck(this, GroupRequest);
+  function RecordRequest() {
+    _classCallCheck(this, RecordRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GroupRequest).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(RecordRequest).apply(this, arguments));
   }
 
-  _createClass(GroupRequest, [{
+  _createClass(RecordRequest, [{
     key: "retrieve",
-    value: function retrieve() {
-      return this.get("/api/groups");
+    value: function retrieve(recordType) {
+      return this.get("/api/records/".concat(recordType));
     }
   }, {
     key: "show",
-    value: function show(group) {
-      return this.get("/api/groups/".concat(group));
+    value: function show(recordType, record) {
+      return this.get("/api/records/".concat(recordType, "/").concat(record));
     }
   }, {
     key: "create",
-    value: function create() {
-      var team = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      if (team != null) return this.get("/api/teams/".concat(team, "/groups/create"));
-      return this.get('/api/groups/create');
+    value: function create(recordType) {
+      return this.get("/api/records/".concat(recordType, "/create"));
     }
   }, {
     key: "store",
-    value: function store() {
-      return this.post('/api/groups');
+    value: function store(recordType) {
+      return this.post("/api/records/".concat(recordType));
     }
   }, {
     key: "edit",
-    value: function edit(group) {
-      return this.get("/api/groups/".concat(group, "/edit"));
+    value: function edit(recordType, record) {
+      return this.get("/api/records/".concat(recordType, "/").concat(record, "/edit"));
     }
   }, {
     key: "update",
-    value: function update(group) {
-      return this.patch("/api/groups/".concat(group));
+    value: function update(recordType, record) {
+      return this.patch("/api/records/".concat(recordType, "/").concat(record));
     }
   }, {
     key: "destroy",
-    value: function destroy(group) {
-      return this["delete"]("/api/groups/".concat(group));
+    value: function destroy(recordType, record) {
+      return this["delete"]("/api/records/".concat(recordType, "/").concat(record));
     }
   }]);
 
-  return GroupRequest;
+  return RecordRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (GroupRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RecordRequest);
 
 /***/ })
 

@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[27],{
 
-/***/ "./resources/js/api/GroupRequest.js":
-/*!******************************************!*\
-  !*** ./resources/js/api/GroupRequest.js ***!
-  \******************************************/
+/***/ "./resources/js/api/TeamProgramsRequest.js":
+/*!*************************************************!*\
+  !*** ./resources/js/api/TeamProgramsRequest.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,60 +30,33 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var GroupRequest =
+var TeamProgramsRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(GroupRequest, _Request);
+  _inherits(TeamProgramsRequest, _Request);
 
-  function GroupRequest() {
-    _classCallCheck(this, GroupRequest);
+  function TeamProgramsRequest() {
+    _classCallCheck(this, TeamProgramsRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(GroupRequest).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(TeamProgramsRequest).apply(this, arguments));
   }
 
-  _createClass(GroupRequest, [{
+  _createClass(TeamProgramsRequest, [{
     key: "retrieve",
-    value: function retrieve() {
-      return this.get("/api/groups");
-    }
-  }, {
-    key: "show",
-    value: function show(group) {
-      return this.get("/api/groups/".concat(group));
-    }
-  }, {
-    key: "create",
-    value: function create() {
-      var team = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      if (team != null) return this.get("/api/teams/".concat(team, "/groups/create"));
-      return this.get('/api/groups/create');
-    }
-  }, {
-    key: "store",
-    value: function store() {
-      return this.post('/api/groups');
-    }
-  }, {
-    key: "edit",
-    value: function edit(group) {
-      return this.get("/api/groups/".concat(group, "/edit"));
-    }
-  }, {
-    key: "update",
-    value: function update(group) {
-      return this.patch("/api/groups/".concat(group));
+    value: function retrieve(team) {
+      return this.get("/api/teams/".concat(team, "/programs"));
     }
   }, {
     key: "destroy",
-    value: function destroy(group) {
-      return this["delete"]("/api/groups/".concat(group));
+    value: function destroy(program) {
+      return this["delete"]("/api/programs/".concat(program));
     }
   }]);
 
-  return GroupRequest;
+  return TeamProgramsRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (GroupRequest);
+/* harmony default export */ __webpack_exports__["default"] = (TeamProgramsRequest);
 
 /***/ })
 
