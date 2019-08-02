@@ -8319,7 +8319,7 @@ __webpack_require__.r(__webpack_exports__);
       this.targetRequest.setFields({
         params: params
       });
-      this.targetRequest.retrieve(args).then(function (response) {
+      this.targetRequest.retrieve().then(function (response) {
         _this2.targetItems = response.data;
       });
     },
@@ -92577,7 +92577,12 @@ var render = function() {
     [
       _c(
         "el-menu-item",
-        _vm._b({}, "el-menu-item", _vm.$attrs, false),
+        _vm._b(
+          { staticClass: "tw-text-white" },
+          "el-menu-item",
+          _vm.$attrs,
+          false
+        ),
         [_vm._t("default")],
         2
       )

@@ -182,7 +182,7 @@
                     params
                 });
 
-                this.targetRequest.retrieve(args).then((response) => {
+                this.targetRequest.retrieve().then((response) => {
                     this.targetItems = response.data;
                 });
             },

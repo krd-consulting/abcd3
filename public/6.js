@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./resources/js/api/FormEntryRequest.js":
-/*!**********************************************!*\
-  !*** ./resources/js/api/FormEntryRequest.js ***!
-  \**********************************************/
+/***/ "./resources/js/api/RolePermissionRequest.js":
+/*!***************************************************!*\
+  !*** ./resources/js/api/RolePermissionRequest.js ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -30,28 +30,33 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var FormEntry =
+var RolePermissionRequest =
 /*#__PURE__*/
 function (_Request) {
-  _inherits(FormEntry, _Request);
+  _inherits(RolePermissionRequest, _Request);
 
-  function FormEntry() {
-    _classCallCheck(this, FormEntry);
+  function RolePermissionRequest() {
+    _classCallCheck(this, RolePermissionRequest);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(FormEntry).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(RolePermissionRequest).apply(this, arguments));
   }
 
-  _createClass(FormEntry, [{
+  _createClass(RolePermissionRequest, [{
     key: "store",
-    value: function store(form) {
-      return this.post("/api/forms/".concat(form));
+    value: function store(role, permission) {
+      return this.post("/api/roles/".concat(role, "/permissions/").concat(permission));
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(role, permission) {
+      return this["delete"]("/api/roles/".concat(role, "/permissions/").concat(permission));
     }
   }]);
 
-  return FormEntry;
+  return RolePermissionRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (FormEntry);
+/* harmony default export */ __webpack_exports__["default"] = (RolePermissionRequest);
 
 /***/ })
 

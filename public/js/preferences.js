@@ -82748,7 +82748,12 @@ var render = function() {
     [
       _c(
         "el-menu-item",
-        _vm._b({}, "el-menu-item", _vm.$attrs, false),
+        _vm._b(
+          { staticClass: "tw-text-white" },
+          "el-menu-item",
+          _vm.$attrs,
+          false
+        ),
         [_vm._t("default")],
         2
       )
