@@ -1,5 +1,8 @@
 <template>
     <div id="matrix">
+
+        <slot></slot>
+        
         <el-row>
             <el-col :span="10">
                 <label class="inputLabel">
@@ -20,23 +23,27 @@
         <table id="matrix-table">
             <thead>
                 <tr class="tw-max-w-sm">
-                    <th><el-button type="text" class="tw-ml-4" @click="addChoice">Add Radio Column</el-button></th>
+                    <th></th>
                     <th v-for="(item, index) in choices" :key="item.index" >
-                        <el-col>
+                        <el-row>
                             <editable-text 
-                                class="tw-cursor-pointer mouseOver" 
+                                class="tw-cursor-pointer mouseOver tw-flex tw-inline" 
                                 v-model="item.value"
                                 @input="updateChoiceValue($event, index)"
                             />
                             <el-button 
-                                class="tw-pr-15" 
+                                class="tw-flex tw-float-right tw-inline" 
                                 type="text" 
-                                size="mini" 
+                                size="mini"
+                                icon="el-icon-close" 
                                 @click="removeChoice(item)">
-                                    Remove
                             </el-button>
-                        </el-col>  
+                        </el-row>  
                     </th>
+                    <el-tooltip content="Add a new choice column">
+                        <el-button class="tw-ml-4" @click="addChoice" icon="el-icon-plus" circle></el-button>
+                    </el-tooltip>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -60,7 +67,7 @@
             v-model="field.settings.required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right tw-mr-48 button-top">
+            class="tw-float-right switch-position">
         </el-switch>
 
          <form @submit.prevent="addQuestion" class="tw-inline-block tw-my-4">
@@ -73,12 +80,7 @@
                     </el-tooltip>
                 </el-col>
             </el-row>
-        </form>
-
-        <div class="footer">
-            <slot></slot>
-        </div>
-        
+        </form>  
     </div>
 </template>
 
@@ -194,7 +196,7 @@ export default {
             const choicesCopy = _.clone(this.choices);
 
             choicesCopy.push({
-                id: this.nextQuestion++, value: 'New Item'
+                id: this.nextQuestion++, value: 'New Choice'
             });
 
             console.log(choicesCopy)
@@ -252,9 +254,9 @@ export default {
         text-decoration: underline;
         font-size: 110%;
     }
-    .button-top {
+    .switch-position {
         position: absolute;
-        top: 30px;;
+        bottom: 20px;;
         right: 10px;
     }
     .footer{

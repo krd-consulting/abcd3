@@ -2,18 +2,27 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
 
-            <el-form-item label="Question/Title" prop="title">
+            <el-form-item prop="title">
+                <label>
+                    Question/Title
+                </label>
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
 
-            <el-form-item label="This field is">
+            <el-form-item>
+                <label>
+                    This field is
+                </label>
                 <el-switch v-model="fieldData.settings.required" 
                     active-text="Required" 
                     inactive-text="Optional">
                 </el-switch>
             </el-form-item>
 
-            <el-form-item label="Set character limit">
+            <el-form-item>
+                <label>
+                    Set character limit
+                </label>
                 <el-switch v-model="fieldData.settings.isLimited" 
                     inactive-text="No Limit" 
                     active-text="Limit">
@@ -25,17 +34,20 @@
                 </el-input-number>
             </el-form-item>
 
-            <el-form-item label="Field refers to:">
+            <el-form-item>
+                <label>
+                    This field
+                </label>
                 <base-select
                     v-model="target"
                     name="target"
-                    placeholder="Select resource">
+                    placeholder="Stands alone">
                     <el-option
                         v-for="(type, index) in targetTypes"
                         :key="index"
                         :label="type.name"
                         :value="type.target">
-                        {{ type.name }}
+                        Refers to {{ type.name }}
                     </el-option>
                 </base-select>
 

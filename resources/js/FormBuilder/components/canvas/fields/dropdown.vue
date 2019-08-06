@@ -1,5 +1,7 @@
 <template>
     <div id="dropdown">
+        <slot></slot>
+        
         <el-row>
         <el-col :span="6">
             <label class="inputLabel">
@@ -38,7 +40,7 @@
             v-model="required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right tw-mr-48 button-top">
+            class="tw-float-right switch-position">
         </el-switch>
         
         <form @submit.prevent="addItem" class="tw-mt-4">
@@ -53,7 +55,6 @@
             </el-row>
         </form>
 
-        <slot></slot>
     </div>
 </template>
 
@@ -161,9 +162,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button-top {
+.switch-position {
     position: absolute;
-    top: 30px;;
+    bottom: 20px;;
     right: 10px;
 }
 </style>

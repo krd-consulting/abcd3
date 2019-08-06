@@ -1,5 +1,7 @@
 <template>
     <div id="fileUpload">
+        <slot></slot>
+        
         <el-col :span="8">
             <label class="inputLabel">
                 <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
@@ -29,10 +31,8 @@
             v-model="field.settings.required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right tw-mr-48 button-top">
+            class="tw-float-right switch-position">
         </el-switch>
-
-        <slot></slot>
     </div>
 </template>
 
@@ -117,9 +117,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button-top {
+.switch-position {
     position: absolute;
-    top: 30px;;
+    bottom: 20px;;
     right: 10px;
 }
 </style>

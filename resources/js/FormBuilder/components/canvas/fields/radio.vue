@@ -1,5 +1,8 @@
 <template>
     <div id="dropdown">
+
+        <slot></slot>
+        
         <el-col :span="8">
             <label class="inputLabel">
                 <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
@@ -34,7 +37,7 @@
             v-model="required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right tw-mr-48 button-top">
+            class="tw-float-right switch-position">
         </el-switch>
         
         <form @submit.prevent="addItem" class=" tw-mt-4">
@@ -48,10 +51,6 @@
                 </el-col>
             </el-row>
         </form>
-        
-        <div class="footer">
-            <slot></slot>
-        </div>
     </div>
 </template>
 
@@ -161,14 +160,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button-top {
+.switch-position {
     position: absolute;
-    top: 30px;;
-    right: 10px;
-}
-.footer{
-    position: absolute;
-    bottom: 0;
+    bottom: 20px;;
     right: 10px;
 }
 </style>

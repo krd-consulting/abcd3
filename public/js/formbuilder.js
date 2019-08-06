@@ -3548,7 +3548,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3631,7 +3630,7 @@ __webpack_require__.r(__webpack_exports__);
     loadItem: function loadItem() {
       this.choices.push({
         id: this.nextItem++,
-        value: 'item ' + this.nextItem
+        value: 'Choice ' + this.nextItem
       });
       this.$store.commit('UPDATE_FIELD', this.field);
     },
@@ -3676,10 +3675,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
-//
-//
-//
-//
 //
 //
 //
@@ -3891,6 +3886,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
+//
 //
 //
 //
@@ -4281,6 +4277,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4403,7 +4401,7 @@ __webpack_require__.r(__webpack_exports__);
 
       choicesCopy.push({
         id: this.nextQuestion++,
-        value: 'New Item'
+        value: 'New Choice'
       });
       console.log(choicesCopy);
       this.choices = choicesCopy;
@@ -4448,7 +4446,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
-//
 //
 //
 //
@@ -4547,7 +4544,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
-//
 //
 //
 //
@@ -4829,8 +4825,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textbox',
@@ -4882,15 +4876,7 @@ __webpack_require__.r(__webpack_exports__);
         this.field = fieldCopy;
       }
     }
-  } // created() {
-  //     this.field = _.clone(this.fieldData)
-  // },
-  // methods: {
-  //     showField(value){
-  //         return (this.field.label[value] == '' || this.editField == value)
-  //     }
-  // }
-
+  }
 });
 
 /***/ }),
@@ -4944,17 +4930,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textfield',
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
     fieldData: {
@@ -5054,15 +5034,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      timeSelection: ''
-    };
+    return {};
   },
   props: {
     fieldData: {
@@ -5148,6 +5123,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormBuilder_components_canvas_fields_timePicker_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/timePicker.vue */ "./resources/js/FormBuilder/components/canvas/fields/timePicker.vue");
 /* harmony import */ var _FormBuilder_components_canvas_fields_fileUpload_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/fileUpload.vue */ "./resources/js/FormBuilder/components/canvas/fields/fileUpload.vue");
 /* harmony import */ var _FormBuilder_components_canvas_fields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/FormBuilder/components/canvas/fields/sectionDivider.vue */ "./resources/js/FormBuilder/components/canvas/fields/sectionDivider.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5473,6 +5462,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'checkBox',
   data: function data() {
@@ -5505,7 +5503,7 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 1; i <= this.fieldData.settings.checkboxNum; i++) {
         this.fieldData.choices.push({
           id: this.fieldData.settings.nextChoice++,
-          value: 'Item ' + this.fieldData.settings.nextChoice
+          value: 'Choice ' + this.fieldData.settings.nextChoice
         });
       }
     },
@@ -5527,6 +5525,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5639,6 +5646,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'dropdown',
   data: function data() {
@@ -5693,6 +5706,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -5797,6 +5812,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'matrix',
   data: function data() {
@@ -5841,7 +5871,7 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 1; i <= this.fieldData.settings.matrix_choices; i++) {
         this.fieldData.choices.push({
           id: this.fieldData.settings.nextChoice++,
-          value: 'Item ' + this.fieldData.settings.nextChoice
+          value: 'Choice ' + this.fieldData.settings.nextChoice
         });
       }
     },
@@ -5864,6 +5894,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5955,6 +5994,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'radioField',
   data: function data() {
@@ -5987,7 +6035,7 @@ __webpack_require__.r(__webpack_exports__);
       for (var i = 1; i <= this.fieldData.settings.radioNum; i++) {
         this.fieldData.choices.push({
           id: this.fieldData.settings.nextChoice++,
-          value: 'Item ' + this.fieldData.settings.nextChoice
+          value: 'Choice ' + this.fieldData.settings.nextChoice
         });
       }
     },
@@ -6009,6 +6057,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -6059,6 +6110,15 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6145,6 +6205,18 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6494,7 +6566,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -6521,6 +6592,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         name: 'Date',
         component: 'DatePicker'
+      }, {
+        name: 'Time',
+        component: 'TimePicker'
       }, {
         name: 'Multiple Choice (dropdown)',
         component: 'Dropdown'
@@ -6679,6 +6753,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   methods: {
     buildForm: function buildForm() {
@@ -6694,8 +6776,12 @@ __webpack_require__.r(__webpack_exports__);
           message: 'Build Successful'
         });
 
-        _this.$store.dispatch('submitForm'); //window.location.href = '/forms/';
+        _this.$store.dispatch('submitForm').then(function (response) {//  redirect to forms
+          // return Promise('') --> Validate whether or not the form is good
+        })["catch"](function (error) {// display error saying some data is incompatable
+        });
 
+        window.location.href = '/forms/';
       })["catch"](function () {
         _this.$message({
           type: 'info',
@@ -7045,6 +7131,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -10461,7 +10549,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-e97e2c96] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-e97e2c96]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-e97e2c96] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10480,7 +10568,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5ce99664] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5ce99664] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10499,7 +10587,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-5bdc3b03] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10518,7 +10606,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-120ae50f] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-120ae50f] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10537,7 +10625,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "#matrix-table[data-v-8416b59a] {\n  width: 100%;\n  margin-top: 20px;\n  z-index: 0;\n}\n#matrix-table table[data-v-8416b59a], td[data-v-8416b59a] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-8416b59a]:hover {\n  background: #9ebdef;\n}\n.mouseOver[data-v-8416b59a]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-8416b59a] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-8416b59a]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, "#matrix-table[data-v-8416b59a] {\n  width: 100%;\n  margin-top: 20px;\n  z-index: 0;\n}\n#matrix-table table[data-v-8416b59a], td[data-v-8416b59a] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-8416b59a]:hover {\n  background: #9ebdef;\n}\n.mouseOver[data-v-8416b59a]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-8416b59a] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n.footer[data-v-8416b59a]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
 
 // exports
 
@@ -10556,7 +10644,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-1c3cc70b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-1c3cc70b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-1c3cc70b] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10575,7 +10663,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7d675a79] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7d675a79]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10594,7 +10682,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -10613,7 +10701,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-7a7b55cc] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-7a7b55cc]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7a7b55cc] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10632,7 +10720,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-28f88a4b] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-28f88a4b]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-28f88a4b] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10651,7 +10739,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button-top[data-v-2da47d2d] {\n  position: absolute;\n  top: 30px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-2da47d2d] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10670,7 +10758,26 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 900px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-row[data-v-afee96a4] {\n  margin: 5px;\n}\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  min-width: 300px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 745px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n\n/* .el-row {\r\n    margin: 5px;\r\n  } */\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 18px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 18px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 110%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\r\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css&":
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "/* .el-form-item.label {\n    font-size: 20px;\n} */\n", ""]);
 
 // exports
 
@@ -10689,7 +10796,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  min-height: 735px;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\r\n", ""]);
 
 // exports
 
@@ -10708,7 +10815,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 100;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 2px !important;\n  right: 15px !important;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(-100%);\n          transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 100;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 2px !important;\n  right: 15px !important;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -10746,7 +10853,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\n", ""]);
+exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\r\n", ""]);
 
 // exports
 
@@ -10765,7 +10872,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n\n", ""]);
+exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -10822,7 +10929,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -10841,7 +10948,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#matrix-table[data-v-04d13538] {\n  width: 100%;\n  /* margin-top: 20px;  */\n  z-index: 0;\n}\n#matrix-table table[data-v-04d13538], td[data-v-04d13538] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-04d13538]:hover {\n  background: #9ebdef;\n}\n", ""]);
+exports.push([module.i, "#matrix-table[data-v-04d13538] {\n  /* width: 100%;  */\n  /* margin-top: 20px;  */\n  z-index: 0;\n}\n#matrix-table table[data-v-04d13538], td[data-v-04d13538] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-04d13538]:hover {\n  background: #9ebdef;\n}\n", ""]);
 
 // exports
 
@@ -10860,7 +10967,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -10879,7 +10986,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n  /* cubic-bezier(1.0, 0.5, 0.8, 1.0); */\n}\n.toggle-enter, .toggle-leave-to {\n  transform: translateX(100%);\n  /* opacity: 0; */\n}\n.panel {\n  height: 100%;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  right: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: right;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.sidenav .close {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Handle differently on smaller screen size */\n@media screen and (max-height: 450px) {\n.sidenav {\n    padding-top: 15px;\n}\n.sidenav a {\n    font-size: 18px;\n}\n}\n", ""]);
+exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n  /* cubic-bezier(1.0, 0.5, 0.8, 1.0); */\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(100%);\n          transform: translateX(100%);\n  /* opacity: 0; */\n}\n.panel {\n  height: 100%;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  right: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: right;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.sidenav .close {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Handle differently on smaller screen size */\n@media screen and (max-height: 450px) {\n.sidenav {\n    padding-top: 15px;\n}\n.sidenav a {\n    font-size: 18px;\n}\n}\n", ""]);
 
 // exports
 
@@ -61964,7 +62071,7 @@ module.exports = isSymbol;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Copyright JS Foundation and other contributors <https://js.foundation/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -61975,7 +62082,7 @@ module.exports = isSymbol;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -64634,10 +64741,16 @@ module.exports = isSymbol;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-      } else if (isMap(value)) {
+
+        return result;
+      }
+
+      if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
+
+        return result;
       }
 
       var keysFunc = isFull
@@ -65561,8 +65674,8 @@ module.exports = isSymbol;
         return;
       }
       baseFor(source, function(srcValue, key) {
-        stack || (stack = new Stack);
         if (isObject(srcValue)) {
+          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -67379,7 +67492,7 @@ module.exports = isSymbol;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision && nativeIsFinite(number)) {
+        if (precision) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -68562,7 +68675,7 @@ module.exports = isSymbol;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
+     * Gets the value at `key`, unless `key` is "__proto__".
      *
      * @private
      * @param {Object} object The object to query.
@@ -68570,10 +68683,6 @@ module.exports = isSymbol;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
-      if (key === 'constructor' && typeof object[key] === 'function') {
-        return;
-      }
-
       if (key == '__proto__') {
         return;
       }
@@ -72374,7 +72483,6 @@ module.exports = isSymbol;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
-            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -76761,12 +76869,9 @@ module.exports = isSymbol;
       , 'g');
 
       // Use a sourceURL for easier debugging.
-      // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+        ('sourceURL' in options
+          ? options.sourceURL
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -76799,9 +76904,7 @@ module.exports = isSymbol;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
-      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
+      var variable = options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -79006,11 +79109,10 @@ module.exports = isSymbol;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = lodashFunc.name + '';
-        if (!hasOwnProperty.call(realNames, key)) {
-          realNames[key] = [];
-        }
-        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
+        var key = (lodashFunc.name + ''),
+            names = realNames[key] || (realNames[key] = []);
+
+        names.push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -86575,6 +86677,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css&":
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css& ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/index.vue?vue&type=style&index=0&id=1ff48ab5&scoped=true&lang=css&":
 /*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/index.vue?vue&type=style&index=0&id=1ff48ab5&scoped=true&lang=css& ***!
@@ -87721,6 +87853,8 @@ var render = function() {
     "div",
     { attrs: { id: "checkbox" } },
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c("el-col", { attrs: { span: 8 } }, [
         _c(
           "label",
@@ -87817,7 +87951,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
+        staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.required,
@@ -87887,9 +88021,7 @@ var render = function() {
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "footer" }, [_vm._t("default")], 2)
+      )
     ],
     2
   )
@@ -87920,9 +88052,11 @@ var render = function() {
     "div",
     { attrs: { id: "datepicker" } },
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c(
         "el-col",
-        { attrs: { span: 10 } },
+        { staticClass: "tw-mb-2", attrs: { span: 10 } },
         [
           _c(
             "label",
@@ -87962,13 +88096,6 @@ var render = function() {
               "start-placeholder": _vm.startDate,
               "end-placeholder": _vm.endDate,
               settings: _vm.dateFormat
-            },
-            model: {
-              value: _vm.dateSelection,
-              callback: function($$v) {
-                _vm.dateSelection = $$v
-              },
-              expression: "dateSelection"
             }
           })
         ],
@@ -87976,7 +88103,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
+        staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.field.settings.required,
@@ -87985,11 +88112,9 @@ var render = function() {
           },
           expression: "field.settings.required"
         }
-      }),
-      _vm._v(" "),
-      _c("el-col", [_vm._t("default")], 2)
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -88018,6 +88143,8 @@ var render = function() {
     "div",
     { attrs: { id: "dropdown" } },
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c(
         "el-row",
         [
@@ -88135,7 +88262,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
+        staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.required,
@@ -88205,9 +88332,7 @@ var render = function() {
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _vm._t("default")
+      )
     ],
     2
   )
@@ -88238,6 +88363,8 @@ var render = function() {
     "div",
     { attrs: { id: "fileUpload" } },
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c(
         "el-col",
         { attrs: { span: 8 } },
@@ -88328,7 +88455,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
+        staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.field.settings.required,
@@ -88337,9 +88464,7 @@ var render = function() {
           },
           expression: "field.settings.required"
         }
-      }),
-      _vm._v(" "),
-      _vm._t("default")
+      })
     ],
     2
   )
@@ -88370,6 +88495,8 @@ var render = function() {
     "div",
     { attrs: { id: "matrix" } },
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c(
         "el-row",
         [
@@ -88433,21 +88560,7 @@ var render = function() {
             "tr",
             { staticClass: "tw-max-w-sm" },
             [
-              _c(
-                "th",
-                [
-                  _c(
-                    "el-button",
-                    {
-                      staticClass: "tw-ml-4",
-                      attrs: { type: "text" },
-                      on: { click: _vm.addChoice }
-                    },
-                    [_vm._v("Add Radio Column")]
-                  )
-                ],
-                1
-              ),
+              _c("th"),
               _vm._v(" "),
               _vm._l(_vm.choices, function(item, index) {
                 return _c(
@@ -88455,10 +88568,11 @@ var render = function() {
                   { key: item.index },
                   [
                     _c(
-                      "el-col",
+                      "el-row",
                       [
                         _c("editable-text", {
-                          staticClass: "tw-cursor-pointer mouseOver",
+                          staticClass:
+                            "tw-cursor-pointer mouseOver tw-flex tw-inline",
                           on: {
                             input: function($event) {
                               return _vm.updateChoiceValue($event, index)
@@ -88473,30 +88587,39 @@ var render = function() {
                           }
                         }),
                         _vm._v(" "),
-                        _c(
-                          "el-button",
-                          {
-                            staticClass: "tw-pr-15",
-                            attrs: { type: "text", size: "mini" },
-                            on: {
-                              click: function($event) {
-                                return _vm.removeChoice(item)
-                              }
-                            }
+                        _c("el-button", {
+                          staticClass: "tw-flex tw-float-right tw-inline",
+                          attrs: {
+                            type: "text",
+                            size: "mini",
+                            icon: "el-icon-close"
                           },
-                          [
-                            _vm._v(
-                              "\n                                Remove\n                        "
-                            )
-                          ]
-                        )
+                          on: {
+                            click: function($event) {
+                              return _vm.removeChoice(item)
+                            }
+                          }
+                        })
                       ],
                       1
                     )
                   ],
                   1
                 )
-              })
+              }),
+              _vm._v(" "),
+              _c(
+                "el-tooltip",
+                { attrs: { content: "Add a new choice column" } },
+                [
+                  _c("el-button", {
+                    staticClass: "tw-ml-4",
+                    attrs: { icon: "el-icon-plus", circle: "" },
+                    on: { click: _vm.addChoice }
+                  })
+                ],
+                1
+              )
             ],
             2
           )
@@ -88572,7 +88695,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
+        staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.field.settings.required,
@@ -88645,11 +88768,9 @@ var render = function() {
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "footer" }, [_vm._t("default")], 2)
+      )
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -88678,6 +88799,8 @@ var render = function() {
     "div",
     { attrs: { id: "numeric" } },
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c(
         "el-col",
         { attrs: { span: 8 } },
@@ -88722,7 +88845,7 @@ var render = function() {
                 }
               })
             : _c("el-input-number", {
-                attrs: { id: "numfield" },
+                attrs: { id: "numfield", disabled: "" },
                 model: {
                   value: _vm.num,
                   callback: function($$v) {
@@ -88736,8 +88859,12 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
-        attrs: { "active-text": "Required", "inactive-text": "Optional" },
+        staticClass: "tw-float-right switch-position",
+        attrs: {
+          "active-text": "Required",
+          "inactive-text": "Optional",
+          disabled: ""
+        },
         model: {
           value: _vm.required,
           callback: function($$v) {
@@ -88745,11 +88872,9 @@ var render = function() {
           },
           expression: "required"
         }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "footer" }, [_vm._t("default")], 2)
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -88778,6 +88903,8 @@ var render = function() {
     "div",
     { attrs: { id: "dropdown" } },
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c("el-col", { attrs: { span: 8 } }, [
         _c(
           "label",
@@ -88880,7 +89007,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
+        staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.required,
@@ -88950,11 +89077,9 @@ var render = function() {
           )
         ],
         1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "footer" }, [_vm._t("default")], 2)
+      )
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -89044,6 +89169,8 @@ var render = function() {
     "div",
     { staticClass: "tw-mb-4", attrs: { id: "Textbox" } },
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c(
         "el-row",
         [
@@ -89106,7 +89233,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
+        staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.required,
@@ -89115,11 +89242,9 @@ var render = function() {
           },
           expression: "required"
         }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "footer" }, [_vm._t("default")], 2)
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -89147,6 +89272,8 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c(
         "el-row",
         [
@@ -89190,13 +89317,6 @@ var render = function() {
                       maxlength: _vm.field.settings.max,
                       placeholder: "Your text here",
                       "show-word-limit": ""
-                    },
-                    model: {
-                      value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
                     }
                   })
                 : _c("el-input", {
@@ -89204,13 +89324,6 @@ var render = function() {
                       id: "input",
                       type: "text",
                       placeholder: "Your text here"
-                    },
-                    model: {
-                      value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
                     }
                   })
             ],
@@ -89221,7 +89334,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
+        staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.required,
@@ -89230,11 +89343,9 @@ var render = function() {
           },
           expression: "required"
         }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "footer" }, [_vm._t("default")], 2)
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -89262,6 +89373,8 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c(
         "el-row",
         [
@@ -89307,13 +89420,6 @@ var render = function() {
                         end: "24:45"
                       },
                       placeholder: "Pick a time"
-                    },
-                    model: {
-                      value: _vm.timeSelection,
-                      callback: function($$v) {
-                        _vm.timeSelection = $$v
-                      },
-                      expression: "timeSelection"
                     }
                   })
                 : _c("el-time-picker", {
@@ -89334,7 +89440,7 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right tw-mr-48 button-top",
+        staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.required,
@@ -89343,11 +89449,9 @@ var render = function() {
           },
           expression: "required"
         }
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "footer" }, [_vm._t("default")], 2)
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []
@@ -89449,7 +89553,8 @@ var render = function() {
                             [
                               _c("el-input", {
                                 attrs: {
-                                  placeholder: "This field is for subtext"
+                                  placeholder:
+                                    "If desired, feel free to enter a brief description for this form"
                                 },
                                 model: {
                                   value: _vm.description,
@@ -89471,17 +89576,27 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "el-row",
-                    { attrs: { gutter: 10 } },
+                    { staticClass: "tw-mb-4", attrs: { gutter: 12 } },
                     [
+                      _c("el-col", { attrs: { span: 4 } }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "input-label tw-mt-4",
+                            attrs: { for: "name" }
+                          },
+                          [_vm._v(" " + _vm._s(_vm.targetName) + " Name")]
+                        )
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "el-col",
-                        { attrs: { span: 10 } },
+                        { attrs: { span: 8 } },
                         [
-                          _c("span", { staticClass: "input-label" }, [
-                            _vm._v(" " + _vm._s(_vm.targetName) + " Name")
-                          ]),
-                          _vm._v(" "),
-                          _c("el-input", { staticClass: "inputField" })
+                          _c("el-input", {
+                            staticClass: "inputField",
+                            attrs: { id: "name" }
+                          })
                         ],
                         1
                       )
@@ -89491,16 +89606,18 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "el-row",
+                    { staticClass: "tw-mb-4", attrs: { gutter: 12 } },
                     [
+                      _c("el-col", { attrs: { span: 4 } }, [
+                        _c("label", { staticClass: "input-label" }, [
+                          _vm._v("Team")
+                        ])
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "el-col",
-                        { attrs: { span: 6 } },
+                        { attrs: { span: 8 } },
                         [
-                          _c("span", { staticClass: "input-label" }, [
-                            _vm._v("Team")
-                          ]),
-                          _c("br"),
-                          _vm._v(" "),
                           _c(
                             "el-select",
                             { attrs: { value: "", placeholder: "Select" } },
@@ -89522,16 +89639,18 @@ var render = function() {
                   _vm.type === "pre-post"
                     ? _c(
                         "el-row",
+                        { staticClass: "tw-mb-4", attrs: { gutter: 12 } },
                         [
+                          _c("el-col", { attrs: { span: 4 } }, [
+                            _c("label", { staticClass: "input-label" }, [
+                              _vm._v("Complete for")
+                            ])
+                          ]),
+                          _vm._v(" "),
                           _c(
                             "el-col",
-                            { attrs: { span: 6 } },
+                            { attrs: { span: 8 } },
                             [
-                              _c("span", { staticClass: "input-label" }, [
-                                _vm._v("Complete for")
-                              ]),
-                              _c("br"),
-                              _vm._v(" "),
                               _c(
                                 "el-select",
                                 {
@@ -89562,17 +89681,18 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "el-row",
-                    { attrs: { guttter: 10 } },
+                    { staticClass: "tw-mb-4", attrs: { guttter: 12 } },
                     [
+                      _c("el-col", { attrs: { span: 4 } }, [
+                        _c("label", { staticClass: "input-label" }, [
+                          _vm._v("Date Completed")
+                        ])
+                      ]),
+                      _vm._v(" "),
                       _c(
                         "el-col",
-                        { attrs: { span: 6 } },
+                        { attrs: { span: 8 } },
                         [
-                          _c("span", { staticClass: "input-label" }, [
-                            _vm._v("Date Completed")
-                          ]),
-                          _c("br"),
-                          _vm._v(" "),
                           _c("el-date-picker", {
                             attrs: {
                               type: "date",
@@ -89625,23 +89745,29 @@ var render = function() {
                               _c(
                                 "el-card",
                                 {
-                                  staticClass: "cursor-move",
+                                  staticClass: "cursor-move tw-my-2",
                                   attrs: {
-                                    "body-style": "padding: 10px;",
+                                    "body-style": "padding: 5px;",
                                     shadow: "hover"
                                   }
                                 },
                                 [
                                   _c(
-                                    "el-button",
+                                    "el-tooltip",
                                     {
-                                      staticClass: "handle tw-float-right",
                                       attrs: {
-                                        size: "mini",
-                                        icon: "el-icon-rank"
+                                        content:
+                                          "Change the order of your fields by clicking this button and dragging to a new position within your form"
                                       }
                                     },
-                                    [_vm._v("Drag Field")]
+                                    [
+                                      _c("el-button", {
+                                        staticClass:
+                                          "handle tw-float-left tw-mt-2 tw-mr-2",
+                                        attrs: { icon: "el-icon-rank" }
+                                      })
+                                    ],
+                                    1
                                   ),
                                   _vm._v(" "),
                                   _c(
@@ -89656,27 +89782,19 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c(
-                                        "el-button",
-                                        {
-                                          staticClass:
-                                            "tw-float-right hover:tw-text-red-600",
-                                          attrs: {
-                                            type: "text",
-                                            icon: "el-icon-close"
-                                          },
-                                          on: {
-                                            click: function($event) {
-                                              return _vm.removeField(index)
-                                            }
-                                          }
+                                      _c("el-button", {
+                                        staticClass:
+                                          "tw-float-right tw-relative tw-top-0 tw-right-0 tw-p-2 tw-z-10 hover:tw-text-red-600",
+                                        attrs: {
+                                          icon: "el-icon-close",
+                                          type: "text"
                                         },
-                                        [
-                                          _vm._v(
-                                            "\n                                            Remove\n                                    "
-                                          )
-                                        ]
-                                      )
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.removeField(index)
+                                          }
+                                        }
+                                      })
                                     ],
                                     1
                                   )
@@ -89714,10 +89832,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&":
-/*!*****************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1& ***!
-  \*****************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -89750,8 +89868,12 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title:", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [
+                _vm._v("\n                 Question/Title\n             ")
+              ]),
+              _vm._v(" "),
               _c(
                 "el-col",
                 { attrs: { span: 24 } },
@@ -89774,8 +89896,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This field is:" } },
             [
+              _c("label", [
+                _vm._v("\n                 This field is\n             ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "active-text": "Required",
@@ -89795,8 +89920,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Number of choices:" } },
             [
+              _c("label", [
+                _vm._v("\n                 Number of choices\n             ")
+              ]),
+              _vm._v(" "),
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
                 model: {
@@ -89877,8 +90005,12 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [
+                _vm._v("\n                Question/Title\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -89894,8 +90026,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This field is" } },
             [
+              _c("label", [
+                _vm._v("\n                This field is\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "active-text": "Required",
@@ -89915,8 +90050,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Calendar Preferences" } },
             [
+              _c("label", [
+                _vm._v("\n                Calendar Preferences\n            ")
+              ]),
+              _vm._v(" "),
               _c(
                 "el-row",
                 [
@@ -90071,8 +90209,12 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question:", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [
+                _vm._v("\n                Question/Title\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -90088,8 +90230,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This field is:" } },
             [
+              _c("label", [
+                _vm._v("\n                This field is\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "active-text": "Required",
@@ -90174,8 +90319,10 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [_vm._v("\n             Question/Title\n         ")]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -90191,8 +90338,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This field is" } },
             [
+              _c("label", [
+                _vm._v("\n                 This field is\n             ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "active-text": "Required",
@@ -90276,8 +90426,10 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [_vm._v("\n            Question/Title\n        ")]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -90293,8 +90445,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Additional information" } },
             [
+              _c("label", [
+                _vm._v("\n                Additional information\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.description,
@@ -90310,8 +90465,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This field is" } },
             [
+              _c("label", [
+                _vm._v("\n                This field is\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "active-text": "Required",
@@ -90331,8 +90489,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Number of questions" } },
             [
+              _c("label", [
+                _vm._v("\n                Number of questions\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1 },
                 model: {
@@ -90349,8 +90510,13 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Number of choices per question" } },
             [
+              _c("label", [
+                _vm._v(
+                  "\n                Number of choices per question\n            "
+                )
+              ]),
+              _vm._v(" "),
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 10 },
                 model: {
@@ -90431,8 +90597,12 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [
+                _vm._v("\n                 Question/Title\n             ")
+              ]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -90448,8 +90618,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This field is" } },
             [
+              _c("label", [
+                _vm._v("\n                 This field is\n             ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "active-text": "Required",
@@ -90469,8 +90642,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Set Default Value" } },
             [
+              _c("label", [
+                _vm._v("\n                 Set Default Value\n             ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "inactive-text": "No Default",
@@ -90566,8 +90742,12 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [
+                _vm._v("\n                Question/Title\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -90583,8 +90763,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This Field is" } },
             [
+              _c("label", [
+                _vm._v("\n                This Field is\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "active-text": "Required",
@@ -90604,8 +90787,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Number of choices" } },
             [
+              _c("label", [
+                _vm._v("\n                Number of choices\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-input-number", {
                 attrs: { "controls-position": "right", min: 1, max: 30 },
                 model: {
@@ -90683,8 +90869,11 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Section label" } },
             [
+              _c("label", [
+                _vm._v("\n                 Section Title\n             ")
+              ]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -90765,8 +90954,12 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [
+                _vm._v("\n                Question/Title\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -90782,8 +90975,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This field is" } },
             [
+              _c("label", [
+                _vm._v("\n                This field is\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "active-text": "Required",
@@ -90803,8 +90999,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Set character limit" } },
             [
+              _c("label", [
+                _vm._v("\n                Set character limit\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: { "inactive-text": "No Limit", "active-text": "Limit" },
                 model: {
@@ -90900,8 +91099,12 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [
+                _vm._v("\n                Question/Title\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -90917,8 +91120,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This field is" } },
             [
+              _c("label", [
+                _vm._v("\n                This field is\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: {
                   "active-text": "Required",
@@ -90938,8 +91144,11 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Set character limit" } },
             [
+              _c("label", [
+                _vm._v("\n                Set character limit\n            ")
+              ]),
+              _vm._v(" "),
               _c("el-switch", {
                 attrs: { "inactive-text": "No Limit", "active-text": "Limit" },
                 model: {
@@ -90971,12 +91180,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "Field refers to:" } },
             [
+              _c("label", [
+                _vm._v("\n                This field\n            ")
+              ]),
+              _vm._v(" "),
               _c(
                 "base-select",
                 {
-                  attrs: { name: "target", placeholder: "Select resource" },
+                  attrs: { name: "target", placeholder: "Stands alone" },
                   model: {
                     value: _vm.target,
                     callback: function($$v) {
@@ -90994,7 +91206,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    " +
+                        "\n                    Refers to " +
                           _vm._s(type.name) +
                           "\n                "
                       )
@@ -91162,11 +91374,11 @@ var render = function() {
             [
               _c("el-input", {
                 model: {
-                  value: _vm.fieldData.label,
+                  value: _vm.fieldData.title,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData, "label", $$v)
+                    _vm.$set(_vm.fieldData, "title", $$v)
                   },
-                  expression: "fieldData.label"
+                  expression: "fieldData.title"
                 }
               })
             ],
@@ -91314,7 +91526,7 @@ var render = function() {
               [
                 _c("template", { slot: "title" }, [
                   _c("p", { staticClass: "menu-title" }, [
-                    _vm._v(" 2. Set Options")
+                    _vm._v("2. Set Options")
                   ])
                 ]),
                 _vm._v(" "),
@@ -91446,30 +91658,40 @@ var render = function() {
     },
     [
       _c(
-        "el-menu-item",
-        {
-          staticClass: "tw-font-bold focus:tw-font-extrabold",
-          attrs: { "default-active": "", index: "/forms/create" }
-        },
-        [_vm._v("\n                Form Builder\n        ")]
+        "router-link",
+        { attrs: { to: "/forms/create" } },
+        [
+          _c(
+            "el-button",
+            { staticClass: "tw-float-left tw-bg-blue-500 tw-text-white" },
+            [_vm._v("Form Builder")]
+          )
+        ],
+        1
       ),
       _vm._v(" "),
       _c(
-        "el-menu-item",
+        "el-button",
         {
-          staticClass: "tw-font-bold focus:tw-font-extrabold",
-          attrs: { index: "/forms/create/preview" }
-        },
-        [_vm._v("\n                Preview Form\n        ")]
-      ),
-      _vm._v(" "),
-      _c(
-        "el-menu-item",
-        {
-          staticClass: "float-right tw-font-bold focus:font-extrabold",
+          staticClass: "tw-float-right tw-bg-blue-500 tw-text-white",
           on: { click: _vm.buildForm }
         },
-        [_vm._v("\n                Finish and Build!\n        ")]
+        [_vm._v("Finish & Build!")]
+      ),
+      _vm._v(" "),
+      _c(
+        "router-link",
+        { attrs: { to: "/forms/create/preview" } },
+        [
+          _c(
+            "el-button",
+            {
+              staticClass: "tw-float-right tw-bg-blue-500 tw-text-white tw-mx-1"
+            },
+            [_vm._v("Preview")]
+          )
+        ],
+        1
       )
     ],
     1
@@ -91524,7 +91746,7 @@ var render = function() {
                 _c(
                   "label",
                   {
-                    staticClass: "input-label tw-mt-4",
+                    staticClass: "tw-block tw-text-right tw-mr-1",
                     attrs: { for: "name" }
                   },
                   [_vm._v(" " + _vm._s(_vm.target.name) + " Name")]
@@ -91560,7 +91782,10 @@ var render = function() {
               _c("el-col", { attrs: { span: 6 } }, [
                 _c(
                   "label",
-                  { staticClass: "input-label", attrs: { for: "teamSelect" } },
+                  {
+                    staticClass: "tw-block tw-text-right tw-mr-1",
+                    attrs: { for: "teamSelect" }
+                  },
                   [_vm._v("Team")]
                 )
               ]),
@@ -91596,7 +91821,7 @@ var render = function() {
                     _c(
                       "label",
                       {
-                        staticClass: "input-label",
+                        staticClass: "tw-block tw-text-right tw-mr-1",
                         attrs: { for: "pre-post" }
                       },
                       [_vm._v("Completed for")]
@@ -91642,7 +91867,10 @@ var render = function() {
               _c("el-col", { attrs: { span: 6 } }, [
                 _c(
                   "label",
-                  { staticClass: "input-label", attrs: { for: "formDate" } },
+                  {
+                    staticClass: "tw-block tw-text-right tw-mr-1",
+                    attrs: { for: "formDate" }
+                  },
                   [_vm._v("Date Completed")]
                 )
               ]),
@@ -91887,13 +92115,13 @@ var render = function() {
       _c("form", [
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5 tw-capitalize" }, [
+            _c("label", { staticClass: "tw-w-1/4 tw-capitalize" }, [
               _vm._v("\n                    Form Name\n                ")
             ]),
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "tw-w-2/3" },
+              { staticClass: "tw-w-2/4" },
               [
                 _c("base-input", {
                   attrs: { name: "name" },
@@ -91931,53 +92159,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5 tw-capitalize" }, [
-              _vm._v("\n                    Description\n                ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tw-w-2/3" },
-              [
-                _c("base-input", {
-                  attrs: { name: "description" },
-                  nativeOn: {
-                    keydown: function($event) {
-                      return _vm.request.errors.clear($event.target.name)
-                    }
-                  },
-                  model: {
-                    value: _vm.formData["description"],
-                    callback: function($$v) {
-                      _vm.$set(_vm.formData, "description", $$v)
-                    },
-                    expression: "formData['description']"
-                  }
-                })
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _vm.request.errors.has("description")
-            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
-                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
-                  _c("span", {
-                    staticClass: "tw-text-xs tw-text-red-500",
-                    domProps: {
-                      textContent: _vm._s(
-                        _vm.request.errors.get("description")[0]
-                      )
-                    }
-                  })
-                ])
-              ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "tw-mb-2" }, [
-          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5" }, [
+            _c("label", { staticClass: "tw-w-1/4" }, [
               _vm._v("\n                    Team\n                ")
             ]),
             _vm._v(" "),
@@ -91992,8 +92174,7 @@ var render = function() {
                       filterable: "",
                       remote: "",
                       "remote-method": _vm.retrieveTeams,
-                      name: "type",
-                      placeholder: "Select Team"
+                      name: "type"
                     },
                     on: {
                       change: function($event) {
@@ -92047,7 +92228,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5" }, [
+            _c("label", { staticClass: "tw-w-1/4" }, [
               _vm._v("\n                    Form Type\n                ")
             ]),
             _vm._v(" "),
@@ -92108,7 +92289,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5" }, [
+            _c("label", { staticClass: "tw-w-1/4" }, [
               _vm._v(
                 "\n                    This form is about\n                "
               )
@@ -92144,11 +92325,15 @@ var render = function() {
                         attrs: { label: type.name, value: type.target }
                       },
                       [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(type.name) +
-                            "\n                        "
-                        )
+                        type.name === "Program" || type.name === "Group"
+                          ? _c("span", [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(type.name) +
+                                  "s\n                            "
+                              )
+                            ])
+                          : _c("span", [_vm._v(_vm._s(type.name))])
                       ]
                     )
                   }),
@@ -92192,7 +92377,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5" }, [
+            _c("label", { staticClass: "tw-w-1/4" }, [
               _vm._v(
                 "\n                    Who can see this form?\n                "
               )
@@ -92873,7 +93058,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 5 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "check" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "check" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -92948,7 +93136,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "dateField" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "dateField" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -93019,7 +93210,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "dropdown" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "dropdown" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -93094,11 +93288,9 @@ var render = function() {
         "el-row",
         [
           _c("el-col", { attrs: { span: 24 } }, [
-            _c(
-              "label",
-              { staticClass: "inputLabel", attrs: { for: "matrix-table" } },
-              [_vm._v(_vm._s(_vm.field.title))]
-            ),
+            _c("label", { attrs: { for: "matrix-table" } }, [
+              _vm._v(_vm._s(_vm.field.title))
+            ]),
             _c("br"),
             _vm._v(" "),
             _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
@@ -93223,7 +93415,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "numfield" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "numfield" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -93295,7 +93490,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 5 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "radioGroup" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "radioGroup" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -93413,7 +93611,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "textArea" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "textArea" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -93495,9 +93696,14 @@ var render = function() {
         "el-row",
         [
           _c("el-col", { attrs: { span: 6 } }, [
-            _c("label", { staticClass: "inputLabel", attrs: { for: "text" } }, [
-              _vm._v(_vm._s(_vm.field.title))
-            ])
+            _c(
+              "label",
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "text" }
+              },
+              [_vm._v(_vm._s(_vm.field.title))]
+            )
           ]),
           _vm._v(" "),
           _vm.field.reference_target_type_id == null
@@ -93673,7 +93879,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "time-picker" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "time-picker" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -93694,21 +93903,21 @@ var render = function() {
                       placeholder: "Pick a time"
                     },
                     model: {
-                      value: _vm.timeSelection,
+                      value: _vm.value,
                       callback: function($$v) {
-                        _vm.timeSelection = $$v
+                        _vm.value = $$v
                       },
-                      expression: "timeSelection"
+                      expression: "value"
                     }
                   })
                 : _c("el-time-picker", {
                     attrs: { "arrow-control": "", placeholder: "Pick a time" },
                     model: {
-                      value: _vm.timeSelection,
+                      value: _vm.value,
                       callback: function($$v) {
-                        _vm.timeSelection = $$v
+                        _vm.value = $$v
                       },
-                      expression: "timeSelection"
+                      expression: "value"
                     }
                   })
             ],
@@ -93753,7 +93962,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "dropdown" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "dropdown" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             ),
             _c("br"),
@@ -93832,10 +94044,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "base-input",
-    {
-      staticClass: "tw-w-full",
-      attrs: { placeholder: "Search for files, forms, etc." }
-    },
+    { staticClass: "tw-w-full", attrs: { placeholder: "System Search" } },
     [
       _c("i", {
         staticClass: "el-input__icon el-icon-search",
@@ -114050,9 +114259,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkBox.vue?vue&type=template&id=08d3aef1& */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&");
+/* harmony import */ var _checkBox_vue_vue_type_template_id_08d3aef1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./checkBox.vue?vue&type=template&id=08d3aef1&scoped=true& */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&scoped=true&");
 /* harmony import */ var _checkBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./checkBox.vue?vue&type=script&lang=js& */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _checkBox_vue_vue_type_style_index_0_id_08d3aef1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css& */ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -114060,13 +114271,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
   _checkBox_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _checkBox_vue_vue_type_template_id_08d3aef1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _checkBox_vue_vue_type_template_id_08d3aef1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "08d3aef1",
   null
   
 )
@@ -114092,19 +114303,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&":
-/*!***********************************************************************************************************!*\
-  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1& ***!
-  \***********************************************************************************************************/
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_style_index_0_id_08d3aef1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=style&index=0&id=08d3aef1&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_style_index_0_id_08d3aef1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_style_index_0_id_08d3aef1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_style_index_0_id_08d3aef1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_style_index_0_id_08d3aef1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_style_index_0_id_08d3aef1_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&scoped=true&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&scoped=true& ***!
+  \***********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./checkBox.vue?vue&type=template&id=08d3aef1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_template_id_08d3aef1_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./checkBox.vue?vue&type=template&id=08d3aef1&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/FormBuilder/components/menu/fieldOptions/checkBox.vue?vue&type=template&id=08d3aef1&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_template_id_08d3aef1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_template_id_08d3aef1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_checkBox_vue_vue_type_template_id_08d3aef1_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -115168,6 +115395,9 @@ var app = new Vue({
   el: '#app',
   router: _routes__WEBPACK_IMPORTED_MODULE_5__["router"],
   store: _store_index_js__WEBPACK_IMPORTED_MODULE_3__["store"],
+  // data: {
+  // 	collapseSidebar: true,
+  // },
   components: {
     Initialize: _views_initialize__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
@@ -115220,13 +115450,6 @@ var app = new Vue({
         this.$store.commit('SET_TARGET', target);
       }
     }
-  },
-  data: {
-    collapseSidebar: false,
-    initialize: {
-      active: true
-    },
-    loading: false
   },
   methods: {
     initializeForm: function initializeForm(data) {
@@ -115310,9 +115533,7 @@ __webpack_require__.r(__webpack_exports__);
       fields: state.fields
     };
     var request = new _api_FormRequest_js__WEBPACK_IMPORTED_MODULE_0__["default"](formData);
-    request.store().then(function (response) {//  return Promise('')
-    })["catch"](function (error) {//
-    });
+    return request.store();
   }
 });
 
@@ -115433,7 +115654,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   title: 'Form Title',
-  description: 'Subtext',
+  description: '',
   team_id: '',
   scope_id: '',
   target: {
@@ -118896,7 +119117,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

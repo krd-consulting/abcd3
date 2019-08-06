@@ -1,5 +1,8 @@
 <nav class="tw-border-r">
     <sidebar-list :collapse="collapseSidebar" class="main-sidebar-menu">
+        <div class="tw-mx-2">
+            <global-search></global-search>
+        </div>
         <sidebar-list-item index="dashboard" :route="{ path: '/dashboard' }">
             <base-icon class="tw-text-xl tw-mr-2">dashboard</base-icon>
             <span slot="title" class="tw-text-white">Dashboard</span>
@@ -14,7 +17,7 @@
                     index="/records/{{ $type->slug }}"
                     :route="{ path: '/records/{{ $type->slug }}' }"
                     >
-                    <base-icon class="tw-text-xl tw-mr-2">insert_drive_file</base-icon>
+                    <!-- <base-icon class="tw-text-xl tw-mr-2">insert_drive_file</base-icon> -->
                     {{ $type->name }}
                 </sidebar-list-item>
             @endforeach
@@ -30,7 +33,7 @@
                     key="3-{{ $program->id }}"
                     :route="{ path: '{{ $program->path }}' }"
                     >
-                    <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
+                    <!-- <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon> -->
                     {{ $program->name }}
                 </sidebar-list-item>
             @endforeach
@@ -60,7 +63,7 @@
                         index="/teams/{{ $team->id }}"
                         :route="{ path: '/teams/{{ $team->id }}' }"
                         >
-                        <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
+                        <!-- <base-icon class="tw-text-xl tw-mr-2">people</base-icon> -->
                         {{ $team->name }}
                     </sidebar-list-item>
                 @endforeach

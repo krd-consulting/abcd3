@@ -9,7 +9,7 @@
         <el-main>
             <el-row class="tw-mb-4">
                 <el-col :span="6">
-                    <label for="name" class="input-label tw-mt-4"> {{ target.name }} Name</label>
+                    <label for="name" class="tw-block tw-text-right tw-mr-1"> {{ target.name }} Name</label>
                 </el-col>  
                 <el-col :span="8">
                     <el-input id="name" class="inputField" v-model="inputName"></el-input>
@@ -18,7 +18,7 @@
                 
             <el-row class="tw-my-4">
                 <el-col :span="6">
-                    <label for="teamSelect" class="input-label">Team</label>
+                    <label for="teamSelect" class="tw-block tw-text-right tw-mr-1">Team</label>
                 </el-col>
                 <el-col :span="6">
                     <el-select value="" placeholder="Select">
@@ -31,7 +31,7 @@
 
             <el-row class="tw-my-4" v-if="type === 'pre-post'">
                 <el-col :span="6">
-                    <label for="pre-post" class="input-label">Completed for</label>
+                    <label for="pre-post" class="tw-block tw-text-right tw-mr-1">Completed for</label>
                 </el-col>
                 <el-col :span="6">
                     <el-select id="pre-post" v-model="value" placeholder="Select">
@@ -46,7 +46,7 @@
 
             <el-row class="tw-my-4">
                 <el-col :span="6">
-                    <label for="formDate" class="input-label">Date Completed</label>
+                    <label for="formDate" class="tw-block tw-text-right tw-mr-1">Date Completed</label>
                 </el-col>
                 <el-col :span="8">
                     <el-date-picker 

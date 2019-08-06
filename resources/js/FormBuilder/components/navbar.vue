@@ -6,7 +6,7 @@
         active-text-color="#409EFF" 
         mode="horizontal" 
         router>
-            <el-menu-item default-active 
+            <!-- <el-menu-item default-active 
                 index="/forms/create" 
                 class="tw-font-bold focus:tw-font-extrabold">
                     Form Builder
@@ -19,7 +19,15 @@
                 class="float-right tw-font-bold focus:font-extrabold" 
                 @click="buildForm">
                     Finish and Build!
-            </el-menu-item>
+            </el-menu-item> -->
+            <router-link to="/forms/create">
+                <el-button class="tw-float-left tw-bg-blue-500 tw-text-white">Form Builder</el-button>
+            </router-link>
+            <el-button class="tw-float-right tw-bg-blue-500 tw-text-white" @click="buildForm">Finish & Build!</el-button>
+            <router-link to="/forms/create/preview">
+                <el-button class="tw-float-right tw-bg-blue-500 tw-text-white tw-mx-1">Preview</el-button>
+            </router-link>
+                
     </el-menu>
 </template>
 
@@ -36,8 +44,14 @@ export default {
                     type: 'success',
                     message: 'Build Successful'
                 });
-                this.$store.dispatch('submitForm')
-                //window.location.href = '/forms/';
+                this.$store.dispatch('submitForm').then((response) => {
+                    //  redirect to forms
+                    // return Promise('') --> Validate whether or not the form is good
+                })
+                .catch((error) => {
+                    // display error saying some data is incompatable
+                });
+                window.location.href = '/forms/';
             }).catch(() => {
                 this.$message({
                     type: 'info',

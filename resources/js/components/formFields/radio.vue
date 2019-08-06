@@ -2,7 +2,7 @@
     <div id="radio" class="tw-my-8">
         <el-row>
             <el-col :span="5">
-                <label for="radioGroup" class="inputLabel">{{ field.title }}</label>
+                <label for="radioGroup" class="tw-block tw-text-right tw-mr-1">{{ field.title }}</label>
             </el-col>
 
             <el-col :span="10">

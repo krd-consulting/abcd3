@@ -30,8 +30,7 @@
 
         <el-collapse-item name="2" disabled class="tw-cursor-default">
             <template slot="title">
-                <!-- <p v-if="!selectedInput.name" class="menu-title">Settings</p> -->
-                <p class="menu-title"><!--{{ selectedInput.name }} --> 2. Set Options</p>
+                <p class="menu-title">2. Set Options</p>
             </template>
 
                 <component :is="selectedInput.component" 
@@ -69,6 +68,7 @@ export default {
                 {name: 'Text Field', component: 'TextField'},
                 {name: 'Numeric Field', component: 'NumericField'},
                 {name: 'Date', component: 'DatePicker'},
+                {name: 'Time', component: 'TimePicker'},
                 {name: 'Multiple Choice (dropdown)', component: 'Dropdown'},
                 {name: 'Multiple Choice (radio)', component: 'RadioField'},
                 {name: 'Multiple Choice (checkbox)', component: 'CheckBox'},
@@ -126,6 +126,7 @@ export default {
 #menu {
     overflow: hidden;
     display: flex;
+    min-height: 735px;
 }
 .el-card {
     margin: 5px;

@@ -37,7 +37,7 @@
                     </slot>
                 </div>
             </div>
-            <div class="tw-bg-gray-100">
+            <div class="tw-bg-orange-300">
                 <slot name="tabs">
                     <resource-profile-tabs :record-types="recordTypes"/>
                 </slot>

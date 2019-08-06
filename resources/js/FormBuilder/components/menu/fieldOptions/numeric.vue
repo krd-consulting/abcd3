@@ -2,15 +2,24 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
             
-            <el-form-item label="Question/Title" prop="title">
+            <el-form-item prop="title">
+                <label>
+                    Question/Title
+                </label>
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
 
-            <el-form-item label="This field is">
+            <el-form-item>
+                <label>
+                    This field is
+                </label>
                 <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
 
-            <el-form-item label="Set Default Value">
+            <el-form-item>
+                <label>
+                    Set Default Value
+                </label>
                 <el-switch v-model="fieldData.settings.isLimited" inactive-text="No Default" active-text="Set Default"></el-switch><br>
                 <el-input-number :disabled="!fieldData.settings.isLimited" v-model="fieldData.settings.defaultNum"></el-input-number>
             </el-form-item>

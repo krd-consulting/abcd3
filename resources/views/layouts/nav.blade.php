@@ -1,18 +1,18 @@
 <el-header class="main-nav tw-bg-blue-700" style="height: 80px;" v-if="!loading">
     <div class="main-logo-container">
-        <base-button class="tw-border-none tw-bg-blue-700 tw-align-middle" @click="collapseSidebar = !collapseSidebar">
-            <base-icon class="tw-text-yellow-200">menu</base-icon>
+        <base-button class="tw-border-none tw-bg-blue-200 tw-align-middle" @click="collapseSidebar = !collapseSidebar">
+            <base-icon class="tw-text-green-100">menu</base-icon>
         </base-button>
         <a href="/" class="tw-text-3xl tw-font-bold tw-text-white tw-align-middle tw-inline-block">
             ABCD
         </a>
     </div>
     <div class="tw-flex tw-flex-1 tw-justify-between">
-        <div class="tw-w-1/2">
+        <!-- <div class="tw-w-1/2">
             <global-search></global-search>
-        </div>
-        <div>
-            <div class="tw-inline-block tw-align-middle tw-mr-2">
+        </div> -->
+        <div class="tw-flex tw-flex-1 tw-justify-end tw-mr-4">
+            <div class="tw-inline-block tw-align-middle tw-mr-4 tw-mt-1">
                 <el-dropdown class="main-nav-dropdown" trigger="click" placement="bottom-end">
                     <base-icon class="tw-text-lg tw-text-white">notifications</base-icon>
                     <el-dropdown-menu slot="dropdown">

@@ -2,7 +2,7 @@
     <div id="dropdown" class="tw-my-8">
         <el-row>
             <el-col :span="6">
-                <label for="dropdown" class="inputLabel">{{ field.title }}</label>
+                <label for="dropdown" class="tw-block tw-text-right tw-mr-1">{{ field.title }}</label>
             </el-col>
             
             <el-col :span="10">

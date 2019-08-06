@@ -1,5 +1,7 @@
 <template>
     <div id="Textbox" class="tw-mb-4">
+        <slot></slot>
+        
         <el-row>
             <el-col :span="10">
 
@@ -30,12 +32,8 @@
                 v-model="required" 
                 active-text="Required" 
                 inactive-text="Optional"
-                class="tw-float-right tw-mr-48 button-top">
+                class="tw-float-right switch-position">
             </el-switch>
-            
-            <div class="footer">
-                <slot></slot>
-            </div>
         
     </div>
 </template>
@@ -89,15 +87,7 @@ export default {
                 this.field = fieldCopy;
             }
         }
-    },
-    // created() {
-    //     this.field = _.clone(this.fieldData)
-    // },
-    // methods: {
-    //     showField(value){
-    //         return (this.field.label[value] == '' || this.editField == value)
-    //     }
-    // }
+    }
 }
 </script>
 
@@ -107,14 +97,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button-top {
+.switch-position {
     position: absolute;
-    top: 30px;;
-    right: 10px;
-}
-.footer{
-    position: absolute;
-    bottom: 0;
+    bottom: 20px;;
     right: 10px;
 }
 </style>

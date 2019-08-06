@@ -6,7 +6,7 @@
         <form>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5 tw-capitalize">
+                    <label class="tw-w-1/4 tw-capitalize">
                         Form Name
                     </label>
                     <div class="tw-w-2/3">
@@ -24,7 +24,7 @@
             </div>
             <div class="tw-mb-2">
                 <div  class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5 tw-capitalize">
+                    <label class="tw-w-1/4 tw-capitalize">
                         Description
                     </label>
                     <div class="tw-w-2/3">
@@ -42,7 +42,7 @@
             </div>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
+                    <label class="tw-w-1/4">
                         Form Type
                     </label>
                     <div class="tw-w-2/3">
@@ -69,7 +69,7 @@
             </div>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
+                    <label class="tw-w-1/4">
                         This form is about
                     </label>
                     <div class="tw-w-2/3">
@@ -84,7 +84,10 @@
                                 :key="index"
                                 :label="type.name"
                                 :value="type.target">
-                                {{ type.name }}
+                                <span v-if="type.name === 'Program' || type.name === 'Group'">
+                                    {{ type.name }}s
+                                </span>
+                                <span v-else>{{ type.name }}</span>
                             </el-option>
                         </base-select>
                     </div>
@@ -102,7 +105,7 @@
             </div>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
+                    <label class="tw-w-1/4">
                         Who can see this form?
                     </label>
                     <div class="tw-w-2/3">

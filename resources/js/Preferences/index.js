@@ -12,5 +12,10 @@ Vue.use(VueRouter);
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    methods: {
+        toggle() {
+            console.log('Toggling the menu here folks...')
+        }
+    }
 });

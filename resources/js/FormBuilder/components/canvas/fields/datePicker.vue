@@ -1,15 +1,16 @@
 <template>
     <div id="datepicker">
+
+        <slot></slot>
         
-            <el-col :span="10">
+            <el-col :span="10" class="tw-mb-2">
                 <label class="inputLabel">
                     <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
                         {{ fieldLabel }}
                     </editable-text>
                 </label>
                 <el-date-picker 
-                    id="dateField"
-                    v-model="dateSelection" 
+                    id="dateField" 
                     :type="dateType" 
                     :picker-options="dateOptions" 
                     :placeholder="datePlaceHolder"
@@ -25,13 +26,8 @@
                 v-model="field.settings.required" 
                 active-text="Required" 
                 inactive-text="Optional"
-                class="tw-float-right tw-mr-48 button-top">
-            </el-switch>
-            
-            <el-col>
-                <slot></slot>
-            </el-col>
-        
+                class="tw-float-right switch-position">
+            </el-switch>     
         
     </div>
 </template>
@@ -199,9 +195,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button-top {
+.switch-position {
     position: absolute;
-    top: 30px;;
+    bottom: 20px;;
     right: 10px;
 }
 </style>
