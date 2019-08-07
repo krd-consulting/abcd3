@@ -26,9 +26,13 @@ const app = new Vue({
     el: '#app',
     router,
     store,
-    // data: {
-    // 	collapseSidebar: true,
-    // },
+    data: {
+        collapseSidebar: true,
+        loading: false,
+        initialize: { 
+            active: true 
+        }
+    },
     components: {
     	Initialize
     },

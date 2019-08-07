@@ -115395,9 +115395,13 @@ var app = new Vue({
   el: '#app',
   router: _routes__WEBPACK_IMPORTED_MODULE_5__["router"],
   store: _store_index_js__WEBPACK_IMPORTED_MODULE_3__["store"],
-  // data: {
-  // 	collapseSidebar: true,
-  // },
+  data: {
+    collapseSidebar: true,
+    loading: false,
+    initialize: {
+      active: true
+    }
+  },
   components: {
     Initialize: _views_initialize__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
