@@ -13,7 +13,7 @@
                     id="dateField" 
                     :type="dateType" 
                     :picker-options="dateOptions" 
-                    :placeholder="datePlaceHolder"
+                    placeholder=" "
                     :range-separator="rangeSeparator"
                     :start-placeholder="startDate"
                     :end-placeholder="endDate"
@@ -89,14 +89,14 @@ export default {
                 this.field = fieldCopy;
             }
         },
-        datePlaceHolder: {
-            get() { return this.field.settings.datePlaceHolder; },
-            set(datePlaceHolder) { 
-                const fieldCopy = _.clone(this.field);
-                fieldCopy.settings.datePlaceHolder = datePlaceHolder;
-                this.field = fieldCopy;
-            }
-        },
+        // datePlaceHolder: {
+        //     get() { return this.field.settings.datePlaceHolder; },
+        //     set(datePlaceHolder) { 
+        //         const fieldCopy = _.clone(this.field);
+        //         fieldCopy.settings.datePlaceHolder = datePlaceHolder;
+        //         this.field = fieldCopy;
+        //     }
+        // },
         dateFormat: {
             get() { return this.field.settings.dateFormat; },
             set(dateFormat) { 
@@ -125,7 +125,7 @@ export default {
                     },
                 });
                 this.dateType = "date"
-                this.datePlaceHolder = "Pick a day"
+                // this.datePlaceHolder = "Pick a day"
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
         },
@@ -137,7 +137,7 @@ export default {
                     },
                 });
                 this.dateType = "date",
-                this.datePlaceHolder = "Pick a day"
+                // this.datePlaceHolder = "Pick a day"
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
         },
@@ -154,22 +154,43 @@ export default {
                             picker.$emit('pick', date);
                             }
                         },
-                        { text: 'A week ago', onClick(picker) 
+                        { text: '1 week ago', onClick(picker) 
                             { const date = new Date();
                             date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
                             picker.$emit('pick', date);}
-                        }
+                        },
+                        { text: '2 weeks ago', onClick(picker) 
+                            { const date = new Date();
+                            date.setTime(date.getTime() - 3600 * 1000 * 24 * 14);
+                            picker.$emit('pick', date);}
+                        },
+                        { text: '3 months ago', onClick(picker) 
+                            { const date = new Date();
+                            date.setMonth(date.getMonth() - 3);
+                            picker.$emit('pick', date);}
+                        },
+                        { text: '6 months ago', onClick(picker) 
+                            { const date = new Date();
+                            date.setMonth(date.getMonth() - 6);
+                            picker.$emit('pick', date);}
+                        },
+                        { text: '9 months ago', onClick(picker) 
+                            { const date = new Date();
+                            date.setMonth(date.getMonth() - 9);
+                            picker.$emit('pick', date);}
+                        },
+                        
                     ],
                 });
                 this.dateType = "date",
-                this.datePlaceHolder = "Pick a day"
+                // this.datePlaceHolder = "Pick a day"
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
         },
         toggleTime() {
             if(this.field.settings.includeTime === true) {
                 this.dateType = "datetime",
-                this.datePlaceHolder = "Pick a day and time"
+                // this.datePlaceHolder = "Pick a day and time"
                 this.dateFormat = "yyyy/MM/dd hh:mm:ss a"
                 this.$store.commit('UPDATE_FIELD', this.field)
             } 

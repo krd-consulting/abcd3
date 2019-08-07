@@ -14,6 +14,7 @@
                         <label v-else for="name" class="input-label tw-mt-4"> {{ form.target_type.name }} Name</label>
                     </el-col>
                     <el-col :span="8">
+                        <!-- :placeholder="`Input ${targetName}`" -->
                         <base-select
                             v-if="targetName != 'Record'"
                             v-model="entryData.target_id"
@@ -22,7 +23,7 @@
                             remote
                             :remote-method="retrieveFormTargetItems"
                             name="type"
-                            :placeholder="`Input ${targetName}`"
+                            placeholder=" "
                             @change="request.errors.clear('team_id')">
                             <el-option
                                 v-for="(item, index) in targetItems"
@@ -40,7 +41,7 @@
                             remote
                             :remote-method="retrieveFormTargetItems"
                             name="type"
-                            :placeholder="`Input ${targetName}`"
+                            placeholder=" "
                             @change="request.errors.clear('team_id')">
                             <el-option
                                 v-for="(item, index) in targetItems"
@@ -59,7 +60,7 @@
                         <label for="teamSelect" class="input-label">Team</label>
                     </el-col>
                     <el-col :span="6">
-                        <el-select value="" placeholder="Select">
+                        <el-select value="" placeholder=" ">
                             <el-option v-for="team in teams" :key="team.value"
                             :label="team.label" :value="team.value">
                             </el-option>
@@ -72,7 +73,7 @@
                         <label for="pre-post" class="input-label">Completed for</label>
                     </el-col>
                     <el-col :span="6">
-                        <el-select id="pre-post" v-model="value" placeholder="Select">
+                        <el-select id="pre-post" v-model="value" placeholder=" ">
                             <el-option v-for="select in prePost" 
                                 :key="select.value"
                                 :label="select.value" 
@@ -91,7 +92,7 @@
                             id="formDate" 
                             v-model="dateCompleted" 
                             type="date" 
-                            placeholder="Pick a day" 
+                            placeholder=" " 
                             :picker-options="pickerOptions">
                         </el-date-picker>
                     </el-col>

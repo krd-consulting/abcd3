@@ -59,6 +59,7 @@
                             remote
                             :remote-method="retrieveTeams"
                             name="type"
+                            placeholder=" "
                             @change="request.errors.clear('team_id')">
                             <el-option
                                 v-for="(team, index) in teams"
@@ -85,7 +86,7 @@
                         <base-select
                             v-model="formData.type"
                             name="type"
-                            placeholder="Select Form Type"
+                            placeholder=" "
                             @change="request.errors.clear('type')">
                             <el-option
                                 v-for="(type, index) in types"
@@ -217,10 +218,10 @@
                 targetTypes: [],
                 types: [],
                 scopes: [],
-                teams: []
+                teams: [],
+                selectedType: null
             }
         },
-
         computed: {
             formattedScopes() {
                 const labels  = {
@@ -249,9 +250,13 @@
                     params: {...this.teamRequestParams }
                 });
 
-                this.teamRequest.retrieve().then(response => {
+                let getTeams = this.teamRequest.retrieve();
+
+                getTeams.then(response => {
                     this.teams = response.data;
                 });
+
+                return getTeams;
             },
 
             close() {
@@ -282,7 +287,14 @@
                     this.scopes = response.data.scopes;
                 });
 
-                this.retrieveTeams();
+                // getFormData.then(response => {
+                //     this.formData.type = this.types[0]
+                // });
+                // return getFormData;
+
+                this.retrieveTeams().then (() => {
+                    this.formData.team_id = this.teams[0].id
+                });
             },
 
             submit() {

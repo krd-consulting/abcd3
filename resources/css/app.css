@@ -66,6 +66,10 @@
         tw-m-0;
 }
 
+.el-date-table th {
+    font-size: 14px !important;
+}
+
 .el-dialog {
     @apply
         tw-rounded;
@@ -128,6 +132,9 @@ a:hover {
 .preferences-sidebar-menu:not(.el-menu--collapse) {
     width: 276px;
     
+}
+.main-logo-container {
+    margin-left: 10px;
 }
 
 .main-nav {

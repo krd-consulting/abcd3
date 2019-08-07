@@ -12,14 +12,14 @@
                     :autosize="{ minRows: 3, maxRows: 5}"
                     :maxlength="max" 
                     show-word-limit 
-                    placeholder="Your text here" 
+                    placeholder=" " 
                     v-model="value">
                 </el-input>
                 <el-input id="textArea"  
                     type="textarea" 
                     v-else
                     :autosize="{ minRows: 3, maxRows: 6}" 
-                    placeholder="Your text here" 
+                    placeholder=" " 
                     v-model="value">
                 </el-input>
             </el-col>

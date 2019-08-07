@@ -13,7 +13,7 @@
 
         
             <div class="tw-inline">
-                <el-select id="dropdown" v-model="dropItem" placeholder="select">
+                <el-select id="dropdown" v-model="dropItem" placeholder=" ">
                     <el-option v-for="(item, index) in choices" :key="index" :label="item.value" :value="item.value"></el-option>
                 </el-select>
             </div>

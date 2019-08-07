@@ -1,8 +1,10 @@
 <el-header class="main-nav tw-bg-blue-700" style="height: 80px;" v-if="!loading">
     <div class="main-logo-container">
-        <base-button class="tw-border-none tw-bg-blue-200 tw-align-middle" @click="collapseSidebar = !collapseSidebar">
-            <base-icon class="tw-text-green-100">menu</base-icon>
-        </base-button>
+        @if(Route::current()->getName() !== "formBuilder")
+            <base-button class="tw-border-none tw-bg-blue-200 tw-align-middle" @click="collapseSidebar = !collapseSidebar">
+                <base-icon class="tw-text-green-100">menu</base-icon>
+            </base-button>
+        @endif
         <a href="/" class="tw-text-3xl tw-font-bold tw-text-white tw-align-middle tw-inline-block">
             ABCD
         </a>

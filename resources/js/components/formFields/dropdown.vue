@@ -6,7 +6,7 @@
             </el-col>
             
             <el-col :span="10">
-                <el-select id="dropdown" v-model="value" filterable placeholder="select">
+                <el-select id="dropdown" v-model="value" filterable placeholder=" ">
                     <el-option v-for="item in field.choices" 
                         :key="item.id" 
                         :label="item.value" 

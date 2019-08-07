@@ -25,23 +25,27 @@
                 <tr class="tw-max-w-sm">
                     <th></th>
                     <th v-for="(item, index) in choices" :key="item.index" >
-                        <el-row>
-                            <editable-text 
-                                class="tw-cursor-pointer mouseOver tw-flex tw-inline" 
-                                v-model="item.value"
-                                @input="updateChoiceValue($event, index)"
-                            />
-                            <el-button 
-                                class="tw-flex tw-float-right tw-inline" 
-                                type="text" 
-                                size="mini"
-                                icon="el-icon-close" 
-                                @click="removeChoice(item)">
-                            </el-button>
-                        </el-row>  
+                        <div class="tw-inline-flex tw-justify-between tw-whitespace-no-wrap">
+                            <div class="tw-flex-none">
+                                <editable-text 
+                                    class="tw-cursor-pointer mouseOver" 
+                                    v-model="item.value"
+                                    @input="updateChoiceValue($event, index)"
+                                />
+                            </div>
+                            <div class="tw-flex-1 tw-relative tw-right-0">
+                                <el-button 
+                                    class="hover:tw-text-red-600" 
+                                    type="text" 
+                                    size="mini"
+                                    icon="el-icon-close" 
+                                    @click="removeChoice(item)">
+                                </el-button>
+                            </div>
+                        </div>  
                     </th>
                     <el-tooltip content="Add a new choice column">
-                        <el-button class="tw-ml-4" @click="addChoice" icon="el-icon-plus" circle></el-button>
+                        <el-button class="tw-ml-4 tw-bg-blue-500 tw-text-white hover:tw-bg-blue-100" @click="addChoice" icon="el-icon-plus" circle></el-button>
                     </el-tooltip>
                     
                 </tr>
@@ -49,12 +53,24 @@
             <tbody>
                 <tr v-for="(item, index) in questions" :key="item.index">
                     <td>
-                        <editable-text 
-                            class="tw-cursor-pointer mouseOver" 
-                            v-model="item.text"
-                            @input="updateQuestionValue($event, index)"
-                        />
-                        <el-button type="text" size="mini" @click="removeQuestion(item)">Remove</el-button>
+                        <div class="tw-inline-flex tw-justify-between">
+                            <div class="tw-flex-auto">
+                                <editable-text 
+                                    class="tw-cursor-pointer mouseOver" 
+                                    v-model="item.text"
+                                    @input="updateQuestionValue($event, index)"
+                                />
+                            </div>
+                            <div class="tw-flex-1 tw-relative tw-right-0">
+                                <el-button 
+                                    class="hover:tw-text-red-600"
+                                    type="text" 
+                                    size="mini"
+                                    icon="el-icon-close" 
+                                    @click="removeQuestion(item)">
+                                </el-button>
+                            </div>
+                        </div>
                     </td>
                     <td v-for="radio in choices" :key="radio.index" class="tw-text-center">
                         <el-radio v-model="radioSelect" disabled></el-radio>

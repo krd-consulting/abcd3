@@ -11,7 +11,7 @@
                     v-model="value" 
                     :type="dateType" 
                     :picker-options="dateOptions" 
-                    :placeholder="datePlaceHolder"
+                    placeholder=" "
                     :range-separator="rangeSeparator"
                     :start-placeholder="startDate"
                     :end-placeholder="endDate"

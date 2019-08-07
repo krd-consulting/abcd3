@@ -3548,12 +3548,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       nextItem: 0,
-      itemText: ''
+      itemText: '',
+      isUnique: true
     };
   },
   components: {
@@ -3566,6 +3572,21 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    // unique() {
+    //     return function (keyname) {
+    //         var output = [];
+    //         var keys   = [];
+    //         this.choices.forEach(function (choice) {
+    //             var key = choice.value[keyname];
+    //             if (keys.indexOf(key) === -1) {
+    //                 keys.push(key);
+    //                 output.push(post);
+    //             }
+    //             return isUnique = false;
+    //         });
+    //         return output;
+    //     };
+    // },
     field: {
       get: function get() {
         return this.fieldData;
@@ -3621,9 +3642,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     getCheckboxItems: function getCheckboxItems() {
-      var i;
-
-      for (i = 0; i < this.field.settings.checkboxNum; i++) {
+      for (var i = 0; i < this.field.settings.checkboxNum; i++) {
         this.loadItem();
       }
     },
@@ -3660,7 +3679,17 @@ __webpack_require__.r(__webpack_exports__);
       fieldCopy.choices[index].value = value;
       this.choices = fieldCopy.choices;
     }
-  }
+  } // filters: {
+  //     duplicate(value) {
+  // for(let i = 0; i <= this.choices.length(); i++) {
+  //     if(value === item.value) {
+  //         this.removeChoice(item);
+  //         return isDuplicate = true;
+  //     }
+  //         }
+  //     }
+  // },
+
 });
 
 /***/ }),
@@ -3772,17 +3801,14 @@ __webpack_require__.r(__webpack_exports__);
         this.field = fieldCopy;
       }
     },
-    datePlaceHolder: {
-      get: function get() {
-        return this.field.settings.datePlaceHolder;
-      },
-      set: function set(datePlaceHolder) {
-        var fieldCopy = _.clone(this.field);
-
-        fieldCopy.settings.datePlaceHolder = datePlaceHolder;
-        this.field = fieldCopy;
-      }
-    },
+    // datePlaceHolder: {
+    //     get() { return this.field.settings.datePlaceHolder; },
+    //     set(datePlaceHolder) { 
+    //         const fieldCopy = _.clone(this.field);
+    //         fieldCopy.settings.datePlaceHolder = datePlaceHolder;
+    //         this.field = fieldCopy;
+    //     }
+    // },
     dateFormat: {
       get: function get() {
         return this.field.settings.dateFormat;
@@ -3814,8 +3840,8 @@ __webpack_require__.r(__webpack_exports__);
             return time.getTime() > Date.now();
           }
         });
-        this.dateType = "date";
-        this.datePlaceHolder = "Pick a day";
+        this.dateType = "date"; // this.datePlaceHolder = "Pick a day"
+
         this.$store.commit('UPDATE_FIELD', this.field);
       }
     },
@@ -3826,7 +3852,7 @@ __webpack_require__.r(__webpack_exports__);
             return time.getTime() < Date.now();
           }
         });
-        this.dateType = "date", this.datePlaceHolder = "Pick a day";
+        this.dateType = "date", // this.datePlaceHolder = "Pick a day"
         this.$store.commit('UPDATE_FIELD', this.field);
       }
     },
@@ -3846,21 +3872,49 @@ __webpack_require__.r(__webpack_exports__);
               picker.$emit('pick', date);
             }
           }, {
-            text: 'A week ago',
+            text: '1 week ago',
             onClick: function onClick(picker) {
               var date = new Date();
               date.setTime(date.getTime() - 3600 * 1000 * 24 * 7);
               picker.$emit('pick', date);
             }
+          }, {
+            text: '2 weeks ago',
+            onClick: function onClick(picker) {
+              var date = new Date();
+              date.setTime(date.getTime() - 3600 * 1000 * 24 * 14);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: '3 months ago',
+            onClick: function onClick(picker) {
+              var date = new Date();
+              date.setMonth(date.getMonth() - 3);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: '6 months ago',
+            onClick: function onClick(picker) {
+              var date = new Date();
+              date.setMonth(date.getMonth() - 6);
+              picker.$emit('pick', date);
+            }
+          }, {
+            text: '9 months ago',
+            onClick: function onClick(picker) {
+              var date = new Date();
+              date.setMonth(date.getMonth() - 9);
+              picker.$emit('pick', date);
+            }
           }]
         });
-        this.dateType = "date", this.datePlaceHolder = "Pick a day";
+        this.dateType = "date", // this.datePlaceHolder = "Pick a day"
         this.$store.commit('UPDATE_FIELD', this.field);
       }
     },
     toggleTime: function toggleTime() {
       if (this.field.settings.includeTime === true) {
-        this.dateType = "datetime", this.datePlaceHolder = "Pick a day and time";
+        this.dateType = "datetime", // this.datePlaceHolder = "Pick a day and time"
         this.dateFormat = "yyyy/MM/dd hh:mm:ss a";
         this.$store.commit('UPDATE_FIELD', this.field);
       }
@@ -4193,6 +4247,22 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -7317,6 +7387,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7346,7 +7417,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       targetTypes: [],
       types: [],
       scopes: [],
-      teams: []
+      teams: [],
+      selectedType: null
     };
   },
   computed: {
@@ -7375,9 +7447,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.teamRequest.setFields({
         params: _objectSpread({}, this.teamRequestParams)
       });
-      this.teamRequest.retrieve().then(function (response) {
+      var getTeams = this.teamRequest.retrieve();
+      getTeams.then(function (response) {
         _this.teams = response.data;
       });
+      return getTeams;
     },
     close: function close() {
       this.$emit('update:active', false);
@@ -7402,8 +7476,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.targetTypes = response.data.target_types;
         _this2.types = response.data.types;
         _this2.scopes = response.data.scopes;
+      }); // getFormData.then(response => {
+      //     this.formData.type = this.types[0]
+      // });
+      // return getFormData;
+
+      this.retrieveTeams().then(function () {
+        _this2.formData.team_id = _this2.teams[0].id;
       });
-      this.retrieveTeams();
     },
     submit: function submit() {
       var _this3 = this;
@@ -87950,6 +88030,16 @@ var render = function() {
         )
       }),
       _vm._v(" "),
+      !_vm.isUnique
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! it looks like you have a duplicate choice. Let's try again with a different value.",
+              type: "error"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("el-switch", {
         staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
@@ -88091,7 +88181,7 @@ var render = function() {
               id: "dateField",
               type: _vm.dateType,
               "picker-options": _vm.dateOptions,
-              placeholder: _vm.datePlaceHolder,
+              placeholder: " ",
               "range-separator": _vm.rangeSeparator,
               "start-placeholder": _vm.startDate,
               "end-placeholder": _vm.endDate,
@@ -88184,7 +88274,7 @@ var render = function() {
                 _c(
                   "el-select",
                   {
-                    attrs: { id: "dropdown", placeholder: "select" },
+                    attrs: { id: "dropdown", placeholder: " " },
                     model: {
                       value: _vm.dropItem,
                       callback: function($$v) {
@@ -88563,49 +88653,60 @@ var render = function() {
               _c("th"),
               _vm._v(" "),
               _vm._l(_vm.choices, function(item, index) {
-                return _c(
-                  "th",
-                  { key: item.index },
-                  [
-                    _c(
-                      "el-row",
-                      [
-                        _c("editable-text", {
-                          staticClass:
-                            "tw-cursor-pointer mouseOver tw-flex tw-inline",
-                          on: {
-                            input: function($event) {
-                              return _vm.updateChoiceValue($event, index)
-                            }
-                          },
-                          model: {
-                            value: item.value,
-                            callback: function($$v) {
-                              _vm.$set(item, "value", $$v)
+                return _c("th", { key: item.index }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "tw-inline-flex tw-justify-between tw-whitespace-no-wrap"
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "tw-flex-none" },
+                        [
+                          _c("editable-text", {
+                            staticClass: "tw-cursor-pointer mouseOver",
+                            on: {
+                              input: function($event) {
+                                return _vm.updateChoiceValue($event, index)
+                              }
                             },
-                            expression: "item.value"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("el-button", {
-                          staticClass: "tw-flex tw-float-right tw-inline",
-                          attrs: {
-                            type: "text",
-                            size: "mini",
-                            icon: "el-icon-close"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.removeChoice(item)
+                            model: {
+                              value: item.value,
+                              callback: function($$v) {
+                                _vm.$set(item, "value", $$v)
+                              },
+                              expression: "item.value"
                             }
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "tw-flex-1 tw-relative tw-right-0" },
+                        [
+                          _c("el-button", {
+                            staticClass: "hover:tw-text-red-600",
+                            attrs: {
+                              type: "text",
+                              size: "mini",
+                              icon: "el-icon-close"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.removeChoice(item)
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ])
               }),
               _vm._v(" "),
               _c(
@@ -88613,7 +88714,8 @@ var render = function() {
                 { attrs: { content: "Add a new choice column" } },
                 [
                   _c("el-button", {
-                    staticClass: "tw-ml-4",
+                    staticClass:
+                      "tw-ml-4 tw-bg-blue-500 tw-text-white hover:tw-bg-blue-100",
                     attrs: { icon: "el-icon-plus", circle: "" },
                     on: { click: _vm.addChoice }
                   })
@@ -88632,40 +88734,57 @@ var render = function() {
               "tr",
               { key: item.index },
               [
-                _c(
-                  "td",
-                  [
-                    _c("editable-text", {
-                      staticClass: "tw-cursor-pointer mouseOver",
-                      on: {
-                        input: function($event) {
-                          return _vm.updateQuestionValue($event, index)
-                        }
-                      },
-                      model: {
-                        value: item.text,
-                        callback: function($$v) {
-                          _vm.$set(item, "text", $$v)
-                        },
-                        expression: "item.text"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { type: "text", size: "mini" },
-                        on: {
-                          click: function($event) {
-                            return _vm.removeQuestion(item)
-                          }
-                        }
-                      },
-                      [_vm._v("Remove")]
-                    )
-                  ],
-                  1
-                ),
+                _c("td", [
+                  _c(
+                    "div",
+                    { staticClass: "tw-inline-flex tw-justify-between" },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "tw-flex-auto" },
+                        [
+                          _c("editable-text", {
+                            staticClass: "tw-cursor-pointer mouseOver",
+                            on: {
+                              input: function($event) {
+                                return _vm.updateQuestionValue($event, index)
+                              }
+                            },
+                            model: {
+                              value: item.text,
+                              callback: function($$v) {
+                                _vm.$set(item, "text", $$v)
+                              },
+                              expression: "item.text"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "tw-flex-1 tw-relative tw-right-0" },
+                        [
+                          _c("el-button", {
+                            staticClass: "hover:tw-text-red-600",
+                            attrs: {
+                              type: "text",
+                              size: "mini",
+                              icon: "el-icon-close"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.removeQuestion(item)
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
                 _vm._l(_vm.choices, function(radio) {
                   return _c(
@@ -89214,7 +89333,7 @@ var render = function() {
                       rows: 2,
                       maxlength: _vm.field.settings.max,
                       "show-word-limit": "",
-                      placeholder: "Your text here"
+                      placeholder: " "
                     }
                   })
                 : _c("el-input", {
@@ -89222,7 +89341,7 @@ var render = function() {
                       id: "textBox",
                       type: "textarea",
                       rows: 2,
-                      placeholder: "Your text here"
+                      placeholder: " "
                     }
                   })
             ],
@@ -89315,16 +89434,12 @@ var render = function() {
                       id: "input",
                       type: "text",
                       maxlength: _vm.field.settings.max,
-                      placeholder: "Your text here",
+                      placeholder: " ",
                       "show-word-limit": ""
                     }
                   })
                 : _c("el-input", {
-                    attrs: {
-                      id: "input",
-                      type: "text",
-                      placeholder: "Your text here"
-                    }
+                    attrs: { id: "input", type: "text", placeholder: " " }
                   })
             ],
             1
@@ -89419,11 +89534,11 @@ var render = function() {
                         step: "00:15",
                         end: "24:45"
                       },
-                      placeholder: "Pick a time"
+                      placeholder: " "
                     }
                   })
                 : _c("el-time-picker", {
-                    attrs: { "arrow-control": "", placeholder: "Pick a time" },
+                    attrs: { "arrow-control": "", placeholder: " " },
                     model: {
                       value: _vm.timeSelection,
                       callback: function($$v) {
@@ -92174,7 +92289,8 @@ var render = function() {
                       filterable: "",
                       remote: "",
                       "remote-method": _vm.retrieveTeams,
-                      name: "type"
+                      name: "type",
+                      placeholder: " "
                     },
                     on: {
                       change: function($event) {
@@ -92239,7 +92355,7 @@ var render = function() {
                 _c(
                   "base-select",
                   {
-                    attrs: { name: "type", placeholder: "Select Form Type" },
+                    attrs: { name: "type", placeholder: " " },
                     on: {
                       change: function($event) {
                         return _vm.request.errors.clear("type")
@@ -93153,7 +93269,7 @@ var render = function() {
                   id: "dateField",
                   type: _vm.dateType,
                   "picker-options": _vm.dateOptions,
-                  placeholder: _vm.datePlaceHolder,
+                  placeholder: " ",
                   "range-separator": _vm.rangeSeparator,
                   "start-placeholder": _vm.startDate,
                   "end-placeholder": _vm.endDate,
@@ -93225,11 +93341,7 @@ var render = function() {
               _c(
                 "el-select",
                 {
-                  attrs: {
-                    id: "dropdown",
-                    filterable: "",
-                    placeholder: "select"
-                  },
+                  attrs: { id: "dropdown", filterable: "", placeholder: " " },
                   model: {
                     value: _vm.value,
                     callback: function($$v) {
@@ -93631,7 +93743,7 @@ var render = function() {
                       autosize: { minRows: 3, maxRows: 5 },
                       maxlength: _vm.max,
                       "show-word-limit": "",
-                      placeholder: "Your text here"
+                      placeholder: " "
                     },
                     model: {
                       value: _vm.value,
@@ -93646,7 +93758,7 @@ var render = function() {
                       id: "textArea",
                       type: "textarea",
                       autosize: { minRows: 3, maxRows: 6 },
-                      placeholder: "Your text here"
+                      placeholder: " "
                     },
                     model: {
                       value: _vm.value,
@@ -93753,7 +93865,7 @@ var render = function() {
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
                             name: "type",
-                            placeholder: "Input " + _vm.targetName
+                            placeholder: " "
                           },
                           on: {
                             change: function($event) {
@@ -93799,7 +93911,7 @@ var render = function() {
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
                             name: "type",
-                            placeholder: "Input " + _vm.targetName
+                            placeholder: " "
                           },
                           on: {
                             change: function($event) {
@@ -93900,7 +94012,7 @@ var render = function() {
                         step: "00:15",
                         end: "24:45"
                       },
-                      placeholder: "Pick a time"
+                      placeholder: " "
                     },
                     model: {
                       value: _vm.value,
@@ -93911,7 +94023,7 @@ var render = function() {
                     }
                   })
                 : _c("el-time-picker", {
-                    attrs: { "arrow-control": "", placeholder: "Pick a time" },
+                    attrs: { "arrow-control": "", placeholder: " " },
                     model: {
                       value: _vm.value,
                       callback: function($$v) {

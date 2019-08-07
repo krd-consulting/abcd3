@@ -27,7 +27,7 @@
                             remote
                             :remote-method="retrieveTargetItems"
                             name="type"
-                            :placeholder="`Input ${targetName}`"
+                            placeholder=" "
                             @change="targetRequest.errors.clear('team_id')">
                             <el-option
                                 v-for="(item, index) in targetItems"
@@ -45,7 +45,7 @@
                             remote
                             :remote-method="retrieveTargetItems"
                             name="type"
-                            :placeholder="`Input ${targetName}`"
+                            placeholder=" "
                             @change="targetRequest.errors.clear('team_id')">
                             <el-option
                                 v-for="(item, index) in targetItems"

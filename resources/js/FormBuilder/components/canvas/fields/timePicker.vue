@@ -18,13 +18,13 @@
                         step: '00:15',
                         end: '24:45'
                     }"
-                    placeholder="Pick a time">
+                    placeholder=" ">
                 </el-time-select>
                 
                 <el-time-picker v-else
                     arrow-control
                     v-model="timeSelection"
-                    placeholder="Pick a time">
+                    placeholder=" ">
                 </el-time-picker>
                 
             </el-col>

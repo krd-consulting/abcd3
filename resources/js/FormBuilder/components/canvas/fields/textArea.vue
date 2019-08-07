@@ -17,13 +17,13 @@
                     :rows="2" 
                     :maxlength="field.settings.max" 
                     show-word-limit 
-                    placeholder="Your text here">
+                    placeholder=" ">
                 </el-input>
                 <el-input id="textBox" 
                     type="textarea" 
                     v-else
                     :rows="2" 
-                    placeholder="Your text here" >
+                    placeholder=" " >
                 </el-input>
             </el-col>
         </el-row>

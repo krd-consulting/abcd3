@@ -4859,6 +4859,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -88826,7 +88827,7 @@ var render = function() {
                                 remote: "",
                                 "remote-method": _vm.retrieveFormTargetItems,
                                 name: "type",
-                                placeholder: "Input " + _vm.targetName
+                                placeholder: " "
                               },
                               on: {
                                 change: function($event) {
@@ -88872,7 +88873,7 @@ var render = function() {
                                 remote: "",
                                 "remote-method": _vm.retrieveFormTargetItems,
                                 name: "type",
-                                placeholder: "Input " + _vm.targetName
+                                placeholder: " "
                               },
                               on: {
                                 change: function($event) {
@@ -88938,7 +88939,7 @@ var render = function() {
                     [
                       _c(
                         "el-select",
-                        { attrs: { value: "", placeholder: "Select" } },
+                        { attrs: { value: "", placeholder: " " } },
                         _vm._l(_vm.teams, function(team) {
                           return _c("el-option", {
                             key: team.value,
@@ -88977,7 +88978,7 @@ var render = function() {
                           _c(
                             "el-select",
                             {
-                              attrs: { id: "pre-post", placeholder: "Select" },
+                              attrs: { id: "pre-post", placeholder: " " },
                               model: {
                                 value: _vm.value,
                                 callback: function($$v) {
@@ -89028,7 +89029,7 @@ var render = function() {
                         attrs: {
                           id: "formDate",
                           type: "date",
-                          placeholder: "Pick a day",
+                          placeholder: " ",
                           "picker-options": _vm.pickerOptions
                         },
                         model: {
@@ -94876,7 +94877,7 @@ var render = function() {
                   id: "dateField",
                   type: _vm.dateType,
                   "picker-options": _vm.dateOptions,
-                  placeholder: _vm.datePlaceHolder,
+                  placeholder: " ",
                   "range-separator": _vm.rangeSeparator,
                   "start-placeholder": _vm.startDate,
                   "end-placeholder": _vm.endDate,
@@ -94948,11 +94949,7 @@ var render = function() {
               _c(
                 "el-select",
                 {
-                  attrs: {
-                    id: "dropdown",
-                    filterable: "",
-                    placeholder: "select"
-                  },
+                  attrs: { id: "dropdown", filterable: "", placeholder: " " },
                   model: {
                     value: _vm.value,
                     callback: function($$v) {
@@ -95354,7 +95351,7 @@ var render = function() {
                       autosize: { minRows: 3, maxRows: 5 },
                       maxlength: _vm.max,
                       "show-word-limit": "",
-                      placeholder: "Your text here"
+                      placeholder: " "
                     },
                     model: {
                       value: _vm.value,
@@ -95369,7 +95366,7 @@ var render = function() {
                       id: "textArea",
                       type: "textarea",
                       autosize: { minRows: 3, maxRows: 6 },
-                      placeholder: "Your text here"
+                      placeholder: " "
                     },
                     model: {
                       value: _vm.value,
@@ -95476,7 +95473,7 @@ var render = function() {
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
                             name: "type",
-                            placeholder: "Input " + _vm.targetName
+                            placeholder: " "
                           },
                           on: {
                             change: function($event) {
@@ -95522,7 +95519,7 @@ var render = function() {
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
                             name: "type",
-                            placeholder: "Input " + _vm.targetName
+                            placeholder: " "
                           },
                           on: {
                             change: function($event) {
@@ -95623,7 +95620,7 @@ var render = function() {
                         step: "00:15",
                         end: "24:45"
                       },
-                      placeholder: "Pick a time"
+                      placeholder: " "
                     },
                     model: {
                       value: _vm.value,
@@ -95634,7 +95631,7 @@ var render = function() {
                     }
                   })
                 : _c("el-time-picker", {
-                    attrs: { "arrow-control": "", placeholder: "Pick a time" },
+                    attrs: { "arrow-control": "", placeholder: " " },
                     model: {
                       value: _vm.value,
                       callback: function($$v) {

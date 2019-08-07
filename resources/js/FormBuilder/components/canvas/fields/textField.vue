@@ -15,13 +15,13 @@
                 id="input"
                 type="text" 
                 :maxlength="field.settings.max" 
-                placeholder="Your text here"  
+                placeholder=" "  
                 show-word-limit>
             </el-input>
             <el-input v-else 
                 id="input"
                 type="text" 
-                placeholder="Your text here">
+                placeholder=" ">
             </el-input>
 
         </el-col>
