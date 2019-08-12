@@ -20,7 +20,8 @@
                         <editable-text 
                             class="tw-cursor-pointer mouseOver"
                             v-model="item.value"
-                            @input="updateChoiceValue($event, index)">
+                            @input="updateChoiceValue($event, index)"
+                            @edit="tempValue(item.value)">
                                 {{ item.value }}
                         </editable-text>
                         <el-button 
@@ -32,6 +33,12 @@
                         </el-button>
                 </el-radio>
             </el-radio-group>
+
+        <el-alert
+            v-if="!isUnique"
+            title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            type="error">
+        </el-alert>
         
         <el-switch 
             v-model="required" 
@@ -62,6 +69,8 @@ export default {
         return {
             itemText: '',
             nextItem: 0,
+            isUnique: true,
+            temp: ''
         }
     },
     components: {
@@ -122,8 +131,16 @@ export default {
     },
     methods: {
 
-        addItem: function() {
+        addItem() {
             const choicesCopy = _.clone(this.choices);
+
+            for(var i = 0; i < this.choices.length; i++) {
+                if(this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
+
+                    this.itemText = ''
+                    return this.isUnique = false;
+                }
+            }
 
             choicesCopy.push({
                 id: this.nextItem++, value: this.itemText
@@ -131,6 +148,7 @@ export default {
 
             this.choices = choicesCopy;
             this.itemText = ''
+            this.isUnique = true;
         },
         
         removeChoice(item) {
@@ -144,12 +162,25 @@ export default {
             this.$forceUpdate();
         },
 
+        tempValue(value) {
+            this.temp = value;
+        },
+
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
+
+            for(var i = 0; i < this.field.choices.length; i++) {
+                if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+
+                    this.field.choices[index].value = this.temp;
+
+                    return this.isUnique = false;
+                }
+            }
+
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
         }
-        
     }
 }
 </script>

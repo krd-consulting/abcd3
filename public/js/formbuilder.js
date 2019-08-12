@@ -3553,13 +3553,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       nextItem: 0,
       itemText: '',
-      isUnique: true
+      isUnique: true,
+      temp: ''
     };
   },
   components: {
@@ -3572,21 +3575,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
-    // unique() {
-    //     return function (keyname) {
-    //         var output = [];
-    //         var keys   = [];
-    //         this.choices.forEach(function (choice) {
-    //             var key = choice.value[keyname];
-    //             if (keys.indexOf(key) === -1) {
-    //                 keys.push(key);
-    //                 output.push(post);
-    //             }
-    //             return isUnique = false;
-    //         });
-    //         return output;
-    //     };
-    // },
     field: {
       get: function get() {
         return this.fieldData;
@@ -3625,7 +3613,7 @@ __webpack_require__.r(__webpack_exports__);
         var fieldValue = _.clone(this.field);
 
         fieldValue.choices.value = value;
-        this.field = fieldValue; // this.$emit('updateChoices', field);
+        this.field = fieldValue;
       }
     },
     required: {
@@ -3651,10 +3639,17 @@ __webpack_require__.r(__webpack_exports__);
         id: this.nextItem++,
         value: 'Choice ' + this.nextItem
       });
-      this.$store.commit('UPDATE_FIELD', this.field);
+      this.$store.commit('UPDATE_FIELD', this.field); // console.log(this.choices)
     },
     addItem: function addItem() {
       var choicesCopy = _.clone(this.choices);
+
+      for (var i = 0; i < this.choices.length; i++) {
+        if (this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
+          this.itemText = '';
+          return this.isUnique = false;
+        }
+      }
 
       choicesCopy.push({
         id: this.nextItem++,
@@ -3662,6 +3657,7 @@ __webpack_require__.r(__webpack_exports__);
       });
       this.choices = choicesCopy;
       this.itemText = '';
+      this.isUnique = true;
     },
     removeChoice: function removeChoice(item) {
       var index = this.choices.indexOf(item);
@@ -3673,23 +3669,23 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$forceUpdate();
     },
+    tempValue: function tempValue(value) {
+      this.temp = value;
+    },
     updateChoiceValue: function updateChoiceValue(value, index) {
       var fieldCopy = _.clone(this.field);
+
+      for (var i = 0; i < this.field.choices.length; i++) {
+        if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+          this.field.choices[index].value = this.temp;
+          return this.isUnique = false;
+        }
+      }
 
       fieldCopy.choices[index].value = value;
       this.choices = fieldCopy.choices;
     }
-  } // filters: {
-  //     duplicate(value) {
-  // for(let i = 0; i <= this.choices.length(); i++) {
-  //     if(value === item.value) {
-  //         this.removeChoice(item);
-  //         return isDuplicate = true;
-  //     }
-  //         }
-  //     }
-  // },
-
+  }
 });
 
 /***/ }),
@@ -4000,13 +3996,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       itemText: '',
       value: '',
-      nextItem: 0
+      nextItem: 0,
+      isUnique: true,
+      temp: ''
     };
   },
   components: {
@@ -4077,16 +4081,23 @@ __webpack_require__.r(__webpack_exports__);
     addItem: function addItem() {
       var choicesCopy = _.clone(this.choices);
 
+      for (var i = 0; i < this.choices.length; i++) {
+        if (this.choices[i].value === this.itemText) {
+          this.itemText = '';
+          return this.isUnique = false;
+        }
+      }
+
       choicesCopy.push({
         id: this.nextItem++,
         value: this.itemText
       });
       this.choices = choicesCopy;
       this.itemText = '';
+      this.isUnique = true;
       this.$forceUpdate();
     },
     removeChoice: function removeChoice(item, index) {
-      // var index = this.choices.indexOf(item);
       if (index !== -1) {
         this.choices.splice(index, 1);
         this.$store.commit('UPDATE_FIELD', this.field);
@@ -4095,9 +4106,19 @@ __webpack_require__.r(__webpack_exports__);
       this.dropItem = null;
       this.$forceUpdate();
     },
+    tempValue: function tempValue(value) {
+      this.temp = value;
+    },
     updateChoiceValue: function updateChoiceValue(value, index) {
-      // var index = this.choices.indexOf(value);
       var fieldCopy = _.clone(this.field);
+
+      for (var i = 0; i < this.field.choices.length; i++) {
+        if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+          // this.field.choices[index].value = this.temp;
+          this.dropItem = this.temp;
+          return this.isUnique = false;
+        }
+      }
 
       fieldCopy.choices[index].value = value;
       this.choices = fieldCopy.choices;
@@ -4349,13 +4370,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       radioSelect: 1,
       itemText: '',
-      isMounted: false
+      isMounted: false,
+      isUnique: true
     };
   },
   components: {
@@ -4448,12 +4476,20 @@ __webpack_require__.r(__webpack_exports__);
     addQuestion: function addQuestion() {
       var questionsCopy = _.clone(this.questions);
 
+      for (var i = 0; i < this.questions.length; i++) {
+        if (this.questions[i].value === this.itemText) {
+          this.itemText = '';
+          return this.isUnique = false;
+        }
+      }
+
       questionsCopy.push({
         id: this.nextQuestion++,
         text: this.itemText
       });
       this.questions = questionsCopy;
       this.itemText = '';
+      this.isUnique = true;
       this.$forceUpdate();
     },
     removeQuestion: function removeQuestion(item) {
@@ -4473,7 +4509,6 @@ __webpack_require__.r(__webpack_exports__);
         id: this.nextQuestion++,
         value: 'New Choice'
       });
-      console.log(choicesCopy);
       this.choices = choicesCopy;
       this.$forceUpdate();
     },
@@ -4491,7 +4526,13 @@ __webpack_require__.r(__webpack_exports__);
       var fieldCopy = _.clone(this.field);
 
       fieldCopy.choices[index].value = value;
-      this.choices = fieldCopy.choices;
+      this.choices = fieldCopy.choices; // for(var i = 0; i < this.choices.length; i++) {
+      //     if(this.choices[i].value === this.itemText) {
+      //         this.itemText = ''
+      //         return this.isUnique = false;
+      //     }
+      // }
+
       this.$forceUpdate();
     },
     updateQuestionValue: function updateQuestionValue(value, index) {
@@ -4670,12 +4711,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       itemText: '',
-      nextItem: 0
+      nextItem: 0,
+      isUnique: true,
+      temp: ''
     };
   },
   components: {
@@ -4747,12 +4797,20 @@ __webpack_require__.r(__webpack_exports__);
     addItem: function addItem() {
       var choicesCopy = _.clone(this.choices);
 
+      for (var i = 0; i < this.choices.length; i++) {
+        if (this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
+          this.itemText = '';
+          return this.isUnique = false;
+        }
+      }
+
       choicesCopy.push({
         id: this.nextItem++,
         value: this.itemText
       });
       this.choices = choicesCopy;
       this.itemText = '';
+      this.isUnique = true;
     },
     removeChoice: function removeChoice(item) {
       var index = this.choices.indexOf(item);
@@ -4764,8 +4822,18 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$forceUpdate();
     },
+    tempValue: function tempValue(value) {
+      this.temp = value;
+    },
     updateChoiceValue: function updateChoiceValue(value, index) {
       var fieldCopy = _.clone(this.field);
+
+      for (var i = 0; i < this.field.choices.length; i++) {
+        if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+          this.field.choices[index].value = this.temp;
+          return this.isUnique = false;
+        }
+      }
 
       fieldCopy.choices[index].value = value;
       this.choices = fieldCopy.choices;
@@ -6710,9 +6778,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selectInput: function selectInput(input) {
-      console.log(input.name);
       this.selectedInput = Object.assign({}, input);
-      console.log(this.selectedInput.name);
       this.step = '2';
     },
     addField: function addField(field) {
@@ -6831,37 +6897,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      visible: false
+    };
+  },
   methods: {
-    buildForm: function buildForm() {
-      var _this = this;
+    submit: function submit() {
+      this.$message({
+        type: 'success',
+        message: 'Build Successful'
+      }); //  redirect to forms
 
-      this.$confirm('Are you sure you are ready to build this form?', 'Confirm', {
-        confirmButtonText: 'OK',
-        cancelButtonText: 'Cancel',
-        type: 'info'
-      }).then(function () {
-        _this.$message({
-          type: 'success',
-          message: 'Build Successful'
-        });
-
-        _this.$store.dispatch('submitForm').then(function (response) {//  redirect to forms
-          // return Promise('') --> Validate whether or not the form is good
-        })["catch"](function (error) {// display error saying some data is incompatable
-        });
-
-        window.location.href = '/forms/';
-      })["catch"](function () {
-        _this.$message({
-          type: 'info',
-          message: "Keep doing what you're are doing"
-        }).then(function () {
-          _this.$message({
-            type: 'warning',
-            message: "Woops, Something went wrong. Please try submitting again"
-          });
-        });
+      this.$store.dispatch('submitForm').then(function (response) {// return Promise('') --> Validate whether or not the form is good
+      })["catch"](function (error) {// display error saying some data is incompatable
+      });
+      this.visible = false;
+      window.location.href = '/forms/';
+    },
+    cancel: function cancel() {
+      this.visible = false;
+      this.$message({
+        type: 'info',
+        message: "Keep doing what you're are doing"
       });
     }
   }
@@ -6890,6 +6971,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_formFields_upload_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @/components/formFields/upload.vue */ "./resources/js/components/formFields/upload.vue");
 /* harmony import */ var _components_formFields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/components/formFields/sectionDivider.vue */ "./resources/js/components/formFields/sectionDivider.vue");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _api_TeamRequest__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/api/TeamRequest */ "./resources/js/api/TeamRequest.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -6976,6 +7058,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -6993,6 +7087,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       value: '',
       inputName: '',
+      teamRequest: new _api_TeamRequest__WEBPACK_IMPORTED_MODULE_12__["default"](),
+      teamRequestParams: {
+        ascending: true,
+        sortBy: 'name',
+        page: 1,
+        perPage: 10,
+        search: ''
+      },
       teams: [],
       dateCompleted: '',
       prePost: [{
@@ -7011,6 +7113,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       }
     };
+  },
+  created: function created() {
+    this.retrieveTeams();
+  },
+  methods: {
+    retrieveTeams: function retrieveTeams(keywords) {
+      var _this = this;
+
+      this.teamRequestParams.search = keywords;
+      this.teamRequest.setFields({
+        params: _objectSpread({}, this.teamRequestParams)
+      });
+      var getTeams = this.teamRequest.retrieve();
+      getTeams.then(function (response) {
+        _this.teams = response.data;
+      });
+      return getTeams;
+    }
   },
   components: {
     MatrixField: _components_formFields_matrix_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -7074,21 +7194,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      isVisible: false // value: '',
-      // inputName: '',
-      // teams: [],
-      // dateCompleted: '',
-      // prePost: [
-      //     {id: 0, value: 'Pre-test'},
-      //     {id: 1, value: 'Intermittent'},
-      //     {id: 2, value: 'Post-test'},
-      // ],
-      // pickerOptions: {
-      //     disabledDate(time) {
-      //         return time.getTime() > Date.now();
-      //     }
-      // }
-
+      isVisible: false
     };
   },
   created: function created() {
@@ -7472,17 +7578,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       var request = new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
+      this.retrieveTeams().then(function () {
+        _this2.formData.team_id = _this2.teams[0].id;
+      });
       request.create().then(function (response) {
         _this2.targetTypes = response.data.target_types;
         _this2.types = response.data.types;
         _this2.scopes = response.data.scopes;
-      }); // getFormData.then(response => {
-      //     this.formData.type = this.types[0]
-      // });
-      // return getFormData;
-
-      this.retrieveTeams().then(function () {
-        _this2.formData.team_id = _this2.teams[0].id;
+        _this2.formData.type = _this2.types['static'];
+        _this2.formData.target = _this2.targetTypes[1].target;
+        _this2.formData.scope_id = _this2.scopes[0].id;
       });
     },
     submit: function submit() {
@@ -7798,6 +7903,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     value: String | Number
@@ -7817,6 +7923,11 @@ __webpack_require__.r(__webpack_exports__);
         return _this.$refs.editable_input.focus();
       });
       this.newValue = this.value;
+      this.$emit('edit');
+    },
+    blur: function blur() {
+      this.active = false;
+      this.save();
     },
     save: function save() {
       this.$emit('input', this.newValue);
@@ -87988,17 +88099,14 @@ var render = function() {
                   "editable-text",
                   {
                     staticClass: "tw-cursor-pointer mouseOver",
+                    attrs: { value: item.value },
                     on: {
                       input: function($event) {
                         return _vm.updateChoiceValue($event, index)
-                      }
-                    },
-                    model: {
-                      value: item.value,
-                      callback: function($$v) {
-                        _vm.$set(item, "value", $$v)
                       },
-                      expression: "item.value"
+                      edit: function($event) {
+                        return _vm.tempValue(item.value)
+                      }
                     }
                   },
                   [
@@ -88034,7 +88142,7 @@ var render = function() {
         ? _c("el-alert", {
             attrs: {
               title:
-                "Woops! it looks like you have a duplicate choice. Let's try again with a different value.",
+                "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
               type: "error"
             }
           })
@@ -88308,6 +88416,9 @@ var render = function() {
                       on: {
                         input: function($event) {
                           return _vm.updateChoiceValue($event)
+                        },
+                        edit: function($event) {
+                          return _vm.tempValue(_vm.dropItem)
                         }
                       },
                       model: {
@@ -88350,6 +88461,16 @@ var render = function() {
         ],
         1
       ),
+      _vm._v(" "),
+      !_vm.isUnique
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
+              type: "error"
+            }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c("el-switch", {
         staticClass: "tw-float-right switch-position",
@@ -88813,6 +88934,16 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
+      !_vm.isUnique
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
+              type: "error"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("el-switch", {
         staticClass: "tw-float-right switch-position",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
@@ -89082,6 +89213,9 @@ var render = function() {
                   on: {
                     input: function($event) {
                       return _vm.updateChoiceValue($event, index)
+                    },
+                    edit: function($event) {
+                      return _vm.tempValue(item.value)
                     }
                   },
                   model: {
@@ -89124,6 +89258,16 @@ var render = function() {
         }),
         1
       ),
+      _vm._v(" "),
+      !_vm.isUnique
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
+              type: "error"
+            }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c("el-switch", {
         staticClass: "tw-float-right switch-position",
@@ -91760,50 +91904,132 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-menu",
-    {
-      staticClass: "w-full",
-      attrs: {
-        "default-active": _vm.$route.path,
-        "background-color": "#fff",
-        "active-text-color": "#409EFF",
-        mode: "horizontal",
-        router: ""
-      }
-    },
+    "div",
     [
       _c(
-        "router-link",
-        { attrs: { to: "/forms/create" } },
+        "el-menu",
+        {
+          staticClass: "w-full",
+          attrs: {
+            "default-active": _vm.$route.path,
+            "background-color": "#fff",
+            "active-text-color": "#409EFF",
+            mode: "horizontal",
+            router: ""
+          }
+        },
         [
           _c(
-            "el-button",
-            { staticClass: "tw-float-left tw-bg-blue-500 tw-text-white" },
-            [_vm._v("Form Builder")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "el-button",
-        {
-          staticClass: "tw-float-right tw-bg-blue-500 tw-text-white",
-          on: { click: _vm.buildForm }
-        },
-        [_vm._v("Finish & Build!")]
-      ),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        { attrs: { to: "/forms/create/preview" } },
-        [
+            "router-link",
+            { attrs: { to: "/forms/create" } },
+            [
+              _c(
+                "el-button",
+                { staticClass: "tw-float-left tw-bg-blue-500 tw-text-white" },
+                [_vm._v("Form Builder")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c(
             "el-button",
             {
-              staticClass: "tw-float-right tw-bg-blue-500 tw-text-white tw-mx-1"
+              staticClass: "tw-float-right tw-bg-blue-500 tw-text-white",
+              on: {
+                click: function($event) {
+                  _vm.visible = true
+                }
+              }
             },
-            [_vm._v("Preview")]
+            [_vm._v("Finish & Build!")]
+          ),
+          _vm._v(" "),
+          _c(
+            "router-link",
+            { attrs: { to: "/forms/create/preview" } },
+            [
+              _c(
+                "el-button",
+                {
+                  staticClass:
+                    "tw-float-right tw-bg-blue-500 tw-text-white tw-mx-1"
+                },
+                [_vm._v("Preview")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-dialog",
+            {
+              attrs: { visible: _vm.visible, width: "30%" },
+              on: {
+                "update:visible": function($event) {
+                  _vm.visible = $event
+                }
+              }
+            },
+            [
+              _c(
+                "div",
+                { attrs: { slot: "title" }, slot: "title" },
+                [
+                  _c("base-icon", { staticClass: "tw-align-middle" }, [
+                    _vm._v("done_outline")
+                  ]),
+                  _vm._v(" Confirm\r\n                    ")
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("span", { staticClass: "tw-text-sm" }, [
+                _vm._v("Are you sure you are ready to build this form?")
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "tw-border-t tw-px-4 tw-py-4 tw-bg-gray-100 tw-rounded-b",
+                  attrs: { slot: "footer" },
+                  slot: "footer"
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-gray-700 tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue tw-text-xs",
+                      on: { click: _vm.cancel }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                        Nevermind\r\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "base-button",
+                    {
+                      staticClass:
+                        "tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none",
+                      on: { click: _vm.submit }
+                    },
+                    [
+                      _c(
+                        "span",
+                        { staticClass: "tw-text-xs tw-align-middle" },
+                        [_vm._v("Good to go!")]
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ]
           )
         ],
         1
@@ -91910,13 +92136,43 @@ var render = function() {
                 { attrs: { span: 6 } },
                 [
                   _c(
-                    "el-select",
-                    { attrs: { value: "", placeholder: "Select" } },
-                    _vm._l(_vm.teams, function(team) {
-                      return _c("el-option", {
-                        key: team.value,
-                        attrs: { label: team.label, value: team.value }
-                      })
+                    "base-select",
+                    {
+                      attrs: {
+                        filterable: "",
+                        remote: "",
+                        "remote-method": _vm.retrieveTeams,
+                        name: "type",
+                        placeholder: " "
+                      },
+                      on: {
+                        change: function($event) {
+                          return _vm.request.errors.clear("team_id")
+                        }
+                      },
+                      model: {
+                        value: _vm.teams.team_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.teams, "team_id", $$v)
+                        },
+                        expression: "teams.team_id"
+                      }
+                    },
+                    _vm._l(_vm.teams, function(team, index) {
+                      return _c(
+                        "el-option",
+                        {
+                          key: index,
+                          attrs: { label: team.name, value: team.id }
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(team.name) +
+                              "\n                        "
+                          )
+                        ]
+                      )
                     }),
                     1
                   )
@@ -92355,7 +92611,10 @@ var render = function() {
                 _c(
                   "base-select",
                   {
-                    attrs: { name: "type", placeholder: " " },
+                    attrs: {
+                      name: "type",
+                      placeholder: "Construction Ahead: Drive Slow"
+                    },
                     on: {
                       change: function($event) {
                         return _vm.request.errors.clear("type")
@@ -93107,7 +93366,7 @@ var render = function() {
             ) {
               return null
             }
-            return _vm.save($event)
+            return _vm.blur($event)
           }
         }
       },
@@ -93126,7 +93385,11 @@ var render = function() {
                 ref: "editable_input",
                 staticClass: "text-base p-0",
                 attrs: { size: "small", maxlength: "200" },
-                on: { blur: _vm.save },
+                on: {
+                  blur: function($event) {
+                    _vm.active = false
+                  }
+                },
                 model: {
                   value: _vm.newValue,
                   callback: function($$v) {

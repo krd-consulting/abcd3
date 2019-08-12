@@ -4737,7 +4737,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_formFields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/components/formFields/sectionDivider.vue */ "./resources/js/components/formFields/sectionDivider.vue");
 /* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
 /* harmony import */ var _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/api/FormEntryRequest */ "./resources/js/api/FormEntryRequest.js");
-/* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
+/* harmony import */ var _api_TeamRequest__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/api/TeamRequest */ "./resources/js/api/TeamRequest.js");
+/* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4860,6 +4865,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -4879,6 +4896,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_11__["default"]({}),
       entryRequest: new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"]({}),
+      teamRequest: new _api_TeamRequest__WEBPACK_IMPORTED_MODULE_13__["default"](),
       form: {
         target_type: {
           name: null
@@ -4887,6 +4905,14 @@ __webpack_require__.r(__webpack_exports__);
           name: null
         }
       },
+      teamRequestParams: {
+        ascending: true,
+        sortBy: 'name',
+        page: 1,
+        perPage: 10,
+        search: ''
+      },
+      teams: [],
       targetRequest: {},
       targetParams: {
         ascending: true,
@@ -4908,7 +4934,6 @@ __webpack_require__.r(__webpack_exports__);
       },
       value: '',
       inputName: '',
-      teams: [],
       dateCompleted: '',
       prePost: [{
         id: 0,
@@ -4944,7 +4969,7 @@ __webpack_require__.r(__webpack_exports__);
     TimeField: _components_formFields_timePicker_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     FileField: _components_formFields_upload_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
     SectionDivider: _components_formFields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
-    RecordPrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_13__["default"]
+    RecordPrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_14__["default"]
   },
   methods: {
     getPrimaryData: function getPrimaryData(record, fields) {
@@ -4958,52 +4983,66 @@ __webpack_require__.r(__webpack_exports__);
       });
       return data.trim();
     },
-    retrieve: function retrieve() {
+    retrieveTeams: function retrieveTeams(keywords) {
       var _this = this;
+
+      this.teamRequestParams.search = keywords;
+      this.teamRequest.setFields({
+        params: _objectSpread({}, this.teamRequestParams)
+      });
+      var getTeams = this.teamRequest.retrieve();
+      getTeams.then(function (response) {
+        _this.teams = response.data;
+      });
+      return getTeams;
+    },
+    retrieve: function retrieve() {
+      var _this2 = this;
 
       var form = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$route.params.form;
       this.request.show(form).then(function (response) {
-        _this.form = response.data;
+        _this2.form = response.data;
       });
     },
     retrieveFormTargetItems: function retrieveFormTargetItems(keywords, callback) {
-      var _this2 = this;
+      var _this3 = this;
 
       __webpack_require__("./resources/js/api lazy recursive ^\\.\\/.*Request$")("./".concat(this.targetName, "Request")).then(function (foo) {
-        _this2.targetRequest = new foo["default"]({});
-        _this2.targetParams.search = keywords;
-        var params = _this2.targetParams;
+        _this3.targetRequest = new foo["default"]({});
+        _this3.targetParams.search = keywords;
+        var params = _this3.targetParams;
 
-        if (_this2.targetName == 'Record') {
-          _this2.recordParams.search = keywords;
-          params = _this2.recordParams;
+        if (_this3.targetName == 'Record') {
+          _this3.recordParams.search = keywords;
+          params = _this3.recordParams;
         }
 
-        _this2.targetRequest.setFields({
+        _this3.targetRequest.setFields({
           params: params
         });
 
-        var args = _this2.form.target != null ? _this2.form.target.name : null;
+        var args = _this3.form.target != null ? _this3.form.target.name : null;
 
-        _this2.targetRequest.retrieve(args).then(function (response) {
-          _this2.targetItems = response.data;
+        _this3.targetRequest.retrieve(args).then(function (response) {
+          _this3.targetItems = response.data;
         });
       });
     },
     submit: function submit() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.form);
       this.entryRequest.store().then(function (response) {
-        _this3.$emit('store', response.data);
+        _this4.$emit('store', response.data);
 
-        _this3.close();
+        _this4.close();
       })["catch"](function (error) {//
       });
     }
   },
   created: function created() {
     this.retrieve();
+    this.retrieveTeams();
   }
 });
 
@@ -88938,13 +88977,43 @@ var render = function() {
                     { attrs: { span: 6 } },
                     [
                       _c(
-                        "el-select",
-                        { attrs: { value: "", placeholder: " " } },
-                        _vm._l(_vm.teams, function(team) {
-                          return _c("el-option", {
-                            key: team.value,
-                            attrs: { label: team.label, value: team.value }
-                          })
+                        "base-select",
+                        {
+                          attrs: {
+                            filterable: "",
+                            remote: "",
+                            "remote-method": _vm.retrieveTeams,
+                            name: "type",
+                            placeholder: " "
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.request.errors.clear("team_id")
+                            }
+                          },
+                          model: {
+                            value: _vm.teams.team_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.teams, "team_id", $$v)
+                            },
+                            expression: "teams.team_id"
+                          }
+                        },
+                        _vm._l(_vm.teams, function(team, index) {
+                          return _c(
+                            "el-option",
+                            {
+                              key: index,
+                              attrs: { label: team.name, value: team.id }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(team.name) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
                         }),
                         1
                       )

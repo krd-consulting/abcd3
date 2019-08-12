@@ -86,7 +86,7 @@
                         <base-select
                             v-model="formData.type"
                             name="type"
-                            placeholder=" "
+                            placeholder="Construction Ahead: Drive Slow"
                             @change="request.errors.clear('type')">
                             <el-option
                                 v-for="(type, index) in types"
@@ -281,19 +281,18 @@
             load() {
                 let request = new Request({});
 
+                this.retrieveTeams().then (() => {
+                    this.formData.team_id = this.teams[0].id
+                });
+
                 request.create().then((response) => {
                     this.targetTypes = response.data.target_types;
                     this.types = response.data.types;
                     this.scopes = response.data.scopes;
-                });
 
-                // getFormData.then(response => {
-                //     this.formData.type = this.types[0]
-                // });
-                // return getFormData;
-
-                this.retrieveTeams().then (() => {
-                    this.formData.team_id = this.teams[0].id
+                    this.formData.type = this.types['static'];
+                    this.formData.target = this.targetTypes[1].target;
+                    this.formData.scope_id = this.scopes[0].id;
                 });
             },
 

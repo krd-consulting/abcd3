@@ -22,8 +22,9 @@
                 :label="item.value">
                     <editable-text 
                         class="tw-cursor-pointer mouseOver"
-                        v-model="item.value"
-                        @input="updateChoiceValue($event, index)">
+                        :value="item.value"
+                        @input="updateChoiceValue($event, index)"
+                        @edit="tempValue(item.value)">
                             {{ item.value }}
                     </editable-text>
             </el-checkbox>
@@ -34,9 +35,10 @@
                     Remove
             </el-button>
         </el-checkbox-group>
+
         <el-alert
-        v-if="!isUnique"
-            title="Woops! it looks like you have a duplicate choice. Let's try again with a different value."
+            v-if="!isUnique"
+            title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
             type="error">
         </el-alert>
 
@@ -70,7 +72,8 @@ export default {
         return {
             nextItem: 0,
             itemText: '',
-            isUnique: true
+            isUnique: true,
+            temp: ''
         }
     },
     components: {
@@ -80,28 +83,9 @@ export default {
         fieldData: {
             type: Array | Object,
             default: {}
-        }
+        },
     },
     computed: {
-
-        // unique() {
-        //     return function (keyname) {
-        //         var output = [];
-        //         var keys   = [];
-
-        //         this.choices.forEach(function (choice) {
-        //             var key = choice.value[keyname];
-
-        //             if (keys.indexOf(key) === -1) {
-        //                 keys.push(key);
-        //                 output.push(post);
-        //             }
-        //             return isUnique = false;
-        //         });
-
-        //         return output;
-        //     };
-        // },
 
         field: {
             get() { return this.fieldData; },
@@ -123,6 +107,7 @@ export default {
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.choices = choices;
                 this.field = fieldCopy;
+
             }
         },
 
@@ -132,7 +117,6 @@ export default {
                 const fieldValue = _.clone(this.field);
                 fieldValue.choices.value = value;
                 this.field = fieldValue;
-                // this.$emit('updateChoices', field);
             }
         },
 
@@ -158,11 +142,19 @@ export default {
                 value: 'Choice ' + this.nextItem
             })
             this.$store.commit('UPDATE_FIELD', this.field)
-            
+            // console.log(this.choices)
         },
 
         addItem() {
             const choicesCopy = _.clone(this.choices);
+
+            for(var i = 0; i < this.choices.length; i++) {
+                if(this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
+
+                    this.itemText = ''
+                    return this.isUnique = false;
+                }
+            }
 
             choicesCopy.push({
                 id: this.nextItem++, value: this.itemText
@@ -170,6 +162,7 @@ export default {
 
             this.choices = choicesCopy;
             this.itemText = ''
+            this.isUnique = true;
         },
         
         removeChoice(item) {
@@ -183,23 +176,26 @@ export default {
             this.$forceUpdate();
         },
 
+        tempValue(value) {
+            this.temp = value;
+        },
+
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
+            
+            for(var i = 0; i < this.field.choices.length; i++) {
+                if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+
+                    this.field.choices[index].value = this.temp;
+
+                    return this.isUnique = false;
+                }
+            }
+
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
-        }  
+        } ,
     },
-    // filters: {
-    //     duplicate(value) {
-            // for(let i = 0; i <= this.choices.length(); i++) {
-            //     if(value === item.value) {
-
-            //         this.removeChoice(item);
-            //         return isDuplicate = true;
-            //     }
-    //         }
-    //     }
-    // },
 }
 </script>
 

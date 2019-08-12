@@ -14615,6 +14615,11 @@ video {
   font-size: 18px !important;
 }
 
+.el-dialog__header {
+  background-color: #2d607d !important;
+  color: white !important;
+}
+
 .el-button+.el-button {
   margin: 0;
 }

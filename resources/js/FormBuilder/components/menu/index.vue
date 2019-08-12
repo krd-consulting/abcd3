@@ -105,9 +105,7 @@ export default {
     methods: {
 
         selectInput(input) {
-            console.log(input.name);
             this.selectedInput = Object.assign({}, input);
-            console.log(this.selectedInput.name);
 
             this.step = '2';
         },

@@ -60,11 +60,22 @@
                         <label for="teamSelect" class="input-label">Team</label>
                     </el-col>
                     <el-col :span="6">
-                        <el-select value="" placeholder=" ">
-                            <el-option v-for="team in teams" :key="team.value"
-                            :label="team.label" :value="team.value">
+                        <base-select
+                            v-model="teams.team_id"
+                            filterable
+                            remote
+                            :remote-method="retrieveTeams"
+                            name="type"
+                            placeholder=" "
+                            @change="request.errors.clear('team_id')">
+                            <el-option
+                                v-for="(team, index) in teams"
+                                :key="index"
+                                :label="team.name"
+                                :value="team.id">
+                                {{ team.name }}
                             </el-option>
-                        </el-select>
+                        </base-select>
                     </el-col>
                 </el-row>
 
@@ -135,6 +146,7 @@
 
     import Request from '@/api/FormRequest';
     import EntryRequest from '@/api/FormEntryRequest';
+    import TeamRequest from '@/api/TeamRequest';
 
     import RecordPrimaryData from '@/App/components/record/primaryData';
 
@@ -143,6 +155,7 @@
             return {
                 request: new Request({}),
                 entryRequest: new EntryRequest({}),
+                teamRequest: new TeamRequest(),
                 form: {
                     target_type: {
                         name: null
@@ -151,6 +164,14 @@
                         name: null
                     }
                 },
+                teamRequestParams: {
+                    ascending: true,
+                    sortBy: 'name',
+                    page: 1,
+                    perPage: 10,
+                    search: ''
+                },
+            teams: [],
                 targetRequest: {},
                 targetParams: {
                     ascending: true,
@@ -172,7 +193,6 @@
                 },
                 value: '',
                 inputName: '',
-                teams: [],
                 dateCompleted: '',
                 prePost: [
                     {id: 0, value: 'Pre-test'},
@@ -231,6 +251,22 @@
                 return data.trim();
             },
 
+            retrieveTeams(keywords) {
+                this.teamRequestParams.search = keywords;
+
+                this.teamRequest.setFields({
+                    params: {...this.teamRequestParams }
+                });
+
+                let getTeams = this.teamRequest.retrieve();
+
+                getTeams.then(response => {
+                    this.teams = response.data;
+                });
+
+                return getTeams;
+            },
+
             retrieve(form = this.$route.params.form) {
                 this.request.show(form).then((response) => {
                     this.form = response.data;
@@ -282,6 +318,7 @@
 
         created() {
             this.retrieve();
+            this.retrieveTeams();
         }
     }
 </script>

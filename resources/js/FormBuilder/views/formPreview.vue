@@ -35,20 +35,6 @@ export default {
     data: () => {
         return {
             isVisible: false,
-            // value: '',
-            // inputName: '',
-            // teams: [],
-            // dateCompleted: '',
-            // prePost: [
-            //     {id: 0, value: 'Pre-test'},
-            //     {id: 1, value: 'Intermittent'},
-            //     {id: 2, value: 'Post-test'},
-            // ],
-            // pickerOptions: {
-            //     disabledDate(time) {
-            //         return time.getTime() > Date.now();
-            //     }
-            // }
         }
     },
     created() {
@@ -72,7 +58,7 @@ export default {
                 behavior: 'smooth'
             });
             
-        }
+        },
     }
 }
 </script>

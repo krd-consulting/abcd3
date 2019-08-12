@@ -1,14 +1,15 @@
 <template>
-	<div v-on="$listeners.click" @click.prevent="edit" @keyup.enter="save">
+	<div v-on="$listeners.click" @click.prevent="edit" @keyup.enter="blur">
 		<div class="pb-px" v-if="!active">{{ value }}</div>
 		<div v-if="active">
 			<el-input 
 				ref="editable_input" 
 				v-model="newValue" 
 				class="text-base p-0" 
-				size="small" 
-				@blur="save" 
-				maxlength="200"></el-input>
+				size="small"
+				@blur="active = false" 
+				maxlength="200">
+			</el-input>
 		</div>
 	</div>
 </template>
@@ -30,6 +31,12 @@
 				this.active = true;
 				this.$nextTick(() => this.$refs.editable_input.focus());
 				this.newValue = this.value;
+				this.$emit('edit');
+			},
+
+			blur() {
+				this.active = false;
+				this.save();
 			},
 
 			save() {

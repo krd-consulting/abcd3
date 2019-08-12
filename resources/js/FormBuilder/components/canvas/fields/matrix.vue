@@ -79,6 +79,12 @@
             </tbody>
         </table>
 
+        <el-alert
+            v-if="!isUnique"
+            title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            type="error">
+        </el-alert>
+
         <el-switch 
             v-model="field.settings.required" 
             active-text="Required" 
@@ -108,7 +114,8 @@ export default {
         return {
             radioSelect: 1,
             itemText: '',
-            isMounted: false
+            isMounted: false,
+            isUnique: true
         }
     },
     components: {
@@ -186,13 +193,21 @@ export default {
         addQuestion() {
             const questionsCopy = _.clone(this.questions);
 
+            for(var i = 0; i < this.questions.length; i++) {
+                if(this.questions[i].value === this.itemText) {
+
+                    this.itemText = ''
+                    return this.isUnique = false;
+                }
+            }
+
             questionsCopy.push({
                 id: this.nextQuestion++, text: this.itemText
             });
 
             this.questions = questionsCopy;
             this.itemText = '';
-
+            this.isUnique = true;
             this.$forceUpdate();
         },
         
@@ -215,9 +230,7 @@ export default {
                 id: this.nextQuestion++, value: 'New Choice'
             });
 
-            console.log(choicesCopy)
             this.choices = choicesCopy;
-
             this.$forceUpdate();
         },
 
@@ -236,6 +249,14 @@ export default {
             const fieldCopy = _.clone(this.field);
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
+
+            // for(var i = 0; i < this.choices.length; i++) {
+            //     if(this.choices[i].value === this.itemText) {
+
+            //         this.itemText = ''
+            //         return this.isUnique = false;
+            //     }
+            // }
 
             this.$forceUpdate();
         },

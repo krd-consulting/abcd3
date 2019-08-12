@@ -21,11 +21,22 @@
                     <label for="teamSelect" class="tw-block tw-text-right tw-mr-1">Team</label>
                 </el-col>
                 <el-col :span="6">
-                    <el-select value="" placeholder="Select">
-                        <el-option v-for="team in teams" :key="team.value"
-                        :label="team.label" :value="team.value">
-                        </el-option>
-                    </el-select>
+                    <base-select
+                            v-model="teams.team_id"
+                            filterable
+                            remote
+                            :remote-method="retrieveTeams"
+                            name="type"
+                            placeholder=" "
+                            @change="request.errors.clear('team_id')">
+                            <el-option
+                                v-for="(team, index) in teams"
+                                :key="index"
+                                :label="team.name"
+                                :value="team.id">
+                                {{ team.name }}
+                            </el-option>
+                        </base-select>
                 </el-col>
             </el-row>
 
@@ -94,12 +105,21 @@ import FileField from '@/components/formFields/upload.vue'
 import SectionDivider from '@/components/formFields/sectionDivider.vue'
 
 import { mapState } from 'vuex'
+import TeamRequest from '@/api/TeamRequest';
 
 export default {
     data: () => {
         return {
             value: '',
             inputName: '',
+            teamRequest: new TeamRequest(),
+                teamRequestParams: {
+                    ascending: true,
+                    sortBy: 'name',
+                    page: 1,
+                    perPage: 10,
+                    search: ''
+                },
             teams: [],
             dateCompleted: '',
             prePost: [
@@ -113,6 +133,27 @@ export default {
                 }
             }
         }
+    },
+    created() {
+        this.retrieveTeams();
+    },
+
+    methods: {
+        retrieveTeams(keywords) {
+            this.teamRequestParams.search = keywords;
+
+            this.teamRequest.setFields({
+                params: {...this.teamRequestParams }
+            });
+
+            let getTeams = this.teamRequest.retrieve();
+
+            getTeams.then(response => {
+                this.teams = response.data;
+            });
+
+            return getTeams;
+        },
     },
 
     components: {
