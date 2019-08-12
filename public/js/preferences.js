@@ -81435,7 +81435,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -81614,7 +81614,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -82022,7 +82022,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -82223,7 +82223,7 @@ var render = function() {
                 },
                 [
                   _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                    _vm._v("Good to go!")
+                    _vm._v("OK")
                   ])
                 ]
               )
@@ -83063,7 +83063,7 @@ var render = function() {
       _c(
         "router-link",
         {
-          staticClass: "tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer",
+          staticClass: "tw-flex tw-w-1/3 tw-items-top tw-cursor-pointer",
           attrs: { tag: "div", to: _vm.to }
         },
         [
@@ -100530,7 +100530,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\Preferences */"./resources/js/Preferences/index.js");
+module.exports = __webpack_require__(/*! /var/www/abcd/resources/js/Preferences */"./resources/js/Preferences/index.js");
 
 
 /***/ })

@@ -8,12 +8,12 @@
         @close="close" 
         @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Create Form
+            <base-icon class="tw-align-text-top">person_add</base-icon> Create New Form
         </div>
         <form>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/4 tw-capitalize">
+                    <label class="tw-w-1/3 tw-capitalize">
                         Form Name
                     </label>
                     <div class="tw-w-2/4">
@@ -31,7 +31,7 @@
             </div>
             <!-- <div class="tw-mb-2">
                 <div  class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/4 tw-capitalize">
+                    <label class="tw-w-1/3 tw-capitalize">
                         Description
                     </label>
                     <div class="tw-w-2/3">
@@ -49,7 +49,7 @@
             </div> -->
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/4">
+                    <label class="tw-w-1/3">
                         Team
                     </label>
                     <div class="tw-w-2/3">
@@ -79,7 +79,7 @@
             </div>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/4">
+                    <label class="tw-w-1/3">
                         Form Type
                     </label>
                     <div class="tw-w-2/3">
@@ -106,14 +106,14 @@
             </div>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/4">
-                        This form is about
+                    <label class="tw-w-1/3">
+                        Collect data about
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
                             v-model="formData.target"
                             name="target"
-                            placeholder="Select Resource"
+                            placeholder=""
                             @change="request.errors.clear('target.type');
                                 request.errors.clear('target.type_id')">
                             <el-option
@@ -142,14 +142,14 @@
             </div>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/4">
-                        Who can see this form?
+                    <label class="tw-w-1/3">
+                        Limit form access to 
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
                             v-model="formData.scope_id"
                             name="target"
-                            placeholder="Choose who can see this form."
+                            placeholder=""
                             @change="request.errors.clear('scope_id');">
                             <el-option
                                 v-for="(scope, index) in formattedScopes"
@@ -180,7 +180,7 @@
             <base-button 
                 class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none"
                 @click="submit">
-                <span class="tw-text-xs tw-align-middle">Good to go!</span>
+                <span class="tw-text-xs tw-align-middle">OK</span>
             </base-button>
         </div>
     </base-dialog>

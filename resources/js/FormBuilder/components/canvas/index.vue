@@ -18,27 +18,27 @@
                                 {{ description }}
                         </editable-text>
 
-                        <div v-if="!description">
-                            <el-input v-model="description" placeholder="If desired, feel free to enter a brief description for this form"></el-input>
-                        </div>
+                        <!-- div v-if="!description">
+                            <el-input v-model="description" placeholder="Please enter an optional description for this form"></el-input>
+                        </div -->
                     </el-header>
 
                 <el-divider></el-divider>
                     
                     <el-row :gutter="12" class="tw-mb-4">
-                        <el-col :span="4">
+                        <el-col :span="8">
                             <label for="name" class="input-label tw-mt-4"> {{ targetName }} Name</label>
                         </el-col>  
-                        <el-col :span="8">
+                        <el-col :span="6">
                             <el-input id="name" class="inputField"></el-input>
                         </el-col>
                     </el-row>
 
                     <el-row :gutter="12" class="tw-mb-4">    
-                            <el-col :span="4">
+                            <el-col :span="8">
                                 <label class="input-label">Team</label>
                             </el-col>
-                            <el-col :span="8">
+                            <el-col :span="6">
                             <el-select value="" placeholder="Select">
                                 <el-option v-for="team in teams" :key="team.value"
                                     :label="team.label" :value="team.value">
@@ -48,10 +48,10 @@
                     </el-row>
 
                     <el-row :gutter="12" class="tw-mb-4" v-if="type === 'pre-post'">
-                        <el-col :span="4">
+                        <el-col :span="8">
                             <label class="input-label">Complete for</label>
                         </el-col>
-                        <el-col :span="8">
+                        <el-col :span="6">
                             <el-select id="pre-post" value="" placeholder="Select">
                                     <el-option v-for="select in prePost" 
                                         :key="select.value"
@@ -63,21 +63,21 @@
                     </el-row>
 
                     <el-row class="tw-mb-4" :guttter="12">
-                        <el-col :span="4">
+                        <el-col :span="8">
                             <label class="input-label">Date Completed</label>
                         </el-col>
-                        <el-col :span="8">
+                        <el-col :span="6">
                             <el-date-picker 
                                 v-model="dateCompleted" 
                                 type="date" 
-                                placeholder="Pick a day" 
+                                placeholder="" 
                                 :picker-options="pickerOptions">
                             </el-date-picker>
                         </el-col>
                     </el-row>
-                <el-divider></el-divider>
+                <!-- el-divider></el-divider -->
 
-                <el-divider content-position="left"><span>Your Content</span></el-divider>
+                <el-divider content-position="left"><span>Custom Fields</span></el-divider>
 
                     <draggable 
                         class="dropArea" 
@@ -106,7 +106,7 @@
                         </el-row>
                 </draggable>
 
-                <el-divider></el-divider>
+                <!-- el-divider></el-divider -->
                 
             </el-card>
             </el-main>
@@ -233,14 +233,14 @@ export default {
     },
     methods: {
         removeField(fieldIndex) {
-            this.$confirm('are you sure you want to remove this field from your form?', 'Warning', {
+            this.$confirm('Are you sure you want to remove this field from your form?', 'Warning', {
                 confirmButtonText: 'Remove',
                 cancelButtonText: 'Nevermind',
                 type: 'warning'
             }).then(() => {
                 this.$message({
                     type: 'success',
-                    message: 'Field Successfully Removed'
+                    message: 'Field removed'
                 })
 
                 this.$store.commit('REMOVE_FIELD', fieldIndex);
@@ -248,7 +248,7 @@ export default {
             }).catch(() => {
                 this.$message({
                     type: 'info',
-                    message: "Alright, we'll keep it"
+                    message: "Field kept"
                 })
             })
         },
@@ -305,13 +305,13 @@ export default {
     margin-top: 15px;
   }
   .el-input {
-      font-size: 18px;
+      font-size: 16px;
   }
   .el-divider span {
-      font-size: 18px;
+      font-size: 16px;
   }
   .canvas-card {
-      font-size: 110%;
+      font-size: 100%;
   }
   .handle {
       position: relative;

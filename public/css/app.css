@@ -14578,6 +14578,12 @@ video {
   font-size: 1.125rem;
 }
 
+#formCreator .el-card__body div.tw-mb-4 div.el-col-8 ,
+.el-dialog__body div.tw-mb-2 label {
+  text-align: right;
+  padding-right: 15px;
+}
+
 .el-card__body, .el-card__body:hover {
   font-size: 1.15em;
 }
@@ -14588,6 +14594,21 @@ video {
 
 .el-menu-item.is-active {
   color: #FEC644;
+}
+
+.el-date-picker__header {
+  padding: 12px;
+  margin: 0 !important;
+}
+
+.el-date-table td span {
+  width: 34px;
+  height: 34px;
+  line-height: 35px;
+}
+
+.el-date-picker__header, .el-dialog__header {
+  background-color: #F6C060
 }
 
 .el-tabs__item.is-active, .el-tabs__item:hover {

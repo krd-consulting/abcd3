@@ -13191,7 +13191,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -13229,7 +13229,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -87033,39 +87033,21 @@ var render = function() {
               ? _c(
                   "span",
                   { staticClass: "tw-rounded tw-mr-2" },
-                  [
-                    _c("base-icon", { staticClass: "tw-text-xs" }, [
-                      _vm._v("calendar_today")
-                    ]),
-                    _vm._v(" "),
-                    _vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])
-                  ],
+                  [_vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])],
                   2
                 )
               : index == "contact_number"
               ? _c(
                   "span",
                   { staticClass: "tw-rounded tw-mr-2" },
-                  [
-                    _c("base-icon", { staticClass: "tw-text-xs" }, [
-                      _vm._v("phone")
-                    ]),
-                    _vm._v(" "),
-                    _vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])
-                  ],
+                  [_vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])],
                   2
                 )
               : index == "email_address"
               ? _c(
                   "span",
                   { staticClass: "tw-rounded tw-mr-2" },
-                  [
-                    _c("base-icon", { staticClass: "tw-text-xs" }, [
-                      _vm._v("email")
-                    ]),
-                    _vm._v(" "),
-                    _vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])
-                  ],
+                  [_vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])],
                   2
                 )
               : _vm._e()
@@ -88364,7 +88346,7 @@ var render = function() {
               },
               [
                 _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                  _vm._v("Good to go!")
+                  _vm._v("OK")
                 ])
               ]
             )
@@ -88769,7 +88751,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -89731,7 +89713,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -89981,7 +89963,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -90802,7 +90784,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -91280,7 +91262,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -92206,7 +92188,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -92435,7 +92417,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -92592,7 +92574,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -93760,7 +93742,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -95972,7 +95954,7 @@ var render = function() {
       _c(
         "router-link",
         {
-          staticClass: "tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer",
+          staticClass: "tw-flex tw-w-1/3 tw-items-top tw-cursor-pointer",
           attrs: { tag: "div", to: _vm.to }
         },
         [
@@ -118479,8 +118461,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /var/www/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /var/www/abcd/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })
