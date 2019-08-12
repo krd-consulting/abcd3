@@ -83063,7 +83063,7 @@ var render = function() {
       _c(
         "router-link",
         {
-          staticClass: "tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer",
+          staticClass: "tw-flex tw-w-1/3 tw-items-top tw-cursor-pointer",
           attrs: { tag: "div", to: _vm.to }
         },
         [
