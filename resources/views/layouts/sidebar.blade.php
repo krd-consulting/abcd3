@@ -9,7 +9,7 @@
         </sidebar-list-item>
         <base-submenu index="/records/">
             <template slot="title">
-                <base-icon class="tw-text-xl tw-mr-2">folder</base-icon>
+                <base-icon class="tw-text-xl tw-mr-2">face</base-icon>
                 <span slot="title" class="tw-text-white">Records</span>
             </template>
             @foreach($recordTypes as $type)
@@ -22,9 +22,15 @@
                 </sidebar-list-item>
             @endforeach
         </base-submenu>
+	
+	<sidebar-list-item index="/groups/" :route="{ path: '/groups' }">
+            <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
+            <span slot="title" class="tw-text-white">Groups</span>
+        </sidebar-list-item>
+	
         <base-submenu index="/programs/">
             <template slot="title">
-                <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
+                <base-icon class="tw-text-xl tw-mr-2">supervised_user_circle</base-icon>
                 <span slot="title" class="tw-text-white">Programs</span>
             </template>
             @foreach($programs as $program)
@@ -48,14 +54,10 @@
                 <li class="tw-py-4 tw-pl-8 tw-text-xs">You have no programs</li>
             @endif
         </base-submenu>
-        <sidebar-list-item index="/groups/" :route="{ path: '/groups' }">
-            <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
-            <span slot="title" class="tw-text-white">Groups</span>
-        </sidebar-list-item>
         @if(count($teams) > 1)
             <base-submenu index="/teams/">
                 <template slot="title">
-                    <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
+                    <base-icon class="tw-text-xl tw-mr-2">group_work</base-icon>
                     <span slot="title" class="tw-text-white">Teams</span>
                 </template>
                 @foreach($teams as $team)
@@ -70,7 +72,7 @@
             </base-submenu>
         @endif
         <sidebar-list-item index="/forms/" :route="{ path: '/forms' }">
-            <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
+            <base-icon class="tw-text-xl tw-mr-2">library_books</base-icon>
             <span slot="title" class="tw-text-white">Forms</span>
         </sidebar-list-item>
     </sidebar-list>

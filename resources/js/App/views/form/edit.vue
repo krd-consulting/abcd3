@@ -145,7 +145,7 @@
             <base-button 
                 class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none"
                 @click="submit">
-                <span class="tw-text-xs tw-align-middle">Good to go!</span>
+                <span class="tw-text-xs tw-align-middle">OK</span>
             </base-button>
         </div>
     </base-dialog>
