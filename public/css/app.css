@@ -14596,7 +14596,18 @@ video {
   color: #FEC644;
 }
 
-.el-dialog__header {
+.el-date-picker__header {
+  padding: 12px;
+  margin: 0 !important;
+}
+
+.el-date-table td span {
+  width: 34px;
+  height: 34px;
+  line-height: 35px;
+}
+
+.el-date-picker__header, .el-dialog__header {
   background-color: #F6C060
 }
 

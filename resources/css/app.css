@@ -44,8 +44,18 @@
     color: #FEC644;
 }
 
+.el-date-picker__header {
+    padding: 12px;
+    margin: 0 !important;
+}
 
-.el-dialog__header {
+.el-date-table td span {
+   width: 34px;
+   height: 34px;
+   line-height: 35px;
+}
+
+.el-date-picker__header, .el-dialog__header {
 	@apply tw-bg-orange-300
 }
 
