@@ -110,9 +110,9 @@
                 </el-row>
                 
                 <div class="tw-block tw-text-right tw-mr-1" v-for="field in form.field_layout" :key="field.id">
-
                     <component
                         class="tw-my-8"
+                        v-model="entryData[field.column_name]"
                         :field="field"
                         :is="field.type"
                         :key="field.id">

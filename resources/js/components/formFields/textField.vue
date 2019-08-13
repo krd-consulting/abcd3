@@ -8,20 +8,23 @@
                 <el-input id="text"
                     v-if="limit"
                     show-word-limit  
-                    v-model="value" 
+                    :value="value"
+                    @input="$emit('input', $event)" 
                     :required="isRequired"
                     :maxlength="max">
                 </el-input>
                 <el-input id="text"
                     v-else 
-                    v-model="value" 
+                    :value="value" 
+                    @input="$emit('input', $event)" 
                     :required="isRequired">
                 </el-input>
             </el-col>
             <el-col v-else :span="10">
                 <base-select
                     v-if="targetName == 'Record'"
-                    v-model="value"
+                    :value="value"
+                    @input="$emit('input', $event)"
                     filterable
                     remote
                     :remote-method="retrieveTargetItems"
@@ -39,7 +42,8 @@
 
                 <base-select
                     v-else-if="targetName == 'Form Field'"
-                    v-model="value"
+                    :value="value"
+                    @input="$emit('input', $event)"
                     @click.native="retrieveTargetItems"
                     filterable
                     remote
@@ -58,7 +62,8 @@
 
                 <base-select
                     v-else
-                    v-model="value"
+                    :value="value"
+                    @input="$emit('input', $event)"
                     @click.native="retrieveTargetItems"
                     filterable
                     remote
@@ -92,7 +97,6 @@
 
         data() {
             return {
-                value: '',
                 targetTypeRequest: new TargetTypeRequest({}),
                 targetType: {
                     name: ''
@@ -132,7 +136,8 @@
             field: {
                 type: Array | Object,
                 default: {}
-            }
+            },
+            value: '',
         },
         computed: {
             max: {

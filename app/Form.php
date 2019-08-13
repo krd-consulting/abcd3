@@ -58,7 +58,10 @@ class Form extends Model
 
             $fields->transform(function($item, $key) use (&$toBeRemoved, &$toBeFlattened) {
                 if($item['type'] != 'MatrixField'){
-                    $item['column_name'] = $this->generateFieldColumnName($this->fieldNumber++);
+                    $columnName = $this->generateFieldColumnName($this->fieldNumber++);
+
+                    $item['column_name'] = $columnName;
+                    $this->field_layout->set("$key.column_name", $columnName);
                     return $item;
                 }
 
@@ -89,6 +92,8 @@ class Form extends Model
                 $added = sizeOf($fields[$adjustedKey]) - 1;
                 $fields->splice($adjustedKey, 1, $fields[$adjustedKey]->toArray());
             }
+
+            $this->save();
 
             $this->fields()->createMany($fields->toArray());
 

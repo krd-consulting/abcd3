@@ -8609,6 +8609,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -8618,7 +8623,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      value: '',
       targetTypeRequest: new _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({}),
       targetType: {
         name: ''
@@ -8658,7 +8662,8 @@ __webpack_require__.r(__webpack_exports__);
     field: {
       type: Array | Object,
       "default": {}
-    }
+    },
+    value: ''
   },
   computed: {
     max: {
@@ -94235,25 +94240,26 @@ var render = function() {
                         attrs: {
                           id: "text",
                           "show-word-limit": "",
+                          value: _vm.value,
                           required: _vm.isRequired,
                           maxlength: _vm.max
                         },
-                        model: {
-                          value: _vm.value,
-                          callback: function($$v) {
-                            _vm.value = $$v
-                          },
-                          expression: "value"
+                        on: {
+                          input: function($event) {
+                            return _vm.$emit("input", $event)
+                          }
                         }
                       })
                     : _c("el-input", {
-                        attrs: { id: "text", required: _vm.isRequired },
-                        model: {
+                        attrs: {
+                          id: "text",
                           value: _vm.value,
-                          callback: function($$v) {
-                            _vm.value = $$v
-                          },
-                          expression: "value"
+                          required: _vm.isRequired
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.$emit("input", $event)
+                          }
                         }
                       })
                 ],
@@ -94268,6 +94274,7 @@ var render = function() {
                         "base-select",
                         {
                           attrs: {
+                            value: _vm.value,
                             filterable: "",
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
@@ -94275,16 +94282,12 @@ var render = function() {
                             placeholder: "Input " + _vm.targetName
                           },
                           on: {
+                            input: function($event) {
+                              return _vm.$emit("input", $event)
+                            },
                             change: function($event) {
                               return _vm.targetRequest.errors.clear("team_id")
                             }
-                          },
-                          model: {
-                            value: _vm.value,
-                            callback: function($$v) {
-                              _vm.value = $$v
-                            },
-                            expression: "value"
                           }
                         },
                         _vm._l(_vm.targetItems, function(item, index) {
@@ -94315,6 +94318,7 @@ var render = function() {
                         "base-select",
                         {
                           attrs: {
+                            value: _vm.value,
                             filterable: "",
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
@@ -94322,6 +94326,9 @@ var render = function() {
                             placeholder: "Input " + _vm.targetName
                           },
                           on: {
+                            input: function($event) {
+                              return _vm.$emit("input", $event)
+                            },
                             change: function($event) {
                               return _vm.targetRequest.errors.clear("team_id")
                             }
@@ -94330,13 +94337,6 @@ var render = function() {
                             click: function($event) {
                               return _vm.retrieveTargetItems($event)
                             }
-                          },
-                          model: {
-                            value: _vm.value,
-                            callback: function($$v) {
-                              _vm.value = $$v
-                            },
-                            expression: "value"
                           }
                         },
                         _vm._l(_vm.targetItems, function(item, index) {
@@ -94361,6 +94361,7 @@ var render = function() {
                         "base-select",
                         {
                           attrs: {
+                            value: _vm.value,
                             filterable: "",
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
@@ -94368,6 +94369,9 @@ var render = function() {
                             placeholder: "Input " + _vm.targetName
                           },
                           on: {
+                            input: function($event) {
+                              return _vm.$emit("input", $event)
+                            },
                             change: function($event) {
                               return _vm.targetRequest.errors.clear("team_id")
                             }
@@ -94376,13 +94380,6 @@ var render = function() {
                             click: function($event) {
                               return _vm.retrieveTargetItems($event)
                             }
-                          },
-                          model: {
-                            value: _vm.value,
-                            callback: function($$v) {
-                              _vm.value = $$v
-                            },
-                            expression: "value"
                           }
                         },
                         _vm._l(_vm.targetItems, function(item, index) {
