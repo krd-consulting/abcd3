@@ -3951,9 +3951,13 @@ __webpack_require__.r(__webpack_exports__);
     Search: _components_search__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
+    pathSuffix: {
+      type: String,
+      "default": ''
+    },
     loading: {
       type: Boolean,
-      deafult: false
+      "default": false
     },
     resourceIdentifier: {
       type: String,
@@ -5063,6 +5067,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -87329,7 +87334,7 @@ var render = function() {
                 {
                   key: index,
                   staticClass: "tw-py-4 tw-px-4 hover:tw-bg-blue-100",
-                  attrs: { to: item.path }
+                  attrs: { to: item.path + _vm.pathSuffix }
                 },
                 [
                   _c(
@@ -89210,6 +89215,7 @@ var render = function() {
             page: _vm.params.page,
             "per-page": _vm.params.perPage,
             "has-add": _vm.total > 0,
+            "path-suffix": "/new",
             "has-delete": "",
             "has-list-columns": false,
             hasSearch: false,
@@ -89257,7 +89263,7 @@ var render = function() {
                     {
                       staticClass:
                         "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none",
-                      attrs: { to: form.path + "/new" },
+                      attrs: { to: "" + form.path },
                       on: {
                         click: function($event) {
                           return _vm.$emit(
@@ -89271,7 +89277,11 @@ var render = function() {
                       _c(
                         "base-icon",
                         { staticClass: "tw-text-xs tw-mr-1 tw-align-middle" },
-                        [_vm._v("\n                    add\n                ")]
+                        [
+                          _vm._v(
+                            "\n                    remove_red_eye\n                "
+                          )
+                        ]
                       ),
                       _vm._v(" "),
                       _c(
@@ -89279,7 +89289,7 @@ var render = function() {
                         { staticClass: "tw-text-xs tw-align-middle" },
                         [
                           _vm._v(
-                            "\n                    Enter Data\n                "
+                            "\n                    View Data\n                "
                           )
                         ]
                       )

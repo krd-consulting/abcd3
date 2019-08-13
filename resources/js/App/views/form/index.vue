@@ -10,6 +10,7 @@
             :page.sync="params.page"
             :per-page="params.perPage"
             :has-add="total > 0"
+            path-suffix="/new"
             has-delete
             :has-list-columns="false"
             :hasSearch="false"
@@ -53,14 +54,14 @@
             </template>
 
             <template v-slot:options-edit-button="{ item:form }">
-                <router-link :to="`${form.path}/new`"
+                <router-link :to="`${form.path}`"
                     class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none"
                     @click="$emit('edit', item[resourceIdentifier])">
                     <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
-                        add
+                        remove_red_eye
                     </base-icon>
                     <span class="tw-text-xs tw-align-middle">
-                        Enter Data
+                        View Data
                     </span>
                 </router-link>
             </template>

@@ -76,7 +76,7 @@
                 <list-item
                     v-for="(item, index) in items"
                     :key="index" class="tw-py-4 tw-px-4 hover:tw-bg-blue-100"
-                    :to="item.path">
+                    :to="item.path + pathSuffix">
 
                     <template slot="image">
                         <slot name="list-item-image" :item="item"></slot>
@@ -172,9 +172,14 @@
         },
 
         props: {
+            pathSuffix: {
+                type: String,
+                default: ''
+            },
+
             loading: {
                 type: Boolean,
-                deafult: false
+                default: false
             },
 
             resourceIdentifier: {

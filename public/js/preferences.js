@@ -3661,9 +3661,13 @@ __webpack_require__.r(__webpack_exports__);
     Search: _components_search__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
+    pathSuffix: {
+      type: String,
+      "default": ''
+    },
     loading: {
       type: Boolean,
-      deafult: false
+      "default": false
     },
     resourceIdentifier: {
       type: String,
@@ -80962,7 +80966,7 @@ var render = function() {
                 {
                   key: index,
                   staticClass: "tw-py-4 tw-px-4 hover:tw-bg-blue-100",
-                  attrs: { to: item.path }
+                  attrs: { to: item.path + _vm.pathSuffix }
                 },
                 [
                   _c(
