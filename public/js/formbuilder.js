@@ -5626,7 +5626,7 @@ __webpack_require__.r(__webpack_exports__);
         rules: {
           title: [{
             required: true,
-            message: 'Please enter question title',
+            message: 'Please enter question or title',
             trigger: 'blur'
           }]
         }
@@ -5645,9 +5645,20 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    save: function save() {
-      this.setChoices();
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.setChoices();
+
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     }
   }
 });
@@ -5747,8 +5758,18 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    save: function save() {
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     }
   }
 });
@@ -5826,9 +5847,20 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    save: function save() {
-      this.setChoices();
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.setChoices();
+
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     }
   }
 });
@@ -5896,8 +5928,18 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    save: function save() {
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     }
   }
 });
@@ -6013,10 +6055,22 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    save: function save() {
-      this.setQuestions();
-      this.setChoices();
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.setQuestions();
+
+          _this.setChoices();
+
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     }
   }
 });
@@ -6092,8 +6146,18 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    save: function save() {
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     }
   }
 });
@@ -6177,9 +6241,20 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     },
-    save: function save() {
-      this.setChoices();
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.setChoices();
+
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     }
   }
 });
@@ -6319,8 +6394,18 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    save: function save() {
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     }
   }
 });
@@ -6521,32 +6606,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    save: function save() {
-      this.fieldData['reference_target_type_id'] = this.target_type_id;
-      this.fieldData['reference_target_id'] = this.target_id;
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.fieldData['reference_target_type_id'] = _this.target_type_id;
+          _this.fieldData['reference_target_id'] = _this.target_id;
+
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     },
     retrieveTargetTypes: function retrieveTargetTypes() {
-      var _this = this;
+      var _this2 = this;
 
       var request = new _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
       request.retrieve().then(function (response) {
-        _this.targetTypes = response.data;
+        _this2.targetTypes = response.data;
       });
     },
     retrieveForms: function retrieveForms(keywords) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.formParams.search = keywords;
       this.formRequest.setFields({
         params: _objectSpread({}, this.formParams)
       });
       this.formRequest.retrieve().then(function (response) {
-        _this2.forms = response.data;
+        _this3.forms = response.data;
       });
     },
     retrieveFields: function retrieveFields(keywords) {
-      var _this3 = this;
+      var _this4 = this;
 
       this.fieldParams.search = keywords;
       console.log('kini');
@@ -6554,7 +6650,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         params: _objectSpread({}, this.fieldParams)
       });
       this.fieldRequest.retrieve(this.form_id).then(function (response) {
-        _this3.fields = response.data;
+        _this4.fields = response.data;
       });
       ;
     }
@@ -6608,15 +6704,15 @@ __webpack_require__.r(__webpack_exports__);
       fieldData: {
         type: 'TimeField',
         name: 'time_picker',
-        label: '',
+        title: '',
         settings: {
           required: false,
           exact_time: false
         },
         rules: {
-          label: [{
+          title: [{
             required: true,
-            message: 'Please input Question or Title',
+            message: 'Please input question title',
             trigger: 'blur'
           }]
         }
@@ -6627,8 +6723,18 @@ __webpack_require__.r(__webpack_exports__);
     inputData: Object
   },
   methods: {
-    save: function save() {
-      this.$emit('save', this.fieldData);
+    save: function save(formName) {
+      var _this = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          _this.$emit('save', _this.fieldData);
+        } else {
+          _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+
+          return false;
+        }
+      });
     }
   }
 });
@@ -6927,13 +7033,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submit: function submit() {
+      var _this = this;
+
       this.$message({
         type: 'success',
         message: 'Build Successful'
       }); //  redirect to forms
 
       this.$store.dispatch('submitForm').then(function (response) {// return Promise('') --> Validate whether or not the form is good
-      })["catch"](function (error) {// display error saying some data is incompatable
+      })["catch"](function () {
+        _this.$message({
+          type: 'error',
+          message: 'Oops! Something went wrong.'
+        });
       });
       this.visible = false;
       window.location.href = '/forms/';
@@ -90181,7 +90293,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )
@@ -90385,7 +90501,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )
@@ -90494,7 +90614,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )
@@ -90602,7 +90726,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )
@@ -90773,7 +90901,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )
@@ -90918,7 +91050,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )
@@ -91048,7 +91184,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )
@@ -91275,7 +91415,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )
@@ -91545,7 +91689,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )
@@ -91603,7 +91751,7 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "label" } },
+            { attrs: { label: "Question/Title", prop: "title" } },
             [
               _c("el-input", {
                 model: {
@@ -91648,7 +91796,11 @@ var render = function() {
                 {
                   staticClass: "tw-w-48",
                   attrs: { type: "success" },
-                  on: { click: _vm.save }
+                  on: {
+                    click: function($event) {
+                      return _vm.save("fieldData")
+                    }
+                  }
                 },
                 [_vm._v("Add it!")]
               )

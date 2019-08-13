@@ -2,7 +2,7 @@
     <div id="timePicker">
        <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
             
-            <el-form-item label="Question/Title" prop="label">
+            <el-form-item label="Question/Title" prop="title">
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
 
@@ -17,7 +17,7 @@
             </el-form-item>-->
 
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
+                <el-button type="success" @click="save('fieldData')" class="tw-w-48">Add it!</el-button>
             </el-form-item>
 
        </el-form>
@@ -32,17 +32,15 @@ export default {
             fieldData: {
                 type: 'TimeField',
                 name: 'time_picker',
-                label: '',
+                title: '',
                 settings: {
                     required: false,
                     exact_time: false
                 },
                 rules: {
-                    label: [{   
-                        required: true, 
-                        message: 'Please input Question or Title', 
-                        trigger: 'blur' 
-                    }]
+                    title: [
+                        { required: true, message: 'Please input question title', trigger: 'blur' }
+                    ]
                 }
             },
         }
@@ -51,8 +49,15 @@ export default {
         inputData: Object,
     },
     methods: {
-        save() {
-            this.$emit('save', this.fieldData);
+        save(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.$emit('save', this.fieldData);
+                } else {
+                    this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+                    return false;
+                }
+            })
         },
     }
 }

@@ -44,7 +44,7 @@
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
+                <el-button type="success" @click="save('fieldData')" class="tw-w-48">Add it!</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -101,12 +101,18 @@ export default {
             }
         },
 
-        save() {
-            this.setQuestions();
-            this.setChoices();
-
-            this.$emit('save', this.fieldData);
-        }
+        save(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.setQuestions();
+                    this.setChoices();
+                    this.$emit('save', this.fieldData);
+                } else {
+                    this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+                    return false;
+                }
+            })
+        },
     }
 }
 </script>

@@ -71,8 +71,11 @@ export default {
                 
                 // return Promise('') --> Validate whether or not the form is good
             })
-            .catch((error) => {
-                // display error saying some data is incompatable
+            .catch(() => {
+                this.$message({
+                    type: 'error',
+                    message: 'Oops! Something went wrong.'
+                });
             });
             this.visible = false;
             window.location.href = '/forms/';

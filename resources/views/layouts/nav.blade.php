@@ -6,7 +6,8 @@
             </base-button>
         @endif
         <a href="/" class="tw-text-3xl tw-font-bold tw-text-white tw-align-middle tw-inline-block">
-            ABCD
+            {{-- ABCD --}}
+        <img src="{{ url('/images/abcd-logo.png') }}" alt="ABCD" class="tw-h-12">
         </a>
     </div>
     <div class="tw-flex tw-flex-1 tw-justify-between">
