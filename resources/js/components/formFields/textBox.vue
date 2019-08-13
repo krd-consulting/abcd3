@@ -2,7 +2,7 @@
     <div id="textBox" class="tw-my-8">
         <el-row>
             <el-col :span="6">
-                <label for="textArea" class="inputLabel">{{ field.title }}</label>
+                <label for="textArea" class="tw-block tw-text-right tw-mr-1">{{ field.title }}</label>
             </el-col>
 
             <el-col :span="10">
@@ -12,14 +12,14 @@
                     :autosize="{ minRows: 3, maxRows: 5}"
                     :maxlength="max" 
                     show-word-limit 
-                    placeholder="Your text here" 
+                    placeholder=" " 
                     v-model="value">
                 </el-input>
                 <el-input id="textArea"  
                     type="textarea" 
                     v-else
                     :autosize="{ minRows: 3, maxRows: 6}" 
-                    placeholder="Your text here" 
+                    placeholder=" " 
                     v-model="value">
                 </el-input>
             </el-col>

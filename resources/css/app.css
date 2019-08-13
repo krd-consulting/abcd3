@@ -24,18 +24,78 @@
 
 @import url('https://rsms.me/inter/inter-ui.css');
 
+#formCreator .el-card__body div.tw-mb-4 div.el-col-8 ,
+.el-dialog__body div.tw-mb-2 label {
+   text-align: right;
+   padding-right: 15px;
+}
+
+
+
 .el-card__body, .el-card__body:hover {
     font-size: 1.15em;
 }
 
+.el-menu-item:hover {
+    color: #FBE4BB;
+}
+
+.el-menu-item.is-active {
+    color: #FEC644;
+}
+
+.el-date-picker__header {
+    padding: 12px;
+    margin: 0 !important;
+}
+
+.el-date-table td span {
+   width: 34px;
+   height: 34px;
+   line-height: 35px;
+}
+
+.el-date-picker__header, .el-dialog__header {
+	@apply tw-bg-orange-300
+}
+
+.el-tabs__item.is-active, .el-tabs__item:hover {
+    /* color: #F2F5EB !important; */
+    color: #FBE4BB !important;
+   
+}
+.el-tabs__active-bar {
+    /* background-color: #7a972b !important; */
+    background-color: #f19d06 !important;
+}
+
 .el-submenu__title i, .el-menu-item i {
     /* color: #Fff; */
-    color: #FEDF97;
+    /* color: #F6C060; */
+    color: #FEC644;
+    /* color: #AABC78; */
+}
+
+.el-switch__label * {
+    font-size: 16px !important;
+}
+
+.el-radio__label, .el-checkbox__label{
+    font-size: 18px !important;
+}
+
+.el-dialog__header {
+    background-color: #2d607d !important;
+    color: white !important;
 }
 
 .el-button+.el-button {
     @apply
         tw-m-0;
+}
+
+.el-date-table th {
+    font-size: 14px !important;
 }
 
 .el-dialog {
@@ -101,6 +161,9 @@ a:hover {
     width: 276px;
     
 }
+.main-logo-container {
+    margin-left: 10px;
+}
 
 .main-nav {
     @apply
@@ -114,6 +177,8 @@ a:hover {
         tw-z-50;
     /* background-color: #428FBC; 
         tw-border-b*/
+        background: rgb(102,139,160);
+        background: linear-gradient(90deg, rgba(102,139,160,1) 20%, rgba(37,79,103,1) 88%);
 }
 
 .main-sidebar-menu {
@@ -121,9 +186,9 @@ a:hover {
         tw-sticky;
     top: 80px;
     /* background-color: #2D607D; */
-    background-color: #254F67;
+    background-color: #668BA0;
     /* background-color: #244E66; */
-    height: 885px;
+    height: 888px;
 }
 
 .main-sidebar-menu .el-menu-item,
@@ -131,7 +196,7 @@ a:hover {
     @apply
         tw-text-base;
     /* background-color: #2D607D; */
-    background-color: #254F67;
+    background-color: #668BA0;
     /* background-color: #244E66; */
 }
 

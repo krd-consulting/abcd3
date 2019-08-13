@@ -26,6 +26,13 @@ const app = new Vue({
     el: '#app',
     router,
     store,
+    data: {
+        collapseSidebar: true,
+        loading: false,
+        initialize: { 
+            active: true 
+        }
+    },
     components: {
     	Initialize
     },
@@ -60,14 +67,6 @@ const app = new Vue({
             get() { return this.$store.state.target },
             set(target) { this.$store.commit('SET_TARGET', target) }, 
         },
-    },
-
-    data: {
-        collapseSidebar: false,
-        initialize: {
-            active: true
-        },
-        loading: false
     },
 
     methods: {

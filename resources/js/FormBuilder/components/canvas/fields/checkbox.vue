@@ -1,5 +1,8 @@
 <template>
   <div id="checkbox">
+
+        <slot></slot>
+
       <el-col :span="8">
           <label class="inputLabel">
             <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
@@ -19,8 +22,9 @@
                 :label="item.value">
                     <editable-text 
                         class="tw-cursor-pointer mouseOver"
-                        v-model="item.value"
-                        @input="updateChoiceValue($event, index)">
+                        :value="item.value"
+                        @input="updateChoiceValue($event, index)"
+                        @edit="tempValue(item.value)">
                             {{ item.value }}
                     </editable-text>
             </el-checkbox>
@@ -32,11 +36,17 @@
             </el-button>
         </el-checkbox-group>
 
+        <el-alert
+            v-if="!isUnique"
+            title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            type="error">
+        </el-alert>
+
         <el-switch 
             v-model="required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right tw-mr-48 button-top">
+            class="tw-float-right switch-position">
         </el-switch>
 
         <form @submit.prevent="addItem" class="tw-inline-block tw-my-4">
@@ -50,10 +60,6 @@
                 </el-col>
             </el-row>
         </form>
-        
-        <div class="footer">
-            <slot></slot>
-        </div>
 
   </div>
 </template>
@@ -65,7 +71,9 @@ export default {
     data() {
         return {
             nextItem: 0,
-            itemText: ''
+            itemText: '',
+            isUnique: true,
+            temp: ''
         }
     },
     components: {
@@ -75,7 +83,7 @@ export default {
         fieldData: {
             type: Array | Object,
             default: {}
-        }
+        },
     },
     computed: {
 
@@ -99,6 +107,7 @@ export default {
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.choices = choices;
                 this.field = fieldCopy;
+
             }
         },
 
@@ -108,7 +117,6 @@ export default {
                 const fieldValue = _.clone(this.field);
                 fieldValue.choices.value = value;
                 this.field = fieldValue;
-                // this.$emit('updateChoices', field);
             }
         },
 
@@ -123,8 +131,7 @@ export default {
     },
     methods: {
         getCheckboxItems() {
-            var i;
-            for(i= 0; i < this.field.settings.checkboxNum; i++) {
+            for(let i = 0; i < this.field.settings.checkboxNum; i++) {
                 this.loadItem();
             }
         },
@@ -132,14 +139,22 @@ export default {
         loadItem() {
             this.choices.push({
                 id: this.nextItem++, 
-                value: 'item ' + this.nextItem
+                value: 'Choice ' + this.nextItem
             })
             this.$store.commit('UPDATE_FIELD', this.field)
-            
+            // console.log(this.choices)
         },
 
         addItem() {
             const choicesCopy = _.clone(this.choices);
+
+            for(var i = 0; i < this.choices.length; i++) {
+                if(this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
+
+                    this.itemText = ''
+                    return this.isUnique = false;
+                }
+            }
 
             choicesCopy.push({
                 id: this.nextItem++, value: this.itemText
@@ -147,6 +162,7 @@ export default {
 
             this.choices = choicesCopy;
             this.itemText = ''
+            this.isUnique = true;
         },
         
         removeChoice(item) {
@@ -160,13 +176,26 @@ export default {
             this.$forceUpdate();
         },
 
+        tempValue(value) {
+            this.temp = value;
+        },
+
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
+            
+            for(var i = 0; i < this.field.choices.length; i++) {
+                if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+
+                    this.field.choices[index].value = this.temp;
+
+                    return this.isUnique = false;
+                }
+            }
+
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
-        }
-        
-    }
+        } ,
+    },
 }
 </script>
 
@@ -181,14 +210,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button-top {
+.switch-position {
     position: absolute;
-    top: 30px;;
-    right: 10px;
-}
-.footer{
-    position: absolute;
-    bottom: 0;
+    bottom: 20px;;
     right: 10px;
 }
 </style>

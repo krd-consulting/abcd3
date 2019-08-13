@@ -18,23 +18,27 @@
                                 {{ description }}
                         </editable-text>
 
-                        <div v-if="!description">
-                            <el-input v-model="description" placeholder="This field is for subtext"></el-input>
-                        </div>
+                        <!-- div v-if="!description">
+                            <el-input v-model="description" placeholder="Please enter an optional description for this form"></el-input>
+                        </div -->
                     </el-header>
 
                 <el-divider></el-divider>
-                        
-                    <el-row :gutter="10">
-                        <el-col :span="10">
-                            <span class="input-label"> {{ targetName }} Name</span>
-                            <el-input class="inputField"></el-input>
+                    
+                    <el-row :gutter="12" class="tw-mb-4">
+                        <el-col :span="8">
+                            <label for="name" class="input-label tw-mt-4"> {{ targetName }} Name</label>
+                        </el-col>  
+                        <el-col :span="6">
+                            <el-input id="name" class="inputField"></el-input>
                         </el-col>
                     </el-row>
 
-                    <el-row>    
-                        <el-col :span="6">
-                            <span class="input-label">Team</span><br>
+                    <el-row :gutter="12" class="tw-mb-4">    
+                            <el-col :span="8">
+                                <label class="input-label">Team</label>
+                            </el-col>
+                            <el-col :span="6">
                             <el-select value="" placeholder="Select">
                                 <el-option v-for="team in teams" :key="team.value"
                                     :label="team.label" :value="team.value">
@@ -43,9 +47,11 @@
                         </el-col>
                     </el-row>
 
-                    <el-row v-if="type === 'pre-post'">
+                    <el-row :gutter="12" class="tw-mb-4" v-if="type === 'pre-post'">
+                        <el-col :span="8">
+                            <label class="input-label">Complete for</label>
+                        </el-col>
                         <el-col :span="6">
-                            <span class="input-label">Complete for</span><br>
                             <el-select id="pre-post" value="" placeholder="Select">
                                     <el-option v-for="select in prePost" 
                                         :key="select.value"
@@ -56,16 +62,22 @@
                         </el-col>
                     </el-row>
 
-                    <el-row :guttter="10">
+                    <el-row class="tw-mb-4" :guttter="12">
+                        <el-col :span="8">
+                            <label class="input-label">Date Completed</label>
+                        </el-col>
                         <el-col :span="6">
-                            <span class="input-label">Date Completed</span><br>
-                            <el-date-picker v-model="dateCompleted" type="date" placeholder="Pick a day" :picker-options="pickerOptions">
+                            <el-date-picker 
+                                v-model="dateCompleted" 
+                                type="date" 
+                                placeholder="" 
+                                :picker-options="pickerOptions">
                             </el-date-picker>
                         </el-col>
                     </el-row>
-                <el-divider></el-divider>
+                <!-- el-divider></el-divider -->
 
-                <el-divider content-position="left"><span>Your Content</span></el-divider>
+                <el-divider content-position="left"><span>Custom Fields</span></el-divider>
 
                     <draggable 
                         class="dropArea" 
@@ -73,17 +85,19 @@
                         handle=".handle">
                             <el-row v-for="(field, index) in fields" type="flex" :gutter="2" :key="index">
                             <el-col class="float-left" :span="24">
-                                <el-card class="cursor-move" body-style="padding: 10px;" shadow="hover">
-                                    <el-button class="handle tw-float-right" size="mini" icon="el-icon-rank">Drag Field</el-button>
+                                <el-card class="cursor-move tw-my-2" body-style="padding: 5px;" shadow="hover">
+                                    <el-tooltip content="Change the order of your fields by clicking this button and dragging to a new position within your form">
+                                        <el-button class="handle tw-float-left tw-mt-2 tw-mr-2" icon="el-icon-rank"></el-button>
+                                    </el-tooltip>
                                 <component 
                                     :is="field.type" 
                                     :fieldData="field"
-                                    @update="updateField($event, index)">
-                                        <el-button type="text" 
+                                    @update="updateField($event, index)">   
+                                        <el-button
                                             @click="removeField(index)" 
                                             icon="el-icon-close" 
-                                            class="tw-float-right hover:tw-text-red-600">
-                                                Remove
+                                            type="text"
+                                            class="tw-float-right tw-relative tw-top-0 tw-right-0 tw-p-2 tw-z-10 hover:tw-text-red-600">
                                         </el-button>
                                 </component>
                                     
@@ -92,7 +106,7 @@
                         </el-row>
                 </draggable>
 
-                <el-divider></el-divider>
+                <!-- el-divider></el-divider -->
                 
             </el-card>
             </el-main>
@@ -219,14 +233,14 @@ export default {
     },
     methods: {
         removeField(fieldIndex) {
-            this.$confirm('are you sure you want to remove this field from your form?', 'Warning', {
+            this.$confirm('Are you sure you want to remove this field from your form?', 'Warning', {
                 confirmButtonText: 'Remove',
                 cancelButtonText: 'Nevermind',
                 type: 'warning'
             }).then(() => {
                 this.$message({
                     type: 'success',
-                    message: 'Field Successfully Removed'
+                    message: 'Field removed'
                 })
 
                 this.$store.commit('REMOVE_FIELD', fieldIndex);
@@ -234,7 +248,7 @@ export default {
             }).catch(() => {
                 this.$message({
                     type: 'info',
-                    message: "Alright, we'll keep it"
+                    message: "Field kept"
                 })
             })
         },
@@ -275,7 +289,7 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
-    max-height: 900px;
+    max-height: 745px;
     overflow-y: scroll;
 }
 .mouseOver:hover {
@@ -283,22 +297,21 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.el-row {
+/* .el-row {
     margin: 5px;
-  }
+  } */
   .el-col {
     border-radius: 4px;
-    min-width: 300px;
     margin-top: 15px;
   }
   .el-input {
-      font-size: 18px;
+      font-size: 16px;
   }
   .el-divider span {
-      font-size: 18px;
+      font-size: 16px;
   }
   .canvas-card {
-      font-size: 110%;
+      font-size: 100%;
   }
   .handle {
       position: relative;

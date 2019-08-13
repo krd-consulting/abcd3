@@ -4593,6 +4593,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4734,7 +4737,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_formFields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @/components/formFields/sectionDivider.vue */ "./resources/js/components/formFields/sectionDivider.vue");
 /* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
 /* harmony import */ var _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/api/FormEntryRequest */ "./resources/js/api/FormEntryRequest.js");
-/* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
+/* harmony import */ var _api_TeamRequest__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/api/TeamRequest */ "./resources/js/api/TeamRequest.js");
+/* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4856,6 +4864,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -4875,6 +4896,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_11__["default"]({}),
       entryRequest: new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"]({}),
+      teamRequest: new _api_TeamRequest__WEBPACK_IMPORTED_MODULE_13__["default"](),
       form: {
         target_type: {
           name: null
@@ -4883,6 +4905,14 @@ __webpack_require__.r(__webpack_exports__);
           name: null
         }
       },
+      teamRequestParams: {
+        ascending: true,
+        sortBy: 'name',
+        page: 1,
+        perPage: 10,
+        search: ''
+      },
+      teams: [],
       targetRequest: {},
       targetParams: {
         ascending: true,
@@ -4904,7 +4934,6 @@ __webpack_require__.r(__webpack_exports__);
       },
       value: '',
       inputName: '',
-      teams: [],
       dateCompleted: '',
       prePost: [{
         id: 0,
@@ -4940,7 +4969,7 @@ __webpack_require__.r(__webpack_exports__);
     TimeField: _components_formFields_timePicker_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
     FileField: _components_formFields_upload_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
     SectionDivider: _components_formFields_sectionDivider_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
-    RecordPrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_13__["default"]
+    RecordPrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_14__["default"]
   },
   methods: {
     getPrimaryData: function getPrimaryData(record, fields) {
@@ -4954,52 +4983,66 @@ __webpack_require__.r(__webpack_exports__);
       });
       return data.trim();
     },
-    retrieve: function retrieve() {
+    retrieveTeams: function retrieveTeams(keywords) {
       var _this = this;
+
+      this.teamRequestParams.search = keywords;
+      this.teamRequest.setFields({
+        params: _objectSpread({}, this.teamRequestParams)
+      });
+      var getTeams = this.teamRequest.retrieve();
+      getTeams.then(function (response) {
+        _this.teams = response.data;
+      });
+      return getTeams;
+    },
+    retrieve: function retrieve() {
+      var _this2 = this;
 
       var form = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$route.params.form;
       this.request.show(form).then(function (response) {
-        _this.form = response.data;
+        _this2.form = response.data;
       });
     },
     retrieveFormTargetItems: function retrieveFormTargetItems(keywords, callback) {
-      var _this2 = this;
+      var _this3 = this;
 
       __webpack_require__("./resources/js/api lazy recursive ^\\.\\/.*Request$")("./".concat(this.targetName, "Request")).then(function (foo) {
-        _this2.targetRequest = new foo["default"]({});
-        _this2.targetParams.search = keywords;
-        var params = _this2.targetParams;
+        _this3.targetRequest = new foo["default"]({});
+        _this3.targetParams.search = keywords;
+        var params = _this3.targetParams;
 
-        if (_this2.targetName == 'Record') {
-          _this2.recordParams.search = keywords;
-          params = _this2.recordParams;
+        if (_this3.targetName == 'Record') {
+          _this3.recordParams.search = keywords;
+          params = _this3.recordParams;
         }
 
-        _this2.targetRequest.setFields({
+        _this3.targetRequest.setFields({
           params: params
         });
 
-        var args = _this2.form.target != null ? _this2.form.target.name : null;
+        var args = _this3.form.target != null ? _this3.form.target.name : null;
 
-        _this2.targetRequest.retrieve(args).then(function (response) {
-          _this2.targetItems = response.data;
+        _this3.targetRequest.retrieve(args).then(function (response) {
+          _this3.targetItems = response.data;
         });
       });
     },
     submit: function submit() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.form);
       this.entryRequest.store().then(function (response) {
-        _this3.$emit('store', response.data);
+        _this4.$emit('store', response.data);
 
-        _this3.close();
+        _this4.close();
       })["catch"](function (error) {//
       });
     }
   },
   created: function created() {
     this.retrieve();
+    this.retrieveTeams();
   }
 });
 
@@ -13151,7 +13194,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -13170,7 +13213,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#matrix-table[data-v-04d13538] {\n  width: 100%;\n  /* margin-top: 20px;  */\n  z-index: 0;\n}\n#matrix-table table[data-v-04d13538], td[data-v-04d13538] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-04d13538]:hover {\n  background: #9ebdef;\n}\n", ""]);
+exports.push([module.i, "#matrix-table[data-v-04d13538] {\n  /* width: 100%;  */\n  /* margin-top: 20px;  */\n  z-index: 0;\n}\n#matrix-table table[data-v-04d13538], td[data-v-04d13538] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-04d13538]:hover {\n  background: #9ebdef;\n}\n", ""]);
 
 // exports
 
@@ -13189,7 +13232,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -64274,7 +64317,7 @@ module.exports = isSymbol;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Copyright JS Foundation and other contributors <https://js.foundation/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -64285,7 +64328,7 @@ module.exports = isSymbol;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -66944,10 +66987,16 @@ module.exports = isSymbol;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-      } else if (isMap(value)) {
+
+        return result;
+      }
+
+      if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
+
+        return result;
       }
 
       var keysFunc = isFull
@@ -67871,8 +67920,8 @@ module.exports = isSymbol;
         return;
       }
       baseFor(source, function(srcValue, key) {
-        stack || (stack = new Stack);
         if (isObject(srcValue)) {
+          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -69689,7 +69738,7 @@ module.exports = isSymbol;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision && nativeIsFinite(number)) {
+        if (precision) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -70872,7 +70921,7 @@ module.exports = isSymbol;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
+     * Gets the value at `key`, unless `key` is "__proto__".
      *
      * @private
      * @param {Object} object The object to query.
@@ -70880,10 +70929,6 @@ module.exports = isSymbol;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
-      if (key === 'constructor' && typeof object[key] === 'function') {
-        return;
-      }
-
       if (key == '__proto__') {
         return;
       }
@@ -74684,7 +74729,6 @@ module.exports = isSymbol;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
-            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -79071,12 +79115,9 @@ module.exports = isSymbol;
       , 'g');
 
       // Use a sourceURL for easier debugging.
-      // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+        ('sourceURL' in options
+          ? options.sourceURL
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -79109,9 +79150,7 @@ module.exports = isSymbol;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
-      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
+      var variable = options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -81316,11 +81355,10 @@ module.exports = isSymbol;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = lodashFunc.name + '';
-        if (!hasOwnProperty.call(realNames, key)) {
-          realNames[key] = [];
-        }
-        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
+        var key = (lodashFunc.name + ''),
+            names = realNames[key] || (realNames[key] = []);
+
+        names.push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -86998,39 +87036,21 @@ var render = function() {
               ? _c(
                   "span",
                   { staticClass: "tw-rounded tw-mr-2" },
-                  [
-                    _c("base-icon", { staticClass: "tw-text-xs" }, [
-                      _vm._v("calendar_today")
-                    ]),
-                    _vm._v(" "),
-                    _vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])
-                  ],
+                  [_vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])],
                   2
                 )
               : index == "contact_number"
               ? _c(
                   "span",
                   { staticClass: "tw-rounded tw-mr-2" },
-                  [
-                    _c("base-icon", { staticClass: "tw-text-xs" }, [
-                      _vm._v("phone")
-                    ]),
-                    _vm._v(" "),
-                    _vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])
-                  ],
+                  [_vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])],
                   2
                 )
               : index == "email_address"
               ? _c(
                   "span",
                   { staticClass: "tw-rounded tw-mr-2" },
-                  [
-                    _c("base-icon", { staticClass: "tw-text-xs" }, [
-                      _vm._v("email")
-                    ]),
-                    _vm._v(" "),
-                    _vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])
-                  ],
+                  [_vm._t("default", [_vm._v(_vm._s(_vm.record[index]))])],
                   2
                 )
               : _vm._e()
@@ -87725,7 +87745,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "tw-bg-gray-100" },
+        { staticClass: "tw-bg-orange-300" },
         [
           _vm._t("tabs", [
             _c("resource-profile-tabs", {
@@ -88329,7 +88349,7 @@ var render = function() {
               },
               [
                 _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                  _vm._v("Good to go!")
+                  _vm._v("OK")
                 ])
               ]
             )
@@ -88384,7 +88404,7 @@ var render = function() {
       _c("form", [
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5 tw-capitalize" }, [
+            _c("label", { staticClass: "tw-w-1/4 tw-capitalize" }, [
               _vm._v("\n                    Form Name\n                ")
             ]),
             _vm._v(" "),
@@ -88428,7 +88448,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5 tw-capitalize" }, [
+            _c("label", { staticClass: "tw-w-1/4 tw-capitalize" }, [
               _vm._v("\n                    Description\n                ")
             ]),
             _vm._v(" "),
@@ -88474,7 +88494,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5" }, [
+            _c("label", { staticClass: "tw-w-1/4" }, [
               _vm._v("\n                    Form Type\n                ")
             ]),
             _vm._v(" "),
@@ -88535,7 +88555,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5" }, [
+            _c("label", { staticClass: "tw-w-1/4" }, [
               _vm._v(
                 "\n                    This form is about\n                "
               )
@@ -88571,11 +88591,15 @@ var render = function() {
                         attrs: { label: type.name, value: type.target }
                       },
                       [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(type.name) +
-                            "\n                        "
-                        )
+                        type.name === "Program" || type.name === "Group"
+                          ? _c("span", [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(type.name) +
+                                  "s\n                            "
+                              )
+                            ])
+                          : _c("span", [_vm._v(_vm._s(type.name))])
                       ]
                     )
                   }),
@@ -88619,7 +88643,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/5" }, [
+            _c("label", { staticClass: "tw-w-1/4" }, [
               _vm._v(
                 "\n                    Who can see this form?\n                "
               )
@@ -88730,7 +88754,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -88827,7 +88851,7 @@ var render = function() {
                                 remote: "",
                                 "remote-method": _vm.retrieveFormTargetItems,
                                 name: "type",
-                                placeholder: "Input " + _vm.targetName
+                                placeholder: " "
                               },
                               on: {
                                 change: function($event) {
@@ -88873,7 +88897,7 @@ var render = function() {
                                 remote: "",
                                 "remote-method": _vm.retrieveFormTargetItems,
                                 name: "type",
-                                placeholder: "Input " + _vm.targetName
+                                placeholder: " "
                               },
                               on: {
                                 change: function($event) {
@@ -88938,13 +88962,43 @@ var render = function() {
                     { attrs: { span: 6 } },
                     [
                       _c(
-                        "el-select",
-                        { attrs: { value: "", placeholder: "Select" } },
-                        _vm._l(_vm.teams, function(team) {
-                          return _c("el-option", {
-                            key: team.value,
-                            attrs: { label: team.label, value: team.value }
-                          })
+                        "base-select",
+                        {
+                          attrs: {
+                            filterable: "",
+                            remote: "",
+                            "remote-method": _vm.retrieveTeams,
+                            name: "type",
+                            placeholder: " "
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.request.errors.clear("team_id")
+                            }
+                          },
+                          model: {
+                            value: _vm.teams.team_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.teams, "team_id", $$v)
+                            },
+                            expression: "teams.team_id"
+                          }
+                        },
+                        _vm._l(_vm.teams, function(team, index) {
+                          return _c(
+                            "el-option",
+                            {
+                              key: index,
+                              attrs: { label: team.name, value: team.id }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(team.name) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
                         }),
                         1
                       )
@@ -88978,7 +89032,7 @@ var render = function() {
                           _c(
                             "el-select",
                             {
-                              attrs: { id: "pre-post", placeholder: "Select" },
+                              attrs: { id: "pre-post", placeholder: " " },
                               model: {
                                 value: _vm.value,
                                 callback: function($$v) {
@@ -89029,7 +89083,7 @@ var render = function() {
                         attrs: {
                           id: "formDate",
                           type: "date",
-                          placeholder: "Pick a day",
+                          placeholder: " ",
                           "picker-options": _vm.pickerOptions
                         },
                         model: {
@@ -89662,7 +89716,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -89912,7 +89966,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -90733,7 +90787,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -91211,7 +91265,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -92137,7 +92191,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -92366,7 +92420,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -92523,7 +92577,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -93691,7 +93745,7 @@ var render = function() {
             },
             [
               _c("span", { staticClass: "tw-text-xs tw-align-middle" }, [
-                _vm._v("Good to go!")
+                _vm._v("OK")
               ])
             ]
           )
@@ -94782,7 +94836,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 5 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "check" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "check" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -94857,7 +94914,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "dateField" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "dateField" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -94871,7 +94931,7 @@ var render = function() {
                   id: "dateField",
                   type: _vm.dateType,
                   "picker-options": _vm.dateOptions,
-                  placeholder: _vm.datePlaceHolder,
+                  placeholder: " ",
                   "range-separator": _vm.rangeSeparator,
                   "start-placeholder": _vm.startDate,
                   "end-placeholder": _vm.endDate,
@@ -94928,7 +94988,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "dropdown" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "dropdown" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -94940,11 +95003,7 @@ var render = function() {
               _c(
                 "el-select",
                 {
-                  attrs: {
-                    id: "dropdown",
-                    filterable: "",
-                    placeholder: "select"
-                  },
+                  attrs: { id: "dropdown", filterable: "", placeholder: " " },
                   model: {
                     value: _vm.value,
                     callback: function($$v) {
@@ -95003,11 +95062,9 @@ var render = function() {
         "el-row",
         [
           _c("el-col", { attrs: { span: 24 } }, [
-            _c(
-              "label",
-              { staticClass: "inputLabel", attrs: { for: "matrix-table" } },
-              [_vm._v(_vm._s(_vm.field.title))]
-            ),
+            _c("label", { attrs: { for: "matrix-table" } }, [
+              _vm._v(_vm._s(_vm.field.title))
+            ]),
             _c("br"),
             _vm._v(" "),
             _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
@@ -95132,7 +95189,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "numfield" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "numfield" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -95204,7 +95264,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 5 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "radioGroup" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "radioGroup" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -95322,7 +95385,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "textArea" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "textArea" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -95339,7 +95405,7 @@ var render = function() {
                       autosize: { minRows: 3, maxRows: 5 },
                       maxlength: _vm.max,
                       "show-word-limit": "",
-                      placeholder: "Your text here"
+                      placeholder: " "
                     },
                     model: {
                       value: _vm.value,
@@ -95354,7 +95420,7 @@ var render = function() {
                       id: "textArea",
                       type: "textarea",
                       autosize: { minRows: 3, maxRows: 6 },
-                      placeholder: "Your text here"
+                      placeholder: " "
                     },
                     model: {
                       value: _vm.value,
@@ -95404,9 +95470,14 @@ var render = function() {
         "el-row",
         [
           _c("el-col", { attrs: { span: 6 } }, [
-            _c("label", { staticClass: "inputLabel", attrs: { for: "text" } }, [
-              _vm._v(_vm._s(_vm.field.title))
-            ])
+            _c(
+              "label",
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "text" }
+              },
+              [_vm._v(_vm._s(_vm.field.title))]
+            )
           ]),
           _vm._v(" "),
           _vm.field.reference_target_type_id == null
@@ -95456,7 +95527,7 @@ var render = function() {
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
                             name: "type",
-                            placeholder: "Input " + _vm.targetName
+                            placeholder: " "
                           },
                           on: {
                             change: function($event) {
@@ -95502,7 +95573,7 @@ var render = function() {
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
                             name: "type",
-                            placeholder: "Input " + _vm.targetName
+                            placeholder: " "
                           },
                           on: {
                             change: function($event) {
@@ -95582,7 +95653,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "time-picker" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "time-picker" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -95600,24 +95674,24 @@ var render = function() {
                         step: "00:15",
                         end: "24:45"
                       },
-                      placeholder: "Pick a time"
+                      placeholder: " "
                     },
                     model: {
-                      value: _vm.timeSelection,
+                      value: _vm.value,
                       callback: function($$v) {
-                        _vm.timeSelection = $$v
+                        _vm.value = $$v
                       },
-                      expression: "timeSelection"
+                      expression: "value"
                     }
                   })
                 : _c("el-time-picker", {
-                    attrs: { "arrow-control": "", placeholder: "Pick a time" },
+                    attrs: { "arrow-control": "", placeholder: " " },
                     model: {
-                      value: _vm.timeSelection,
+                      value: _vm.value,
                       callback: function($$v) {
-                        _vm.timeSelection = $$v
+                        _vm.value = $$v
                       },
-                      expression: "timeSelection"
+                      expression: "value"
                     }
                   })
             ],
@@ -95662,7 +95736,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel", attrs: { for: "dropdown" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "dropdown" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             ),
             _c("br"),
@@ -95741,10 +95818,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "base-input",
-    {
-      staticClass: "tw-w-full",
-      attrs: { placeholder: "Search for files, forms, etc." }
-    },
+    { staticClass: "tw-w-full", attrs: { placeholder: "System Search" } },
     [
       _c("i", {
         staticClass: "el-input__icon el-icon-search",
@@ -95883,7 +95957,7 @@ var render = function() {
       _c(
         "router-link",
         {
-          staticClass: "tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer",
+          staticClass: "tw-flex tw-w-1/3 tw-items-top tw-cursor-pointer",
           attrs: { tag: "div", to: _vm.to }
         },
         [
@@ -118448,8 +118522,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })

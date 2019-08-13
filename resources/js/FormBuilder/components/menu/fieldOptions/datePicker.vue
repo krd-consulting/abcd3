@@ -2,15 +2,24 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
             
-            <el-form-item label="Question/Title" prop="title">
+            <el-form-item prop="title">
+                <label>
+                    Question/Title
+                </label>
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
             
-            <el-form-item label="This field is">
+            <el-form-item>
+                <label>
+                    This field is
+                </label>
                 <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
             
-            <el-form-item label="Calendar Preferences">
+            <el-form-item>
+                <label>
+                    Calendar Preferences
+                </label>
                 <el-row>
                     <el-switch v-model="fieldData.settings.pastOnly" active-text="Past dates only"></el-switch>
                 </el-row>
@@ -29,7 +38,7 @@
             </el-form-item>
 
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
+                <el-button type="success" @click="save('fieldData')" class="tw-w-48">Add it!</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -72,9 +81,16 @@ export default {
         inputData: Object,
     },
     methods: {
-        save() {
-            this.$emit('save', this.fieldData);
-        }
+        save(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.$emit('save', this.fieldData);
+                } else {
+                    this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+                    return false;
+                }
+            })
+        },
     }
 }
 </script>

@@ -9,7 +9,7 @@
         <el-main>
             <el-row class="tw-mb-4">
                 <el-col :span="6">
-                    <label for="name" class="input-label tw-mt-4"> {{ target.name }} Name</label>
+                    <label for="name" class="tw-block tw-text-right tw-mr-1"> {{ target.name }} Name</label>
                 </el-col>  
                 <el-col :span="8">
                     <el-input id="name" class="inputField" v-model="inputName"></el-input>
@@ -18,20 +18,31 @@
                 
             <el-row class="tw-my-4">
                 <el-col :span="6">
-                    <label for="teamSelect" class="input-label">Team</label>
+                    <label for="teamSelect" class="tw-block tw-text-right tw-mr-1">Team</label>
                 </el-col>
                 <el-col :span="6">
-                    <el-select value="" placeholder="Select">
-                        <el-option v-for="team in teams" :key="team.value"
-                        :label="team.label" :value="team.value">
-                        </el-option>
-                    </el-select>
+                    <base-select
+                            v-model="teams.team_id"
+                            filterable
+                            remote
+                            :remote-method="retrieveTeams"
+                            name="type"
+                            placeholder=" "
+                            @change="request.errors.clear('team_id')">
+                            <el-option
+                                v-for="(team, index) in teams"
+                                :key="index"
+                                :label="team.name"
+                                :value="team.id">
+                                {{ team.name }}
+                            </el-option>
+                        </base-select>
                 </el-col>
             </el-row>
 
             <el-row class="tw-my-4" v-if="type === 'pre-post'">
                 <el-col :span="6">
-                    <label for="pre-post" class="input-label">Completed for</label>
+                    <label for="pre-post" class="tw-block tw-text-right tw-mr-1">Completed for</label>
                 </el-col>
                 <el-col :span="6">
                     <el-select id="pre-post" v-model="value" placeholder="Select">
@@ -46,7 +57,7 @@
 
             <el-row class="tw-my-4">
                 <el-col :span="6">
-                    <label for="formDate" class="input-label">Date Completed</label>
+                    <label for="formDate" class="tw-block tw-text-right tw-mr-1">Date Completed</label>
                 </el-col>
                 <el-col :span="8">
                     <el-date-picker 
@@ -94,12 +105,21 @@ import FileField from '@/components/formFields/upload.vue'
 import SectionDivider from '@/components/formFields/sectionDivider.vue'
 
 import { mapState } from 'vuex'
+import TeamRequest from '@/api/TeamRequest';
 
 export default {
     data: () => {
         return {
             value: '',
             inputName: '',
+            teamRequest: new TeamRequest(),
+                teamRequestParams: {
+                    ascending: true,
+                    sortBy: 'name',
+                    page: 1,
+                    perPage: 10,
+                    search: ''
+                },
             teams: [],
             dateCompleted: '',
             prePost: [
@@ -113,6 +133,27 @@ export default {
                 }
             }
         }
+    },
+    created() {
+        this.retrieveTeams();
+    },
+
+    methods: {
+        retrieveTeams(keywords) {
+            this.teamRequestParams.search = keywords;
+
+            this.teamRequest.setFields({
+                params: {...this.teamRequestParams }
+            });
+
+            let getTeams = this.teamRequest.retrieve();
+
+            getTeams.then(response => {
+                this.teams = response.data;
+            });
+
+            return getTeams;
+        },
     },
 
     components: {

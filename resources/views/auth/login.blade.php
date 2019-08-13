@@ -2,28 +2,39 @@
 
 @section('content')
 
-<div class="tw-bg-gray-100 tw-w-full tw-flex lg:tw-items-start lg:tw-pt-48 tw-h-screen">
+<div class="tw-bg-gray-100 tw-w-full tw-flex lg:tw-items-start lg:tw-pt-24 tw-h-screen">
     <login-form inline-template>
         <div 
-            class="lg:tw-container lg:tw-mx-auto lg:tw-w-3/5 tw-w-full tw-flex tw-flex-wrap tw-bg-white lg:tw-rounded-lg tw-shadow tw-border-t-8 tw-border-blue-500">
-            <div class="lg:tw-w-1/2 tw-w-full lg:tw-pt-12 tw-pt-64 tw-pb-16 tw-px-12" >
+            class="lg:tw-container lg:tw-mx-auto lg:tw-w-2/5 tw-w-full tw-flex tw-flex-wrap tw-bg-white lg:tw-rounded-lg tw-shadow tw-border-t-8 tw-border-blue-500">
+            <div class="tw-w-full lg:tw-pt-12 tw-pt-64 tw-pb-16 tw-px-12" >
                 <div v-if="!forgotPasswordActive">
-                    <h1 class="tw-text-3xl tw-mb-4 tw-font-bold tw-text-blue-600">{{ __('Welcome Back!') }}</h1>
+		    <center>
+			<img class="tw-w-1/2" src="/images/abcd-logo-large.jpg"></img><br>
+		    </center>
+			<!-- <h1 class="tw-text-3xl tw-mb-4 tw-font-bold tw-text-blue-600">{{ __('welcome') }}</h1> -->
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <base-input
-                            id="email"
-                            v-model="email"
-                            type="email"
-                            class="
-                                {{ $errors->has('email') ? ' is-invalid' : '' }}
-                                tw-mb-2 tw-w-full tw-text-base tw-py-2
-                            "
-                            name="email" value="{{ old('email') }}"
-                            placeholder="Email Address"
-                            autocomplete="off"
-                            required autofocus
-                        ></base-input>
+			<div class="tw-mb-2">
+                		<div class="tw-flex tw-items-center tw-w-full">
+                    			<label class="tw-w-1/4">
+                        			Login 
+                    			</label>
+                    			<div class="tw-w-3/4">
+                        			<base-input
+                            				id="email"
+                            				v-model="email"
+                            				type="email"
+                            				class="
+                                				{{ $errors->has('email') ? ' is-invalid' : '' }}
+                                				tw-mb-2 tw-w-full tw-text-base tw-py-2
+                            					"
+                            				name="email" value="{{ old('email') }}"
+                            				placeholder=""
+                            				autocomplete="off"
+                            				required autofocus
+                        			></base-input>
+					</div>
+                		</div>
 
                         @if ($errors->has('email'))
                             <span role="alert">
@@ -31,19 +42,27 @@
                             </span>
                         @endif
 
-                        <base-input
-                            id="password"
-                            v-model="password"
-                            type="password"
-                            class="
-                                {{ $errors->has('password') ? ' is-invalid' : '' }}
-                                tw-mb-2 tw-w-full tw-text-base tw-py-2
-                            "
-                            name="password"
-                            placeholder="Password"
-                            required
-                            show-password
-                        ></base-input>
+			<div class="tw-mb-2">
+                		<div class="tw-flex tw-items-center tw-w-full">
+                    			<label class="tw-w-1/4">
+                        			Password 
+                    			</label>
+                    			<div class="tw-w-3/4">
+                        			<base-input
+                            				id="password"
+                            				v-model="password"
+                            				type="password"
+                            				class="
+                            				        {{ $errors->has('password') ? ' is-invalid' : '' }}
+                            				        tw-mb-2 tw-w-full tw-text-base tw-py-2
+                            					"
+                            				name="password"
+                            				placeholder=""
+                            				required
+                            				show-password
+                        			></base-input>
+					</div>
+                		</div>
 
                         @if ($errors->has('password'))
                             <span role="alert">
@@ -122,27 +141,27 @@
                     </form>
                 </div>
             </div>
-            <div class="lg:tw-w-1/2 tw-w-full tw-pt-12 tw-pb-16 tw-px-12 tw-bg-blue-500-lightest lg:tw-block tw-hidden">
+            <!-- div class="lg:tw-w-1/2 tw-w-full tw-pt-12 tw-pb-16 tw-px-12 tw-bg-blue-500-lightest lg:tw-block tw-hidden">
                 <h2 class="tw-text-xl tw-mt-2">A Better Community Database</h2>
                 <ul class="tw-list-reset">
                     <li class="tw-mt-6 tw-font-semibold tw-text-blue-500-darker">
                         <base-icon class="tw-text-2xl tw-text-blue-500 tw-mr-2">check_circle</base-icon>
-                        A feature/description.
+                        A 
                     </li>
                     <li class="tw-mt-6 tw-font-semibold tw-text-blue-500-darker">
                         <base-icon class="tw-text-2xl tw-text-blue-500 tw-mr-2">check_circle</base-icon>
-                        B feature/description.
+                        Better
                     </li>
                     <li class="tw-mt-6 tw-font-semibold tw-text-blue-500-darker">
                         <base-icon class="tw-text-2xl tw-text-blue-500 tw-mr-2">check_circle</base-icon>
-                        C feature/description.
+                        Community
                     </li>
                     <li class="tw-mt-6 tw-font-semibold tw-text-blue-500-darker">
                         <base-icon class="tw-text-2xl tw-text-blue-500 tw-mr-2">check_circle</base-icon>
-                        D feature/description.
+                        Database
                     </li>
                 </ul>
-            </div>
+            </div -->
         </div>
     </login-form>
 </div>

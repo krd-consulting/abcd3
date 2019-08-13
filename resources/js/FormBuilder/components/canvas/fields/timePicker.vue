@@ -1,5 +1,7 @@
 <template>
     <div>
+        <slot></slot>
+        
         <el-row>
             <el-col :span="6">
                 <label class="inputLabel">
@@ -11,19 +13,18 @@
 
                 <el-time-select v-if="exactTime === false"
                     arrow-control
-                    v-model="timeSelection"
                     :picker-options="{  
                         start: '01:00',
                         step: '00:15',
                         end: '24:45'
                     }"
-                    placeholder="Pick a time">
+                    placeholder=" ">
                 </el-time-select>
                 
                 <el-time-picker v-else
                     arrow-control
                     v-model="timeSelection"
-                    placeholder="Pick a time">
+                    placeholder=" ">
                 </el-time-picker>
                 
             </el-col>
@@ -33,12 +34,8 @@
                 v-model="required" 
                 active-text="Required" 
                 inactive-text="Optional"
-                class="tw-float-right tw-mr-48 button-top">
+                class="tw-float-right switch-position">
             </el-switch>
-
-            <div class="footer">
-                <slot></slot>
-            </div>
         
     </div>
 </template>
@@ -49,7 +46,6 @@ import EditableText from '@/components/editableText.vue'
 export default {
     data: () => {
         return {
-            timeSelection: '',
         }
     },
     props: {
@@ -106,9 +102,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button-top {
+.switch-position {
     position: absolute;
-    top: 30px;;
+    bottom: 20px;;
     right: 10px;
 }
 .footer{

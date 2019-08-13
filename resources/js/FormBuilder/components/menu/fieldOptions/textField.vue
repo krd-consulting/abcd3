@@ -2,18 +2,27 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
 
-            <el-form-item label="Question/Title" prop="title">
+            <el-form-item prop="title">
+                <label>
+                    Question/Title
+                </label>
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
 
-            <el-form-item label="This field is">
+            <el-form-item>
+                <label>
+                    This field is
+                </label>
                 <el-switch v-model="fieldData.settings.required" 
                     active-text="Required" 
                     inactive-text="Optional">
                 </el-switch>
             </el-form-item>
 
-            <el-form-item label="Set character limit">
+            <el-form-item>
+                <label>
+                    Set character limit
+                </label>
                 <el-switch v-model="fieldData.settings.isLimited" 
                     inactive-text="No Limit" 
                     active-text="Limit">
@@ -25,17 +34,20 @@
                 </el-input-number>
             </el-form-item>
 
-            <el-form-item label="Field refers to:">
+            <el-form-item>
+                <label>
+                    This field
+                </label>
                 <base-select
                     v-model="target"
                     name="target"
-                    placeholder="Select resource">
+                    placeholder="Stands alone">
                     <el-option
                         v-for="(type, index) in targetTypes"
                         :key="index"
                         :label="type.name"
                         :value="type.target">
-                        {{ type.name }}
+                        Refers to {{ type.name }}
                     </el-option>
                 </base-select>
 
@@ -76,7 +88,7 @@
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
+                <el-button type="success" @click="save('fieldData')" class="tw-w-48">Add it!</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -177,12 +189,19 @@ export default {
             return targetType.name;
         }
     },
-    methods: {        
-        save() {
-            this.fieldData['reference_target_type_id'] = this.target_type_id;
-            this.fieldData['reference_target_id'] = this.target_id;
-            this.$emit('save', this.fieldData);
-        },
+    methods: {
+        save(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.fieldData['reference_target_type_id'] = this.target_type_id;
+                    this.fieldData['reference_target_id'] = this.target_id;
+                    this.$emit('save', this.fieldData);
+                } else {
+                    this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+                    return false;
+                }
+            })
+        },       
 
         retrieveTargetTypes() {
             const request = new FormFieldTargetTypesRequest({});

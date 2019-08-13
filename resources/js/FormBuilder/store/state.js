@@ -1,6 +1,6 @@
 export default {
     title: 'Form Title',
-    description: 'Subtext',
+    description: '',
     team_id: '',
     scope_id: '',
     target: {

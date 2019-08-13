@@ -2,7 +2,7 @@
     <div id="textField" class="tw-my-8">
         <el-row>
             <el-col :span="6">
-                <label for="text" class="inputLabel">{{ field.title }}</label>
+                <label for="text" class="tw-block tw-text-right tw-mr-1">{{ field.title }}</label>
             </el-col>
             <el-col v-if="field.reference_target_type_id == null" :span="10">
                 <el-input id="text"
@@ -27,7 +27,7 @@
                             remote
                             :remote-method="retrieveTargetItems"
                             name="type"
-                            :placeholder="`Input ${targetName}`"
+                            placeholder=" "
                             @change="targetRequest.errors.clear('team_id')">
                             <el-option
                                 v-for="(item, index) in targetItems"
@@ -45,7 +45,7 @@
                             remote
                             :remote-method="retrieveTargetItems"
                             name="type"
-                            :placeholder="`Input ${targetName}`"
+                            placeholder=" "
                             @change="targetRequest.errors.clear('team_id')">
                             <el-option
                                 v-for="(item, index) in targetItems"

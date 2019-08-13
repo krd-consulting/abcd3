@@ -126,7 +126,7 @@
         <div slot="footer" class="tw-border-t tw-px-4 tw-py-4 tw-bg-gray-100 tw-rounded-b">
             <slot name="footer">
                 <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none" @click="close">
-                    <span class="tw-text-xs tw-align-middle">Good to go!</span>
+                    <span class="tw-text-xs tw-align-middle">OK</span>
                 </base-button>
             </slot>
         </div>

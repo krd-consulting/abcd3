@@ -1,5 +1,8 @@
 <template>
     <div id="matrix">
+
+        <slot></slot>
+        
         <el-row>
             <el-col :span="10">
                 <label class="inputLabel">
@@ -20,34 +23,54 @@
         <table id="matrix-table">
             <thead>
                 <tr class="tw-max-w-sm">
-                    <th><el-button type="text" class="tw-ml-4" @click="addChoice">Add Radio Column</el-button></th>
+                    <th></th>
                     <th v-for="(item, index) in choices" :key="item.index" >
-                        <el-col>
-                            <editable-text 
-                                class="tw-cursor-pointer mouseOver" 
-                                v-model="item.value"
-                                @input="updateChoiceValue($event, index)"
-                            />
-                            <el-button 
-                                class="tw-pr-15" 
-                                type="text" 
-                                size="mini" 
-                                @click="removeChoice(item)">
-                                    Remove
-                            </el-button>
-                        </el-col>  
+                        <div class="tw-inline-flex tw-justify-between tw-whitespace-no-wrap">
+                            <div class="tw-flex-none">
+                                <editable-text 
+                                    class="tw-cursor-pointer mouseOver" 
+                                    v-model="item.value"
+                                    @input="updateChoiceValue($event, index)"
+                                />
+                            </div>
+                            <div class="tw-flex-1 tw-relative tw-right-0">
+                                <el-button 
+                                    class="hover:tw-text-red-600" 
+                                    type="text" 
+                                    size="mini"
+                                    icon="el-icon-close" 
+                                    @click="removeChoice(item)">
+                                </el-button>
+                            </div>
+                        </div>  
                     </th>
+                    <el-tooltip content="Add a new choice column">
+                        <el-button class="tw-ml-4 tw-bg-blue-500 tw-text-white hover:tw-bg-blue-100" @click="addChoice" icon="el-icon-plus" circle></el-button>
+                    </el-tooltip>
+                    
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(item, index) in questions" :key="item.index">
                     <td>
-                        <editable-text 
-                            class="tw-cursor-pointer mouseOver" 
-                            v-model="item.text"
-                            @input="updateQuestionValue($event, index)"
-                        />
-                        <el-button type="text" size="mini" @click="removeQuestion(item)">Remove</el-button>
+                        <div class="tw-inline-flex tw-justify-between">
+                            <div class="tw-flex-auto">
+                                <editable-text 
+                                    class="tw-cursor-pointer mouseOver" 
+                                    v-model="item.text"
+                                    @input="updateQuestionValue($event, index)"
+                                />
+                            </div>
+                            <div class="tw-flex-1 tw-relative tw-right-0">
+                                <el-button 
+                                    class="hover:tw-text-red-600"
+                                    type="text" 
+                                    size="mini"
+                                    icon="el-icon-close" 
+                                    @click="removeQuestion(item)">
+                                </el-button>
+                            </div>
+                        </div>
                     </td>
                     <td v-for="radio in choices" :key="radio.index" class="tw-text-center">
                         <el-radio v-model="radioSelect" disabled></el-radio>
@@ -56,11 +79,17 @@
             </tbody>
         </table>
 
+        <el-alert
+            v-if="!isUnique"
+            title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            type="error">
+        </el-alert>
+
         <el-switch 
             v-model="field.settings.required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right tw-mr-48 button-top">
+            class="tw-float-right switch-position">
         </el-switch>
 
          <form @submit.prevent="addQuestion" class="tw-inline-block tw-my-4">
@@ -73,12 +102,7 @@
                     </el-tooltip>
                 </el-col>
             </el-row>
-        </form>
-
-        <div class="footer">
-            <slot></slot>
-        </div>
-        
+        </form>  
     </div>
 </template>
 
@@ -90,7 +114,8 @@ export default {
         return {
             radioSelect: 1,
             itemText: '',
-            isMounted: false
+            isMounted: false,
+            isUnique: true
         }
     },
     components: {
@@ -168,13 +193,21 @@ export default {
         addQuestion() {
             const questionsCopy = _.clone(this.questions);
 
+            for(var i = 0; i < this.questions.length; i++) {
+                if(this.questions[i].value === this.itemText) {
+
+                    this.itemText = ''
+                    return this.isUnique = false;
+                }
+            }
+
             questionsCopy.push({
                 id: this.nextQuestion++, text: this.itemText
             });
 
             this.questions = questionsCopy;
             this.itemText = '';
-
+            this.isUnique = true;
             this.$forceUpdate();
         },
         
@@ -194,12 +227,10 @@ export default {
             const choicesCopy = _.clone(this.choices);
 
             choicesCopy.push({
-                id: this.nextQuestion++, value: 'New Item'
+                id: this.nextQuestion++, value: 'New Choice'
             });
 
-            console.log(choicesCopy)
             this.choices = choicesCopy;
-
             this.$forceUpdate();
         },
 
@@ -218,6 +249,14 @@ export default {
             const fieldCopy = _.clone(this.field);
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
+
+            // for(var i = 0; i < this.choices.length; i++) {
+            //     if(this.choices[i].value === this.itemText) {
+
+            //         this.itemText = ''
+            //         return this.isUnique = false;
+            //     }
+            // }
 
             this.$forceUpdate();
         },
@@ -252,9 +291,9 @@ export default {
         text-decoration: underline;
         font-size: 110%;
     }
-    .button-top {
+    .switch-position {
         position: absolute;
-        top: 30px;;
+        bottom: 20px;;
         right: 10px;
     }
     .footer{

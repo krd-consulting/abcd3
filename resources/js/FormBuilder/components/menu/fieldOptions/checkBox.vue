@@ -2,22 +2,31 @@
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
         
-            <el-form-item label="Question/Title:" prop="title">
+            <el-form-item prop="title">
+                <label>
+                    Question/Title
+                </label>
                 <el-col :span="24">
                     <el-input v-model="fieldData.title"></el-input>
                 </el-col>
             </el-form-item>
             
-            <el-form-item label="This field is:">
+            <el-form-item>
+                <label>
+                    This field is
+                </label>
                 <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
             </el-form-item>
             
-            <el-form-item label="Number of choices:">
+            <el-form-item>
+                <label>
+                    Number of choices
+                </label>
                 <el-input-number v-model="fieldData.settings.checkboxNum" controls-position="right" :min="1" :max="10"></el-input-number>
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
-                <el-button type="success" @click="save" class="tw-w-48">Add it!</el-button>
+                <el-button type="success" @click="save('fieldData')" class="tw-w-48">Add it!</el-button>
             </el-form-item>
 
         </el-form>
@@ -41,7 +50,7 @@ export default {
                 choices: [],
                 rules: {
                     title: [
-                        { required: true, message: 'Please enter question title', trigger: 'blur' }
+                        { required: true, message: 'Please enter question or title', trigger: 'blur' }
                     ]
                 }
             },
@@ -55,19 +64,28 @@ export default {
         setChoices() {
             for(let i = 1; i <= this.fieldData.settings.checkboxNum; i++) {
                 this.fieldData.choices.push({
-                    id: this.fieldData.settings.nextChoice++, value: 'Item ' + this.fieldData.settings.nextChoice
+                    id: this.fieldData.settings.nextChoice++, value: 'Choice ' + this.fieldData.settings.nextChoice
                 })
             }
         },
 
-        save() {
-            this.setChoices();
-            this.$emit('save', this.fieldData);
+        save(formName) {
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.setChoices();
+                    this.$emit('save', this.fieldData);
+                } else {
+                    this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
+                    return false;
+                }
+            })
         },
     }
 }
 </script>
 
-<style>
-
+<style scoped>
+    /* .el-form-item.label {
+        font-size: 20px;
+    } */
 </style>

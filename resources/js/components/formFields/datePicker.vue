@@ -2,7 +2,7 @@
     <div id="datepicker" class="tw-my-8">
         <el-row>
             <el-col :span="6">
-                <label for="dateField" class="inputLabel">{{ field.title }}</label>
+                <label for="dateField" class="tw-block tw-text-right tw-mr-1">{{ field.title }}</label>
             </el-col>
 
             <el-col :span="10">
@@ -11,7 +11,7 @@
                     v-model="value" 
                     :type="dateType" 
                     :picker-options="dateOptions" 
-                    :placeholder="datePlaceHolder"
+                    placeholder=" "
                     :range-separator="rangeSeparator"
                     :start-placeholder="startDate"
                     :end-placeholder="endDate"

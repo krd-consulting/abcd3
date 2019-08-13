@@ -1,5 +1,7 @@
 <template>
   <div>
+      <slot></slot>
+      
     <el-row>
         <el-col :span="10">
             
@@ -13,15 +15,13 @@
                 id="input"
                 type="text" 
                 :maxlength="field.settings.max" 
-                placeholder="Your text here" 
-                v-model="value" 
+                placeholder=" "  
                 show-word-limit>
             </el-input>
             <el-input v-else 
                 id="input"
                 type="text" 
-                placeholder="Your text here" 
-                v-model="value">
+                placeholder=" ">
             </el-input>
 
         </el-col>
@@ -31,12 +31,8 @@
         v-model="required" 
         active-text="Required" 
         inactive-text="Optional"
-        class="tw-float-right tw-mr-48 button-top">
+        class="tw-float-right switch-position">
     </el-switch>
-
-    <div class="footer">
-        <slot></slot>
-    </div>
     
   </div>
 </template>
@@ -48,7 +44,6 @@ export default {
     name: 'Textfield',
     data() {
         return {
-            value: ''
         }
     },
 
@@ -100,14 +95,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button-top {
+.switch-position {
     position: absolute;
-    top: 30px;;
-    right: 10px;
-}
-.footer{
-    position: absolute;
-    bottom: 0;
+    bottom: 20px;;
     right: 10px;
 }
 </style>

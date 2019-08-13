@@ -1,5 +1,7 @@
 <template>
     <div id="dropdown">
+        <slot></slot>
+        
         <el-row>
         <el-col :span="6">
             <label class="inputLabel">
@@ -11,7 +13,7 @@
 
         
             <div class="tw-inline">
-                <el-select id="dropdown" v-model="dropItem" placeholder="select">
+                <el-select id="dropdown" v-model="dropItem" placeholder=" ">
                     <el-option v-for="(item, index) in choices" :key="index" :label="item.value" :value="item.value"></el-option>
                 </el-select>
             </div>
@@ -21,7 +23,8 @@
                 <editable-text 
                     class="tw-cursor-pointer mouseOver" 
                     v-model="dropItem"
-                    @input="updateChoiceValue($event)">
+                    @input="updateChoiceValue($event)"
+                    @edit="tempValue(dropItem)">
                     {{ dropItem }}
                 </editable-text>
                 <el-button 
@@ -31,14 +34,19 @@
                             Remove Item
                 </el-button>
             </el-col>
-
         </el-row>
+
+        <el-alert
+            v-if="!isUnique"
+            title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            type="error">
+        </el-alert>
 
         <el-switch 
             v-model="required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right tw-mr-48 button-top">
+            class="tw-float-right switch-position">
         </el-switch>
         
         <form @submit.prevent="addItem" class="tw-mt-4">
@@ -53,7 +61,6 @@
             </el-row>
         </form>
 
-        <slot></slot>
     </div>
 </template>
 
@@ -66,6 +73,8 @@ export default {
             itemText: '',
             value: '',
             nextItem: 0,
+            isUnique: true,
+            temp: ''
         }
     },
     components: {
@@ -125,16 +134,24 @@ export default {
         addItem() {
             const choicesCopy = _.clone(this.choices);
 
+            for(var i = 0; i < this.choices.length; i++) {
+                if(this.choices[i].value === this.itemText) {
+
+                    this.itemText = ''
+                    return this.isUnique = false;
+                }
+            }
+
             choicesCopy.push({
                 id: this.nextItem++, value: this.itemText
             });
 
             this.choices = choicesCopy;
             this.itemText = ''
+            this.isUnique = true;
             this.$forceUpdate();
         },
         removeChoice(item, index) {
-            // var index = this.choices.indexOf(item);
 
             if (index !== -1) {
                 this.choices.splice(index, 1);
@@ -143,9 +160,24 @@ export default {
             this.dropItem = null;
             this.$forceUpdate();
         },
+
+        tempValue(value) {
+            this.temp = value;
+        },
+
         updateChoiceValue(value, index) {
-            // var index = this.choices.indexOf(value);
             const fieldCopy = _.clone(this.field);
+
+            for(var i = 0; i < this.field.choices.length; i++) {
+                if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+
+                    // this.field.choices[index].value = this.temp;
+                    this.dropItem = this.temp;
+                    
+                    return this.isUnique = false;
+                }
+            }
+
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
             this.dropItem = value;
@@ -161,9 +193,9 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button-top {
+.switch-position {
     position: absolute;
-    top: 30px;;
+    bottom: 20px;;
     right: 10px;
 }
 </style>

@@ -3,7 +3,7 @@
         <br>
         <el-row>
            <el-col :span="24">
-                <label for="matrix-table" class="inputLabel">{{ field.title }}</label><br>
+                <label for="matrix-table" class="">{{ field.title }}</label><br>
                 <sup>{{ field.description }}</sup>
                     <table id="matrix-table">
                     <thead>
@@ -55,7 +55,7 @@ export default {
 
 <style scoped>
     #matrix-table {
-        width: 100%; 
+        /* width: 100%;  */
         /* margin-top: 20px;  */
         z-index: 0;
         

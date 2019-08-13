@@ -2,7 +2,10 @@
     <div id="sectionDivider">
        <el-form label-position="top" ref="fieldData" :model="fieldData" @submit.native.prevent>
             
-            <el-form-item label="Section label">
+            <el-form-item>
+                <label>
+                    Section Title
+                </label>
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
             

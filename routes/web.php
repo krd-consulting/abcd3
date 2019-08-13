@@ -109,7 +109,7 @@ Route::prefix('api')
 Route::get('/preferences', 'ShowPreferences');
 Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
 
-Route::get('/forms/create', 'ShowFormBuilder');
+Route::get('/forms/create', 'ShowFormBuilder')->name('formBuilder');
 Route::get('/forms/create/{all}', 'ShowFormBuilder')->where('all', '(.*)');
 
 // Catch All Route

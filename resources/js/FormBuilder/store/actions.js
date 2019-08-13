@@ -21,13 +21,7 @@ export default {
 
         const request = new Request(formData);
 
-        request.store()
-            .then((response) => {
-                //  return Promise('')
-                
-            })
-            .catch((error) => {
-                //
-            });
+        return request.store();
+        
     }
 }

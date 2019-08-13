@@ -8,15 +8,15 @@
         @close="close" 
         @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Create Form
+            <base-icon class="tw-align-text-top">person_add</base-icon> Create New Form
         </div>
         <form>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5 tw-capitalize">
+                    <label class="tw-w-1/3 tw-capitalize">
                         Form Name
                     </label>
-                    <div class="tw-w-2/3">
+                    <div class="tw-w-2/4">
                         <base-input
                             v-model="formData['name']"
                             name="name"
@@ -29,9 +29,9 @@
                     </div>
                 </div>
             </div>
-            <div class="tw-mb-2">
+            <!-- <div class="tw-mb-2">
                 <div  class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5 tw-capitalize">
+                    <label class="tw-w-1/3 tw-capitalize">
                         Description
                     </label>
                     <div class="tw-w-2/3">
@@ -46,10 +46,10 @@
                         <span v-text="request.errors.get('description')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
+                    <label class="tw-w-1/3">
                         Team
                     </label>
                     <div class="tw-w-2/3">
@@ -59,7 +59,7 @@
                             remote
                             :remote-method="retrieveTeams"
                             name="type"
-                            placeholder="Select Team"
+                            placeholder=" "
                             @change="request.errors.clear('team_id')">
                             <el-option
                                 v-for="(team, index) in teams"
@@ -79,14 +79,14 @@
             </div>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
+                    <label class="tw-w-1/3">
                         Form Type
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
                             v-model="formData.type"
                             name="type"
-                            placeholder="Select Form Type"
+                            placeholder="Construction Ahead: Drive Slow"
                             @change="request.errors.clear('type')">
                             <el-option
                                 v-for="(type, index) in types"
@@ -106,14 +106,14 @@
             </div>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
-                        This form is about
+                    <label class="tw-w-1/3">
+                        Collect data about
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
                             v-model="formData.target"
                             name="target"
-                            placeholder="Select Resource"
+                            placeholder=""
                             @change="request.errors.clear('target.type');
                                 request.errors.clear('target.type_id')">
                             <el-option
@@ -121,7 +121,10 @@
                                 :key="index"
                                 :label="type.name"
                                 :value="type.target">
-                                {{ type.name }}
+                                <span v-if="type.name === 'Program' || type.name === 'Group'">
+                                    {{ type.name }}s
+                                </span>
+                                <span v-else>{{ type.name }}</span>
                             </el-option>
                         </base-select>
                     </div>
@@ -139,14 +142,14 @@
             </div>
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
-                        Who can see this form?
+                    <label class="tw-w-1/3">
+                        Limit form access to 
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
                             v-model="formData.scope_id"
                             name="target"
-                            placeholder="Choose who can see this form."
+                            placeholder=""
                             @change="request.errors.clear('scope_id');">
                             <el-option
                                 v-for="(scope, index) in formattedScopes"
@@ -177,7 +180,7 @@
             <base-button 
                 class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none"
                 @click="submit">
-                <span class="tw-text-xs tw-align-middle">Good to go!</span>
+                <span class="tw-text-xs tw-align-middle">OK</span>
             </base-button>
         </div>
     </base-dialog>
@@ -215,10 +218,10 @@
                 targetTypes: [],
                 types: [],
                 scopes: [],
-                teams: []
+                teams: [],
+                selectedType: null
             }
         },
-
         computed: {
             formattedScopes() {
                 const labels  = {
@@ -247,9 +250,13 @@
                     params: {...this.teamRequestParams }
                 });
 
-                this.teamRequest.retrieve().then(response => {
+                let getTeams = this.teamRequest.retrieve();
+
+                getTeams.then(response => {
                     this.teams = response.data;
                 });
+
+                return getTeams;
             },
 
             close() {
@@ -274,13 +281,19 @@
             load() {
                 let request = new Request({});
 
+                this.retrieveTeams().then (() => {
+                    this.formData.team_id = this.teams[0].id
+                });
+
                 request.create().then((response) => {
                     this.targetTypes = response.data.target_types;
                     this.types = response.data.types;
                     this.scopes = response.data.scopes;
-                });
 
-                this.retrieveTeams();
+                    this.formData.type = this.types['static'];
+                    this.formData.target = this.targetTypes[1].target;
+                    this.formData.scope_id = this.scopes[0].id;
+                });
             },
 
             submit() {
