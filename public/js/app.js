@@ -4875,7 +4875,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -13205,7 +13204,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -13243,7 +13242,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -64328,7 +64327,7 @@ module.exports = isSymbol;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Copyright JS Foundation and other contributors <https://js.foundation/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -64339,7 +64338,7 @@ module.exports = isSymbol;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -66998,10 +66997,16 @@ module.exports = isSymbol;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-      } else if (isMap(value)) {
+
+        return result;
+      }
+
+      if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
+
+        return result;
       }
 
       var keysFunc = isFull
@@ -67925,8 +67930,8 @@ module.exports = isSymbol;
         return;
       }
       baseFor(source, function(srcValue, key) {
-        stack || (stack = new Stack);
         if (isObject(srcValue)) {
+          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -69743,7 +69748,7 @@ module.exports = isSymbol;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision && nativeIsFinite(number)) {
+        if (precision) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -70926,7 +70931,7 @@ module.exports = isSymbol;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
+     * Gets the value at `key`, unless `key` is "__proto__".
      *
      * @private
      * @param {Object} object The object to query.
@@ -70934,10 +70939,6 @@ module.exports = isSymbol;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
-      if (key === 'constructor' && typeof object[key] === 'function') {
-        return;
-      }
-
       if (key == '__proto__') {
         return;
       }
@@ -74738,7 +74739,6 @@ module.exports = isSymbol;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
-            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -79125,12 +79125,9 @@ module.exports = isSymbol;
       , 'g');
 
       // Use a sourceURL for easier debugging.
-      // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+        ('sourceURL' in options
+          ? options.sourceURL
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -79163,9 +79160,7 @@ module.exports = isSymbol;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
-      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
+      var variable = options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -81370,11 +81365,10 @@ module.exports = isSymbol;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = lodashFunc.name + '';
-        if (!hasOwnProperty.call(realNames, key)) {
-          realNames[key] = [];
-        }
-        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
+        var key = (lodashFunc.name + ''),
+            names = realNames[key] || (realNames[key] = []);
+
+        names.push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -88835,7 +88829,7 @@ var render = function() {
                       ? _c(
                           "label",
                           {
-                            staticClass: "input-label tw-mt-4",
+                            staticClass: "tw-block tw-text-right tw-mr-1",
                             attrs: { for: "name" }
                           },
                           [_vm._v(" " + _vm._s(_vm.form.target.name) + " Name")]
@@ -88843,7 +88837,7 @@ var render = function() {
                       : _c(
                           "label",
                           {
-                            staticClass: "input-label tw-mt-4",
+                            staticClass: "tw-block tw-text-right tw-mr-1",
                             attrs: { for: "name" }
                           },
                           [
@@ -88960,13 +88954,13 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-row",
-                { staticClass: "tw-my-4" },
+                { staticClass: "tw-mb-4" },
                 [
                   _c("el-col", { attrs: { span: 6 } }, [
                     _c(
                       "label",
                       {
-                        staticClass: "input-label",
+                        staticClass: "tw-block tw-text-right tw-mr-1",
                         attrs: { for: "teamSelect" }
                       },
                       [_vm._v("Team")]
@@ -89028,13 +89022,13 @@ var render = function() {
               _vm.form.type === "pre-post"
                 ? _c(
                     "el-row",
-                    { staticClass: "tw-my-4" },
+                    { staticClass: "tw-mb-4" },
                     [
                       _c("el-col", { attrs: { span: 6 } }, [
                         _c(
                           "label",
                           {
-                            staticClass: "input-label",
+                            staticClass: "tw-block tw-text-right tw-mr-1",
                             attrs: { for: "pre-post" }
                           },
                           [_vm._v("Completed for")]
@@ -89078,13 +89072,13 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-row",
-                { staticClass: "tw-my-4" },
+                { staticClass: "tw-mb-4" },
                 [
                   _c("el-col", { attrs: { span: 6 } }, [
                     _c(
                       "label",
                       {
-                        staticClass: "input-label",
+                        staticClass: "tw-block tw-text-right tw-mr-1",
                         attrs: { for: "formDate" }
                       },
                       [_vm._v("Date Completed")]
@@ -89093,7 +89087,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "el-col",
-                    { attrs: { span: 8 } },
+                    { attrs: { span: 6 } },
                     [
                       _c("el-date-picker", {
                         attrs: {
@@ -89120,7 +89114,10 @@ var render = function() {
               _vm._l(_vm.form.field_layout, function(field) {
                 return _c(
                   "div",
-                  { key: field.id, staticClass: "tw-mt-4" },
+                  {
+                    key: field.id,
+                    staticClass: "tw-block tw-text-right tw-mr-1"
+                  },
                   [
                     _c(field.type, {
                       key: field.id,
@@ -118523,8 +118520,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
 
 
 /***/ })
