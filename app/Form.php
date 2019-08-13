@@ -97,7 +97,10 @@ class Form extends Model
             // create form entry table for form
             Schema::create($this->table_name, function (Blueprint $table) use ($fields) {
                 $table->bigIncrements('id');
-                $table->string('type');
+                
+                if($this->type == config('app.form_types.pre-post')) 
+                    $table->string('type');
+
                 $table->bigInteger('target_id')->unsigned();
 
                 foreach($fields as $field) {
@@ -121,6 +124,7 @@ class Form extends Model
                     }
                 }
 
+                $table->dateTime('completed_at');
                 $table->timestamps();
                 $table->softDeletes();
                 $table->userstamps();
