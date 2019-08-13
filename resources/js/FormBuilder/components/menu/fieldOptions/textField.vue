@@ -161,7 +161,8 @@ export default {
 
             const target = this.target.toString().split('_');
 
-            this.fieldData.reference_target_type_id = target;
+            this.fieldData.reference_target_type_id = target[0];
+            this.fieldData.reference_target_id = target[1];
 
             return target[0];
         },
@@ -170,6 +171,8 @@ export default {
             if(this.target.toString().includes('_')) {
                 const target = this.target.toString().split('_')
                 return target[1];
+            }else if(this.targetName == 'Form Field') {
+                return this.fieldData.reference_target_id;
             }
 
             return null;
@@ -193,8 +196,8 @@ export default {
         save(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.fieldData['reference_target_type_id'] = this.target_type_id;
-                    this.fieldData['reference_target_id'] = this.target_id;
+                    this.fieldData.reference_target_type_id = this.target_type_id;
+                    this.fieldData.reference_target_id = this.target_id;
                     this.$emit('save', this.fieldData);
                 } else {
                     this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
@@ -225,8 +228,6 @@ export default {
 
         retrieveFields(keywords){
             this.fieldParams.search = keywords;
-
-            console.log('kini');
 
             this.fieldRequest.setFields({
                 params: {...this.fieldParams}

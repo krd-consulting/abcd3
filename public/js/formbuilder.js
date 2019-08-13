@@ -6586,13 +6586,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       var target = this.target.toString().split('_');
-      this.fieldData.reference_target_type_id = target;
+      this.fieldData.reference_target_type_id = target[0];
+      this.fieldData.reference_target_id = target[1];
       return target[0];
     },
     target_id: function target_id() {
       if (this.target.toString().includes('_')) {
         var target = this.target.toString().split('_');
         return target[1];
+      } else if (this.targetName == 'Form Field') {
+        return this.fieldData.reference_target_id;
       }
 
       return null;
@@ -6611,8 +6614,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          _this.fieldData['reference_target_type_id'] = _this.target_type_id;
-          _this.fieldData['reference_target_id'] = _this.target_id;
+          _this.fieldData.reference_target_type_id = _this.target_type_id;
+          _this.fieldData.reference_target_id = _this.target_id;
 
           _this.$emit('save', _this.fieldData);
         } else {
@@ -6645,7 +6648,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this4 = this;
 
       this.fieldParams.search = keywords;
-      console.log('kini');
       this.fieldRequest.setFields({
         params: _objectSpread({}, this.fieldParams)
       });
@@ -94215,7 +94217,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "tw-block tw-mr-1", attrs: { for: "text" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "text" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),

@@ -39,7 +39,7 @@ class StoreForm extends FormRequest
             'fields.*.type' => 'required',
             'fields.*.title' => 'required',
             'fields.*.reference_target_type_id' => 'nullable|exists:form_target_types,id',
-            'fields.*.reference_target_id' => 'nullable|exists:record_types,id',
+            'fields.*.reference_target_id' => 'nullable',
             'fields.*.settings' => 'nullable',
             'fields.*.settings.max' => 'integer',
             'fields.*.validation_rules' => 'sometimes',

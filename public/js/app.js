@@ -95488,7 +95488,10 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              { staticClass: "tw-block tw-mr-1", attrs: { for: "text" } },
+              {
+                staticClass: "tw-block tw-text-right tw-mr-1",
+                attrs: { for: "text" }
+              },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
