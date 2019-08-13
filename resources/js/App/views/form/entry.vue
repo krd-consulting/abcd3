@@ -10,11 +10,10 @@
             <el-main>
                 <el-row class="tw-mb-4">
                     <el-col :span="6">
-                        <label v-if="form.target != null" for="name" class="input-label tw-mt-4"> {{ form.target.name }} Name</label>
-                        <label v-else for="name" class="input-label tw-mt-4"> {{ form.target_type.name }} Name</label>
+                        <label v-if="form.target != null" for="name" class="tw-block tw-text-right tw-mr-1"> {{ form.target.name }} Name</label>
+                        <label v-else for="name" class="tw-block tw-text-right tw-mr-1"> {{ form.target_type.name }} Name</label>
                     </el-col>
                     <el-col :span="8">
-                        <!-- :placeholder="`Input ${targetName}`" -->
                         <base-select
                             v-if="targetName != 'Record'"
                             v-model="entryData.target_id"
@@ -55,9 +54,9 @@
                     </el-col>
                 </el-row>
                     
-                <el-row class="tw-my-4">
+                <el-row class="tw-mb-4">
                     <el-col :span="6">
-                        <label for="teamSelect" class="input-label">Team</label>
+                        <label for="teamSelect" class="tw-block tw-text-right tw-mr-1">Team</label>
                     </el-col>
                     <el-col :span="6">
                         <base-select
@@ -79,9 +78,9 @@
                     </el-col>
                 </el-row>
 
-                <el-row class="tw-my-4" v-if="form.type === 'pre-post'">
+                <el-row v-if="form.type === 'pre-post'" class="tw-mb-4">
                     <el-col :span="6">
-                        <label for="pre-post" class="input-label">Completed for</label>
+                        <label for="pre-post" class="tw-block tw-text-right tw-mr-1">Completed for</label>
                     </el-col>
                     <el-col :span="6">
                         <el-select id="pre-post" v-model="value" placeholder=" ">
@@ -94,11 +93,11 @@
                     </el-col>
                 </el-row>
 
-                <el-row class="tw-my-4">
+                <el-row class="tw-mb-4">
                     <el-col :span="6">
-                        <label for="formDate" class="input-label">Date Completed</label>
+                        <label for="formDate" class="tw-block tw-text-right tw-mr-1">Date Completed</label>
                     </el-col>
-                    <el-col :span="8">
+                    <el-col :span="6">
                         <el-date-picker 
                             id="formDate" 
                             v-model="dateCompleted" 
@@ -110,7 +109,7 @@
                     
                 </el-row>
                 
-                <div class="tw-mt-4" v-for="field in form.field_layout" :key="field.id">
+                <div class="tw-block tw-text-right tw-mr-1" v-for="field in form.field_layout" :key="field.id">
 
                     <component
                         class="tw-my-8"
