@@ -25,9 +25,10 @@ class CreateFormFieldsTable extends Migration
             $table->schemalessAttributes('options');
             $table->schemalessAttributes('settings');
             $table->schemalessAttributes('validation_rules');
+
             $table->unique(['form_id', 'column_name']);
             $table->foreign('reference_target_type_id')->references('id')->on('form_target_types');
-            $table->foreign('form_id')->references('id')->on('forms');
+            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
         });
     }
 

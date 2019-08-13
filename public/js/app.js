@@ -10777,8 +10777,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_GroupRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/api/GroupRequest */ "./resources/js/api/GroupRequest.js");
 /* harmony import */ var _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/api/RecordTypeRequest */ "./resources/js/api/RecordTypeRequest.js");
 /* harmony import */ var _api_RecordRequest__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/api/RecordRequest */ "./resources/js/api/RecordRequest.js");
-/* harmony import */ var _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/api/FormFieldRequest */ "./resources/js/api/FormFieldRequest.js");
-/* harmony import */ var _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/api/FormFieldEntryRequest */ "./resources/js/api/FormFieldEntryRequest.js");
+/* harmony import */ var _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/api/FormFieldEntryRequest */ "./resources/js/api/FormFieldEntryRequest.js");
 //
 //
 //
@@ -10841,7 +10840,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10861,7 +10878,7 @@ __webpack_require__.r(__webpack_exports__);
         Program: _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_1__["default"],
         Group: _api_GroupRequest__WEBPACK_IMPORTED_MODULE_2__["default"],
         Record: _api_RecordRequest__WEBPACK_IMPORTED_MODULE_4__["default"],
-        'Form Field': _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_6__["default"]
+        'Form Field': _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_5__["default"]
       },
       targetParams: {
         ascending: true,
@@ -10879,7 +10896,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       fieldParams: {
         ascending: true,
-        sortBy: 'title',
+        sortBy: 'id',
         page: 1,
         perPage: 10,
         search: ''
@@ -10946,19 +10963,13 @@ __webpack_require__.r(__webpack_exports__);
       } else if (this.targetName == 'Form Field') {
         this.fieldParams.search = keywords;
         params = this.fieldParams;
-
-        var _request = new _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_5__["default"]({});
-
-        _request.show(this.field.reference_target_id).then(function (response) {
-          _this2.targetRequest.setFields({
-            params: params
-          });
-
-          _this2.targetRequest.retrieve(response.data.form.id).then(function (response) {
-            _this2.targetItems = response.data;
-          });
+        this.targetRequest.setFields({
+          params: params
         });
-
+        this.targetRequest.retrieve(this.field.reference_target_id).then(function (response) {
+          _this2.targetItems = response.data;
+          console.log(response.data);
+        });
         return;
       }
 
@@ -13194,7 +13205,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -13232,7 +13243,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -64317,7 +64328,7 @@ module.exports = isSymbol;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -64328,7 +64339,7 @@ module.exports = isSymbol;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.11';
+  var VERSION = '4.17.15';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -66987,16 +66998,10 @@ module.exports = isSymbol;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-
-        return result;
-      }
-
-      if (isMap(value)) {
+      } else if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
-
-        return result;
       }
 
       var keysFunc = isFull
@@ -67920,8 +67925,8 @@ module.exports = isSymbol;
         return;
       }
       baseFor(source, function(srcValue, key) {
+        stack || (stack = new Stack);
         if (isObject(srcValue)) {
-          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -69738,7 +69743,7 @@ module.exports = isSymbol;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision) {
+        if (precision && nativeIsFinite(number)) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -70921,7 +70926,7 @@ module.exports = isSymbol;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__".
+     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
      *
      * @private
      * @param {Object} object The object to query.
@@ -70929,6 +70934,10 @@ module.exports = isSymbol;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
+      if (key === 'constructor' && typeof object[key] === 'function') {
+        return;
+      }
+
       if (key == '__proto__') {
         return;
       }
@@ -74729,6 +74738,7 @@ module.exports = isSymbol;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
+            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -79115,9 +79125,12 @@ module.exports = isSymbol;
       , 'g');
 
       // Use a sourceURL for easier debugging.
+      // The sourceURL gets injected into the source that's eval-ed, so be careful
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        ('sourceURL' in options
-          ? options.sourceURL
+        (hasOwnProperty.call(options, 'sourceURL')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -79150,7 +79163,9 @@ module.exports = isSymbol;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      var variable = options.variable;
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
+      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -81355,10 +81370,11 @@ module.exports = isSymbol;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = (lodashFunc.name + ''),
-            names = realNames[key] || (realNames[key] = []);
-
-        names.push({ 'name': methodName, 'func': lodashFunc });
+        var key = lodashFunc.name + '';
+        if (!hasOwnProperty.call(realNames, key)) {
+          realNames[key] = [];
+        }
+        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -95472,10 +95488,7 @@ var render = function() {
           _c("el-col", { attrs: { span: 6 } }, [
             _c(
               "label",
-              {
-                staticClass: "tw-block tw-text-right tw-mr-1",
-                attrs: { for: "text" }
-              },
+              { staticClass: "tw-block tw-mr-1", attrs: { for: "text" } },
               [_vm._v(_vm._s(_vm.field.title))]
             )
           ]),
@@ -95518,7 +95531,7 @@ var render = function() {
                 "el-col",
                 { attrs: { span: 10 } },
                 [
-                  _vm.targetName != "Record"
+                  _vm.targetName == "Record"
                     ? _c(
                         "base-select",
                         {
@@ -95527,7 +95540,100 @@ var render = function() {
                             remote: "",
                             "remote-method": _vm.retrieveTargetItems,
                             name: "type",
-                            placeholder: " "
+                            placeholder: "Input " + _vm.targetName
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.targetRequest.errors.clear("team_id")
+                            }
+                          },
+                          model: {
+                            value: _vm.value,
+                            callback: function($$v) {
+                              _vm.value = $$v
+                            },
+                            expression: "value"
+                          }
+                        },
+                        _vm._l(_vm.targetItems, function(item, index) {
+                          return _c(
+                            "el-option",
+                            {
+                              key: index,
+                              attrs: {
+                                label: _vm.getPrimaryData(item, item.fields),
+                                value: item.id
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(
+                                    _vm.getPrimaryData(item, item.fields)
+                                  ) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                        }),
+                        1
+                      )
+                    : _vm.targetName == "Form Field"
+                    ? _c(
+                        "base-select",
+                        {
+                          attrs: {
+                            filterable: "",
+                            remote: "",
+                            "remote-method": _vm.retrieveTargetItems,
+                            name: "type",
+                            placeholder: "Input " + _vm.targetName
+                          },
+                          on: {
+                            change: function($event) {
+                              return _vm.targetRequest.errors.clear("team_id")
+                            }
+                          },
+                          nativeOn: {
+                            click: function($event) {
+                              return _vm.retrieveTargetItems($event)
+                            }
+                          },
+                          model: {
+                            value: _vm.value,
+                            callback: function($$v) {
+                              _vm.value = $$v
+                            },
+                            expression: "value"
+                          }
+                        },
+                        _vm._l(_vm.targetItems, function(item, index) {
+                          return _c(
+                            "el-option",
+                            {
+                              key: index,
+                              attrs: { label: item.value, value: item.value }
+                            },
+                            [
+                              _vm._v(
+                                "\n                    " +
+                                  _vm._s(item.value) +
+                                  "\n                "
+                              )
+                            ]
+                          )
+                        }),
+                        1
+                      )
+                    : _c(
+                        "base-select",
+                        {
+                          attrs: {
+                            filterable: "",
+                            remote: "",
+                            "remote-method": _vm.retrieveTargetItems,
+                            name: "type",
+                            placeholder: "Input " + _vm.targetName
                           },
                           on: {
                             change: function($event) {
@@ -95556,55 +95662,9 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n                            " +
+                                "\n                    " +
                                   _vm._s(item.name) +
-                                  "\n                        "
-                              )
-                            ]
-                          )
-                        }),
-                        1
-                      )
-                    : _c(
-                        "base-select",
-                        {
-                          attrs: {
-                            filterable: "",
-                            remote: "",
-                            "remote-method": _vm.retrieveTargetItems,
-                            name: "type",
-                            placeholder: " "
-                          },
-                          on: {
-                            change: function($event) {
-                              return _vm.targetRequest.errors.clear("team_id")
-                            }
-                          },
-                          model: {
-                            value: _vm.value,
-                            callback: function($$v) {
-                              _vm.value = $$v
-                            },
-                            expression: "value"
-                          }
-                        },
-                        _vm._l(_vm.targetItems, function(item, index) {
-                          return _c(
-                            "el-option",
-                            {
-                              key: index,
-                              attrs: {
-                                label: _vm.getPrimaryData(item, item.fields),
-                                value: item.id
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(
-                                    _vm.getPrimaryData(item, item.fields)
-                                  ) +
-                                  "\n                        "
+                                  "\n                "
                               )
                             ]
                           )
@@ -114155,7 +114215,8 @@ var map = {
 		"./resources/js/api/FormFieldEntryRequest.js"
 	],
 	"./FormFieldRequest": [
-		"./resources/js/api/FormFieldRequest.js"
+		"./resources/js/api/FormFieldRequest.js",
+		5
 	],
 	"./FormFieldTargetTypeRequest": [
 		"./resources/js/api/FormFieldTargetTypeRequest.js"
@@ -114201,7 +114262,7 @@ var map = {
 	],
 	"./RecordsAvailableForCaseloadRequest": [
 		"./resources/js/api/RecordsAvailableForCaseloadRequest.js",
-		5
+		6
 	],
 	"./RecordsAvailableForGroupRequest": [
 		"./resources/js/api/RecordsAvailableForGroupRequest.js"
@@ -114214,11 +114275,11 @@ var map = {
 	],
 	"./RolePermissionRequest": [
 		"./resources/js/api/RolePermissionRequest.js",
-		6
+		7
 	],
 	"./RoleRequest": [
 		"./resources/js/api/RoleRequest.js",
-		7
+		8
 	],
 	"./TeamGroupsRequest": [
 		"./resources/js/api/TeamGroupsRequest.js"
@@ -114431,8 +114492,8 @@ function (_Request) {
 
   _createClass(FormFieldEntry, [{
     key: "retrieve",
-    value: function retrieve(form, field) {
-      return this.get("/api/forms/".concat(form, "/fields/").concat(field, "/entries"));
+    value: function retrieve(field) {
+      return this.get("/api/form-fields/".concat(field, "/entries"));
     }
   }]);
 
@@ -114440,66 +114501,6 @@ function (_Request) {
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (FormFieldEntry);
-
-/***/ }),
-
-/***/ "./resources/js/api/FormFieldRequest.js":
-/*!**********************************************!*\
-  !*** ./resources/js/api/FormFieldRequest.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-var FormField =
-/*#__PURE__*/
-function (_Request) {
-  _inherits(FormField, _Request);
-
-  function FormField() {
-    _classCallCheck(this, FormField);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(FormField).apply(this, arguments));
-  }
-
-  _createClass(FormField, [{
-    key: "retrieve",
-    value: function retrieve(form) {
-      return this.get("/api/forms/".concat(form, "/fields"));
-    }
-  }, {
-    key: "show",
-    value: function show(field) {
-      return this.get("api/form-fields/".concat(field));
-    }
-  }]);
-
-  return FormField;
-}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
-
-/* harmony default export */ __webpack_exports__["default"] = (FormField);
 
 /***/ }),
 
@@ -118522,8 +118523,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

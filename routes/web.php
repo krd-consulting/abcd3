@@ -100,6 +100,8 @@ Route::prefix('api')
 
         Route::get('forms/{form}/fields', 'FormFieldController@index');
 
+        Route::get('form-fields/{field}/entries', 'FormFieldEntries');
+
         Route::resource('roles', 'RoleController')->except('show');
 
         Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');

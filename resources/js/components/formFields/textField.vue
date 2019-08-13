@@ -2,7 +2,7 @@
     <div id="textField" class="tw-my-8">
         <el-row>
             <el-col :span="6">
-                <label for="text" class="tw-block tw-text-right tw-mr-1">{{ field.title }}</label>
+                <label for="text" class="tw-block tw-mr-1">{{ field.title }}</label>
             </el-col>
             <el-col v-if="field.reference_target_type_id == null" :span="10">
                 <el-input id="text"
@@ -20,41 +20,60 @@
             </el-col>
             <el-col v-else :span="10">
                 <base-select
-                            v-if="targetName != 'Record'"
-                            v-model="value"
-                            @click.native="retrieveTargetItems"
-                            filterable
-                            remote
-                            :remote-method="retrieveTargetItems"
-                            name="type"
-                            placeholder=" "
-                            @change="targetRequest.errors.clear('team_id')">
-                            <el-option
-                                v-for="(item, index) in targetItems"
-                                :key="index"
-                                :label="item.name"
-                                :value="item.id">
-                                {{ item.name }}
-                            </el-option>
-                        </base-select>
+                    v-if="targetName == 'Record'"
+                    v-model="value"
+                    filterable
+                    remote
+                    :remote-method="retrieveTargetItems"
+                    name="type"
+                    :placeholder="`Input ${targetName}`"
+                    @change="targetRequest.errors.clear('team_id')">
+                    <el-option
+                        v-for="(item, index) in targetItems"
+                        :key="index"
+                        :label="getPrimaryData(item, item.fields)"
+                        :value="item.id">
+                        {{ getPrimaryData(item, item.fields) }}
+                    </el-option>
+                </base-select>
 
-                        <base-select
-                            v-else
-                            v-model="value"
-                            filterable
-                            remote
-                            :remote-method="retrieveTargetItems"
-                            name="type"
-                            placeholder=" "
-                            @change="targetRequest.errors.clear('team_id')">
-                            <el-option
-                                v-for="(item, index) in targetItems"
-                                :key="index"
-                                :label="getPrimaryData(item, item.fields)"
-                                :value="item.id">
-                                {{ getPrimaryData(item, item.fields) }}
-                            </el-option>
-                        </base-select>
+                <base-select
+                    v-else-if="targetName == 'Form Field'"
+                    v-model="value"
+                    @click.native="retrieveTargetItems"
+                    filterable
+                    remote
+                    :remote-method="retrieveTargetItems"
+                    name="type"
+                    :placeholder="`Input ${targetName}`"
+                    @change="targetRequest.errors.clear('team_id')">
+                    <el-option
+                        v-for="(item, index) in targetItems"
+                        :key="index"
+                        :label="item.value"
+                        :value="item.value">
+                        {{ item.value }}
+                    </el-option>
+                </base-select>
+
+                <base-select
+                    v-else
+                    v-model="value"
+                    @click.native="retrieveTargetItems"
+                    filterable
+                    remote
+                    :remote-method="retrieveTargetItems"
+                    name="type"
+                    :placeholder="`Input ${targetName}`"
+                    @change="targetRequest.errors.clear('team_id')">
+                    <el-option
+                        v-for="(item, index) in targetItems"
+                        :key="index"
+                        :label="item.name"
+                        :value="item.id">
+                        {{ item.name }}
+                    </el-option>
+                </base-select>
             </el-col>
         </el-row>
     </div>
@@ -67,7 +86,6 @@
     import GroupRequest from '@/api/GroupRequest';
     import RecordTypeRequest from '@/api/RecordTypeRequest';
     import RecordRequest from '@/api/RecordRequest';
-    import FormFieldRequest from '@/api/FormFieldRequest';
     import FormFieldEntryRequest from '@/api/FormFieldEntryRequest';
 
     export default {
@@ -102,7 +120,7 @@
                 },
                 fieldParams: {
                     ascending: true,
-                    sortBy: 'title',
+                    sortBy: 'id',
                     page: 1,
                     perPage: 10,
                     search: ''
@@ -166,15 +184,14 @@
                     this.fieldParams.search = keywords;
                     params = this.fieldParams;
 
-                    const request = new FormFieldRequest({});
-                    request.show(this.field.reference_target_id).then((response) => {
-                        this.targetRequest.setFields({
-                            params
-                        });
+                    this.targetRequest.setFields({
+                        params
+                    });
 
-                        this.targetRequest.retrieve(response.data.form.id, ).then((response) => {
-                            this.targetItems = response.data;
-                        });
+                    this.targetRequest.retrieve(this.field.reference_target_id).then((response) => {
+                        this.targetItems = response.data;
+
+                        console.log(response.data);
                     });
 
                     return;
