@@ -4,7 +4,7 @@
             <el-col :span="6">
                 <label for="text" class="tw-block tw-text-right tw-mr-1">{{ field.title }}</label>
             </el-col>
-            <el-col v-if="field.reference_target_type_id == null" :span="10">
+            <el-col v-if="field.reference_target_type_id == null" :span="8">
                 <el-input id="text"
                     v-if="limit"
                     show-word-limit  
@@ -18,7 +18,7 @@
                     :required="isRequired">
                 </el-input>
             </el-col>
-            <el-col v-else :span="10">
+            <el-col v-else :span="8">
                 <base-select
                     v-if="targetName == 'Record'"
                     v-model="value"

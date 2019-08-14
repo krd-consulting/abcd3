@@ -58,7 +58,7 @@
                     <el-col :span="6">
                         <label for="teamSelect" class="tw-block tw-text-right tw-mr-1">Team</label>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="8">
                         <base-select
                             v-model="teams.team_id"
                             filterable
@@ -109,7 +109,7 @@
                     
                 </el-row>
                 
-                <div class="tw-block tw-text-right tw-mr-1" v-for="field in form.field_layout" :key="field.id">
+                <div class="tw-block tw-mr-1" v-for="field in form.field_layout" :key="field.id">
 
                     <component
                         class="tw-my-8"

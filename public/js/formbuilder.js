@@ -3554,7 +3554,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4743,7 +4742,6 @@ __webpack_require__.r(__webpack_exports__);
         return this.fieldData;
       },
       set: function set(field) {
-        console.log('field edited');
         this.$emit('update', field);
       }
     },
@@ -4754,7 +4752,7 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(title) {
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -7027,6 +7025,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -7372,6 +7371,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7392,16 +7402,6 @@ __webpack_require__.r(__webpack_exports__);
     MenuPanel: _FormBuilder_components_menu_mobileMenu_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     NavBar: _FormBuilder_components_navbar_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
-  /* test method used when examining responsive behavior */
-  // computed: {
-  //     screenWidth: {
-  //         get() { return window.innerWidth },
-  //         set(screenWidth) {
-  //             this.screenWidth = window.innerWidth
-  //         }
-  //     } 
-  // },
-
 });
 
 /***/ }),
@@ -8040,7 +8040,6 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('edit');
     },
     blur: function blur() {
-      this.active = false;
       this.save();
     },
     save: function save() {
@@ -10868,7 +10867,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-e97e2c96] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-e97e2c96] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10887,7 +10886,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5ce99664] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5ce99664] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10906,7 +10905,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10925,7 +10924,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-120ae50f] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-120ae50f] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10963,7 +10962,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-1c3cc70b] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-1c3cc70b] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -10982,7 +10981,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -11001,7 +11000,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -11020,7 +11019,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7a7b55cc] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7a7b55cc] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -11039,7 +11038,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-28f88a4b] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-28f88a4b] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -11058,7 +11057,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-2da47d2d] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-2da47d2d] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -11077,7 +11076,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 745px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n\n/* .el-row {\n    margin: 5px;\n  } */\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 16px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 16px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 100%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 745px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n\n/* .el-row {\r\n    margin: 5px;\r\n  } */\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 16px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 16px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 100%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\r\n", ""]);
 
 // exports
 
@@ -11115,7 +11114,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  min-height: 735px;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  min-height: 735px;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\r\n", ""]);
 
 // exports
 
@@ -11134,7 +11133,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 100;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 2px !important;\n  right: 15px !important;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(-100%);\n          transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 100;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 2px !important;\n  right: 15px !important;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -11172,7 +11171,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\n", ""]);
+exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\r\n", ""]);
 
 // exports
 
@@ -11191,7 +11190,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n\n", ""]);
+exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -11248,7 +11247,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -11286,7 +11285,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -11305,7 +11304,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n  /* cubic-bezier(1.0, 0.5, 0.8, 1.0); */\n}\n.toggle-enter, .toggle-leave-to {\n  transform: translateX(100%);\n  /* opacity: 0; */\n}\n.panel {\n  height: 100%;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  right: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: right;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.sidenav .close {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Handle differently on smaller screen size */\n@media screen and (max-height: 450px) {\n.sidenav {\n    padding-top: 15px;\n}\n.sidenav a {\n    font-size: 18px;\n}\n}\n", ""]);
+exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n  /* cubic-bezier(1.0, 0.5, 0.8, 1.0); */\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(100%);\n          transform: translateX(100%);\n  /* opacity: 0; */\n}\n.panel {\n  height: 100%;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  right: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: right;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.sidenav .close {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Handle differently on smaller screen size */\n@media screen and (max-height: 450px) {\n.sidenav {\n    padding-top: 15px;\n}\n.sidenav a {\n    font-size: 18px;\n}\n}\n", ""]);
 
 // exports
 
@@ -62390,7 +62389,7 @@ module.exports = isSymbol;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Copyright JS Foundation and other contributors <https://js.foundation/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -62401,7 +62400,7 @@ module.exports = isSymbol;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -65060,10 +65059,16 @@ module.exports = isSymbol;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-      } else if (isMap(value)) {
+
+        return result;
+      }
+
+      if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
+
+        return result;
       }
 
       var keysFunc = isFull
@@ -65987,8 +65992,8 @@ module.exports = isSymbol;
         return;
       }
       baseFor(source, function(srcValue, key) {
-        stack || (stack = new Stack);
         if (isObject(srcValue)) {
+          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -67805,7 +67810,7 @@ module.exports = isSymbol;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision && nativeIsFinite(number)) {
+        if (precision) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -68988,7 +68993,7 @@ module.exports = isSymbol;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
+     * Gets the value at `key`, unless `key` is "__proto__".
      *
      * @private
      * @param {Object} object The object to query.
@@ -68996,10 +69001,6 @@ module.exports = isSymbol;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
-      if (key === 'constructor' && typeof object[key] === 'function') {
-        return;
-      }
-
       if (key == '__proto__') {
         return;
       }
@@ -72800,7 +72801,6 @@ module.exports = isSymbol;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
-            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -77187,12 +77187,9 @@ module.exports = isSymbol;
       , 'g');
 
       // Use a sourceURL for easier debugging.
-      // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+        ('sourceURL' in options
+          ? options.sourceURL
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -77225,9 +77222,7 @@ module.exports = isSymbol;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
-      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
+      var variable = options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -79432,11 +79427,10 @@ module.exports = isSymbol;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = lodashFunc.name + '';
-        if (!hasOwnProperty.call(realNames, key)) {
-          realNames[key] = [];
-        }
-        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
+        var key = (lodashFunc.name + ''),
+            names = realNames[key] || (realNames[key] = []);
+
+        names.push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -88210,14 +88204,15 @@ var render = function() {
       _c("br"),
       _c("br"),
       _vm._v(" "),
-      _vm._l(_vm.choices, function(item, index) {
-        return _c(
-          "el-checkbox-group",
-          { key: item.value, attrs: { id: "check" } },
-          [
-            _c(
+      _c(
+        "el-checkbox-group",
+        { attrs: { id: "check" } },
+        [
+          _vm._l(_vm.choices, function(item, index) {
+            return _c(
               "el-checkbox",
               {
+                key: item.value,
                 attrs: { label: item.value },
                 model: {
                   value: _vm.value,
@@ -88252,24 +88247,24 @@ var render = function() {
                 )
               ],
               1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-button",
-              {
-                attrs: { type: "text", size: "mini" },
-                on: {
-                  click: function($event) {
-                    return _vm.removeChoice(item)
-                  }
-                }
-              },
-              [_vm._v("\n                  Remove\n          ")]
             )
-          ],
-          1
-        )
-      }),
+          }),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              attrs: { type: "text", size: "mini" },
+              on: {
+                click: function($event) {
+                  return _vm.removeChoice(_vm.item)
+                }
+              }
+            },
+            [_vm._v("\n                  Remove\n          ")]
+          )
+        ],
+        2
+      ),
       _vm._v(" "),
       !_vm.isUnique
         ? _c("el-alert", {
@@ -89343,6 +89338,7 @@ var render = function() {
                 "editable-text",
                 {
                   staticClass: "tw-cursor-pointer mouseOver",
+                  attrs: { value: item.value },
                   on: {
                     input: function($event) {
                       return _vm.updateChoiceValue($event, index)
@@ -89350,13 +89346,6 @@ var render = function() {
                     edit: function($event) {
                       return _vm.tempValue(item.value)
                     }
-                  },
-                  model: {
-                    value: item.value,
-                    callback: function($$v) {
-                      _vm.$set(item, "value", $$v)
-                    },
-                    expression: "item.value"
                   }
                 },
                 [
@@ -92066,6 +92055,8 @@ var render = function() {
           }
         },
         [
+          _vm._t("mobile"),
+          _vm._v(" "),
           _c(
             "router-link",
             { attrs: { to: "/forms/create" } },
@@ -92126,7 +92117,7 @@ var render = function() {
                   _c("base-icon", { staticClass: "tw-align-middle" }, [
                     _vm._v("done_outline")
                   ]),
-                  _vm._v(" Confirm\n                    ")
+                  _vm._v(" Confirm\r\n                    ")
                 ],
                 1
               ),
@@ -92153,7 +92144,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Nevermind\n                    "
+                        "\r\n                        Nevermind\r\n                    "
                       )
                     ]
                   ),
@@ -92179,7 +92170,7 @@ var render = function() {
             ]
           )
         ],
-        1
+        2
       )
     ],
     1
@@ -92566,7 +92557,61 @@ var render = function() {
             "el-card",
             { attrs: { id: "canvas-container" } },
             [
-              _c("el-header", [_c("nav-bar")], 1),
+              _c(
+                "el-header",
+                [
+                  _c("nav-bar", {
+                    scopedSlots: _vm._u([
+                      {
+                        key: "mobile",
+                        fn: function() {
+                          return [
+                            _c(
+                              "menu-panel",
+                              {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "button-text",
+                                    fn: function() {
+                                      return [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "tw-float-left tw-mr-1 mobile-menu"
+                                          },
+                                          [
+                                            _c(
+                                              "base-icon",
+                                              {
+                                                staticClass: "tw-align-middle"
+                                              },
+                                              [_vm._v("menu")]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              },
+                              [
+                                _vm._v(" "),
+                                _c("form-menu", { attrs: { id: "menu" } })
+                              ],
+                              1
+                            )
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  })
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("form-canvas", { attrs: { fields: _vm.fields, id: "canvas" } })
             ],
@@ -93814,75 +93859,29 @@ var render = function() {
             _vm._v(" "),
             _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
             _vm._v(" "),
-            _c("table", { attrs: { id: "matrix-table" } }, [
-              _c("thead", [
-                _c(
-                  "tr",
-                  { staticClass: "tw-max-w-sm" },
-                  [
-                    _c("th"),
-                    _vm._v(" "),
-                    _vm._l(_vm.field.choices, function(item, index) {
-                      return _c(
-                        "th",
-                        { key: index },
-                        [
-                          _c("el-col", [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(item.value) +
-                                "\n                            "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.field.questions, function(question, questionIndex) {
-                  return _c(
+            _c(
+              "table",
+              { staticClass: "tw-w-full", attrs: { id: "matrix-table" } },
+              [
+                _c("thead", [
+                  _c(
                     "tr",
-                    { key: questionIndex },
+                    { staticClass: "tw-max-w-sm" },
                     [
-                      _c("td", [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(question.text) +
-                            "\n                        "
-                        )
-                      ]),
+                      _c("th"),
                       _vm._v(" "),
-                      _vm._l(_vm.field.choices, function(response, index) {
+                      _vm._l(_vm.field.choices, function(item, index) {
                         return _c(
-                          "td",
-                          { key: response.id, staticClass: "tw-text-center" },
+                          "th",
+                          { key: index },
                           [
-                            _c(
-                              "el-radio",
-                              {
-                                key: response.id,
-                                staticClass: "tw-ml-2",
-                                attrs: { value: index, label: response.value },
-                                model: {
-                                  value: _vm.select[questionIndex],
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.select, questionIndex, $$v)
-                                  },
-                                  expression: "select[questionIndex]"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                     \n                            "
-                                )
-                              ]
-                            )
+                            _c("el-col", [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(item.value) +
+                                  "\n                            "
+                              )
+                            ])
                           ],
                           1
                         )
@@ -93890,10 +93889,66 @@ var render = function() {
                     ],
                     2
                   )
-                }),
-                0
-              )
-            ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.field.questions, function(
+                    question,
+                    questionIndex
+                  ) {
+                    return _c(
+                      "tr",
+                      { key: questionIndex },
+                      [
+                        _c("td", [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(question.text) +
+                              "\n                        "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.field.choices, function(response, index) {
+                          return _c(
+                            "td",
+                            { key: response.id, staticClass: "tw-text-center" },
+                            [
+                              _c(
+                                "el-radio",
+                                {
+                                  key: response.id,
+                                  staticClass: "tw-ml-2",
+                                  attrs: {
+                                    value: index,
+                                    label: response.value
+                                  },
+                                  model: {
+                                    value: _vm.select[questionIndex],
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.select, questionIndex, $$v)
+                                    },
+                                    expression: "select[questionIndex]"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                     \n                            "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  }),
+                  0
+                )
+              ]
+            )
           ])
         ],
         1
@@ -94228,7 +94283,7 @@ var render = function() {
           _vm.field.reference_target_type_id == null
             ? _c(
                 "el-col",
-                { attrs: { span: 10 } },
+                { attrs: { span: 8 } },
                 [
                   _vm.limit
                     ? _c("el-input", {
@@ -94261,7 +94316,7 @@ var render = function() {
               )
             : _c(
                 "el-col",
-                { attrs: { span: 10 } },
+                { attrs: { span: 8 } },
                 [
                   _vm.targetName == "Record"
                     ? _c(
@@ -119742,7 +119797,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

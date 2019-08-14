@@ -21,6 +21,7 @@
                 @click="buildForm">
                     Finish and Build!
             </el-menu-item> -->
+            <slot name="mobile"></slot>
             <router-link to="/forms/create">
                 <el-button class="tw-float-left tw-bg-blue-500 tw-text-white">Form Builder</el-button>
             </router-link>
@@ -123,6 +124,7 @@ export default {
 </script>
 
 <style scoped>
+    
     .float-right {
         float: right !important;
     }

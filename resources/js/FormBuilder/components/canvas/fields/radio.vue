@@ -11,15 +11,15 @@
             </label>
         </el-col><br><br>
              <el-radio-group id="radioGroup">
-                <el-radio 
-                    v-model="value" 
+                <el-radio  
                     v-for="(item, index) in choices" 
-                    :key="item.value" 
+                    :key="item.value"
+                    v-model="value" 
                     :label="item.value" 
                     class="tw-mx-4">
                         <editable-text 
                             class="tw-cursor-pointer mouseOver"
-                            v-model="item.value"
+                            :value="item.value"
                             @input="updateChoiceValue($event, index)"
                             @edit="tempValue(item.value)">
                                 {{ item.value }}
@@ -86,17 +86,14 @@ export default {
 
         field: {
             get() { return this.fieldData; },
-            set(field) { 
-                console.log('field edited');
-                this.$emit('update', field); 
-            }
+            set(field) { this.$emit('update', field); }
         },
 
         fieldLabel: {
             get() { return this.field.title; },
-            set(title) { 
+            set(title) {
                 const fieldCopy = _.clone(this.field);
-                fieldCopy.label = label;
+                fieldCopy.title = title;
                 this.field = fieldCopy;
             }
         },
@@ -168,16 +165,16 @@ export default {
 
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
-
+            
             for(var i = 0; i < this.field.choices.length; i++) {
                 if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
 
                     this.field.choices[index].value = this.temp;
-
+                    
                     return this.isUnique = false;
                 }
             }
-
+            
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
         }

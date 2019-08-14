@@ -7,7 +7,18 @@
 
             <el-card id="canvas-container">
                 <el-header>
-                    <nav-bar/>
+                    <nav-bar>
+                        <template v-slot:mobile>
+                            <menu-panel>
+                                <template v-slot:button-text>
+                                    <span class="tw-float-left tw-mr-1 mobile-menu">
+                                        <base-icon class="tw-align-middle">menu</base-icon>
+                                    </span>
+                                </template>
+                                <form-menu id="menu"/>
+                            </menu-panel>
+                        </template>
+                    </nav-bar>
                 </el-header>   
 
                 <form-canvas :fields="fields" id="canvas"/>
@@ -41,15 +52,6 @@
             MenuPanel,
             NavBar
         },
-        /* test method used when examining responsive behavior */
-        // computed: {
-        //     screenWidth: {
-        //         get() { return window.innerWidth },
-        //         set(screenWidth) {
-        //             this.screenWidth = window.innerWidth
-        //         }
-        //     } 
-        // },
     }
 </script>
 
@@ -76,8 +78,6 @@
     }
     .mobile-menu {
         display: inherit;
-        margin: 0 auto;
-        margin-top: 10px;
     }
     #menu-container {
         display: none;

@@ -35,7 +35,6 @@
 			},
 
 			blur() {
-				this.active = false;
 				this.save();
 			},
 
