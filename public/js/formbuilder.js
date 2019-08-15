@@ -6522,6 +6522,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -91589,23 +91595,35 @@ var render = function() {
                     expression: "target"
                   }
                 },
-                _vm._l(_vm.targetTypes, function(type, index) {
-                  return _c(
+                [
+                  _c(
                     "el-option",
-                    {
-                      key: index,
-                      attrs: { label: type.name, value: type.target }
-                    },
+                    { key: -1, attrs: { label: "Stands alone", value: "" } },
                     [
                       _vm._v(
-                        "\n                    Refers to " +
-                          _vm._s(type.name) +
-                          "\n                "
+                        "\n                    Stands alone\n                "
                       )
                     ]
-                  )
-                }),
-                1
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.targetTypes, function(type, index) {
+                    return _c(
+                      "el-option",
+                      {
+                        key: index,
+                        attrs: { label: type.name, value: type.target }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Refers to " +
+                            _vm._s(type.name) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  })
+                ],
+                2
               ),
               _vm._v(" "),
               _vm.targetName == "Form Fields"

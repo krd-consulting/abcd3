@@ -43,6 +43,12 @@
                     name="target"
                     placeholder="Stands alone">
                     <el-option
+                        :key="-1"
+                        label="Stands alone"
+                        value="">
+                        Stands alone
+                    </el-option>
+                    <el-option
                         v-for="(type, index) in targetTypes"
                         :key="index"
                         :label="type.name"
