@@ -36,7 +36,7 @@ class CreateProgramClientStatusTable extends Migration
     public function down()
     {
         Schema::table('program_client_status', function (Blueprint $table) {
-            $table->dropForeign(['program_client_id']);
+            $table->dropForeign(['program_record_id']);
         });
 
         Schema::dropIfExists('program_client_status');

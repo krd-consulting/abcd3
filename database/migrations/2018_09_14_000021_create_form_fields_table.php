@@ -39,7 +39,9 @@ class CreateFormFieldsTable extends Migration
      */
     public function down()
     {
-        $table->dropForeign(['target_type_id']);
+        Schema::table('form_fields', function (Blueprint $table) {
+            $table->dropForeign(['reference_target_type_id']);
+        });
 
         Schema::dropIfExists('form_fields');
     }
