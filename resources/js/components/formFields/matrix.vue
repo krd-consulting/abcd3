@@ -5,7 +5,7 @@
            <el-col :span="24">
                 <label for="matrix-table" class="">{{ field.title }}</label><br>
                 <sup>{{ field.description }}</sup>
-                    <table id="matrix-table">
+                    <table id="matrix-table" class="tw-w-full">
                     <thead>
                         <tr class="tw-max-w-sm">
                             <th></th>

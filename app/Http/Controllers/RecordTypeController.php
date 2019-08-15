@@ -9,7 +9,9 @@ use Illuminate\Http\Request;
 class RecordTypeController extends Controller
 {
     public function index() {
-        return RecordType::all();
+        return [
+        	'data' => RecordType::all()
+        ];
     }
 
     public function show(RecordType $recordType) {

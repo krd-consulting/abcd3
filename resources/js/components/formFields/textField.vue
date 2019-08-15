@@ -4,7 +4,7 @@
             <el-col :span="6">
                 <label for="text" class="tw-block tw-text-right tw-mr-1">{{ field.title }}</label>
             </el-col>
-            <el-col v-if="field.reference_target_type_id == null" :span="10">
+            <el-col v-if="field.reference_target_type_id == null" :span="8">
                 <el-input id="text"
                     v-if="limit"
                     show-word-limit  
@@ -20,9 +20,9 @@
                     :required="isRequired">
                 </el-input>
             </el-col>
-            <el-col v-else :span="10">
+            <el-col v-else :span="8">
                 <base-select
-                    v-if="targetName == 'Record'"
+                    v-if="targetName == 'Records'"
                     :value="value"
                     @input="$emit('input', $event)"
                     filterable
@@ -41,7 +41,7 @@
                 </base-select>
 
                 <base-select
-                    v-else-if="targetName == 'Form Field'"
+                    v-else-if="targetName == 'Form Fields'"
                     :value="value"
                     @input="$emit('input', $event)"
                     @click.native="retrieveTargetItems"
@@ -103,10 +103,10 @@
                 },
                 targetRequest: {},
                 requests: {
-                    Program: ProgramRequest,
-                    Group: GroupRequest,
-                    Record: RecordRequest,
-                    'Form Field': FormFieldEntryRequest
+                    Programs: ProgramRequest,
+                    Groups: GroupRequest,
+                    Records: RecordRequest,
+                    'Form Fields': FormFieldEntryRequest
                 },
                 targetParams: {
                     ascending: true,
@@ -169,7 +169,7 @@
                 this.targetParams.search = keywords;
                 let params = this.targetParams;
 
-                if(this.targetName == 'Record') {
+                if(this.targetName == 'Records') {
                     this.recordParams.search = keywords;
                     params = this.recordParams;
 
@@ -185,7 +185,7 @@
                     });
 
                     return;
-                } else if(this.targetName == 'Form Field') {
+                } else if(this.targetName == 'Form Fields') {
                     this.fieldParams.search = keywords;
                     params = this.fieldParams;
 
@@ -195,8 +195,6 @@
 
                     this.targetRequest.retrieve(this.field.reference_target_id).then((response) => {
                         this.targetItems = response.data;
-
-                        console.log(response.data);
                     });
 
                     return;

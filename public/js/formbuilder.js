@@ -3554,7 +3554,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4743,7 +4742,6 @@ __webpack_require__.r(__webpack_exports__);
         return this.fieldData;
       },
       set: function set(field) {
-        console.log('field edited');
         this.$emit('update', field);
       }
     },
@@ -4754,7 +4752,7 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(title) {
         var fieldCopy = _.clone(this.field);
 
-        fieldCopy.label = label;
+        fieldCopy.title = title;
         this.field = fieldCopy;
       }
     },
@@ -6422,8 +6420,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormFieldTargetTypeRequest */ "./resources/js/api/FormFieldTargetTypeRequest.js");
-/* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
-/* harmony import */ var _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/api/FormFieldRequest */ "./resources/js/api/FormFieldRequest.js");
+/* harmony import */ var _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/api/RecordTypeRequest */ "./resources/js/api/RecordTypeRequest.js");
+/* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
+/* harmony import */ var _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/api/FormFieldRequest */ "./resources/js/api/FormFieldRequest.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -6524,6 +6523,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -6533,7 +6557,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       targetTypes: [],
       target: '',
-      formRequest: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({}),
+      formRequest: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_2__["default"]({}),
       formParams: {
         ascending: true,
         sortBy: 'name',
@@ -6543,7 +6567,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       forms: [],
       form_id: null,
-      fieldRequest: new _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_2__["default"]({}),
+      record_type: null,
+      recordTypes: [],
+      fieldRequest: new _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_3__["default"]({}),
       fieldParams: {
         ascending: true,
         sortBy: 'title',
@@ -6579,32 +6605,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     inputData: Object
   },
   computed: {
-    target_type_id: function target_type_id() {
-      if (!this.target.toString().includes('_')) {
-        this.fieldData.reference_target_type_id = this.target;
-        return this.target;
-      }
-
-      var target = this.target.toString().split('_');
-      this.fieldData.reference_target_type_id = target[0];
-      this.fieldData.reference_target_id = target[1];
-      return target[0];
-    },
-    target_id: function target_id() {
-      if (this.target.toString().includes('_')) {
-        var target = this.target.toString().split('_');
-        return target[1];
-      } else if (this.targetName == 'Form Field') {
-        return this.fieldData.reference_target_id;
-      }
-
-      return null;
-    },
     targetName: function targetName() {
       var targetType = null;
-      targetType = _.find(this.targetTypes, _.matchesProperty('target', this.target));
+      targetType = _.find(this.targetTypes, _.matchesProperty('id', this.fieldData.reference_target_type_id));
       if (targetType == null) return null;
-      if (targetType.name == 'Form Field') this.retrieveForms();
+
+      if (targetType.name == 'Records') {
+        this.retrieveRecordTypes();
+      } else if (targetType.name == 'Form Fields') {
+        this.retrieveForms();
+      }
+
       return targetType.name;
     }
   },
@@ -6614,9 +6625,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          _this.fieldData.reference_target_type_id = _this.target_type_id;
-          _this.fieldData.reference_target_id = _this.target_id;
-
           _this.$emit('save', _this.fieldData);
         } else {
           _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
@@ -6633,26 +6641,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.targetTypes = response.data;
       });
     },
-    retrieveForms: function retrieveForms(keywords) {
+    retrieveRecordTypes: function retrieveRecordTypes() {
       var _this3 = this;
+
+      var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({});
+      request.retrieve().then(function (response) {
+        _this3.recordTypes = response.data;
+      });
+    },
+    retrieveForms: function retrieveForms(keywords) {
+      var _this4 = this;
 
       this.formParams.search = keywords;
       this.formRequest.setFields({
         params: _objectSpread({}, this.formParams)
       });
       this.formRequest.retrieve().then(function (response) {
-        _this3.forms = response.data;
+        _this4.forms = response.data;
       });
     },
     retrieveFields: function retrieveFields(keywords) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.fieldParams.search = keywords;
       this.fieldRequest.setFields({
         params: _objectSpread({}, this.fieldParams)
       });
       this.fieldRequest.retrieve(this.form_id).then(function (response) {
-        _this4.fields = response.data;
+        _this5.fields = response.data;
       });
       ;
     }
@@ -6972,6 +6988,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -7372,6 +7389,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -7392,16 +7420,6 @@ __webpack_require__.r(__webpack_exports__);
     MenuPanel: _FormBuilder_components_menu_mobileMenu_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
     NavBar: _FormBuilder_components_navbar_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }
-  /* test method used when examining responsive behavior */
-  // computed: {
-  //     screenWidth: {
-  //         get() { return window.innerWidth },
-  //         set(screenWidth) {
-  //             this.screenWidth = window.innerWidth
-  //         }
-  //     } 
-  // },
-
 });
 
 /***/ }),
@@ -7421,23 +7439,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7700,7 +7701,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.types = response.data.types;
         _this2.scopes = response.data.scopes;
         _this2.formData.type = _this2.types['static'];
-        _this2.formData.target = _this2.targetTypes[1].target;
+        _this2.formData.target = _this2.targetTypes[0].target;
         _this2.formData.scope_id = _this2.scopes[0].id;
       });
     },
@@ -8040,7 +8041,6 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('edit');
     },
     blur: function blur() {
-      this.active = false;
       this.save();
     },
     save: function save() {
@@ -8629,10 +8629,10 @@ __webpack_require__.r(__webpack_exports__);
       },
       targetRequest: {},
       requests: {
-        Program: _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_1__["default"],
-        Group: _api_GroupRequest__WEBPACK_IMPORTED_MODULE_2__["default"],
-        Record: _api_RecordRequest__WEBPACK_IMPORTED_MODULE_4__["default"],
-        'Form Field': _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_5__["default"]
+        Programs: _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_1__["default"],
+        Groups: _api_GroupRequest__WEBPACK_IMPORTED_MODULE_2__["default"],
+        Records: _api_RecordRequest__WEBPACK_IMPORTED_MODULE_4__["default"],
+        'Form Fields': _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_5__["default"]
       },
       targetParams: {
         ascending: true,
@@ -8701,7 +8701,7 @@ __webpack_require__.r(__webpack_exports__);
       this.targetParams.search = keywords;
       var params = this.targetParams;
 
-      if (this.targetName == 'Record') {
+      if (this.targetName == 'Records') {
         this.recordParams.search = keywords;
         params = this.recordParams;
         var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_3__["default"]({});
@@ -8715,7 +8715,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
         return;
-      } else if (this.targetName == 'Form Field') {
+      } else if (this.targetName == 'Form Fields') {
         this.fieldParams.search = keywords;
         params = this.fieldParams;
         this.targetRequest.setFields({
@@ -8723,7 +8723,6 @@ __webpack_require__.r(__webpack_exports__);
         });
         this.targetRequest.retrieve(this.field.reference_target_id).then(function (response) {
           _this2.targetItems = response.data;
-          console.log(response.data);
         });
         return;
       }
@@ -11196,7 +11195,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n    margin: 0 auto;\n    margin-top: 10px;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n\n", ""]);
+exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -88215,14 +88214,15 @@ var render = function() {
       _c("br"),
       _c("br"),
       _vm._v(" "),
-      _vm._l(_vm.choices, function(item, index) {
-        return _c(
-          "el-checkbox-group",
-          { key: item.value, attrs: { id: "check" } },
-          [
-            _c(
+      _c(
+        "el-checkbox-group",
+        { attrs: { id: "check" } },
+        [
+          _vm._l(_vm.choices, function(item, index) {
+            return _c(
               "el-checkbox",
               {
+                key: item.value,
                 attrs: { label: item.value },
                 model: {
                   value: _vm.value,
@@ -88257,24 +88257,24 @@ var render = function() {
                 )
               ],
               1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-button",
-              {
-                attrs: { type: "text", size: "mini" },
-                on: {
-                  click: function($event) {
-                    return _vm.removeChoice(item)
-                  }
-                }
-              },
-              [_vm._v("\n                  Remove\n          ")]
             )
-          ],
-          1
-        )
-      }),
+          }),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              attrs: { type: "text", size: "mini" },
+              on: {
+                click: function($event) {
+                  return _vm.removeChoice(_vm.item)
+                }
+              }
+            },
+            [_vm._v("\n                  Remove\n          ")]
+          )
+        ],
+        2
+      ),
       _vm._v(" "),
       !_vm.isUnique
         ? _c("el-alert", {
@@ -89348,6 +89348,7 @@ var render = function() {
                 "editable-text",
                 {
                   staticClass: "tw-cursor-pointer mouseOver",
+                  attrs: { value: item.value },
                   on: {
                     input: function($event) {
                       return _vm.updateChoiceValue($event, index)
@@ -89355,13 +89356,6 @@ var render = function() {
                     edit: function($event) {
                       return _vm.tempValue(item.value)
                     }
-                  },
-                  model: {
-                    value: item.value,
-                    callback: function($$v) {
-                      _vm.$set(item, "value", $$v)
-                    },
-                    expression: "item.value"
                   }
                 },
                 [
@@ -91592,34 +91586,91 @@ var render = function() {
                 "base-select",
                 {
                   attrs: { name: "target", placeholder: "Stands alone" },
+                  on: {
+                    change: function($event) {
+                      _vm.fieldData.reference_target_id = null
+                    }
+                  },
                   model: {
-                    value: _vm.target,
+                    value: _vm.fieldData.reference_target_type_id,
                     callback: function($$v) {
-                      _vm.target = $$v
+                      _vm.$set(_vm.fieldData, "reference_target_type_id", $$v)
                     },
-                    expression: "target"
+                    expression: "fieldData.reference_target_type_id"
                   }
                 },
-                _vm._l(_vm.targetTypes, function(type, index) {
-                  return _c(
+                [
+                  _c(
                     "el-option",
-                    {
-                      key: index,
-                      attrs: { label: type.name, value: type.target }
-                    },
+                    { key: -1, attrs: { label: "Stands alone", value: "" } },
                     [
                       _vm._v(
-                        "\n                    Refers to " +
-                          _vm._s(type.name) +
-                          "\n                "
+                        "\n                    Stands alone\n                "
                       )
                     ]
-                  )
-                }),
-                1
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.targetTypes, function(type, index) {
+                    return _c(
+                      "el-option",
+                      {
+                        key: index,
+                        attrs: {
+                          label: "Refers to " + type.name,
+                          value: type.id
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Refers to " +
+                            _vm._s(type.name) +
+                            "\n                "
+                        )
+                      ]
+                    )
+                  })
+                ],
+                2
               ),
               _vm._v(" "),
-              _vm.targetName == "Form Field"
+              _vm.targetName == "Records"
+                ? _c(
+                    "base-select",
+                    {
+                      attrs: {
+                        name: "record_type",
+                        filterable: "",
+                        remote: "",
+                        "remote-method": _vm.retrieveRecordTypes,
+                        placeholder: "Select record type"
+                      },
+                      model: {
+                        value: _vm.fieldData.reference_target_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.fieldData, "reference_target_id", $$v)
+                        },
+                        expression: "fieldData.reference_target_id"
+                      }
+                    },
+                    _vm._l(_vm.recordTypes, function(type, index) {
+                      return _c(
+                        "el-option",
+                        {
+                          key: index,
+                          attrs: { label: type.name, value: type.id }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(type.name) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    }),
+                    1
+                  )
+                : _vm.targetName == "Form Fields"
                 ? _c(
                     "base-select",
                     {
@@ -91664,7 +91715,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.targetName == "Form Field" && _vm.form_id != null
+              _vm.targetName == "Form Fields" && _vm.form_id != null
                 ? _c(
                     "base-select",
                     {
@@ -92071,6 +92122,8 @@ var render = function() {
           }
         },
         [
+          _vm._t("mobile"),
+          _vm._v(" "),
           _c(
             "router-link",
             { attrs: { to: "/forms/create" } },
@@ -92184,7 +92237,7 @@ var render = function() {
             ]
           )
         ],
-        1
+        2
       )
     ],
     1
@@ -92571,7 +92624,61 @@ var render = function() {
             "el-card",
             { attrs: { id: "canvas-container" } },
             [
-              _c("el-header", [_c("nav-bar")], 1),
+              _c(
+                "el-header",
+                [
+                  _c("nav-bar", {
+                    scopedSlots: _vm._u([
+                      {
+                        key: "mobile",
+                        fn: function() {
+                          return [
+                            _c(
+                              "menu-panel",
+                              {
+                                scopedSlots: _vm._u([
+                                  {
+                                    key: "button-text",
+                                    fn: function() {
+                                      return [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass:
+                                              "tw-float-left tw-mr-1 mobile-menu"
+                                          },
+                                          [
+                                            _c(
+                                              "base-icon",
+                                              {
+                                                staticClass: "tw-align-middle"
+                                              },
+                                              [_vm._v("menu")]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    },
+                                    proxy: true
+                                  }
+                                ])
+                              },
+                              [
+                                _vm._v(" "),
+                                _c("form-menu", { attrs: { id: "menu" } })
+                              ],
+                              1
+                            )
+                          ]
+                        },
+                        proxy: true
+                      }
+                    ])
+                  })
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("form-canvas", { attrs: { fields: _vm.fields, id: "canvas" } })
             ],
@@ -92683,76 +92790,6 @@ var render = function() {
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
             _c("label", { staticClass: "tw-w-1/3" }, [
-              _vm._v("\n                    Team\n                ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tw-w-2/3" },
-              [
-                _c(
-                  "base-select",
-                  {
-                    attrs: {
-                      filterable: "",
-                      remote: "",
-                      "remote-method": _vm.retrieveTeams,
-                      name: "type",
-                      placeholder: " "
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.request.errors.clear("team_id")
-                      }
-                    },
-                    model: {
-                      value: _vm.formData.team_id,
-                      callback: function($$v) {
-                        _vm.$set(_vm.formData, "team_id", $$v)
-                      },
-                      expression: "formData.team_id"
-                    }
-                  },
-                  _vm._l(_vm.teams, function(team, index) {
-                    return _c(
-                      "el-option",
-                      {
-                        key: index,
-                        attrs: { label: team.name, value: team.id }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(team.name) +
-                            "\n                        "
-                        )
-                      ]
-                    )
-                  }),
-                  1
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _vm.request.errors.has("team_id")
-            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
-                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
-                  _c("span", {
-                    staticClass: "tw-text-xs tw-text-red-500",
-                    domProps: {
-                      textContent: _vm._s(_vm.request.errors.get("team_id")[0])
-                    }
-                  })
-                ])
-              ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "tw-mb-2" }, [
-          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/3" }, [
               _vm._v("\n                    Form Type\n                ")
             ]),
             _vm._v(" "),
@@ -92763,10 +92800,7 @@ var render = function() {
                 _c(
                   "base-select",
                   {
-                    attrs: {
-                      name: "type",
-                      placeholder: "Construction Ahead: Drive Slow"
-                    },
+                    attrs: { name: "type", placeholder: " " },
                     on: {
                       change: function($event) {
                         return _vm.request.errors.clear("type")
@@ -92976,6 +93010,76 @@ var render = function() {
                       textContent: _vm._s(
                         _vm.request.errors.get("target.type_id")[0]
                       )
+                    }
+                  })
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tw-mb-2" }, [
+          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
+            _c("label", { staticClass: "tw-w-1/3" }, [
+              _vm._v("\n                    Team\n                ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tw-w-2/3" },
+              [
+                _c(
+                  "base-select",
+                  {
+                    attrs: {
+                      filterable: "",
+                      remote: "",
+                      "remote-method": _vm.retrieveTeams,
+                      name: "type",
+                      placeholder: " "
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.request.errors.clear("team_id")
+                      }
+                    },
+                    model: {
+                      value: _vm.formData.team_id,
+                      callback: function($$v) {
+                        _vm.$set(_vm.formData, "team_id", $$v)
+                      },
+                      expression: "formData.team_id"
+                    }
+                  },
+                  _vm._l(_vm.teams, function(team, index) {
+                    return _c(
+                      "el-option",
+                      {
+                        key: index,
+                        attrs: { label: team.name, value: team.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(team.name) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm.request.errors.has("team_id")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red-500",
+                    domProps: {
+                      textContent: _vm._s(_vm.request.errors.get("team_id")[0])
                     }
                   })
                 ])
@@ -93534,11 +93638,7 @@ var render = function() {
                 ref: "editable_input",
                 staticClass: "text-base p-0",
                 attrs: { size: "small", maxlength: "200" },
-                on: {
-                  blur: function($event) {
-                    _vm.active = false
-                  }
-                },
+                on: { blur: _vm.blur },
                 model: {
                   value: _vm.newValue,
                   callback: function($$v) {
@@ -93819,75 +93919,29 @@ var render = function() {
             _vm._v(" "),
             _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
             _vm._v(" "),
-            _c("table", { attrs: { id: "matrix-table" } }, [
-              _c("thead", [
-                _c(
-                  "tr",
-                  { staticClass: "tw-max-w-sm" },
-                  [
-                    _c("th"),
-                    _vm._v(" "),
-                    _vm._l(_vm.field.choices, function(item, index) {
-                      return _c(
-                        "th",
-                        { key: index },
-                        [
-                          _c("el-col", [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(item.value) +
-                                "\n                            "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.field.questions, function(question, questionIndex) {
-                  return _c(
+            _c(
+              "table",
+              { staticClass: "tw-w-full", attrs: { id: "matrix-table" } },
+              [
+                _c("thead", [
+                  _c(
                     "tr",
-                    { key: questionIndex },
+                    { staticClass: "tw-max-w-sm" },
                     [
-                      _c("td", [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(question.text) +
-                            "\n                        "
-                        )
-                      ]),
+                      _c("th"),
                       _vm._v(" "),
-                      _vm._l(_vm.field.choices, function(response, index) {
+                      _vm._l(_vm.field.choices, function(item, index) {
                         return _c(
-                          "td",
-                          { key: response.id, staticClass: "tw-text-center" },
+                          "th",
+                          { key: index },
                           [
-                            _c(
-                              "el-radio",
-                              {
-                                key: response.id,
-                                staticClass: "tw-ml-2",
-                                attrs: { value: index, label: response.value },
-                                model: {
-                                  value: _vm.select[questionIndex],
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.select, questionIndex, $$v)
-                                  },
-                                  expression: "select[questionIndex]"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                     \n                            "
-                                )
-                              ]
-                            )
+                            _c("el-col", [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(item.value) +
+                                  "\n                            "
+                              )
+                            ])
                           ],
                           1
                         )
@@ -93895,10 +93949,66 @@ var render = function() {
                     ],
                     2
                   )
-                }),
-                0
-              )
-            ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.field.questions, function(
+                    question,
+                    questionIndex
+                  ) {
+                    return _c(
+                      "tr",
+                      { key: questionIndex },
+                      [
+                        _c("td", [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(question.text) +
+                              "\n                        "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.field.choices, function(response, index) {
+                          return _c(
+                            "td",
+                            { key: response.id, staticClass: "tw-text-center" },
+                            [
+                              _c(
+                                "el-radio",
+                                {
+                                  key: response.id,
+                                  staticClass: "tw-ml-2",
+                                  attrs: {
+                                    value: index,
+                                    label: response.value
+                                  },
+                                  model: {
+                                    value: _vm.select[questionIndex],
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.select, questionIndex, $$v)
+                                    },
+                                    expression: "select[questionIndex]"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                     \n                            "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  }),
+                  0
+                )
+              ]
+            )
           ])
         ],
         1
@@ -94233,7 +94343,7 @@ var render = function() {
           _vm.field.reference_target_type_id == null
             ? _c(
                 "el-col",
-                { attrs: { span: 10 } },
+                { attrs: { span: 8 } },
                 [
                   _vm.limit
                     ? _c("el-input", {
@@ -94267,9 +94377,9 @@ var render = function() {
               )
             : _c(
                 "el-col",
-                { attrs: { span: 10 } },
+                { attrs: { span: 8 } },
                 [
-                  _vm.targetName == "Record"
+                  _vm.targetName == "Records"
                     ? _c(
                         "base-select",
                         {
@@ -94313,7 +94423,7 @@ var render = function() {
                         }),
                         1
                       )
-                    : _vm.targetName == "Form Field"
+                    : _vm.targetName == "Form Fields"
                     ? _c(
                         "base-select",
                         {

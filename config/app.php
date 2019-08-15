@@ -232,29 +232,29 @@ return [
     ],
 
     'form_types' => [
-        'static' => 'static',
-        'pre-post' => 'pre-post'
+        'static' => 'Static',
+        'pre-post' => 'Pre-post'
     ],
 
     'form_target_types' => [
         'record' => [
-            'name' => 'Record',
+            'name' => 'Records',
             'model' => 'App\RecordType'
         ],
         'program' => [
-            'name' => 'Program',
+            'name' => 'Programs',
             'model' => 'App\Program'
         ],
         'group' => [
-            'name' => 'Group',
+            'name' => 'Groups',
             'model' => 'App\Group'
         ],
         'form' => [
-            'name' => 'Form',
+            'name' => 'Forms',
             'model' => 'App\Form'
         ],
         'form_field' => [
-            'name' => 'Form Field',
+            'name' => 'Form Fields',
             'model' => 'App\FormField'
         ],
         

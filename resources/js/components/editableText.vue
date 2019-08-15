@@ -7,7 +7,7 @@
 				v-model="newValue" 
 				class="text-base p-0" 
 				size="small"
-				@blur="active = false" 
+				@blur="blur" 
 				maxlength="200">
 			</el-input>
 		</div>
@@ -35,7 +35,6 @@
 			},
 
 			blur() {
-				this.active = false;
 				this.save();
 			},
 

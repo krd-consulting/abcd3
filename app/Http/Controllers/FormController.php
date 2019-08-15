@@ -120,7 +120,7 @@ class FormController extends Controller
             return $type;
         });
 
-        $targetTypes = $targetTypes->concat($recordTypes);
+        $targetTypes = $recordTypes->concat($targetTypes);
 
         $targetTypes->map(function($type) {
             $type['target'] = !empty($type['target_id']) ? $type['id'] . '_' . $type['target_id'] : $type['id'];

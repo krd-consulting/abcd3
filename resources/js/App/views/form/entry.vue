@@ -11,7 +11,7 @@
                 <el-row class="tw-mb-4">
                     <el-col :span="6">
                         <label v-if="form.target != null" for="name" class="tw-block tw-text-right tw-mr-1"> {{ form.target.name }} Name</label>
-                        <label v-else for="name" class="tw-block tw-text-right tw-mr-1"> {{ form.target_type.name }} Name</label>
+                        <label v-else for="name" class="tw-block tw-text-right tw-mr-1"> {{ targetName }} Name</label>
                     </el-col>
                     <el-col :span="8">
                         <base-select
@@ -58,7 +58,7 @@
                     <el-col :span="6">
                         <label for="teamSelect" class="tw-block tw-text-right tw-mr-1">Team</label>
                     </el-col>
-                    <el-col :span="6">
+                    <el-col :span="8">
                         <base-select
                             v-model="teams.team_id"
                             filterable
@@ -109,7 +109,7 @@
                     
                 </el-row>
                 
-                <div class="tw-block tw-text-right tw-mr-1" v-for="field in form.field_layout" :key="field.id">
+                <div class="tw-block tw-mr-1" v-for="field in form.field_layout" :key="field.id">
                     <component
                         class="tw-my-8"
                         v-model="entryData[field.column_name]"
@@ -209,7 +209,13 @@
 
         computed: {
             targetName() {
-                return this.form.target_type.name;
+                const targetTypes = {
+                    Programs: 'Program',
+                    Groups: 'Group',
+                    Records: 'Record',
+                };
+
+                return targetTypes[this.form.target_type.name];
             }
         },
 

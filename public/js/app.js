@@ -4957,7 +4957,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {
     targetName: function targetName() {
-      return this.form.target_type.name;
+      var targetTypes = {
+        Programs: 'Program',
+        Groups: 'Group',
+        Records: 'Record'
+      };
+      return targetTypes[this.form.target_type.name];
     }
   },
   components: {
@@ -10883,10 +10888,10 @@ __webpack_require__.r(__webpack_exports__);
       },
       targetRequest: {},
       requests: {
-        Program: _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_1__["default"],
-        Group: _api_GroupRequest__WEBPACK_IMPORTED_MODULE_2__["default"],
-        Record: _api_RecordRequest__WEBPACK_IMPORTED_MODULE_4__["default"],
-        'Form Field': _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_5__["default"]
+        Programs: _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_1__["default"],
+        Groups: _api_GroupRequest__WEBPACK_IMPORTED_MODULE_2__["default"],
+        Records: _api_RecordRequest__WEBPACK_IMPORTED_MODULE_4__["default"],
+        'Form Fields': _api_FormFieldEntryRequest__WEBPACK_IMPORTED_MODULE_5__["default"]
       },
       targetParams: {
         ascending: true,
@@ -10955,7 +10960,7 @@ __webpack_require__.r(__webpack_exports__);
       this.targetParams.search = keywords;
       var params = this.targetParams;
 
-      if (this.targetName == 'Record') {
+      if (this.targetName == 'Records') {
         this.recordParams.search = keywords;
         params = this.recordParams;
         var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_3__["default"]({});
@@ -10969,7 +10974,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         });
         return;
-      } else if (this.targetName == 'Form Field') {
+      } else if (this.targetName == 'Form Fields') {
         this.fieldParams.search = keywords;
         params = this.fieldParams;
         this.targetRequest.setFields({
@@ -10977,7 +10982,6 @@ __webpack_require__.r(__webpack_exports__);
         });
         this.targetRequest.retrieve(this.field.reference_target_id).then(function (response) {
           _this2.targetItems = response.data;
-          console.log(response.data);
         });
         return;
       }
@@ -88855,11 +88859,7 @@ var render = function() {
                             staticClass: "tw-block tw-text-right tw-mr-1",
                             attrs: { for: "name" }
                           },
-                          [
-                            _vm._v(
-                              " " + _vm._s(_vm.form.target_type.name) + " Name"
-                            )
-                          ]
+                          [_vm._v(" " + _vm._s(_vm.targetName) + " Name")]
                         )
                   ]),
                   _vm._v(" "),
@@ -88984,7 +88984,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "el-col",
-                    { attrs: { span: 6 } },
+                    { attrs: { span: 8 } },
                     [
                       _c(
                         "base-select",
@@ -89129,10 +89129,7 @@ var render = function() {
               _vm._l(_vm.form.field_layout, function(field) {
                 return _c(
                   "div",
-                  {
-                    key: field.id,
-                    staticClass: "tw-block tw-text-right tw-mr-1"
-                  },
+                  { key: field.id, staticClass: "tw-block tw-mr-1" },
                   [
                     _c(field.type, {
                       key: field.id,
@@ -95109,75 +95106,29 @@ var render = function() {
             _vm._v(" "),
             _c("sup", [_vm._v(_vm._s(_vm.field.description))]),
             _vm._v(" "),
-            _c("table", { attrs: { id: "matrix-table" } }, [
-              _c("thead", [
-                _c(
-                  "tr",
-                  { staticClass: "tw-max-w-sm" },
-                  [
-                    _c("th"),
-                    _vm._v(" "),
-                    _vm._l(_vm.field.choices, function(item, index) {
-                      return _c(
-                        "th",
-                        { key: index },
-                        [
-                          _c("el-col", [
-                            _vm._v(
-                              "\n                                " +
-                                _vm._s(item.value) +
-                                "\n                            "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.field.questions, function(question, questionIndex) {
-                  return _c(
+            _c(
+              "table",
+              { staticClass: "tw-w-full", attrs: { id: "matrix-table" } },
+              [
+                _c("thead", [
+                  _c(
                     "tr",
-                    { key: questionIndex },
+                    { staticClass: "tw-max-w-sm" },
                     [
-                      _c("td", [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(question.text) +
-                            "\n                        "
-                        )
-                      ]),
+                      _c("th"),
                       _vm._v(" "),
-                      _vm._l(_vm.field.choices, function(response, index) {
+                      _vm._l(_vm.field.choices, function(item, index) {
                         return _c(
-                          "td",
-                          { key: response.id, staticClass: "tw-text-center" },
+                          "th",
+                          { key: index },
                           [
-                            _c(
-                              "el-radio",
-                              {
-                                key: response.id,
-                                staticClass: "tw-ml-2",
-                                attrs: { value: index, label: response.value },
-                                model: {
-                                  value: _vm.select[questionIndex],
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.select, questionIndex, $$v)
-                                  },
-                                  expression: "select[questionIndex]"
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                                     \n                            "
-                                )
-                              ]
-                            )
+                            _c("el-col", [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(item.value) +
+                                  "\n                            "
+                              )
+                            ])
                           ],
                           1
                         )
@@ -95185,10 +95136,66 @@ var render = function() {
                     ],
                     2
                   )
-                }),
-                0
-              )
-            ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.field.questions, function(
+                    question,
+                    questionIndex
+                  ) {
+                    return _c(
+                      "tr",
+                      { key: questionIndex },
+                      [
+                        _c("td", [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(question.text) +
+                              "\n                        "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.field.choices, function(response, index) {
+                          return _c(
+                            "td",
+                            { key: response.id, staticClass: "tw-text-center" },
+                            [
+                              _c(
+                                "el-radio",
+                                {
+                                  key: response.id,
+                                  staticClass: "tw-ml-2",
+                                  attrs: {
+                                    value: index,
+                                    label: response.value
+                                  },
+                                  model: {
+                                    value: _vm.select[questionIndex],
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.select, questionIndex, $$v)
+                                    },
+                                    expression: "select[questionIndex]"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                     \n                            "
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        })
+                      ],
+                      2
+                    )
+                  }),
+                  0
+                )
+              ]
+            )
           ])
         ],
         1
@@ -95523,7 +95530,7 @@ var render = function() {
           _vm.field.reference_target_type_id == null
             ? _c(
                 "el-col",
-                { attrs: { span: 10 } },
+                { attrs: { span: 8 } },
                 [
                   _vm.limit
                     ? _c("el-input", {
@@ -95557,9 +95564,9 @@ var render = function() {
               )
             : _c(
                 "el-col",
-                { attrs: { span: 10 } },
+                { attrs: { span: 8 } },
                 [
-                  _vm.targetName == "Record"
+                  _vm.targetName == "Records"
                     ? _c(
                         "base-select",
                         {
@@ -95603,7 +95610,7 @@ var render = function() {
                         }),
                         1
                       )
-                    : _vm.targetName == "Form Field"
+                    : _vm.targetName == "Form Fields"
                     ? _c(
                         "base-select",
                         {

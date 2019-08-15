@@ -12,12 +12,11 @@
       </el-col>
         <br><br>
 
-        <el-checkbox-group 
-            id="check" 
-            v-for="(item, index) in choices" 
-            :key="item.value">
+        <el-checkbox-group id="check">
 
-            <el-checkbox 
+            <el-checkbox
+                v-for="(item, index) in choices" 
+                :key="item.value" 
                 v-model="value" 
                 :label="item.value">
                     <editable-text 
@@ -182,16 +181,16 @@ export default {
 
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
-            
+
             for(var i = 0; i < this.field.choices.length; i++) {
                 if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
 
                     this.field.choices[index].value = this.temp;
-
+                    
                     return this.isUnique = false;
                 }
             }
-
+            
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
         } ,
