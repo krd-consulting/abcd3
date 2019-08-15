@@ -6420,8 +6420,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_FormFieldTargetTypeRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/FormFieldTargetTypeRequest */ "./resources/js/api/FormFieldTargetTypeRequest.js");
-/* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
-/* harmony import */ var _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/api/FormFieldRequest */ "./resources/js/api/FormFieldRequest.js");
+/* harmony import */ var _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/api/RecordTypeRequest */ "./resources/js/api/RecordTypeRequest.js");
+/* harmony import */ var _api_FormRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/api/FormRequest */ "./resources/js/api/FormRequest.js");
+/* harmony import */ var _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/api/FormFieldRequest */ "./resources/js/api/FormFieldRequest.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -6528,6 +6529,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -6537,7 +6557,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       targetTypes: [],
       target: '',
-      formRequest: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({}),
+      formRequest: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_2__["default"]({}),
       formParams: {
         ascending: true,
         sortBy: 'name',
@@ -6547,7 +6567,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       forms: [],
       form_id: null,
-      fieldRequest: new _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_2__["default"]({}),
+      record_type: null,
+      recordTypes: [],
+      fieldRequest: new _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_3__["default"]({}),
       fieldParams: {
         ascending: true,
         sortBy: 'title',
@@ -6583,32 +6605,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     inputData: Object
   },
   computed: {
-    target_type_id: function target_type_id() {
-      if (!this.target.toString().includes('_')) {
-        this.fieldData.reference_target_type_id = this.target;
-        return this.target;
-      }
-
-      var target = this.target.toString().split('_');
-      this.fieldData.reference_target_type_id = target[0];
-      this.fieldData.reference_target_id = target[1];
-      return target[0];
-    },
-    target_id: function target_id() {
-      if (this.target.toString().includes('_')) {
-        var target = this.target.toString().split('_');
-        return target[1];
-      } else if (this.targetName == 'Form Fields') {
-        return this.fieldData.reference_target_id;
-      }
-
-      return null;
-    },
     targetName: function targetName() {
       var targetType = null;
-      targetType = _.find(this.targetTypes, _.matchesProperty('target', this.target));
+      targetType = _.find(this.targetTypes, _.matchesProperty('id', this.fieldData.reference_target_type_id));
       if (targetType == null) return null;
-      if (targetType.name == 'Form Fields') this.retrieveForms();
+
+      if (targetType.name == 'Records') {
+        this.retrieveRecordTypes();
+      } else if (targetType.name == 'Form Fields') {
+        this.retrieveForms();
+      }
+
       return targetType.name;
     }
   },
@@ -6618,9 +6625,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          _this.fieldData.reference_target_type_id = _this.target_type_id;
-          _this.fieldData.reference_target_id = _this.target_id;
-
           _this.$emit('save', _this.fieldData);
         } else {
           _this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
@@ -6637,26 +6641,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.targetTypes = response.data;
       });
     },
-    retrieveForms: function retrieveForms(keywords) {
+    retrieveRecordTypes: function retrieveRecordTypes() {
       var _this3 = this;
+
+      var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({});
+      request.retrieve().then(function (response) {
+        _this3.recordTypes = response.data;
+      });
+    },
+    retrieveForms: function retrieveForms(keywords) {
+      var _this4 = this;
 
       this.formParams.search = keywords;
       this.formRequest.setFields({
         params: _objectSpread({}, this.formParams)
       });
       this.formRequest.retrieve().then(function (response) {
-        _this3.forms = response.data;
+        _this4.forms = response.data;
       });
     },
     retrieveFields: function retrieveFields(keywords) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.fieldParams.search = keywords;
       this.fieldRequest.setFields({
         params: _objectSpread({}, this.fieldParams)
       });
       this.fieldRequest.retrieve(this.form_id).then(function (response) {
-        _this4.fields = response.data;
+        _this5.fields = response.data;
       });
       ;
     }
@@ -91587,12 +91599,17 @@ var render = function() {
                 "base-select",
                 {
                   attrs: { name: "target", placeholder: "Stands alone" },
+                  on: {
+                    change: function($event) {
+                      _vm.fieldData.reference_target_id = null
+                    }
+                  },
                   model: {
-                    value: _vm.target,
+                    value: _vm.fieldData.reference_target_type_id,
                     callback: function($$v) {
-                      _vm.target = $$v
+                      _vm.$set(_vm.fieldData, "reference_target_type_id", $$v)
                     },
-                    expression: "target"
+                    expression: "fieldData.reference_target_type_id"
                   }
                 },
                 [
@@ -91611,7 +91628,7 @@ var render = function() {
                       "el-option",
                       {
                         key: index,
-                        attrs: { label: type.name, value: type.target }
+                        attrs: { label: type.name, value: type.id }
                       },
                       [
                         _vm._v(
@@ -91626,7 +91643,44 @@ var render = function() {
                 2
               ),
               _vm._v(" "),
-              _vm.targetName == "Form Fields"
+              _vm.targetName == "Records"
+                ? _c(
+                    "base-select",
+                    {
+                      attrs: {
+                        name: "record_type",
+                        filterable: "",
+                        remote: "",
+                        "remote-method": _vm.retrieveRecordTypes,
+                        placeholder: "Select record type"
+                      },
+                      model: {
+                        value: _vm.fieldData.reference_target_id,
+                        callback: function($$v) {
+                          _vm.$set(_vm.fieldData, "reference_target_id", $$v)
+                        },
+                        expression: "fieldData.reference_target_id"
+                      }
+                    },
+                    _vm._l(_vm.recordTypes, function(type, index) {
+                      return _c(
+                        "el-option",
+                        {
+                          key: index,
+                          attrs: { label: type.name, value: type.id }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(type.name) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    }),
+                    1
+                  )
+                : _vm.targetName == "Form Fields"
                 ? _c(
                     "base-select",
                     {
@@ -94334,7 +94388,7 @@ var render = function() {
                 "el-col",
                 { attrs: { span: 8 } },
                 [
-                  _vm.targetName == "Record"
+                  _vm.targetName == "Records"
                     ? _c(
                         "base-select",
                         {

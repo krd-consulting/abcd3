@@ -95553,7 +95553,7 @@ var render = function() {
                 "el-col",
                 { attrs: { span: 8 } },
                 [
-                  _vm.targetName == "Record"
+                  _vm.targetName == "Records"
                     ? _c(
                         "base-select",
                         {

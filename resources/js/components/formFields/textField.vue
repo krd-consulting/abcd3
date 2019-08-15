@@ -20,7 +20,7 @@
             </el-col>
             <el-col v-else :span="8">
                 <base-select
-                    v-if="targetName == 'Record'"
+                    v-if="targetName == 'Records'"
                     v-model="value"
                     filterable
                     remote

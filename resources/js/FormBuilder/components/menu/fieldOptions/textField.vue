@@ -39,7 +39,8 @@
                     This field
                 </label>
                 <base-select
-                    v-model="target"
+                    v-model="fieldData.reference_target_type_id"
+                    @change="fieldData.reference_target_id = null"
                     name="target"
                     placeholder="Stands alone">
                     <el-option
@@ -52,13 +53,30 @@
                         v-for="(type, index) in targetTypes"
                         :key="index"
                         :label="type.name"
-                        :value="type.target">
+                        :value="type.id">
                         Refers to {{ type.name }}
                     </el-option>
                 </base-select>
 
                 <base-select
-                    v-if="targetName == 'Form Fields'"
+                    v-if="targetName == 'Records'"
+                    v-model="fieldData.reference_target_id"
+                    name="record_type"
+                    filterable
+                    remote
+                    :remote-method="retrieveRecordTypes"
+                    placeholder="Select record type">
+                    <el-option
+                        v-for="(type, index) in recordTypes"
+                        :key="index"
+                        :label="type.name"
+                        :value="type.id">
+                        {{ type.name }}
+                    </el-option>
+                </base-select>
+
+                <base-select
+                    v-else-if="targetName == 'Form Fields'"
                     v-model="form_id"
                     @change="retrieveFields(''); fieldData.reference_target_id = null"
                     name="form"
@@ -102,6 +120,7 @@
 
 <script>
 import FormFieldTargetTypesRequest from '@/api/FormFieldTargetTypeRequest';
+import RecordTypeRequest from '@/api/RecordTypeRequest';
 import FormRequest from '@/api/FormRequest';
 import FieldRequest from '@/api/FormFieldRequest';
 
@@ -121,7 +140,8 @@ export default {
             },
             forms: [],
             form_id: null,
-
+            record_type: null,
+            recordTypes: [],
             fieldRequest: new FieldRequest({}),
             fieldParams: {
                 ascending: true,
@@ -159,41 +179,22 @@ export default {
     },
     
     computed: {
-        target_type_id() {
-            if(!this.target.toString().includes('_')) {
-                this.fieldData.reference_target_type_id = this.target;
-                return this.target;
-            }
-
-            const target = this.target.toString().split('_');
-
-            this.fieldData.reference_target_type_id = target[0];
-            this.fieldData.reference_target_id = target[1];
-
-            return target[0];
-        },
-
-        target_id() {
-            if(this.target.toString().includes('_')) {
-                const target = this.target.toString().split('_')
-                return target[1];
-            }else if(this.targetName == 'Form Fields') {
-                return this.fieldData.reference_target_id;
-            }
-
-            return null;
-        },
-
         targetName() {
             let targetType = null;
 
-            targetType = _.find(this.targetTypes, _.matchesProperty('target', this.target));
+            targetType = _.find(
+                this.targetTypes, 
+                _.matchesProperty('id', this.fieldData.reference_target_type_id)
+            );
 
             if(targetType == null)
                 return null;
 
-            if(targetType.name == 'Form Fields')
+            if(targetType.name == 'Records') {
+                this.retrieveRecordTypes();
+            }else if(targetType.name == 'Form Fields') {
                 this.retrieveForms();
+            }
 
             return targetType.name;
         }
@@ -202,8 +203,6 @@ export default {
         save(formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.fieldData.reference_target_type_id = this.target_type_id;
-                    this.fieldData.reference_target_id = this.target_id;
                     this.$emit('save', this.fieldData);
                 } else {
                     this.$message.error('Oops, You forgot to enter a Question/Title for this field.');
@@ -217,6 +216,14 @@ export default {
 
             request.retrieve().then((response) => {
                 this.targetTypes = response.data;
+            });
+        },
+
+        retrieveRecordTypes() {
+            const request = new RecordTypeRequest({});
+
+            request.retrieve().then((response) => {
+                this.recordTypes = response.data;
             });
         },
 
