@@ -52,7 +52,7 @@
                     <el-option
                         v-for="(type, index) in targetTypes"
                         :key="index"
-                        :label="type.name"
+                        :label="`Refers to ${type.name}`"
                         :value="type.id">
                         Refers to {{ type.name }}
                     </el-option>

@@ -91628,7 +91628,10 @@ var render = function() {
                       "el-option",
                       {
                         key: index,
-                        attrs: { label: type.name, value: type.id }
+                        attrs: {
+                          label: "Refers to " + type.name,
+                          value: type.id
+                        }
                       },
                       [
                         _vm._v(
