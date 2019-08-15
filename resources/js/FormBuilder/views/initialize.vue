@@ -47,36 +47,7 @@
                     </div>
                 </div>
             </div> -->
-            <div class="tw-mb-2">
-                <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/3">
-                        Team
-                    </label>
-                    <div class="tw-w-2/3">
-                        <base-select
-                            v-model="formData.team_id"
-                            filterable
-                            remote
-                            :remote-method="retrieveTeams"
-                            name="type"
-                            placeholder=" "
-                            @change="request.errors.clear('team_id')">
-                            <el-option
-                                v-for="(team, index) in teams"
-                                :key="index"
-                                :label="team.name"
-                                :value="team.id">
-                                {{ team.name }}
-                            </el-option>
-                        </base-select>
-                    </div>
-                </div>
-                <div v-if="request.errors.has('team_id')" class="tw-flex tw-justify-end">
-                    <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red-500"></span>
-                    </div>
-                </div>
-            </div>
+            
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/3">
@@ -86,7 +57,7 @@
                         <base-select
                             v-model="formData.type"
                             name="type"
-                            placeholder="Construction Ahead: Drive Slow"
+                            placeholder=" "
                             @change="request.errors.clear('type')">
                             <el-option
                                 v-for="(type, index) in types"
@@ -169,6 +140,36 @@
                 <div v-if="request.errors.has('target.type_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
                         <span v-text="request.errors.get('target.type_id')[0]" class="tw-text-xs tw-text-red-500"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="tw-mb-2">
+                <div class="tw-flex tw-items-center tw-w-full">
+                    <label class="tw-w-1/3">
+                        Team
+                    </label>
+                    <div class="tw-w-2/3">
+                        <base-select
+                            v-model="formData.team_id"
+                            filterable
+                            remote
+                            :remote-method="retrieveTeams"
+                            name="type"
+                            placeholder=" "
+                            @change="request.errors.clear('team_id')">
+                            <el-option
+                                v-for="(team, index) in teams"
+                                :key="index"
+                                :label="team.name"
+                                :value="team.id">
+                                {{ team.name }}
+                            </el-option>
+                        </base-select>
+                    </div>
+                </div>
+                <div v-if="request.errors.has('team_id')" class="tw-flex tw-justify-end">
+                    <div class="tw-w-4/5 tw-py-2">
+                        <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
             </div>

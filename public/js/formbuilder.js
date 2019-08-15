@@ -7608,6 +7608,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -92723,76 +92724,6 @@ var render = function() {
         _c("div", { staticClass: "tw-mb-2" }, [
           _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
             _c("label", { staticClass: "tw-w-1/3" }, [
-              _vm._v("\n                    Team\n                ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tw-w-2/3" },
-              [
-                _c(
-                  "base-select",
-                  {
-                    attrs: {
-                      filterable: "",
-                      remote: "",
-                      "remote-method": _vm.retrieveTeams,
-                      name: "type",
-                      placeholder: " "
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.request.errors.clear("team_id")
-                      }
-                    },
-                    model: {
-                      value: _vm.formData.team_id,
-                      callback: function($$v) {
-                        _vm.$set(_vm.formData, "team_id", $$v)
-                      },
-                      expression: "formData.team_id"
-                    }
-                  },
-                  _vm._l(_vm.teams, function(team, index) {
-                    return _c(
-                      "el-option",
-                      {
-                        key: index,
-                        attrs: { label: team.name, value: team.id }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(team.name) +
-                            "\n                        "
-                        )
-                      ]
-                    )
-                  }),
-                  1
-                )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _vm.request.errors.has("team_id")
-            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
-                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
-                  _c("span", {
-                    staticClass: "tw-text-xs tw-text-red-500",
-                    domProps: {
-                      textContent: _vm._s(_vm.request.errors.get("team_id")[0])
-                    }
-                  })
-                ])
-              ])
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "tw-mb-2" }, [
-          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/3" }, [
               _vm._v("\n                    Form Type\n                ")
             ]),
             _vm._v(" "),
@@ -92803,10 +92734,7 @@ var render = function() {
                 _c(
                   "base-select",
                   {
-                    attrs: {
-                      name: "type",
-                      placeholder: "Construction Ahead: Drive Slow"
-                    },
+                    attrs: { name: "type", placeholder: " " },
                     on: {
                       change: function($event) {
                         return _vm.request.errors.clear("type")
@@ -93016,6 +92944,76 @@ var render = function() {
                       textContent: _vm._s(
                         _vm.request.errors.get("target.type_id")[0]
                       )
+                    }
+                  })
+                ])
+              ])
+            : _vm._e()
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "tw-mb-2" }, [
+          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
+            _c("label", { staticClass: "tw-w-1/3" }, [
+              _vm._v("\n                    Team\n                ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tw-w-2/3" },
+              [
+                _c(
+                  "base-select",
+                  {
+                    attrs: {
+                      filterable: "",
+                      remote: "",
+                      "remote-method": _vm.retrieveTeams,
+                      name: "type",
+                      placeholder: " "
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.request.errors.clear("team_id")
+                      }
+                    },
+                    model: {
+                      value: _vm.formData.team_id,
+                      callback: function($$v) {
+                        _vm.$set(_vm.formData, "team_id", $$v)
+                      },
+                      expression: "formData.team_id"
+                    }
+                  },
+                  _vm._l(_vm.teams, function(team, index) {
+                    return _c(
+                      "el-option",
+                      {
+                        key: index,
+                        attrs: { label: team.name, value: team.id }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            " +
+                            _vm._s(team.name) +
+                            "\n                        "
+                        )
+                      ]
+                    )
+                  }),
+                  1
+                )
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _vm.request.errors.has("team_id")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red-500",
+                    domProps: {
+                      textContent: _vm._s(_vm.request.errors.get("team_id")[0])
                     }
                   })
                 ])
@@ -93574,11 +93572,7 @@ var render = function() {
                 ref: "editable_input",
                 staticClass: "text-base p-0",
                 attrs: { size: "small", maxlength: "200" },
-                on: {
-                  blur: function($event) {
-                    _vm.active = false
-                  }
-                },
+                on: { blur: _vm.blur },
                 model: {
                   value: _vm.newValue,
                   callback: function($$v) {
