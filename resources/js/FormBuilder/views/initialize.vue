@@ -29,24 +29,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="tw-mb-2">
-                <div  class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/3 tw-capitalize">
-                        Description
-                    </label>
-                    <div class="tw-w-2/3">
-                        <base-input
-                            v-model="formData['description']"
-                            name="description"
-                            @keydown.native="request.errors.clear($event.target.name)"/>
-                    </div>
-                </div>
-                <div v-if="request.errors.has('description')" class="tw-flex tw-justify-end">
-                    <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('description')[0]" class="tw-text-xs tw-text-red-500"></span>
-                    </div>
-                </div>
-            </div> -->
             
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
@@ -292,7 +274,7 @@
                     this.scopes = response.data.scopes;
 
                     this.formData.type = this.types['static'];
-                    this.formData.target = this.targetTypes[1].target;
+                    this.formData.target = this.targetTypes[0].target;
                     this.formData.scope_id = this.scopes[0].id;
                 });
             },

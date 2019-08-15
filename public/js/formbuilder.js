@@ -7609,24 +7609,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7719,7 +7701,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.types = response.data.types;
         _this2.scopes = response.data.scopes;
         _this2.formData.type = _this2.types['static'];
-        _this2.formData.target = _this2.targetTypes[1].target;
+        _this2.formData.target = _this2.targetTypes[0].target;
         _this2.formData.scope_id = _this2.scopes[0].id;
       });
     },
