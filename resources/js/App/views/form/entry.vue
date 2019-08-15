@@ -11,7 +11,7 @@
                 <el-row class="tw-mb-4">
                     <el-col :span="6">
                         <label v-if="form.target != null" for="name" class="tw-block tw-text-right tw-mr-1"> {{ form.target.name }} Name</label>
-                        <label v-else for="name" class="tw-block tw-text-right tw-mr-1"> {{ form.target_type.name }} Name</label>
+                        <label v-else for="name" class="tw-block tw-text-right tw-mr-1"> {{ targetName }} Name</label>
                     </el-col>
                     <el-col :span="8">
                         <base-select
@@ -209,7 +209,13 @@
 
         computed: {
             targetName() {
-                return this.form.target_type.name;
+                const targetTypes = {
+                    Programs: 'Program',
+                    Groups: 'Group',
+                    Records: 'Record',
+                };
+
+                return targetTypes[this.form.target_type.name];
             }
         },
 

@@ -38,7 +38,7 @@
                 </base-select>
 
                 <base-select
-                    v-else-if="targetName == 'Form Field'"
+                    v-else-if="targetName == 'Form Fields'"
                     v-model="value"
                     @click.native="retrieveTargetItems"
                     filterable
@@ -99,10 +99,10 @@
                 },
                 targetRequest: {},
                 requests: {
-                    Program: ProgramRequest,
-                    Group: GroupRequest,
-                    Record: RecordRequest,
-                    'Form Field': FormFieldEntryRequest
+                    Programs: ProgramRequest,
+                    Groups: GroupRequest,
+                    Records: RecordRequest,
+                    'Form Fields': FormFieldEntryRequest
                 },
                 targetParams: {
                     ascending: true,
@@ -164,7 +164,7 @@
                 this.targetParams.search = keywords;
                 let params = this.targetParams;
 
-                if(this.targetName == 'Record') {
+                if(this.targetName == 'Records') {
                     this.recordParams.search = keywords;
                     params = this.recordParams;
 
@@ -180,7 +180,7 @@
                     });
 
                     return;
-                } else if(this.targetName == 'Form Field') {
+                } else if(this.targetName == 'Form Fields') {
                     this.fieldParams.search = keywords;
                     params = this.fieldParams;
 
@@ -190,8 +190,6 @@
 
                     this.targetRequest.retrieve(this.field.reference_target_id).then((response) => {
                         this.targetItems = response.data;
-
-                        console.log(response.data);
                     });
 
                     return;

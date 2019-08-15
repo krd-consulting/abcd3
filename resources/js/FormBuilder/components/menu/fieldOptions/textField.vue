@@ -52,7 +52,7 @@
                 </base-select>
 
                 <base-select
-                    v-if="targetName == 'Form Field'"
+                    v-if="targetName == 'Form Fields'"
                     v-model="form_id"
                     @change="retrieveFields(''); fieldData.reference_target_id = null"
                     name="form"
@@ -70,7 +70,7 @@
                 </base-select>
 
                 <base-select
-                    v-if="targetName == 'Form Field' && form_id != null"
+                    v-if="targetName == 'Form Fields' && form_id != null"
                     v-model="fieldData.reference_target_id"
                     name="field"
                     filterable
@@ -171,7 +171,7 @@ export default {
             if(this.target.toString().includes('_')) {
                 const target = this.target.toString().split('_')
                 return target[1];
-            }else if(this.targetName == 'Form Field') {
+            }else if(this.targetName == 'Form Fields') {
                 return this.fieldData.reference_target_id;
             }
 
@@ -186,7 +186,7 @@ export default {
             if(targetType == null)
                 return null;
 
-            if(targetType.name == 'Form Field')
+            if(targetType.name == 'Form Fields')
                 this.retrieveForms();
 
             return targetType.name;
