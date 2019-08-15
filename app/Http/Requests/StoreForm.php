@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 use Illuminate\Validation\Rule;
 
+use App\Scope;
+
 class StoreForm extends FormRequest
 {
     /**
@@ -25,6 +27,9 @@ class StoreForm extends FormRequest
      */
     public function rules()
     {
+        $universal = Scope::where('name' , config('auth.scopes.universal.name'))->first()->id;
+        $self = Scope::where('name' , config('auth.scopes.self.name'))->first()->id;
+
         return [
             'name' => 'required',
             'description' => '',
@@ -34,8 +39,8 @@ class StoreForm extends FormRequest
                 'required',
                 Rule::in(config('app.form_types'))
             ],
-            'team_id' => 'required|exists:teams,id',
             'scope_id' => 'required|exists:scopes,id',
+            'team_id' => "required_if:scope_id,$universal|required_if:scope_id,$self|exists:teams,id",
             'fields.*.type' => 'required',
             'fields.*.title' => 'required',
             'fields.*.reference_target_type_id' => 'nullable|exists:form_target_types,id',
