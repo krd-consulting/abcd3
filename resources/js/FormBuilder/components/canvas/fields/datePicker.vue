@@ -3,9 +3,9 @@
 
         <slot></slot>
         
-            <el-col :span="10" class="tw-mb-2">
+            <div class="tw-inline-flex tw-my-1">
                 <label class="inputLabel">
-                    <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
                         {{ fieldLabel }}
                     </editable-text>
                 </label>
@@ -19,7 +19,7 @@
                     :end-placeholder="endDate"
                     :settings="dateFormat">
                 </el-date-picker>
-            </el-col>
+            </div>
             
         
             <el-switch 
@@ -89,14 +89,6 @@ export default {
                 this.field = fieldCopy;
             }
         },
-        // datePlaceHolder: {
-        //     get() { return this.field.settings.datePlaceHolder; },
-        //     set(datePlaceHolder) { 
-        //         const fieldCopy = _.clone(this.field);
-        //         fieldCopy.settings.datePlaceHolder = datePlaceHolder;
-        //         this.field = fieldCopy;
-        //     }
-        // },
         dateFormat: {
             get() { return this.field.settings.dateFormat; },
             set(dateFormat) { 
@@ -217,8 +209,8 @@ export default {
     font-size: 110%;
 }
 .switch-position {
-    position: absolute;
-    bottom: 20px;;
-    right: 10px;
+    position: relative;
+    top: 15px;
+    right: 40px;
 }
 </style>

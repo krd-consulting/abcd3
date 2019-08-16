@@ -3554,6 +3554,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3796,14 +3799,6 @@ __webpack_require__.r(__webpack_exports__);
         this.field = fieldCopy;
       }
     },
-    // datePlaceHolder: {
-    //     get() { return this.field.settings.datePlaceHolder; },
-    //     set(datePlaceHolder) { 
-    //         const fieldCopy = _.clone(this.field);
-    //         fieldCopy.settings.datePlaceHolder = datePlaceHolder;
-    //         this.field = fieldCopy;
-    //     }
-    // },
     dateFormat: {
       get: function get() {
         return this.field.settings.dateFormat;
@@ -3935,6 +3930,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
+//
 //
 //
 //
@@ -4139,9 +4135,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
-//
-//
-//
 //
 //
 //
@@ -4556,6 +4549,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
+//
 //
 //
 //
@@ -5063,9 +5057,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textfield',
@@ -5128,8 +5119,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
-//
-//
 //
 //
 //
@@ -6365,6 +6354,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'textBox',
   data: function data() {
@@ -6427,6 +6419,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -6689,6 +6683,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6988,6 +6988,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -7609,6 +7611,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -7654,6 +7658,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var scopes = _.clone(this.scopes);
 
+      console.log(this.scopes);
       return scopes.map(function (scope) {
         scope.label = labels[scope.name];
         return scope;
@@ -10872,7 +10877,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-e97e2c96] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-e97e2c96] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -10891,7 +10896,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5ce99664] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5ce99664] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -10910,7 +10915,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -10929,7 +10934,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-120ae50f] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-120ae50f] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -10948,7 +10953,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "#matrix-table[data-v-8416b59a] {\n  width: 100%;\n  margin-top: 20px;\n  z-index: 0;\n}\n#matrix-table table[data-v-8416b59a], td[data-v-8416b59a] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-8416b59a]:hover {\n  background: #9ebdef;\n}\n.mouseOver[data-v-8416b59a]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-8416b59a] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n.footer[data-v-8416b59a]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, "#matrix-table[data-v-8416b59a] {\n  width: 100%;\n  margin-top: 20px;\n  z-index: 0;\n}\n#matrix-table table[data-v-8416b59a], td[data-v-8416b59a] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-8416b59a]:hover {\n  background: #9ebdef;\n}\n.mouseOver[data-v-8416b59a]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-8416b59a] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -10967,7 +10972,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-1c3cc70b] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-1c3cc70b] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -10986,7 +10991,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -11005,7 +11010,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
 
 // exports
 
@@ -11024,7 +11029,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7a7b55cc] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7a7b55cc] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -11043,7 +11048,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-28f88a4b] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-28f88a4b] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -11062,7 +11067,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-2da47d2d] {\n  position: absolute;\n  bottom: 20px;\n  right: 10px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-2da47d2d] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
 
 // exports
 
@@ -11081,7 +11086,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 745px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n\n/* .el-row {\n    margin: 5px;\n  } */\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 16px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 16px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 100%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 745px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n\n/* .el-row {\r\n    margin: 5px;\r\n  } */\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 16px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 16px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 100%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\r\n", ""]);
 
 // exports
 
@@ -11119,7 +11124,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  min-height: 735px;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  min-height: 735px;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\r\n", ""]);
 
 // exports
 
@@ -11138,7 +11143,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 100;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 2px !important;\n  right: 15px !important;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(-100%);\n          transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 100;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 2px !important;\n  right: 15px !important;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -11157,7 +11162,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".float-right[data-v-380115ba] {\n  float: right !important;\n}\n", ""]);
+exports.push([module.i, ".float-right[data-v-380115ba] {\n  float: right !important;\n}\n.el-menu--horizontal>.el-menu-item.is-active[data-v-380115ba] {\n  border-bottom-color: #537C94 !important;\n  color: #537C94 !important;\n}\n", ""]);
 
 // exports
 
@@ -11176,7 +11181,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\n", ""]);
+exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\r\n", ""]);
 
 // exports
 
@@ -11195,7 +11200,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n\n", ""]);
+exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -11252,7 +11257,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -11290,7 +11295,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -11309,7 +11314,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n  /* cubic-bezier(1.0, 0.5, 0.8, 1.0); */\n}\n.toggle-enter, .toggle-leave-to {\n  transform: translateX(100%);\n  /* opacity: 0; */\n}\n.panel {\n  height: 100%;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  right: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: right;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.sidenav .close {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Handle differently on smaller screen size */\n@media screen and (max-height: 450px) {\n.sidenav {\n    padding-top: 15px;\n}\n.sidenav a {\n    font-size: 18px;\n}\n}\n", ""]);
+exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n  /* cubic-bezier(1.0, 0.5, 0.8, 1.0); */\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(100%);\n          transform: translateX(100%);\n  /* opacity: 0; */\n}\n.panel {\n  height: 100%;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  right: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: right;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.sidenav .close {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Handle differently on smaller screen size */\n@media screen and (max-height: 450px) {\n.sidenav {\n    padding-top: 15px;\n}\n.sidenav a {\n    font-size: 18px;\n}\n}\n", ""]);
 
 // exports
 
@@ -62394,7 +62399,7 @@ module.exports = isSymbol;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Copyright JS Foundation and other contributors <https://js.foundation/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -62405,7 +62410,7 @@ module.exports = isSymbol;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -65064,10 +65069,16 @@ module.exports = isSymbol;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-      } else if (isMap(value)) {
+
+        return result;
+      }
+
+      if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
+
+        return result;
       }
 
       var keysFunc = isFull
@@ -65991,8 +66002,8 @@ module.exports = isSymbol;
         return;
       }
       baseFor(source, function(srcValue, key) {
-        stack || (stack = new Stack);
         if (isObject(srcValue)) {
+          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -67809,7 +67820,7 @@ module.exports = isSymbol;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision && nativeIsFinite(number)) {
+        if (precision) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -68992,7 +69003,7 @@ module.exports = isSymbol;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
+     * Gets the value at `key`, unless `key` is "__proto__".
      *
      * @private
      * @param {Object} object The object to query.
@@ -69000,10 +69011,6 @@ module.exports = isSymbol;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
-      if (key === 'constructor' && typeof object[key] === 'function') {
-        return;
-      }
-
       if (key == '__proto__') {
         return;
       }
@@ -72804,7 +72811,6 @@ module.exports = isSymbol;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
-            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -77191,12 +77197,9 @@ module.exports = isSymbol;
       , 'g');
 
       // Use a sourceURL for easier debugging.
-      // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+        ('sourceURL' in options
+          ? options.sourceURL
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -77229,9 +77232,7 @@ module.exports = isSymbol;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
-      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
+      var variable = options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -79436,11 +79437,10 @@ module.exports = isSymbol;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = lodashFunc.name + '';
-        if (!hasOwnProperty.call(realNames, key)) {
-          realNames[key] = [];
-        }
-        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
+        var key = (lodashFunc.name + ''),
+            names = realNames[key] || (realNames[key] = []);
+
+        names.push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -88183,7 +88183,19 @@ var render = function() {
     [
       _vm._t("default"),
       _vm._v(" "),
-      _c("el-col", { attrs: { span: 8 } }, [
+      _c("el-switch", {
+        staticClass: "tw-float-right switch-position",
+        attrs: { "active-text": "Required", "inactive-text": "Optional" },
+        model: {
+          value: _vm.required,
+          callback: function($$v) {
+            _vm.required = $$v
+          },
+          expression: "required"
+        }
+      }),
+      _vm._v(" "),
+      _c("el-col", { staticClass: "tw-mt-1", attrs: { span: 8 } }, [
         _c(
           "label",
           { staticClass: "inputLabel" },
@@ -88214,24 +88226,23 @@ var render = function() {
       _c("br"),
       _c("br"),
       _vm._v(" "),
-      _c(
-        "el-checkbox-group",
-        { attrs: { id: "check" } },
-        [
-          _vm._l(_vm.choices, function(item, index) {
-            return _c(
-              "el-checkbox",
-              {
-                key: item.value,
-                attrs: { label: item.value },
-                model: {
-                  value: _vm.value,
-                  callback: function($$v) {
-                    _vm.value = $$v
-                  },
-                  expression: "value"
-                }
+      _vm._l(_vm.choices, function(item, index) {
+        return _c(
+          "el-checkbox-group",
+          {
+            key: item.value,
+            attrs: { id: "check", label: item.value },
+            model: {
+              value: _vm.value,
+              callback: function($$v) {
+                _vm.value = $$v
               },
+              expression: "value"
+            }
+          },
+          [
+            _c(
+              "el-checkbox",
               [
                 _c(
                   "editable-text",
@@ -88249,32 +88260,34 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\n                          " +
+                      "\n                      " +
                         _vm._s(item.value) +
-                        "\n                  "
+                        "\n              "
                     )
                   ]
                 )
               ],
               1
-            )
-          }),
-          _vm._v(" "),
-          _c(
-            "el-button",
-            {
-              attrs: { type: "text", size: "mini" },
-              on: {
-                click: function($event) {
-                  return _vm.removeChoice(_vm.item)
+            ),
+            _vm._v(" "),
+            _c(
+              "el-button",
+              {
+                staticClass: "tw--ml-6 tw-mt-4 hover:tw-text-red-600",
+                attrs: { type: "text", size: "mini" },
+                on: {
+                  click: function($event) {
+                    return _vm.removeChoice(item)
+                  }
                 }
-              }
-            },
-            [_vm._v("\n                  Remove\n          ")]
-          )
-        ],
-        2
-      ),
+              },
+              [_c("base-icon", [_vm._v("delete_forever")])],
+              1
+            )
+          ],
+          1
+        )
+      }),
       _vm._v(" "),
       !_vm.isUnique
         ? _c("el-alert", {
@@ -88285,18 +88298,6 @@ var render = function() {
             }
           })
         : _vm._e(),
-      _vm._v(" "),
-      _c("el-switch", {
-        staticClass: "tw-float-right switch-position",
-        attrs: { "active-text": "Required", "inactive-text": "Optional" },
-        model: {
-          value: _vm.required,
-          callback: function($$v) {
-            _vm.required = $$v
-          },
-          expression: "required"
-        }
-      }),
       _vm._v(" "),
       _c(
         "form",
@@ -88391,8 +88392,8 @@ var render = function() {
       _vm._t("default"),
       _vm._v(" "),
       _c(
-        "el-col",
-        { staticClass: "tw-mb-2", attrs: { span: 10 } },
+        "div",
+        { staticClass: "tw-inline-flex tw-my-1" },
         [
           _c(
             "label",
@@ -88401,7 +88402,7 @@ var render = function() {
               _c(
                 "editable-text",
                 {
-                  staticClass: "tw-cursor-pointer mouseOver",
+                  staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
                   model: {
                     value: _vm.fieldLabel,
                     callback: function($$v) {
@@ -88481,46 +88482,80 @@ var render = function() {
     [
       _vm._t("default"),
       _vm._v(" "),
-      _c(
-        "el-row",
-        [
-          _c("el-col", { attrs: { span: 6 } }, [
+      _c("div", { staticClass: "tw-inline-flex tw-my-1" }, [
+        _c(
+          "label",
+          { staticClass: "tw-flex-1" },
+          [
             _c(
-              "label",
-              { staticClass: "inputLabel" },
+              "editable-text",
+              {
+                staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                model: {
+                  value: _vm.fieldLabel,
+                  callback: function($$v) {
+                    _vm.fieldLabel = $$v
+                  },
+                  expression: "fieldLabel"
+                }
+              },
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.fieldLabel) +
+                    "\n            "
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tw-inline" },
+          [
+            _c(
+              "el-select",
+              {
+                attrs: { id: "dropdown", placeholder: " " },
+                model: {
+                  value: _vm.dropItem,
+                  callback: function($$v) {
+                    _vm.dropItem = $$v
+                  },
+                  expression: "dropItem"
+                }
+              },
+              _vm._l(_vm.choices, function(item, index) {
+                return _c("el-option", {
+                  key: index,
+                  attrs: { label: item.value, value: item.value }
+                })
+              }),
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm.dropItem != null
+          ? _c(
+              "div",
+              { staticClass: "tw-inline-flex tw-my-1 tw-ml-2" },
               [
                 _c(
                   "editable-text",
                   {
                     staticClass: "tw-cursor-pointer mouseOver",
-                    model: {
-                      value: _vm.fieldLabel,
-                      callback: function($$v) {
-                        _vm.fieldLabel = $$v
+                    on: {
+                      input: function($event) {
+                        return _vm.updateChoiceValue($event)
                       },
-                      expression: "fieldLabel"
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(_vm.fieldLabel) +
-                        "\n            "
-                    )
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tw-inline" },
-              [
-                _c(
-                  "el-select",
-                  {
-                    attrs: { id: "dropdown", placeholder: " " },
+                      edit: function($event) {
+                        return _vm.tempValue(_vm.dropItem)
+                      }
+                    },
                     model: {
                       value: _vm.dropItem,
                       callback: function($$v) {
@@ -88529,76 +88564,34 @@ var render = function() {
                       expression: "dropItem"
                     }
                   },
-                  _vm._l(_vm.choices, function(item, index) {
-                    return _c("el-option", {
-                      key: index,
-                      attrs: { label: item.value, value: item.value }
-                    })
-                  }),
+                  [
+                    _vm._v(
+                      "\n                " +
+                        _vm._s(_vm.dropItem) +
+                        "\n            "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "el-button",
+                  {
+                    staticClass: "hover:tw-text-red-600",
+                    attrs: { type: "text", size: "mini" },
+                    on: {
+                      click: function($event) {
+                        return _vm.removeChoice(_vm.dropItem, _vm.index)
+                      }
+                    }
+                  },
+                  [_c("base-icon", [_vm._v("delete_forever")])],
                   1
                 )
               ],
               1
             )
-          ]),
-          _vm._v(" "),
-          _vm.dropItem != null
-            ? _c(
-                "el-col",
-                { staticClass: "tw-inline", attrs: { span: 6 } },
-                [
-                  _c(
-                    "editable-text",
-                    {
-                      staticClass: "tw-cursor-pointer mouseOver",
-                      on: {
-                        input: function($event) {
-                          return _vm.updateChoiceValue($event)
-                        },
-                        edit: function($event) {
-                          return _vm.tempValue(_vm.dropItem)
-                        }
-                      },
-                      model: {
-                        value: _vm.dropItem,
-                        callback: function($$v) {
-                          _vm.dropItem = $$v
-                        },
-                        expression: "dropItem"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(_vm.dropItem) +
-                          "\n            "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-button",
-                    {
-                      attrs: { type: "text", size: "mini" },
-                      on: {
-                        click: function($event) {
-                          return _vm.removeChoice(_vm.dropItem, _vm.index)
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        Remove Item\n            "
-                      )
-                    ]
-                  )
-                ],
-                1
-              )
-            : _vm._e()
-        ],
-        1
-      ),
+          : _vm._e()
+      ]),
       _vm._v(" "),
       !_vm.isUnique
         ? _c("el-alert", {
@@ -88635,7 +88628,7 @@ var render = function() {
         },
         [
           _c(
-            "el-row",
+            "div",
             [
               _c(
                 "el-col",
@@ -88679,8 +88672,7 @@ var render = function() {
             ],
             1
           )
-        ],
-        1
+        ]
       )
     ],
     2
@@ -88715,17 +88707,17 @@ var render = function() {
       _vm._t("default"),
       _vm._v(" "),
       _c(
-        "el-col",
-        { attrs: { span: 8 } },
+        "div",
+        { staticClass: "tw-inline-flex tw-my-1" },
         [
           _c(
             "label",
-            { staticClass: "inputLabel" },
+            { staticClass: "tw-flex-1 tw-mt-1" },
             [
               _c(
                 "editable-text",
                 {
-                  staticClass: "tw-cursor-pointer mouseOver",
+                  staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
                   model: {
                     value: _vm.fieldLabel,
                     callback: function($$v) {
@@ -88738,27 +88730,6 @@ var render = function() {
                   _vm._v(
                     "\n                " +
                       _vm._s(_vm.fieldLabel) +
-                      "\n            "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "editable-text",
-                {
-                  staticClass: "tw-cursor-pointer tw-text-xs mouseOver",
-                  model: {
-                    value: _vm.fieldDescription,
-                    callback: function($$v) {
-                      _vm.fieldDescription = $$v
-                    },
-                    expression: "fieldDescription"
-                  }
-                },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.fieldDescription) +
                       "\n            "
                   )
                 ]
@@ -88846,13 +88817,25 @@ var render = function() {
     [
       _vm._t("default"),
       _vm._v(" "),
+      _c("el-switch", {
+        staticClass: "tw-float-right switch-position",
+        attrs: { "active-text": "Required", "inactive-text": "Optional" },
+        model: {
+          value: _vm.field.settings.required,
+          callback: function($$v) {
+            _vm.$set(_vm.field.settings, "required", $$v)
+          },
+          expression: "field.settings.required"
+        }
+      }),
+      _vm._v(" "),
       _c(
         "el-row",
+        { staticClass: "tw-mt-1" },
         [
           _c("el-col", { attrs: { span: 10 } }, [
             _c(
               "label",
-              { staticClass: "inputLabel" },
               [
                 _c(
                   "editable-text",
@@ -89082,18 +89065,6 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _c("el-switch", {
-        staticClass: "tw-float-right switch-position",
-        attrs: { "active-text": "Required", "inactive-text": "Optional" },
-        model: {
-          value: _vm.field.settings.required,
-          callback: function($$v) {
-            _vm.$set(_vm.field.settings, "required", $$v)
-          },
-          expression: "field.settings.required"
-        }
-      }),
-      _vm._v(" "),
       _c(
         "form",
         {
@@ -89189,70 +89160,68 @@ var render = function() {
     [
       _vm._t("default"),
       _vm._v(" "),
-      _c(
-        "el-col",
-        { attrs: { span: 8 } },
-        [
-          _c(
-            "label",
-            { staticClass: "inputLabel" },
-            [
-              _c(
-                "editable-text",
-                {
-                  staticClass: "tw-cursor-pointer mouseOver",
+      _c("div", { staticClass: "tw-inline-flex tw-my-1" }, [
+        _c(
+          "label",
+          { staticClass: "tw-flex-1" },
+          [
+            _c(
+              "editable-text",
+              {
+                staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                model: {
+                  value: _vm.fieldLabel,
+                  callback: function($$v) {
+                    _vm.fieldLabel = $$v
+                  },
+                  expression: "fieldLabel"
+                }
+              },
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.fieldLabel) +
+                    "\n            "
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tw-flex-none" },
+          [
+            _vm.field.settings.isLimited
+              ? _c("el-input-number", {
+                  attrs: { id: "numfield" },
                   model: {
-                    value: _vm.fieldLabel,
+                    value: _vm.field.settings.defaultNum,
                     callback: function($$v) {
-                      _vm.fieldLabel = $$v
+                      _vm.$set(_vm.field.settings, "defaultNum", $$v)
                     },
-                    expression: "fieldLabel"
+                    expression: "field.settings.defaultNum"
                   }
-                },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.fieldLabel) +
-                      "\n            "
-                  )
-                ]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm.field.settings.isLimited
-            ? _c("el-input-number", {
-                attrs: { id: "numfield" },
-                model: {
-                  value: _vm.field.settings.defaultNum,
-                  callback: function($$v) {
-                    _vm.$set(_vm.field.settings, "defaultNum", $$v)
-                  },
-                  expression: "field.settings.defaultNum"
-                }
-              })
-            : _c("el-input-number", {
-                attrs: { id: "numfield", disabled: "" },
-                model: {
-                  value: _vm.num,
-                  callback: function($$v) {
-                    _vm.num = $$v
-                  },
-                  expression: "num"
-                }
-              })
-        ],
-        1
-      ),
+                })
+              : _c("el-input-number", {
+                  attrs: { id: "numfield", disabled: "" },
+                  model: {
+                    value: _vm.num,
+                    callback: function($$v) {
+                      _vm.num = $$v
+                    },
+                    expression: "num"
+                  }
+                })
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _c("el-switch", {
         staticClass: "tw-float-right switch-position",
-        attrs: {
-          "active-text": "Required",
-          "inactive-text": "Optional",
-          disabled: ""
-        },
+        attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.required,
           callback: function($$v) {
@@ -89293,10 +89262,21 @@ var render = function() {
     [
       _vm._t("default"),
       _vm._v(" "),
-      _c("el-col", { attrs: { span: 8 } }, [
+      _c("el-switch", {
+        staticClass: "tw-float-right switch-position",
+        attrs: { "active-text": "Required", "inactive-text": "Optional" },
+        model: {
+          value: _vm.required,
+          callback: function($$v) {
+            _vm.required = $$v
+          },
+          expression: "required"
+        }
+      }),
+      _vm._v(" "),
+      _c("el-col", { staticClass: "tw-mt-1", attrs: { span: 8 } }, [
         _c(
           "label",
-          { staticClass: "inputLabel" },
           [
             _c(
               "editable-text",
@@ -89330,47 +89310,42 @@ var render = function() {
         { attrs: { id: "radioGroup" } },
         _vm._l(_vm.choices, function(item, index) {
           return _c(
-            "el-radio",
-            {
-              key: item.value,
-              staticClass: "tw-mx-4",
-              attrs: { label: item.value },
-              model: {
-                value: _vm.value,
-                callback: function($$v) {
-                  _vm.value = $$v
-                },
-                expression: "value"
-              }
-            },
+            "div",
+            { key: item.value, attrs: { label: item.value } },
             [
               _c(
-                "editable-text",
-                {
-                  staticClass: "tw-cursor-pointer mouseOver",
-                  attrs: { value: item.value },
-                  on: {
-                    input: function($event) {
-                      return _vm.updateChoiceValue($event, index)
-                    },
-                    edit: function($event) {
-                      return _vm.tempValue(item.value)
-                    }
-                  }
-                },
+                "el-radio",
                 [
-                  _vm._v(
-                    "\n                            " +
-                      _vm._s(item.value) +
-                      "\n                    "
+                  _c(
+                    "editable-text",
+                    {
+                      staticClass: "tw-cursor-pointer mouseOver",
+                      attrs: { value: item.value },
+                      on: {
+                        input: function($event) {
+                          return _vm.updateChoiceValue($event, index)
+                        },
+                        edit: function($event) {
+                          return _vm.tempValue(item.value)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(item.value) +
+                          "\n                    "
+                      )
+                    ]
                   )
-                ]
+                ],
+                1
               ),
               _vm._v(" "),
               _c(
                 "el-button",
                 {
-                  staticClass: "float-right pr-15",
+                  staticClass: "tw--ml-6 hover:tw-text-red-600",
                   attrs: { type: "text", size: "mini" },
                   on: {
                     click: function($event) {
@@ -89378,17 +89353,14 @@ var render = function() {
                     }
                   }
                 },
-                [
-                  _vm._v(
-                    "\n                            Remove\n                    "
-                  )
-                ]
+                [_c("base-icon", [_vm._v("delete_forever")])],
+                1
               )
             ],
             1
           )
         }),
-        1
+        0
       ),
       _vm._v(" "),
       !_vm.isUnique
@@ -89401,22 +89373,10 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _c("el-switch", {
-        staticClass: "tw-float-right switch-position",
-        attrs: { "active-text": "Required", "inactive-text": "Optional" },
-        model: {
-          value: _vm.required,
-          callback: function($$v) {
-            _vm.required = $$v
-          },
-          expression: "required"
-        }
-      }),
-      _vm._v(" "),
       _c(
         "form",
         {
-          staticClass: " tw-mt-4",
+          staticClass: "tw-mt-4",
           on: {
             submit: function($event) {
               $event.preventDefault()
@@ -89502,6 +89462,8 @@ var render = function() {
   return _c(
     "div",
     [
+      _vm._t("default"),
+      _vm._v(" "),
       _c("br"),
       _vm._v(" "),
       _c("el-divider", [
@@ -89531,9 +89493,7 @@ var render = function() {
           ],
           1
         )
-      ]),
-      _vm._v(" "),
-      _vm._t("default")
+      ])
     ],
     2
   )
@@ -89562,70 +89522,73 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "tw-mb-4", attrs: { id: "Textbox" } },
+    { attrs: { id: "Textbox" } },
     [
       _vm._t("default"),
       _vm._v(" "),
-      _c(
-        "el-row",
-        [
-          _c(
-            "el-col",
-            { attrs: { span: 10 } },
-            [
-              _c(
-                "label",
-                { staticClass: "inputLabel" },
-                [
-                  _c(
-                    "editable-text",
-                    {
-                      staticClass: "tw-cursor-pointer mouseOver",
-                      model: {
-                        value: _vm.fieldLabel,
-                        callback: function($$v) {
-                          _vm.fieldLabel = $$v
-                        },
-                        expression: "fieldLabel"
+      _c("div", { staticClass: "tw-inline-flex tw-my-1" }, [
+        _c(
+          "label",
+          { staticClass: "tw-flex-1" },
+          [
+            _c(
+              "editable-text",
+              {
+                staticClass: "tw-cursor-pointer mouseOver",
+                model: {
+                  value: _vm.fieldLabel,
+                  callback: function($$v) {
+                    _vm.fieldLabel = $$v
+                  },
+                  expression: "fieldLabel"
+                }
+              },
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.fieldLabel) +
+                    "\n            "
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tw-flex-none tw-w-64" },
+          [
+            _c(
+              "el-col",
+              { attrs: { span: 24 } },
+              [
+                _vm.field.settings.isLimited
+                  ? _c("el-input", {
+                      attrs: {
+                        id: "textBox",
+                        type: "textarea",
+                        rows: 2,
+                        maxlength: _vm.field.settings.max,
+                        "show-word-limit": "",
+                        placeholder: " "
                       }
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.fieldLabel) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _vm.field.settings.isLimited
-                ? _c("el-input", {
-                    attrs: {
-                      id: "textBox",
-                      type: "textarea",
-                      rows: 2,
-                      maxlength: _vm.field.settings.max,
-                      "show-word-limit": "",
-                      placeholder: " "
-                    }
-                  })
-                : _c("el-input", {
-                    attrs: {
-                      id: "textBox",
-                      type: "textarea",
-                      rows: 2,
-                      placeholder: " "
-                    }
-                  })
-            ],
-            1
-          )
-        ],
-        1
-      ),
+                    })
+                  : _c("el-input", {
+                      attrs: {
+                        id: "textBox",
+                        type: "textarea",
+                        rows: 2,
+                        placeholder: " "
+                      }
+                    })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _c("el-switch", {
         staticClass: "tw-float-right switch-position",
@@ -89669,60 +89632,54 @@ var render = function() {
     [
       _vm._t("default"),
       _vm._v(" "),
-      _c(
-        "el-row",
-        [
-          _c(
-            "el-col",
-            { attrs: { span: 10 } },
-            [
-              _c(
-                "label",
-                { staticClass: "inputLabel" },
-                [
-                  _c(
-                    "editable-text",
-                    {
-                      staticClass: "tw-cursor-pointer mouseOver",
-                      model: {
-                        value: _vm.fieldLabel,
-                        callback: function($$v) {
-                          _vm.fieldLabel = $$v
-                        },
-                        expression: "fieldLabel"
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                  " +
-                          _vm._s(_vm.fieldLabel) +
-                          "\n              "
-                      )
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _vm.field.settings.isLimited
-                ? _c("el-input", {
-                    attrs: {
-                      id: "input",
-                      type: "text",
-                      maxlength: _vm.field.settings.max,
-                      placeholder: " ",
-                      "show-word-limit": ""
-                    }
-                  })
-                : _c("el-input", {
-                    attrs: { id: "input", type: "text", placeholder: " " }
-                  })
-            ],
-            1
-          )
-        ],
-        1
-      ),
+      _c("div", { staticClass: "tw-inline-flex tw-my-1" }, [
+        _c(
+          "label",
+          { staticClass: "tw-flex-1" },
+          [
+            _c(
+              "editable-text",
+              {
+                staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                model: {
+                  value: _vm.fieldLabel,
+                  callback: function($$v) {
+                    _vm.fieldLabel = $$v
+                  },
+                  expression: "fieldLabel"
+                }
+              },
+              [
+                _vm._v(
+                  "\n              " + _vm._s(_vm.fieldLabel) + "\n          "
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tw-flex-none" },
+          [
+            _vm.field.settings.isLimited
+              ? _c("el-input", {
+                  attrs: {
+                    id: "input",
+                    type: "text",
+                    maxlength: _vm.field.settings.max,
+                    placeholder: " ",
+                    "show-word-limit": ""
+                  }
+                })
+              : _c("el-input", {
+                  attrs: { id: "input", type: "text", placeholder: " " }
+                })
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _c("el-switch", {
         staticClass: "tw-float-right switch-position",
@@ -89766,69 +89723,65 @@ var render = function() {
     [
       _vm._t("default"),
       _vm._v(" "),
-      _c(
-        "el-row",
-        [
-          _c(
-            "el-col",
-            { attrs: { span: 6 } },
-            [
-              _c(
-                "label",
-                { staticClass: "inputLabel" },
-                [
-                  _c(
-                    "editable-text",
-                    {
-                      staticClass: "tw-cursor-pointer mouseOver",
-                      model: {
-                        value: _vm.fieldLabel,
-                        callback: function($$v) {
-                          _vm.fieldLabel = $$v
-                        },
-                        expression: "fieldLabel"
-                      }
+      _c("div", { staticClass: "tw-inline-flex tw-my-1" }, [
+        _c(
+          "label",
+          { staticClass: "tw-flex-1" },
+          [
+            _c(
+              "editable-text",
+              {
+                staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                model: {
+                  value: _vm.fieldLabel,
+                  callback: function($$v) {
+                    _vm.fieldLabel = $$v
+                  },
+                  expression: "fieldLabel"
+                }
+              },
+              [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.fieldLabel) +
+                    "\n            "
+                )
+              ]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "tw-flex-none" },
+          [
+            _vm.exactTime === false
+              ? _c("el-time-select", {
+                  attrs: {
+                    "arrow-control": "",
+                    "picker-options": {
+                      start: "01:00",
+                      step: "00:15",
+                      end: "24:45"
                     },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.fieldLabel) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _vm.exactTime === false
-                ? _c("el-time-select", {
-                    attrs: {
-                      "arrow-control": "",
-                      "picker-options": {
-                        start: "01:00",
-                        step: "00:15",
-                        end: "24:45"
-                      },
-                      placeholder: " "
-                    }
-                  })
-                : _c("el-time-picker", {
-                    attrs: { "arrow-control": "", placeholder: " " },
-                    model: {
-                      value: _vm.timeSelection,
-                      callback: function($$v) {
-                        _vm.timeSelection = $$v
-                      },
-                      expression: "timeSelection"
-                    }
-                  })
-            ],
-            1
-          )
-        ],
-        1
-      ),
+                    placeholder: " "
+                  }
+                })
+              : _c("el-time-picker", {
+                  attrs: { "arrow-control": "", placeholder: " " },
+                  model: {
+                    value: _vm.timeSelection,
+                    callback: function($$v) {
+                      _vm.timeSelection = $$v
+                    },
+                    expression: "timeSelection"
+                  }
+                })
+          ],
+          1
+        )
+      ]),
       _vm._v(" "),
       _c("el-switch", {
         staticClass: "tw-float-right switch-position",
@@ -89881,71 +89834,40 @@ var render = function() {
                 "el-card",
                 { attrs: { "body-style": "padding: 10px;", shadow: "hover" } },
                 [
-                  _c(
-                    "el-header",
-                    { staticClass: "tw-text-center tw-mb-12" },
-                    [
-                      _c(
-                        "h1",
-                        { staticClass: "tw-text-4xl" },
-                        [
-                          _c(
-                            "editable-text",
-                            {
-                              staticClass:
-                                "tw-cursor-pointer mouseOver tw-text-4xl",
-                              model: {
-                                value: _vm.title,
-                                callback: function($$v) {
-                                  _vm.title = $$v
-                                },
-                                expression: "title"
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(_vm.title) +
-                                  "\n                        "
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _vm.description
-                        ? _c(
-                            "editable-text",
-                            {
-                              staticClass:
-                                "tw-cursor-pointer mouseOver tw-text-xs",
-                              model: {
-                                value: _vm.description,
-                                callback: function($$v) {
-                                  _vm.description = $$v
-                                },
-                                expression: "description"
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                            " +
-                                  _vm._s(_vm.description) +
-                                  "\n                    "
-                              )
-                            ]
-                          )
-                        : _vm._e()
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("el-divider"),
+                  _c("el-header", { staticClass: "tw-text-center" }, [
+                    _c(
+                      "h1",
+                      { staticClass: "tw-text-4xl" },
+                      [
+                        _c(
+                          "editable-text",
+                          {
+                            staticClass:
+                              "tw-cursor-pointer mouseOver tw-text-4xl",
+                            model: {
+                              value: _vm.title,
+                              callback: function($$v) {
+                                _vm.title = $$v
+                              },
+                              expression: "title"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                                " +
+                                _vm._s(_vm.title) +
+                                "\n                        "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ]),
                   _vm._v(" "),
                   _c(
                     "el-row",
-                    { staticClass: "tw-mb-4", attrs: { gutter: 12 } },
+                    { staticClass: "tw-mb-4" },
                     [
                       _c("el-col", { attrs: { span: 8 } }, [
                         _c(
@@ -89975,7 +89897,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "el-row",
-                    { staticClass: "tw-mb-4", attrs: { gutter: 12 } },
+                    { staticClass: "tw-mb-4" },
                     [
                       _c("el-col", { attrs: { span: 8 } }, [
                         _c("label", { staticClass: "input-label" }, [
@@ -90008,7 +89930,7 @@ var render = function() {
                   _vm.type === "pre-post"
                     ? _c(
                         "el-row",
-                        { staticClass: "tw-mb-4", attrs: { gutter: 12 } },
+                        { staticClass: "tw-mb-4" },
                         [
                           _c("el-col", { attrs: { span: 8 } }, [
                             _c("label", { staticClass: "input-label" }, [
@@ -90050,7 +89972,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "el-row",
-                    { staticClass: "tw-mb-4", attrs: { guttter: 12 } },
+                    { staticClass: "tw-mb-4" },
                     [
                       _c("el-col", { attrs: { span: 8 } }, [
                         _c("label", { staticClass: "input-label" }, [
@@ -90130,7 +90052,7 @@ var render = function() {
                                     [
                                       _c("el-button", {
                                         staticClass:
-                                          "handle tw-float-left tw-mt-2 tw-mr-2",
+                                          "handle tw-float-left tw-top-0 tw-left-0 tw-mr-4",
                                         attrs: { icon: "el-icon-rank" }
                                       })
                                     ],
@@ -90149,19 +90071,25 @@ var render = function() {
                                       }
                                     },
                                     [
-                                      _c("el-button", {
-                                        staticClass:
-                                          "tw-float-right tw-relative tw-top-0 tw-right-0 tw-p-2 tw-z-10 hover:tw-text-red-600",
-                                        attrs: {
-                                          icon: "el-icon-close",
-                                          type: "text"
-                                        },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.removeField(index)
+                                      _c(
+                                        "el-button",
+                                        {
+                                          staticClass:
+                                            "tw-float-right tw-relative tw-top-0 tw-right-0 tw-p-2 tw-z-10 hover:tw-text-red-600",
+                                          attrs: { size: "mini" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.removeField(index)
+                                            }
                                           }
-                                        }
-                                      })
+                                        },
+                                        [
+                                          _c("base-icon", [
+                                            _vm._v("delete_forever")
+                                          ])
+                                        ],
+                                        1
+                                      )
                                     ],
                                     1
                                   )
@@ -90261,12 +90189,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                 This field is\n             ")
               ]),
+              _c("br"),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -90395,12 +90326,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                This field is\n            ")
               ]),
+              _c("br"),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -90426,6 +90360,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-row",
+                { staticClass: "tw--mt-1 tw-ml-4" },
                 [
                   _c("el-switch", {
                     attrs: { "active-text": "Past dates only" },
@@ -90443,6 +90378,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-row",
+                { staticClass: "tw--mt-1 tw-ml-4" },
                 [
                   _c("el-switch", {
                     attrs: { "active-text": "Future dates only" },
@@ -90460,6 +90396,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-row",
+                { staticClass: "tw--mt-1 tw-ml-4" },
                 [
                   _c("el-switch", {
                     attrs: { "active-text": "Include shortcuts" },
@@ -90477,6 +90414,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-row",
+                { staticClass: "tw--mt-1 tw-ml-4" },
                 [
                   _c("el-switch", {
                     attrs: { "active-text": "Include time" },
@@ -90494,6 +90432,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-row",
+                { staticClass: "tw--mt-1 tw-ml-4" },
                 [
                   _c("el-switch", {
                     attrs: { "active-text": "Set a date range" },
@@ -90603,12 +90542,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                This field is\n            ")
               ]),
+              _c("br"),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -90715,12 +90657,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                 This field is\n             ")
               ]),
+              _c("br"),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -90826,6 +90771,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                Additional information\n            ")
@@ -90846,12 +90792,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                This field is\n            ")
               ]),
+              _c("br"),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -90891,11 +90840,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
-                _vm._v(
-                  "\n                Number of choices per question\n            "
-                )
+                _vm._v("\n                Number of choices\n            ")
               ]),
               _vm._v(" "),
               _c("el-input-number", {
@@ -91003,12 +90951,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                 This field is\n             ")
               ]),
+              _c("br"),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -91033,6 +90984,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "inactive-text": "No Default",
                   "active-text": "Set Default"
@@ -91048,6 +91000,7 @@ var render = function() {
               _c("br"),
               _vm._v(" "),
               _c("el-input-number", {
+                staticClass: "tw-ml-5",
                 attrs: { disabled: !_vm.fieldData.settings.isLimited },
                 model: {
                   value: _vm.fieldData.settings.defaultNum,
@@ -91152,12 +91105,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                This Field is\n            ")
               ]),
+              _c("br"),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -91368,12 +91324,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                This field is\n            ")
               ]),
+              _c("br"),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -91398,6 +91357,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: { "inactive-text": "No Limit", "active-text": "Limit" },
                 model: {
                   value: _vm.fieldData.settings.isLimited,
@@ -91409,6 +91369,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("el-input-number", {
+                staticClass: "tw--mt-8 tw-ml-2",
                 attrs: {
                   disabled: !_vm.fieldData.settings.isLimited,
                   step: 5,
@@ -91517,12 +91478,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                This field is\n            ")
               ]),
+              _c("br"),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -91547,6 +91511,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: { "inactive-text": "No Limit", "active-text": "Limit" },
                 model: {
                   value: _vm.fieldData.settings.isLimited,
@@ -91577,6 +91542,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { staticClass: "tw-mt-8" },
             [
               _c("label", [
                 _vm._v("\n                This field\n            ")
@@ -91828,8 +91794,12 @@ var render = function() {
         [
           _c(
             "el-form-item",
-            { attrs: { label: "Question/Title", prop: "title" } },
+            { attrs: { prop: "title" } },
             [
+              _c("label", [
+                _vm._v("\n                 Question/Title\n             ")
+              ]),
+              _vm._v(" "),
               _c("el-input", {
                 model: {
                   value: _vm.fieldData.title,
@@ -91845,9 +91815,15 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
-            { attrs: { label: "This field is" } },
+            { staticClass: "tw-mt-8" },
             [
+              _c("label", [
+                _vm._v("\n                 This field is\n             ")
+              ]),
+              _c("br"),
+              _vm._v(" "),
               _c("el-switch", {
+                staticClass: "tw--mt-6",
                 attrs: {
                   "active-text": "Required",
                   "inactive-text": "Optional"
@@ -92125,16 +92101,21 @@ var render = function() {
           _vm._t("mobile"),
           _vm._v(" "),
           _c(
-            "router-link",
-            { attrs: { to: "/forms/create" } },
-            [
-              _c(
-                "el-button",
-                { staticClass: "tw-float-left tw-bg-blue-500 tw-text-white" },
-                [_vm._v("Form Builder")]
-              )
-            ],
-            1
+            "el-menu-item",
+            {
+              staticClass: "tw-font-bold focus:tw-font-extrabold",
+              attrs: { "default-active": "", index: "/forms/create" }
+            },
+            [_vm._v("\r\n                    Form Builder\r\n            ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-menu-item",
+            {
+              staticClass: "tw-font-bold focus:tw-font-extrabold",
+              attrs: { index: "/forms/create/preview" }
+            },
+            [_vm._v("\r\n                    Preview Form\r\n            ")]
           ),
           _vm._v(" "),
           _c(
@@ -92148,22 +92129,6 @@ var render = function() {
               }
             },
             [_vm._v("Finish & Build!")]
-          ),
-          _vm._v(" "),
-          _c(
-            "router-link",
-            { attrs: { to: "/forms/create/preview" } },
-            [
-              _c(
-                "el-button",
-                {
-                  staticClass:
-                    "tw-float-right tw-bg-blue-500 tw-text-white tw-mx-1"
-                },
-                [_vm._v("Preview")]
-              )
-            ],
-            1
           ),
           _vm._v(" "),
           _c(
@@ -92184,7 +92149,7 @@ var render = function() {
                   _c("base-icon", { staticClass: "tw-align-middle" }, [
                     _vm._v("done_outline")
                   ]),
-                  _vm._v(" Confirm\n                    ")
+                  _vm._v(" Confirm\r\n                    ")
                 ],
                 1
               ),
@@ -92211,7 +92176,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Nevermind\n                    "
+                        "\r\n                        Nevermind\r\n                    "
                       )
                     ]
                   ),
@@ -93017,75 +92982,79 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "tw-mb-2" }, [
-          _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
-            _c("label", { staticClass: "tw-w-1/3" }, [
-              _vm._v("\n                    Team\n                ")
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tw-w-2/3" },
-              [
+        this.formattedScopes.id !== 1 || this.formattedScopes.id !== 6
+          ? _c("div", { staticClass: "tw-mb-2" }, [
+              _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
+                _c("label", { staticClass: "tw-w-1/3" }, [
+                  _vm._v("\n                    Team\n                ")
+                ]),
+                _vm._v(" "),
                 _c(
-                  "base-select",
-                  {
-                    attrs: {
-                      filterable: "",
-                      remote: "",
-                      "remote-method": _vm.retrieveTeams,
-                      name: "type",
-                      placeholder: " "
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.request.errors.clear("team_id")
-                      }
-                    },
-                    model: {
-                      value: _vm.formData.team_id,
-                      callback: function($$v) {
-                        _vm.$set(_vm.formData, "team_id", $$v)
-                      },
-                      expression: "formData.team_id"
-                    }
-                  },
-                  _vm._l(_vm.teams, function(team, index) {
-                    return _c(
-                      "el-option",
+                  "div",
+                  { staticClass: "tw-w-2/3" },
+                  [
+                    _c(
+                      "base-select",
                       {
-                        key: index,
-                        attrs: { label: team.name, value: team.id }
+                        attrs: {
+                          filterable: "",
+                          remote: "",
+                          "remote-method": _vm.retrieveTeams,
+                          name: "type",
+                          placeholder: " "
+                        },
+                        on: {
+                          change: function($event) {
+                            return _vm.request.errors.clear("team_id")
+                          }
+                        },
+                        model: {
+                          value: _vm.formData.team_id,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formData, "team_id", $$v)
+                          },
+                          expression: "formData.team_id"
+                        }
                       },
-                      [
-                        _vm._v(
-                          "\n                            " +
-                            _vm._s(team.name) +
-                            "\n                        "
+                      _vm._l(_vm.teams, function(team, index) {
+                        return _c(
+                          "el-option",
+                          {
+                            key: index,
+                            attrs: { label: team.name, value: team.id }
+                          },
+                          [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(team.name) +
+                                "\n                        "
+                            )
+                          ]
                         )
-                      ]
+                      }),
+                      1
                     )
-                  }),
+                  ],
                   1
                 )
-              ],
-              1
-            )
-          ]),
-          _vm._v(" "),
-          _vm.request.errors.has("team_id")
-            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
-                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
-                  _c("span", {
-                    staticClass: "tw-text-xs tw-text-red-500",
-                    domProps: {
-                      textContent: _vm._s(_vm.request.errors.get("team_id")[0])
-                    }
-                  })
-                ])
-              ])
-            : _vm._e()
-        ])
+              ]),
+              _vm._v(" "),
+              _vm.request.errors.has("team_id")
+                ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                    _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                      _c("span", {
+                        staticClass: "tw-text-xs tw-text-red-500",
+                        domProps: {
+                          textContent: _vm._s(
+                            _vm.request.errors.get("team_id")[0]
+                          )
+                        }
+                      })
+                    ])
+                  ])
+                : _vm._e()
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c(
@@ -119849,7 +119818,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

@@ -2,21 +2,27 @@
     <div id="dropdown">
 
         <slot></slot>
+
+        <el-switch 
+            v-model="required" 
+            active-text="Required" 
+            inactive-text="Optional"
+            class="tw-float-right switch-position">
+        </el-switch>
         
-        <el-col :span="8">
-            <label class="inputLabel">
+        <el-col :span="8" class="tw-mt-1">
+            <label>
                 <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
                     {{ fieldLabel }}
                 </editable-text>
             </label>
         </el-col><br><br>
              <el-radio-group id="radioGroup">
-                <el-radio  
-                    v-for="(item, index) in choices" 
-                    :key="item.value"
-                    v-model="value" 
-                    :label="item.value" 
-                    class="tw-mx-4">
+                <div 
+                v-for="(item, index) in choices" 
+                :key="item.value" 
+                :label="item.value">
+                    <el-radio>
                         <editable-text 
                             class="tw-cursor-pointer mouseOver"
                             :value="item.value"
@@ -24,14 +30,15 @@
                             @edit="tempValue(item.value)">
                                 {{ item.value }}
                         </editable-text>
-                        <el-button 
-                            class="float-right pr-15" 
-                            type="text" 
-                            size="mini" 
-                            @click="removeChoice(item)">
-                                Remove
-                        </el-button>
-                </el-radio>
+                    </el-radio>
+                    <el-button 
+                        class="tw--ml-6 hover:tw-text-red-600" 
+                        type="text" 
+                        size="mini" 
+                        @click="removeChoice(item)">
+                            <base-icon>delete_forever</base-icon>
+                    </el-button>
+                </div>
             </el-radio-group>
 
         <el-alert
@@ -40,14 +47,7 @@
             type="error">
         </el-alert>
         
-        <el-switch 
-            v-model="required" 
-            active-text="Required" 
-            inactive-text="Optional"
-            class="tw-float-right switch-position">
-        </el-switch>
-        
-        <form @submit.prevent="addItem" class=" tw-mt-4">
+        <form @submit.prevent="addItem" class="tw-mt-4">
             <el-row> 
                 <el-col :span="6" class="tw-float-left">
                     <label for="add-item">Add a new Item</label>
@@ -189,8 +189,8 @@ export default {
     font-size: 110%;
 }
 .switch-position {
-    position: absolute;
-    bottom: 20px;;
-    right: 10px;
+    position: relative;
+    top: 15px;
+    right: 40px;
 }
 </style>

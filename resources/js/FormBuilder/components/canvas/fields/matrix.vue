@@ -2,10 +2,17 @@
     <div id="matrix">
 
         <slot></slot>
+
+        <el-switch 
+            v-model="field.settings.required" 
+            active-text="Required" 
+            inactive-text="Optional"
+            class="tw-float-right switch-position">
+        </el-switch>
         
-        <el-row>
+        <el-row class="tw-mt-1">
             <el-col :span="10">
-                <label class="inputLabel">
+                <label>
                     <editable-text 
                         class="tw-cursor-pointer mouseOver" 
                         v-model="fieldLabel">
@@ -84,13 +91,6 @@
             title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
             type="error">
         </el-alert>
-
-        <el-switch 
-            v-model="field.settings.required" 
-            active-text="Required" 
-            inactive-text="Optional"
-            class="tw-float-right switch-position">
-        </el-switch>
 
          <form @submit.prevent="addQuestion" class="tw-inline-block tw-my-4">
             <el-row>
@@ -292,13 +292,8 @@ export default {
         font-size: 110%;
     }
     .switch-position {
-        position: absolute;
-        bottom: 20px;;
-        right: 10px;
-    }
-    .footer{
-        position: absolute;
-        bottom: 0;
-        right: 10px;
+        position: relative;
+        top: 15px;
+        right: 40px;
     }
 </style>

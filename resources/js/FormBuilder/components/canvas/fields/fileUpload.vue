@@ -2,13 +2,10 @@
     <div id="fileUpload">
         <slot></slot>
         
-        <el-col :span="8">
-            <label class="inputLabel">
-                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+        <div class="tw-inline-flex tw-my-1">
+            <label class="tw-flex-1 tw-mt-1">
+                <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
                     {{ fieldLabel }}
-                </editable-text>
-                <editable-text class="tw-cursor-pointer tw-text-xs mouseOver" v-model="fieldDescription">
-                    {{ fieldDescription }}
                 </editable-text>
             </label>
         
@@ -25,7 +22,7 @@
             <el-button size="small" type="primary">Click to upload</el-button>
             <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
         </el-upload>
-      </el-col>
+      </div>
 
       <el-switch 
             v-model="field.settings.required" 
@@ -118,8 +115,8 @@ export default {
     font-size: 110%;
 }
 .switch-position {
-    position: absolute;
-    bottom: 20px;;
-    right: 10px;
+    position: relative;
+    top: 15px;
+    right: 40px;
 }
 </style>

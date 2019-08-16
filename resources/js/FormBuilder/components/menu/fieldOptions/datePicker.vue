@@ -9,30 +9,30 @@
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
             
-            <el-form-item>
+            <el-form-item class="tw-mt-8">
                 <label>
                     This field is
-                </label>
-                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
+                </label><br>
+                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional" class="tw--mt-6"></el-switch>
             </el-form-item>
             
             <el-form-item>
                 <label>
                     Calendar Preferences
                 </label>
-                <el-row>
+                <el-row class="tw--mt-1 tw-ml-4">
                     <el-switch v-model="fieldData.settings.pastOnly" active-text="Past dates only"></el-switch>
                 </el-row>
-                <el-row>
+                <el-row class="tw--mt-1 tw-ml-4">
                     <el-switch v-model="fieldData.settings.futureOnly" active-text="Future dates only"></el-switch>
                 </el-row>
-                <el-row>
+                <el-row class="tw--mt-1 tw-ml-4">
                     <el-switch v-model="fieldData.settings.quickMenu" active-text="Include shortcuts"></el-switch>
                 </el-row>
-                <el-row>
+                <el-row class="tw--mt-1 tw-ml-4">
                     <el-switch v-model="fieldData.settings.includeTime" active-text="Include time"></el-switch>
                 </el-row>
-                <el-row>
+                <el-row class="tw--mt-1 tw-ml-4">
                     <el-switch v-model="fieldData.settings.dateRange" active-text="Set a date range"></el-switch>
                 </el-row>
             </el-form-item>

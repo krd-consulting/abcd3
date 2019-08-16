@@ -11,11 +11,11 @@
                 </el-col>
             </el-form-item>
             
-            <el-form-item>
+            <el-form-item class="tw-mt-8">
                 <label>
                     This field is
-                </label>
-                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
+                </label><br>
+                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional" class="tw--mt-6"></el-switch>
             </el-form-item>
             
             <el-form-item>

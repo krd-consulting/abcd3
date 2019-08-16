@@ -7,7 +7,8 @@
         active-text-color="#409EFF" 
         mode="horizontal" 
         router>
-            <!-- <el-menu-item default-active 
+        <slot name="mobile"></slot>
+            <el-menu-item default-active 
                 index="/forms/create" 
                 class="tw-font-bold focus:tw-font-extrabold">
                     Form Builder
@@ -16,19 +17,20 @@
                 class="tw-font-bold focus:tw-font-extrabold">
                     Preview Form
             </el-menu-item>
-            <el-menu-item
+            <!-- <el-menu-item
                 class="float-right tw-font-bold focus:font-extrabold" 
                 @click="buildForm">
                     Finish and Build!
             </el-menu-item> -->
-            <slot name="mobile"></slot>
-            <router-link to="/forms/create">
+            <el-button class="tw-float-right tw-bg-blue-500 tw-text-white" @click="visible = true">Finish & Build!</el-button>
+            
+            <!-- <router-link to="/forms/create">
                 <el-button class="tw-float-left tw-bg-blue-500 tw-text-white">Form Builder</el-button>
             </router-link>
             <el-button class="tw-float-right tw-bg-blue-500 tw-text-white" @click="visible = true">Finish & Build!</el-button>
             <router-link to="/forms/create/preview">
                 <el-button class="tw-float-right tw-bg-blue-500 tw-text-white tw-mx-1">Preview</el-button>
-            </router-link>
+            </router-link> -->
 
             <el-dialog :visible.sync="visible" width="30%">
                     <div slot="title">
@@ -46,7 +48,7 @@
                         <span class="tw-text-xs tw-align-middle">Good to go!</span>
                     </base-button>
                 </div>
-            </el-dialog>
+            </el-dialog> 
                 
     </el-menu>
 
@@ -127,5 +129,10 @@ export default {
     
     .float-right {
         float: right !important;
+    }
+
+    .el-menu--horizontal>.el-menu-item.is-active {
+        border-bottom-color: #537C94 !important;
+        color: #537C94 !important;
     }
 </style>

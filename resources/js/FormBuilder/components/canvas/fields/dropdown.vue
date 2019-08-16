@@ -2,10 +2,10 @@
     <div id="dropdown">
         <slot></slot>
         
-        <el-row>
-        <el-col :span="6">
-            <label class="inputLabel">
-                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+        <div class="tw-inline-flex tw-my-1">
+        <!-- <el-col :span="6"> -->
+            <label class="tw-flex-1">
+                <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
                     {{ fieldLabel }}
                 </editable-text>
             </label>
@@ -17,9 +17,9 @@
                     <el-option v-for="(item, index) in choices" :key="index" :label="item.value" :value="item.value"></el-option>
                 </el-select>
             </div>
-            </el-col>
+            <!-- </el-col> -->
 
-            <el-col :span="6" class="tw-inline" v-if="dropItem != null">
+            <div class="tw-inline-flex tw-my-1 tw-ml-2" v-if="dropItem != null">
                 <editable-text 
                     class="tw-cursor-pointer mouseOver" 
                     v-model="dropItem"
@@ -28,13 +28,14 @@
                     {{ dropItem }}
                 </editable-text>
                 <el-button 
+                    class="hover:tw-text-red-600" 
                     type="text" 
                     size="mini" 
                     @click="removeChoice(dropItem, index)">
-                            Remove Item
+                            <base-icon>delete_forever</base-icon>
                 </el-button>
-            </el-col>
-        </el-row>
+            </div>
+        </div>
 
         <el-alert
             v-if="!isUnique"
@@ -50,7 +51,7 @@
         </el-switch>
         
         <form @submit.prevent="addItem" class="tw-mt-4">
-            <el-row> 
+            <div> 
                 <el-col :span="6" class="">
                     <label for="add-item">Add a new Item</label>
                     <el-input id="add-item" v-model="itemText"></el-input>
@@ -58,7 +59,7 @@
                         <el-button type="text" @click="addItem">Add</el-button>
                     </el-tooltip>
                 </el-col>
-            </el-row>
+            </div>
         </form>
 
     </div>
@@ -194,9 +195,9 @@ export default {
     font-size: 110%;
 }
 .switch-position {
-    position: absolute;
-    bottom: 20px;;
-    right: 10px;
+    position: relative;
+    top: 15px;
+    right: 40px;
 }
 </style>
 

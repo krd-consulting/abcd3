@@ -9,13 +9,14 @@
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
 
-            <el-form-item>
+            <el-form-item class="tw-mt-8">
                 <label>
                     This field is
-                </label>
+                </label><br>
                 <el-switch v-model="fieldData.settings.required" 
                     active-text="Required" 
-                    inactive-text="Optional">
+                    inactive-text="Optional"
+                    class="tw--mt-6">
                 </el-switch>
             </el-form-item>
 
@@ -25,12 +26,14 @@
                 </label>
                 <el-switch v-model="fieldData.settings.isLimited" 
                     inactive-text="No Limit" 
-                    active-text="Limit">
+                    active-text="Limit"
+                    class="tw--mt-6">
                 </el-switch>
                 <el-input-number v-model="fieldData.settings.max"
                     :disabled="!fieldData.settings.isLimited" 
                     :step="5" 
-                    step-strictly>
+                    step-strictly
+                    class="tw--mt-8 tw-ml-2">
                 </el-input-number>
             </el-form-item>
 

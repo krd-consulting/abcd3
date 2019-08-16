@@ -125,7 +125,9 @@
                     </div>
                 </div>
             </div>
-            <div class="tw-mb-2">
+            
+            <!-- TODO: FIX THIS -->
+            <div class="tw-mb-2" v-if="this.formattedScopes.id !== 1 || this.formattedScopes.id !== 6">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/3">
                         Team
@@ -216,6 +218,8 @@
                 };
 
                 const scopes = _.clone(this.scopes);
+
+                console.log(this.scopes);
 
                 return scopes.map((scope) => {
                     scope.label = labels[scope.name];

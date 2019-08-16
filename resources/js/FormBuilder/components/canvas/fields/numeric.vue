@@ -3,14 +3,14 @@
 
         <slot></slot>
         
-        <el-col :span="8">
-            <label class="inputLabel">
-                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+        <div class="tw-inline-flex tw-my-1">
+            <label class="tw-flex-1">
+                <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
                     {{ fieldLabel }}
                 </editable-text>
             </label>
         
-        
+        <div class="tw-flex-none">
             <el-input-number id="numfield" v-if="field.settings.isLimited" 
                 v-model="field.settings.defaultNum">
             </el-input-number>
@@ -18,13 +18,14 @@
                 v-else 
                 v-model="num" disabled>
             </el-input-number>
-        </el-col> 
+        </div>
+        </div>
 
         <el-switch 
             v-model="required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right switch-position" disabled>
+            class="tw-float-right switch-position">
         </el-switch>
        
     </div>
@@ -90,8 +91,8 @@ export default {
     font-size: 110%;
 }
 .switch-position {
-    position: absolute;
-    bottom: 20px;;
-    right: 10px;
+    position: relative;
+    top: 15px;
+    right: 40px;
 }
 </style>

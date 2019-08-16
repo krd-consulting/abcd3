@@ -3,7 +3,14 @@
 
         <slot></slot>
 
-      <el-col :span="8">
+        <el-switch 
+            v-model="required" 
+            active-text="Required" 
+            inactive-text="Optional"
+            class="tw-float-right switch-position">
+        </el-switch>
+
+      <el-col :span="8" class="tw-mt-1">
           <label class="inputLabel">
             <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
                 {{ fieldLabel }}
@@ -12,27 +19,30 @@
       </el-col>
         <br><br>
 
-        <el-checkbox-group id="check">
+        <el-checkbox-group id="check" 
+            v-for="(item, index) in choices" 
+            :key="item.value" 
+            v-model="value" 
+            :label="item.value">
 
-            <el-checkbox
-                v-for="(item, index) in choices" 
-                :key="item.value" 
-                v-model="value" 
-                :label="item.value">
-                    <editable-text 
-                        class="tw-cursor-pointer mouseOver"
-                        :value="item.value"
-                        @input="updateChoiceValue($event, index)"
-                        @edit="tempValue(item.value)">
-                            {{ item.value }}
-                    </editable-text>
+            <el-checkbox>
+                <editable-text 
+                    class="tw-cursor-pointer mouseOver"
+                    :value="item.value"
+                    @input="updateChoiceValue($event, index)"
+                    @edit="tempValue(item.value)">
+                        {{ item.value }}
+                </editable-text>
             </el-checkbox>
+
             <el-button 
+                class="tw--ml-6 tw-mt-4 hover:tw-text-red-600"
                 type="text" 
                 size="mini" 
                 @click="removeChoice(item)">
-                    Remove
+                    <base-icon>delete_forever</base-icon>
             </el-button>
+            
         </el-checkbox-group>
 
         <el-alert
@@ -40,13 +50,6 @@
             title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
             type="error">
         </el-alert>
-
-        <el-switch 
-            v-model="required" 
-            active-text="Required" 
-            inactive-text="Optional"
-            class="tw-float-right switch-position">
-        </el-switch>
 
         <form @submit.prevent="addItem" class="tw-inline-block tw-my-4">
             <el-row> 
@@ -210,8 +213,8 @@ export default {
     font-size: 110%;
 }
 .switch-position {
-    position: absolute;
-    bottom: 20px;;
-    right: 10px;
+    position: relative;
+    top: 15px;
+    right: 40px;
 }
 </style>

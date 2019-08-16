@@ -4,7 +4,7 @@
             <el-main>
                 <el-card body-style="padding: 10px;" shadow="hover" >
 
-                    <el-header class="tw-text-center tw-mb-12">
+                    <el-header class="tw-text-center">
                         <h1 class="tw-text-4xl">
                             <editable-text class="tw-cursor-pointer mouseOver tw-text-4xl" 
                                 v-model="title">
@@ -12,20 +12,20 @@
                             </editable-text>
                         </h1>
 
-                        <editable-text v-if="description" 
+                        <!-- <editable-text v-if="description" 
                             class="tw-cursor-pointer mouseOver tw-text-xs"  
                             v-model="description">
                                 {{ description }}
-                        </editable-text>
+                        </editable-text> -->
 
                         <!-- div v-if="!description">
                             <el-input v-model="description" placeholder="Please enter an optional description for this form"></el-input>
                         </div -->
                     </el-header>
 
-                <el-divider></el-divider>
+                <!-- <el-divider></el-divider> -->
                     
-                    <el-row :gutter="12" class="tw-mb-4">
+                    <el-row class="tw-mb-4">
                         <el-col :span="8">
                             <label for="name" class="input-label tw-mt-4"> {{ targetName }} Name</label>
                         </el-col>  
@@ -34,7 +34,7 @@
                         </el-col>
                     </el-row>
 
-                    <el-row :gutter="12" class="tw-mb-4">    
+                    <el-row class="tw-mb-4">    
                             <el-col :span="8">
                                 <label class="input-label">Team</label>
                             </el-col>
@@ -47,7 +47,7 @@
                         </el-col>
                     </el-row>
 
-                    <el-row :gutter="12" class="tw-mb-4" v-if="type === 'pre-post'">
+                    <el-row class="tw-mb-4" v-if="type === 'pre-post'">
                         <el-col :span="8">
                             <label class="input-label">Complete for</label>
                         </el-col>
@@ -62,7 +62,7 @@
                         </el-col>
                     </el-row>
 
-                    <el-row class="tw-mb-4" :guttter="12">
+                    <el-row class="tw-mb-4">
                         <el-col :span="8">
                             <label class="input-label">Date Completed</label>
                         </el-col>
@@ -87,7 +87,7 @@
                             <el-col class="float-left" :span="24">
                                 <el-card class="cursor-move tw-my-2" body-style="padding: 5px;" shadow="hover">
                                     <el-tooltip content="Change the order of your fields by clicking this button and dragging to a new position within your form">
-                                        <el-button class="handle tw-float-left tw-mt-2 tw-mr-2" icon="el-icon-rank"></el-button>
+                                        <el-button class="handle tw-float-left tw-top-0 tw-left-0 tw-mr-4" icon="el-icon-rank"></el-button>
                                     </el-tooltip>
                                 <component 
                                     :is="field.type" 
@@ -95,9 +95,9 @@
                                     @update="updateField($event, index)">   
                                         <el-button
                                             @click="removeField(index)" 
-                                            icon="el-icon-close" 
-                                            type="text"
+                                            size="mini"
                                             class="tw-float-right tw-relative tw-top-0 tw-right-0 tw-p-2 tw-z-10 hover:tw-text-red-600">
+                                            <base-icon>delete_forever</base-icon>
                                         </el-button>
                                 </component>
                                     

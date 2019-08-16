@@ -1,5 +1,6 @@
 <template>
     <div>
+        <slot></slot>
         <br>
         <el-divider>
 
@@ -12,7 +13,6 @@
 
         </el-divider>
 
-        <slot></slot>
     </div>
 </template>
 

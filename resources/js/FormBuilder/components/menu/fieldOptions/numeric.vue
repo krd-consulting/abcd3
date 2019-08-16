@@ -9,19 +9,19 @@
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
 
-            <el-form-item>
+            <el-form-item class="tw-mt-8">
                 <label>
                     This field is
-                </label>
-                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional"></el-switch>
+                </label><br>
+                <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional" class="tw--mt-6"></el-switch>
             </el-form-item>
 
             <el-form-item>
                 <label>
                     Set Default Value
                 </label>
-                <el-switch v-model="fieldData.settings.isLimited" inactive-text="No Default" active-text="Set Default"></el-switch><br>
-                <el-input-number :disabled="!fieldData.settings.isLimited" v-model="fieldData.settings.defaultNum"></el-input-number>
+                <el-switch v-model="fieldData.settings.isLimited" inactive-text="No Default" active-text="Set Default" class="tw--mt-6"></el-switch><br>
+                <el-input-number :disabled="!fieldData.settings.isLimited" v-model="fieldData.settings.defaultNum" class="tw-ml-5"></el-input-number>
             </el-form-item>
 
             <el-form-item class="tw-relative tw-text-center tw-mt-12">

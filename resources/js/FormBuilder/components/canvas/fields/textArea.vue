@@ -1,16 +1,15 @@
 <template>
-    <div id="Textbox" class="tw-mb-4">
+    <div id="Textbox">
         <slot></slot>
         
-        <el-row>
-            <el-col :span="10">
-
-                <label class="inputLabel">   
-                    <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-                        {{ fieldLabel }}
-                    </editable-text>
-                </label> 
-
+        <div class="tw-inline-flex tw-my-1">
+            <label class="tw-flex-1">   
+                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
+            </label> 
+            <div class="tw-flex-none tw-w-64">
+                <el-col :span="24">
                 <el-input id="textBox" 
                     v-if="field.settings.isLimited" 
                     type="textarea" 
@@ -25,8 +24,9 @@
                     :rows="2" 
                     placeholder=" " >
                 </el-input>
-            </el-col>
-        </el-row>
+                </el-col>
+            </div>
+        </div>
 
             <el-switch 
                 v-model="required" 
@@ -98,8 +98,8 @@ export default {
     font-size: 110%;
 }
 .switch-position {
-    position: absolute;
-    bottom: 20px;;
-    right: 10px;
+    position: relative;
+    top: 15px;
+    right: 40px;
 }
 </style>

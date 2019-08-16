@@ -2,15 +2,13 @@
     <div>
         <slot></slot>
         
-        <el-row>
-            <el-col :span="6">
-                <label class="inputLabel">
-                    <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
-                        {{ fieldLabel }}
-                    </editable-text>
-                </label>
-            
-
+        <div class="tw-inline-flex tw-my-1">
+            <label class="tw-flex-1">
+                <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
+                    {{ fieldLabel }}
+                </editable-text>
+            </label>
+            <div class="tw-flex-none">
                 <el-time-select v-if="exactTime === false"
                     arrow-control
                     :picker-options="{  
@@ -27,8 +25,8 @@
                     placeholder=" ">
                 </el-time-picker>
                 
-            </el-col>
-        </el-row>
+            </div>
+        </div>
 
             <el-switch 
                 v-model="required" 
@@ -103,9 +101,9 @@ export default {
     font-size: 110%;
 }
 .switch-position {
-    position: absolute;
-    bottom: 20px;;
-    right: 10px;
+    position: relative;
+    top: 15px;
+    right: 40px;
 }
 .footer{
     position: absolute;

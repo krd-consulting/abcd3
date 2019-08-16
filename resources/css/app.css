@@ -57,11 +57,10 @@
 }
 
 .el-date-picker__header, .el-dialog__header {
-	@apply tw-bg-orange-300
+	@apply tw-bg-orange-300;
 }
 
 .el-tabs__item.is-active, .el-tabs__item:hover {
-    /* color: #F2F5EB !important; */
     color: #FBE4BB !important;
    
 }
