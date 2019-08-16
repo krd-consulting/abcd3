@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use Carbon\Carbon;
+
 class StoreFormEntry extends FormRequest
 {
     /**
@@ -14,6 +16,29 @@ class StoreFormEntry extends FormRequest
     public function authorize()
     {
         return true;
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->castDateFields();
+    }
+
+    protected function castDateFields()
+    {
+        $fields = $this->form->fields;
+
+        $toBeMerged = [];
+
+        foreach($fields as $field) {
+            if($field->type == 'date') {
+                $columnName = $field->column_name;
+
+                $toBeMerged[$columnName]
+                     = Carbon::parse($this->$columnName)->toDateTimeString();
+            }
+        }
+
+        $this->merge($toBeMerged);
     }
 
     /**
