@@ -100,7 +100,7 @@
                     <el-col :span="6">
                         <el-date-picker 
                             id="formDate" 
-                            v-model="dateCompleted" 
+                            v-model="entryData.completed_at" 
                             type="date" 
                             placeholder=" " 
                             :picker-options="pickerOptions">
@@ -308,12 +308,10 @@
             },
             
             submit() {
-                this.entryRequest = new EntryRequest(this.form);
+                this.entryRequest = new EntryRequest(this.entryData);
 
                 this.entryRequest.store()
                     .then((response) => {
-                        this.$emit('store', response.data);
-                        this.close();
                     })
                     .catch((error) => {
                         //
