@@ -9,7 +9,8 @@
                 <div class="zone">
                     <el-radio-group id="radioGroup" 
                         class="tw-my-2 tw-mx-8" 
-                        v-model="select" 
+                        :value="value"
+                        @input="$emit('input', $event)" 
                         v-for="item in field.choices" 
                         :key="item.id">
                             <el-radio :label="item.value"></el-radio>
@@ -30,7 +31,8 @@ export default {
         }
     },
     props: { 
-        field: Object
+        field: Object,
+        value: ''
     },
 }
 </script>

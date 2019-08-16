@@ -8,7 +8,8 @@
             <el-col :span="10">
                 <el-date-picker 
                     id="dateField"
-                    v-model="value" 
+                    :value="value"
+                    @input="$emit('input', $event)" 
                     :type="dateType" 
                     :picker-options="dateOptions" 
                     placeholder=" "
@@ -25,13 +26,9 @@
 
 <script>
 export default {
-    data: () => {
-        return {
-            value: '',
-        }
-    },
     props: { 
-        field: Object
+        field: Object,
+        value: ''
     },
     computed: {
         isRequired: {

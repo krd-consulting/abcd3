@@ -8142,14 +8142,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      value: ''
-    };
-  },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     isRequired: {
@@ -8400,6 +8397,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -8407,7 +8405,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   }
 });
 
@@ -93779,6 +93778,7 @@ var render = function() {
               _c("el-date-picker", {
                 attrs: {
                   id: "dateField",
+                  value: _vm.value,
                   type: _vm.dateType,
                   "picker-options": _vm.dateOptions,
                   placeholder: " ",
@@ -93788,12 +93788,10 @@ var render = function() {
                   format: _vm.dateFormat,
                   required: _vm.isRequired
                 },
-                model: {
-                  value: _vm.value,
-                  callback: function($$v) {
-                    _vm.value = $$v
-                  },
-                  expression: "value"
+                on: {
+                  input: function($event) {
+                    return _vm.$emit("input", $event)
+                  }
                 }
               })
             ],
@@ -94142,13 +94140,11 @@ var render = function() {
                   {
                     key: item.id,
                     staticClass: "tw-my-2 tw-mx-8",
-                    attrs: { id: "radioGroup" },
-                    model: {
-                      value: _vm.select,
-                      callback: function($$v) {
-                        _vm.select = $$v
-                      },
-                      expression: "select"
+                    attrs: { id: "radioGroup", value: _vm.value },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   },
                   [_c("el-radio", { attrs: { label: item.value } })],
