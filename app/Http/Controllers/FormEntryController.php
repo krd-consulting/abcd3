@@ -11,6 +11,6 @@ class FormEntryController extends Controller
 {
     public function store(Form $form, StoreFormEntry $request) 
     {
-    	
+    	return $request;
     }
 }

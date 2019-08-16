@@ -23,9 +23,26 @@ class StoreFormEntry extends FormRequest
      */
     public function rules()
     {
-        return [
-            'target_id' => 'required',
+        $form = $this->form;
+
+        $rules = [
+            'target_id' 
+                => 'required|exists:' . (new $form->target_type->model)->getFormReferenceTable() . ',id',
             'completed_at' => 'required|date'
         ];
+
+        $fieldsRules = [];
+
+        foreach($form->fields as $field) {
+             if($field->settings->required == true) {
+                $fieldsRules[$field->column_name] = 'required';
+            }else {
+                $fieldsRules[$field->column_name] = 'nullable';
+            }
+        }
+
+        $rules = array_merge($rules, $fieldsRules);
+
+        return $rules;
     }
 }

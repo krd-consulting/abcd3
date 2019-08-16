@@ -310,8 +310,9 @@
             submit() {
                 this.entryRequest = new EntryRequest(this.entryData);
 
-                this.entryRequest.store()
+                this.entryRequest.store(this.$route.params.form)
                     .then((response) => {
+                        console.log(response);
                     })
                     .catch((error) => {
                         //

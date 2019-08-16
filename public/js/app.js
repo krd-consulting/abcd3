@@ -5037,13 +5037,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     submit: function submit() {
-      var _this4 = this;
-
-      this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.form);
-      this.entryRequest.store().then(function (response) {
-        _this4.$emit('store', response.data);
-
-        _this4.close();
+      this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.entryData);
+      this.entryRequest.store(this.$route.params.form).then(function (response) {
+        console.log(response);
       })["catch"](function (error) {//
       });
     }
@@ -89112,11 +89108,11 @@ var render = function() {
                           "picker-options": _vm.pickerOptions
                         },
                         model: {
-                          value: _vm.dateCompleted,
+                          value: _vm.entryData.completed_at,
                           callback: function($$v) {
-                            _vm.dateCompleted = $$v
+                            _vm.$set(_vm.entryData, "completed_at", $$v)
                           },
-                          expression: "dateCompleted"
+                          expression: "entryData.completed_at"
                         }
                       })
                     ],
