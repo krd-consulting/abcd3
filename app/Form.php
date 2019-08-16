@@ -112,7 +112,7 @@ class Form extends Model
                     $columnType = $field->column_type;
                     $columnName = $field->column_name;
 
-                    $table->$columnType($columnName);
+                    $table->$columnType($columnName)->nullable();
 
                     // foreign keys
                     if(!empty($field->target_type)) {
@@ -129,7 +129,7 @@ class Form extends Model
                     }
                 }
 
-                $table->dateTime('completed_at');
+                $table->timestamp('completed_at');
                 $table->timestamps();
                 $table->softDeletes();
                 $table->userstamps();

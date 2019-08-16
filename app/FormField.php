@@ -35,7 +35,7 @@ class FormField extends Model
         'dropdown' => 'string',
         'radio' => 'string',
         'checkbox' => 'string',
-        'date' => 'date',
+        'date' => 'timestamp',
         'time' => 'time',
         'file' => 'bigInteger'
     ];
