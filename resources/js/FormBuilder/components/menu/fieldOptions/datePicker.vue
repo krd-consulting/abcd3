@@ -21,22 +21,45 @@
                     Calendar Preferences
                 </label>
                 <el-row class="tw--mt-1 tw-ml-4">
-                    <el-switch v-model="fieldData.settings.pastOnly" active-text="Past dates only"></el-switch>
+                    <el-switch 
+                        v-model="fieldData.settings.pastOnly" 
+                        @change="togglePastFuture" 
+                        :disabled="disablePast"
+                        active-text="Past dates only">
+                    </el-switch>
                 </el-row>
                 <el-row class="tw--mt-1 tw-ml-4">
-                    <el-switch v-model="fieldData.settings.futureOnly" active-text="Future dates only"></el-switch>
+                    <el-switch 
+                        v-model="fieldData.settings.futureOnly" 
+                        @change="togglePastFuture" 
+                        :disabled="disableFuture"
+                        active-text="Future dates only">
+                    </el-switch>
                 </el-row>
                 <el-row class="tw--mt-1 tw-ml-4">
-                    <el-switch v-model="fieldData.settings.quickMenu" active-text="Include shortcuts"></el-switch>
+                    <el-switch 
+                        v-model="fieldData.settings.quickMenu" 
+                        active-text="Include shortcuts">
+                    </el-switch>
                 </el-row>
                 <el-row class="tw--mt-1 tw-ml-4">
-                    <el-switch v-model="fieldData.settings.includeTime" active-text="Include time"></el-switch>
+                    <el-switch 
+                        v-model="fieldData.settings.includeTime" 
+                        @change="toggleTimeRange" 
+                        :disabled="disableTime"
+                        active-text="Include time">
+                    </el-switch>
                 </el-row>
                 <el-row class="tw--mt-1 tw-ml-4">
-                    <el-switch v-model="fieldData.settings.dateRange" active-text="Set a date range"></el-switch>
+                    <el-switch 
+                        v-model="fieldData.settings.dateRange" 
+                        @change="toggleTimeRange" 
+                        :disabled="disableRange"
+                        active-text="Set a date range">
+                    </el-switch>
                 </el-row>
             </el-form-item>
-
+            
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
                 <el-button type="success" @click="save('fieldData')" class="tw-w-48">Add it!</el-button>
             </el-form-item>
@@ -49,6 +72,10 @@ export default {
     name: 'datePicker',
     data: () => {
         return {
+            disableFuture: false,
+            disablePast: false,
+            disableTime: false,
+            disableRange: false,
             fieldData: {
                 type: 'DateField',
                 name: 'date_picker',
@@ -90,6 +117,30 @@ export default {
                     return false;
                 }
             })
+        },
+        togglePastFuture() {
+            if(this.fieldData.settings.pastOnly === true) {
+                this.disableFuture = true;
+            } else {
+                this.disableFuture = false; 
+            }
+            if(this.fieldData.settings.futureOnly === true) {
+                this.disablePast = true;
+            } else {
+                this.disablePast = false; 
+            }
+        },
+        toggleTimeRange() {
+            if(this.fieldData.settings.includeTime === true) {
+                this.disableRange = true;
+            } else {
+                this.disableRange = false; 
+            }
+            if(this.fieldData.settings.dateRange === true) {
+                this.disableTime = true;
+            } else {
+                this.disableTime = false; 
+            }
         },
     }
 }

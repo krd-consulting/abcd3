@@ -126,9 +126,9 @@
                 </div>
             </div>
             
-            <!-- TODO: FIX THIS -->
-            <div class="tw-mb-2" v-if="this.formattedScopes.id !== 1 || this.formattedScopes.id !== 6">
-                <div class="tw-flex tw-items-center tw-w-full">
+            <!----------------------------   TODO: FIX THIS   ------------------------------->
+            <div class="tw-mb-2">
+                <div class="tw-flex tw-items-center tw-w-full" v-if="this.formData.scope_id !== 1 && this.formData.scope_id !== 6">
                     <label class="tw-w-1/3">
                         Team
                     </label>
@@ -219,11 +219,10 @@
 
                 const scopes = _.clone(this.scopes);
 
-                console.log(this.scopes);
 
                 return scopes.map((scope) => {
                     scope.label = labels[scope.name];
-
+                    console.log(scope);
                     return scope;
                 });
             }
@@ -271,7 +270,7 @@
                 this.retrieveTeams().then (() => {
                     this.formData.team_id = this.teams[0].id
                 });
-
+                
                 request.create().then((response) => {
                     this.targetTypes = response.data.target_types;
                     this.types = response.data.types;
@@ -281,6 +280,7 @@
                     this.formData.target = this.targetTypes[0].target;
                     this.formData.scope_id = this.scopes[0].id;
                 });
+
             },
 
             submit() {

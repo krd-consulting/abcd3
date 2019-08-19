@@ -8,12 +8,14 @@
 
         <el-col :span="10">
           <el-upload 
-              action="https://jsonplaceholder.typicode.com/posts/"
+              action=""
+              :auto-upload="false"
+              :http-request="handleUpload"
               :on-preview="handlePreview"
               :on-remove="handleRemove"
               :before-remove="beforeRemove"
               multiple
-              :limit="3"
+              :limit="field.settings.limit"
               :on-exceed="handleExceed"
               :file-list="fileList">
               <el-button size="small" type="primary">Click to upload</el-button>
@@ -35,6 +37,9 @@ export default {
         field: Object
     },
     methods: {
+      handleUpload(file) {
+        console.log(file);
+      },
       handleRemove(file, fileList) {
         console.log(file, fileList);
       },

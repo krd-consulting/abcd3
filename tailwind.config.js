@@ -17,6 +17,13 @@ module.exports = {
 		'5xl': '3rem',
 		'6xl': '4rem',
 	},
+	extend: {
+		spacing: {
+        	'72': '18rem',
+        	'84': '21rem',
+        	'96': '24rem',
+		}
+	},
 	colors: {
 		black: colors.black,
 		white: colors.white,

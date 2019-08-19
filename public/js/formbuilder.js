@@ -3997,6 +3997,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4118,6 +4120,7 @@ __webpack_require__.r(__webpack_exports__);
       fieldCopy.choices[index].value = value;
       this.choices = fieldCopy.choices;
       this.dropItem = value;
+      this.isUnique = true;
       this.$forceUpdate();
     }
   }
@@ -5057,6 +5060,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textfield',
@@ -5707,10 +5716,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'datePicker',
   data: function data() {
     return {
+      disableFuture: false,
+      disablePast: false,
+      disableTime: false,
+      disableRange: false,
       fieldData: {
         type: 'DateField',
         name: 'date_picker',
@@ -5757,6 +5793,32 @@ __webpack_require__.r(__webpack_exports__);
           return false;
         }
       });
+    },
+    togglePastFuture: function togglePastFuture() {
+      if (this.fieldData.settings.pastOnly === true) {
+        this.disableFuture = true;
+      } else {
+        this.disableFuture = false;
+      }
+
+      if (this.fieldData.settings.futureOnly === true) {
+        this.disablePast = true;
+      } else {
+        this.disablePast = false;
+      }
+    },
+    toggleTimeRange: function toggleTimeRange() {
+      if (this.fieldData.settings.includeTime === true) {
+        this.disableRange = true;
+      } else {
+        this.disableRange = false;
+      }
+
+      if (this.fieldData.settings.dateRange === true) {
+        this.disableTime = true;
+      } else {
+        this.disableTime = false;
+      }
     }
   }
 });
@@ -5889,6 +5951,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'fileUpload',
   data: function data() {
@@ -5899,7 +5968,8 @@ __webpack_require__.r(__webpack_exports__);
         title: '',
         description: '',
         settings: {
-          required: false
+          required: false,
+          limit: 1
         },
         rules: {
           title: [{
@@ -7658,9 +7728,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var scopes = _.clone(this.scopes);
 
-      console.log(this.scopes);
       return scopes.map(function (scope) {
         scope.label = labels[scope.name];
+        console.log(scope);
         return scope;
       });
     }
@@ -8844,6 +8914,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -8854,6 +8926,9 @@ __webpack_require__.r(__webpack_exports__);
     field: Object
   },
   methods: {
+    handleUpload: function handleUpload(file) {
+      console.log(file);
+    },
     handleRemove: function handleRemove(file, fileList) {
       console.log(file, fileList);
     },
@@ -10915,7 +10990,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -88576,7 +88651,7 @@ var render = function() {
                 _c(
                   "el-button",
                   {
-                    staticClass: "hover:tw-text-red-600",
+                    staticClass: "tw-px-2 tw-py-1 hover:tw-text-red-600 ",
                     attrs: { type: "text", size: "mini" },
                     on: {
                       click: function($event) {
@@ -88604,7 +88679,7 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("el-switch", {
-        staticClass: "tw-float-right switch-position",
+        staticClass: "tw-float-right switch-position hidden-xs-only",
         attrs: { "active-text": "Required", "inactive-text": "Optional" },
         model: {
           value: _vm.required,
@@ -88618,7 +88693,7 @@ var render = function() {
       _c(
         "form",
         {
-          staticClass: "tw-mt-4",
+          staticClass: "tw-mt-4 tw-ml-16",
           on: {
             submit: function($event) {
               $event.preventDefault()
@@ -88629,41 +88704,43 @@ var render = function() {
         [
           _c(
             "div",
+            { staticClass: "tw-w-72 tw-inline-block" },
+            [
+              _c("el-input", {
+                attrs: { id: "add-item", placeholder: "Add" },
+                model: {
+                  value: _vm.itemText,
+                  callback: function($$v) {
+                    _vm.itemText = $$v
+                  },
+                  expression: "itemText"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "tw-inline-block" },
             [
               _c(
-                "el-col",
-                { attrs: { span: 6 } },
+                "el-tooltip",
+                {
+                  attrs: {
+                    content:
+                      "Alternatively, you can press enter after typing in this field to add items to the list"
+                  }
+                },
                 [
-                  _c("label", { attrs: { for: "add-item" } }, [
-                    _vm._v("Add a new Item")
-                  ]),
-                  _vm._v(" "),
-                  _c("el-input", {
-                    attrs: { id: "add-item" },
-                    model: {
-                      value: _vm.itemText,
-                      callback: function($$v) {
-                        _vm.itemText = $$v
-                      },
-                      expression: "itemText"
-                    }
-                  }),
-                  _vm._v(" "),
                   _c(
-                    "el-tooltip",
+                    "el-button",
                     {
-                      attrs: {
-                        content:
-                          "Alternatively, you can press enter after typing in this field to add items to the list"
-                      }
+                      staticClass: "tw-px-2 tw-py-1",
+                      attrs: { size: "mini" },
+                      on: { click: _vm.addItem }
                     },
-                    [
-                      _c(
-                        "el-button",
-                        { attrs: { type: "text" }, on: { click: _vm.addItem } },
-                        [_vm._v("Add")]
-                      )
-                    ],
+                    [_c("base-icon", {}, [_vm._v("add_box")])],
                     1
                   )
                 ],
@@ -89691,7 +89768,16 @@ var render = function() {
           },
           expression: "required"
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title: "Woops! Title cannot be empty. Lets try that again.",
+              type: "error"
+            }
+          })
+        : _vm._e()
     ],
     2
   )
@@ -90363,7 +90449,11 @@ var render = function() {
                 { staticClass: "tw--mt-1 tw-ml-4" },
                 [
                   _c("el-switch", {
-                    attrs: { "active-text": "Past dates only" },
+                    attrs: {
+                      disabled: _vm.disablePast,
+                      "active-text": "Past dates only"
+                    },
+                    on: { change: _vm.togglePastFuture },
                     model: {
                       value: _vm.fieldData.settings.pastOnly,
                       callback: function($$v) {
@@ -90381,7 +90471,11 @@ var render = function() {
                 { staticClass: "tw--mt-1 tw-ml-4" },
                 [
                   _c("el-switch", {
-                    attrs: { "active-text": "Future dates only" },
+                    attrs: {
+                      disabled: _vm.disableFuture,
+                      "active-text": "Future dates only"
+                    },
+                    on: { change: _vm.togglePastFuture },
                     model: {
                       value: _vm.fieldData.settings.futureOnly,
                       callback: function($$v) {
@@ -90417,7 +90511,11 @@ var render = function() {
                 { staticClass: "tw--mt-1 tw-ml-4" },
                 [
                   _c("el-switch", {
-                    attrs: { "active-text": "Include time" },
+                    attrs: {
+                      disabled: _vm.disableTime,
+                      "active-text": "Include time"
+                    },
+                    on: { change: _vm.toggleTimeRange },
                     model: {
                       value: _vm.fieldData.settings.includeTime,
                       callback: function($$v) {
@@ -90435,7 +90533,11 @@ var render = function() {
                 { staticClass: "tw--mt-1 tw-ml-4" },
                 [
                   _c("el-switch", {
-                    attrs: { "active-text": "Set a date range" },
+                    attrs: {
+                      disabled: _vm.disableRange,
+                      "active-text": "Set a date range"
+                    },
+                    on: { change: _vm.toggleTimeRange },
                     model: {
                       value: _vm.fieldData.settings.dateRange,
                       callback: function($$v) {
@@ -90676,6 +90778,31 @@ var render = function() {
                     _vm.$set(_vm.fieldData.settings, "required", $$v)
                   },
                   expression: "fieldData.settings.required"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { staticClass: "tw-mt-8" },
+            [
+              _c("label", [
+                _vm._v(
+                  "\n                 Number of files to submit\n             "
+                )
+              ]),
+              _c("br"),
+              _vm._v(" "),
+              _c("el-input-number", {
+                attrs: { min: 1, max: 10 },
+                model: {
+                  value: _vm.fieldData.settings.limit,
+                  callback: function($$v) {
+                    _vm.$set(_vm.fieldData.settings, "limit", $$v)
+                  },
+                  expression: "fieldData.settings.limit"
                 }
               })
             ],
@@ -92982,9 +93109,9 @@ var render = function() {
             : _vm._e()
         ]),
         _vm._v(" "),
-        this.formattedScopes.id !== 1 || this.formattedScopes.id !== 6
-          ? _c("div", { staticClass: "tw-mb-2" }, [
-              _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
+        _c("div", { staticClass: "tw-mb-2" }, [
+          this.formData.scope_id !== 1 && this.formData.scope_id !== 6
+            ? _c("div", { staticClass: "tw-flex tw-items-center tw-w-full" }, [
                 _c("label", { staticClass: "tw-w-1/3" }, [
                   _vm._v("\n                    Team\n                ")
                 ]),
@@ -93037,24 +93164,22 @@ var render = function() {
                   ],
                   1
                 )
-              ]),
-              _vm._v(" "),
-              _vm.request.errors.has("team_id")
-                ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
-                    _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
-                      _c("span", {
-                        staticClass: "tw-text-xs tw-text-red-500",
-                        domProps: {
-                          textContent: _vm._s(
-                            _vm.request.errors.get("team_id")[0]
-                          )
-                        }
-                      })
-                    ])
-                  ])
-                : _vm._e()
-            ])
-          : _vm._e()
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.request.errors.has("team_id")
+            ? _c("div", { staticClass: "tw-flex tw-justify-end" }, [
+                _c("div", { staticClass: "tw-w-4/5 tw-py-2" }, [
+                  _c("span", {
+                    staticClass: "tw-text-xs tw-text-red-500",
+                    domProps: {
+                      textContent: _vm._s(_vm.request.errors.get("team_id")[0])
+                    }
+                  })
+                ])
+              ])
+            : _vm._e()
+        ])
       ]),
       _vm._v(" "),
       _c(
@@ -94623,12 +94748,14 @@ var render = function() {
                 "el-upload",
                 {
                   attrs: {
-                    action: "https://jsonplaceholder.typicode.com/posts/",
+                    action: "",
+                    "auto-upload": false,
+                    "http-request": _vm.handleUpload,
                     "on-preview": _vm.handlePreview,
                     "on-remove": _vm.handleRemove,
                     "before-remove": _vm.beforeRemove,
                     multiple: "",
-                    limit: 3,
+                    limit: _vm.field.settings.limit,
                     "on-exceed": _vm.handleExceed,
                     "file-list": _vm.fileList
                   }

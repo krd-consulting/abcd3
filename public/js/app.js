@@ -11098,6 +11098,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -11108,6 +11110,9 @@ __webpack_require__.r(__webpack_exports__);
     field: Object
   },
   methods: {
+    handleUpload: function handleUpload(file) {
+      console.log(file);
+    },
     handleRemove: function handleRemove(file, fileList) {
       console.log(file, fileList);
     },
@@ -95836,12 +95841,14 @@ var render = function() {
                 "el-upload",
                 {
                   attrs: {
-                    action: "https://jsonplaceholder.typicode.com/posts/",
+                    action: "",
+                    "auto-upload": false,
+                    "http-request": _vm.handleUpload,
                     "on-preview": _vm.handlePreview,
                     "on-remove": _vm.handleRemove,
                     "before-remove": _vm.beforeRemove,
                     multiple: "",
-                    limit: 3,
+                    limit: _vm.field.settings.limit,
                     "on-exceed": _vm.handleExceed,
                     "file-list": _vm.fileList
                   }

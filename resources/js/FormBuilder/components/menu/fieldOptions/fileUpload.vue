@@ -15,6 +15,13 @@
                 </label><br>
                 <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional" class="tw--mt-6"></el-switch>
             </el-form-item>
+
+            <el-form-item class="tw-mt-8">
+                <label>
+                    Number of files to submit
+                </label><br>
+                <el-input-number v-model="fieldData.settings.limit" :min="1" :max="10"></el-input-number>
+            </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
                 <el-button type="success" @click="save('fieldData')" class="tw-w-48">Add it!</el-button>
@@ -36,6 +43,7 @@ export default {
                 description: '',
                 settings: {
                     required: false,
+                    limit: 1
                 },
                 rules: {
                     title: [

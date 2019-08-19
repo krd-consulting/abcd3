@@ -9,9 +9,7 @@
                     {{ fieldLabel }}
                 </editable-text>
             </label>
-        
 
-        
             <div class="tw-inline">
                 <el-select id="dropdown" v-model="dropItem" placeholder=" ">
                     <el-option v-for="(item, index) in choices" :key="index" :label="item.value" :value="item.value"></el-option>
@@ -28,7 +26,7 @@
                     {{ dropItem }}
                 </editable-text>
                 <el-button 
-                    class="hover:tw-text-red-600" 
+                    class="tw-px-2 tw-py-1 hover:tw-text-red-600 " 
                     type="text" 
                     size="mini" 
                     @click="removeChoice(dropItem, index)">
@@ -47,19 +45,23 @@
             v-model="required" 
             active-text="Required" 
             inactive-text="Optional"
-            class="tw-float-right switch-position">
+            class="tw-float-right switch-position hidden-xs-only">
         </el-switch>
         
-        <form @submit.prevent="addItem" class="tw-mt-4">
-            <div> 
-                <el-col :span="6" class="">
-                    <label for="add-item">Add a new Item</label>
-                    <el-input id="add-item" v-model="itemText"></el-input>
+        <form @submit.prevent="addItem" class="tw-mt-4 tw-ml-16">
+                <!-- <el-col :span="2">
+                    <label for="add-item" class="tw-text-right"></label>
+                </el-col> -->
+                <div class="tw-w-72 tw-inline-block">
+                    <el-input id="add-item" placeholder="Add" v-model="itemText"></el-input>
+                </div>
+                <div class="tw-inline-block">
                     <el-tooltip content="Alternatively, you can press enter after typing in this field to add items to the list">
-                        <el-button type="text" @click="addItem">Add</el-button>
+                        <el-button class="tw-px-2 tw-py-1" size="mini" @click="addItem">
+                            <base-icon class="">add_box</base-icon>
+                        </el-button>
                     </el-tooltip>
-                </el-col>
-            </div>
+                </div>
         </form>
 
     </div>
@@ -182,6 +184,7 @@ export default {
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
             this.dropItem = value;
+            this.isUnique = true;
             this.$forceUpdate();
         }
     }
@@ -198,6 +201,14 @@ export default {
     position: relative;
     top: 15px;
     right: 40px;
+}
+
+@media (max-width: 768px) {
+    .switch-position {
+        position: relative;
+        bottom: 0;
+        right: 0;
+    }
 }
 </style>
 

@@ -30,6 +30,12 @@
         inactive-text="Optional"
         class="tw-float-right switch-position">
     </el-switch>
+
+    <el-alert
+        v-if="isEmpty"
+        title="Woops! Title cannot be empty. Lets try that again."
+        type="error">
+    </el-alert>
     
   </div>
 </template>
@@ -40,8 +46,7 @@ import EditableText from '@/components/editableText.vue'
 export default {
     name: 'Textfield',
     data() {
-        return {
-        }
+        return {}
     },
 
     props: {
