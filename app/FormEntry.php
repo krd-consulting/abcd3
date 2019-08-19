@@ -9,10 +9,13 @@ use App\Traits\Models\Sort;
 
 use Carbon\Carbon;
 
+use Wildside\Userstamps\Userstamps;
+
 class FormEntry extends Model
 {
     use Search;
     use Sort;
+    use Userstamps;
 
     public $searchColumns = [];
 
