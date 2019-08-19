@@ -17,6 +17,8 @@ class FormEntryController extends Controller
 
 		$entry->create($request->validated());
 
-		return $entry->first();
+		return [
+			'data' => $entry
+		];
     }
 }
