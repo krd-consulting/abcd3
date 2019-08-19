@@ -34,7 +34,7 @@ class FormField extends Model
         'number' => 'decimal',
         'dropdown' => 'string',
         'radio' => 'string',
-        'checkbox' => 'string',
+        'checkbox' => 'json',
         'date' => 'timestamp',
         'time' => 'time',
         'file' => 'bigInteger'
@@ -48,7 +48,7 @@ class FormField extends Model
         'RadioField' => 'radio',
         'CheckBoxField' => 'checkbox',
         'DateField' => 'date',
-        'DateTimeField', 'datetime',
+        'DateTimeField' => 'datetime',
         'TimeField' => 'time',
         'FileField' => 'file'
     ];

@@ -170,7 +170,7 @@
                     perPage: 10,
                     search: ''
                 },
-            teams: [],
+                teams: [],
                 targetRequest: {},
                 targetParams: {
                     ascending: true,
@@ -187,9 +187,7 @@
                     search: ''
                 },
                 targetItems: [],
-                entryData: {
-                    target_id: ''
-                },
+                entryData: {},
                 value: '',
                 inputName: '',
                 dateCompleted: '',
@@ -273,10 +271,16 @@
             },
 
             retrieve(form = this.$route.params.form) {
-                this.request.show(form).then((response) => {
+                return this.request.show(form).then((response) => {
                     this.form = response.data;
                 });
             },
+
+            // initializeEntryData(fields) {
+            //     fields.foreach((field) => {
+            //         if(field.type == 'Check')
+            //     })
+            // },
 
             retrieveFormTargetItems(keywords, callback) {
                 import(`@/api/${this.targetName}Request`)

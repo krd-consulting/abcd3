@@ -14,8 +14,9 @@ class FormEntryController extends Controller
     {
     	$entry = new FormEntry;
     	$entry->setTable($form->table_name);
-
-		$entry->create($request->validated());
+    	$entry->castFieldsToArray($form->fields()->where('type', 'checkbox')->pluck('column_name'));
+		$entry->fill($request->validated());
+		$entry->save();
 
 		return [
 			'data' => $entry->latest()->first()

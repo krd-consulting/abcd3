@@ -8087,6 +8087,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -8095,7 +8096,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    field: Object
+    field: Object,
+    value: {
+      type: Array,
+      "default": []
+    }
   },
   computed: {
     isRequired: {
@@ -93697,30 +93702,32 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(item) {
-                return _c(
+              [
+                _c(
                   "el-checkbox-group",
                   {
-                    key: item.id,
                     staticClass: "tw-h-8",
-                    attrs: { id: "check", required: _vm.isRequired },
-                    model: {
-                      value: _vm.select,
-                      callback: function($$v) {
-                        _vm.select = $$v
-                      },
-                      expression: "select"
+                    attrs: {
+                      id: "check",
+                      value: _vm.value,
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   },
-                  [
-                    _c("el-checkbox", {
+                  _vm._l(_vm.field.choices, function(item) {
+                    return _c("el-checkbox", {
+                      key: item.value,
                       staticClass: "tw-my-2 tw-ml-8 tw-text-lg",
                       attrs: { label: item.value }
                     })
-                  ],
+                  }),
                   1
                 )
-              }),
+              ],
               1
             )
           ])
