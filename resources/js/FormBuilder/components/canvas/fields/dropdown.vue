@@ -25,56 +25,56 @@
                 </el-select>
             </div>
 
-            
-            <form @submit.prevent="addItem" class="tw-inline-flex tw-ml-8">
-                <div class="tw-w-72 tw-inline-block tw-mt-0">
-                    <el-input id="add-item" class="tw-w-72" placeholder="Add" v-model="itemText"></el-input>
-                </div>
-                <div class="tw-inline-block">
-                    <el-tooltip content="Alternatively, you can press enter after typing in this field to add items to the list">
-                        <el-button class="button" size="small" @click="addItem">
-                            <base-icon>add_box</base-icon>
+            <div class="tw-ml-16 tw-pl-2" v-if="dropItem != null">
+                <span>Edit this list item: </span>
+                <div class="tw-inline-flex tw-justify-between">
+                    <div class="tw-flex-auto">
+                        <editable-text 
+                            class="tw-cursor-pointer mouseOver tw-inline-block tw-w-64" 
+                            :value="dropItem"
+                            @input="updateChoiceValue($event)"
+                            @edit="tempValue(dropItem)">
+                            {{ dropItem }}
+                        </editable-text>
+                    </div>
+                    <div class="tw-flex-1 tw-relative tw-right-0">
+                        <el-button 
+                            class="tw-px-2 tw-py-1 hover:tw-text-red-600" 
+                            type="text" 
+                            size="mini" 
+                            @click="removeChoice(dropItem, index)">
+                                    <base-icon>delete_forever</base-icon>
                         </el-button>
-                    </el-tooltip>
+                    </div>
                 </div>
-            </form>    
+            </div>
+  
         </div>
 
         <el-alert
             v-if="!isUnique"
-            title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            title="Oops! it looks like you have already added that as a choice. Let's try again with a different value."
             type="error">
         </el-alert>
 
         <el-alert
             v-if="isEmpty"
-            title="Woops! This value cannot be empty. Lets try that again."
+            title="Oops! This value cannot be empty. Lets try that again."
             type="error">
         </el-alert>
 
-    <div class="tw-ml-16 tw-pl-2" v-if="dropItem != null">
-        <span>Edit this list item: </span>
-        <div class="tw-inline-flex tw-justify-between">
-            <div class="tw-flex-auto">
-                <editable-text 
-                    class="tw-cursor-pointer mouseOver tw-inline-block tw-w-64" 
-                    :value="dropItem"
-                    @input="updateChoiceValue($event)"
-                    @edit="tempValue(dropItem)">
-                    {{ dropItem }}
-                </editable-text>
-            </div>
-            <div class="tw-flex-1 tw-relative tw-right-0">
-                <el-button 
-                    class="tw-px-2 tw-py-1 hover:tw-text-red-600" 
-                    type="text" 
-                    size="mini" 
-                    @click="removeChoice(dropItem, index)">
-                            <base-icon>delete_forever</base-icon>
-                </el-button>
-            </div>
+    <form @submit.prevent="addItem">
+        <div class="tw-w-72 tw-block tw-float-left tw-mt-0">
+            <el-input id="add-item" class="tw-w-72" placeholder="Add" v-model="itemText"></el-input>
         </div>
-    </div>
+        <div class="tw-block tw-float-left">
+            <el-tooltip content="Alternatively, you can press enter after typing in this field to add items to the list">
+                <el-button type="text" @click="addItem">
+                    <base-icon class="tw-text-3xl">add_box</base-icon>
+                </el-button>
+            </el-tooltip>
+        </div>
+    </form>
         
 
     </div>
@@ -222,9 +222,12 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.button {
-    margin-top: 3px !important;
-    padding: 5px;
+.el-button {
+    padding: 0;
+}
+button {
+    padding: 0px;
+    margin-bottom: -5px;
 }
 .switch-position {
     position: relative;

@@ -1,5 +1,5 @@
 <template>
-    <div id="dropdown">
+    <div id="radio">
 
         <slot></slot>
 
@@ -22,17 +22,19 @@
         </el-col><br><br>
         <div class="zone">
             <div v-for="(item, index) in choices" 
-                :key="item.value" 
-                :label="item.value">
+                :key="item.value">
+
                 <el-radio>
                     <editable-text 
                         class="tw-cursor-pointer mouseOver"
                         :value="item.value"
+                        :label="item.value"
                         @input="updateChoiceValue($event, index)"
                         @edit="tempValue(item.value)">
                             {{ item.value }}
                     </editable-text>
                 </el-radio>
+
                 <el-button 
                     class="tw--ml-6 hover:tw-text-red-600" 
                     type="text" 
@@ -45,13 +47,13 @@
 
         <el-alert
             v-if="!isUnique"
-            title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            title="Oops! it looks like you have already added that as a choice. Let's try again with a different value."
             type="error">
         </el-alert>
 
         <el-alert
             v-if="isEmpty"
-            title="Woops! This value cannot be empty. Lets try that again."
+            title="Oops! This value cannot be empty. Lets try that again."
             type="error">
         </el-alert>
         
@@ -76,6 +78,7 @@ export default {
     data() {
         return {
             itemText: '',
+            num: '',
             nextItem: 0,
             isUnique: true,
             isEmpty: false,

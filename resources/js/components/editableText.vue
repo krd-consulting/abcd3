@@ -1,5 +1,5 @@
 <template>
-	<div v-on="$listeners.click" @click.prevent="edit" @keyup.enter="save">
+	<div v-on="$listeners.click" @click.prevent="edit" @keyup.enter="blur">
 		<div class="pb-px" v-if="!active">{{ value }}</div>
 		<div v-if="active">
 			<el-input 
@@ -7,7 +7,7 @@
 				v-model="newValue" 
 				class="text-base p-0" 
 				size="small"
-				@blur="!active" 
+				@blur="save" 
 				maxlength="200">
 			</el-input>
 		</div>

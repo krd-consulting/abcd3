@@ -11,7 +11,7 @@
         </el-switch>
 
       <el-col :span="8" class="tw-mt-1">
-          <label class="inputLabel">
+          <label>
             <editable-text 
                 class="tw-cursor-pointer mouseOver" 
                 v-model="fieldLabel"
@@ -22,10 +22,8 @@
       </el-col>
         <br><br>
         <div class="zone">
-            <div id="check" 
-                v-for="(item, index) in choices" 
-                :key="item.value"  
-                :label="item.value">
+            <div v-for="(item, index) in choices" 
+                :key="item.value">
 
                 <el-checkbox>
                     <editable-text 
@@ -49,13 +47,13 @@
 
         <el-alert
             v-if="!isUnique"
-            title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            title="Oops! it looks like you have already added that as a choice. Let's try again with a different value."
             type="error">
         </el-alert>
 
         <el-alert
             v-if="isEmpty"
-            title="Woops! This value cannot be empty. Lets try that again."
+            title="Oops! This value cannot be empty. Lets try that again."
             type="error">
         </el-alert>
 

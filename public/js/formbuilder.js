@@ -3563,8 +3563,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4872,11 +4870,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       itemText: '',
+      num: '',
       nextItem: 0,
       isUnique: true,
       isEmpty: false,
@@ -11225,7 +11226,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button[data-v-5bdc3b03] {\n  margin-top: 3px !important;\n  padding: 5px;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n    margin-right: 4px;\n}\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-button[data-v-5bdc3b03] {\n  padding: 0;\n}\nbutton[data-v-5bdc3b03] {\n  padding: 0px;\n  margin-bottom: -5px;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n    margin-right: 4px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -88508,7 +88509,6 @@ var render = function() {
       _c("el-col", { staticClass: "tw-mt-1", attrs: { span: 8 } }, [
         _c(
           "label",
-          { staticClass: "inputLabel" },
           [
             _c(
               "editable-text",
@@ -88547,7 +88547,7 @@ var render = function() {
         _vm._l(_vm.choices, function(item, index) {
           return _c(
             "div",
-            { key: item.value, attrs: { id: "check", label: item.value } },
+            { key: item.value },
             [
               _c(
                 "el-checkbox",
@@ -88603,7 +88603,7 @@ var render = function() {
         ? _c("el-alert", {
             attrs: {
               title:
-                "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
+                "Oops! it looks like you have already added that as a choice. Let's try again with a different value.",
               type: "error"
             }
           })
@@ -88612,7 +88612,7 @@ var render = function() {
       _vm.isEmpty
         ? _c("el-alert", {
             attrs: {
-              title: "Woops! This value cannot be empty. Lets try that again.",
+              title: "Oops! This value cannot be empty. Lets try that again.",
               type: "error"
             }
           })
@@ -88894,75 +88894,73 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c(
-          "form",
-          {
-            staticClass: "tw-inline-flex tw-ml-8",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.addItem($event)
-              }
-            }
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "tw-w-72 tw-inline-block tw-mt-0" },
-              [
-                _c("el-input", {
-                  staticClass: "tw-w-72",
-                  attrs: { id: "add-item", placeholder: "Add" },
-                  model: {
-                    value: _vm.itemText,
-                    callback: function($$v) {
-                      _vm.itemText = $$v
-                    },
-                    expression: "itemText"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "tw-inline-block" },
-              [
+        _vm.dropItem != null
+          ? _c("div", { staticClass: "tw-ml-16 tw-pl-2" }, [
+              _c("span", [_vm._v("Edit this list item: ")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tw-inline-flex tw-justify-between" }, [
                 _c(
-                  "el-tooltip",
-                  {
-                    attrs: {
-                      content:
-                        "Alternatively, you can press enter after typing in this field to add items to the list"
-                    }
-                  },
+                  "div",
+                  { staticClass: "tw-flex-auto" },
+                  [
+                    _c(
+                      "editable-text",
+                      {
+                        staticClass:
+                          "tw-cursor-pointer mouseOver tw-inline-block tw-w-64",
+                        attrs: { value: _vm.dropItem },
+                        on: {
+                          input: function($event) {
+                            return _vm.updateChoiceValue($event)
+                          },
+                          edit: function($event) {
+                            return _vm.tempValue(_vm.dropItem)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.dropItem) +
+                            "\n                    "
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "tw-flex-1 tw-relative tw-right-0" },
                   [
                     _c(
                       "el-button",
                       {
-                        staticClass: "button",
-                        attrs: { size: "small" },
-                        on: { click: _vm.addItem }
+                        staticClass: "tw-px-2 tw-py-1 hover:tw-text-red-600",
+                        attrs: { type: "text", size: "mini" },
+                        on: {
+                          click: function($event) {
+                            return _vm.removeChoice(_vm.dropItem, _vm.index)
+                          }
+                        }
                       },
-                      [_c("base-icon", [_vm._v("add_box")])],
+                      [_c("base-icon", [_vm._v("delete_forever")])],
                       1
                     )
                   ],
                   1
                 )
-              ],
-              1
-            )
-          ]
-        )
+              ])
+            ])
+          : _vm._e()
       ]),
       _vm._v(" "),
       !_vm.isUnique
         ? _c("el-alert", {
             attrs: {
               title:
-                "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
+                "Oops! it looks like you have already added that as a choice. Let's try again with a different value.",
               type: "error"
             }
           })
@@ -88971,72 +88969,73 @@ var render = function() {
       _vm.isEmpty
         ? _c("el-alert", {
             attrs: {
-              title: "Woops! This value cannot be empty. Lets try that again.",
+              title: "Oops! This value cannot be empty. Lets try that again.",
               type: "error"
             }
           })
         : _vm._e(),
       _vm._v(" "),
-      _vm.dropItem != null
-        ? _c("div", { staticClass: "tw-ml-16 tw-pl-2" }, [
-            _c("span", [_vm._v("Edit this list item: ")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tw-inline-flex tw-justify-between" }, [
+      _c(
+        "form",
+        {
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.addItem($event)
+            }
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "tw-w-72 tw-block tw-float-left tw-mt-0" },
+            [
+              _c("el-input", {
+                staticClass: "tw-w-72",
+                attrs: { id: "add-item", placeholder: "Add" },
+                model: {
+                  value: _vm.itemText,
+                  callback: function($$v) {
+                    _vm.itemText = $$v
+                  },
+                  expression: "itemText"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "tw-block tw-float-left" },
+            [
               _c(
-                "div",
-                { staticClass: "tw-flex-auto" },
-                [
-                  _c(
-                    "editable-text",
-                    {
-                      staticClass:
-                        "tw-cursor-pointer mouseOver tw-inline-block tw-w-64",
-                      attrs: { value: _vm.dropItem },
-                      on: {
-                        input: function($event) {
-                          return _vm.updateChoiceValue($event)
-                        },
-                        edit: function($event) {
-                          return _vm.tempValue(_vm.dropItem)
-                        }
-                      }
-                    },
-                    [
-                      _vm._v(
-                        "\n                " +
-                          _vm._s(_vm.dropItem) +
-                          "\n            "
-                      )
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "tw-flex-1 tw-relative tw-right-0" },
+                "el-tooltip",
+                {
+                  attrs: {
+                    content:
+                      "Alternatively, you can press enter after typing in this field to add items to the list"
+                  }
+                },
                 [
                   _c(
                     "el-button",
-                    {
-                      staticClass: "tw-px-2 tw-py-1 hover:tw-text-red-600",
-                      attrs: { type: "text", size: "mini" },
-                      on: {
-                        click: function($event) {
-                          return _vm.removeChoice(_vm.dropItem, _vm.index)
-                        }
-                      }
-                    },
-                    [_c("base-icon", [_vm._v("delete_forever")])],
+                    { attrs: { type: "text" }, on: { click: _vm.addItem } },
+                    [
+                      _c("base-icon", { staticClass: "tw-text-3xl" }, [
+                        _vm._v("add_box")
+                      ])
+                    ],
                     1
                   )
                 ],
                 1
               )
-            ])
-          ])
-        : _vm._e()
+            ],
+            1
+          )
+        ]
+      )
     ],
     2
   )
@@ -89685,7 +89684,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { attrs: { id: "dropdown" } },
+    { attrs: { id: "radio" } },
     [
       _vm._t("default"),
       _vm._v(" "),
@@ -89743,7 +89742,7 @@ var render = function() {
         _vm._l(_vm.choices, function(item, index) {
           return _c(
             "div",
-            { key: item.value, attrs: { label: item.value } },
+            { key: item.value },
             [
               _c(
                 "el-radio",
@@ -89752,7 +89751,7 @@ var render = function() {
                     "editable-text",
                     {
                       staticClass: "tw-cursor-pointer mouseOver",
-                      attrs: { value: item.value },
+                      attrs: { value: item.value, label: item.value },
                       on: {
                         input: function($event) {
                           return _vm.updateChoiceValue($event, index)
@@ -89799,7 +89798,7 @@ var render = function() {
         ? _c("el-alert", {
             attrs: {
               title:
-                "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
+                "Oops! it looks like you have already added that as a choice. Let's try again with a different value.",
               type: "error"
             }
           })
@@ -89808,7 +89807,7 @@ var render = function() {
       _vm.isEmpty
         ? _c("el-alert", {
             attrs: {
-              title: "Woops! This value cannot be empty. Lets try that again.",
+              title: "Oops! This value cannot be empty. Lets try that again.",
               type: "error"
             }
           })
@@ -94113,7 +94112,7 @@ var render = function() {
             ) {
               return null
             }
-            return _vm.save($event)
+            return _vm.blur($event)
           }
         }
       },
@@ -94132,11 +94131,7 @@ var render = function() {
                 ref: "editable_input",
                 staticClass: "text-base p-0",
                 attrs: { size: "small", maxlength: "200" },
-                on: {
-                  blur: function($event) {
-                    !_vm.active
-                  }
-                },
+                on: { blur: _vm.save },
                 model: {
                   value: _vm.newValue,
                   callback: function($$v) {
