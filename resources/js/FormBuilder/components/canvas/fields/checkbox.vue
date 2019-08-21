@@ -12,42 +12,50 @@
 
       <el-col :span="8" class="tw-mt-1">
           <label class="inputLabel">
-            <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+            <editable-text 
+                class="tw-cursor-pointer mouseOver" 
+                v-model="fieldLabel"
+                @edit="tempValue(fieldLabel)">
                 {{ fieldLabel }}
             </editable-text>
         </label>
       </el-col>
         <br><br>
+        <div class="zone">
+            <div id="check" 
+                v-for="(item, index) in choices" 
+                :key="item.value"  
+                :label="item.value">
 
-        <el-checkbox-group id="check" 
-            v-for="(item, index) in choices" 
-            :key="item.value" 
-            v-model="value" 
-            :label="item.value">
+                <el-checkbox>
+                    <editable-text 
+                        class="tw-cursor-pointer mouseOver"
+                        :value="item.value"
+                        @input="updateChoiceValue($event, index)"
+                        @edit="tempValue(item.value)">
+                            {{ item.value }}
+                    </editable-text>
+                </el-checkbox>
 
-            <el-checkbox>
-                <editable-text 
-                    class="tw-cursor-pointer mouseOver"
-                    :value="item.value"
-                    @input="updateChoiceValue($event, index)"
-                    @edit="tempValue(item.value)">
-                        {{ item.value }}
-                </editable-text>
-            </el-checkbox>
-
-            <el-button 
-                class="tw--ml-6 tw-mt-4 hover:tw-text-red-600"
-                type="text" 
-                size="mini" 
-                @click="removeChoice(item)">
-                    <base-icon>delete_forever</base-icon>
-            </el-button>
-            
-        </el-checkbox-group>
+                <el-button 
+                    class="tw--ml-6 tw-mt-4 hover:tw-text-red-600"
+                    type="text" 
+                    size="mini" 
+                    @click="removeChoice(item)">
+                        <base-icon>delete_forever</base-icon>
+                </el-button>
+            </div>
+        </div>
 
         <el-alert
             v-if="!isUnique"
             title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            type="error">
+        </el-alert>
+
+        <el-alert
+            v-if="isEmpty"
+            title="Woops! This value cannot be empty. Lets try that again."
             type="error">
         </el-alert>
 
@@ -75,6 +83,7 @@ export default {
             nextItem: 0,
             itemText: '',
             isUnique: true,
+            isEmpty: false,
             temp: ''
         }
     },
@@ -97,9 +106,15 @@ export default {
         fieldLabel: {
             get() { return this.field.title; },
             set(title) {
+                if(title === ''){
+                    title = this.temp;
+                    return this.isEmpty = true;
+                }
+
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.title = title;
                 this.field = fieldCopy;
+                this.isEmpty = false;
             }
         },
 
@@ -144,11 +159,14 @@ export default {
                 value: 'Choice ' + this.nextItem
             })
             this.$store.commit('UPDATE_FIELD', this.field)
-            // console.log(this.choices)
         },
 
         addItem() {
             const choicesCopy = _.clone(this.choices);
+            
+            if(this.itemText === '') {
+                return this.isEmpty = true;
+            }
 
             for(var i = 0; i < this.choices.length; i++) {
                 if(this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
@@ -165,6 +183,7 @@ export default {
             this.choices = choicesCopy;
             this.itemText = ''
             this.isUnique = true;
+            this.isEmpty = false;
         },
         
         removeChoice(item) {
@@ -185,9 +204,13 @@ export default {
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
 
+            if(value === '') {
+                this.field.choices[index].value = this.temp;
+                return this.isEmpty = true;
+            }
+
             for(var i = 0; i < this.field.choices.length; i++) {
                 if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
-
                     this.field.choices[index].value = this.temp;
                     
                     return this.isUnique = false;
@@ -196,6 +219,8 @@ export default {
             
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
+            this.isEmpty = false;
+            this.isUnique = true;
         } ,
     },
 }
@@ -216,5 +241,13 @@ export default {
     position: relative;
     top: 15px;
     right: 40px;
+}
+.zone {
+    overflow: none;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 300px;
+    max-width: 300px;
 }
 </style>

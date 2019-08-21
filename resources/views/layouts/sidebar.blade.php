@@ -1,5 +1,16 @@
 <nav class="tw-border-r">
     <sidebar-list :collapse="collapseSidebar" class="main-sidebar-menu">
+        <div class="main-logo-container">
+            @if(Route::current()->getName() !== "formBuilder")
+                <base-button class="tw-border-none tw-bg-blue-200 tw-align-middle" @click="collapseSidebar = !collapseSidebar">
+                    <base-icon class="tw-text-green-100">menu</base-icon>
+                </base-button>
+            @endif
+            <a href="/" class="tw-text-3xl tw-font-bold tw-text-white tw-align-middle tw-inline-block">
+                {{-- ABCD --}}
+            <img src="{{ url('/images/abcd-logo.png') }}" alt="ABCD" class="tw-h-12">
+            </a>
+        </div>
         <div class="tw-mx-2">
             <global-search></global-search>
         </div>

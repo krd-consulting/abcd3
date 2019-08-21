@@ -25,6 +25,7 @@
         @show
 
         <base-container class="tw-min-h-full" v-if="!loading">
+            
             @section('main-sidebar')
             @show
 

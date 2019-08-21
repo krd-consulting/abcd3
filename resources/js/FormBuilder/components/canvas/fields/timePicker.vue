@@ -4,12 +4,15 @@
         
         <div class="tw-inline-flex tw-my-1">
             <label class="tw-flex-1">
-                <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
+                <editable-text 
+                    class="tw-cursor-pointer mouseOver tw-mr-1" 
+                    v-model="fieldLabel"
+                    @edit="tempValue(fieldLabel)">
                     {{ fieldLabel }}
                 </editable-text>
             </label>
             <div class="tw-flex-none">
-                <el-time-select v-if="exactTime === false"
+                <el-time-select v-if="!exactTime"
                     arrow-control
                     :picker-options="{  
                         start: '01:00',
@@ -34,6 +37,12 @@
                 inactive-text="Optional"
                 class="tw-float-right switch-position">
             </el-switch>
+
+            <el-alert
+                v-if="isEmpty"
+                title="Woops! Your question/title cannot be empty. Lets try that again."
+                type="error">
+            </el-alert>
         
     </div>
 </template>
@@ -44,6 +53,8 @@ import EditableText from '@/components/editableText.vue'
 export default {
     data: () => {
         return {
+            isEmpty: false,
+            temp: ''
         }
     },
     props: {
@@ -59,9 +70,15 @@ export default {
         fieldLabel: {
             get() { return this.field.title; },
             set(title) { 
+                if(title === ''){
+                    title = this.temp;
+                    return this.isEmpty = true;
+                }
+
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.title = title;
                 this.field = fieldCopy;
+                this.isEmpty = false;
             }
         },
 
@@ -91,6 +108,12 @@ export default {
             }
         }
     },
+
+    methods: {
+        tempValue(value) {
+            this.temp = value;
+        },
+    }
 }
 </script>
 
@@ -104,10 +127,5 @@ export default {
     position: relative;
     top: 15px;
     right: 40px;
-}
-.footer{
-    position: absolute;
-    bottom: 0;
-    right: 10px;
 }
 </style>

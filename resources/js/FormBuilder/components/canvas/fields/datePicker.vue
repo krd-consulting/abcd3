@@ -3,31 +3,40 @@
 
         <slot></slot>
         
-            <div class="tw-inline-flex tw-my-1">
-                <label class="inputLabel">
-                    <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
-                        {{ fieldLabel }}
-                    </editable-text>
-                </label>
-                <el-date-picker 
-                    id="dateField" 
-                    :type="dateType" 
-                    :picker-options="dateOptions" 
-                    placeholder=" "
-                    :range-separator="rangeSeparator"
-                    :start-placeholder="startDate"
-                    :end-placeholder="endDate"
-                    :settings="dateFormat">
-                </el-date-picker>
-            </div>
-            
+        <div class="tw-inline-flex tw-my-1">
+            <label class="inputLabel">
+                <editable-text 
+                    class="tw-cursor-pointer mouseOver tw-mr-1" 
+                    v-model="fieldLabel"
+                    @edit="tempValue(fieldLabel)">
+                    {{ fieldLabel }}
+                </editable-text>
+            </label>
+            <el-date-picker 
+                id="dateField" 
+                :type="dateType" 
+                :picker-options="dateOptions" 
+                placeholder=" "
+                :range-separator="rangeSeparator"
+                :start-placeholder="startDate"
+                :end-placeholder="endDate"
+                :settings="dateFormat">
+            </el-date-picker>
+        </div>
         
-            <el-switch 
-                v-model="field.settings.required" 
-                active-text="Required" 
-                inactive-text="Optional"
-                class="tw-float-right switch-position">
-            </el-switch>     
+    
+        <el-switch 
+            v-model="field.settings.required" 
+            active-text="Required" 
+            inactive-text="Optional"
+            class="tw-float-right switch-position">
+        </el-switch>
+
+        <el-alert
+            v-if="isEmpty"
+            title="Woops! Your question/title cannot be empty. Lets try that again."
+            type="error">
+        </el-alert>     
         
     </div>
 </template>
@@ -41,6 +50,8 @@ export default {
             dateSelection: '',
             startDate: '',
             endDate: '',
+            isEmpty: false,
+            temp: ''
         }
     },
     props: {
@@ -68,9 +79,15 @@ export default {
         fieldLabel: {
             get() { return this.field.title; },
             set(title) { 
+                if(title === ''){
+                    title = this.temp;
+                    return this.isEmpty = true;
+                }
+
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.title = title;
                 this.field = fieldCopy;
+                this.isEmpty = false;
             }
         },
         dateType: {
@@ -121,6 +138,7 @@ export default {
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
         },
+
         toggleFutureOnly() {
             if(this.field.settings.futureOnly === true) {
                 this.dateOptions = Object.assign({}, this.dateOptions, {
@@ -133,6 +151,7 @@ export default {
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
         },
+
         toggleQuickMenu() {
             if(this.field.settings.quickMenu === true) {
                 this.dateOptions = Object.assign({}, this.dateOptions, {
@@ -179,6 +198,7 @@ export default {
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
         },
+
         toggleTime() {
             if(this.field.settings.includeTime === true) {
                 this.dateType = "datetime",
@@ -188,6 +208,7 @@ export default {
             } 
             
         },
+
         toggleRange() {
             if(this.field.settings.dateRange === true){
                 this.dateType = 'daterange',
@@ -197,7 +218,11 @@ export default {
                 this.endDate = 'End date'
                 this.$store.commit('UPDATE_FIELD', this.field)
             }
-        }
+        },
+
+        tempValue(value) {
+            this.temp = value;
+        },
     }
 }
 </script>

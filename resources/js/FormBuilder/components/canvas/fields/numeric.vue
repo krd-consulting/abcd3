@@ -5,20 +5,23 @@
         
         <div class="tw-inline-flex tw-my-1">
             <label class="tw-flex-1">
-                <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
+                <editable-text 
+                    class="tw-cursor-pointer mouseOver tw-mr-1" 
+                    v-model="fieldLabel"
+                    @edit="tempValue(fieldLabel)">
                     {{ fieldLabel }}
                 </editable-text>
             </label>
         
-        <div class="tw-flex-none">
-            <el-input-number id="numfield" v-if="field.settings.isLimited" 
-                v-model="field.settings.defaultNum">
-            </el-input-number>
-            <el-input-number id="numfield" 
-                v-else 
-                v-model="num" disabled>
-            </el-input-number>
-        </div>
+            <div class="tw-flex-none">
+                <el-input-number id="numfield" v-if="field.settings.isLimited" 
+                    v-model="field.settings.defaultNum">
+                </el-input-number>
+                <el-input-number id="numfield" 
+                    v-else 
+                    v-model="num" disabled>
+                </el-input-number>
+            </div>
         </div>
 
         <el-switch 
@@ -27,6 +30,12 @@
             inactive-text="Optional"
             class="tw-float-right switch-position">
         </el-switch>
+
+        <el-alert
+            v-if="isEmpty"
+            title="Woops! Your question/title cannot be empty. Lets try that again."
+            type="error">
+        </el-alert>
        
     </div>
 </template>
@@ -39,6 +48,8 @@ export default {
     data() {
         return {
             num: 0,
+            isEmpty: false,
+            temp: ''
         }
     },
     props: {
@@ -54,22 +65,21 @@ export default {
         fieldLabel: {
             get() { return this.field.title; },
             set(title) { 
-                console.log('field label edited');
+                if(title === ''){
+                    title = this.temp;
+                    return this.isEmpty = true;
+                }
 
                 const fieldCopy = _.clone(this.field);
-
                 fieldCopy.title = title;
-
                 this.field = fieldCopy;
+                this.isEmpty = false;
             }
         },
 
         field: {
             get() { return this.fieldData; },
-            set(field) { 
-                console.log('field edited');
-                this.$emit('update', field); 
-            }
+            set(field) { this.$emit('update', field); }
         },
 
         required: {
@@ -81,6 +91,12 @@ export default {
             }
         }
     },
+
+    methods: {
+        tempValue(value) {
+            this.temp = value;
+        },
+    }
 }
 </script>
 

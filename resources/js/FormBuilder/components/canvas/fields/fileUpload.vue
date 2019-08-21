@@ -4,21 +4,18 @@
         
         <div class="tw-inline-flex tw-my-1">
             <label class="tw-flex-1 tw-mt-1">
-                <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
+                <editable-text 
+                    class="tw-cursor-pointer mouseOver tw-mr-1" 
+                    v-model="fieldLabel"
+                    @edit="tempValue(fieldLabel)">
                     {{ fieldLabel }}
                 </editable-text>
             </label>
         
       
         <el-upload disabled
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :before-remove="beforeRemove"
-            multiple
-            :limit="3"
-            :on-exceed="handleExceed"
-            :file-list="fileList">
+            action=""
+            :http-request="handleUpload">
             <el-button size="small" type="primary">Click to upload</el-button>
             <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
         </el-upload>
@@ -30,6 +27,12 @@
             inactive-text="Optional"
             class="tw-float-right switch-position">
         </el-switch>
+
+        <el-alert
+            v-if="isEmpty"
+            title="Woops! Your question/title cannot be empty. Lets try that again."
+            type="error">
+        </el-alert>
     </div>
 </template>
 
@@ -38,9 +41,11 @@ import EditableText from '@/components/editableText.vue'
 
 export default {
     data() {
-      return {
-        fileList: [],
-      };
+        return {
+            fileList: [],
+            isEmpty: false,
+            temp: ''
+        };
     },
     props: {
         fieldData: {
@@ -54,22 +59,25 @@ export default {
     computed: {
         fieldLabel: {
             get() { return this.field.title; },
-            set(title) { 
+            set(title) {
+                if(title === ''){
+                    title = this.temp;
+                    return this.isEmpty = true;
+                }
+
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.title = title;
                 this.field = fieldCopy;
+                this.isEmpty = false;
             }
         },
 
         fieldDescription: {
             get() { return this.field.description; },
             set(description) { 
-                console.log('field description edited');
 
                 const fieldCopy = _.clone(this.field);
-
                 fieldCopy.description = description;
-
                 this.field = fieldCopy;
             }
         },
@@ -92,18 +100,13 @@ export default {
         }
     },
     methods: {
-      handleRemove(file, fileList) {
-        console.log(file, fileList); // temp methods
-      },
-      handlePreview(file) {
-        console.log(file); // temp methods
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`Cancel the transfer of ${ file.name } ?`);
-      }
+        handleUpload() {
+            console.log('disabled')
+        },
+
+        tempValue(value) {
+            this.temp = value;
+        },
     }
 }
 </script>

@@ -3557,6 +3557,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3564,6 +3572,7 @@ __webpack_require__.r(__webpack_exports__);
       nextItem: 0,
       itemText: '',
       isUnique: true,
+      isEmpty: false,
       temp: ''
     };
   },
@@ -3590,10 +3599,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
+
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     choices: {
@@ -3641,10 +3656,14 @@ __webpack_require__.r(__webpack_exports__);
         id: this.nextItem++,
         value: 'Choice ' + this.nextItem
       });
-      this.$store.commit('UPDATE_FIELD', this.field); // console.log(this.choices)
+      this.$store.commit('UPDATE_FIELD', this.field);
     },
     addItem: function addItem() {
       var choicesCopy = _.clone(this.choices);
+
+      if (this.itemText === '') {
+        return this.isEmpty = true;
+      }
 
       for (var i = 0; i < this.choices.length; i++) {
         if (this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
@@ -3660,6 +3679,7 @@ __webpack_require__.r(__webpack_exports__);
       this.choices = choicesCopy;
       this.itemText = '';
       this.isUnique = true;
+      this.isEmpty = false;
     },
     removeChoice: function removeChoice(item) {
       var index = this.choices.indexOf(item);
@@ -3677,6 +3697,11 @@ __webpack_require__.r(__webpack_exports__);
     updateChoiceValue: function updateChoiceValue(value, index) {
       var fieldCopy = _.clone(this.field);
 
+      if (value === '') {
+        this.field.choices[index].value = this.temp;
+        return this.isEmpty = true;
+      }
+
       for (var i = 0; i < this.field.choices.length; i++) {
         if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
           this.field.choices[index].value = this.temp;
@@ -3686,6 +3711,8 @@ __webpack_require__.r(__webpack_exports__);
 
       fieldCopy.choices[index].value = value;
       this.choices = fieldCopy.choices;
+      this.isEmpty = false;
+      this.isUnique = true;
     }
   }
 });
@@ -3736,13 +3763,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       dateSelection: '',
       startDate: '',
-      endDate: ''
+      endDate: '',
+      isEmpty: false,
+      temp: ''
     };
   },
   props: {
@@ -3771,10 +3809,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
+
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     dateType: {
@@ -3914,6 +3958,9 @@ __webpack_require__.r(__webpack_exports__);
         this.dateType = 'daterange', this.rangeSeparator = 'to', this.dateFormat = "yyyy/MM/dd", this.startDate = 'Start date', this.endDate = 'End date';
         this.$store.commit('UPDATE_FIELD', this.field);
       }
+    },
+    tempValue: function tempValue(value) {
+      this.temp = value;
     }
   }
 });
@@ -3999,6 +4046,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4007,6 +4067,7 @@ __webpack_require__.r(__webpack_exports__);
       value: '',
       nextItem: 0,
       isUnique: true,
+      isEmpty: false,
       temp: ''
     };
   },
@@ -4033,10 +4094,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
+
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     choices: {
@@ -4078,6 +4145,10 @@ __webpack_require__.r(__webpack_exports__);
     addItem: function addItem() {
       var choicesCopy = _.clone(this.choices);
 
+      if (this.itemText === '') {
+        return this.isEmpty = true;
+      }
+
       for (var i = 0; i < this.choices.length; i++) {
         if (this.choices[i].value === this.itemText) {
           this.itemText = '';
@@ -4092,6 +4163,7 @@ __webpack_require__.r(__webpack_exports__);
       this.choices = choicesCopy;
       this.itemText = '';
       this.isUnique = true;
+      this.isEmpty = false;
       this.$forceUpdate();
     },
     removeChoice: function removeChoice(item, index) {
@@ -4173,11 +4245,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      fileList: []
+      fileList: [],
+      isEmpty: false,
+      temp: ''
     };
   },
   props: {
@@ -4195,10 +4272,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
+
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     fieldDescription: {
@@ -4206,8 +4289,6 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.description;
       },
       set: function set(description) {
-        console.log('field description edited');
-
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.description = description;
@@ -4236,17 +4317,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    handleRemove: function handleRemove(file, fileList) {
-      console.log(file, fileList); // temp methods
+    handleUpload: function handleUpload() {
+      console.log('disabled');
     },
-    handlePreview: function handlePreview(file) {
-      console.log(file); // temp methods
-    },
-    handleExceed: function handleExceed(files, fileList) {
-      this.$message.warning("The limit is 3, you selected ".concat(files.length, " files this time, add up to ").concat(files.length + fileList.length, " totally"));
-    },
-    beforeRemove: function beforeRemove(file, fileList) {
-      return this.$confirm("Cancel the transfer of ".concat(file.name, " ?"));
+    tempValue: function tempValue(value) {
+      this.temp = value;
     }
   }
 });
@@ -4371,6 +4446,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4378,7 +4470,10 @@ __webpack_require__.r(__webpack_exports__);
       radioSelect: 1,
       itemText: '',
       isMounted: false,
-      isUnique: true
+      isUnique: true,
+      isEmpty: false,
+      isEmptyTable: false,
+      temp: ''
     };
   },
   components: {
@@ -4404,10 +4499,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
+
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     fieldDescription: {
@@ -4468,11 +4569,18 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    tempValue: function tempValue(value) {
+      this.temp = value;
+    },
     addQuestion: function addQuestion() {
       var questionsCopy = _.clone(this.questions);
 
+      if (this.itemText === '') {
+        return this.isEmptyTable = true;
+      }
+
       for (var i = 0; i < this.questions.length; i++) {
-        if (this.questions[i].value === this.itemText) {
+        if (this.questions[i].text.toUpperCase() === this.itemText.toUpperCase()) {
           this.itemText = '';
           return this.isUnique = false;
         }
@@ -4485,6 +4593,7 @@ __webpack_require__.r(__webpack_exports__);
       this.questions = questionsCopy;
       this.itemText = '';
       this.isUnique = true;
+      this.isEmptyTable = false;
       this.$forceUpdate();
     },
     removeQuestion: function removeQuestion(item) {
@@ -4520,21 +4629,43 @@ __webpack_require__.r(__webpack_exports__);
     updateChoiceValue: function updateChoiceValue(value, index) {
       var fieldCopy = _.clone(this.field);
 
-      fieldCopy.choices[index].value = value;
-      this.choices = fieldCopy.choices; // for(var i = 0; i < this.choices.length; i++) {
-      //     if(this.choices[i].value === this.itemText) {
-      //         this.itemText = ''
-      //         return this.isUnique = false;
-      //     }
-      // }
+      if (value === '') {
+        this.choices[index].value = this.temp;
+        return this.isEmptyTable = true;
+      }
 
+      for (var i = 0; i < this.field.choices.length; i++) {
+        if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+          this.field.choices[index].value = this.temp;
+          return this.isUnique = false;
+        }
+      }
+
+      fieldCopy.choices[index].value = value;
+      this.choices = fieldCopy.choices;
+      this.isEmptyTable = false;
+      this.isUnique = true;
       this.$forceUpdate();
     },
     updateQuestionValue: function updateQuestionValue(value, index) {
       var fieldCopy = _.clone(this.field);
 
-      fieldCopy.questions[index].value = value;
+      if (value === '') {
+        this.questions[index].text = this.temp;
+        return this.isEmptyTable = true;
+      }
+
+      for (var i = 0; i < this.questions.length; i++) {
+        if (this.questions[i].text.toUpperCase() === value.toUpperCase()) {
+          this.questions[index].text = this.temp;
+          return this.isUnique = false;
+        }
+      }
+
+      fieldCopy.questions[index].text = value;
       this.questions = fieldCopy.questions;
+      this.isEmptyTable = false;
+      this.isUnique = true;
       this.$forceUpdate();
     }
   }
@@ -4585,12 +4716,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'numeric',
   data: function data() {
     return {
-      num: 0
+      num: 0,
+      isEmpty: false,
+      temp: ''
     };
   },
   props: {
@@ -4608,12 +4750,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
-        console.log('field label edited');
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
 
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     field: {
@@ -4621,7 +4767,6 @@ __webpack_require__.r(__webpack_exports__);
         return this.fieldData;
       },
       set: function set(field) {
-        console.log('field edited');
         this.$emit('update', field);
       }
     },
@@ -4635,6 +4780,11 @@ __webpack_require__.r(__webpack_exports__);
         fieldCopy.settings.required = required;
         this.field = fieldCopy;
       }
+    }
+  },
+  methods: {
+    tempValue: function tempValue(value) {
+      this.temp = value;
     }
   }
 });
@@ -4714,6 +4864,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -4721,6 +4879,7 @@ __webpack_require__.r(__webpack_exports__);
       itemText: '',
       nextItem: 0,
       isUnique: true,
+      isEmpty: false,
       temp: ''
     };
   },
@@ -4747,10 +4906,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
+
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     choices: {
@@ -4792,6 +4957,10 @@ __webpack_require__.r(__webpack_exports__);
     addItem: function addItem() {
       var choicesCopy = _.clone(this.choices);
 
+      if (this.itemText === '') {
+        return this.isEmpty = true;
+      }
+
       for (var i = 0; i < this.choices.length; i++) {
         if (this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
           this.itemText = '';
@@ -4806,6 +4975,7 @@ __webpack_require__.r(__webpack_exports__);
       this.choices = choicesCopy;
       this.itemText = '';
       this.isUnique = true;
+      this.isEmpty = false;
     },
     removeChoice: function removeChoice(item) {
       var index = this.choices.indexOf(item);
@@ -4822,6 +4992,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateChoiceValue: function updateChoiceValue(value, index) {
       var fieldCopy = _.clone(this.field);
+
+      if (value === '') {
+        this.field.choices[index].value = this.temp;
+        return this.isEmpty = true;
+      }
 
       for (var i = 0; i < this.field.choices.length; i++) {
         if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
@@ -4958,12 +5133,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textbox',
   data: function data() {
     return {
-      value: ''
+      isEmpty: false,
+      temp: ''
     };
   },
   props: {
@@ -4981,12 +5166,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
-        console.log('field label edited');
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
 
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     field: {
@@ -5008,6 +5197,11 @@ __webpack_require__.r(__webpack_exports__);
         fieldCopy.settings.required = required;
         this.field = fieldCopy;
       }
+    }
+  },
+  methods: {
+    tempValue: function tempValue(value) {
+      this.temp = value;
     }
   }
 });
@@ -5066,11 +5260,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Textfield',
   data: function data() {
-    return {};
+    return {
+      isEmpty: false,
+      temp: ''
+    };
   },
   props: {
     fieldData: {
@@ -5087,10 +5287,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
+
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     field: {
@@ -5098,7 +5304,6 @@ __webpack_require__.r(__webpack_exports__);
         return this.fieldData;
       },
       set: function set(field) {
-        console.log('field edited');
         this.$emit('update', field);
       }
     },
@@ -5112,6 +5317,11 @@ __webpack_require__.r(__webpack_exports__);
         fieldCopy.settings.required = required;
         this.field = fieldCopy;
       }
+    }
+  },
+  methods: {
+    tempValue: function tempValue(value) {
+      this.temp = value;
     }
   }
 });
@@ -5168,10 +5378,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      isEmpty: false,
+      temp: ''
+    };
   },
   props: {
     fieldData: {
@@ -5188,10 +5410,16 @@ __webpack_require__.r(__webpack_exports__);
         return this.field.title;
       },
       set: function set(title) {
+        if (title === '') {
+          title = this.temp;
+          return this.isEmpty = true;
+        }
+
         var fieldCopy = _.clone(this.field);
 
         fieldCopy.title = title;
         this.field = fieldCopy;
+        this.isEmpty = false;
       }
     },
     field: {
@@ -5224,6 +5452,11 @@ __webpack_require__.r(__webpack_exports__);
         fieldCopy.settings.required = required;
         this.field = fieldCopy;
       }
+    }
+  },
+  methods: {
+    tempValue: function tempValue(value) {
+      this.temp = value;
     }
   }
 });
@@ -8108,6 +8341,7 @@ __webpack_require__.r(__webpack_exports__);
     edit: function edit() {
       var _this = this;
 
+      console.log('edit');
       this.active = true;
       this.$nextTick(function () {
         return _this.$refs.editable_input.focus();
@@ -8116,9 +8350,10 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('edit');
     },
     blur: function blur() {
-      this.save();
+      this.active = false;
     },
     save: function save() {
+      console.log('save');
       this.$emit('input', this.newValue);
       this.active = false;
     }
@@ -10952,7 +11187,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-e97e2c96] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-e97e2c96] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-e97e2c96] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -10990,7 +11225,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n}\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.button[data-v-5bdc3b03] {\n  margin-top: 3px !important;\n  padding: 5px;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n    margin-right: 4px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -11028,7 +11263,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "#matrix-table[data-v-8416b59a] {\n  width: 100%;\n  margin-top: 20px;\n  z-index: 0;\n}\n#matrix-table table[data-v-8416b59a], td[data-v-8416b59a] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-8416b59a]:hover {\n  background: #9ebdef;\n}\n.mouseOver[data-v-8416b59a]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-8416b59a] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n", ""]);
+exports.push([module.i, "table[data-v-8416b59a]{\n  width: 100%;\n  margin-top: 20px;\n  z-index: 0;\n  display: block;\n  max-height: 300px;\n  overflow-y: auto;\n}\ntd[data-v-8416b59a] {\n  border: 1px solid #dedfe0;\n  max-width: 20%;\n}\ntbody tr[data-v-8416b59a]:hover {\n  background: #9ebdef;\n}\n.mouseOver[data-v-8416b59a]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-8416b59a] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -11066,7 +11301,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-7d675a79] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -11142,7 +11377,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-2da47d2d] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.footer[data-v-2da47d2d]{\n  position: absolute;\n  bottom: 0;\n  right: 10px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-2da47d2d] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
 
 // exports
 
@@ -11351,7 +11586,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#matrix-table[data-v-04d13538] {\n  /* width: 100%;  */\n  /* margin-top: 20px;  */\n  z-index: 0;\n}\n#matrix-table table[data-v-04d13538], td[data-v-04d13538] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-04d13538]:hover {\n  background: #9ebdef;\n}\n", ""]);
+exports.push([module.i, "#matrix-table[data-v-04d13538] {\n  /* width: 100%;  */\n  /* margin-top: 20px;  */\n  z-index: 0;\n}\n#matrix-table td[data-v-04d13538] {\n  border: 1px solid #dedfe0;\n  max-width: 30%;\n}\n#matrix-table tbody tr[data-v-04d13538]:hover {\n  background: #9ebdef;\n}\n", ""]);
 
 // exports
 
@@ -88279,6 +88514,11 @@ var render = function() {
               "editable-text",
               {
                 staticClass: "tw-cursor-pointer mouseOver",
+                on: {
+                  edit: function($event) {
+                    return _vm.tempValue(_vm.fieldLabel)
+                  }
+                },
                 model: {
                   value: _vm.fieldLabel,
                   callback: function($$v) {
@@ -88301,74 +88541,78 @@ var render = function() {
       _c("br"),
       _c("br"),
       _vm._v(" "),
-      _vm._l(_vm.choices, function(item, index) {
-        return _c(
-          "el-checkbox-group",
-          {
-            key: item.value,
-            attrs: { id: "check", label: item.value },
-            model: {
-              value: _vm.value,
-              callback: function($$v) {
-                _vm.value = $$v
-              },
-              expression: "value"
-            }
-          },
-          [
-            _c(
-              "el-checkbox",
-              [
-                _c(
-                  "editable-text",
-                  {
-                    staticClass: "tw-cursor-pointer mouseOver",
-                    attrs: { value: item.value },
-                    on: {
-                      input: function($event) {
-                        return _vm.updateChoiceValue($event, index)
-                      },
-                      edit: function($event) {
-                        return _vm.tempValue(item.value)
+      _c(
+        "div",
+        { staticClass: "zone" },
+        _vm._l(_vm.choices, function(item, index) {
+          return _c(
+            "div",
+            { key: item.value, attrs: { id: "check", label: item.value } },
+            [
+              _c(
+                "el-checkbox",
+                [
+                  _c(
+                    "editable-text",
+                    {
+                      staticClass: "tw-cursor-pointer mouseOver",
+                      attrs: { value: item.value },
+                      on: {
+                        input: function($event) {
+                          return _vm.updateChoiceValue($event, index)
+                        },
+                        edit: function($event) {
+                          return _vm.tempValue(item.value)
+                        }
                       }
+                    },
+                    [
+                      _vm._v(
+                        "\n                          " +
+                          _vm._s(item.value) +
+                          "\n                  "
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  staticClass: "tw--ml-6 tw-mt-4 hover:tw-text-red-600",
+                  attrs: { type: "text", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      return _vm.removeChoice(item)
                     }
-                  },
-                  [
-                    _vm._v(
-                      "\n                      " +
-                        _vm._s(item.value) +
-                        "\n              "
-                    )
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "el-button",
-              {
-                staticClass: "tw--ml-6 tw-mt-4 hover:tw-text-red-600",
-                attrs: { type: "text", size: "mini" },
-                on: {
-                  click: function($event) {
-                    return _vm.removeChoice(item)
                   }
-                }
-              },
-              [_c("base-icon", [_vm._v("delete_forever")])],
-              1
-            )
-          ],
-          1
-        )
-      }),
+                },
+                [_c("base-icon", [_vm._v("delete_forever")])],
+                1
+              )
+            ],
+            1
+          )
+        }),
+        0
+      ),
       _vm._v(" "),
       !_vm.isUnique
         ? _c("el-alert", {
             attrs: {
               title:
                 "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
+              type: "error"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title: "Woops! This value cannot be empty. Lets try that again.",
               type: "error"
             }
           })
@@ -88478,6 +88722,11 @@ var render = function() {
                 "editable-text",
                 {
                   staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                  on: {
+                    edit: function($event) {
+                      return _vm.tempValue(_vm.fieldLabel)
+                    }
+                  },
                   model: {
                     value: _vm.fieldLabel,
                     callback: function($$v) {
@@ -88488,9 +88737,9 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                    " +
+                    "\n                " +
                       _vm._s(_vm.fieldLabel) +
-                      "\n                "
+                      "\n            "
                   )
                 ]
               )
@@ -88524,7 +88773,17 @@ var render = function() {
           },
           expression: "field.settings.required"
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! Your question/title cannot be empty. Lets try that again.",
+              type: "error"
+            }
+          })
+        : _vm._e()
     ],
     2
   )
@@ -88557,6 +88816,18 @@ var render = function() {
     [
       _vm._t("default"),
       _vm._v(" "),
+      _c("el-switch", {
+        staticClass: "tw-float-right switch-position hidden-xs-only",
+        attrs: { "active-text": "Required", "inactive-text": "Optional" },
+        model: {
+          value: _vm.required,
+          callback: function($$v) {
+            _vm.required = $$v
+          },
+          expression: "required"
+        }
+      }),
+      _vm._v(" "),
       _c("div", { staticClass: "tw-inline-flex tw-my-1" }, [
         _c(
           "label",
@@ -88566,6 +88837,11 @@ var render = function() {
               "editable-text",
               {
                 staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                on: {
+                  edit: function($event) {
+                    return _vm.tempValue(_vm.fieldLabel)
+                  }
+                },
                 model: {
                   value: _vm.fieldLabel,
                   callback: function($$v) {
@@ -88588,12 +88864,16 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "tw-inline" },
+          { staticClass: "tw-inline-block" },
           [
             _c(
               "el-select",
               {
-                attrs: { id: "dropdown", placeholder: " " },
+                attrs: {
+                  id: "dropdown",
+                  value: _vm.dropItem,
+                  placeholder: " "
+                },
                 model: {
                   value: _vm.dropItem,
                   callback: function($$v) {
@@ -88614,58 +88894,68 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _vm.dropItem != null
-          ? _c(
+        _c(
+          "form",
+          {
+            staticClass: "tw-inline-flex tw-ml-8",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.addItem($event)
+              }
+            }
+          },
+          [
+            _c(
               "div",
-              { staticClass: "tw-inline-flex tw-my-1 tw-ml-2" },
+              { staticClass: "tw-w-72 tw-inline-block tw-mt-0" },
+              [
+                _c("el-input", {
+                  staticClass: "tw-w-72",
+                  attrs: { id: "add-item", placeholder: "Add" },
+                  model: {
+                    value: _vm.itemText,
+                    callback: function($$v) {
+                      _vm.itemText = $$v
+                    },
+                    expression: "itemText"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "tw-inline-block" },
               [
                 _c(
-                  "editable-text",
+                  "el-tooltip",
                   {
-                    staticClass: "tw-cursor-pointer mouseOver",
-                    on: {
-                      input: function($event) {
-                        return _vm.updateChoiceValue($event)
-                      },
-                      edit: function($event) {
-                        return _vm.tempValue(_vm.dropItem)
-                      }
-                    },
-                    model: {
-                      value: _vm.dropItem,
-                      callback: function($$v) {
-                        _vm.dropItem = $$v
-                      },
-                      expression: "dropItem"
+                    attrs: {
+                      content:
+                        "Alternatively, you can press enter after typing in this field to add items to the list"
                     }
                   },
                   [
-                    _vm._v(
-                      "\n                " +
-                        _vm._s(_vm.dropItem) +
-                        "\n            "
+                    _c(
+                      "el-button",
+                      {
+                        staticClass: "button",
+                        attrs: { size: "small" },
+                        on: { click: _vm.addItem }
+                      },
+                      [_c("base-icon", [_vm._v("add_box")])],
+                      1
                     )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-button",
-                  {
-                    staticClass: "tw-px-2 tw-py-1 hover:tw-text-red-600 ",
-                    attrs: { type: "text", size: "mini" },
-                    on: {
-                      click: function($event) {
-                        return _vm.removeChoice(_vm.dropItem, _vm.index)
-                      }
-                    }
-                  },
-                  [_c("base-icon", [_vm._v("delete_forever")])],
+                  ],
                   1
                 )
               ],
               1
             )
-          : _vm._e()
+          ]
+        )
       ]),
       _vm._v(" "),
       !_vm.isUnique
@@ -88678,79 +88968,75 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _c("el-switch", {
-        staticClass: "tw-float-right switch-position hidden-xs-only",
-        attrs: { "active-text": "Required", "inactive-text": "Optional" },
-        model: {
-          value: _vm.required,
-          callback: function($$v) {
-            _vm.required = $$v
-          },
-          expression: "required"
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "form",
-        {
-          staticClass: "tw-mt-4 tw-ml-16",
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.addItem($event)
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title: "Woops! This value cannot be empty. Lets try that again.",
+              type: "error"
             }
-          }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "tw-w-72 tw-inline-block" },
-            [
-              _c("el-input", {
-                attrs: { id: "add-item", placeholder: "Add" },
-                model: {
-                  value: _vm.itemText,
-                  callback: function($$v) {
-                    _vm.itemText = $$v
-                  },
-                  expression: "itemText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tw-inline-block" },
-            [
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.dropItem != null
+        ? _c("div", { staticClass: "tw-ml-16 tw-pl-2" }, [
+            _c("span", [_vm._v("Edit this list item: ")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "tw-inline-flex tw-justify-between" }, [
               _c(
-                "el-tooltip",
-                {
-                  attrs: {
-                    content:
-                      "Alternatively, you can press enter after typing in this field to add items to the list"
-                  }
-                },
+                "div",
+                { staticClass: "tw-flex-auto" },
+                [
+                  _c(
+                    "editable-text",
+                    {
+                      staticClass:
+                        "tw-cursor-pointer mouseOver tw-inline-block tw-w-64",
+                      attrs: { value: _vm.dropItem },
+                      on: {
+                        input: function($event) {
+                          return _vm.updateChoiceValue($event)
+                        },
+                        edit: function($event) {
+                          return _vm.tempValue(_vm.dropItem)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(_vm.dropItem) +
+                          "\n            "
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "tw-flex-1 tw-relative tw-right-0" },
                 [
                   _c(
                     "el-button",
                     {
-                      staticClass: "tw-px-2 tw-py-1",
-                      attrs: { size: "mini" },
-                      on: { click: _vm.addItem }
+                      staticClass: "tw-px-2 tw-py-1 hover:tw-text-red-600",
+                      attrs: { type: "text", size: "mini" },
+                      on: {
+                        click: function($event) {
+                          return _vm.removeChoice(_vm.dropItem, _vm.index)
+                        }
+                      }
                     },
-                    [_c("base-icon", {}, [_vm._v("add_box")])],
+                    [_c("base-icon", [_vm._v("delete_forever")])],
                     1
                   )
                 ],
                 1
               )
-            ],
-            1
-          )
-        ]
-      )
+            ])
+          ])
+        : _vm._e()
     ],
     2
   )
@@ -88795,6 +89081,11 @@ var render = function() {
                 "editable-text",
                 {
                   staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                  on: {
+                    edit: function($event) {
+                      return _vm.tempValue(_vm.fieldLabel)
+                    }
+                  },
                   model: {
                     value: _vm.fieldLabel,
                     callback: function($$v) {
@@ -88820,14 +89111,8 @@ var render = function() {
             {
               attrs: {
                 disabled: "",
-                action: "https://jsonplaceholder.typicode.com/posts/",
-                "on-preview": _vm.handlePreview,
-                "on-remove": _vm.handleRemove,
-                "before-remove": _vm.beforeRemove,
-                multiple: "",
-                limit: 3,
-                "on-exceed": _vm.handleExceed,
-                "file-list": _vm.fileList
+                action: "",
+                "http-request": _vm.handleUpload
               }
             },
             [
@@ -88861,7 +89146,17 @@ var render = function() {
           },
           expression: "field.settings.required"
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! Your question/title cannot be empty. Lets try that again.",
+              type: "error"
+            }
+          })
+        : _vm._e()
     ],
     2
   )
@@ -88918,6 +89213,11 @@ var render = function() {
                   "editable-text",
                   {
                     staticClass: "tw-cursor-pointer mouseOver",
+                    on: {
+                      edit: function($event) {
+                        return _vm.tempValue(_vm.fieldLabel)
+                      }
+                    },
                     model: {
                       value: _vm.fieldLabel,
                       callback: function($$v) {
@@ -88963,6 +89263,16 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! Your question/title cannot be empty. Lets try that again.",
+              type: "error"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
       _c("table", { attrs: { id: "matrix-table" } }, [
         _c("thead", [
           _c(
@@ -88972,7 +89282,7 @@ var render = function() {
               _c("th"),
               _vm._v(" "),
               _vm._l(_vm.choices, function(item, index) {
-                return _c("th", { key: item.index }, [
+                return _c("th", { key: item.value }, [
                   _c(
                     "div",
                     {
@@ -88984,21 +89294,28 @@ var render = function() {
                         "div",
                         { staticClass: "tw-flex-none" },
                         [
-                          _c("editable-text", {
-                            staticClass: "tw-cursor-pointer mouseOver",
-                            on: {
-                              input: function($event) {
-                                return _vm.updateChoiceValue($event, index)
+                          _c(
+                            "editable-text",
+                            {
+                              staticClass: "tw-cursor-pointer mouseOver",
+                              attrs: { value: item.value },
+                              on: {
+                                input: function($event) {
+                                  return _vm.updateChoiceValue($event, index)
+                                },
+                                edit: function($event) {
+                                  return _vm.tempValue(item.value)
+                                }
                               }
                             },
-                            model: {
-                              value: item.value,
-                              callback: function($$v) {
-                                _vm.$set(item, "value", $$v)
-                              },
-                              expression: "item.value"
-                            }
-                          })
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(item.value) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
                         ],
                         1
                       ),
@@ -89051,7 +89368,7 @@ var render = function() {
           _vm._l(_vm.questions, function(item, index) {
             return _c(
               "tr",
-              { key: item.index },
+              { key: item.text },
               [
                 _c("td", [
                   _c(
@@ -89062,21 +89379,29 @@ var render = function() {
                         "div",
                         { staticClass: "tw-flex-auto" },
                         [
-                          _c("editable-text", {
-                            staticClass: "tw-cursor-pointer mouseOver",
-                            on: {
-                              input: function($event) {
-                                return _vm.updateQuestionValue($event, index)
+                          _c(
+                            "editable-text",
+                            {
+                              staticClass:
+                                "tw-cursor-pointer mouseOver tw-inline-block",
+                              attrs: { value: item.text },
+                              on: {
+                                input: function($event) {
+                                  return _vm.updateQuestionValue($event, index)
+                                },
+                                edit: function($event) {
+                                  return _vm.tempValue(item.text)
+                                }
                               }
                             },
-                            model: {
-                              value: item.text,
-                              callback: function($$v) {
-                                _vm.$set(item, "text", $$v)
-                              },
-                              expression: "item.text"
-                            }
-                          })
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(item.text) +
+                                  "\n                            "
+                              )
+                            ]
+                          )
                         ],
                         1
                       ),
@@ -89137,6 +89462,16 @@ var render = function() {
             attrs: {
               title:
                 "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
+              type: "error"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isEmptyTable
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! Your question or choice cannot be empty. Lets try that again.",
               type: "error"
             }
           })
@@ -89246,6 +89581,11 @@ var render = function() {
               "editable-text",
               {
                 staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                on: {
+                  edit: function($event) {
+                    return _vm.tempValue(_vm.fieldLabel)
+                  }
+                },
                 model: {
                   value: _vm.fieldLabel,
                   callback: function($$v) {
@@ -89306,7 +89646,17 @@ var render = function() {
           },
           expression: "required"
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! Your question/title cannot be empty. Lets try that again.",
+              type: "error"
+            }
+          })
+        : _vm._e()
     ],
     2
   )
@@ -89359,6 +89709,11 @@ var render = function() {
               "editable-text",
               {
                 staticClass: "tw-cursor-pointer mouseOver",
+                on: {
+                  edit: function($event) {
+                    return _vm.tempValue(_vm.fieldLabel)
+                  }
+                },
                 model: {
                   value: _vm.fieldLabel,
                   callback: function($$v) {
@@ -89383,8 +89738,8 @@ var render = function() {
       _c("br"),
       _vm._v(" "),
       _c(
-        "el-radio-group",
-        { attrs: { id: "radioGroup" } },
+        "div",
+        { staticClass: "zone" },
         _vm._l(_vm.choices, function(item, index) {
           return _c(
             "div",
@@ -89409,9 +89764,9 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            " +
+                        "\n                        " +
                           _vm._s(item.value) +
-                          "\n                    "
+                          "\n                "
                       )
                     ]
                   )
@@ -89445,6 +89800,15 @@ var render = function() {
             attrs: {
               title:
                 "Woops! it looks like you have already added that as a choice. Let's try again with a different value.",
+              type: "error"
+            }
+          })
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title: "Woops! This value cannot be empty. Lets try that again.",
               type: "error"
             }
           })
@@ -89612,6 +89976,11 @@ var render = function() {
               "editable-text",
               {
                 staticClass: "tw-cursor-pointer mouseOver",
+                on: {
+                  edit: function($event) {
+                    return _vm.tempValue(_vm.fieldLabel)
+                  }
+                },
                 model: {
                   value: _vm.fieldLabel,
                   callback: function($$v) {
@@ -89677,7 +90046,17 @@ var render = function() {
           },
           expression: "required"
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! Your question/title cannot be empty. Lets try that again.",
+              type: "error"
+            }
+          })
+        : _vm._e()
     ],
     2
   )
@@ -89709,6 +90088,18 @@ var render = function() {
     [
       _vm._t("default"),
       _vm._v(" "),
+      _c("el-switch", {
+        staticClass: "tw-float-right switch-position",
+        attrs: { "active-text": "Required", "inactive-text": "Optional" },
+        model: {
+          value: _vm.required,
+          callback: function($$v) {
+            _vm.required = $$v
+          },
+          expression: "required"
+        }
+      }),
+      _vm._v(" "),
       _c("div", { staticClass: "tw-inline-flex tw-my-1" }, [
         _c(
           "label",
@@ -89718,6 +90109,11 @@ var render = function() {
               "editable-text",
               {
                 staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                on: {
+                  edit: function($event) {
+                    return _vm.tempValue(_vm.fieldLabel)
+                  }
+                },
                 model: {
                   value: _vm.fieldLabel,
                   callback: function($$v) {
@@ -89738,7 +90134,7 @@ var render = function() {
         _vm._v(" "),
         _c(
           "div",
-          { staticClass: "tw-flex-none" },
+          { staticClass: "tw-inline-block" },
           [
             _vm.field.settings.isLimited
               ? _c("el-input", {
@@ -89758,22 +90154,11 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("el-switch", {
-        staticClass: "tw-float-right switch-position",
-        attrs: { "active-text": "Required", "inactive-text": "Optional" },
-        model: {
-          value: _vm.required,
-          callback: function($$v) {
-            _vm.required = $$v
-          },
-          expression: "required"
-        }
-      }),
-      _vm._v(" "),
       _vm.isEmpty
         ? _c("el-alert", {
             attrs: {
-              title: "Woops! Title cannot be empty. Lets try that again.",
+              title:
+                "Woops! Your question/title cannot be empty. Lets try that again.",
               type: "error"
             }
           })
@@ -89818,6 +90203,11 @@ var render = function() {
               "editable-text",
               {
                 staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                on: {
+                  edit: function($event) {
+                    return _vm.tempValue(_vm.fieldLabel)
+                  }
+                },
                 model: {
                   value: _vm.fieldLabel,
                   callback: function($$v) {
@@ -89842,7 +90232,7 @@ var render = function() {
           "div",
           { staticClass: "tw-flex-none" },
           [
-            _vm.exactTime === false
+            !_vm.exactTime
               ? _c("el-time-select", {
                   attrs: {
                     "arrow-control": "",
@@ -89879,7 +90269,17 @@ var render = function() {
           },
           expression: "required"
         }
-      })
+      }),
+      _vm._v(" "),
+      _vm.isEmpty
+        ? _c("el-alert", {
+            attrs: {
+              title:
+                "Woops! Your question/title cannot be empty. Lets try that again.",
+              type: "error"
+            }
+          })
+        : _vm._e()
     ],
     2
   )
@@ -93713,7 +94113,7 @@ var render = function() {
             ) {
               return null
             }
-            return _vm.blur($event)
+            return _vm.save($event)
           }
         }
       },
@@ -93732,7 +94132,11 @@ var render = function() {
                 ref: "editable_input",
                 staticClass: "text-base p-0",
                 attrs: { size: "small", maxlength: "200" },
-                on: { blur: _vm.blur },
+                on: {
+                  blur: function($event) {
+                    !_vm.active
+                  }
+                },
                 model: {
                   value: _vm.newValue,
                   callback: function($$v) {
@@ -94027,7 +94431,10 @@ var render = function() {
                       _vm._l(_vm.field.choices, function(item, index) {
                         return _c(
                           "th",
-                          { key: index },
+                          {
+                            key: index,
+                            staticClass: "tw-whitespace-no-wrap tw-mx-2"
+                          },
                           [
                             _c("el-col", [
                               _vm._v(

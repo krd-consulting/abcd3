@@ -13242,7 +13242,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#matrix-table[data-v-04d13538] {\n  /* width: 100%;  */\n  /* margin-top: 20px;  */\n  z-index: 0;\n}\n#matrix-table table[data-v-04d13538], td[data-v-04d13538] {\n  border: 1px solid #dedfe0;\n}\n#matrix-table tbody tr[data-v-04d13538]:hover {\n  background: #9ebdef;\n}\n", ""]);
+exports.push([module.i, "#matrix-table[data-v-04d13538] {\n  /* width: 100%;  */\n  /* margin-top: 20px;  */\n  z-index: 0;\n}\n#matrix-table td[data-v-04d13538] {\n  border: 1px solid #dedfe0;\n  max-width: 30%;\n}\n#matrix-table tbody tr[data-v-04d13538]:hover {\n  background: #9ebdef;\n}\n", ""]);
 
 // exports
 
@@ -95120,7 +95120,10 @@ var render = function() {
                       _vm._l(_vm.field.choices, function(item, index) {
                         return _c(
                           "th",
-                          { key: index },
+                          {
+                            key: index,
+                            staticClass: "tw-whitespace-no-wrap tw-mx-2"
+                          },
                           [
                             _c("el-col", [
                               _vm._v(

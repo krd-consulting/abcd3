@@ -170,7 +170,7 @@ a:hover {
     @apply
         tw-text-base
         tw-flex
-        tw-justify-start
+        tw-justify-between
         tw-items-center
         tw-px-0
         tw-sticky
@@ -180,6 +180,7 @@ a:hover {
         tw-border-b*/
         background: rgb(102,139,160);
         background: linear-gradient(90deg, rgba(102,139,160,1) 14.5%, rgba(247,250,252,1) 14.5%);
+        /* float: right; */
 }
 
 .main-sidebar-menu {

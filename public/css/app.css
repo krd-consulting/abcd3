@@ -14784,7 +14784,7 @@ a:hover {
 .main-nav {
   font-size: 1.125rem;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   padding-left: 0;
   padding-right: 0;
@@ -14796,6 +14796,7 @@ a:hover {
         tw-border-b*/
   background: rgb(102,139,160);
   background: linear-gradient(90deg, rgba(102,139,160,1) 14.5%, rgba(247,250,252,1) 14.5%);
+  /* float: right; */
 }
 
 .main-sidebar-menu {

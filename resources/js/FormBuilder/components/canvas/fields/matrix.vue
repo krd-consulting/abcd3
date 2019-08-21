@@ -15,7 +15,8 @@
                 <label>
                     <editable-text 
                         class="tw-cursor-pointer mouseOver" 
-                        v-model="fieldLabel">
+                        v-model="fieldLabel"
+                        @edit="tempValue(fieldLabel)">
                             {{ fieldLabel }}
                     </editable-text>
 
@@ -27,18 +28,27 @@
                 </label>
             </el-col>
         </el-row>
+
+        <el-alert
+            v-if="isEmpty"
+            title="Woops! Your question/title cannot be empty. Lets try that again."
+            type="error">
+        </el-alert>
+
         <table id="matrix-table">
             <thead>
                 <tr class="tw-max-w-sm">
                     <th></th>
-                    <th v-for="(item, index) in choices" :key="item.index" >
+                    <th v-for="(item, index) in choices" :key="item.value" >
                         <div class="tw-inline-flex tw-justify-between tw-whitespace-no-wrap">
                             <div class="tw-flex-none">
                                 <editable-text 
                                     class="tw-cursor-pointer mouseOver" 
-                                    v-model="item.value"
+                                    :value="item.value"
                                     @input="updateChoiceValue($event, index)"
-                                />
+                                    @edit="tempValue(item.value)">
+                                        {{ item.value }}
+                                </editable-text>
                             </div>
                             <div class="tw-flex-1 tw-relative tw-right-0">
                                 <el-button 
@@ -58,15 +68,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in questions" :key="item.index">
+                <tr v-for="(item, index) in questions" :key="item.text">
                     <td>
                         <div class="tw-inline-flex tw-justify-between">
                             <div class="tw-flex-auto">
                                 <editable-text 
-                                    class="tw-cursor-pointer mouseOver" 
-                                    v-model="item.text"
+                                    class="tw-cursor-pointer mouseOver tw-inline-block" 
+                                    :value="item.text"
                                     @input="updateQuestionValue($event, index)"
-                                />
+                                    @edit="tempValue(item.text)">
+                                        {{ item.text }}
+                                </editable-text>
                             </div>
                             <div class="tw-flex-1 tw-relative tw-right-0">
                                 <el-button 
@@ -89,6 +101,11 @@
         <el-alert
             v-if="!isUnique"
             title="Woops! it looks like you have already added that as a choice. Let's try again with a different value."
+            type="error">
+        </el-alert>
+        <el-alert
+            v-if="isEmptyTable"
+            title="Woops! Your question or choice cannot be empty. Lets try that again."
             type="error">
         </el-alert>
 
@@ -115,7 +132,10 @@ export default {
             radioSelect: 1,
             itemText: '',
             isMounted: false,
-            isUnique: true
+            isUnique: true,
+            isEmpty: false,
+            isEmptyTable: false,
+            temp: ''
         }
     },
     components: {
@@ -136,9 +156,15 @@ export default {
         fieldLabel: {
             get() { return this.field.title },
             set(title) {
+                if(title === ''){
+                    title = this.temp;
+                    return this.isEmpty = true;
+                }
+
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.title = title;
                 this.field = fieldCopy;
+                this.isEmpty = false;
             }
         },
 
@@ -190,11 +216,18 @@ export default {
     },
     methods: {
 
+        tempValue(value) {
+            this.temp = value;
+        },
+
         addQuestion() {
             const questionsCopy = _.clone(this.questions);
+            if(this.itemText === '') {
+                return this.isEmptyTable = true;
+            }
 
             for(var i = 0; i < this.questions.length; i++) {
-                if(this.questions[i].value === this.itemText) {
+                if(this.questions[i].text.toUpperCase() === this.itemText.toUpperCase()) {
 
                     this.itemText = ''
                     return this.isUnique = false;
@@ -208,11 +241,11 @@ export default {
             this.questions = questionsCopy;
             this.itemText = '';
             this.isUnique = true;
+            this.isEmptyTable = false;
             this.$forceUpdate();
         },
         
         removeQuestion(item) {
-
             var index = this.questions.indexOf(item);
 
             if (index !== -1) {
@@ -247,25 +280,50 @@ export default {
         
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
+
+            if(value === '') {
+                this.choices[index].value = this.temp;
+                return this.isEmptyTable = true;
+            }
+
+            for(var i = 0; i < this.field.choices.length; i++) {
+                if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+                    this.field.choices[index].value = this.temp;
+                    
+                    return this.isUnique = false;
+                }
+            }
+
             fieldCopy.choices[index].value = value;
             this.choices = fieldCopy.choices;
+            this.isEmptyTable = false;
+            this.isUnique = true;
 
-            // for(var i = 0; i < this.choices.length; i++) {
-            //     if(this.choices[i].value === this.itemText) {
-
-            //         this.itemText = ''
-            //         return this.isUnique = false;
-            //     }
-            // }
+            
 
             this.$forceUpdate();
         },
 
         updateQuestionValue(value, index) {
             const fieldCopy = _.clone(this.field);
-            fieldCopy.questions[index].value = value;
-            this.questions = fieldCopy.questions;
 
+            if(value === '') {
+                this.questions[index].text = this.temp;
+                return this.isEmptyTable = true;
+            }
+            for(var i = 0; i < this.questions.length; i++) {
+                if(this.questions[i].text.toUpperCase() === value.toUpperCase()) {
+                    
+                    this.questions[index].text = this.temp;
+                    
+                    return this.isUnique = false;
+                }
+            }
+
+            fieldCopy.questions[index].text = value;
+            this.questions = fieldCopy.questions;
+            this.isEmptyTable = false;
+            this.isUnique = true;
             this.$forceUpdate();
         }
         
@@ -274,16 +332,19 @@ export default {
 </script>
 
 <style scoped>
-    #matrix-table {
+    table{
         width: 100%; 
         margin-top: 20px; 
         z-index: 0;
-        
+        display: block;
+        max-height: 300px;
+        overflow-y: auto;
     }
-    #matrix-table table, td {
+    td {
         border: 1px solid #dedfe0;
+        max-width: 20%;
     }
-    #matrix-table tbody tr:hover {
+    tbody tr:hover {
         background: #9ebdef;
     }
     .mouseOver:hover {

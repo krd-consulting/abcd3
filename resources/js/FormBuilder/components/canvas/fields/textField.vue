@@ -2,13 +2,23 @@
   <div>
       <slot></slot>
 
+      <el-switch 
+        v-model="required" 
+        active-text="Required" 
+        inactive-text="Optional"
+        class="tw-float-right switch-position">
+    </el-switch>
+
     <div class="tw-inline-flex tw-my-1">
         <label class="tw-flex-1">   
-            <editable-text class="tw-cursor-pointer mouseOver tw-mr-1" v-model="fieldLabel">
+            <editable-text 
+                class="tw-cursor-pointer mouseOver tw-mr-1" 
+                v-model="fieldLabel"
+                @edit="tempValue(fieldLabel)">
                 {{ fieldLabel }}
             </editable-text>
         </label>    
-        <div class="tw-flex-none">
+        <div class="tw-inline-block">
             <el-input v-if="field.settings.isLimited"
                 id="input"
                 type="text" 
@@ -24,16 +34,9 @@
         </div>
     </div>
 
-    <el-switch 
-        v-model="required" 
-        active-text="Required" 
-        inactive-text="Optional"
-        class="tw-float-right switch-position">
-    </el-switch>
-
     <el-alert
         v-if="isEmpty"
-        title="Woops! Title cannot be empty. Lets try that again."
+        title="Woops! Your question/title cannot be empty. Lets try that again."
         type="error">
     </el-alert>
     
@@ -46,7 +49,10 @@ import EditableText from '@/components/editableText.vue'
 export default {
     name: 'Textfield',
     data() {
-        return {}
+        return {
+            isEmpty: false,
+            temp: ''
+        }
     },
 
     props: {
@@ -64,18 +70,21 @@ export default {
         fieldLabel: {
             get() { return this.field.title; },
             set(title) { 
+                if(title === ''){
+                    title = this.temp;
+                    return this.isEmpty = true;
+                }
+
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.title = title;
                 this.field = fieldCopy;
+                this.isEmpty = false;
             }
         },
 
         field: {
             get() { return this.fieldData; },
-            set(field) { 
-                console.log('field edited');
-                this.$emit('update', field); 
-            }
+            set(field) { this.$emit('update', field); }
         },
 
         required: {
@@ -86,8 +95,13 @@ export default {
                 this.field = fieldCopy;
             }
         },
-
     },
+
+    methods: {
+        tempValue(value) {
+            this.temp = value;
+        },
+    }
 }
 </script>
 

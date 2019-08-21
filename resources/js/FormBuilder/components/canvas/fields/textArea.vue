@@ -4,7 +4,10 @@
         
         <div class="tw-inline-flex tw-my-1">
             <label class="tw-flex-1">   
-                <editable-text class="tw-cursor-pointer mouseOver" v-model="fieldLabel">
+                <editable-text 
+                    class="tw-cursor-pointer mouseOver" 
+                    v-model="fieldLabel"
+                    @edit="tempValue(fieldLabel)">
                     {{ fieldLabel }}
                 </editable-text>
             </label> 
@@ -28,12 +31,18 @@
             </div>
         </div>
 
-            <el-switch 
-                v-model="required" 
-                active-text="Required" 
-                inactive-text="Optional"
-                class="tw-float-right switch-position">
-            </el-switch>
+        <el-switch 
+            v-model="required" 
+            active-text="Required" 
+            inactive-text="Optional"
+            class="tw-float-right switch-position">
+        </el-switch>
+
+        <el-alert
+            v-if="isEmpty"
+            title="Woops! Your question/title cannot be empty. Lets try that again."
+            type="error">
+        </el-alert>
         
     </div>
 </template>
@@ -45,7 +54,8 @@ export default {
     name: 'Textbox',
     data() {
         return {
-            value: '',
+            isEmpty: false,
+            temp: ''
         }
     },
     props: {
@@ -61,13 +71,15 @@ export default {
         fieldLabel: {
             get() { return this.field.title; },
             set(title) { 
-                console.log('field label edited');
+                if(title === ''){
+                    title = this.temp;
+                    return this.isEmpty = true;
+                }
 
                 const fieldCopy = _.clone(this.field);
-
                 fieldCopy.title = title;
-
                 this.field = fieldCopy;
+                this.isEmpty = false;
             }
         },
 
@@ -87,6 +99,12 @@ export default {
                 this.field = fieldCopy;
             }
         }
+    },
+
+    methods: {
+        tempValue(value) {
+            this.temp = value;
+        },
     }
 }
 </script>

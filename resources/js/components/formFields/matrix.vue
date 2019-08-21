@@ -9,7 +9,7 @@
                     <thead>
                         <tr class="tw-max-w-sm">
                             <th></th>
-                            <th v-for="(item, index) in field.choices" :key="index" >
+                            <th class="tw-whitespace-no-wrap tw-mx-2" v-for="(item, index) in field.choices" :key="index" >
                                 <el-col>
                                     {{ item.value }}
                                 </el-col>  
@@ -60,8 +60,9 @@ export default {
         z-index: 0;
         
     }
-    #matrix-table table, td {
+    #matrix-table td {
         border: 1px solid #dedfe0;
+        max-width: 30%;
     }
     #matrix-table tbody tr:hover {
         background: #9ebdef;
