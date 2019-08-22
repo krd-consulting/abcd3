@@ -59,9 +59,7 @@ export default {
     methods: {
         setChoices() {
             for(let i = 1; i <= this.fieldData.settings. radioNum; i++) {
-                this.fieldData.choices.push({
-                    id: this.fieldData.settings.nextChoice++, value: 'Choice ' + this.fieldData.settings.nextChoice
-                })
+                this.fieldData.choices.push( 'Choice ' + i )
             }
         },
 

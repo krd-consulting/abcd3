@@ -39,24 +39,24 @@
             <thead>
                 <tr class="tw-max-w-sm">
                     <th></th>
-                    <th v-for="(item, index) in choices" :key="item.value" >
+                    <th v-for="(choice, index) in choices" :key="choice" >
                         <div class="tw-inline-flex tw-justify-between tw-whitespace-no-wrap">
                             <div class="tw-flex-none">
                                 <editable-text 
                                     class="tw-cursor-pointer mouseOver" 
-                                    :value="item.value"
+                                    :value="choice"
                                     @input="updateChoiceValue($event, index)"
-                                    @edit="tempValue(item.value)">
-                                        {{ item.value }}
+                                    @edit="tempValue(choice)">
+                                        {{ choice }}
                                 </editable-text>
                             </div>
                             <div class="tw-flex-1 tw-relative tw-right-0">
                                 <el-button 
                                     class="hover:tw-text-red-600" 
                                     type="text" 
-                                    size="mini"
-                                    icon="el-icon-close" 
-                                    @click="removeChoice(item)">
+                                    size="mini" 
+                                    @click="removeChoice(choice)">
+                                        <base-icon>delete_forever</base-icon>
                                 </el-button>
                             </div>
                         </div>  
@@ -68,16 +68,16 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(item, index) in questions" :key="item.text">
+                <tr v-for="(question, index) in questions" :key="question">
                     <td>
                         <div class="tw-inline-flex tw-justify-between">
                             <div class="tw-flex-auto">
                                 <editable-text 
                                     class="tw-cursor-pointer mouseOver tw-inline-block" 
-                                    :value="item.text"
+                                    :value="question"
                                     @input="updateQuestionValue($event, index)"
-                                    @edit="tempValue(item.text)">
-                                        {{ item.text }}
+                                    @edit="tempValue(question)">
+                                        {{ question }}
                                 </editable-text>
                             </div>
                             <div class="tw-flex-1 tw-relative tw-right-0">
@@ -85,8 +85,8 @@
                                     class="hover:tw-text-red-600"
                                     type="text" 
                                     size="mini"
-                                    icon="el-icon-close" 
-                                    @click="removeQuestion(item)">
+                                    @click="removeQuestion(question)">
+                                        <base-icon>delete_forever</base-icon>
                                 </el-button>
                             </div>
                         </div>
@@ -195,16 +195,6 @@ export default {
             }
         },
 
-        value: {
-            get(){ return this.field.choices.value},
-            set(value){
-                const fieldValue = _.clone(this.field);
-                fieldValue.choices.value = value;
-                this.field = fieldValue;
-                this.$emit('updateChoices', field);
-            }
-        },
-
         required: {
             get() { return this.field.settings.required; },
             set(required) { 
@@ -227,16 +217,14 @@ export default {
             }
 
             for(var i = 0; i < this.questions.length; i++) {
-                if(this.questions[i].text.toUpperCase() === this.itemText.toUpperCase()) {
+                if(this.questions[i].toUpperCase() === this.itemText.toUpperCase()) {
 
                     this.itemText = ''
                     return this.isUnique = false;
                 }
             }
 
-            questionsCopy.push({
-                id: this.nextQuestion++, text: this.itemText
-            });
+            questionsCopy.push( this.itemText );
 
             this.questions = questionsCopy;
             this.itemText = '';
@@ -245,56 +233,85 @@ export default {
             this.$forceUpdate();
         },
         
-        removeQuestion(item) {
-            var index = this.questions.indexOf(item);
+        removeQuestion(question) {
+            this.$confirm('Are you sure you would like to remove this particular question?', 'Warning', {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                type: 'warning'
+            }).then(() => {
+                this.$message({
+                    type: 'success',
+                    message: 'Question deleted'
+                });
+                var index = this.questions.indexOf(question);
 
-            if (index !== -1) {
-                this.questions.splice(index, 1);
-            }
-            this.$store.commit('UPDATE_FIELD', this.field);
-
-            this.$forceUpdate();
+                if (index !== -1) {
+                    this.questions.splice(index, 1);
+                }
+                
+                this.$store.commit('UPDATE_FIELD', this.field);
+                this.$forceUpdate();
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: 'Delete canceled'
+                });          
+            });
         },
 
         addChoice() {
             const choicesCopy = _.clone(this.choices);
 
-            choicesCopy.push({
-                id: this.nextQuestion++, value: 'New Choice'
-            });
+            choicesCopy.push( 'New Choice' );
 
             this.choices = choicesCopy;
             this.$forceUpdate();
         },
 
-        removeChoice(item) {
-            var index = this.choices.indexOf(item);
+        removeChoice(choice) {
+            this.$confirm('Are you sure you\'d like to remove this column?', 'Warning', {
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Cancel',
+                type: 'warning'
+            }).then(() => {
+                var index = this.choices.indexOf(choice);
 
-            if (index !== -1) {
-                this.choices.splice(index, 1);
-                this.$store.commit('UPDATE_FIELD', this.field)
-            }
+                if (index !== -1) {
+                    this.choices.splice(index, 1);
+                    this.$store.commit('UPDATE_FIELD', this.field)
+                }
 
-            this.$forceUpdate();
+                this.$forceUpdate();
+
+                this.$message({
+                    type: 'success',
+                    message: 'Column deleted'
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: 'Delete canceled'
+                });          
+            });
         },
         
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
 
             if(value === '') {
-                this.choices[index].value = this.temp;
+                this.choices[index] = this.temp;
                 return this.isEmptyTable = true;
             }
 
             for(var i = 0; i < this.field.choices.length; i++) {
-                if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
-                    this.field.choices[index].value = this.temp;
+                if(this.field.choices[i].toUpperCase() === value.toUpperCase()) {
+                    this.field.choices[index] = this.temp;
                     
                     return this.isUnique = false;
                 }
             }
 
-            fieldCopy.choices[index].value = value;
+            fieldCopy.choices[index] = value;
             this.choices = fieldCopy.choices;
             this.isEmptyTable = false;
             this.isUnique = true;
@@ -308,19 +325,19 @@ export default {
             const fieldCopy = _.clone(this.field);
 
             if(value === '') {
-                this.questions[index].text = this.temp;
+                this.questions[index] = this.temp;
                 return this.isEmptyTable = true;
             }
             for(var i = 0; i < this.questions.length; i++) {
-                if(this.questions[i].text.toUpperCase() === value.toUpperCase()) {
+                if(this.questions[i].toUpperCase() === value.toUpperCase()) {
                     
-                    this.questions[index].text = this.temp;
+                    this.questions[index] = this.temp;
                     
                     return this.isUnique = false;
                 }
             }
 
-            fieldCopy.questions[index].text = value;
+            fieldCopy.questions[index] = value;
             this.questions = fieldCopy.questions;
             this.isEmptyTable = false;
             this.isUnique = true;

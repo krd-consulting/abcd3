@@ -3627,7 +3627,7 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         var fieldValue = _.clone(this.field);
 
-        fieldValue.choices.value = value;
+        fieldValue.choices = value;
         this.field = fieldValue;
       }
     },
@@ -3650,10 +3650,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     loadItem: function loadItem() {
-      this.choices.push({
-        id: this.nextItem++,
-        value: 'Choice ' + this.nextItem
-      });
+      this.choices.push('Choice ' + this.nextItem);
       this.$store.commit('UPDATE_FIELD', this.field);
     },
     addItem: function addItem() {
@@ -3664,16 +3661,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var i = 0; i < this.choices.length; i++) {
-        if (this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
+        if (this.choices[i].toUpperCase() === this.itemText.toUpperCase()) {
           this.itemText = '';
           return this.isUnique = false;
         }
       }
 
-      choicesCopy.push({
-        id: this.nextItem++,
-        value: this.itemText
-      });
+      choicesCopy.push(this.itemText);
       this.choices = choicesCopy;
       this.itemText = '';
       this.isUnique = true;
@@ -3701,13 +3695,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var i = 0; i < this.field.choices.length; i++) {
-        if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
-          this.field.choices[index].value = this.temp;
+        if (this.field.choices[i].toUpperCase() === value.toUpperCase()) {
+          this.field.choices[index] = this.temp;
           return this.isUnique = false;
         }
       }
 
-      fieldCopy.choices[index].value = value;
+      fieldCopy.choices[index] = value;
       this.choices = fieldCopy.choices;
       this.isEmpty = false;
       this.isUnique = true;
@@ -3975,6 +3969,26 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/components/editableText.vue */ "./resources/js/components/editableText.vue");
+/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuedraggable */ "./node_modules/vuedraggable/dist/vuedraggable.common.js");
+/* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4058,6 +4072,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -4070,7 +4085,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   components: {
-    EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+    EditableText: _components_editableText_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_1___default.a
   },
   props: {
     fieldData: {
@@ -4181,8 +4197,8 @@ __webpack_require__.r(__webpack_exports__);
 
       for (var i = 0; i < this.field.choices.length; i++) {
         if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
-          // this.field.choices[index].value = this.temp;
-          this.dropItem = this.temp;
+          this.field.choices[index].value = this.temp; // this.dropItem = this.temp;
+
           return this.isUnique = false;
         }
       }
@@ -4542,18 +4558,6 @@ __webpack_require__.r(__webpack_exports__);
         this.field = fieldCopy;
       }
     },
-    value: {
-      get: function get() {
-        return this.field.choices.value;
-      },
-      set: function set(value) {
-        var fieldValue = _.clone(this.field);
-
-        fieldValue.choices.value = value;
-        this.field = fieldValue;
-        this.$emit('updateChoices', field);
-      }
-    },
     required: {
       get: function get() {
         return this.field.settings.required;
@@ -4578,68 +4582,100 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var i = 0; i < this.questions.length; i++) {
-        if (this.questions[i].text.toUpperCase() === this.itemText.toUpperCase()) {
+        if (this.questions[i].toUpperCase() === this.itemText.toUpperCase()) {
           this.itemText = '';
           return this.isUnique = false;
         }
       }
 
-      questionsCopy.push({
-        id: this.nextQuestion++,
-        text: this.itemText
-      });
+      questionsCopy.push(this.itemText);
       this.questions = questionsCopy;
       this.itemText = '';
       this.isUnique = true;
       this.isEmptyTable = false;
       this.$forceUpdate();
     },
-    removeQuestion: function removeQuestion(item) {
-      var index = this.questions.indexOf(item);
+    removeQuestion: function removeQuestion(question) {
+      var _this = this;
 
-      if (index !== -1) {
-        this.questions.splice(index, 1);
-      }
+      this.$confirm('Are you sure you would like to remove this particular question?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(function () {
+        _this.$message({
+          type: 'success',
+          message: 'Question deleted'
+        });
 
-      this.$store.commit('UPDATE_FIELD', this.field);
-      this.$forceUpdate();
+        var index = _this.questions.indexOf(question);
+
+        if (index !== -1) {
+          _this.questions.splice(index, 1);
+        }
+
+        _this.$store.commit('UPDATE_FIELD', _this.field);
+
+        _this.$forceUpdate();
+      })["catch"](function () {
+        _this.$message({
+          type: 'info',
+          message: 'Delete canceled'
+        });
+      });
     },
     addChoice: function addChoice() {
       var choicesCopy = _.clone(this.choices);
 
-      choicesCopy.push({
-        id: this.nextQuestion++,
-        value: 'New Choice'
-      });
+      choicesCopy.push('New Choice');
       this.choices = choicesCopy;
       this.$forceUpdate();
     },
-    removeChoice: function removeChoice(item) {
-      var index = this.choices.indexOf(item);
+    removeChoice: function removeChoice(choice) {
+      var _this2 = this;
 
-      if (index !== -1) {
-        this.choices.splice(index, 1);
-        this.$store.commit('UPDATE_FIELD', this.field);
-      }
+      this.$confirm('Are you sure you\'d like to remove this column?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(function () {
+        var index = _this2.choices.indexOf(choice);
 
-      this.$forceUpdate();
+        if (index !== -1) {
+          _this2.choices.splice(index, 1);
+
+          _this2.$store.commit('UPDATE_FIELD', _this2.field);
+        }
+
+        _this2.$forceUpdate();
+
+        _this2.$message({
+          type: 'success',
+          message: 'Column deleted'
+        });
+      })["catch"](function () {
+        _this2.$message({
+          type: 'info',
+          message: 'Delete canceled'
+        });
+      });
     },
     updateChoiceValue: function updateChoiceValue(value, index) {
       var fieldCopy = _.clone(this.field);
 
       if (value === '') {
-        this.choices[index].value = this.temp;
+        this.choices[index] = this.temp;
         return this.isEmptyTable = true;
       }
 
       for (var i = 0; i < this.field.choices.length; i++) {
-        if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
-          this.field.choices[index].value = this.temp;
+        if (this.field.choices[i].toUpperCase() === value.toUpperCase()) {
+          this.field.choices[index] = this.temp;
           return this.isUnique = false;
         }
       }
 
-      fieldCopy.choices[index].value = value;
+      fieldCopy.choices[index] = value;
       this.choices = fieldCopy.choices;
       this.isEmptyTable = false;
       this.isUnique = true;
@@ -4649,18 +4685,18 @@ __webpack_require__.r(__webpack_exports__);
       var fieldCopy = _.clone(this.field);
 
       if (value === '') {
-        this.questions[index].text = this.temp;
+        this.questions[index] = this.temp;
         return this.isEmptyTable = true;
       }
 
       for (var i = 0; i < this.questions.length; i++) {
-        if (this.questions[i].text.toUpperCase() === value.toUpperCase()) {
-          this.questions[index].text = this.temp;
+        if (this.questions[i].toUpperCase() === value.toUpperCase()) {
+          this.questions[index] = this.temp;
           return this.isUnique = false;
         }
       }
 
-      fieldCopy.questions[index].text = value;
+      fieldCopy.questions[index] = value;
       this.questions = fieldCopy.questions;
       this.isEmptyTable = false;
       this.isUnique = true;
@@ -4937,7 +4973,7 @@ __webpack_require__.r(__webpack_exports__);
       set: function set(value) {
         var fieldValue = _.clone(this.field);
 
-        fieldValue.choices.value = value;
+        fieldValue.choices = value;
         this.field = fieldValue;
         this.$emit('updateChoices', field);
       }
@@ -4963,16 +4999,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var i = 0; i < this.choices.length; i++) {
-        if (this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
+        if (this.choices[i].toUpperCase() === this.itemText.toUpperCase()) {
           this.itemText = '';
           return this.isUnique = false;
         }
       }
 
-      choicesCopy.push({
-        id: this.nextItem++,
-        value: this.itemText
-      });
+      choicesCopy.push(this.itemText);
       this.choices = choicesCopy;
       this.itemText = '';
       this.isUnique = true;
@@ -4995,18 +5028,18 @@ __webpack_require__.r(__webpack_exports__);
       var fieldCopy = _.clone(this.field);
 
       if (value === '') {
-        this.field.choices[index].value = this.temp;
+        this.field.choices[index] = this.temp;
         return this.isEmpty = true;
       }
 
       for (var i = 0; i < this.field.choices.length; i++) {
-        if (this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
-          this.field.choices[index].value = this.temp;
+        if (this.field.choices[i].toUpperCase() === value.toUpperCase()) {
+          this.field.choices[index] = this.temp;
           return this.isUnique = false;
         }
       }
 
-      fieldCopy.choices[index].value = value;
+      fieldCopy.choices[index] = value;
       this.choices = fieldCopy.choices;
     }
   }
@@ -5843,14 +5876,13 @@ __webpack_require__.r(__webpack_exports__);
   name: 'checkBox',
   data: function data() {
     return {
+      checkboxNum: 2,
       fieldData: {
         type: 'CheckBoxField',
         name: 'check_box',
         title: '',
         settings: {
-          required: false,
-          checkboxNum: 2,
-          nextChoice: 0
+          required: false
         },
         choices: [],
         rules: {
@@ -5868,11 +5900,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     setChoices: function setChoices() {
-      for (var i = 1; i <= this.fieldData.settings.checkboxNum; i++) {
-        this.fieldData.choices.push({
-          id: this.fieldData.settings.nextChoice++,
-          value: 'Choice ' + this.fieldData.settings.nextChoice
-        });
+      for (var i = 1; i <= this.checkboxNum; i++) {
+        this.fieldData.choices.push('Choice ' + i);
       }
     },
     save: function save(formName) {
@@ -6310,9 +6339,7 @@ __webpack_require__.r(__webpack_exports__);
         settings: {
           required: false,
           matrix_questions: 2,
-          matrix_choices: 5,
-          nextQuestion: 0,
-          nextChoice: 0
+          matrix_choices: 5
         },
         questions: [],
         choices: [],
@@ -6332,18 +6359,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setQuestions: function setQuestions() {
       for (var i = 0; i < this.fieldData.settings.matrix_questions; i++) {
-        this.fieldData.questions.push({
-          id: this.fieldData.settings.nextQuestion++,
-          text: 'Question ' + this.fieldData.settings.nextQuestion
-        });
+        this.fieldData.questions.push('Question ' + i);
       }
     },
     setChoices: function setChoices() {
       for (var i = 1; i <= this.fieldData.settings.matrix_choices; i++) {
-        this.fieldData.choices.push({
-          id: this.fieldData.settings.nextChoice++,
-          value: 'Choice ' + this.fieldData.settings.nextChoice
-        });
+        this.fieldData.choices.push('Choice ' + i);
       }
     },
     save: function save(formName) {
@@ -6526,10 +6547,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setChoices: function setChoices() {
       for (var i = 1; i <= this.fieldData.settings.radioNum; i++) {
-        this.fieldData.choices.push({
-          id: this.fieldData.settings.nextChoice++,
-          value: 'Choice ' + this.fieldData.settings.nextChoice
-        });
+        this.fieldData.choices.push('Choice ' + i);
       }
     },
     save: function save(formName) {
@@ -8401,8 +8419,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      select: [] // isRequired: false,
-
+      select: []
     };
   },
   props: {
@@ -11226,7 +11243,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-button[data-v-5bdc3b03] {\n  padding: 0;\n}\nbutton[data-v-5bdc3b03] {\n  padding: 0px;\n  margin-bottom: -5px;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n    margin-right: 4px;\n}\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.handle[data-v-5bdc3b03] {\n  position: relative;\n  z-index: 10;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n    margin-right: 4px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -11302,7 +11319,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-7d675a79] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-radio__label[data-v-7d675a79] {\n  width: 100px;\n}\n.switch-position[data-v-7d675a79] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-7d675a79] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -88506,74 +88523,69 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("el-col", { staticClass: "tw-mt-1", attrs: { span: 8 } }, [
-        _c(
-          "label",
-          [
+      _c(
+        "el-row",
+        [
+          _c("el-col", { staticClass: "tw-mt-1", attrs: { span: 6 } }, [
             _c(
-              "editable-text",
-              {
-                staticClass: "tw-cursor-pointer mouseOver",
-                on: {
-                  edit: function($event) {
-                    return _vm.tempValue(_vm.fieldLabel)
-                  }
-                },
-                model: {
-                  value: _vm.fieldLabel,
-                  callback: function($$v) {
-                    _vm.fieldLabel = $$v
-                  },
-                  expression: "fieldLabel"
-                }
-              },
+              "label",
               [
-                _vm._v(
-                  "\n              " + _vm._s(_vm.fieldLabel) + "\n          "
+                _c(
+                  "editable-text",
+                  {
+                    staticClass: "tw-cursor-pointer mouseOver",
+                    on: {
+                      edit: function($event) {
+                        return _vm.tempValue(_vm.fieldLabel)
+                      }
+                    },
+                    model: {
+                      value: _vm.fieldLabel,
+                      callback: function($$v) {
+                        _vm.fieldLabel = $$v
+                      },
+                      expression: "fieldLabel"
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                  " +
+                        _vm._s(_vm.fieldLabel) +
+                        "\n              "
+                    )
+                  ]
                 )
-              ]
+              ],
+              1
             )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _c("br"),
+          ])
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "div",
         { staticClass: "zone" },
-        _vm._l(_vm.choices, function(item, index) {
+        _vm._l(_vm.choices, function(choice, index) {
           return _c(
             "div",
-            { key: item.value },
+            { key: choice },
             [
               _c(
                 "el-checkbox",
                 [
-                  _c(
-                    "editable-text",
-                    {
-                      staticClass: "tw-cursor-pointer mouseOver",
-                      attrs: { value: item.value },
-                      on: {
-                        input: function($event) {
-                          return _vm.updateChoiceValue($event, index)
-                        },
-                        edit: function($event) {
-                          return _vm.tempValue(item.value)
-                        }
+                  _c("editable-text", {
+                    staticClass: "tw-cursor-pointer mouseOver",
+                    attrs: { value: choice },
+                    on: {
+                      input: function($event) {
+                        return _vm.updateChoiceValue($event, index)
+                      },
+                      edit: function($event) {
+                        return _vm.tempValue(choice)
                       }
-                    },
-                    [
-                      _vm._v(
-                        "\n                          " +
-                          _vm._s(item.value) +
-                          "\n                  "
-                      )
-                    ]
-                  )
+                    }
+                  })
                 ],
                 1
               ),
@@ -88585,7 +88597,7 @@ var render = function() {
                   attrs: { type: "text", size: "mini" },
                   on: {
                     click: function($event) {
-                      return _vm.removeChoice(item)
+                      return _vm.removeChoice(_vm.item)
                     }
                   }
                 },
@@ -88829,38 +88841,40 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "tw-inline-flex tw-my-1" }, [
-        _c(
-          "label",
-          { staticClass: "tw-flex-1" },
-          [
-            _c(
-              "editable-text",
-              {
-                staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
-                on: {
-                  edit: function($event) {
-                    return _vm.tempValue(_vm.fieldLabel)
+        _c("div", { staticClass: "tw-max-w-xs" }, [
+          _c(
+            "label",
+            { staticClass: "tw-flex-1" },
+            [
+              _c(
+                "editable-text",
+                {
+                  staticClass: "tw-cursor-pointer mouseOver tw-mr-1",
+                  on: {
+                    edit: function($event) {
+                      return _vm.tempValue(_vm.fieldLabel)
+                    }
+                  },
+                  model: {
+                    value: _vm.fieldLabel,
+                    callback: function($$v) {
+                      _vm.fieldLabel = $$v
+                    },
+                    expression: "fieldLabel"
                   }
                 },
-                model: {
-                  value: _vm.fieldLabel,
-                  callback: function($$v) {
-                    _vm.fieldLabel = $$v
-                  },
-                  expression: "fieldLabel"
-                }
-              },
-              [
-                _vm._v(
-                  "\n                " +
-                    _vm._s(_vm.fieldLabel) +
-                    "\n            "
-                )
-              ]
-            )
-          ],
-          1
-        ),
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.fieldLabel) +
+                      "\n                "
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -88870,90 +88884,46 @@ var render = function() {
               "el-select",
               {
                 attrs: {
-                  id: "dropdown",
-                  value: _vm.dropItem,
-                  placeholder: " "
+                  multiple: "",
+                  filterable: "",
+                  "allow-create": "",
+                  "default-first-option": "",
+                  placeholder: "Enter Select Menu Items"
                 },
                 model: {
-                  value: _vm.dropItem,
+                  value: _vm.choices,
                   callback: function($$v) {
-                    _vm.dropItem = $$v
+                    _vm.choices = $$v
                   },
-                  expression: "dropItem"
+                  expression: "choices"
                 }
               },
-              _vm._l(_vm.choices, function(item, index) {
-                return _c("el-option", {
-                  key: index,
-                  attrs: { label: item.value, value: item.value }
-                })
-              }),
+              [
+                _c(
+                  "draggable",
+                  {
+                    model: {
+                      value: _vm.choices,
+                      callback: function($$v) {
+                        _vm.choices = $$v
+                      },
+                      expression: "choices"
+                    }
+                  },
+                  _vm._l(_vm.choices, function(item, index) {
+                    return _c("el-option", {
+                      key: index,
+                      attrs: { label: item, value: item }
+                    })
+                  }),
+                  1
+                )
+              ],
               1
             )
           ],
           1
-        ),
-        _vm._v(" "),
-        _vm.dropItem != null
-          ? _c("div", { staticClass: "tw-ml-16 tw-pl-2" }, [
-              _c("span", [_vm._v("Edit this list item: ")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "tw-inline-flex tw-justify-between" }, [
-                _c(
-                  "div",
-                  { staticClass: "tw-flex-auto" },
-                  [
-                    _c(
-                      "editable-text",
-                      {
-                        staticClass:
-                          "tw-cursor-pointer mouseOver tw-inline-block tw-w-64",
-                        attrs: { value: _vm.dropItem },
-                        on: {
-                          input: function($event) {
-                            return _vm.updateChoiceValue($event)
-                          },
-                          edit: function($event) {
-                            return _vm.tempValue(_vm.dropItem)
-                          }
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        " +
-                            _vm._s(_vm.dropItem) +
-                            "\n                    "
-                        )
-                      ]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "tw-flex-1 tw-relative tw-right-0" },
-                  [
-                    _c(
-                      "el-button",
-                      {
-                        staticClass: "tw-px-2 tw-py-1 hover:tw-text-red-600",
-                        attrs: { type: "text", size: "mini" },
-                        on: {
-                          click: function($event) {
-                            return _vm.removeChoice(_vm.dropItem, _vm.index)
-                          }
-                        }
-                      },
-                      [_c("base-icon", [_vm._v("delete_forever")])],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ])
-            ])
-          : _vm._e()
+        )
       ]),
       _vm._v(" "),
       !_vm.isUnique
@@ -88973,69 +88943,7 @@ var render = function() {
               type: "error"
             }
           })
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "form",
-        {
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.addItem($event)
-            }
-          }
-        },
-        [
-          _c(
-            "div",
-            { staticClass: "tw-w-72 tw-block tw-float-left tw-mt-0" },
-            [
-              _c("el-input", {
-                staticClass: "tw-w-72",
-                attrs: { id: "add-item", placeholder: "Add" },
-                model: {
-                  value: _vm.itemText,
-                  callback: function($$v) {
-                    _vm.itemText = $$v
-                  },
-                  expression: "itemText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "tw-block tw-float-left" },
-            [
-              _c(
-                "el-tooltip",
-                {
-                  attrs: {
-                    content:
-                      "Alternatively, you can press enter after typing in this field to add items to the list"
-                  }
-                },
-                [
-                  _c(
-                    "el-button",
-                    { attrs: { type: "text" }, on: { click: _vm.addItem } },
-                    [
-                      _c("base-icon", { staticClass: "tw-text-3xl" }, [
-                        _vm._v("add_box")
-                      ])
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ]
-      )
+        : _vm._e()
     ],
     2
   )
@@ -89280,8 +89188,8 @@ var render = function() {
             [
               _c("th"),
               _vm._v(" "),
-              _vm._l(_vm.choices, function(item, index) {
-                return _c("th", { key: item.value }, [
+              _vm._l(_vm.choices, function(choice, index) {
+                return _c("th", { key: choice }, [
                   _c(
                     "div",
                     {
@@ -89297,20 +89205,20 @@ var render = function() {
                             "editable-text",
                             {
                               staticClass: "tw-cursor-pointer mouseOver",
-                              attrs: { value: item.value },
+                              attrs: { value: choice },
                               on: {
                                 input: function($event) {
                                   return _vm.updateChoiceValue($event, index)
                                 },
                                 edit: function($event) {
-                                  return _vm.tempValue(item.value)
+                                  return _vm.tempValue(choice)
                                 }
                               }
                             },
                             [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(item.value) +
+                                  _vm._s(choice) +
                                   "\n                            "
                               )
                             ]
@@ -89323,19 +89231,20 @@ var render = function() {
                         "div",
                         { staticClass: "tw-flex-1 tw-relative tw-right-0" },
                         [
-                          _c("el-button", {
-                            staticClass: "hover:tw-text-red-600",
-                            attrs: {
-                              type: "text",
-                              size: "mini",
-                              icon: "el-icon-close"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.removeChoice(item)
+                          _c(
+                            "el-button",
+                            {
+                              staticClass: "hover:tw-text-red-600",
+                              attrs: { type: "text", size: "mini" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.removeChoice(choice)
+                                }
                               }
-                            }
-                          })
+                            },
+                            [_c("base-icon", [_vm._v("delete_forever")])],
+                            1
+                          )
                         ],
                         1
                       )
@@ -89364,10 +89273,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.questions, function(item, index) {
+          _vm._l(_vm.questions, function(question, index) {
             return _c(
               "tr",
-              { key: item.text },
+              { key: question },
               [
                 _c("td", [
                   _c(
@@ -89383,20 +89292,20 @@ var render = function() {
                             {
                               staticClass:
                                 "tw-cursor-pointer mouseOver tw-inline-block",
-                              attrs: { value: item.text },
+                              attrs: { value: question },
                               on: {
                                 input: function($event) {
                                   return _vm.updateQuestionValue($event, index)
                                 },
                                 edit: function($event) {
-                                  return _vm.tempValue(item.text)
+                                  return _vm.tempValue(question)
                                 }
                               }
                             },
                             [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(item.text) +
+                                  _vm._s(question) +
                                   "\n                            "
                               )
                             ]
@@ -89409,19 +89318,20 @@ var render = function() {
                         "div",
                         { staticClass: "tw-flex-1 tw-relative tw-right-0" },
                         [
-                          _c("el-button", {
-                            staticClass: "hover:tw-text-red-600",
-                            attrs: {
-                              type: "text",
-                              size: "mini",
-                              icon: "el-icon-close"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.removeQuestion(item)
+                          _c(
+                            "el-button",
+                            {
+                              staticClass: "hover:tw-text-red-600",
+                              attrs: { type: "text", size: "mini" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.removeQuestion(question)
+                                }
                               }
-                            }
-                          })
+                            },
+                            [_c("base-icon", [_vm._v("delete_forever")])],
+                            1
+                          )
                         ],
                         1
                       )
@@ -89739,10 +89649,10 @@ var render = function() {
       _c(
         "div",
         { staticClass: "zone" },
-        _vm._l(_vm.choices, function(item, index) {
+        _vm._l(_vm.choices, function(choice, index) {
           return _c(
             "div",
-            { key: item.value },
+            { key: choice },
             [
               _c(
                 "el-radio",
@@ -89751,20 +89661,20 @@ var render = function() {
                     "editable-text",
                     {
                       staticClass: "tw-cursor-pointer mouseOver",
-                      attrs: { value: item.value, label: item.value },
+                      attrs: { value: choice, label: choice },
                       on: {
                         input: function($event) {
                           return _vm.updateChoiceValue($event, index)
                         },
                         edit: function($event) {
-                          return _vm.tempValue(item.value)
+                          return _vm.tempValue(choice)
                         }
                       }
                     },
                     [
                       _vm._v(
                         "\n                        " +
-                          _vm._s(item.value) +
+                          _vm._s(choice) +
                           "\n                "
                       )
                     ]
@@ -89780,7 +89690,7 @@ var render = function() {
                   attrs: { type: "text", size: "mini" },
                   on: {
                     click: function($event) {
-                      return _vm.removeChoice(item)
+                      return _vm.removeChoice(choice)
                     }
                   }
                 },
@@ -90707,13 +90617,13 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("el-input-number", {
-                attrs: { "controls-position": "right", min: 1, max: 10 },
+                attrs: { "controls-position": "right", min: 1 },
                 model: {
-                  value: _vm.fieldData.settings.checkboxNum,
+                  value: _vm.checkboxNum,
                   callback: function($$v) {
-                    _vm.$set(_vm.fieldData.settings, "checkboxNum", $$v)
+                    _vm.checkboxNum = $$v
                   },
-                  expression: "fieldData.settings.checkboxNum"
+                  expression: "checkboxNum"
                 }
               })
             ],
@@ -94191,11 +94101,11 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(item) {
+              _vm._l(_vm.field.choices, function(choice) {
                 return _c(
                   "el-checkbox-group",
                   {
-                    key: item.id,
+                    key: choice,
                     staticClass: "tw-h-8",
                     attrs: { id: "check", required: _vm.isRequired },
                     model: {
@@ -94209,7 +94119,7 @@ var render = function() {
                   [
                     _c("el-checkbox", {
                       staticClass: "tw-my-2 tw-ml-8 tw-text-lg",
-                      attrs: { label: item.value }
+                      attrs: { label: choice }
                     })
                   ],
                   1
@@ -94355,10 +94265,10 @@ var render = function() {
                     expression: "value"
                   }
                 },
-                _vm._l(_vm.field.choices, function(item) {
+                _vm._l(_vm.field.choices, function(choice) {
                   return _c("el-option", {
-                    key: item.id,
-                    attrs: { label: item.value, value: item.value }
+                    key: choice,
+                    attrs: { label: choice, value: choice }
                   })
                 }),
                 1
@@ -94423,7 +94333,7 @@ var render = function() {
                     [
                       _c("th"),
                       _vm._v(" "),
-                      _vm._l(_vm.field.choices, function(item, index) {
+                      _vm._l(_vm.field.choices, function(choice, index) {
                         return _c(
                           "th",
                           {
@@ -94434,7 +94344,7 @@ var render = function() {
                             _c("el-col", [
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(item.value) +
+                                  _vm._s(choice) +
                                   "\n                            "
                               )
                             ])
@@ -94460,7 +94370,7 @@ var render = function() {
                         _c("td", [
                           _vm._v(
                             "\n                            " +
-                              _vm._s(question.text) +
+                              _vm._s(question) +
                               "\n                        "
                           )
                         ]),
@@ -94468,17 +94378,14 @@ var render = function() {
                         _vm._l(_vm.field.choices, function(response, index) {
                           return _c(
                             "td",
-                            { key: response.id, staticClass: "tw-text-center" },
+                            { key: response, staticClass: "tw-text-center" },
                             [
                               _c(
                                 "el-radio",
                                 {
-                                  key: response.id,
+                                  key: response,
                                   staticClass: "tw-ml-2",
-                                  attrs: {
-                                    value: index,
-                                    label: response.value
-                                  },
+                                  attrs: { value: index, label: response },
                                   model: {
                                     value: _vm.select[questionIndex],
                                     callback: function($$v) {
@@ -94632,11 +94539,11 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(item) {
+              _vm._l(_vm.field.choices, function(choice) {
                 return _c(
                   "el-radio-group",
                   {
-                    key: item.id,
+                    key: choice,
                     staticClass: "tw-my-2 tw-mx-8",
                     attrs: { id: "radioGroup" },
                     model: {
@@ -94647,7 +94554,7 @@ var render = function() {
                       expression: "select"
                     }
                   },
-                  [_c("el-radio", { attrs: { label: item.value } })],
+                  [_c("el-radio", { attrs: { label: choice } })],
                   1
                 )
               }),

@@ -9,9 +9,9 @@
                     <thead>
                         <tr class="tw-max-w-sm">
                             <th></th>
-                            <th class="tw-whitespace-no-wrap tw-mx-2" v-for="(item, index) in field.choices" :key="index" >
+                            <th class="tw-whitespace-no-wrap tw-mx-2" v-for="(choice, index) in field.choices" :key="index" >
                                 <el-col>
-                                    {{ item.value }}
+                                    {{ choice }}
                                 </el-col>  
                             </th>
                         </tr>
@@ -19,14 +19,14 @@
                     <tbody>
                         <tr v-for="(question, questionIndex) in field.questions" :key="questionIndex">
                             <td>
-                                {{ question.text }}
+                                {{ question }}
                             </td>
                             <td v-for="(response, index) in field.choices" 
-                                :key="response.id" 
+                                :key="response" 
                                 class="tw-text-center">
                                 <el-radio :value="index" 
-                                    :key="response.id"
-                                    :label="response.value"
+                                    :key="response"
+                                    :label="response"
                                     v-model="select[questionIndex]" 
                                     class="tw-ml-2">
                                         &nbsp;

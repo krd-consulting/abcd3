@@ -8,12 +8,12 @@
                 <div class="zone">
                     <el-checkbox-group id="check" 
                         class="tw-h-8"
-                        v-for="item in field.choices" 
-                        :key="item.id"
+                        v-for="choice in field.choices" 
+                        :key="choice"
                         v-model="select"
                         :required="isRequired">
 
-                            <el-checkbox :label="item.value" class="tw-my-2 tw-ml-8 tw-text-lg"></el-checkbox>
+                            <el-checkbox :label="choice" class="tw-my-2 tw-ml-8 tw-text-lg"></el-checkbox>
 
                     </el-checkbox-group>
                 </div>
@@ -29,7 +29,6 @@ export default {
     data() {
         return {
             select: [],
-            // isRequired: false,
         }
     },
     props: { 

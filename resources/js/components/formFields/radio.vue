@@ -10,9 +10,9 @@
                     <el-radio-group id="radioGroup" 
                         class="tw-my-2 tw-mx-8" 
                         v-model="select" 
-                        v-for="item in field.choices" 
-                        :key="item.id">
-                            <el-radio :label="item.value"></el-radio>
+                        v-for="choice in field.choices" 
+                        :key="choice">
+                            <el-radio :label="choice"></el-radio>
                     </el-radio-group>
                 </div>
             </el-col>

@@ -22,7 +22,7 @@
                 <label>
                     Number of choices
                 </label>
-                <el-input-number v-model="fieldData.settings.checkboxNum" controls-position="right" :min="1" :max="10"></el-input-number>
+                <el-input-number v-model="checkboxNum" controls-position="right" :min="1"></el-input-number>
             </el-form-item>
             
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
@@ -38,14 +38,13 @@ export default {
     name: 'checkBox',
     data: () => {
         return {
+            checkboxNum: 2,
             fieldData: {
                 type: 'CheckBoxField',
                 name: 'check_box',
                 title: '',
                 settings: {
                     required: false,
-                    checkboxNum: 2,
-                    nextChoice: 0,
                 },
                 choices: [],
                 rules: {
@@ -62,10 +61,10 @@ export default {
     methods: {
 
         setChoices() {
-            for(let i = 1; i <= this.fieldData.settings.checkboxNum; i++) {
-                this.fieldData.choices.push({
-                    id: this.fieldData.settings.nextChoice++, value: 'Choice ' + this.fieldData.settings.nextChoice
-                })
+            for(let i = 1; i <= this.checkboxNum; i++) {
+                this.fieldData.choices.push( 
+                    'Choice ' + i
+                )
             }
         },
 

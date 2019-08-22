@@ -7,10 +7,10 @@
             
             <el-col :span="10">
                 <el-select id="dropdown" v-model="value" filterable placeholder=" ">
-                    <el-option v-for="item in field.choices" 
-                        :key="item.id" 
-                        :label="item.value" 
-                        :value="item.value">
+                    <el-option v-for="choice in field.choices" 
+                        :key="choice" 
+                        :label="choice" 
+                        :value="choice">
                     </el-option>
                 </el-select>
             </el-col>

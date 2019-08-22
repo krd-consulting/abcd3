@@ -48,9 +48,8 @@ class StoreForm extends FormRequest
             'fields.*.settings' => 'nullable',
             'fields.*.settings.max' => 'integer',
             'fields.*.validation_rules' => 'sometimes',
-            'fields.*.questions.*.text' => 'required_if:fields.*.type,matrix',
-            'fields.*.choices.*.text' => 'required_if:fields.*.type,matrix,radio,checkbox,dropdown',
-            'fields.*.choices.*.value' => 'required_if:fields.*.type,matrix,radio,checkbox,dropdown',
+            'fields.*.questions.*' => 'required_if:fields.*.type,matrix',
+            'fields.*.choices.*' => 'required_if:fields.*.type,matrix,radio,checkbox,dropdown',
         ];
     }
 }

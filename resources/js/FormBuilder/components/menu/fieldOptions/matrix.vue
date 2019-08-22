@@ -64,8 +64,6 @@ export default {
                     required: false,
                     matrix_questions: 2,
                     matrix_choices: 5,
-                    nextQuestion: 0,
-                    nextChoice: 0,
                 },
                 questions: [],
                 choices: [],
@@ -86,18 +84,14 @@ export default {
         setQuestions() {
 
             for(let i = 0; i < this.fieldData.settings.matrix_questions; i++) {
-                this.fieldData.questions.push({
-                    id: this.fieldData.settings.nextQuestion++, text: 'Question ' + this.fieldData.settings.nextQuestion
-                })
+                this.fieldData.questions.push( 'Question ' + i )
             }
         },
 
         setChoices() {
 
             for(let i = 1; i <= this.fieldData.settings.matrix_choices; i++) {
-                this.fieldData.choices.push({
-                    id: this.fieldData.settings.nextChoice++, value: 'Choice ' + this.fieldData.settings.nextChoice
-                })
+                this.fieldData.choices.push( 'Choice ' + i )
             }
         },
 

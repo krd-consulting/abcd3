@@ -21,17 +21,17 @@
             </label>
         </el-col><br><br>
         <div class="zone">
-            <div v-for="(item, index) in choices" 
-                :key="item.value">
+            <div v-for="(choice, index) in choices" 
+                :key="choice">
 
                 <el-radio>
                     <editable-text 
                         class="tw-cursor-pointer mouseOver"
-                        :value="item.value"
-                        :label="item.value"
+                        :value="choice"
+                        :label="choice"
                         @input="updateChoiceValue($event, index)"
-                        @edit="tempValue(item.value)">
-                            {{ item.value }}
+                        @edit="tempValue(choice)">
+                            {{ choice }}
                     </editable-text>
                 </el-radio>
 
@@ -39,7 +39,7 @@
                     class="tw--ml-6 hover:tw-text-red-600" 
                     type="text" 
                     size="mini" 
-                    @click="removeChoice(item)">
+                    @click="removeChoice(choice)">
                         <base-icon>delete_forever</base-icon>
                 </el-button>
             </div>
@@ -129,7 +129,7 @@ export default {
             get(){ return this.field.choices.value},
             set(value){
                 const fieldValue = _.clone(this.field);
-                fieldValue.choices.value = value;
+                fieldValue.choices= value;
                 this.field = fieldValue;
                 this.$emit('updateChoices', field);
             }
@@ -154,16 +154,14 @@ export default {
             }
 
             for(var i = 0; i < this.choices.length; i++) {
-                if(this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
+                if(this.choices[i].toUpperCase() === this.itemText.toUpperCase()) {
 
                     this.itemText = ''
                     return this.isUnique = false;
                 }
             }
 
-            choicesCopy.push({
-                id: this.nextItem++, value: this.itemText
-            });
+            choicesCopy.push( this.itemText );
 
             this.choices = choicesCopy;
             this.itemText = ''
@@ -190,20 +188,20 @@ export default {
             const fieldCopy = _.clone(this.field);
 
             if(value === '') {
-                this.field.choices[index].value = this.temp;
+                this.field.choices[index] = this.temp;
                 return this.isEmpty = true;
             }
             
             for(var i = 0; i < this.field.choices.length; i++) {
-                if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
+                if(this.field.choices[i].toUpperCase() === value.toUpperCase()) {
 
-                    this.field.choices[index].value = this.temp;
+                    this.field.choices[index] = this.temp;
                     
                     return this.isUnique = false;
                 }
             }
             
-            fieldCopy.choices[index].value = value;
+            fieldCopy.choices[index] = value;
             this.choices = fieldCopy.choices;
         }
     }
@@ -215,6 +213,9 @@ export default {
     color: #409EFF;
     text-decoration: underline;
     font-size: 110%;
+}
+.el-radio__label {
+    width: 100px;
 }
 .switch-position {
     position: relative;

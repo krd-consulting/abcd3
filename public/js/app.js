@@ -10349,8 +10349,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      select: [] // isRequired: false,
-
+      select: []
     };
   },
   props: {
@@ -94885,11 +94884,11 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(item) {
+              _vm._l(_vm.field.choices, function(choice) {
                 return _c(
                   "el-checkbox-group",
                   {
-                    key: item.id,
+                    key: choice,
                     staticClass: "tw-h-8",
                     attrs: { id: "check", required: _vm.isRequired },
                     model: {
@@ -94903,7 +94902,7 @@ var render = function() {
                   [
                     _c("el-checkbox", {
                       staticClass: "tw-my-2 tw-ml-8 tw-text-lg",
-                      attrs: { label: item.value }
+                      attrs: { label: choice }
                     })
                   ],
                   1
@@ -95049,10 +95048,10 @@ var render = function() {
                     expression: "value"
                   }
                 },
-                _vm._l(_vm.field.choices, function(item) {
+                _vm._l(_vm.field.choices, function(choice) {
                   return _c("el-option", {
-                    key: item.id,
-                    attrs: { label: item.value, value: item.value }
+                    key: choice,
+                    attrs: { label: choice, value: choice }
                   })
                 }),
                 1
@@ -95117,7 +95116,7 @@ var render = function() {
                     [
                       _c("th"),
                       _vm._v(" "),
-                      _vm._l(_vm.field.choices, function(item, index) {
+                      _vm._l(_vm.field.choices, function(choice, index) {
                         return _c(
                           "th",
                           {
@@ -95128,7 +95127,7 @@ var render = function() {
                             _c("el-col", [
                               _vm._v(
                                 "\n                                " +
-                                  _vm._s(item.value) +
+                                  _vm._s(choice) +
                                   "\n                            "
                               )
                             ])
@@ -95154,7 +95153,7 @@ var render = function() {
                         _c("td", [
                           _vm._v(
                             "\n                            " +
-                              _vm._s(question.text) +
+                              _vm._s(question) +
                               "\n                        "
                           )
                         ]),
@@ -95162,17 +95161,14 @@ var render = function() {
                         _vm._l(_vm.field.choices, function(response, index) {
                           return _c(
                             "td",
-                            { key: response.id, staticClass: "tw-text-center" },
+                            { key: response, staticClass: "tw-text-center" },
                             [
                               _c(
                                 "el-radio",
                                 {
-                                  key: response.id,
+                                  key: response,
                                   staticClass: "tw-ml-2",
-                                  attrs: {
-                                    value: index,
-                                    label: response.value
-                                  },
+                                  attrs: { value: index, label: response },
                                   model: {
                                     value: _vm.select[questionIndex],
                                     callback: function($$v) {
@@ -95326,11 +95322,11 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(item) {
+              _vm._l(_vm.field.choices, function(choice) {
                 return _c(
                   "el-radio-group",
                   {
-                    key: item.id,
+                    key: choice,
                     staticClass: "tw-my-2 tw-mx-8",
                     attrs: { id: "radioGroup" },
                     model: {
@@ -95341,7 +95337,7 @@ var render = function() {
                       expression: "select"
                     }
                   },
-                  [_c("el-radio", { attrs: { label: item.value } })],
+                  [_c("el-radio", { attrs: { label: choice } })],
                   1
                 )
               }),

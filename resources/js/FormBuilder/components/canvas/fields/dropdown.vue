@@ -10,45 +10,39 @@
         </el-switch>
         
         <div class="tw-inline-flex tw-my-1">
-            <label class="tw-flex-1">
-                <editable-text 
-                class="tw-cursor-pointer mouseOver tw-mr-1" 
-                v-model="fieldLabel"
-                @edit="tempValue(fieldLabel)">
-                    {{ fieldLabel }}
-                </editable-text>
-            </label>
+            
+            <div class="tw-max-w-xs">
+                <label class="tw-flex-1">
+                    <editable-text 
+                    class="tw-cursor-pointer mouseOver tw-mr-1" 
+                    v-model="fieldLabel"
+                    @edit="tempValue(fieldLabel)">
+                        {{ fieldLabel }}
+                    </editable-text>
+                </label>
+            </div>
+            
 
             <div class="tw-inline-block">
-                <el-select id="dropdown" v-model="dropItem" :value="dropItem" placeholder=" ">
-                    <el-option v-for="(item, index) in choices" :key="index" :label="item.value" :value="item.value"></el-option>
+                <el-select v-model="choices" multiple filterable allow-create default-first-option
+                    placeholder="Enter Select Menu Items">
+                    <draggable v-model="choices" >
+                        <!-- <el-button class="handle tw-float-left tw-top-0 tw-left-0 tw-mr-4" size="mini" icon="el-icon-rank"></el-button> -->
+                        <el-option v-for="(item, index) in choices" 
+                            :key="index" 
+                            :label="item" 
+                            :value="item">
+                        </el-option>
+                    </draggable>
+                    
                 </el-select>
             </div>
 
-            <div class="tw-ml-16 tw-pl-2" v-if="dropItem != null">
-                <span>Edit this list item: </span>
-                <div class="tw-inline-flex tw-justify-between">
-                    <div class="tw-flex-auto">
-                        <editable-text 
-                            class="tw-cursor-pointer mouseOver tw-inline-block tw-w-64" 
-                            :value="dropItem"
-                            @input="updateChoiceValue($event)"
-                            @edit="tempValue(dropItem)">
-                            {{ dropItem }}
-                        </editable-text>
-                    </div>
-                    <div class="tw-flex-1 tw-relative tw-right-0">
-                        <el-button 
-                            class="tw-px-2 tw-py-1 hover:tw-text-red-600" 
-                            type="text" 
-                            size="mini" 
-                            @click="removeChoice(dropItem, index)">
-                                    <base-icon>delete_forever</base-icon>
-                        </el-button>
-                    </div>
-                </div>
-            </div>
-  
+            <!-- <div class="tw-inline-block">
+                <el-select id="dropdown" v-model="dropItem" :value="dropItem" placeholder=" ">
+                    <el-option v-for="(item, index) in choices" :key="index" :label="item.value" :value="item.value"></el-option>
+                </el-select>
+            </div> -->
         </div>
 
         <el-alert
@@ -63,8 +57,32 @@
             type="error">
         </el-alert>
 
-    <form @submit.prevent="addItem">
-        <div class="tw-w-72 tw-block tw-float-left tw-mt-0">
+    <!-- <div class="tw-ml-2 tw-pl-2" v-if="dropItem != null">
+        <div class="tw-inline-flex">
+            <span>Edit this list item: </span>
+            <div class="tw-flex-none">
+                <editable-text 
+                    class="tw-cursor-pointer mouseOver tw-inline-block tw-w-64" 
+                    :value="dropItem"
+                    @input="updateChoiceValue($event)"
+                    @edit="tempValue(dropItem)">
+                    {{ dropItem }}
+                </editable-text>
+            </div>
+            <div class="tw-inline tw-relative tw-right-0">
+                <el-button 
+                    class="tw-px-2 tw-py-1 hover:tw-text-red-600" 
+                    type="text" 
+                    size="mini" 
+                    @click="removeChoice(dropItem, index)">
+                            <base-icon>delete_forever</base-icon>
+                </el-button>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- <form @submit.prevent="addItem">
+        <div class="tw-w-72 tw-block tw-float-left tw-mt-0 tw-ml-2">
             <el-input id="add-item" class="tw-w-72" placeholder="Add" v-model="itemText"></el-input>
         </div>
         <div class="tw-block tw-float-left">
@@ -74,7 +92,7 @@
                 </el-button>
             </el-tooltip>
         </div>
-    </form>
+    </form> -->
         
 
     </div>
@@ -82,6 +100,7 @@
 
 <script>
 import EditableText from '@/components/editableText.vue'
+import draggable from 'vuedraggable'
 
 export default {
     data() {
@@ -95,7 +114,8 @@ export default {
         }
     },
     components: {
-        EditableText
+        EditableText,
+        draggable
     },
     props: {
         fieldData: {
@@ -199,8 +219,8 @@ export default {
             for(var i = 0; i < this.field.choices.length; i++) {
                 if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
 
-                    // this.field.choices[index].value = this.temp;
-                    this.dropItem = this.temp;
+                    this.field.choices[index].value = this.temp;
+                    // this.dropItem = this.temp;
                     
                     return this.isUnique = false;
                 }
@@ -222,17 +242,14 @@ export default {
     text-decoration: underline;
     font-size: 110%;
 }
-.el-button {
-    padding: 0;
-}
-button {
-    padding: 0px;
-    margin-bottom: -5px;
-}
 .switch-position {
     position: relative;
     top: 15px;
     right: 40px;
+}
+.handle {
+    position: relative;
+    z-index: 10;
 }
 
 @media (max-width: 768px) {

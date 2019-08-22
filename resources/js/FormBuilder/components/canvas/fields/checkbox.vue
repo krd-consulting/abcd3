@@ -1,37 +1,37 @@
 <template>
   <div id="checkbox">
 
-        <slot></slot>
+    <slot></slot>
+    
+    <el-switch 
+        v-model="required" 
+        active-text="Required" 
+        inactive-text="Optional"
+        class="tw-float-right switch-position">
+    </el-switch>
 
-        <el-switch 
-            v-model="required" 
-            active-text="Required" 
-            inactive-text="Optional"
-            class="tw-float-right switch-position">
-        </el-switch>
-
-      <el-col :span="8" class="tw-mt-1">
-          <label>
-            <editable-text 
-                class="tw-cursor-pointer mouseOver" 
-                v-model="fieldLabel"
-                @edit="tempValue(fieldLabel)">
-                {{ fieldLabel }}
-            </editable-text>
-        </label>
-      </el-col>
-        <br><br>
+    <el-row>
+        <el-col :span="6" class="tw-mt-1">
+            <label>
+                <editable-text 
+                    class="tw-cursor-pointer mouseOver" 
+                    v-model="fieldLabel"
+                    @edit="tempValue(fieldLabel)">
+                    {{ fieldLabel }}
+                </editable-text>
+            </label>
+        </el-col>
+    </el-row>
         <div class="zone">
-            <div v-for="(item, index) in choices" 
-                :key="item.value">
+            <div v-for="(choice, index) in choices" 
+                :key="choice">
 
                 <el-checkbox>
                     <editable-text 
                         class="tw-cursor-pointer mouseOver"
-                        :value="item.value"
+                        :value="choice"
                         @input="updateChoiceValue($event, index)"
-                        @edit="tempValue(item.value)">
-                            {{ item.value }}
+                        @edit="tempValue(choice)">
                     </editable-text>
                 </el-checkbox>
 
@@ -130,7 +130,7 @@ export default {
             get(){ return this.field.choices.value},
             set(value){
                 const fieldValue = _.clone(this.field);
-                fieldValue.choices.value = value;
+                fieldValue.choices = value;
                 this.field = fieldValue;
             }
         },
@@ -152,10 +152,9 @@ export default {
         },
 
         loadItem() {
-            this.choices.push({
-                id: this.nextItem++, 
-                value: 'Choice ' + this.nextItem
-            })
+            this.choices.push(
+                'Choice ' + this.nextItem
+            )
             this.$store.commit('UPDATE_FIELD', this.field)
         },
 
@@ -167,16 +166,14 @@ export default {
             }
 
             for(var i = 0; i < this.choices.length; i++) {
-                if(this.choices[i].value.toUpperCase() === this.itemText.toUpperCase()) {
+                if(this.choices[i].toUpperCase() === this.itemText.toUpperCase()) {
 
                     this.itemText = ''
                     return this.isUnique = false;
                 }
             }
 
-            choicesCopy.push({
-                id: this.nextItem++, value: this.itemText
-            });
+            choicesCopy.push( this.itemText );
 
             this.choices = choicesCopy;
             this.itemText = ''
@@ -208,14 +205,14 @@ export default {
             }
 
             for(var i = 0; i < this.field.choices.length; i++) {
-                if(this.field.choices[i].value.toUpperCase() === value.toUpperCase()) {
-                    this.field.choices[index].value = this.temp;
+                if(this.field.choices[i].toUpperCase() === value.toUpperCase()) {
+                    this.field.choices[index] = this.temp;
                     
                     return this.isUnique = false;
                 }
             }
             
-            fieldCopy.choices[index].value = value;
+            fieldCopy.choices[index] = value;
             this.choices = fieldCopy.choices;
             this.isEmpty = false;
             this.isUnique = true;
