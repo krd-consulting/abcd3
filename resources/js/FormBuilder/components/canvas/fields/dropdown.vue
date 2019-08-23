@@ -31,10 +31,11 @@
                         <el-option v-for="(item, index) in choices" 
                             :key="index" 
                             :label="item" 
-                            :value="item">
+                            :value="item"
+                            class="tw-cursor-move"
+                            @change="updateChoiceValue($event)">
                         </el-option>
-                    </draggable>
-                    
+                    </draggable>  
                 </el-select>
             </div>
 
@@ -247,11 +248,6 @@ export default {
     top: 15px;
     right: 40px;
 }
-.handle {
-    position: relative;
-    z-index: 10;
-}
-
 @media (max-width: 768px) {
     .switch-position {
         position: relative;

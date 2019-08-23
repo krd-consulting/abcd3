@@ -4071,6 +4071,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -11243,7 +11244,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.handle[data-v-5bdc3b03] {\n  position: relative;\n  z-index: 10;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n    margin-right: 4px;\n}\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n    margin-right: 4px;\n}\n}\r\n", ""]);
 
 // exports
 
@@ -11319,7 +11320,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.el-radio__label[data-v-7d675a79] {\n  width: 100px;\n}\n.switch-position[data-v-7d675a79] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-7d675a79] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-7d675a79] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\r\n", ""]);
 
 // exports
 
@@ -88913,7 +88914,13 @@ var render = function() {
                   _vm._l(_vm.choices, function(item, index) {
                     return _c("el-option", {
                       key: index,
-                      attrs: { label: item, value: item }
+                      staticClass: "tw-cursor-move",
+                      attrs: { label: item, value: item },
+                      on: {
+                        change: function($event) {
+                          return _vm.updateChoiceValue($event)
+                        }
+                      }
                     })
                   }),
                   1
@@ -89660,7 +89667,8 @@ var render = function() {
                   _c(
                     "editable-text",
                     {
-                      staticClass: "tw-cursor-pointer mouseOver",
+                      staticClass:
+                        "tw-cursor-pointer mouseOver tw-inline-block",
                       attrs: { value: choice, label: choice },
                       on: {
                         input: function($event) {

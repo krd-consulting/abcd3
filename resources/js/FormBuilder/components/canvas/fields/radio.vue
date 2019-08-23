@@ -26,7 +26,7 @@
 
                 <el-radio>
                     <editable-text 
-                        class="tw-cursor-pointer mouseOver"
+                        class="tw-cursor-pointer mouseOver tw-inline-block"
                         :value="choice"
                         :label="choice"
                         @input="updateChoiceValue($event, index)"
@@ -213,9 +213,6 @@ export default {
     color: #409EFF;
     text-decoration: underline;
     font-size: 110%;
-}
-.el-radio__label {
-    width: 100px;
 }
 .switch-position {
     position: relative;
