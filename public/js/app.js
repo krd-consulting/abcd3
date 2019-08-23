@@ -4932,9 +4932,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         search: ''
       },
       targetItems: [],
-      entryData: {
-        target_id: ''
-      },
+      entryData: {},
       value: '',
       inputName: '',
       dateCompleted: '',
@@ -5008,10 +5006,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       var form = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$route.params.form;
-      this.request.show(form).then(function (response) {
+      return this.request.show(form).then(function (response) {
         _this2.form = response.data;
       });
     },
+    // initializeEntryData(fields) {
+    //     fields.foreach((field) => {
+    //         if(field.type == 'Check')
+    //     })
+    // },
     retrieveFormTargetItems: function retrieveFormTargetItems(keywords, callback) {
       var _this3 = this;
 
@@ -5037,13 +5040,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     submit: function submit() {
-      var _this4 = this;
-
-      this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.form);
-      this.entryRequest.store().then(function (response) {
-        _this4.$emit('store', response.data);
-
-        _this4.close();
+      this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.entryData);
+      this.entryRequest.store(this.$route.params.form).then(function (response) {
+        console.log(response);
       })["catch"](function (error) {//
       });
     }
@@ -10346,6 +10345,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10353,7 +10354,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    field: Object
+    field: Object,
+    value: {
+      type: Array,
+      "default": []
+    }
   },
   computed: {
     isRequired: {
@@ -10400,14 +10405,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      value: ''
-    };
-  },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     isRequired: {
@@ -10657,7 +10659,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10665,7 +10666,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   }
 });
 
@@ -13222,7 +13224,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -13260,7 +13262,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -64345,7 +64347,7 @@ module.exports = isSymbol;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright JS Foundation and other contributors <https://js.foundation/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -64356,7 +64358,7 @@ module.exports = isSymbol;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.11';
+  var VERSION = '4.17.15';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -67015,16 +67017,10 @@ module.exports = isSymbol;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-
-        return result;
-      }
-
-      if (isMap(value)) {
+      } else if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
-
-        return result;
       }
 
       var keysFunc = isFull
@@ -67948,8 +67944,8 @@ module.exports = isSymbol;
         return;
       }
       baseFor(source, function(srcValue, key) {
+        stack || (stack = new Stack);
         if (isObject(srcValue)) {
-          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -69766,7 +69762,7 @@ module.exports = isSymbol;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision) {
+        if (precision && nativeIsFinite(number)) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -70949,7 +70945,7 @@ module.exports = isSymbol;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__".
+     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
      *
      * @private
      * @param {Object} object The object to query.
@@ -70957,6 +70953,10 @@ module.exports = isSymbol;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
+      if (key === 'constructor' && typeof object[key] === 'function') {
+        return;
+      }
+
       if (key == '__proto__') {
         return;
       }
@@ -74757,6 +74757,7 @@ module.exports = isSymbol;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
+            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -79143,9 +79144,12 @@ module.exports = isSymbol;
       , 'g');
 
       // Use a sourceURL for easier debugging.
+      // The sourceURL gets injected into the source that's eval-ed, so be careful
+      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
+      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        ('sourceURL' in options
-          ? options.sourceURL
+        (hasOwnProperty.call(options, 'sourceURL')
+          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -79178,7 +79182,9 @@ module.exports = isSymbol;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      var variable = options.variable;
+      // Like with sourceURL, we take care to not check the option's prototype,
+      // as this configuration is a code injection vector.
+      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -81383,10 +81389,11 @@ module.exports = isSymbol;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = (lodashFunc.name + ''),
-            names = realNames[key] || (realNames[key] = []);
-
-        names.push({ 'name': methodName, 'func': lodashFunc });
+        var key = lodashFunc.name + '';
+        if (!hasOwnProperty.call(realNames, key)) {
+          realNames[key] = [];
+        }
+        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -89111,11 +89118,11 @@ var render = function() {
                           "picker-options": _vm.pickerOptions
                         },
                         model: {
-                          value: _vm.dateCompleted,
+                          value: _vm.entryData.completed_at,
                           callback: function($$v) {
-                            _vm.dateCompleted = $$v
+                            _vm.$set(_vm.entryData, "completed_at", $$v)
                           },
-                          expression: "dateCompleted"
+                          expression: "entryData.completed_at"
                         }
                       })
                     ],
@@ -94884,30 +94891,33 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(choice) {
-                return _c(
+              [
+                _c(
                   "el-checkbox-group",
                   {
-                    key: choice,
+                    key: _vm.choice,
                     staticClass: "tw-h-8",
-                    attrs: { id: "check", required: _vm.isRequired },
-                    model: {
-                      value: _vm.select,
-                      callback: function($$v) {
-                        _vm.select = $$v
-                      },
-                      expression: "select"
+                    attrs: {
+                      id: "check",
+                      value: _vm.value,
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   },
-                  [
-                    _c("el-checkbox", {
+                  _vm._l(_vm.field.choices, function(choice) {
+                    return _c("el-checkbox", {
+                      key: choice,
                       staticClass: "tw-my-2 tw-ml-8 tw-text-lg",
                       attrs: { label: choice }
                     })
-                  ],
+                  }),
                   1
                 )
-              }),
+              ],
               1
             )
           ])
@@ -94965,6 +94975,7 @@ var render = function() {
               _c("el-date-picker", {
                 attrs: {
                   id: "dateField",
+                  value: _vm.value,
                   type: _vm.dateType,
                   "picker-options": _vm.dateOptions,
                   placeholder: " ",
@@ -94974,12 +94985,10 @@ var render = function() {
                   format: _vm.dateFormat,
                   required: _vm.isRequired
                 },
-                model: {
-                  value: _vm.value,
-                  callback: function($$v) {
-                    _vm.value = $$v
-                  },
-                  expression: "value"
+                on: {
+                  input: function($event) {
+                    return _vm.$emit("input", $event)
+                  }
                 }
               })
             ],
@@ -95322,25 +95331,27 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(choice) {
-                return _c(
+              [
+                _c(
                   "el-radio-group",
                   {
-                    key: choice,
                     staticClass: "tw-my-2 tw-mx-8",
-                    attrs: { id: "radioGroup" },
-                    model: {
-                      value: _vm.select,
-                      callback: function($$v) {
-                        _vm.select = $$v
-                      },
-                      expression: "select"
+                    attrs: { id: "radioGroup", value: _vm.value },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   },
-                  [_c("el-radio", { attrs: { label: choice } })],
+                  _vm._l(_vm.field.choices, function(choice) {
+                    return _c("el-radio", {
+                      key: choice,
+                      attrs: { label: choice }
+                    })
+                  }),
                   1
                 )
-              }),
+              ],
               1
             )
           ])
@@ -118550,8 +118561,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\css\app.css */"./resources/css/app.css");
+__webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

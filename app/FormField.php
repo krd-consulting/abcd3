@@ -23,6 +23,7 @@ class FormField extends Model
     ];
 
 	public $casts = [
+        'validation_rules' => 'array',
         'options' => 'array',
         'settings' => 'array',
     ];
@@ -33,8 +34,8 @@ class FormField extends Model
         'number' => 'decimal',
         'dropdown' => 'string',
         'radio' => 'string',
-        'checkbox' => 'string',
-        'date' => 'date',
+        'checkbox' => 'json',
+        'date' => 'timestamp',
         'time' => 'time',
         'file' => 'bigInteger'
     ];
@@ -47,7 +48,7 @@ class FormField extends Model
         'RadioField' => 'radio',
         'CheckBoxField' => 'checkbox',
         'DateField' => 'date',
-        'DateTimeField', 'datetime',
+        'DateTimeField' => 'datetime',
         'TimeField' => 'time',
         'FileField' => 'file'
     ];
@@ -75,16 +76,6 @@ class FormField extends Model
     public function setChoicesAttribute($value)
     {
     	$this->options['choices'] = $value;
-    }
-
-    public function setValidationRulesAttribute($value)
-    {
-        $this->validation_rules = $value;
-    }
-
-    public function setSettingsAttribute($value)
-    {
-        $this->settings = $value;
     }
 
     public function getOptionsAttribute(): SchemalessAttributes
