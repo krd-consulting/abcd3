@@ -52,30 +52,32 @@ class Form extends Model
             $toBeRemoved = [];
             $toBeFlattened = [];
 
-            $fields = $fields->reject(function($item, $key) {
-                return $item['type'] == 'SectionDivider';
+            $fields = $fields->reject(function($field, $key) {
+                return $field['type'] == 'SectionDivider';
             });
 
-            $fields->transform(function($item, $key) use (&$toBeRemoved, &$toBeFlattened) {
-                if($item['type'] != 'MatrixField'){
+            $fields->transform(function($field, $key) use (&$toBeRemoved, &$toBeFlattened) {
+                if($field['type'] != 'MatrixField'){
                     $columnName = $this->generateFieldColumnName($this->fieldNumber++);
 
-                    $item['column_name'] = $columnName;
+                    $field['column_name'] = $columnName;
                     $this->field_layout->set("$key.column_name", $columnName);
-                    return $item;
+                    return $field;
                 }
 
                 $radioFields = [];
-                $radioFields = collect($item['questions'])
-                    ->map(function($question, $key) use ($item){
+                $radioFields = collect($field['questions'])
+                    ->map(function($question, $key) use ($field){
                         $radioField = [];
                         $radioField['title'] = $question;
                         $radioField['type'] = 'RadioField';
-                        $radioField['choices'] = $item['choices'];
-                        $radioField['settings'] = $item['settings'];
+                        $radioField['choices'] = $field['choices'];
+                        $radioField['settings'] = $field['settings'];
                         $radioField['validation_rules']
-                            = isset($item['validation_rules']) ? $item['validation_rules'] : NULL;
-                        $radioField['column_name'] = $this->generateFieldColumnName($this->fieldNumber++);
+                            = isset($field['validation_rules']) ? $field['validation_rules'] : NULL;
+                        $columnName = $this->generateFieldColumnName($this->fieldNumber++);
+                        $radioField['column_name'] = $columnName;
+                        $this->field_layout->set("questions.$key.column_name", $columnName);
                         return $radioField;
                     });
 
