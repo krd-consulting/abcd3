@@ -22,12 +22,12 @@
                                 {{ question }}
                             </td>
                             <td v-for="(response, index) in field.choices" 
-                                :key="response" 
+                                :key="index" 
                                 class="tw-text-center">
-                                <el-radio :value="index" 
+                                <el-radio 
                                     :key="response"
                                     :label="response"
-                                    v-model="select[questionIndex]" 
+                                    v-model="select[questionIndex]"
                                     class="tw-ml-2">
                                         &nbsp;
                                 </el-radio>
@@ -48,7 +48,8 @@ export default {
         }
     },
     props: { 
-        field: Object
+        field: Object,
+        
     },
 }
 </script>

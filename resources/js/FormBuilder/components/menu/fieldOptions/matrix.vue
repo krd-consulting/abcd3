@@ -84,7 +84,9 @@ export default {
         setQuestions() {
 
             for(let i = 0; i < this.fieldData.settings.matrix_questions; i++) {
-                this.fieldData.questions.push( 'Question ' + i )
+                this.fieldData.questions.push({
+                    name: 'Question ' + i++
+                })
             }
         },
 

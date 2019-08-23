@@ -11,7 +11,9 @@
                     v-if="limit"
                     :autosize="{ minRows: 3, maxRows: 5}"
                     :maxlength="max" 
-                    show-word-limit 
+                    show-word-limit
+                    :value="value"
+                    @input="$emit('input', $event)"
                     placeholder=" " 
                     v-model="value">
                 </el-input>
@@ -19,7 +21,9 @@
                     type="textarea" 
                     v-else
                     :autosize="{ minRows: 3, maxRows: 6}" 
-                    placeholder=" " 
+                    placeholder=" "
+                    :value="value"
+                    @input="$emit('input', $event)" 
                     v-model="value">
                 </el-input>
             </el-col>
@@ -30,12 +34,11 @@
 <script>
 export default {
     data() {
-        return {
-            value: ''
-        }
+        return {}
     },
     props: { 
-        field: Object
+        field: Object,
+        value: ''
     },
     computed: {
         max: {

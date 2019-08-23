@@ -8622,14 +8622,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      select: []
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    select: []
   }
 });
 
@@ -8669,14 +8669,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     useDefault: {
@@ -8815,14 +8816,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     max: {
@@ -9123,14 +9127,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   }
 });
 
@@ -94393,7 +94398,7 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._l(_vm.field.choices, function(response, index) {
+                        _vm._l(_vm.field.choices, function(response) {
                           return _c(
                             "td",
                             { key: response, staticClass: "tw-text-center" },
@@ -94403,13 +94408,14 @@ var render = function() {
                                 {
                                   key: response,
                                   staticClass: "tw-ml-2",
-                                  attrs: { value: index, label: response },
-                                  model: {
-                                    value: _vm.select[questionIndex],
-                                    callback: function($$v) {
-                                      _vm.$set(_vm.select, questionIndex, $$v)
-                                    },
-                                    expression: "select[questionIndex]"
+                                  attrs: {
+                                    label: response,
+                                    value: _vm.select[questionIndex]
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      return _vm.$emit("input", $event)
+                                    }
                                   }
                                 },
                                 [
@@ -94484,23 +94490,27 @@ var render = function() {
             [
               _vm.limit
                 ? _c("el-input-number", {
-                    attrs: { id: "numfield", required: _vm.isRequired },
-                    model: {
-                      value: _vm.useDefault,
-                      callback: function($$v) {
-                        _vm.useDefault = $$v
-                      },
-                      expression: "useDefault"
+                    attrs: {
+                      id: "numfield",
+                      value: _vm.value,
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
                 : _c("el-input-number", {
-                    attrs: { id: "numfield", required: _vm.isRequired },
-                    model: {
+                    attrs: {
+                      id: "numfield",
                       value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
             ],
@@ -94688,7 +94698,13 @@ var render = function() {
                       autosize: { minRows: 3, maxRows: 5 },
                       maxlength: _vm.max,
                       "show-word-limit": "",
+                      value: _vm.value,
                       placeholder: " "
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     },
                     model: {
                       value: _vm.value,
@@ -94703,7 +94719,13 @@ var render = function() {
                       id: "textArea",
                       type: "textarea",
                       autosize: { minRows: 3, maxRows: 6 },
-                      placeholder: " "
+                      placeholder: " ",
+                      value: _vm.value
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     },
                     model: {
                       value: _vm.value,
@@ -94991,6 +95013,7 @@ var render = function() {
                 ? _c("el-time-select", {
                     attrs: {
                       "arrow-control": "",
+                      value: _vm.value,
                       "picker-options": {
                         start: "01:00",
                         step: "00:15",
@@ -94998,22 +95021,22 @@ var render = function() {
                       },
                       placeholder: " "
                     },
-                    model: {
-                      value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
                 : _c("el-time-picker", {
-                    attrs: { "arrow-control": "", placeholder: " " },
-                    model: {
+                    attrs: {
+                      "arrow-control": "",
                       value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
+                      placeholder: " "
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
             ],

@@ -76,8 +76,8 @@
                                     class="tw-cursor-pointer mouseOver tw-inline-block" 
                                     :value="question"
                                     @input="updateQuestionValue($event, index)"
-                                    @edit="tempValue(question)">
-                                        {{ question }}
+                                    @edit="tempValue(question.name)">
+                                        {{ question.name }}
                                 </editable-text>
                             </div>
                             <div class="tw-flex-1 tw-relative tw-right-0">
@@ -217,7 +217,7 @@ export default {
             }
 
             for(var i = 0; i < this.questions.length; i++) {
-                if(this.questions[i].toUpperCase() === this.itemText.toUpperCase()) {
+                if(this.questions[i].name.toUpperCase() === this.itemText.toUpperCase()) {
 
                     this.itemText = ''
                     return this.isUnique = false;
@@ -329,15 +329,15 @@ export default {
                 return this.isEmptyTable = true;
             }
             for(var i = 0; i < this.questions.length; i++) {
-                if(this.questions[i].toUpperCase() === value.toUpperCase()) {
+                if(this.questions[i].toUpperCase().name === value.toUpperCase()) {
                     
-                    this.questions[index] = this.temp;
+                    this.questions[index].name = this.temp;
                     
                     return this.isUnique = false;
                 }
             }
 
-            fieldCopy.questions[index] = value;
+            fieldCopy.questions[index].name = value;
             this.questions = fieldCopy.questions;
             this.isEmptyTable = false;
             this.isUnique = true;
