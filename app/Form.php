@@ -69,7 +69,7 @@ class Form extends Model
                 $radioFields = collect($item['questions'])
                     ->map(function($question, $key) use ($item){
                         $radioField = [];
-                        $radioField['title'] = $question['text'];
+                        $radioField['title'] = $question;
                         $radioField['type'] = 'RadioField';
                         $radioField['choices'] = $item['choices'];
                         $radioField['settings'] = $item['settings'];
