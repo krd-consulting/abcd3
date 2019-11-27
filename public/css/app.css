@@ -14642,6 +14642,10 @@ video {
   font-size: 1.125rem;
 }
 
+label#remember {
+  margin-right: 5px !important;
+}
+
 #formCreator .el-card__body div.tw-mb-4 div.el-col-8 ,
 .el-dialog__body div.tw-mb-2 label {
   text-align: right;

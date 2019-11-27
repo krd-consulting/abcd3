@@ -11206,7 +11206,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-e97e2c96] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-e97e2c96] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.mouseOver[data-v-e97e2c96]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-e97e2c96] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-e97e2c96] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -11225,7 +11225,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5ce99664] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5ce99664]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5ce99664] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -11244,7 +11244,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n    margin-right: 4px;\n}\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-5bdc3b03]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-5bdc3b03] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n@media (max-width: 768px) {\n.switch-position[data-v-5bdc3b03] {\n    position: relative;\n    bottom: 0;\n    right: 0;\n    margin-right: 4px;\n}\n}\n", ""]);
 
 // exports
 
@@ -11263,7 +11263,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-120ae50f] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-120ae50f]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-120ae50f] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -11301,7 +11301,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-1c3cc70b] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-1c3cc70b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-1c3cc70b] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -11320,7 +11320,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-7d675a79] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7d675a79]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7d675a79] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n.zone[data-v-7d675a79] {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 300px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -11339,7 +11339,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-cf0bdb34]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n", ""]);
 
 // exports
 
@@ -11358,7 +11358,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7a7b55cc] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-7a7b55cc]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-7a7b55cc] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -11377,7 +11377,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-28f88a4b] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-28f88a4b]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-28f88a4b] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -11396,7 +11396,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-2da47d2d] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\r\n", ""]);
+exports.push([module.i, ".mouseOver[data-v-2da47d2d]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n.switch-position[data-v-2da47d2d] {\n  position: relative;\n  top: 15px;\n  right: 40px;\n}\n", ""]);
 
 // exports
 
@@ -11415,7 +11415,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 745px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n\n/* .el-row {\r\n    margin: 5px;\r\n  } */\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 16px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 16px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 100%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\r\n", ""]);
+exports.push([module.i, "#canvas[data-v-afee96a4] {\n  font-family: 'Inter UI', Arial, sans-serif;\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n  color: #2c3e50;\n  max-height: 745px;\n  overflow-y: scroll;\n}\n.mouseOver[data-v-afee96a4]:hover {\n  color: #409EFF;\n  text-decoration: underline;\n  font-size: 110%;\n}\n\n/* .el-row {\n    margin: 5px;\n  } */\n.el-col[data-v-afee96a4] {\n  border-radius: 4px;\n  margin-top: 15px;\n}\n.el-input[data-v-afee96a4] {\n  font-size: 16px;\n}\n.el-divider span[data-v-afee96a4] {\n  font-size: 16px;\n}\n.canvas-card[data-v-afee96a4] {\n  font-size: 100%;\n}\n.handle[data-v-afee96a4] {\n  position: relative;\n  z-index: 10;\n}\n.handle[data-v-afee96a4]:hover {\n  cursor: move;\n}\n", ""]);
 
 // exports
 
@@ -11453,7 +11453,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  min-height: 735px;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\r\n", ""]);
+exports.push([module.i, "#menu[data-v-1ff48ab5] {\n  overflow: hidden;\n  display: flex;\n  min-height: 735px;\n}\n.el-card[data-v-1ff48ab5] {\n  margin: 5px;\n  border: none;\n}\n.el-card[data-v-1ff48ab5]:hover {\n  font-size: 14px;\n}\n.cursor-pointer[data-v-1ff48ab5] {\n  cursor: pointer;\n}\n.menu-title[data-v-1ff48ab5] {\n  padding-left: 5px;\n  font-size: 24px;\n  font-weight: bold;\n  color: #2c3e50;\n}\n.fields[data-v-1ff48ab5] {\n  font-size: 13px;\n  font-weight: bold;\n}\n\n/* Ipad size */\n@media (min-width: 640px){\n.el-collapse[data-v-1ff48ab5] {\n    width: 300px;\n}\n}\n\n/* Standard monitor size */\n@media (min-width: 1024px){\n.el-collapse[data-v-1ff48ab5] {\n    display: flex;\n    flex-wrap: wrap;\n    width: 100%;\n}\n}\n@media (min-width: 1200px){\n  /* large monitor size */\n}\n", ""]);
 
 // exports
 
@@ -11510,7 +11510,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\r\n", ""]);
+exports.push([module.i, "#preview[data-v-159bef3d] {\n  display: flex;\n  position: absolute;\n  top: 50;\n  left: 0;\n  min-height: 85%;\n  width: 100%;\n}\n#preview-form[data-v-159bef3d] {\n  margin: 0 auto;\n  width: 1000px;\n}\n.float-right[data-v-159bef3d] {\n  float: right !important;\n}\n.backToTop[data-v-159bef3d] {\n  position: fixed;\n  bottom: 20px;\n  right: 20px;\n  height: 50px;\n}\n.fade-enter-active[data-v-159bef3d], .fade-leave-active[data-v-159bef3d] {\n  transition: opacity .5s;\n}\n.fade-enter[data-v-159bef3d], .fade-leave-to[data-v-159bef3d] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n@media (min-width: 768px){\n}\n@media (min-width: 1024px){\n}\n@media (min-width: 1200px){\n}\n", ""]);
 
 // exports
 
@@ -11529,7 +11529,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\r\n\r\n", ""]);
+exports.push([module.i, "#formCreator[data-v-0c2f292a] {\n  display: flex;\n  flex-direction: row;\n  align-items: center;\n}\n#canvas[data-v-0c2f292a] {\n  width: 100%;\n  padding-right: 15px;\n}\n\n/* Tablet/Reduced Screen View */\n@media (min-width: 500px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 100%;\n    margin-left: 1%;\n    margin-right: 1%;\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: inherit;\n}\n#menu-container[data-v-0c2f292a] {\n    display: none;\n}\n}\n\n/* Desktop View */\n@media (min-width: 1024px){\n#canvas-container[data-v-0c2f292a] {\n    flex: 80%;\n    margin-left: 10px;\n    margin-right: 5%;\n    min-width: 500px;\n}\n.el-header[data-v-0c2f292a] {\n    min-width: 500px;\n}\n.mobile-menu[data-v-0c2f292a] {\n    display: none;\n}\n#menu-container[data-v-0c2f292a] {\n    flex: 22%;\n    display: block;\n    padding-top: 60px;\n    padding-bottom: 10px;\n    margin: 0 auto;\n    margin-left: 5%;\n    min-width: 300px;\n    max-width: 450px;\n    max-height: 900px;\n}\n.float-right[data-v-0c2f292a] {\n    float: right !important;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -11586,7 +11586,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -11624,7 +11624,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\r\n", ""]);
+exports.push([module.i, ".zone {\n  overflow: none;\n  display: flex;\n  flex-direction: column;\n  flex-wrap: wrap;\n  max-height: 200px;\n  max-width: 300px;\n}\n", ""]);
 
 // exports
 
@@ -92550,7 +92550,7 @@ var render = function() {
               staticClass: "tw-font-bold focus:tw-font-extrabold",
               attrs: { "default-active": "", index: "/forms/create" }
             },
-            [_vm._v("\r\n                    Form Builder\r\n            ")]
+            [_vm._v("\n                    Form Builder\n            ")]
           ),
           _vm._v(" "),
           _c(
@@ -92559,7 +92559,7 @@ var render = function() {
               staticClass: "tw-font-bold focus:tw-font-extrabold",
               attrs: { index: "/forms/create/preview" }
             },
-            [_vm._v("\r\n                    Preview Form\r\n            ")]
+            [_vm._v("\n                    Preview Form\n            ")]
           ),
           _vm._v(" "),
           _c(
@@ -92593,7 +92593,7 @@ var render = function() {
                   _c("base-icon", { staticClass: "tw-align-middle" }, [
                     _vm._v("done_outline")
                   ]),
-                  _vm._v(" Confirm\r\n                    ")
+                  _vm._v(" Confirm\n                    ")
                 ],
                 1
               ),
@@ -92620,7 +92620,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                        Nevermind\r\n                    "
+                        "\n                        Nevermind\n                    "
                       )
                     ]
                   ),
@@ -120262,7 +120262,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\KRD-Developer\Desktop\WorkSpace\abcd\resources\js\FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /var/www/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })
