@@ -4932,9 +4932,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         search: ''
       },
       targetItems: [],
-      entryData: {
-        target_id: ''
-      },
+      entryData: {},
       value: '',
       inputName: '',
       dateCompleted: '',
@@ -5008,10 +5006,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this2 = this;
 
       var form = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$route.params.form;
-      this.request.show(form).then(function (response) {
+      return this.request.show(form).then(function (response) {
         _this2.form = response.data;
       });
     },
+    // initializeEntryData(fields) {
+    //     fields.foreach((field) => {
+    //         if(field.type == 'Check')
+    //     })
+    // },
     retrieveFormTargetItems: function retrieveFormTargetItems(keywords, callback) {
       var _this3 = this;
 
@@ -5037,13 +5040,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     submit: function submit() {
-      var _this4 = this;
-
-      this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.form);
-      this.entryRequest.store().then(function (response) {
-        _this4.$emit('store', response.data);
-
-        _this4.close();
+      this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.entryData);
+      this.entryRequest.store(this.$route.params.form).then(function (response) {
+        console.log(response);
       })["catch"](function (error) {//
       });
     }
@@ -5970,7 +5969,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({});
       request.retrieve().then(function (response) {
-        _this2.recordTypes = response;
+        _this2.recordTypes = response.data;
       });
     },
     confirmDelete: function confirmDelete(group) {
@@ -7183,7 +7182,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({});
       request.retrieve().then(function (response) {
-        _this2.recordTypes = response;
+        _this2.recordTypes = response.data;
       });
     },
     confirmDelete: function confirmDelete(program) {
@@ -9690,7 +9689,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var request = new _api_RecordTypeRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({});
       request.retrieve().then(function (response) {
-        _this2.recordTypes = response;
+        _this2.recordTypes = response.data;
       });
     },
     confirmDelete: function confirmDelete(team) {
@@ -10346,6 +10345,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10353,7 +10354,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    field: Object
+    field: Object,
+    value: {
+      type: Array,
+      "default": []
+    }
   },
   computed: {
     isRequired: {
@@ -10400,14 +10405,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      value: ''
-    };
-  },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     isRequired: {
@@ -10595,14 +10597,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     useDefault: {
@@ -10657,7 +10660,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10665,7 +10667,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   }
 });
 
@@ -10741,14 +10744,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     max: {
@@ -11049,14 +11055,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   }
 });
 
@@ -89111,11 +89118,11 @@ var render = function() {
                           "picker-options": _vm.pickerOptions
                         },
                         model: {
-                          value: _vm.dateCompleted,
+                          value: _vm.entryData.completed_at,
                           callback: function($$v) {
-                            _vm.dateCompleted = $$v
+                            _vm.$set(_vm.entryData, "completed_at", $$v)
                           },
-                          expression: "dateCompleted"
+                          expression: "entryData.completed_at"
                         }
                       })
                     ],
@@ -94884,30 +94891,33 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(choice) {
-                return _c(
+              [
+                _c(
                   "el-checkbox-group",
                   {
-                    key: choice,
+                    key: _vm.choice,
                     staticClass: "tw-h-8",
-                    attrs: { id: "check", required: _vm.isRequired },
-                    model: {
-                      value: _vm.select,
-                      callback: function($$v) {
-                        _vm.select = $$v
-                      },
-                      expression: "select"
+                    attrs: {
+                      id: "check",
+                      value: _vm.value,
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   },
-                  [
-                    _c("el-checkbox", {
+                  _vm._l(_vm.field.choices, function(choice) {
+                    return _c("el-checkbox", {
+                      key: choice,
                       staticClass: "tw-my-2 tw-ml-8 tw-text-lg",
                       attrs: { label: choice }
                     })
-                  ],
+                  }),
                   1
                 )
-              }),
+              ],
               1
             )
           ])
@@ -94965,6 +94975,7 @@ var render = function() {
               _c("el-date-picker", {
                 attrs: {
                   id: "dateField",
+                  value: _vm.value,
                   type: _vm.dateType,
                   "picker-options": _vm.dateOptions,
                   placeholder: " ",
@@ -94974,12 +94985,10 @@ var render = function() {
                   format: _vm.dateFormat,
                   required: _vm.isRequired
                 },
-                model: {
-                  value: _vm.value,
-                  callback: function($$v) {
-                    _vm.value = $$v
-                  },
-                  expression: "value"
+                on: {
+                  input: function($event) {
+                    return _vm.$emit("input", $event)
+                  }
                 }
               })
             ],
@@ -95161,14 +95170,14 @@ var render = function() {
                         _vm._l(_vm.field.choices, function(response, index) {
                           return _c(
                             "td",
-                            { key: response, staticClass: "tw-text-center" },
+                            { key: index, staticClass: "tw-text-center" },
                             [
                               _c(
                                 "el-radio",
                                 {
                                   key: response,
                                   staticClass: "tw-ml-2",
-                                  attrs: { value: index, label: response },
+                                  attrs: { label: response },
                                   model: {
                                     value: _vm.select[questionIndex],
                                     callback: function($$v) {
@@ -95249,23 +95258,27 @@ var render = function() {
             [
               _vm.limit
                 ? _c("el-input-number", {
-                    attrs: { id: "numfield", required: _vm.isRequired },
-                    model: {
-                      value: _vm.useDefault,
-                      callback: function($$v) {
-                        _vm.useDefault = $$v
-                      },
-                      expression: "useDefault"
+                    attrs: {
+                      id: "numfield",
+                      value: _vm.value,
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
                 : _c("el-input-number", {
-                    attrs: { id: "numfield", required: _vm.isRequired },
-                    model: {
+                    attrs: {
+                      id: "numfield",
                       value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
             ],
@@ -95322,25 +95335,27 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(choice) {
-                return _c(
+              [
+                _c(
                   "el-radio-group",
                   {
-                    key: choice,
                     staticClass: "tw-my-2 tw-mx-8",
-                    attrs: { id: "radioGroup" },
-                    model: {
-                      value: _vm.select,
-                      callback: function($$v) {
-                        _vm.select = $$v
-                      },
-                      expression: "select"
+                    attrs: { id: "radioGroup", value: _vm.value },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   },
-                  [_c("el-radio", { attrs: { label: choice } })],
+                  _vm._l(_vm.field.choices, function(choice) {
+                    return _c("el-radio", {
+                      key: choice,
+                      attrs: { label: choice }
+                    })
+                  }),
                   1
                 )
-              }),
+              ],
               1
             )
           ])
@@ -95451,7 +95466,13 @@ var render = function() {
                       autosize: { minRows: 3, maxRows: 5 },
                       maxlength: _vm.max,
                       "show-word-limit": "",
+                      value: _vm.value,
                       placeholder: " "
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     },
                     model: {
                       value: _vm.value,
@@ -95466,7 +95487,13 @@ var render = function() {
                       id: "textArea",
                       type: "textarea",
                       autosize: { minRows: 3, maxRows: 6 },
-                      placeholder: " "
+                      placeholder: " ",
+                      value: _vm.value
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     },
                     model: {
                       value: _vm.value,
@@ -95754,6 +95781,7 @@ var render = function() {
                 ? _c("el-time-select", {
                     attrs: {
                       "arrow-control": "",
+                      value: _vm.value,
                       "picker-options": {
                         start: "01:00",
                         step: "00:15",
@@ -95761,22 +95789,22 @@ var render = function() {
                       },
                       placeholder: " "
                     },
-                    model: {
-                      value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
                 : _c("el-time-picker", {
-                    attrs: { "arrow-control": "", placeholder: " " },
-                    model: {
+                    attrs: {
+                      "arrow-control": "",
                       value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
+                      placeholder: " "
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
             ],
@@ -118550,8 +118578,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/abcd/resources/js/App */"./resources/js/App/index.js");
-module.exports = __webpack_require__(/*! /var/www/abcd/resources/css/app.css */"./resources/css/app.css");
+__webpack_require__(/*! /Users/rupert/www/sites/abcd/resources/js/App */"./resources/js/App/index.js");
+module.exports = __webpack_require__(/*! /Users/rupert/www/sites/abcd/resources/css/app.css */"./resources/css/app.css");
 
 
 /***/ })

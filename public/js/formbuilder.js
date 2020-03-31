@@ -4583,7 +4583,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var i = 0; i < this.questions.length; i++) {
-        if (this.questions[i].toUpperCase() === this.itemText.toUpperCase()) {
+        if (this.questions[i].name.toUpperCase() === this.itemText.toUpperCase()) {
           this.itemText = '';
           return this.isUnique = false;
         }
@@ -4691,13 +4691,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var i = 0; i < this.questions.length; i++) {
-        if (this.questions[i].toUpperCase() === value.toUpperCase()) {
-          this.questions[index] = this.temp;
+        if (this.questions[i].toUpperCase().name === value.toUpperCase()) {
+          this.questions[index].name = this.temp;
           return this.isUnique = false;
         }
       }
 
-      fieldCopy.questions[index] = value;
+      fieldCopy.questions[index].name = value;
       this.questions = fieldCopy.questions;
       this.isEmptyTable = false;
       this.isUnique = true;
@@ -6360,7 +6360,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setQuestions: function setQuestions() {
       for (var i = 0; i < this.fieldData.settings.matrix_questions; i++) {
-        this.fieldData.questions.push('Question ' + i);
+        this.fieldData.questions.push({
+          name: 'Question ' + i++
+        });
       }
     },
     setChoices: function setChoices() {
@@ -8417,6 +8419,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -8424,7 +8428,11 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    field: Object
+    field: Object,
+    value: {
+      type: Array,
+      "default": []
+    }
   },
   computed: {
     isRequired: {
@@ -8471,14 +8479,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      value: ''
-    };
-  },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     isRequired: {
@@ -8666,14 +8671,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     useDefault: {
@@ -8728,7 +8734,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -8736,7 +8741,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   }
 });
 
@@ -8812,14 +8818,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   },
   computed: {
     max: {
@@ -9120,14 +9129,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {
-      value: ''
-    };
+    return {};
   },
   props: {
-    field: Object
+    field: Object,
+    value: ''
   }
 });
 
@@ -89305,14 +89315,14 @@ var render = function() {
                                   return _vm.updateQuestionValue($event, index)
                                 },
                                 edit: function($event) {
-                                  return _vm.tempValue(question)
+                                  return _vm.tempValue(question.name)
                                 }
                               }
                             },
                             [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(question) +
+                                  _vm._s(question.name) +
                                   "\n                            "
                               )
                             ]
@@ -94109,30 +94119,33 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(choice) {
-                return _c(
+              [
+                _c(
                   "el-checkbox-group",
                   {
-                    key: choice,
+                    key: _vm.choice,
                     staticClass: "tw-h-8",
-                    attrs: { id: "check", required: _vm.isRequired },
-                    model: {
-                      value: _vm.select,
-                      callback: function($$v) {
-                        _vm.select = $$v
-                      },
-                      expression: "select"
+                    attrs: {
+                      id: "check",
+                      value: _vm.value,
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   },
-                  [
-                    _c("el-checkbox", {
+                  _vm._l(_vm.field.choices, function(choice) {
+                    return _c("el-checkbox", {
+                      key: choice,
                       staticClass: "tw-my-2 tw-ml-8 tw-text-lg",
                       attrs: { label: choice }
                     })
-                  ],
+                  }),
                   1
                 )
-              }),
+              ],
               1
             )
           ])
@@ -94190,6 +94203,7 @@ var render = function() {
               _c("el-date-picker", {
                 attrs: {
                   id: "dateField",
+                  value: _vm.value,
                   type: _vm.dateType,
                   "picker-options": _vm.dateOptions,
                   placeholder: " ",
@@ -94199,12 +94213,10 @@ var render = function() {
                   format: _vm.dateFormat,
                   required: _vm.isRequired
                 },
-                model: {
-                  value: _vm.value,
-                  callback: function($$v) {
-                    _vm.value = $$v
-                  },
-                  expression: "value"
+                on: {
+                  input: function($event) {
+                    return _vm.$emit("input", $event)
+                  }
                 }
               })
             ],
@@ -94386,14 +94398,14 @@ var render = function() {
                         _vm._l(_vm.field.choices, function(response, index) {
                           return _c(
                             "td",
-                            { key: response, staticClass: "tw-text-center" },
+                            { key: index, staticClass: "tw-text-center" },
                             [
                               _c(
                                 "el-radio",
                                 {
                                   key: response,
                                   staticClass: "tw-ml-2",
-                                  attrs: { value: index, label: response },
+                                  attrs: { label: response },
                                   model: {
                                     value: _vm.select[questionIndex],
                                     callback: function($$v) {
@@ -94474,23 +94486,27 @@ var render = function() {
             [
               _vm.limit
                 ? _c("el-input-number", {
-                    attrs: { id: "numfield", required: _vm.isRequired },
-                    model: {
-                      value: _vm.useDefault,
-                      callback: function($$v) {
-                        _vm.useDefault = $$v
-                      },
-                      expression: "useDefault"
+                    attrs: {
+                      id: "numfield",
+                      value: _vm.value,
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
                 : _c("el-input-number", {
-                    attrs: { id: "numfield", required: _vm.isRequired },
-                    model: {
+                    attrs: {
+                      id: "numfield",
                       value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
+                      required: _vm.isRequired
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
             ],
@@ -94547,25 +94563,27 @@ var render = function() {
             _c(
               "div",
               { staticClass: "zone" },
-              _vm._l(_vm.field.choices, function(choice) {
-                return _c(
+              [
+                _c(
                   "el-radio-group",
                   {
-                    key: choice,
                     staticClass: "tw-my-2 tw-mx-8",
-                    attrs: { id: "radioGroup" },
-                    model: {
-                      value: _vm.select,
-                      callback: function($$v) {
-                        _vm.select = $$v
-                      },
-                      expression: "select"
+                    attrs: { id: "radioGroup", value: _vm.value },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   },
-                  [_c("el-radio", { attrs: { label: choice } })],
+                  _vm._l(_vm.field.choices, function(choice) {
+                    return _c("el-radio", {
+                      key: choice,
+                      attrs: { label: choice }
+                    })
+                  }),
                   1
                 )
-              }),
+              ],
               1
             )
           ])
@@ -94676,7 +94694,13 @@ var render = function() {
                       autosize: { minRows: 3, maxRows: 5 },
                       maxlength: _vm.max,
                       "show-word-limit": "",
+                      value: _vm.value,
                       placeholder: " "
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     },
                     model: {
                       value: _vm.value,
@@ -94691,7 +94715,13 @@ var render = function() {
                       id: "textArea",
                       type: "textarea",
                       autosize: { minRows: 3, maxRows: 6 },
-                      placeholder: " "
+                      placeholder: " ",
+                      value: _vm.value
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     },
                     model: {
                       value: _vm.value,
@@ -94979,6 +95009,7 @@ var render = function() {
                 ? _c("el-time-select", {
                     attrs: {
                       "arrow-control": "",
+                      value: _vm.value,
                       "picker-options": {
                         start: "01:00",
                         step: "00:15",
@@ -94986,22 +95017,22 @@ var render = function() {
                       },
                       placeholder: " "
                     },
-                    model: {
-                      value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
                 : _c("el-time-picker", {
-                    attrs: { "arrow-control": "", placeholder: " " },
-                    model: {
+                    attrs: {
+                      "arrow-control": "",
                       value: _vm.value,
-                      callback: function($$v) {
-                        _vm.value = $$v
-                      },
-                      expression: "value"
+                      placeholder: " "
+                    },
+                    on: {
+                      input: function($event) {
+                        return _vm.$emit("input", $event)
+                      }
                     }
                   })
             ],
@@ -120262,7 +120293,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /Users/rupert/www/sites/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

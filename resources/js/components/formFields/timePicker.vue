@@ -8,7 +8,8 @@
             <el-col :span="10">
                 <el-time-select v-if="field.settings.exact_time === false"
                     arrow-control
-                    v-model="value"
+                    :value="value"
+                    @input="$emit('input', $event)"
                     :picker-options="{  
                         start: '01:00',
                         step: '00:15',
@@ -19,7 +20,8 @@
                 
                 <el-time-picker v-else
                     arrow-control
-                    v-model="value"
+                    :value="value"
+                    @input="$emit('input', $event)"
                     placeholder=" ">
                 </el-time-picker>
             </el-col>
@@ -30,12 +32,11 @@
 <script>
 export default {
     data: () => {
-        return {
-            value: ''
-        }
+        return {}
     },
     props: { 
-        field: Object
+        field: Object,
+        value: ''
     },
 }
 </script>

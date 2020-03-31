@@ -9,13 +9,15 @@
                 <el-input-number 
                     v-if="limit"
                     id="numfield" 
-                    v-model="useDefault"
+                    :value="value"
+                    @input="$emit('input', $event)"
                     :required="isRequired">
                 </el-input-number>
                 <el-input-number 
                     v-else
                     id="numfield" 
-                    v-model="value"
+                    :value="value"
+                    @input="$emit('input', $event)"
                     :required="isRequired">
                 </el-input-number>
             </el-col>
@@ -26,12 +28,11 @@
 <script>
 export default {
     data() {
-        return {
-            value: ''
-        }
+        return {}
     },
     props: { 
-        field: Object
+        field: Object,
+        value: ''
     },
     computed: {
         useDefault: {
