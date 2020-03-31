@@ -2,19 +2,18 @@
 
 @section('content')
 
-<div class="tw-bg-gray-100 tw-w-full tw-flex lg:tw-items-start lg:tw-pt-24 tw-h-screen">
+<div class="tw-bg-gray-100 tw-w-full tw-flex lg:tw-items-start lg:tw-pt-24 lg:tw-pl-24 tw-h-screen">
     <login-form inline-template>
-        <div 
-            class="lg:tw-container lg:tw-mx-auto lg:tw-w-2/5 tw-w-full tw-flex tw-flex-wrap tw-bg-white lg:tw-rounded-lg tw-shadow tw-border-t-8 tw-border-blue-500">
-            <div class="tw-w-full lg:tw-pt-12 tw-pt-64 tw-pb-16 tw-px-12" >
+        <div class="lg:tw-container lg:tw-ml-16 lg:tw-mt-24 lg:tw-w-2/5 tw-w-full tw-flex tw-flex-wrap tw-bg-white lg:tw-rounded-lg tw-shadow tw-border-t-8 tw-border-orange-500">
+            <div class="tw-w-full lg:tw-pt-12 tw-pt-64 tw-pb-8 tw-px-12">
                 <div v-if="!forgotPasswordActive">
-		    <center>
-			<img class="tw-w-1/2" src="/images/abcd-logo-large.jpg"></img><br>
-		    </center>
+		    <!--center-->
+			<!--img class="tw-w-1/4" src="/images/abcd-logo-large.jpg"></img><br-->
+		    <!--/center-->
 			<!-- <h1 class="tw-text-3xl tw-mb-4 tw-font-bold tw-text-blue-600">{{ __('welcome') }}</h1> -->
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-			<div class="tw-mb-2">
+			<div class="tw-mb-1">
                 		<div class="tw-flex tw-items-center tw-w-full">
                     			<label class="tw-w-1/4">
                         			Login 
@@ -26,7 +25,7 @@
                             				type="email"
                             				class="
                                 				{{ $errors->has('email') ? ' is-invalid' : '' }}
-                                				tw-mb-2 tw-w-full tw-text-base tw-py-2
+                                				tw-mb-2 tw-w-full tw-text-base
                             					"
                             				name="email" value="{{ old('email') }}"
                             				placeholder=""
@@ -42,7 +41,7 @@
                             </span>
                         @endif
 
-			<div class="tw-mb-2">
+			<div class="tw-mb-1">
                 		<div class="tw-flex tw-items-center tw-w-full">
                     			<label class="tw-w-1/4">
                         			Password 
@@ -54,7 +53,7 @@
                             				type="password"
                             				class="
                             				        {{ $errors->has('password') ? ' is-invalid' : '' }}
-                            				        tw-mb-2 tw-w-full tw-text-base tw-py-2
+                            				        tw-mb-2 tw-w-full tw-text-base
                             					"
                             				name="password"
                             				placeholder=""
@@ -70,7 +69,11 @@
                             </span>
                         @endif
 
-                        <div class="tw-flex tw-justify-between tw-items-center tw-mb-4">
+                        <base-button type="submit" class="tw-py-4 tw-w-full tm-mx-auto tw-mb-5 tw-center tw-text-base tw-text-white tw-font-semibold tw-bg-orange-400">
+                            {{ __('Log in') }}
+                        </base-button>
+                        
+                        <div class="tw-flex tw-justify-between tw-items-center tw--mb-4 tw-mt-4">
                             <span>
                                 <base-checkbox
                                     type="checkbox"
@@ -88,9 +91,7 @@
                             </a>
                         </div>
 
-                        <base-button type="submit" class="tw-py-2 tw-w-full tw-text-base tw-text-white tw-font-semibold tw-bg-blue-500">
-                            {{ __('Log in') }}
-                        </base-button>
+                        
 
                     </form>
                 </div>
@@ -163,8 +164,14 @@
                 </ul>
             </div -->
         </div>
+            </div>
+        </div>
     </login-form>
+
+<img class="tw-w-1/2" src="/images/splash.jpg"></img>
+
 </div>
+
 @endsection
 
 @section('scripts')
