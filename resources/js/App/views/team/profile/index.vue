@@ -5,9 +5,9 @@
             :team-id="team.id"
             @update="retrieve()"/>
 
-        <resource-profile 
+        <resource-profile
             :record-types="recordTypes"
-            @edit="editTeam(team)" 
+            @edit="editTeam(team)"
             @delete="confirmDelete(team)">
             <template v-slot:header>
                 {{ team.name }}
@@ -59,12 +59,12 @@
                     this.team = response.data;
                 });
             },
-            
+
             retrieveRecordTypes() {
                 const request = new RecordTypeRequest({});
 
                 request.retrieve().then((response) => {
-                    this.recordTypes = response;
+                    this.recordTypes = response.data;
                 });
             },
 

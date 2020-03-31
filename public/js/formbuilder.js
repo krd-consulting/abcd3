@@ -4583,7 +4583,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var i = 0; i < this.questions.length; i++) {
-        if (this.questions[i].toUpperCase() === this.itemText.toUpperCase()) {
+        if (this.questions[i].name.toUpperCase() === this.itemText.toUpperCase()) {
           this.itemText = '';
           return this.isUnique = false;
         }
@@ -4691,13 +4691,13 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       for (var i = 0; i < this.questions.length; i++) {
-        if (this.questions[i].toUpperCase() === value.toUpperCase()) {
-          this.questions[index] = this.temp;
+        if (this.questions[i].toUpperCase().name === value.toUpperCase()) {
+          this.questions[index].name = this.temp;
           return this.isUnique = false;
         }
       }
 
-      fieldCopy.questions[index] = value;
+      fieldCopy.questions[index].name = value;
       this.questions = fieldCopy.questions;
       this.isEmptyTable = false;
       this.isUnique = true;
@@ -6360,7 +6360,9 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     setQuestions: function setQuestions() {
       for (var i = 0; i < this.fieldData.settings.matrix_questions; i++) {
-        this.fieldData.questions.push('Question ' + i);
+        this.fieldData.questions.push({
+          name: 'Question ' + i++
+        });
       }
     },
     setChoices: function setChoices() {
@@ -8622,14 +8624,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return {};
+    return {
+      select: []
+    };
   },
   props: {
-    field: Object,
-    select: []
+    field: Object
   }
 });
 
@@ -11480,7 +11482,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 100;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 2px !important;\n  right: 15px !important;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
+exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(-100%);\n          transform: translateX(-100%);\n}\n.panel {\n  height: screen;\n  width: 350px;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  left: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n  z-index: 100;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: left;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.close {\n  position: absolute !important;\n  padding-bottom: 50px;\n  top: 2px !important;\n  right: 15px !important;\n  font-size: 36px;\n  font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -11651,7 +11653,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n  /* cubic-bezier(1.0, 0.5, 0.8, 1.0); */\n}\n.toggle-enter, .toggle-leave-to {\n  transform: translateX(100%);\n  /* opacity: 0; */\n}\n.panel {\n  height: 100%;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  right: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: right;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.sidenav .close {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Handle differently on smaller screen size */\n@media screen and (max-height: 450px) {\n.sidenav {\n    padding-top: 15px;\n}\n.sidenav a {\n    font-size: 18px;\n}\n}\n", ""]);
+exports.push([module.i, ".toggle-enter-active {\n  transition: 1s ease;\n}\n.toggle-leave-active {\n  transition: 1s ease;\n  /* cubic-bezier(1.0, 0.5, 0.8, 1.0); */\n}\n.toggle-enter, .toggle-leave-to {\n  -webkit-transform: translateX(100%);\n          transform: translateX(100%);\n  /* opacity: 0; */\n}\n.panel {\n  height: 100%;\n  position: fixed;\n  z-index: 1;\n  top: 0;\n  right: 0;\n  background-color: #ffffff;\n  overflow-x: hidden;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n  text-align: left;\n  padding-left: 20px;\n}\n.panel a {\n  padding: 8px 8px 8px 32px;\n  text-decoration: none;\n  font-size: 25px;\n  color: #818181;\n  display: block;\n  transition: 0.2s;\n  text-align: right;\n}\n.sidenav a:hover {\n  color: #f1f1f1;\n}\n.sidenav .close {\n  position: absolute;\n  top: 0;\n  right: 25px;\n  font-size: 36px;\n  margin-left: 50px;\n}\n\n/* Handle differently on smaller screen size */\n@media screen and (max-height: 450px) {\n.sidenav {\n    padding-top: 15px;\n}\n.sidenav a {\n    font-size: 18px;\n}\n}\n", ""]);
 
 // exports
 
@@ -62736,7 +62738,7 @@ module.exports = isSymbol;
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
  * @license
  * Lodash <https://lodash.com/>
- * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Copyright JS Foundation and other contributors <https://js.foundation/>
  * Released under MIT license <https://lodash.com/license>
  * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
  * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
@@ -62747,7 +62749,7 @@ module.exports = isSymbol;
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.15';
+  var VERSION = '4.17.11';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
@@ -65406,10 +65408,16 @@ module.exports = isSymbol;
         value.forEach(function(subValue) {
           result.add(baseClone(subValue, bitmask, customizer, subValue, value, stack));
         });
-      } else if (isMap(value)) {
+
+        return result;
+      }
+
+      if (isMap(value)) {
         value.forEach(function(subValue, key) {
           result.set(key, baseClone(subValue, bitmask, customizer, key, value, stack));
         });
+
+        return result;
       }
 
       var keysFunc = isFull
@@ -66333,8 +66341,8 @@ module.exports = isSymbol;
         return;
       }
       baseFor(source, function(srcValue, key) {
-        stack || (stack = new Stack);
         if (isObject(srcValue)) {
+          stack || (stack = new Stack);
           baseMergeDeep(object, source, key, srcIndex, baseMerge, customizer, stack);
         }
         else {
@@ -68151,7 +68159,7 @@ module.exports = isSymbol;
       return function(number, precision) {
         number = toNumber(number);
         precision = precision == null ? 0 : nativeMin(toInteger(precision), 292);
-        if (precision && nativeIsFinite(number)) {
+        if (precision) {
           // Shift with exponential notation to avoid floating-point issues.
           // See [MDN](https://mdn.io/round#Examples) for more details.
           var pair = (toString(number) + 'e').split('e'),
@@ -69334,7 +69342,7 @@ module.exports = isSymbol;
     }
 
     /**
-     * Gets the value at `key`, unless `key` is "__proto__" or "constructor".
+     * Gets the value at `key`, unless `key` is "__proto__".
      *
      * @private
      * @param {Object} object The object to query.
@@ -69342,10 +69350,6 @@ module.exports = isSymbol;
      * @returns {*} Returns the property value.
      */
     function safeGet(object, key) {
-      if (key === 'constructor' && typeof object[key] === 'function') {
-        return;
-      }
-
       if (key == '__proto__') {
         return;
       }
@@ -73146,7 +73150,6 @@ module.exports = isSymbol;
           }
           if (maxing) {
             // Handle invocations in a tight loop.
-            clearTimeout(timerId);
             timerId = setTimeout(timerExpired, wait);
             return invokeFunc(lastCallTime);
           }
@@ -77533,12 +77536,9 @@ module.exports = isSymbol;
       , 'g');
 
       // Use a sourceURL for easier debugging.
-      // The sourceURL gets injected into the source that's eval-ed, so be careful
-      // with lookup (in case of e.g. prototype pollution), and strip newlines if any.
-      // A newline wouldn't be a valid sourceURL anyway, and it'd enable code injection.
       var sourceURL = '//# sourceURL=' +
-        (hasOwnProperty.call(options, 'sourceURL')
-          ? (options.sourceURL + '').replace(/[\r\n]/g, ' ')
+        ('sourceURL' in options
+          ? options.sourceURL
           : ('lodash.templateSources[' + (++templateCounter) + ']')
         ) + '\n';
 
@@ -77571,9 +77571,7 @@ module.exports = isSymbol;
 
       // If `variable` is not specified wrap a with-statement around the generated
       // code to add the data object to the top of the scope chain.
-      // Like with sourceURL, we take care to not check the option's prototype,
-      // as this configuration is a code injection vector.
-      var variable = hasOwnProperty.call(options, 'variable') && options.variable;
+      var variable = options.variable;
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
@@ -79778,11 +79776,10 @@ module.exports = isSymbol;
     baseForOwn(LazyWrapper.prototype, function(func, methodName) {
       var lodashFunc = lodash[methodName];
       if (lodashFunc) {
-        var key = lodashFunc.name + '';
-        if (!hasOwnProperty.call(realNames, key)) {
-          realNames[key] = [];
-        }
-        realNames[key].push({ 'name': methodName, 'func': lodashFunc });
+        var key = (lodashFunc.name + ''),
+            names = realNames[key] || (realNames[key] = []);
+
+        names.push({ 'name': methodName, 'func': lodashFunc });
       }
     });
 
@@ -89318,14 +89315,14 @@ var render = function() {
                                   return _vm.updateQuestionValue($event, index)
                                 },
                                 edit: function($event) {
-                                  return _vm.tempValue(question)
+                                  return _vm.tempValue(question.name)
                                 }
                               }
                             },
                             [
                               _vm._v(
                                 "\n                                    " +
-                                  _vm._s(question) +
+                                  _vm._s(question.name) +
                                   "\n                            "
                               )
                             ]
@@ -94398,24 +94395,23 @@ var render = function() {
                           )
                         ]),
                         _vm._v(" "),
-                        _vm._l(_vm.field.choices, function(response) {
+                        _vm._l(_vm.field.choices, function(response, index) {
                           return _c(
                             "td",
-                            { key: response, staticClass: "tw-text-center" },
+                            { key: index, staticClass: "tw-text-center" },
                             [
                               _c(
                                 "el-radio",
                                 {
                                   key: response,
                                   staticClass: "tw-ml-2",
-                                  attrs: {
-                                    label: response,
-                                    value: _vm.select[questionIndex]
-                                  },
-                                  on: {
-                                    input: function($event) {
-                                      return _vm.$emit("input", $event)
-                                    }
+                                  attrs: { label: response },
+                                  model: {
+                                    value: _vm.select[questionIndex],
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.select, questionIndex, $$v)
+                                    },
+                                    expression: "select[questionIndex]"
                                   }
                                 },
                                 [
@@ -120297,7 +120293,7 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /mnt/c/Users/ruper/code/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
+module.exports = __webpack_require__(/*! /Users/rupert/www/sites/abcd/resources/js/FormBuilder */"./resources/js/FormBuilder/index.js");
 
 
 /***/ })

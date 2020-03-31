@@ -5,10 +5,10 @@
             :program-id="program.id"
             @update="retrieve"/>
 
-        <resource-profile 
+        <resource-profile
             :extra-information-path="`/teams/${program.team.id}`"
             :record-types="recordTypes"
-            @edit="editProgram(program)" 
+            @edit="editProgram(program)"
             @delete="confirmDelete(program)">
             <template v-slot:header>
                 {{ program.name }}
@@ -79,7 +79,7 @@
                 const request = new RecordTypeRequest({});
 
                 request.retrieve().then((response) => {
-                    this.recordTypes = response;
+                    this.recordTypes = response.data;
                 });
             },
 

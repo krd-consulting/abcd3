@@ -1,15 +1,15 @@
 <template>
     <div>
-        
+
         <edit-group
             :active.sync="edit.active"
             :group="edit.group"
             @update="retrieve"/>
 
-        <resource-profile 
+        <resource-profile
             :extra-information-path="`/programs/${group.program.id}`"
             :record-types="recordTypes"
-            @edit="editGroup(group)" 
+            @edit="editGroup(group)"
             @delete="confirmDelete(group)">
             <template v-slot:header>
                 {{ group.name }}
@@ -91,7 +91,7 @@
                 const request = new RecordTypeRequest({});
 
                 request.retrieve().then((response) => {
-                    this.recordTypes = response;
+                    this.recordTypes = response.data;
                 });
             },
 
