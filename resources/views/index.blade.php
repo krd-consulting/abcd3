@@ -9,9 +9,7 @@
 @endsection
 
 @section('content')
-    <el-main class="main">
-         <router-view></router-view>
-    </el-main>
+    <router-view></router-view>
 @endsection
 
 @section('scripts')

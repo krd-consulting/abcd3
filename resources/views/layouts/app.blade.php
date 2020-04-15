@@ -13,23 +13,26 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         
-        <style>
-            .item-text {
-                color:  #feba1b;
-            }
-        </style>
+    <style>
+        .item-text {
+            color:  #feba1b;
+        }
+    </style>
 </head>
 <body onload="load()">
     <div id="app">
-        @section('main-nav')
-        @show
-
-        <base-container class="tw-min-h-full" v-if="!loading">
-            
+        <base-container class="tw-h-screen" v-if="!loading">
             @section('main-sidebar')
             @show
 
-            @yield('content')
+            <base-container>
+                @section('main-nav')
+                @show
+
+                <el-main class="main">
+                    @yield('content')
+                </el-main>
+            </base-container>
         </base-container>
     </div>
 

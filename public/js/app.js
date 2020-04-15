@@ -10260,13 +10260,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  inheritAttrs: false,
-  props: {
-    route: Object
-  }
+  inheritAttrs: false
 });
 
 /***/ }),
@@ -11445,14 +11440,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   inheritAttrs: false,
   props: {
     index: String,
     title: String,
-    options: Boolean,
-    route: Object
+    options: Boolean
   },
   methods: {}
 });
@@ -94366,7 +94359,7 @@ var render = function() {
                 "list-item",
                 {
                   key: index,
-                  staticClass: "tw-py-4 tw-px-4 hover:tw-bg-blue-100",
+                  staticClass: "tw-py-4 tw-px-4 hover:tw-bg-gray-100",
                   attrs: { to: item.path + _vm.pathSuffix }
                 },
                 [
@@ -101677,22 +101670,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "router-link",
-    { attrs: { tag: "a", to: _vm.route } },
-    [
-      _c(
-        "el-menu-item",
-        _vm._b(
-          { staticClass: "tw-text-white" },
-          "el-menu-item",
-          _vm.$attrs,
-          false
-        ),
-        [_vm._t("default")],
-        2
-      )
-    ],
-    1
+    "el-menu-item",
+    _vm._b({}, "el-menu-item", _vm.$attrs, false),
+    [_vm._t("default")],
+    2
   )
 }
 var staticRenderFns = []
@@ -103261,7 +103242,7 @@ var render = function() {
   return _c(
     "base-menu-item",
     _vm._b(
-      { attrs: { index: _vm.index, route: _vm.route } },
+      { attrs: { index: _vm.index } },
       "base-menu-item",
       _vm.$attrs,
       false

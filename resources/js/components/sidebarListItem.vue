@@ -2,7 +2,6 @@
     <base-menu-item
         v-bind="$attrs"
         :index="index"
-        :route="route"
     >
         <slot></slot>
         <slot name="title"></slot>
@@ -15,7 +14,6 @@
             index: String,
             title: String,
             options: Boolean,
-            route: Object
         },
 
         methods: {

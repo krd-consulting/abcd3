@@ -16,20 +16,20 @@
         <div class="tw-container tw-mx-auto tw-flex tw-mt-8">
             <nav>
                 <sidebar-list :collapse="false" class="preferences-sidebar-menu tw-bg-gray-100">
-                    <sidebar-list-item index="1" :route="{ path: '/preferences/' }">
+                    <sidebar-list-item index="/preferences/">
                         <base-icon class="tw-text-xl tw-mr-2">dashboard</base-icon>
                         <span slot="title" class="tw-text-black">General</span>
                     </sidebar-list-item>
-                    <sidebar-list-item index="2" :route="{ path: '/preferences/records' }">
+                    <sidebar-list-item index="/preferences/records">
                         <base-icon class="tw-text-xl tw-mr-2">insert_drive_file</base-icon>
                         <span slot="title" class="tw-text-black">Records</span>
                     </sidebar-list-item>
-                    <sidebar-list-item index="3" :route="{ path: '/preferences/programs' }">
+                    <sidebar-list-item index="/preferences/programs">
                         <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
                         <span slot="title" class="tw-text-black">Programs</span>
                     </sidebar-list-item>
                     @can('write roles')
-                        <sidebar-list-item index="4" :route="{ path: '/preferences/roles' }">
+                        <sidebar-list-item index="/preferences/roles">
                             <base-icon class="tw-text-xl tw-mr-2">people</base-icon>
                             <span slot="title" class="tw-text-black">Roles</span>
                         </sidebar-list-item>

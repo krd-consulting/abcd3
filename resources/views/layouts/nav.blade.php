@@ -1,4 +1,4 @@
-<el-header class="main-nav tw-bg-blue-700" style="height: 80px;" v-if="!loading">
+<el-header class="tw-bg-blue-500" v-if="!loading">
     
     <div class="tw-flex tw-flex-1 tw-justify-between">
         <!-- <div class="tw-w-1/2">
