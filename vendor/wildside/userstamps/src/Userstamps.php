@@ -2,8 +2,8 @@
 
 namespace Wildside\Userstamps;
 
-trait Userstamps {
-
+trait Userstamps
+{
     /**
      * Whether we're currently maintaing userstamps.
      *
@@ -18,6 +18,8 @@ trait Userstamps {
      */
     public static function bootUserstamps()
     {
+        static::addGlobalScope(new UserstampsScope);
+
         static::registerListeners();
     }
 
@@ -58,7 +60,7 @@ trait Userstamps {
      */
     public function creator()
     {
-        return $this -> belongsTo($this -> getUserClass(), $this -> getCreatedByColumn());
+        return $this->belongsTo($this->getUserClass(), $this->getCreatedByColumn());
     }
 
     /**
@@ -66,7 +68,7 @@ trait Userstamps {
      */
     public function editor()
     {
-        return $this -> belongsTo($this -> getUserClass(), $this -> getUpdatedByColumn());
+        return $this->belongsTo($this->getUserClass(), $this->getUpdatedByColumn());
     }
 
     /**
@@ -74,7 +76,7 @@ trait Userstamps {
      */
     public function destroyer()
     {
-        return $this -> belongsTo($this -> getUserClass(), $this -> getDeletedByColumn());
+        return $this->belongsTo($this->getUserClass(), $this->getDeletedByColumn());
     }
 
     /**
@@ -84,7 +86,7 @@ trait Userstamps {
      */
     public function getCreatedByColumn()
     {
-        return defined('static::CREATED_BY') ? static::CREATED_BY : 'created_by';
+        return defined('static::CREATED_BY') && ! is_null(static::CREATED_BY) ? static::CREATED_BY : 'created_by';
     }
 
     /**
@@ -94,7 +96,7 @@ trait Userstamps {
      */
     public function getUpdatedByColumn()
     {
-        return defined('static::UPDATED_BY') ? static::UPDATED_BY : 'updated_by';
+        return defined('static::UPDATED_BY') && ! is_null(static::UPDATED_BY) ? static::UPDATED_BY : 'updated_by';
     }
 
     /**
@@ -104,7 +106,7 @@ trait Userstamps {
      */
     public function getDeletedByColumn()
     {
-        return defined('static::DELETED_BY') ? static::DELETED_BY : 'deleted_by';
+        return defined('static::DELETED_BY') && ! is_null(static::DELETED_BY) ? static::DELETED_BY : 'deleted_by';
     }
 
     /**
@@ -114,7 +116,7 @@ trait Userstamps {
      */
     public function isUserstamping()
     {
-        return $this -> userstamping;
+        return $this->userstamping;
     }
 
     /**
@@ -124,7 +126,7 @@ trait Userstamps {
      */
     public function stopUserstamping()
     {
-        $this -> userstamping = false;
+        $this->userstamping = false;
     }
 
     /**
@@ -134,7 +136,7 @@ trait Userstamps {
      */
     public function startUserstamping()
     {
-        $this -> userstamping = true;
+        $this->userstamping = true;
     }
 
     /**
@@ -144,10 +146,6 @@ trait Userstamps {
      */
     protected function getUserClass()
     {
-        if (get_class(auth()) === 'Illuminate\Auth\Guard') {
-            return auth() -> getProvider() -> getModel();
-        }
-
-        return auth() -> guard() -> getProvider() -> getModel();
+        return config('auth.providers.users.model');
     }
 }

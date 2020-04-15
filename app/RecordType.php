@@ -6,11 +6,11 @@ use App\Model;
 
 use App\Contracts\FormReference;
 use App\Traits\Models\FormReference as FormReferenceTrait;
-
+use Illuminate\Contracts\Routing\UrlRoutable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class RecordType extends Model implements FormReference
+class RecordType extends Model implements FormReference, UrlRoutable
 {
     use HasSlug, FormReferenceTrait;
 
@@ -38,9 +38,10 @@ class RecordType extends Model implements FormReference
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value
+     * @param  string|null  $field
      * @return \Illuminate\Database\Eloquent\Model|null
      */
-    public function resolveRouteBinding($value)
+    public function resolveRouteBinding($value, $field = null)
     {
         return 
             $this

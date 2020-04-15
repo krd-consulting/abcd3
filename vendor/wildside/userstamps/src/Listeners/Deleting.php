@@ -2,8 +2,10 @@
 
 namespace Wildside\Userstamps\Listeners;
 
-class Deleting {
+use Illuminate\Support\Facades\Auth;
 
+class Deleting
+{
     /**
      * When the model is being deleted.
      *
@@ -12,20 +14,20 @@ class Deleting {
      */
     public function handle($model)
     {
-        if (! $model -> isUserstamping()) {
+        if (! $model->isUserstamping()) {
             return;
         }
 
-        if (is_null($model -> {$model -> getDeletedByColumn()})) {
-            $model -> {$model -> getDeletedByColumn()} = auth() -> id();
+        if (is_null($model->{$model->getDeletedByColumn()})) {
+            $model->{$model->getDeletedByColumn()} = Auth::id();
         }
 
-        $dispatcher = $model -> getEventDispatcher();
+        $dispatcher = $model->getEventDispatcher();
 
-        $model -> unsetEventDispatcher();
+        $model->unsetEventDispatcher();
 
-        $model -> save();
+        $model->save();
 
-        $model -> setEventDispatcher($dispatcher);
+        $model->setEventDispatcher($dispatcher);
     }
 }
