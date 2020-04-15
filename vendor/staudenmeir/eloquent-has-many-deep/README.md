@@ -7,12 +7,13 @@
 
 ## Introduction
 This extended version of `HasManyThrough` allows relationships with unlimited intermediate models.  
-It supports [many-to-many](#belongstomany) and [polymorphic](#morphmany) relationships and all their possible combinations.   
+It supports [many-to-many](#belongstomany) and [polymorphic](#morphmany) relationships and all their possible combinations.
+
 Supports Laravel 5.5.29+.
 
 ## Installation
 
-    composer require staudenmeir/eloquent-has-many-deep
+    composer require staudenmeir/eloquent-has-many-deep:"^1.7"
 
 ## Usage
 
@@ -241,7 +242,7 @@ class Tag extends Model
 
 ### Existing Relationships
 
-In complex cases, you can define a `HasManyDeep` relationship by chaining existing relationships:
+In complex cases, you can define a `HasManyDeep` relationship by concatenating existing relationships:
 
 ```php
 class Country extends Model
@@ -363,7 +364,7 @@ You can specify a custom pivot model as the third argument and a custom accessor
 public function permissions()
 {
     return $this->hasManyDeep('App\Permission', ['role_user', 'App\Role'])
-        ->withPivot('role_user', ['expires_at'], 'App\RoleUserPivot', 'pivot');
+        ->withPivot('role_user', ['expires_at'], 'App\RoleUser', 'pivot');
 }
 
 foreach ($user->permissions as $permission) {
@@ -380,7 +381,7 @@ class Post extends Model
 {
     use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
-    public function childComments()
+    public function commentReplies()
     {
         return $this->hasManyDeep('App\Comment', ['App\Comment as alias'], [null, 'parent_id']);
     }
@@ -393,6 +394,57 @@ Use the `HasTableAlias` trait in the models you are aliasing:
 class Comment extends Model
 {
     use \Staudenmeir\EloquentHasManyDeep\HasTableAlias;
+}
+```
+
+For pivot tables, this requires custom models:
+
+```php
+class User extends Model
+{
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+
+    public function permissions()
+    {
+        return $this->hasManyDeep('App\Permission', ['App\RoleUser as alias', 'App\Role']);
+    }
+}
+
+class RoleUser extends Pivot
+{
+    use \Staudenmeir\EloquentHasManyDeep\HasTableAlias;
+}
+```
+
+Use `setAlias()` to specify a table alias when concatenating existing relationships:
+
+```php
+class Post extends Model
+{
+    use \Staudenmeir\EloquentHasManyDeep\HasRelationships;
+
+    public function commentReplies()
+    {
+        return $this->hasManyDeepFromRelations(
+            $this->comments(),
+            (new Comment)->setAlias('alias')->replies()
+        );
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+}
+
+class Comment extends Model
+{
+    use \Staudenmeir\EloquentHasManyDeep\HasTableAlias;
+
+    public function replies()
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
 }
 ```
 
@@ -417,3 +469,7 @@ class User extends Model
     use SoftDeletes;
 }
 ```
+
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE OF CONDUCT](CODE_OF_CONDUCT.md) for details.

@@ -78,12 +78,8 @@ trait HasRoles
             return $this->getRoleClass()->{$method}($role, $guard);
         }, $roles);
 
-        return $query->whereHas('roles', function ($query) use ($roles) {
-            $query->where(function ($query) use ($roles) {
-                foreach ($roles as $role) {
-                    $query->orWhere(config('permission.table_names.roles').'.id', $role->id);
-                }
-            });
+        return $query->whereHas('roles', function (Builder $subQuery) use ($roles) {
+            $subQuery->whereIn(config('permission.table_names.roles').'.id', \array_column($roles, 'id'));
         });
     }
 
@@ -150,13 +146,15 @@ trait HasRoles
 
         $this->load('roles');
 
+        $this->forgetCachedPermissions();
+
         return $this;
     }
 
     /**
      * Remove all current roles and set the given ones.
      *
-     * @param array|\Spatie\Permission\Contracts\Role|string ...$roles
+     * @param  array|\Spatie\Permission\Contracts\Role|string  ...$roles
      *
      * @return $this
      */
@@ -171,21 +169,25 @@ trait HasRoles
      * Determine if the model has (one of) the given role(s).
      *
      * @param string|int|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
-     *
+     * @param string|null $guard
      * @return bool
      */
-    public function hasRole($roles): bool
+    public function hasRole($roles, string $guard = null): bool
     {
         if (is_string($roles) && false !== strpos($roles, '|')) {
             $roles = $this->convertPipeToArray($roles);
         }
 
         if (is_string($roles)) {
-            return $this->roles->contains('name', $roles);
+            return $guard
+                ? $this->roles->where('guard_name', $guard)->contains('name', $roles)
+                : $this->roles->contains('name', $roles);
         }
 
         if (is_int($roles)) {
-            return $this->roles->contains('id', $roles);
+            return $guard
+                ? $this->roles->where('guard_name', $guard)->contains('id', $roles)
+                : $this->roles->contains('id', $roles);
         }
 
         if ($roles instanceof Role) {
@@ -194,7 +196,7 @@ trait HasRoles
 
         if (is_array($roles)) {
             foreach ($roles as $role) {
-                if ($this->hasRole($role)) {
+                if ($this->hasRole($role, $guard)) {
                     return true;
                 }
             }
@@ -202,17 +204,19 @@ trait HasRoles
             return false;
         }
 
-        return $roles->intersect($this->roles)->isNotEmpty();
+        return $roles->intersect($guard ? $this->roles->where('guard_name', $guard) : $this->roles)->isNotEmpty();
     }
 
     /**
      * Determine if the model has any of the given role(s).
      *
-     * @param string|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
+     * Alias to hasRole() but without Guard controls
+     *
+     * @param string|int|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
      *
      * @return bool
      */
-    public function hasAnyRole($roles): bool
+    public function hasAnyRole(...$roles): bool
     {
         return $this->hasRole($roles);
     }
@@ -220,18 +224,20 @@ trait HasRoles
     /**
      * Determine if the model has all of the given role(s).
      *
-     * @param string|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection $roles
-     *
+     * @param  string|array|\Spatie\Permission\Contracts\Role|\Illuminate\Support\Collection  $roles
+     * @param  string|null  $guard
      * @return bool
      */
-    public function hasAllRoles($roles): bool
+    public function hasAllRoles($roles, string $guard = null): bool
     {
         if (is_string($roles) && false !== strpos($roles, '|')) {
             $roles = $this->convertPipeToArray($roles);
         }
 
         if (is_string($roles)) {
-            return $this->roles->contains('name', $roles);
+            return $guard
+                ? $this->roles->where('guard_name', $guard)->contains('name', $roles)
+                : $this->roles->contains('name', $roles);
         }
 
         if ($roles instanceof Role) {
@@ -242,7 +248,10 @@ trait HasRoles
             return $role instanceof Role ? $role->name : $role;
         });
 
-        return $roles->intersect($this->getRoleNames()) == $roles;
+        return $roles->intersect(
+            $guard
+                ? $this->roles->where('guard_name', $guard)->pluck('name')
+                : $this->getRoleNames()) == $roles;
     }
 
     /**
