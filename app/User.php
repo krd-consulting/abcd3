@@ -11,9 +11,7 @@ use App\ProgramRecord;
 use App\TeamRecord;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 use Spatie\Permission\Traits\HasRoles;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
@@ -64,7 +62,7 @@ class User extends Authenticatable implements Auditable
     public function teamGroups()
     {
         return $this->hasManyDeepFromRelations(
-            $this->teamPrograms(), 
+            $this->teamPrograms(),
             (new Program)->groups()
         );
     }
@@ -72,7 +70,7 @@ class User extends Authenticatable implements Auditable
     public function programGroups()
     {
         return $this->hasManyDeepFromRelations(
-            $this->programs(), 
+            $this->programs(),
             (new Program)->groups()
         );
     }
@@ -107,7 +105,7 @@ class User extends Authenticatable implements Auditable
         return $this->hasManyDeepFromRelations($this->records(), (new Record)->forms());
     }
 
-    public function availableTeams(?int $limit) 
+    public function availableTeams(?int $limit)
     {
         $teams;
 

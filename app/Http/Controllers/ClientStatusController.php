@@ -7,8 +7,6 @@ use App\ClientStatus;
 use App\Http\Requests\StoreClientStatus;
 use App\Http\Requests\UpdateClientStatus;
 
-use Illuminate\Http\Request;
-
 class ClientStatusController extends Controller
 {
     public function index()

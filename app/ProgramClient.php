@@ -12,7 +12,7 @@ use App\Http\Requests\UpdateProgramRecord;
 
 use App\Observers\ProgramClientObserver;
 
-use \Tightenco\Parental\HasParent;
+use Parental\HasParent;
 
 class ProgramClient extends ProgramRecord
 {

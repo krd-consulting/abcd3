@@ -28,6 +28,10 @@ class Form extends Model
 
     protected $fieldNumber = 1;
 
+    /**
+     * TODO: [Maintenance] make this function easier to read; extract some parts
+     * to private functions.
+     */
     public function createUsingRequest($request)
     {
         $this->name = $request->name;
@@ -104,8 +108,8 @@ class Form extends Model
             // create form entry table for form
             Schema::create($this->table_name, function (Blueprint $table) use ($fields) {
                 $table->bigIncrements('id');
-                
-                if($this->type == config('app.form_types.pre-post')) 
+
+                if($this->type == config('app.form_types.pre-post'))
                     $table->string('type');
 
                 $table->bigInteger('target_id')->unsigned();
@@ -183,10 +187,10 @@ class Form extends Model
 
     public function teams()
     {
-        return 
+        return
             $this
             ->morphedByMany(
-                'App\Team', 
+                'App\Team',
                 'model',
                 'model_has_forms',
                 'form_id',
@@ -197,10 +201,10 @@ class Form extends Model
 
     public function programs()
     {
-        return 
+        return
             $this
             ->morphedByMany(
-                'App\Program', 
+                'App\Program',
                 'model',
                 'model_has_forms',
                 'form_id',
@@ -211,10 +215,10 @@ class Form extends Model
 
     public function groups()
     {
-        return 
+        return
             $this
             ->morphedByMany(
-                'App\Group', 
+                'App\Group',
                 'model',
                 'model_has_forms',
                 'form_id',

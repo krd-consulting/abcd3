@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 
-use App\Form;
-
 use Carbon\Carbon;
 
 use Wildside\Userstamps\Userstamps;

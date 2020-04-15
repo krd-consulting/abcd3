@@ -3,7 +3,6 @@
 namespace App;
 
 use App\ProgramRecord;
-use App\User;
 
 use App\Http\Requests\UpdateProgramRecord;
 

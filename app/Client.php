@@ -4,13 +4,11 @@ namespace App;
 
 use App\Record;
 
-use \Tightenco\Parental\HasParent;
+use Parental\HasParent;
 
 class Client extends Record
 {
     use HasParent;
-
-	protected $table = 'records';
 
     protected static function boot()
     {

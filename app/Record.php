@@ -6,9 +6,6 @@ use App\Group;
 use App\RecordType;
 use App\Team;
 
-use App\ProgramRecord;
-use App\ProgramClient;
-
 use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 
@@ -113,7 +110,7 @@ class Record extends Model
 
     public function getProgramRecordPivotClass(RecordType $recordType = NULL)
     {
-        $model = $recordType == NULL ? 
+        $model = $recordType == NULL ?
                 $this->record_type == NULL ? 'Record' : $this->record_type->identity->model
             : $recordType->identity->model;
 
@@ -125,7 +122,7 @@ class Record extends Model
         return $this->hasMany($this->getProgramRecordPivotClass());
     }
 
-    public function teams() 
+    public function teams()
     {
         return $this->belongsToMany('App\Team');
     }
@@ -181,7 +178,7 @@ class Record extends Model
 
     // Query Scopes
 
-    public function scopeAs($query, $identity) {
+    public function scopeAs($query, $identity) { // $records->as($identity)
         return $query->addSelect('id')
             ->addSelect('field_1_value as ' . $identity->field1->name)
             ->addSelect('field_2_value as ' . $identity->field2->name)

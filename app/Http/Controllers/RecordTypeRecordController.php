@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Record;
 use App\RecordType;
-use App\User;
 use App\Http\Resources\Records;
-
-use Illuminate\Http\Request;
 
 class RecordTypeRecordController extends Controller
 {

@@ -4,7 +4,6 @@ namespace App;
 
 use App\Program;
 use App\Record;
-use App\User;
 
 use App\Http\Requests\StoreProgramRecord;
 use App\Http\Requests\UpdateProgramRecord;
