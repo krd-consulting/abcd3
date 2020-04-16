@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.login')
 
 @section('content')
 
-<div class="tw-bg-gray-100 tw-w-full tw-flex tw-justify-around lg:tw-items-start tw-h-screen">
+<div class="tw-bg-gray-100 tw-flex tw-justify-around tw-items-stretch tw-h-screen">
     <login-form inline-template old-email="{{ old('email') }}">
-        <div class="lg:tw-container lg:tw-ml-16 lg:tw-mt-48 lg:tw-w-4/5 tw-w-full tw-flex tw-flex-wrap tw-bg-white lg:tw-rounded-lg tw-shadow tw-border-t-8 tw-border-orange-500">
-            <div class="tw-w-full lg:tw-pt-8 tw-pt-64 tw-pb-8 tw-px-12">
+        <div class="lg:tw-w-1/2 md:tw-w-3/4 tw-w-full xl:tw-px-12 tw-px-4 tw-flex tw-items-center">
+            <div class="tw-w-full lg:tw-pt-16 tw-pt-12 tw-pb-8 xl:tw-px-12 lg:tw-px-8 tw-px-4 tw-bg-white tw-rounded-lg tw-shadow tw-border-t-8 tw-border-orange-500">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     @if ($errors->has('email'))
@@ -18,11 +18,11 @@
                         </div>
                     @endif            
                     <div>
-                        <div class="tw-flex tw-items-center tw-w-full">
-                            <label class="tw-w-1/4">
+                        <div class="tw-flex tw-flex-wrap tw-items-center tw-w-full">
+                            <label class="md:tw-w-1/4 md:tw-block tw-hidden">
                                 Login 
                             </label>
-                            <div class="tw-w-3/4">
+                            <div class="md:tw-w-3/4 tw-w-full">
                                 <base-input
                                         id="email"
                                         v-model="email"
@@ -33,7 +33,7 @@
                                             "
                                         name="email" 
                                         value="{{ old('email') }}"
-                                        placeholder=""
+                                        placeholder="Login"
                                         autocomplete="off"
                                         required autofocus
                                 ></base-input>
@@ -41,11 +41,11 @@
                         </div>
                     </div>
                     <div class="tw-mb-1">
-                        <div class="tw-flex tw-items-center tw-w-full">
-                            <label class="tw-w-1/4">
+                        <div class="tw-flex tw-flex-wrap tw-items-center tw-w-full">
+                            <label class="md:tw-w-1/4 md:tw-block tw-hidden">
                                 Password 
                             </label>
-                            <div class="tw-w-3/4">
+                            <div class="md:tw-w-3/4 tw-w-full">
                                 <base-input
                                         id="password"
                                         v-model="password"
@@ -55,7 +55,7 @@
                                                 tw-mb-2 tw-w-full tw-text-base
                                             "
                                         name="password"
-                                        placeholder=""
+                                        placeholder="Password"
                                         required
                                         show-password
                                 ></base-input>
@@ -77,10 +77,11 @@
                     </div>
                 </form>
             </div>
-            </div>
         </div>
     </login-form>
-    <img class="tw-hidden lg:tw-block lg:tw-w-1/2" src="/images/splash.jpg"></img>
+    <div class="tw-hidden lg:tw-w-1/2 lg:tw-flex lg:tw-items-center tw-bg-white">
+        <img src="/images/splash.jpg"></img>
+    </div>
 </div>
 
 @endsection

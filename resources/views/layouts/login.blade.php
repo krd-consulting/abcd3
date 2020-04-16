@@ -12,29 +12,12 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        
-    <style>
-        .item-text {
-            color:  #feba1b;
-        }
-    </style>
 </head>
 <body>
     <div id="app">
-        <base-container class="tw-h-screen" v-if="!loading">
-            @section('main-sidebar')
-            @show
-
-            <base-container>
-                @section('main-nav')
-                @show
-
-                <el-main class="main">
-                    @yield('content')
-                </el-main>
-            </base-container>
-        </base-container>
+        @yield('content')
     </div>
+
     @section('scripts')
     @show
 </body>
