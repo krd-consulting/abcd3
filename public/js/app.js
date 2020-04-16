@@ -5095,10 +5095,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     submit: function submit() {
+      var _this4 = this;
+
       this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.entryData);
       this.entryRequest.store(this.$route.params.form).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {//
+        _this4.$message({
+          type: 'success',
+          message: 'Form Entry Submitted!'
+        });
+
+        window.location.reload();
+      })["catch"](function (error) {
+        _this4.$message({
+          type: 'error',
+          message: 'You may have entered incorrect data.'
+        });
       });
     }
   },

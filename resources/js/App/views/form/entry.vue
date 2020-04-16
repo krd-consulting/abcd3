@@ -316,10 +316,18 @@
 
                 this.entryRequest.store(this.$route.params.form)
                     .then((response) => {
-                        console.log(response);
+                        this.$message({
+                            type: 'success',
+                            message: 'Form Entry Submitted!'
+                        });
+
+                        window.location.reload();
                     })
                     .catch((error) => {
-                        //
+                        this.$message({
+                            type: 'error',
+                            message: 'You may have entered incorrect data.'
+                        });
                     });
             }
         },

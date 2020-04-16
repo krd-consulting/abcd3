@@ -71,8 +71,8 @@ export default {
             });
             //  redirect to forms
             this.$store.dispatch('submitForm').then((response) => {
-                
-                // return Promise('') --> Validate whether or not the form is good
+                this.visible = false;
+                window.location.href = '/forms/';
             })
             .catch(() => {
                 this.$message({
@@ -80,8 +80,6 @@ export default {
                     message: 'Oops! Something went wrong.'
                 });
             });
-            this.visible = false;
-            window.location.href = '/forms/';
         },
         cancel() {
             this.visible = false;
