@@ -1,7 +1,7 @@
 <template>
     <span>
         <base-icon class="tw-text-xs tw-align-middle">{{ icon }}</base-icon>
-        <slot>{{ name }}</slot>
+        <slot></slot>
     </span>
 </template>
 <script>
@@ -11,25 +11,6 @@
         },
 
         computed: {
-            name() {
-                switch(this.scope) {
-                    case 1:
-                        return 'universal';
-
-                    case 2:
-                        return 'team';
-
-                    case 3:
-                        return 'program';
-
-                    case 4:
-                        return 'case load';
-
-                    case 5:
-                        return 'self';
-                }
-            },
-
             icon() {
 
                 switch(this.scope) {
@@ -47,6 +28,9 @@
 
                     case 5:
                         return 'person';
+                    
+                    case 6:
+                        return 'star';
                 }
             }
         }

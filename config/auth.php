@@ -112,22 +112,22 @@ return [
 
         'group' => [
             'name' => 'group',
-            'value' => '2'
+            'value' => '3'
         ],
 
         'program' => [
             'name' => 'program',
-            'value' => '3'
+            'value' => '4'
         ],
 
         'team' => [
             'name' => 'team',
-            'value' => '4'
+            'value' => '5'
         ],
 
         'universal' => [
             'name' => 'universal',
-            'value' => '5'
+            'value' => '6'
         ],
     ],
 

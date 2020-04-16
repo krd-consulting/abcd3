@@ -4654,6 +4654,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -5240,24 +5242,6 @@ __webpack_require__.r(__webpack_exports__);
     scope: Number
   },
   computed: {
-    name: function name() {
-      switch (this.scope) {
-        case 1:
-          return 'universal';
-
-        case 2:
-          return 'team';
-
-        case 3:
-          return 'program';
-
-        case 4:
-          return 'case load';
-
-        case 5:
-          return 'self';
-      }
-    },
     icon: function icon() {
       switch (this.scope) {
         case 1:
@@ -5274,6 +5258,9 @@ __webpack_require__.r(__webpack_exports__);
 
         case 5:
           return 'person';
+
+        case 6:
+          return 'star';
       }
     }
   }
@@ -89308,145 +89295,160 @@ var render = function() {
           staticStyle: { "max-height": "78vh" }
         },
         _vm._l(_vm.roles, function(role, roleIndex) {
-          return _c("div", { staticClass: "tw-w-1/2 tw-mb-4 tw-px-2" }, [
-            _c(
-              "div",
-              {
-                staticClass: "tw-rounded tw-shadow tw-bg-white tw-px-4 tw-py-2"
-              },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "tw-flex tw-items-center tw-pt-4 tw-pb-2 tw-border-b tw-rounded-t"
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "tw-w-3/4" },
-                      [
-                        _c("div", { staticClass: "tw-font-semibold" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(role.name) +
-                              "\n                        "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("scope-tag", {
-                          staticClass:
-                            "tw-py-1 tw-text-xs tw-text-blue-500 tw-font-semibold tw-capitalize",
-                          attrs: { scope: role.scope_id }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "tw-w-1/4 tw-text-right tw-mr-4" },
-                      [
-                        _c(
-                          "button",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.editRole(role)
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "base-icon",
-                              {
-                                staticClass:
-                                  "tw-text-sm tw-text-gray-500 hover:tw-text-blue"
-                              },
-                              [_vm._v("edit")]
-                            )
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.confirm(role)
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "base-icon",
-                              {
-                                staticClass:
-                                  "tw-text-sm tw-text-gray-500 hover:tw-text-red-400"
-                              },
-                              [_vm._v("delete")]
-                            )
-                          ],
-                          1
-                        )
-                      ]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("table", { staticClass: "tw-w-full" }, [
+          return _c(
+            "div",
+            { key: role.id, staticClass: "tw-w-1/2 tw-mb-4 tw-px-2" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "tw-rounded tw-shadow tw-bg-white tw-px-4 tw-py-2"
+                },
+                [
                   _c(
-                    "tbody",
-                    _vm._l(role.all_permissions, function(
-                      permission,
-                      permissionIndex
-                    ) {
-                      return _c("tr", [
-                        _c(
-                          "td",
-                          {
-                            staticClass: "tw-py-4 tw-text-sm tw-capitalize",
-                            attrs: { width: "75%" }
-                          },
-                          [_vm._v(_vm._s(permission.name))]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          { staticClass: "tw-py-4 tw-text-right tw-pr-4" },
-                          [
-                            _c("base-switch", {
+                    "div",
+                    {
+                      staticClass:
+                        "tw-flex tw-items-center tw-pt-4 tw-pb-2 tw-border-b tw-rounded-t"
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "tw-w-3/4" },
+                        [
+                          _c("div", { staticClass: "tw-font-semibold" }, [
+                            _vm._v(
+                              "\n                            " +
+                                _vm._s(role.name) +
+                                "\n                        "
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "scope-tag",
+                            {
+                              staticClass:
+                                "tw-py-1 tw-text-xs tw-text-blue-500 tw-font-semibold tw-capitalize",
+                              attrs: { scope: role.scope.id }
+                            },
+                            [
+                              _vm._v(
+                                "\n                            " +
+                                  _vm._s(role.scope.name) +
+                                  "\n                        "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "tw-w-1/4 tw-text-right tw-mr-4" },
+                        [
+                          _c(
+                            "button",
+                            {
                               on: {
-                                change: function($event) {
-                                  return _vm.toggleRolePermission(
-                                    role,
-                                    permission,
-                                    $event,
-                                    roleIndex,
-                                    permissionIndex
-                                  )
+                                click: function($event) {
+                                  return _vm.editRole(role)
                                 }
-                              },
-                              model: {
-                                value: permission.permitted,
-                                callback: function($$v) {
-                                  _vm.$set(permission, "permitted", $$v)
-                                },
-                                expression: "permission.permitted"
                               }
-                            })
-                          ],
-                          1
-                        )
-                      ])
-                    }),
-                    0
-                  )
-                ])
-              ]
-            )
-          ])
+                            },
+                            [
+                              _c(
+                                "base-icon",
+                                {
+                                  staticClass:
+                                    "tw-text-sm tw-text-gray-500 hover:tw-text-blue"
+                                },
+                                [_vm._v("edit")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.confirm(role)
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "base-icon",
+                                {
+                                  staticClass:
+                                    "tw-text-sm tw-text-gray-500 hover:tw-text-red-400"
+                                },
+                                [_vm._v("delete")]
+                              )
+                            ],
+                            1
+                          )
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("table", { staticClass: "tw-w-full" }, [
+                    _c(
+                      "tbody",
+                      _vm._l(role.all_permissions, function(
+                        permission,
+                        permissionIndex
+                      ) {
+                        return _c("tr", [
+                          _c(
+                            "td",
+                            {
+                              staticClass: "tw-py-4 tw-text-sm tw-capitalize",
+                              attrs: { width: "75%" }
+                            },
+                            [_vm._v(_vm._s(permission.name))]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            { staticClass: "tw-py-4 tw-text-right tw-pr-4" },
+                            [
+                              _c("base-switch", {
+                                on: {
+                                  change: function($event) {
+                                    return _vm.toggleRolePermission(
+                                      role,
+                                      permission,
+                                      $event,
+                                      roleIndex,
+                                      permissionIndex
+                                    )
+                                  }
+                                },
+                                model: {
+                                  value: permission.permitted,
+                                  callback: function($$v) {
+                                    _vm.$set(permission, "permitted", $$v)
+                                  },
+                                  expression: "permission.permitted"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
         }),
         0
       )
@@ -90183,7 +90185,7 @@ var render = function() {
         _vm._v(_vm._s(_vm.icon))
       ]),
       _vm._v(" "),
-      _vm._t("default", [_vm._v(_vm._s(_vm.name))])
+      _vm._t("default")
     ],
     2
   )
