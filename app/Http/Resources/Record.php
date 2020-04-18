@@ -19,8 +19,11 @@ class Record extends JsonResource
     {
         return [
             'id' => $this->id,
+
+            // TODO: Remove n+1 query
             'type_slug' => $this->record_type->slug,
             'type' => new RecordType($this->record_type),
+
             'program_status' => $this->whenPivotLoaded(
                 'program_record',
                 function () {
@@ -31,9 +34,12 @@ class Record extends JsonResource
             'enrolled_at' => $this->whenPivotLoaded('program_record', function() {
                 return $this->pivot->enrolled_at;
             }),
+            // TODO: Remove n+1 query
             'cases_count' => $this->cases->count(),
             'groups_count' => $this->groups->count(),
             'path' => $this->path,
+
+            // TODO: Remove n+1 query
             $this->record_type->identity->field1->name => $this->field_1_value,
             $this->record_type->identity->field2->name => $this->field_2_value,
             $this->record_type->identity->field3->name => $this->field_3_value,
@@ -42,6 +48,7 @@ class Record extends JsonResource
                 $this->record_type->identity->field2->name => 'field_2_value',
                 $this->record_type->identity->field3->name => 'field_3_value'
             ],
+
             'editable' => auth()->user()->can('write', $this->resource)
         ];
     }

@@ -43,6 +43,9 @@ class Records extends ResourceCollection
 
         return [
             'record_type' => new RecordTypeResource($this->recordType),
+
+            // TODO: Remove n+1 query
+
             'fields' => [
                 $this->recordType->identity->field1->name => 'field_1_value',
                 $this->recordType->identity->field2->name => 'field_2_value',
