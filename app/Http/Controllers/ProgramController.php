@@ -9,9 +9,6 @@ use App\Http\Resources\Programs;
 use App\Http\Requests\StoreProgram;
 use App\Http\Requests\UpdateProgram;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-
 class ProgramController extends Controller
 {
     /**
@@ -21,7 +18,8 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = (new Program)->availableFor(auth()->user())->with('team')->get();
+        $perPage = request('perPage');
+        $programs = (new Program)->availableFor(auth()->user())->with('team')->paginate($perPage);
 
         return (new Programs($programs));
     }

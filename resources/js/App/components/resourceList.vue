@@ -16,7 +16,7 @@
                             </slot>
                         </div>
                         <div>
-                            <slot v-if="total == 0 && search == '' && loading == false" name="empty-placeholder-add-button">
+                            <slot v-if="total == 0 && search == '' && loading == false && hasAdd" name="empty-placeholder-add-button">
                                 <base-button
                                     class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none"
                                     @click="$emit('add')">

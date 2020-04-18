@@ -2,15 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Form;
 use App\FormEntry;
 use App\Http\Requests\StoreFormEntry;
+use App\Http\Resources\FormEntries;
+
+use Barryvdh\Debugbar\Facade as Debugbar;
 
 class FormEntryController extends Controller
 {
-    public function store(Form $form, StoreFormEntry $request) 
+	public function index(Form $form)
+	{
+        $entry = new FormEntry;
+        $entry->setTable($form->table_name);
+        $entries = $entry->paginate();
+        $entries->load('target');
+
+        $entries = (new FormEntries($entries));
+
+        return $entries;
+	}
+
+    public function store(Form $form, StoreFormEntry $request)
     {
     	$entry = new FormEntry;
     	$entry->setTable($form->table_name);

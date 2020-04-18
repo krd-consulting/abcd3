@@ -170,6 +170,17 @@ class Form extends Model
         return SchemalessAttributes::createForModel($this, 'field_layout');
     }
 
+    /**
+     * TODO: Implement this relationship; might need a custom relationship
+     * Form has many entries but is dictated by the entries' table name since
+     * a form's entries are located in a table in the form: `form_[id]`
+     * where [id] is the left padded id of the form
+     */
+    public function entries()
+    {
+
+    }
+
     public function fields()
     {
         return $this->hasMany('App\FormField');

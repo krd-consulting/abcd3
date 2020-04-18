@@ -12,12 +12,6 @@ use App\Http\Resources\Forms;
 use App\Http\Requests\StoreForm;
 use App\Http\Requests\UpdateForm;
 
-use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-
 class FormController extends Controller
 {
     public function index()

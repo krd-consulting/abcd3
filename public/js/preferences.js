@@ -87734,7 +87734,8 @@ var render = function() {
                       [
                         _vm.total == 0 &&
                         _vm.search == "" &&
-                        _vm.loading == false
+                        _vm.loading == false &&
+                        _vm.hasAdd
                           ? _vm._t("empty-placeholder-add-button", [
                               _c(
                                 "base-button",

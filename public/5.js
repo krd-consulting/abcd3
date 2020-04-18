@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
-/***/ "./resources/js/api/FormFieldRequest.js":
-/*!**********************************************!*\
-  !*** ./resources/js/api/FormFieldRequest.js ***!
-  \**********************************************/
+/***/ "./resources/js/api/RecordsAvailableForCaseloadRequest.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/api/RecordsAvailableForCaseloadRequest.js ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,33 +34,40 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var FormField = /*#__PURE__*/function (_Request) {
-  _inherits(FormField, _Request);
+var RecordsAvailableForCaseloadRequest = /*#__PURE__*/function (_Request) {
+  _inherits(RecordsAvailableForCaseloadRequest, _Request);
 
-  var _super = _createSuper(FormField);
+  var _super = _createSuper(RecordsAvailableForCaseloadRequest);
 
-  function FormField() {
-    _classCallCheck(this, FormField);
+  function RecordsAvailableForCaseloadRequest() {
+    _classCallCheck(this, RecordsAvailableForCaseloadRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(FormField, [{
+  _createClass(RecordsAvailableForCaseloadRequest, [{
     key: "retrieve",
-    value: function retrieve(form) {
-      return this.get("/api/forms/".concat(form, "/fields"));
-    }
-  }, {
-    key: "show",
-    value: function show(field) {
-      return this.get("api/form-fields/".concat(field));
-    }
+    value: function retrieve(program, recordType, record) {
+      return this.get("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record, "/available-cases"));
+    } // store() {
+    // 	return this.post(`/api/programs/client-statuses`);
+    // }
+    // edit(status) {
+    // 	return this.get(`/api/programs/client-statuses/${status}/edit`);
+    // }
+    // update(status) {
+    // 	return this.patch(`/api/programs/client-statuses/${status}`);
+    // }
+    // destroy(status) {
+    // 	return this.delete(`/api/programs/client-statuses/${status}`);
+    // }
+
   }]);
 
-  return FormField;
+  return RecordsAvailableForCaseloadRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (FormField);
+/* harmony default export */ __webpack_exports__["default"] = (RecordsAvailableForCaseloadRequest);
 
 /***/ })
 

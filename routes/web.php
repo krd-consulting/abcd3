@@ -100,6 +100,7 @@ Route::prefix('api')
 
         Route::get('forms/{form}/fields', 'FormFieldController@index');
 
+        Route::get('forms/{form}/entries', 'FormEntryController@index');
         Route::post('forms/{form}', 'FormEntryController@store');
 
         Route::get('form-fields/{field}/entries', 'FormFieldEntries');

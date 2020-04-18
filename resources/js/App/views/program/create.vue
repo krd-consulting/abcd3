@@ -75,10 +75,10 @@
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="programData.settings.default_client_status_id"
+                            v-model="programData.default_client_status_id"
                             name="team"
                             placeholder="Select Default Status"
-                            @change="request.errors.clear('settings.default_client_status_id')">
+                            @change="request.errors.clear('default_client_status_id')">
                             <el-option
                                 v-for="status in statuses"
                                 :key="status.id"
@@ -89,9 +89,9 @@
                         </base-select>
                     </div>
                 </div>
-                <div v-if="request.errors.has('settings.default_client_status_id')" class="tw-flex tw-justify-end">
+                <div v-if="request.errors.has('default_client_status_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('settings.default_client_status_id')[0]" class="tw-text-xs tw-text-red-500"></span>
+                        <span v-text="request.errors.get('default_client_status_id')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
             </div>
@@ -129,9 +129,7 @@
                     name: '',
                     description: '',
                     team_id: '',
-                    settings: { 
-                        default_client_status_id: ''
-                    }
+                    default_client_status_id: ''
                 },
                 teams: [],
                 statuses: []

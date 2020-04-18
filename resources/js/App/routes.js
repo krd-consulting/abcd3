@@ -21,7 +21,8 @@ import TeamProfilePrograms from './views/team/profile/programs';
 import TeamProfileGroups from './views/team/profile/groups';
 import TeamProfileRecords from './views/team/profile/records';
 import FormList from './views/form';
-import FormEntry from './views/form/entry';
+import FormEntryList from './views/form/entry/';
+import FormEntry from './views/form/entry/create';
 
 const routes = [
     {
@@ -82,6 +83,9 @@ const routes = [
     },
     {
         path: '/forms/:form/new', component: FormEntry,
+    }, 
+    {
+        path: '/forms/:form', component: FormEntryList
     }
 ];
 

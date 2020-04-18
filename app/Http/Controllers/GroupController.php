@@ -7,13 +7,12 @@ use App\Team;
 use App\Http\Requests\StoreGroup;
 use App\Http\Requests\UpdateGroup;
 
-use Illuminate\Http\Request;
-
 class GroupController extends Controller
 {
     public function index()
     {
-        return (new Group())->availableFor(auth()->user())->with('program')->paginate();
+        $perPage = request('perPage');
+        return (new Group())->availableFor(auth()->user())->with('program')->paginate($perPage);
     }
 
     public function show(Group $group)

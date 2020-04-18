@@ -30,6 +30,7 @@
                                         class="
                                             {{ $errors->has('email') ? ' is-invalid' : '' }}
                                             tw-mb-2 tw-w-full tw-text-base
+                                            tw-placeholder-transparent
                                             "
                                         name="email" 
                                         value="{{ old('email') }}"
