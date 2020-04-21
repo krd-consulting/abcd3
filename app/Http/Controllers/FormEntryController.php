@@ -7,8 +7,6 @@ use App\FormEntry;
 use App\Http\Requests\StoreFormEntry;
 use App\Http\Resources\FormEntries;
 
-use Barryvdh\Debugbar\Facade as Debugbar;
-
 class FormEntryController extends Controller
 {
 	public function index(Form $form)
@@ -16,6 +14,7 @@ class FormEntryController extends Controller
         $entry = new FormEntry;
         $entry->setTable($form->table_name);
         $entries = $entry->paginate();
+
         $entries->load('target');
 
         $entries = (new FormEntries($entries));

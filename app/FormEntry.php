@@ -57,7 +57,12 @@ class FormEntry extends Model
 
     public function target()
     {
-        $targetModel = $this->form()->target_type->model;
+        // Have to do this because for some reason,
+        // $this->form()->target_type always returns the first item in
+        // the form target types table.
+        $targetType = FormTargetType::find($this->form()->target_type_id);
+
+        $targetModel = $targetType->model;
 
         if($targetModel == 'App\RecordType') {
             $targetModel = 'App\Record';

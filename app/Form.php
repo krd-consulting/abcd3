@@ -245,6 +245,10 @@ class Form extends Model
         $this->table_name = 'form_' . str_pad($id, 3, '0', STR_PAD_LEFT);
     }
 
+    public function scope() {
+        return $this->belongsTo('App\Scope');
+    }
+
     public function scopeAvailableFor($query, $user) {
         $universal =
             (clone $query)
