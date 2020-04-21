@@ -11,6 +11,7 @@
             :per-page="params.perPage"
             :has-add="total > 0"
             path-suffix="/new"
+            has-add
             has-delete
             :has-list-columns="false"
             :hasSearch="false"

@@ -5375,6 +5375,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -96601,6 +96602,7 @@ var render = function() {
             "per-page": _vm.params.perPage,
             "has-add": _vm.total > 0,
             "path-suffix": "/new",
+            "has-add": "",
             "has-delete": "",
             "has-list-columns": false,
             hasSearch: false,
