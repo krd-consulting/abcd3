@@ -76,5 +76,8 @@ module.exports = {
 		indigo: colors.indigo,
 		purple: colors.purple,
 	}
-  }
+  },
+  variants: {
+    backgroundColor: ['even', 'hover'],
+  },
 }

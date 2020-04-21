@@ -4,7 +4,7 @@
         :page.sync="params.page"
         :per-page="params.perPage"
         :search-terms.sync="params.search"
-        :loading="loading"
+        :loading="false"
         :has-list-columns="false"
         @page-change="retrieve()"
         :total="total">
@@ -14,13 +14,13 @@
             <list-item
                 v-for="(entry, index) in entries"
                 :key="index"
-                class="tw-py-4 tw-px-4 hover:tw-bg-gray-100"
-                :to="entry.target.path">
+                :to="entry.target.path"
+                class="tw-cursor-pointer">
                 <template slot="image">
                     <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-base" :record="entry.target" :fields="entry.target.fields"/>
                 </template>
 
-                <slot name="list-item-primary-data" :item="item">
+                <slot name="list-item-primary-data" :item="entry">
                     <primary-data class="tw-font-semibold" :record="entry.target" :fields="entry.target.fields"/>
                 </slot>
 
@@ -29,9 +29,12 @@
                 </template>
 
                 <template slot="bellows">
-                    <div v-for="field in fields">
-                        {{ field.title }}:{{ entry[field.column_name] }}
-                    </div>
+                    <dl>
+                        <div v-for="field in fields" class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
+                            <dl class="tw-text-gray-600">{{ field.title }}</dl>
+                            <dt>{{ entry[field.column_name] }}</dt>
+                        </div>
+                    </dl>
                 </template>
             </list-item>
         </template>

@@ -5183,6 +5183,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -11563,6 +11566,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     to: {
@@ -11572,6 +11583,11 @@ __webpack_require__.r(__webpack_exports__);
     primaryData: String,
     secondaryData: String,
     item: Array | Object
+  },
+  data: function data() {
+    return {
+      open: false
+    };
   }
 });
 
@@ -96461,7 +96477,7 @@ var render = function() {
         page: _vm.params.page,
         "per-page": _vm.params.perPage,
         "search-terms": _vm.params.search,
-        loading: _vm.loading,
+        loading: false,
         "has-list-columns": false,
         total: _vm.total
       },
@@ -96491,7 +96507,7 @@ var render = function() {
             "list-item",
             {
               key: index,
-              staticClass: "tw-py-4 tw-px-4 hover:tw-bg-gray-100",
+              staticClass: "tw-cursor-pointer",
               attrs: { to: entry.target.path }
             },
             [
@@ -96515,7 +96531,7 @@ var render = function() {
                     attrs: { record: entry.target, fields: entry.target.fields }
                   })
                 ],
-                { item: _vm.item }
+                { item: entry }
               ),
               _vm._v(" "),
               _c(
@@ -96530,22 +96546,28 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "template",
-                { slot: "bellows" },
-                _vm._l(_vm.fields, function(field) {
-                  return _c("div", [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(field.title) +
-                        ":" +
-                        _vm._s(entry[field.column_name]) +
-                        "\n                "
+              _c("template", { slot: "bellows" }, [
+                _c(
+                  "dl",
+                  _vm._l(_vm.fields, function(field) {
+                    return _c(
+                      "div",
+                      {
+                        staticClass:
+                          "tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100"
+                      },
+                      [
+                        _c("dl", { staticClass: "tw-text-gray-600" }, [
+                          _vm._v(_vm._s(field.title))
+                        ]),
+                        _vm._v(" "),
+                        _c("dt", [_vm._v(_vm._s(entry[field.column_name]))])
+                      ]
                     )
-                  ])
-                }),
-                0
-              )
+                  }),
+                  0
+                )
+              ])
             ],
             2
           )
@@ -103534,85 +103556,125 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: " tw-bg-white tw-border-b" }, [
-    _c(
-      "div",
-      { staticClass: "tw-flex tw-items-center" },
-      [
-        _c(
-          "router-link",
-          {
-            staticClass: "tw-flex tw-w-1/3 tw-items-top tw-cursor-pointer",
-            attrs: { tag: "div", to: _vm.to }
-          },
-          [
-            _c("div", [_vm._t("image")], 2),
-            _vm._v(" "),
-            _c(
-              "div",
-              [
-                _vm._t(
-                  "primary-data",
-                  [
-                    _c(
-                      "span",
-                      { staticClass: "tw-block" },
-                      [_vm._t("default", [_vm._v(_vm._s(_vm.primaryData))])],
-                      2
-                    )
-                  ],
-                  { item: _vm.item }
-                ),
-                _vm._v(" "),
-                _vm._t(
-                  "secondary-data",
-                  [
-                    _c(
-                      "span",
-                      { staticClass: "tw-text-sm" },
-                      [
-                        _vm._t("secondary-data-text", [
-                          _vm._v(_vm._s(_vm.secondaryData))
-                        ])
-                      ],
-                      2
-                    )
-                  ],
-                  { item: _vm.item }
-                )
-              ],
-              2
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "tw-flex tw-flex-grow tw-justify-between" },
-          [
-            _vm._t("tertiary-data", null, { item: _vm.item }),
-            _vm._v(" "),
-            _vm._t(
-              "options-container",
-              [
-                _c(
-                  "div",
-                  { staticClass: "tw-text-right" },
-                  [_vm._t("options")],
-                  2
-                )
-              ],
-              { item: _vm.item }
-            )
-          ],
-          2
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", [_vm._t("bellows")], 2)
-  ])
+  return _c(
+    "div",
+    {
+      staticClass: "tw-bg-white tw-border-b",
+      on: {
+        click: function($event) {
+          _vm.open = !_vm.open
+        }
+      }
+    },
+    [
+      _c(
+        "div",
+        { staticClass: "tw-flex tw-items-center tw-p-4 hover:tw-bg-gray-100" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "tw-flex tw-w-1/3 tw-items-top tw-cursor-pointer",
+              attrs: { tag: "div", to: _vm.to }
+            },
+            [
+              _c("div", [_vm._t("image")], 2),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _vm._t(
+                    "primary-data",
+                    [
+                      _c(
+                        "span",
+                        { staticClass: "tw-block" },
+                        [_vm._t("default", [_vm._v(_vm._s(_vm.primaryData))])],
+                        2
+                      )
+                    ],
+                    { item: _vm.item }
+                  ),
+                  _vm._v(" "),
+                  _vm._t(
+                    "secondary-data",
+                    [
+                      _c(
+                        "span",
+                        { staticClass: "tw-text-sm" },
+                        [
+                          _vm._t("secondary-data-text", [
+                            _vm._v(_vm._s(_vm.secondaryData))
+                          ])
+                        ],
+                        2
+                      )
+                    ],
+                    { item: _vm.item }
+                  )
+                ],
+                2
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "tw-flex tw-flex-grow tw-justify-between" },
+            [
+              _vm._t("tertiary-data", null, { item: _vm.item }),
+              _vm._v(" "),
+              _c("div", { staticClass: "tw-flex-grow" }),
+              _vm._v(" "),
+              _vm._t(
+                "options-container",
+                [
+                  _c(
+                    "div",
+                    { staticClass: "tw-text-right" },
+                    [
+                      _c("div", { staticClass: "tw-flex tw-flex-grow" }),
+                      _vm._v(" "),
+                      _vm._t("options", [
+                        _c(
+                          "button",
+                          {
+                            staticClass:
+                              "tw-py-2 tw-px-4 tw-text-gray-600 hover:tw-text-blue-500 tw-bg-transparent tw-border-none"
+                          },
+                          [
+                            _c(
+                              "base-icon",
+                              { staticClass: "tw-text-xs tw-align-middle" },
+                              [
+                                _vm._t("options-delete-icon", [
+                                  _vm._v("expand_more")
+                                ])
+                              ],
+                              2
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ],
+                    2
+                  )
+                ],
+                { item: _vm.item }
+              )
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.open
+        ? _c("div", { staticClass: "tw-border-t" }, [_vm._t("bellows")], 2)
+        : _vm._e()
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
