@@ -97,6 +97,7 @@ Route::prefix('api')
         Route::post('forms/create', 'ValidateForm');
         Route::post('forms', 'FormController@store');
         Route::patch('forms/{form}', 'FormController@update');
+        Route::delete('forms/{form}', 'FormController@destroy');
 
         Route::get('forms/{form}/fields', 'FormFieldController@index');
 

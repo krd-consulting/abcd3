@@ -128,4 +128,10 @@ class FormController extends Controller
         return $targetTypes;
 
     }
+
+    public function destroy(Form $form) {
+        // TODO: Authorize deleting forms.
+
+        $form->delete();
+    }
 }

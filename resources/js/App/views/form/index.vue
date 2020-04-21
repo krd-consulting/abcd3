@@ -16,6 +16,7 @@
             :hasSearch="false"
             @edit="editForm"
             @page-change="retrieve()"
+            @delete="confirmDelete"
             :total="total">
             <template slot="header-text">Forms</template>
             <template slot="options-add">
@@ -146,6 +147,36 @@
                     this.forms = response.data;
                     this.total = response.meta.total;
                 });
+            },
+
+            confirmDelete(form) {
+                this.$confirm('Are you sure you want to delete this Form?', 'Delete Form', {
+                    confirmButtonText: 'Delete',
+                    cancelButtonText: 'Wait, no!',
+                    type: 'warning'
+                }).then(() => {
+                    this.deleteForm(form)
+                        .then(() => {
+                            this.retrieve();
+
+                            this.$message({
+                                type: 'success',
+                                message: 'Form was deleted.'
+                            });
+                        })
+                        .catch((error) => {
+                            this.$message({
+                                type: 'error',
+                                message: error.message
+                            });
+                        });
+                })
+            },
+
+            deleteForm(form) {
+                let request = new Request();
+
+                return request.destroy(form);
             },
         },
 

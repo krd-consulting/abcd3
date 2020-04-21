@@ -5374,6 +5374,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -5417,6 +5418,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.forms = response.data;
         _this.total = response.meta.total;
       });
+    },
+    confirmDelete: function confirmDelete(form) {
+      var _this2 = this;
+
+      this.$confirm('Are you sure you want to delete this Form?', 'Delete Form', {
+        confirmButtonText: 'Delete',
+        cancelButtonText: 'Wait, no!',
+        type: 'warning'
+      }).then(function () {
+        _this2.deleteForm(form).then(function () {
+          _this2.retrieve();
+
+          _this2.$message({
+            type: 'success',
+            message: 'Form was deleted.'
+          });
+        })["catch"](function (error) {
+          _this2.$message({
+            type: 'error',
+            message: error.message
+          });
+        });
+      });
+    },
+    deleteForm: function deleteForm(form) {
+      var request = new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"]();
+      return request.destroy(form);
     }
   },
   created: function created() {
@@ -96585,7 +96613,8 @@ var render = function() {
             edit: _vm.editForm,
             "page-change": function($event) {
               return _vm.retrieve()
-            }
+            },
+            delete: _vm.confirmDelete
           },
           scopedSlots: _vm._u([
             {
@@ -122708,10 +122737,12 @@ var Form = /*#__PURE__*/function (_Request) {
     key: "update",
     value: function update(form) {
       return this.patch("/api/forms/".concat(form));
-    } // destroy(status) {
-    // 	return this.delete(`/api/programs/client-statuses/${status}`);
-    // }
-
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(form) {
+      return this["delete"]("/api/forms/".concat(form));
+    }
   }]);
 
   return Form;

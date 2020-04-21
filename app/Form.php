@@ -9,6 +9,7 @@ use App\Scope;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Spatie\SchemalessAttributes\SchemalessAttributes;
 use Wildside\Userstamps\Userstamps;
@@ -17,6 +18,7 @@ use Wildside\Userstamps\Userstamps;
 class Form extends Model
 {
     use Userstamps;
+    use SoftDeletes;
 
     protected $searchColumns = [
         'name'

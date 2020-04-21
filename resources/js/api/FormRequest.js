@@ -29,9 +29,9 @@ class Form extends Request {
     	return this.patch(`/api/forms/${form}`);
     }
 
-    // destroy(status) {
-    // 	return this.delete(`/api/programs/client-statuses/${status}`);
-    // }
+    destroy(form) {
+    	return this.delete(`/api/forms/${form}`);
+    }
 }
 
 export default Form
