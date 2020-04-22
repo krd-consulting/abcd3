@@ -1,9 +1,10 @@
 <template>
-	<component :is="appropriateComponent" :record="record"/>
+	<component :is="appropriateComponent" :record="record" :program="program"/>
 </template>
 <script>
 	export default {
 		props: {
+            program: Array | Object,
 			recordType: Array | Object,
 			record: Array | Object
 		},

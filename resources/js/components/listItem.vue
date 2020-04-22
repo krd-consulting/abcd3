@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-items-center tw-bg-white tw-border-b">
-        <router-link tag="div" class="tw-flex tw-w-1/3 tw-items-top tw-cursor-pointer" :to="to">
+        <router-link tag="div" class="tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer" :to="to">
             <div>
                 <slot name="image">
                 </slot>

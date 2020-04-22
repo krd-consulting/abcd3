@@ -101,14 +101,14 @@
                         break;
 
                     case 'Staff':
-                        return [ 'Caseload', 'Groups'];
+                        return [ 'Caseload', 'Groups', 'Enrollment Date'];
                         break;
 
                     case 'Volunteer':
                         return [ 'Hours Per Month', 'Hours Per Year'];
                         break;
 
-                    default: 
+                    default:
                         return [];
                 }
             },

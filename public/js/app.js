@@ -3656,6 +3656,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
+    program: Array | Object,
     recordType: Array | Object,
     record: Array | Object
   },
@@ -3705,6 +3706,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     parsedFields: function parsedFields() {
       var fields = [];
+
+      if (this.fields == null) {
+        return fields;
+      }
+
       if ('first_name' in this.fields) fields.push('first_name');
       if ('last_name' in this.fields) fields.push('last_name');
       if ('business_name' in this.fields) fields.push('business_name');
@@ -9226,7 +9232,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           break;
 
         case 'Staff':
-          return ['Caseload', 'Groups'];
+          return ['Caseload', 'Groups', 'Enrollment Date'];
           break;
 
         case 'Volunteer':
@@ -94245,7 +94251,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(_vm.appropriateComponent, {
     tag: "component",
-    attrs: { record: _vm.record }
+    attrs: { record: _vm.record, program: _vm.program }
   })
 }
 var staticRenderFns = []
@@ -103465,7 +103471,7 @@ var render = function() {
       _c(
         "router-link",
         {
-          staticClass: "tw-flex tw-w-1/3 tw-items-top tw-cursor-pointer",
+          staticClass: "tw-flex tw-w-1/4 tw-items-top tw-cursor-pointer",
           attrs: { tag: "div", to: _vm.to }
         },
         [

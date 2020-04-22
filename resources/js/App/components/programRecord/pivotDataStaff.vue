@@ -6,8 +6,8 @@
 	        </div>
 	        <div>
 	        	<add-case
-	        		:record-id="record.id" 
-            		:active.sync="addCaseModal.active" 
+	        		:record-id="record.id"
+            		:active.sync="addCaseModal.active"
             		@close="retrieve()">
             			<template slot="title">
             				Caseload of <primary-data :record="record" :fields="record.fields"/>
@@ -27,7 +27,7 @@
 	        </div>
 	        <div>
 	        	<add-group
-	        		:record-id="record.id" 
+	        		:record-id="record.id"
             		:active.sync="addGroupModal.active" @close="retrieve()"/>
 	            <base-button
 	                class="tw-py-2 tw-px-0 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-gray-500 tw-border-none"
@@ -55,7 +55,8 @@
 		},
 
 		props: {
-			record: Array | Object
+			record: Array | Object,
+            program: Array | Object
 		},
 
 		computed: {
