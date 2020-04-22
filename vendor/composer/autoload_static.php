@@ -80,6 +80,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Staudenmeir\\EloquentHasManyDeep\\' => 32,
+            'Spatie\\ViewModels\\' => 18,
             'Spatie\\Sluggable\\' => 17,
             'Spatie\\SchemalessAttributes\\' => 28,
             'Spatie\\Permission\\' => 18,
@@ -298,6 +299,10 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'Staudenmeir\\EloquentHasManyDeep\\' => 
         array (
             0 => __DIR__ . '/..' . '/staudenmeir/eloquent-has-many-deep/src',
+        ),
+        'Spatie\\ViewModels\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/laravel-view-models/src',
         ),
         'Spatie\\Sluggable\\' => 
         array (
@@ -540,6 +545,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'App\\Http\\Controllers\\GroupsAvailableForRecord' => __DIR__ . '/../..' . '/app/Http/Controllers/GroupsAvailableForRecord.php',
         'App\\Http\\Controllers\\ProgramController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProgramController.php',
         'App\\Http\\Controllers\\ProgramGroupsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProgramGroupsController.php',
+        'App\\Http\\Controllers\\ProgramRecordController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProgramRecordController.php',
         'App\\Http\\Controllers\\ProgramRecordsController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProgramRecordsController.php',
         'App\\Http\\Controllers\\ProgramsAvailableForRecord' => __DIR__ . '/../..' . '/app/Http/Controllers/ProgramsAvailableForRecord.php',
         'App\\Http\\Controllers\\RecordController' => __DIR__ . '/../..' . '/app/Http/Controllers/RecordController.php',
@@ -592,6 +598,10 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'App\\Http\\Requests\\UpdateRolePermission' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateRolePermission.php',
         'App\\Http\\Requests\\UpdateTeam' => __DIR__ . '/../..' . '/app/Http/Requests/UpdateTeam.php',
         'App\\Http\\Resources\\Form' => __DIR__ . '/../..' . '/app/Http/Resources/Form.php',
+        'App\\Http\\Resources\\FormEntries' => __DIR__ . '/../..' . '/app/Http/Resources/FormEntries.php',
+        'App\\Http\\Resources\\FormEntry' => __DIR__ . '/../..' . '/app/Http/Resources/FormEntry.php',
+        'App\\Http\\Resources\\FormEntry\\Group' => __DIR__ . '/../..' . '/app/Http/Resources/FormEntry/Group.php',
+        'App\\Http\\Resources\\FormEntry\\Program' => __DIR__ . '/../..' . '/app/Http/Resources/FormEntry/Program.php',
         'App\\Http\\Resources\\FormField' => __DIR__ . '/../..' . '/app/Http/Resources/FormField.php',
         'App\\Http\\Resources\\FormFields' => __DIR__ . '/../..' . '/app/Http/Resources/FormFields.php',
         'App\\Http\\Resources\\Forms' => __DIR__ . '/../..' . '/app/Http/Resources/Forms.php',
@@ -637,6 +647,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'App\\Traits\\Models\\FormReference' => __DIR__ . '/../..' . '/app/Traits/Models/FormReference.php',
         'App\\Traits\\Models\\Search' => __DIR__ . '/../..' . '/app/Traits/Models/Search.php',
         'App\\Traits\\Models\\Sort' => __DIR__ . '/../..' . '/app/Traits/Models/Sort.php',
+        'App\\Traits\\Resources\\CountRelated' => __DIR__ . '/../..' . '/app/Traits/Resources/CountRelated.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
@@ -3075,7 +3086,7 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'Monolog\\Handler\\DoctrineCouchDBHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/DoctrineCouchDBHandler.php',
         'Monolog\\Handler\\DynamoDbHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/DynamoDbHandler.php',
         'Monolog\\Handler\\ElasticaHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/ElasticaHandler.php',
-        'Monolog\\Handler\\ElasticsearchHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/ElasticsearchHandler.php',
+        'Monolog\\Handler\\ElasticsearchHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/ElasticSearchHandler.php',
         'Monolog\\Handler\\ErrorLogHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/ErrorLogHandler.php',
         'Monolog\\Handler\\FallbackGroupHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/FallbackGroupHandler.php',
         'Monolog\\Handler\\FilterHandler' => __DIR__ . '/..' . '/monolog/monolog/src/Monolog/Handler/FilterHandler.php',
@@ -4437,6 +4448,9 @@ class ComposerStaticInit2a16781bdc1f92e5f590acaf2d558c6f
         'Spatie\\Sluggable\\HasSlug' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/HasSlug.php',
         'Spatie\\Sluggable\\InvalidOption' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/InvalidOption.php',
         'Spatie\\Sluggable\\SlugOptions' => __DIR__ . '/..' . '/spatie/laravel-sluggable/src/SlugOptions.php',
+        'Spatie\\ViewModels\\Console\\ViewModelMakeCommand' => __DIR__ . '/..' . '/spatie/laravel-view-models/src/Console/ViewModelMakeCommand.php',
+        'Spatie\\ViewModels\\Providers\\ViewModelsServiceProvider' => __DIR__ . '/..' . '/spatie/laravel-view-models/src/Providers/ViewModelsServiceProvider.php',
+        'Spatie\\ViewModels\\ViewModel' => __DIR__ . '/..' . '/spatie/laravel-view-models/src/ViewModel.php',
         'Staudenmeir\\EloquentHasManyDeep\\ConcatenatesRelationships' => __DIR__ . '/..' . '/staudenmeir/eloquent-has-many-deep/src/ConcatenatesRelationships.php',
         'Staudenmeir\\EloquentHasManyDeep\\HasEagerLimit' => __DIR__ . '/..' . '/staudenmeir/eloquent-has-many-deep/src/HasEagerLimit.php',
         'Staudenmeir\\EloquentHasManyDeep\\HasManyDeep' => __DIR__ . '/..' . '/staudenmeir/eloquent-has-many-deep/src/HasManyDeep.php',

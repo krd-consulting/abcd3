@@ -38,6 +38,7 @@ return array(
     'Symfony\\Component\\CssSelector\\' => array($vendorDir . '/symfony/css-selector'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Staudenmeir\\EloquentHasManyDeep\\' => array($vendorDir . '/staudenmeir/eloquent-has-many-deep/src'),
+    'Spatie\\ViewModels\\' => array($vendorDir . '/spatie/laravel-view-models/src'),
     'Spatie\\Sluggable\\' => array($vendorDir . '/spatie/laravel-sluggable/src'),
     'Spatie\\SchemalessAttributes\\' => array($vendorDir . '/spatie/laravel-schemaless-attributes/src'),
     'Spatie\\Permission\\' => array($vendorDir . '/spatie/laravel-permission/src'),
