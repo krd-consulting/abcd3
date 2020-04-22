@@ -25,6 +25,7 @@ class ProgramRecordsController extends Controller
             ->setRecordIdentity($recordType->identity)
             ->records()
             ->withLatestProgramStatuses($recordType, $program)
+            ->with('cases', 'groups')
             ->only($recordType);
 
         $records = $records->availableFor(auth()->user());
@@ -55,7 +56,7 @@ class ProgramRecordsController extends Controller
         $data = (new $programRecord)->of($program, $record)->first();
 
         return [
-            'data' => $data                        
+            'data' => $data
         ];
     }
 
@@ -73,9 +74,9 @@ class ProgramRecordsController extends Controller
     }
 
     public function update(
-        Program $program, 
-        RecordType $recordType, 
-        Record $record, 
+        Program $program,
+        RecordType $recordType,
+        Record $record,
         UpdateProgramRecord $request
     )
     {
@@ -106,7 +107,7 @@ class ProgramRecordsController extends Controller
         return $record;
     }
 
-    private function getModel(RecordType $recordType) 
+    private function getModel(RecordType $recordType)
     {
         return "App\Program" . $recordType->identity->model;
     }

@@ -5,7 +5,7 @@
     export default {
         props: {
             record: Object,
-            fields: Object|Array
+            fields: Object | Array
         },
 
         computed: {
@@ -15,6 +15,10 @@
 
             parsedFields() {
                 let fields = [];
+
+                if(this.fields == null) {
+                    return fields;
+                }
 
                 if('first_name' in this.fields)
                     fields.push('first_name');

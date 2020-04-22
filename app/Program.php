@@ -47,9 +47,9 @@ class Program extends Model implements FormReference
     public function client_statuses()
     {
         return $this->hasManyThrough(
-            'App\ProgramClientStatus', 
-            'App\ProgramClient', 
-            'program_id', 
+            'App\ProgramClientStatus',
+            'App\ProgramClient',
+            'program_id',
             'program_record_id'
         );
     }
@@ -71,7 +71,7 @@ class Program extends Model implements FormReference
     {
         if(!$this->belongsTo('App\ClientStatus')->exists())
             return $this->default_client_status();
-        
+
         return $this->belongsTo('App\ClientStatus');
     }
 
@@ -156,7 +156,7 @@ class Program extends Model implements FormReference
         return $query->whereIn("$table.team_id", $teams);
     }
 
-    public function scopeWithLatestRecordStatuses($query, Record $record) 
+    public function scopeWithLatestRecordStatuses($query, Record $record)
     {
         if($record->record_type->identity->model == 'Record')
             return $query;

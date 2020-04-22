@@ -66,7 +66,8 @@ __webpack_require__.r(__webpack_exports__);
     PrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
-    record: Array | Object
+    record: Array | Object,
+    program: Array | Object
   },
   computed: {
     casesCount: function casesCount() {

@@ -22,7 +22,10 @@ class RecordProgramsController extends Controller
         $model = 'App\\' . $recordType->identity->model;
         $record = (new $model())->find($record->id);
 
-        $programs = $record->programs()->withLatestRecordStatuses($record);
+        $programs = $record
+            ->programs()
+            ->withLatestRecordStatuses($record)
+            ->with('caseRecords', 'groups');
 
         $programs = $programs->availableFor(auth()->user());
 
@@ -50,7 +53,7 @@ class RecordProgramsController extends Controller
         $class = $this->getModel($recordType);
 
         $programRecord = new $class();
-        
+
         $programRecord->createFrom($program, $record, true, $request);
 
         return $program;
@@ -72,7 +75,7 @@ class RecordProgramsController extends Controller
         return $program;
     }
 
-    private function getModel(RecordType $recordType) 
+    private function getModel(RecordType $recordType)
     {
         return "App\Program" . $recordType->identity->model;
     }

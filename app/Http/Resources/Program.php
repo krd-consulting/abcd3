@@ -2,10 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Traits\Resources\CountRelated;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class Program extends JsonResource
 {
+    use CountRelated;
+
     /**
      * Transform the resource into an array.
      *
@@ -38,6 +42,15 @@ class Program extends JsonResource
             'enrolled_at' => $this->whenPivotLoaded('program_record', function() {
                 return $this->pivot->enrolled_at;
             }),
+
+            'cases_count' => $this->countRelated('caseRecords'),
+
+            'groups_count' => $this->countRelated('groups'),
+
+            'enrolled_at' => $this->whenPivotLoaded('program_record', function() {
+                return $this->pivot->enrolled_at;
+            }),
+
             'available_record_types' => $this->available_record_types,
             'path' => $this->path,
             'created_at' => $this->created_at,
