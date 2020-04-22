@@ -16,16 +16,28 @@
                 :key="index"
                 :to="entry.target.path"
                 class="tw-cursor-pointer">
-                <template slot="image">
-                    <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-base" :record="entry.target" :fields="entry.target.fields"/>
+                <template v-if="targetName == 'Record'">
+                    <template slot="image">
+                        <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-base" :record="entry.target" :fields="entry.target.fields"/>
+                    </template>
+
+                    <slot name="list-item-primary-data" :item="entry">
+                        <primary-data class="tw-font-semibold" :record="entry.target" :fields="entry.target.fields"/>
+                    </slot>
+
+                    <template slot="secondary-data">
+                        <secondary-data class="tw-text-xs tw-text-gray-600" :record="entry.target" :fields="entry.target.fields"/>
+                    </template>
                 </template>
 
-                <slot name="list-item-primary-data" :item="entry">
-                    <primary-data class="tw-font-semibold" :record="entry.target" :fields="entry.target.fields"/>
-                </slot>
+                <template v-if="targetName != 'Record'">
+                    <slot name="list-item-primary-data" :item="entry">
+                        {{ entry.target.name }}
+                    </slot>
 
-                <template slot="secondary-data">
-                    <secondary-data class="tw-text-xs tw-text-gray-600" :record="entry.target" :fields="entry.target.fields"/>
+                    <template slot="secondary-data">
+                        {{ entry.target.secondary_data }}
+                    </template>
                 </template>
 
                 <template slot="bellows">
@@ -51,6 +63,8 @@
     import PrimaryData from '@/App/components/record/primaryData';
     import SecondaryData from '@/App/components/record/secondaryData';
 
+    import { targetTypes } from '@/helpers';
+
     export default {
         components: {
             List,
@@ -68,6 +82,7 @@
                 form: [],
                 entries: [],
                 fields: [],
+                targetType: '',
                 request: new Request({}),
                 entriesRequest: new EntryRequest({}),
                 fieldRequest: new FieldRequest({}),
@@ -79,6 +94,16 @@
                     search: ''
                 },
                 total: 0,
+            }
+        },
+
+        computed: {
+            listComponent() {
+                return this.targetName.toLowerCase() + '-list';
+            },
+
+            targetName() {
+                return targetTypes[this.targetType];
             }
         },
 
@@ -97,6 +122,7 @@
                 this.entriesRequest.retrieve(this.$route.params.form).then(response => {
                     this.entries = response.data;
                     this.total = response.meta.total;
+                    this.targetType = response.target_type;
                 });
             },
 

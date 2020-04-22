@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./resources/js/api/RoleRequest.js":
-/*!*****************************************!*\
-  !*** ./resources/js/api/RoleRequest.js ***!
-  \*****************************************/
+/***/ "./resources/js/api/FormFieldRequest.js":
+/*!**********************************************!*\
+  !*** ./resources/js/api/FormFieldRequest.js ***!
+  \**********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,53 +34,33 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var RoleRequest = /*#__PURE__*/function (_Request) {
-  _inherits(RoleRequest, _Request);
+var FormField = /*#__PURE__*/function (_Request) {
+  _inherits(FormField, _Request);
 
-  var _super = _createSuper(RoleRequest);
+  var _super = _createSuper(FormField);
 
-  function RoleRequest() {
-    _classCallCheck(this, RoleRequest);
+  function FormField() {
+    _classCallCheck(this, FormField);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(RoleRequest, [{
+  _createClass(FormField, [{
     key: "retrieve",
-    value: function retrieve() {
-      return this.get('/api/roles');
+    value: function retrieve(form) {
+      return this.get("/api/forms/".concat(form, "/fields"));
     }
   }, {
-    key: "create",
-    value: function create() {
-      return this.get('/api/roles/create');
-    }
-  }, {
-    key: "store",
-    value: function store() {
-      return this.post('/api/roles');
-    }
-  }, {
-    key: "edit",
-    value: function edit(role) {
-      return this.get("/api/roles/".concat(role, "/edit"));
-    }
-  }, {
-    key: "update",
-    value: function update(role) {
-      return this.patch("/api/roles/".concat(role));
-    }
-  }, {
-    key: "destroy",
-    value: function destroy(role) {
-      return this["delete"]("/api/roles/".concat(role));
+    key: "show",
+    value: function show(field) {
+      return this.get("api/form-fields/".concat(field));
     }
   }]);
 
-  return RoleRequest;
+  return FormField;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RoleRequest);
+/* harmony default export */ __webpack_exports__["default"] = (FormField);
 
 /***/ })
 

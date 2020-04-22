@@ -4802,6 +4802,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @/api/FormEntryRequest */ "./resources/js/api/FormEntryRequest.js");
 /* harmony import */ var _api_TeamRequest__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @/api/TeamRequest */ "./resources/js/api/TeamRequest.js");
 /* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @/helpers */ "./resources/js/helpers.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -4955,6 +4956,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -5016,12 +5018,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {
     targetName: function targetName() {
-      var targetTypes = {
-        Programs: 'Program',
-        Groups: 'Group',
-        Records: 'Record'
-      };
-      return targetTypes[this.form.target_type.name];
+      return _helpers__WEBPACK_IMPORTED_MODULE_15__["targetTypes"][this.form.target_type.name];
     }
   },
   components: {
@@ -5144,6 +5141,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _App_components_record_profilePicture__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/App/components/record/profilePicture */ "./resources/js/App/components/record/profilePicture.vue");
 /* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
 /* harmony import */ var _App_components_record_secondaryData__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/App/components/record/secondaryData */ "./resources/js/App/components/record/secondaryData.vue");
+/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/helpers */ "./resources/js/helpers.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -5192,6 +5190,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -5216,6 +5227,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       form: [],
       entries: [],
       fields: [],
+      targetType: '',
       request: new _api_FormRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({}),
       entriesRequest: new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({}),
       fieldRequest: new _api_FormFieldRequest__WEBPACK_IMPORTED_MODULE_2__["default"]({}),
@@ -5228,6 +5240,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       total: 0
     };
+  },
+  computed: {
+    listComponent: function listComponent() {
+      return this.targetName.toLowerCase() + '-list';
+    },
+    targetName: function targetName() {
+      return _helpers__WEBPACK_IMPORTED_MODULE_8__["targetTypes"][this.targetType];
+    }
   },
   methods: {
     retrieve: function retrieve() {
@@ -5246,6 +5266,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.entriesRequest.retrieve(this.$route.params.form).then(function (response) {
         _this2.entries = response.data;
         _this2.total = response.meta.total;
+        _this2.targetType = response.target_type;
       });
     },
     retrieveFields: function retrieveFields() {
@@ -96517,40 +96538,77 @@ var render = function() {
               attrs: { to: entry.target.path }
             },
             [
-              _c(
-                "template",
-                { slot: "image" },
-                [
-                  _c("profile-picture", {
-                    staticClass: "tw-mr-2 tw-w-12 tw-h-12 tw-text-base",
-                    attrs: { record: entry.target, fields: entry.target.fields }
-                  })
-                ],
-                1
-              ),
+              _vm.targetName == "Record"
+                ? [
+                    _c(
+                      "template",
+                      { slot: "image" },
+                      [
+                        _c("profile-picture", {
+                          staticClass: "tw-mr-2 tw-w-12 tw-h-12 tw-text-base",
+                          attrs: {
+                            record: entry.target,
+                            fields: entry.target.fields
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm._t(
+                      "list-item-primary-data",
+                      [
+                        _c("primary-data", {
+                          staticClass: "tw-font-semibold",
+                          attrs: {
+                            record: entry.target,
+                            fields: entry.target.fields
+                          }
+                        })
+                      ],
+                      { item: entry }
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "template",
+                      { slot: "secondary-data" },
+                      [
+                        _c("secondary-data", {
+                          staticClass: "tw-text-xs tw-text-gray-600",
+                          attrs: {
+                            record: entry.target,
+                            fields: entry.target.fields
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ]
+                : _vm._e(),
               _vm._v(" "),
-              _vm._t(
-                "list-item-primary-data",
-                [
-                  _c("primary-data", {
-                    staticClass: "tw-font-semibold",
-                    attrs: { record: entry.target, fields: entry.target.fields }
-                  })
-                ],
-                { item: entry }
-              ),
-              _vm._v(" "),
-              _c(
-                "template",
-                { slot: "secondary-data" },
-                [
-                  _c("secondary-data", {
-                    staticClass: "tw-text-xs tw-text-gray-600",
-                    attrs: { record: entry.target, fields: entry.target.fields }
-                  })
-                ],
-                1
-              ),
+              _vm.targetName != "Record"
+                ? [
+                    _vm._t(
+                      "list-item-primary-data",
+                      [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(entry.target.name) +
+                            "\n                "
+                        )
+                      ],
+                      { item: entry }
+                    ),
+                    _vm._v(" "),
+                    _c("template", { slot: "secondary-data" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(entry.target.secondary_data) +
+                          "\n                "
+                      )
+                    ])
+                  ]
+                : _vm._e(),
               _vm._v(" "),
               _c("template", { slot: "bellows" }, [
                 _c(
@@ -126828,6 +126886,24 @@ var Request = /*#__PURE__*/function () {
 }();
 
 /* harmony default export */ __webpack_exports__["default"] = (Request);
+
+/***/ }),
+
+/***/ "./resources/js/helpers.js":
+/*!*********************************!*\
+  !*** ./resources/js/helpers.js ***!
+  \*********************************/
+/*! exports provided: targetTypes */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "targetTypes", function() { return targetTypes; });
+var targetTypes = {
+  Programs: 'Program',
+  Groups: 'Group',
+  Records: 'Record'
+};
 
 /***/ }),
 

@@ -6,7 +6,7 @@
                 <p>{{ form.description }}</p>
                 <el-divider></el-divider>
             </el-header>
-            
+
             <el-main>
                 <el-row class="tw-mb-4">
                     <el-col :span="6">
@@ -50,10 +50,10 @@
                                 <record-primary-data :record="item" :fields="item.fields" />
                             </el-option>
                         </base-select>
-                        
+
                     </el-col>
                 </el-row>
-                    
+
                 <el-row class="tw-mb-4">
                     <el-col :span="6">
                         <label for="teamSelect" class="tw-block tw-text-right tw-mr-1">Team</label>
@@ -84,9 +84,9 @@
                     </el-col>
                     <el-col :span="6">
                         <el-select id="pre-post" v-model="value" placeholder=" ">
-                            <el-option v-for="select in prePost" 
+                            <el-option v-for="select in prePost"
                                 :key="select.value"
-                                :label="select.value" 
+                                :label="select.value"
                                 :value="select.value">
                             </el-option>
                         </el-select>
@@ -98,17 +98,17 @@
                         <label for="formDate" class="tw-block tw-text-right tw-mr-1">Date Completed</label>
                     </el-col>
                     <el-col :span="6">
-                        <el-date-picker 
-                            id="formDate" 
-                            v-model="entryData.completed_at" 
-                            type="date" 
-                            placeholder=" " 
+                        <el-date-picker
+                            id="formDate"
+                            v-model="entryData.completed_at"
+                            type="date"
+                            placeholder=" "
                             :picker-options="pickerOptions">
                         </el-date-picker>
                     </el-col>
-                    
+
                 </el-row>
-                
+
                 <div class="tw-block tw-mr-1" v-for="field in form.field_layout" :key="field.id">
                     <component
                         class="tw-my-8"
@@ -117,7 +117,7 @@
                         :is="field.type"
                         :key="field.id">
                     </component>
-                    
+
                 </div>
 
                 <br>
@@ -127,7 +127,7 @@
                         <el-button type="primary" class="tw-w-48" @click="submit">Submit</el-button>
                     </div>
             </el-main>
-        </el-card> 
+        </el-card>
     </div>
 </template>
 <script>
@@ -148,6 +148,8 @@
     import TeamRequest from '@/api/TeamRequest';
 
     import RecordPrimaryData from '@/App/components/record/primaryData';
+
+    import { targetTypes } from '@/helpers';
 
     export default {
         data() {
@@ -207,12 +209,6 @@
 
         computed: {
             targetName() {
-                const targetTypes = {
-                    Programs: 'Program',
-                    Groups: 'Group',
-                    Records: 'Record',
-                };
-
                 return targetTypes[this.form.target_type.name];
             }
         },
@@ -299,18 +295,18 @@
                             params
                         });
 
-                        const args = this.form.target != null 
-                        ? this.form.target.name 
+                        const args = this.form.target != null
+                        ? this.form.target.name
                         : null;
 
                         this.targetRequest.retrieve(args).then((response) => {
                             this.targetItems = response.data;
                         });
-    
+
                     }
                 );
             },
-            
+
             submit() {
                 this.entryRequest = new EntryRequest(this.entryData);
 

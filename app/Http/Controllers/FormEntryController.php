@@ -17,7 +17,7 @@ class FormEntryController extends Controller
 
         $entries->load('target');
 
-        $entries = (new FormEntries($entries));
+        $entries = (new FormEntries($entries, $form->target_type));
 
         return $entries;
 	}
