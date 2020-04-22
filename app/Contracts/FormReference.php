@@ -1,11 +1,13 @@
 <?php
 namespace App\Contracts;
 
-interface FormReference 
+interface FormReference
 {
 
 	public function getFormReferenceTable();
 
 	public function getFormReferenceField();
+
+    public function getFormReferenceClass();
 
 }

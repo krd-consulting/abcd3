@@ -6,13 +6,16 @@ use App\Http\Resources\Record as RecordResource;
 use App\Http\Resources\FormEntry\Program as ProgramResource;
 use App\Http\Resources\FormEntry\Group as GroupResource;
 
-use App\Record;
-use App\Program;
-
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class FormEntry extends JsonResource
 {
+    private $resourceMap = [
+        'App\Record' => 'App\Http\Resources\Record',
+        'App\Program' => 'App\Http\Resources\FormEntry\Program',
+        'App\Group' => 'App\Http\Resources\FormEntry\Group'
+    ];
+
     /**
      * Transform the resource into an array.
      *
@@ -24,16 +27,9 @@ class FormEntry extends JsonResource
         $response = parent::toArray($request);
 
         $target = $this->when($this->relationLoaded('target'), function () {
-            switch (true) {
-                case $this->target instanceof Record:
-                    return (new RecordResource($this->target));
-
-                case $this->target instanceof Program:
-                    return (new ProgramResource($this->target));
-
-                case $this->target instanceof Group:
-                    return (new GroupResource($this->target));
-            }
+            $class = $this->resourceMap[
+                get_class($this->target)
+            ];
         });
 
         if(!empty($target)) {

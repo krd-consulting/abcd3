@@ -14,4 +14,9 @@ trait FormReference {
         return $this->getKeyName();
     }
 
+    public function getFormReferenceClass()
+    {
+        return get_class($this);
+    }
+
 }

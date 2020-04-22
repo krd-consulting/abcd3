@@ -43,7 +43,7 @@ class RecordType extends Model implements FormReference, UrlRoutable
      */
     public function resolveRouteBinding($value, $field = null)
     {
-        return 
+        return
             $this
                 ->where('id', $value)
                 ->orWhere('slug', $value)
@@ -53,5 +53,10 @@ class RecordType extends Model implements FormReference, UrlRoutable
     public function getFormReferenceTable()
     {
         return $this->records()->getRelated()->getTable();
+    }
+
+    public function getFormReferenceClass()
+    {
+        return 'App\Record';
     }
 }

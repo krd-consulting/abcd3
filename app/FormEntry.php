@@ -64,9 +64,7 @@ class FormEntry extends Model
 
         $targetModel = $targetType->model;
 
-        if($targetModel == 'App\RecordType') {
-            $targetModel = 'App\Record';
-        }
+        $targetModel = (new $targetModel)->getFormReferenceClass();
 
 		return $this->belongsTo($targetModel);
     }
