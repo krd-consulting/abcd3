@@ -96694,7 +96694,7 @@ var render = function() {
           return _vm.$set(_vm.params, "search", $event)
         },
         "page-change": function($event) {
-          return _vm.retrieve()
+          return _vm.retrieveEntries()
         }
       }
     },

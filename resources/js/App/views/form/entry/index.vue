@@ -6,7 +6,7 @@
         :search-terms.sync="params.search"
         :loading="false"
         :has-list-columns="false"
-        @page-change="retrieve()"
+        @page-change="retrieveEntries()"
         :total="total">
         <template slot="header-text">{{ form.name }}</template>
 
