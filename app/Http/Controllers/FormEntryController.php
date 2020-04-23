@@ -7,13 +7,17 @@ use App\FormEntry;
 use App\Http\Requests\StoreFormEntry;
 use App\Http\Resources\FormEntries;
 
+use Barryvdh\Debugbar\Facade as Debugbar;
+
 class FormEntryController extends Controller
 {
 	public function index(Form $form)
 	{
         $entry = new FormEntry;
         $entry->setTable($form->table_name);
-        $entries = $entry->paginate();
+
+        $perPage = request('perPage');
+        $entries = $entry->paginate($perPage);
 
         $entries->load('target');
 
@@ -24,6 +28,8 @@ class FormEntryController extends Controller
 
     public function store(Form $form, StoreFormEntry $request)
     {
+        // TODO: authorize
+
     	$entry = new FormEntry;
     	$entry->setTable($form->table_name);
     	$entry->castFieldsToArray($form->fields()->where('type', 'checkbox')->pluck('column_name'));

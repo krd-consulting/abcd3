@@ -4,12 +4,15 @@
             <el-col :span="6">
                 <label for="dropdown" class="tw-block tw-text-right tw-mr-1">{{ field.title }}</label>
             </el-col>
-            
+
             <el-col :span="10">
-                <el-select id="dropdown" v-model="value" filterable placeholder=" ">
-                    <el-option v-for="choice in field.choices" 
-                        :key="choice" 
-                        :label="choice" 
+                <el-select
+                    id="dropdown"
+                    v-model="value"
+                    @input="$emit('input', $event)" filterable placeholder=" ">
+                    <el-option v-for="choice in field.choices"
+                        :key="choice"
+                        :label="choice"
                         :value="choice">
                     </el-option>
                 </el-select>
@@ -25,7 +28,7 @@ export default {
             value: ''
         }
     },
-    props: { 
+    props: {
         field: Object
     },
 }

@@ -10940,6 +10940,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -102848,6 +102851,11 @@ var render = function() {
                 "el-select",
                 {
                   attrs: { id: "dropdown", filterable: "", placeholder: " " },
+                  on: {
+                    input: function($event) {
+                      return _vm.$emit("input", $event)
+                    }
+                  },
                   model: {
                     value: _vm.value,
                     callback: function($$v) {

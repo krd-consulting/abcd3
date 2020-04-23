@@ -9,8 +9,6 @@ use App\Traits\Models\Sort;
 
 use Carbon\Carbon;
 
-use Barryvdh\Debugbar\Facade as Debugbar;
-
 use Wildside\Userstamps\Userstamps;
 
 class FormEntry extends Model
