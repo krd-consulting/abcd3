@@ -137,7 +137,7 @@ class Form extends Model
                     }
                 }
 
-                $table->timestamp('completed_at');
+                $table->timestamp('completed_at')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
                 $table->userstamps();
