@@ -42,8 +42,16 @@
 
                 <template slot="bellows">
                     <dl>
-                        <div v-for="field in fields" class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
-                            <dl class="tw-text-gray-600">{{ field.title }}</dl>
+                        <text-field
+                            v-if="field.type == 'text'"
+                            v-for="(field, index) in fields"
+                            v-model="entry[field.column_name]"
+                            :field="field"
+                            :key="index"
+                            class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
+                        </text-field>
+                        <div v-else class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
+                            <dd class="tw-text-gray-600">{{ field.title }}</dd>
                             <dt>{{ entry[field.column_name] }}</dt>
                         </div>
                     </dl>
@@ -63,6 +71,8 @@
     import PrimaryData from '@/App/components/record/primaryData';
     import SecondaryData from '@/App/components/record/secondaryData';
 
+    import TextField from '@/components/formEntryDataFields/textField';
+
     import { targetTypes } from '@/helpers';
 
     export default {
@@ -72,6 +82,7 @@
             ProfilePicture,
             PrimaryData,
             SecondaryData,
+            TextField
         },
 
         data() {

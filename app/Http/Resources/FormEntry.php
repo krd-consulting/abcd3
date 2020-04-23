@@ -2,10 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\Record as RecordResource;
-use App\Http\Resources\FormEntry\Program as ProgramResource;
-use App\Http\Resources\FormEntry\Group as GroupResource;
-
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class FormEntry extends JsonResource
@@ -26,16 +22,23 @@ class FormEntry extends JsonResource
     {
         $response = parent::toArray($request);
 
-        $target = $this->when($this->relationLoaded('target'), function () {
-            $class = $this->resourceMap[
-                get_class($this->target)
-            ];
-        });
+        $target = $this->getTarget();
 
         if(!empty($target)) {
             $response['target'] = $target;
         }
 
         return $response;
+    }
+
+    private function getTarget()
+    {
+        return $this->when($this->relationLoaded('target'), function () {
+            $class = $this->resourceMap[
+                get_class($this->target)
+            ];
+
+            return (new $class($this->target));
+        });
     }
 }

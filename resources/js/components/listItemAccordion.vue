@@ -1,6 +1,6 @@
 <template>
-    <div class="tw-bg-white tw-border-b" @click="open = !open">
-        <div class="tw-flex tw-items-center tw-p-4 hover:tw-bg-gray-100">
+    <div class="tw-bg-white tw-border-b">
+        <div class="tw-flex tw-items-center tw-p-4 hover:tw-bg-gray-100" @click="open = !open">
             <router-link tag="div" class="tw-flex tw-w-1/3 tw-items-top tw-cursor-pointer" :to="to">
                 <div>
                     <slot name="image">
@@ -38,7 +38,7 @@
                 </slot>
             </div>
         </div>
-        <div v-if="open" class="tw-border-t">
+        <div v-show="open" class="tw-border-t">
             <slot name="bellows"></slot>
         </div>
     </div>

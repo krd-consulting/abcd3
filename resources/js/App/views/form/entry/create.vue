@@ -229,6 +229,7 @@
         },
 
         methods: {
+            // TODO: Move to helpers
             getPrimaryData(record, fields) {
                 let remainingFields = [];
 
@@ -271,12 +272,6 @@
                     this.form = response.data;
                 });
             },
-
-            // initializeEntryData(fields) {
-            //     fields.foreach((field) => {
-            //         if(field.type == 'Check')
-            //     })
-            // },
 
             retrieveFormTargetItems(keywords, callback) {
                 import(`@/api/${this.targetName}Request`)

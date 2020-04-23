@@ -83,7 +83,7 @@
                 });
 
                 this.request.show(this.$route.params.group).then((response) => {
-                    this.group = response;
+                    this.group = response.data;
                 });
             },
 

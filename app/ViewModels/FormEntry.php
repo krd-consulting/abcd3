@@ -6,10 +6,15 @@ use App\Contracts\ViewModel\Resource;
 
 use Spatie\ViewModels\ViewModel;
 
-class FormEntry extends ViewModel
+class FormViewModel extends ViewModel
 {
-    public function __construct(Resource $target)
+    public function __construct(Form $form)
     {
-        $this->target = $target;
+        $this->form = $form;
+    }
+
+    public function entries()
+    {
+
     }
 }

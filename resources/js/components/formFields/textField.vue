@@ -7,16 +7,16 @@
             <el-col v-if="field.reference_target_type_id == null" :span="8">
                 <el-input id="text"
                     v-if="limit"
-                    show-word-limit  
+                    show-word-limit
                     :value="value"
-                    @input="$emit('input', $event)" 
+                    @input="$emit('input', $event)"
                     :required="isRequired"
                     :maxlength="max">
                 </el-input>
                 <el-input id="text"
-                    v-else 
-                    :value="value" 
-                    @input="$emit('input', $event)" 
+                    v-else
+                    :value="value"
+                    @input="$emit('input', $event)"
                     :required="isRequired">
                 </el-input>
             </el-col>
@@ -132,7 +132,7 @@
                 targetItems: [],
             }
         },
-        props: { 
+        props: {
             field: {
                 type: Array | Object,
                 default: {}
