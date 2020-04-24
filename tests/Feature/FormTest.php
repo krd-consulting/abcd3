@@ -12,6 +12,7 @@ use App\User;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Validation\ValidationException;
 
 class FormTest extends TestCase
 {
@@ -28,7 +29,7 @@ class FormTest extends TestCase
         ])->givePermissionTo(config('auth.permissions.write-forms.name'));
 
         $user = factory(User::class)->create()->assignRole($role);
-        
+
         $record = factory(Record::class)->create();
         $user->records()->save($record);
 
@@ -36,6 +37,22 @@ class FormTest extends TestCase
         $team->records()->attach($record);
 
         return $user;
+    }
+
+    private function questions($columnStart = 1)
+    {
+        return [
+            'question 1', 'question 2'
+        ];
+    }
+
+    private function choices()
+    {
+        return [
+            [
+                'Choice 1', 'Choice 2'
+            ]
+        ];
     }
 
     /** @test */
@@ -57,35 +74,15 @@ class FormTest extends TestCase
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'settings' => [],
-                'questions' => [
-                    [
-                        'text' => 'question 1'
-                    ],
-                    [
-                        'text' => 'question 2'
-                    ]
-                ],
-                'choices' => [
-                    [
-                        'text' => 'choice 1',
-                        'value ' => 1
-                    ],
-                    [
-                        'text' => 'choice 2',
-                        'value ' => 2
-                    ],
-                    [
-                        'text' => 'choice 3',
-                        'value ' => 3
-                    ]
-                ]
+                'questions' => $this->questions(),
+                'choices' => $this->choices()
             ],
         ];
 
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => '',
             'scope_id' => $scope->id,
@@ -93,23 +90,28 @@ class FormTest extends TestCase
             'fields' => $fields
         ];
 
-        $response = $this->actingAs($user)->post('/api/forms', $form);
+        try {
+            $response = $this->actingAs($user)->post('/api/forms', $form);
+        } catch(ValidationException $e) {
+            var_dump($e->errors());
+        }
 
         $response->assertStatus(201);
 
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => NULL,
             'scope_id' => $scope->id
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('form_team', [
+        $this->assertDatabaseHas('model_has_forms', [
             'form_id' => $response->decodeResponseJson()['id'],
-            'team_id' => $team->id,
+            'model_id' => $team->id,
+            'model_type' => 'App\Team',
         ]);
 
         $fields = [
@@ -153,28 +155,8 @@ class FormTest extends TestCase
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'settings' => [],
-                'questions' => [
-                    [
-                        'text' => 'question 1'
-                    ],
-                    [
-                        'text' => 'question 2'
-                    ]
-                ],
-                'choices' => [
-                    [
-                        'text' => 'choice 1',
-                        'value ' => 1
-                    ],
-                    [
-                        'text' => 'choice 2',
-                        'value ' => 2
-                    ],
-                    [
-                        'text' => 'choice 3',
-                        'value ' => 3
-                    ]
-                ]
+                'questions' => $this->questions(),
+                'choices' => $this->choices()
             ],
             [
                 'type' => 'TextField',
@@ -188,28 +170,8 @@ class FormTest extends TestCase
                 'reference_target_type_id' => NULL,
                 'reference_target_id' => NULL,
                 'settings' => [],
-                'questions' => [
-                    [
-                        'text' => 'question 1'
-                    ],
-                    [
-                        'text' => 'question 2'
-                    ]
-                ],
-                'choices' => [
-                    [
-                        'text' => 'choice 1',
-                        'value ' => 1
-                    ],
-                    [
-                        'text' => 'choice 2',
-                        'value ' => 2
-                    ],
-                    [
-                        'text' => 'choice 3',
-                        'value ' => 3
-                    ]
-                ]
+                'questions' => $this->questions(),
+                'choices' => $this->choices()
             ],
             [
                 'type' => 'TextField',
@@ -222,7 +184,7 @@ class FormTest extends TestCase
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => '',
             'scope_id' => $scope->id,
@@ -230,23 +192,28 @@ class FormTest extends TestCase
             'fields' => $fields
         ];
 
-        $response = $this->actingAs($user)->post('/api/forms', $form);
+        try {
+            $response = $this->actingAs($user)->post('/api/forms', $form);
+        }catch (ValidationException $e) {
+            var_dump($e->errors());
+        }
 
         $response->assertStatus(201);
 
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => NULL,
             'scope_id' => $scope->id
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('form_team', [
+        $this->assertDatabaseHas('model_has_forms', [
             'form_id' => $response->decodeResponseJson()['id'],
-            'team_id' => $team->id,
+            'model_id' => $team->id,
+            'model_type' => 'App\Team',
         ]);
 
         $fields = [
@@ -323,7 +290,7 @@ class FormTest extends TestCase
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => '',
             'scope_id' => $scope->id,
@@ -338,16 +305,17 @@ class FormTest extends TestCase
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => NULL,
             'scope_id' => $scope->id
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('form_team', [
+        $this->assertDatabaseHas('model_has_forms', [
             'form_id' => $response->decodeResponseJson()['id'],
-            'team_id' => $team->id,
+            'model_id' => $team->id,
+            'model_type' => 'App\Team',
         ]);
 
         $fields = [
@@ -389,7 +357,7 @@ class FormTest extends TestCase
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => '',
             'scope_id' => $scope->id,
@@ -404,16 +372,17 @@ class FormTest extends TestCase
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => NULL,
             'scope_id' => $scope->id
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('form_team', [
+        $this->assertDatabaseHas('model_has_forms', [
             'form_id' => $response->decodeResponseJson()['id'],
-            'team_id' => $team->id,
+            'model_id' => $team->id,
+            'model_type' => 'App\Team',
         ]);
 
         $fields = [
@@ -445,7 +414,7 @@ class FormTest extends TestCase
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => '',
             'scope_id' => $scope->id,
@@ -460,16 +429,17 @@ class FormTest extends TestCase
         $form = [
             'name' => $name,
             'description' => $description,
-            'type' => 'static',
+            'type' => config('app.form_types.static'),
             'target_type_id' => 3,
             'target_id' => NULL,
             'scope_id' => $scope->id
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('form_team', [
+        $this->assertDatabaseHas('model_has_forms', [
             'form_id' => $response->decodeResponseJson()['id'],
-            'team_id' => $team->id,
+            'model_id' => $team->id,
+            'model_type' => 'App\Team',
         ]);
 
         $fields = [
