@@ -12,19 +12,20 @@
                             <th class="tw-whitespace-no-wrap tw-mx-2" v-for="(choice, index) in field.choices" :key="index" >
                                 <el-col>
                                     {{ choice }}
-                                </el-col>  
+                                </el-col>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr v-for="(question, questionIndex) in field.questions" :key="questionIndex">
                             <td>
-                                {{ question }}
+                                {{ question.title }}
                             </td>
-                            <td v-for="(response, index) in field.choices" 
-                                :key="index" 
+                            <td v-for="(response, index) in field.choices"
+                                :key="index"
                                 class="tw-text-center">
-                                <el-radio 
+                                <el-radio
+                                    @input="$emit('input', {'column_name': question.column_name, 'value': select[questionIndex]})"
                                     :key="response"
                                     :label="response"
                                     v-model="select[questionIndex]"
@@ -47,9 +48,9 @@ export default {
             select: []
         }
     },
-    props: { 
+    props: {
         field: Object,
-        
+
     },
 }
 </script>
@@ -59,7 +60,7 @@ export default {
         /* width: 100%;  */
         /* margin-top: 20px;  */
         z-index: 0;
-        
+
     }
     #matrix-table td {
         border: 1px solid #dedfe0;

@@ -4941,6 +4941,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -10943,6 +10953,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -10965,6 +10977,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -96601,19 +96614,31 @@ var render = function() {
                   "div",
                   { key: field.id, staticClass: "tw-block tw-mr-1" },
                   [
-                    _c(field.type, {
-                      key: field.id,
-                      tag: "component",
-                      staticClass: "tw-my-8",
-                      attrs: { field: field },
-                      model: {
-                        value: _vm.entryData[field.column_name],
-                        callback: function($$v) {
-                          _vm.$set(_vm.entryData, field.column_name, $$v)
-                        },
-                        expression: "entryData[field.column_name]"
-                      }
-                    })
+                    field.type == "MatrixField"
+                      ? _c(field.type, {
+                          key: field.id,
+                          tag: "component",
+                          staticClass: "tw-my-8",
+                          attrs: { field: field },
+                          on: {
+                            input: function($event) {
+                              _vm.entryData[$event.column_name] = $event.value
+                            }
+                          }
+                        })
+                      : _c(field.type, {
+                          key: field.id,
+                          tag: "component",
+                          staticClass: "tw-my-8",
+                          attrs: { field: field },
+                          model: {
+                            value: _vm.entryData[field.column_name],
+                            callback: function($$v) {
+                              _vm.$set(_vm.entryData, field.column_name, $$v)
+                            },
+                            expression: "entryData[field.column_name]"
+                          }
+                        })
                   ],
                   1
                 )
@@ -102969,7 +102994,7 @@ var render = function() {
                         _c("td", [
                           _vm._v(
                             "\n                            " +
-                              _vm._s(question) +
+                              _vm._s(question.title) +
                               "\n                        "
                           )
                         ]),
@@ -102985,6 +103010,14 @@ var render = function() {
                                   key: response,
                                   staticClass: "tw-ml-2",
                                   attrs: { label: response },
+                                  on: {
+                                    input: function($event) {
+                                      return _vm.$emit("input", {
+                                        column_name: question.column_name,
+                                        value: _vm.select[questionIndex]
+                                      })
+                                    }
+                                  },
                                   model: {
                                     value: _vm.select[questionIndex],
                                     callback: function($$v) {

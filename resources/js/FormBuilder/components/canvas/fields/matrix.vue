@@ -3,25 +3,25 @@
 
         <slot></slot>
 
-        <el-switch 
-            v-model="field.settings.required" 
-            active-text="Required" 
+        <el-switch
+            v-model="field.settings.required"
+            active-text="Required"
             inactive-text="Optional"
             class="tw-float-right switch-position">
         </el-switch>
-        
+
         <el-row class="tw-mt-1">
             <el-col :span="10">
                 <label>
-                    <editable-text 
-                        class="tw-cursor-pointer mouseOver" 
+                    <editable-text
+                        class="tw-cursor-pointer mouseOver"
                         v-model="fieldLabel"
                         @edit="tempValue(fieldLabel)">
                             {{ fieldLabel }}
                     </editable-text>
 
-                    <editable-text 
-                        class="tw-cursor-pointer mouseOver tw-text-xs" 
+                    <editable-text
+                        class="tw-cursor-pointer mouseOver tw-text-xs"
                         v-model="fieldDescription">
                             {{ fieldDescription }}
                     </editable-text>
@@ -42,8 +42,8 @@
                     <th v-for="(choice, index) in choices" :key="choice" >
                         <div class="tw-inline-flex tw-justify-between tw-whitespace-no-wrap">
                             <div class="tw-flex-none">
-                                <editable-text 
-                                    class="tw-cursor-pointer mouseOver" 
+                                <editable-text
+                                    class="tw-cursor-pointer mouseOver"
                                     :value="choice"
                                     @input="updateChoiceValue($event, index)"
                                     @edit="tempValue(choice)">
@@ -51,20 +51,20 @@
                                 </editable-text>
                             </div>
                             <div class="tw-flex-1 tw-relative tw-right-0">
-                                <el-button 
-                                    class="hover:tw-text-red-600" 
-                                    type="text" 
-                                    size="mini" 
+                                <el-button
+                                    class="hover:tw-text-red-600"
+                                    type="text"
+                                    size="mini"
                                     @click="removeChoice(choice)">
                                         <base-icon>delete_forever</base-icon>
                                 </el-button>
                             </div>
-                        </div>  
+                        </div>
                     </th>
                     <el-tooltip content="Add a new choice column">
                         <el-button class="tw-ml-4 tw-bg-blue-500 tw-text-white hover:tw-bg-blue-100" @click="addChoice" icon="el-icon-plus" circle></el-button>
                     </el-tooltip>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -72,20 +72,20 @@
                     <td>
                         <div class="tw-inline-flex tw-justify-between">
                             <div class="tw-flex-auto">
-                                <editable-text 
-                                    class="tw-cursor-pointer mouseOver tw-inline-block" 
+                                <editable-text
+                                    class="tw-cursor-pointer mouseOver tw-inline-block"
                                     :value="question"
                                     @input="updateQuestionValue($event, index)"
-                                    @edit="tempValue(question.name)">
-                                        {{ question.name }}
+                                    @edit="tempValue(question)">
+                                        {{ question }}
                                 </editable-text>
                             </div>
                             <div class="tw-flex-1 tw-relative tw-right-0">
-                                <el-button 
+                                <el-button
                                     class="hover:tw-text-red-600"
-                                    type="text" 
+                                    type="text"
                                     size="mini"
-                                    @click="removeQuestion(question)">
+                                    @click="removeQuestion(index)">
                                         <base-icon>delete_forever</base-icon>
                                 </el-button>
                             </div>
@@ -119,7 +119,7 @@
                     </el-tooltip>
                 </el-col>
             </el-row>
-        </form>  
+        </form>
     </div>
 </template>
 
@@ -179,7 +179,7 @@ export default {
 
         choices: {
             get() { return this.field.choices },
-            set(choices) { 
+            set(choices) {
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.choices = choices;
                 this.field = fieldCopy;
@@ -188,7 +188,7 @@ export default {
 
         questions: {
             get() { return this.field.questions },
-            set(questions) { 
+            set(questions) {
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.questions = questions;
                 this.field = fieldCopy;
@@ -197,7 +197,7 @@ export default {
 
         required: {
             get() { return this.field.settings.required; },
-            set(required) { 
+            set(required) {
                 const fieldCopy = _.clone(this.field);
                 fieldCopy.settings.required = required;
                 this.field = fieldCopy;
@@ -217,7 +217,7 @@ export default {
             }
 
             for(var i = 0; i < this.questions.length; i++) {
-                if(this.questions[i].name.toUpperCase() === this.itemText.toUpperCase()) {
+                if(this.questions[i].toUpperCase() === this.itemText.toUpperCase()) {
 
                     this.itemText = ''
                     return this.isUnique = false;
@@ -232,7 +232,7 @@ export default {
             this.isEmptyTable = false;
             this.$forceUpdate();
         },
-        
+
         removeQuestion(question) {
             this.$confirm('Are you sure you would like to remove this particular question?', 'Warning', {
                 confirmButtonText: 'OK',
@@ -243,19 +243,18 @@ export default {
                     type: 'success',
                     message: 'Question deleted'
                 });
-                var index = this.questions.indexOf(question);
 
-                if (index !== -1) {
-                    this.questions.splice(index, 1);
+                if (question !== -1) {
+                    this.questions.splice(question, 1);
                 }
-                
+
                 this.$store.commit('UPDATE_FIELD', this.field);
                 this.$forceUpdate();
             }).catch(() => {
                 this.$message({
                     type: 'info',
                     message: 'Delete canceled'
-                });          
+                });
             });
         },
 
@@ -291,10 +290,10 @@ export default {
                 this.$message({
                     type: 'info',
                     message: 'Delete canceled'
-                });          
+                });
             });
         },
-        
+
         updateChoiceValue(value, index) {
             const fieldCopy = _.clone(this.field);
 
@@ -306,7 +305,7 @@ export default {
             for(var i = 0; i < this.field.choices.length; i++) {
                 if(this.field.choices[i].toUpperCase() === value.toUpperCase()) {
                     this.field.choices[index] = this.temp;
-                    
+
                     return this.isUnique = false;
                 }
             }
@@ -316,7 +315,7 @@ export default {
             this.isEmptyTable = false;
             this.isUnique = true;
 
-            
+
 
             this.$forceUpdate();
         },
@@ -329,29 +328,29 @@ export default {
                 return this.isEmptyTable = true;
             }
             for(var i = 0; i < this.questions.length; i++) {
-                if(this.questions[i].toUpperCase().name === value.toUpperCase()) {
-                    
-                    this.questions[index].name = this.temp;
-                    
+                if(this.questions[i].toUpperCase() === value.toUpperCase()) {
+
+                    this.questions[index] = this.temp;
+
                     return this.isUnique = false;
                 }
             }
 
-            fieldCopy.questions[index].name = value;
+            fieldCopy.questions[index] = value;
             this.questions = fieldCopy.questions;
             this.isEmptyTable = false;
             this.isUnique = true;
             this.$forceUpdate();
         }
-        
+
     }
 }
 </script>
 
 <style scoped>
     table{
-        width: 100%; 
-        margin-top: 20px; 
+        width: 100%;
+        margin-top: 20px;
         z-index: 0;
         display: block;
         max-height: 300px;

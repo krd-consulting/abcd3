@@ -1,48 +1,48 @@
 <template>
     <div>
         <el-form label-position="top" ref="fieldData" :rules="fieldData.rules" :model="fieldData" @submit.native.prevent>
-            
+
             <el-form-item prop="title">
             <label>
                 Question/Title
             </label>
                 <el-input v-model="fieldData.title"></el-input>
             </el-form-item>
-            
+
             <el-form-item class="tw-mt-8">
                 <label>
                     Additional information
                 </label>
                 <el-input v-model="fieldData.description"></el-input>
             </el-form-item>
-            
+
             <el-form-item class="tw-mt-8">
                 <label>
                     This field is
                 </label><br>
                 <el-switch v-model="fieldData.settings.required" active-text="Required" inactive-text="Optional" class="tw--mt-6"></el-switch>
             </el-form-item>
-            
+
             <el-form-item>
                 <label>
                     Number of questions
                 </label>
                 <el-input-number v-model="fieldData.settings.matrix_questions"
-                    controls-position="right" 
+                    controls-position="right"
                     :min="1">
                 </el-input-number>
             </el-form-item>
-            
+
             <el-form-item class="tw-mt-8">
                 <label>
                     Number of choices
                 </label>
                 <el-input-number v-model="fieldData.settings.matrix_choices"
-                    controls-position="right"  
+                    controls-position="right"
                     :min="1" :max="10">
                 </el-input-number>
             </el-form-item>
-            
+
             <el-form-item class="tw-relative tw-text-center tw-mt-12">
                 <el-button type="success" @click="save('fieldData')" class="tw-w-48">Add it!</el-button>
             </el-form-item>
@@ -84,9 +84,7 @@ export default {
         setQuestions() {
 
             for(let i = 0; i < this.fieldData.settings.matrix_questions; i++) {
-                this.fieldData.questions.push({
-                    name: 'Question ' + i++
-                })
+                this.fieldData.questions.push('Question ' + (i + 1));
             }
         },
 

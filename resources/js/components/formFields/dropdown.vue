@@ -9,7 +9,9 @@
                 <el-select
                     id="dropdown"
                     v-model="value"
-                    @input="$emit('input', $event)" filterable placeholder=" ">
+                    @input="$emit('input', $event)"
+                    filterable
+                    placeholder=" ">
                     <el-option v-for="choice in field.choices"
                         :key="choice"
                         :label="choice"

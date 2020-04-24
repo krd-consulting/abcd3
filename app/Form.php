@@ -73,7 +73,7 @@ class Form extends Model
 
                 $radioFields = [];
                 $radioFields = collect($field['questions'])
-                    ->map(function($question, $key) use ($field){
+                    ->map(function($question, $radioFieldKey) use ($field, $key){
                         $radioField = [];
                         $radioField['title'] = $question;
                         $radioField['type'] = 'RadioField';
@@ -83,7 +83,8 @@ class Form extends Model
                             = isset($field['validation_rules']) ? $field['validation_rules'] : NULL;
                         $columnName = $this->generateFieldColumnName($this->fieldNumber++);
                         $radioField['column_name'] = $columnName;
-                        $this->field_layout->set("questions.$key.column_name", $columnName);
+                        $this->field_layout->set("$key.questions.$radioFieldKey.column_name", $columnName);
+                        $this->field_layout->set("$key.questions.$radioFieldKey.title", $question);
                         return $radioField;
                     });
 
@@ -120,7 +121,13 @@ class Form extends Model
                     $columnType = $field->column_type;
                     $columnName = $field->column_name;
 
-                    $table->$columnType($columnName)->nullable();
+                    // add foreign key for file upload column
+                    if($field->type == 'file') {
+                        $table->$columnType($columnName)->unsigned()->nullable();
+                        $table->foreign($columnName)->references('id')->on('files');
+                    }else {
+                        $table->$columnType($columnName)->nullable();
+                    }
 
                     // foreign keys
                     if(!empty($field->target_type)) {
@@ -141,10 +148,6 @@ class Form extends Model
                 $table->timestamps();
                 $table->softDeletes();
                 $table->userstamps();
-
-                // add foreign key for file upload column
-                if($field->type == 'file')
-                    $table->foreign($columnName)->references('id')->on('files');
 
                 $class = $this->target_type->model;
                 $model = new $class;
