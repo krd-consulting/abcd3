@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./resources/js/api/AttachmentRequest.js":
-/*!***********************************************!*\
-  !*** ./resources/js/api/AttachmentRequest.js ***!
-  \***********************************************/
+/***/ "./resources/js/api/DownloadAttachmentRequest.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/api/DownloadAttachmentRequest.js ***!
+  \*******************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,28 +34,25 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var AttachmentRequest = /*#__PURE__*/function (_Request) {
-  _inherits(AttachmentRequest, _Request);
+var DownloadAttachmentRequest = /*#__PURE__*/function (_Request) {
+  _inherits(DownloadAttachmentRequest, _Request);
 
-  var _super = _createSuper(AttachmentRequest);
+  var _super = _createSuper(DownloadAttachmentRequest);
 
-  function AttachmentRequest() {
-    _classCallCheck(this, AttachmentRequest);
+  function DownloadAttachmentRequest() {
+    _classCallCheck(this, DownloadAttachmentRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(AttachmentRequest, [{
-    key: "store",
-    value: function store() {
-      return this.post("/api/attachments");
-    } // destroy(program, recordType, record, recordCase) {
-    //     return this.delete(`/api/programs/${program}/records/${recordType}/${record}/cases/${recordCase}`);
-    // }
-
+  _createClass(DownloadAttachmentRequest, [{
+    key: "show",
+    value: function show(attachment) {
+      return this.get("/api/downloads/attachments/".concat(attachment));
+    }
   }]);
 
-  return AttachmentRequest;
+  return DownloadAttachmentRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (AttachmentRequest);

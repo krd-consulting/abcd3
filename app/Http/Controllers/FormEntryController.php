@@ -19,6 +19,8 @@ class FormEntryController extends Controller
         $entry = new FormEntry;
         $entry->setTable($form->table_name);
 
+        $entry->castFieldsToArray($form->fields()->whereIn('type', ['checkbox', 'file'])->pluck('column_name'));
+
         $perPage = request('perPage');
         $entries = $entry->paginate($perPage);
 

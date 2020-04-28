@@ -42,17 +42,25 @@
 
                 <template slot="bellows">
                     <dl>
-                        <text-field
-                            v-if="field.type == 'text'"
-                            v-for="(field, index) in fields"
-                            v-model="entry[field.column_name]"
-                            :field="field"
-                            :key="index"
-                            class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
-                        </text-field>
-                        <div v-else class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
-                            <dd class="tw-text-gray-600">{{ field.title }}</dd>
-                            <dt>{{ entry[field.column_name] }}</dt>
+                        <div v-for="(field, index) in fields" :key="index">
+                            <text-field
+                                v-if="field.type == 'text'"
+                                v-model="entry[field.column_name]"
+                                :field="field"
+                                class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
+                            </text-field>
+
+                            <file-field
+                                v-else-if="field.type == 'file'"
+                                v-model="entry[field.column_name]"
+                                :field="field"
+                                class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
+                            </file-field>
+
+                            <div v-else class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
+                                <dd class="tw-text-gray-600">{{ field.title }}</dd>
+                                <dt>{{ entry[field.column_name] }}</dt>
+                            </div>
                         </div>
                     </dl>
                 </template>
@@ -71,7 +79,8 @@
     import PrimaryData from '@/App/components/record/primaryData';
     import SecondaryData from '@/App/components/record/secondaryData';
 
-    import TextField from '@/components/formEntryDataFields/textField';
+    import TextField from '@/components/formEntryDataFields/text';
+    import FileField from '@/components/formEntryDataFields/file';
 
     import { targetTypes } from '@/helpers';
 
@@ -82,7 +91,8 @@
             ProfilePicture,
             PrimaryData,
             SecondaryData,
-            TextField
+            TextField,
+            FileField
         },
 
         data() {

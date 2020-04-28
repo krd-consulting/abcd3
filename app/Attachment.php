@@ -13,7 +13,7 @@ class Attachment extends Model
     {
         $path = $file->store('attachments');
 
-        $attachment = (new Attachment([ 'path' => $path ]));
+        $attachment = (new Attachment([ 'path' => $path, 'name' => $file->getClientOriginalName() ]));
         $attachment->save();
 
         return $attachment;

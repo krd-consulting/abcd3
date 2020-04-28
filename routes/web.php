@@ -111,9 +111,12 @@ Route::prefix('api')
         Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');
         Route::delete('roles/{role}/permissions/{permission}', 'RolePermissionController@destroy');
 
+        Route::get('attachments/{attachment}', 'AttachmentController@show');
         Route::post('attachments', 'AttachmentController@store');
         Route::delete('attachments/{attachment}', 'AttachmentController@destroy');
 });
+
+Route::get('downloads/attachments/{attachment}', 'AttachmentController@download');
 
 Route::get('/preferences', 'ShowPreferences');
 Route::get('/preferences/{all}', 'ShowPreferences')->where('all', '(.*)');
