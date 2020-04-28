@@ -63,7 +63,7 @@
                     </el-col>
                     <el-col :span="8">
                         <base-select
-                            v-model="teams.team_id"
+                            v-model="entryData.team_id"
                             filterable
                             remote
                             :remote-method="retrieveTeams"
@@ -157,7 +157,7 @@
                 <br>
 
                     <div class="tw-relative tw-text-center tw-mt-12">
-                        <el-button type="primary" class="tw-w-48" @click="submit">Submit</el-button>
+                        <el-button type="primary" class="tw-w-48" @click="submit" :disabled="disableSubmit">Submit</el-button>
                     </div>
             </el-main>
         </el-card>
@@ -227,6 +227,7 @@
                 value: '',
                 inputName: '',
                 dateCompleted: '',
+                disableSubmit: false,
                 prePost: [
                     {id: 0, value: 'Pre-test'},
                     {id: 1, value: 'Intermittent'},
@@ -345,6 +346,8 @@
             },
 
             submit() {
+                this.disableSubmit = true;
+
                 this.entryRequest = new EntryRequest(this.entryData);
 
                 this.entryRequest.store(this.$route.params.form)
@@ -361,6 +364,8 @@
                             type: 'error',
                             message: 'You may have entered incorrect data.'
                         });
+
+                        this.disableSubmit = false;
 
                         this.errors = error.errors;
                     });

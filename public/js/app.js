@@ -5033,6 +5033,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       value: '',
       inputName: '',
       dateCompleted: '',
+      disableSubmit: false,
       prePost: [{
         id: 0,
         value: 'Pre-test'
@@ -5137,6 +5138,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     submit: function submit() {
       var _this4 = this;
 
+      this.disableSubmit = true;
       this.entryRequest = new _api_FormEntryRequest__WEBPACK_IMPORTED_MODULE_12__["default"](this.entryData);
       this.entryRequest.store(this.$route.params.form).then(function (response) {
         _this4.$message({
@@ -5151,6 +5153,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           message: 'You may have entered incorrect data.'
         });
 
+        _this4.disableSubmit = false;
         _this4.errors = error.errors;
       });
     }
@@ -96603,11 +96606,11 @@ var render = function() {
                             }
                           },
                           model: {
-                            value: _vm.teams.team_id,
+                            value: _vm.entryData.team_id,
                             callback: function($$v) {
-                              _vm.$set(_vm.teams, "team_id", $$v)
+                              _vm.$set(_vm.entryData, "team_id", $$v)
                             },
-                            expression: "teams.team_id"
+                            expression: "entryData.team_id"
                           }
                         },
                         _vm._l(_vm.teams, function(team, index) {
@@ -96836,7 +96839,7 @@ var render = function() {
                     "el-button",
                     {
                       staticClass: "tw-w-48",
-                      attrs: { type: "primary" },
+                      attrs: { type: "primary", disabled: _vm.disableSubmit },
                       on: { click: _vm.submit }
                     },
                     [_vm._v("Submit")]

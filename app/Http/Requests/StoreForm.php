@@ -27,8 +27,8 @@ class StoreForm extends FormRequest
      */
     public function rules()
     {
-        $universal = Scope::where('name' , config('auth.scopes.universal.name'))->first()->id;
-        $self = Scope::where('name' , config('auth.scopes.self.name'))->first()->id;
+        $universal = Scope::where('value' , config('auth.scopes.universal.value'))->first()->id;
+        $self = Scope::where('value' , config('auth.scopes.self.value'))->first()->id;
 
         return [
             'name' => 'required',
@@ -40,7 +40,7 @@ class StoreForm extends FormRequest
                 Rule::in(config('app.form_types'))
             ],
             'scope_id' => 'required|exists:scopes,id',
-            'team_id' => "required_if:scope_id,$universal|required_if:scope_id,$self|exists:teams,id",
+            'team_id' => "sometimes|nullable|required_unless:scope_id,$universal,$self|exists:teams,id",
             'fields.*.type' => 'required',
             'fields.*.title' => 'required',
             'fields.*.reference_target_type_id' => 'nullable|exists:form_target_types,id',

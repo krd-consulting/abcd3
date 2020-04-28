@@ -1,11 +1,11 @@
 <template>
-    <base-dialog 
-        v-bind="$attrs" 
+    <base-dialog
+        v-bind="$attrs"
         :close-on-click-modal="false"
         :show-close="false"
         :close-on-press-escape="false"
-        :visible="active" 
-        @close="close" 
+        :visible="active"
+        @close="close"
         @open="open">
         <div slot="title">
             <base-icon class="tw-align-text-top">person_add</base-icon> Create New Form
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/3">
@@ -96,7 +96,7 @@
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/3">
-                        Limit form access to 
+                        Limit form access to
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
@@ -125,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!----------------------------   TODO: FIX THIS   ------------------------------->
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full" v-if="this.formData.scope_id !== 1 && this.formData.scope_id !== 6">
@@ -162,7 +162,7 @@
             <a href="javascript:history.back()" class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-gray-700 tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue tw-text-xs">
                 Nevermind
             </a>
-            <base-button 
+            <base-button
                 class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none"
                 @click="submit">
                 <span class="tw-text-xs tw-align-middle">OK</span>
@@ -267,10 +267,8 @@
             load() {
                 let request = new Request({});
 
-                this.retrieveTeams().then (() => {
-                    this.formData.team_id = this.teams[0].id
-                });
-                
+                this.retrieveTeams();
+
                 request.create().then((response) => {
                     this.targetTypes = response.data.target_types;
                     this.types = response.data.types;

@@ -6,12 +6,13 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 use App\FormTargetType;
+use App\Scope;
 
 class InitializeForm extends FormRequest
 {
 
     protected $hasTargetId = false;
-    
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -34,7 +35,7 @@ class InitializeForm extends FormRequest
         $this->target = [];
 
         $this->target['type'] = $target[0];
-        
+
 
         if(isset($target[1])) {
             $this->target['id'] = $target[1];
@@ -54,10 +55,13 @@ class InitializeForm extends FormRequest
      */
     public function rules()
     {
+        $universal = Scope::where('name' , config('auth.scopes.universal.name'))->first()->id;
+        $self = Scope::where('name' , config('auth.scopes.self.name'))->first()->id;
+
         return [
             'name' => 'required',
             'description' => '',
-            'team_id' => 'required|exists:teams,id',
+            'team_id' => "sometimes|nullable|required_unless:scope_id,$universal,$self|exists:teams,id",
             'type' => [
                 'required',
                 Rule::in(config('app.form_types'))
