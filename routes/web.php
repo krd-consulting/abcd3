@@ -110,6 +110,9 @@ Route::prefix('api')
 
         Route::post('roles/{role}/permissions/{permission}', 'RolePermissionController@store');
         Route::delete('roles/{role}/permissions/{permission}', 'RolePermissionController@destroy');
+
+        Route::post('attachments', 'AttachmentController@store');
+        Route::delete('attachments/{attachment}', 'AttachmentController@destroy');
 });
 
 Route::get('/preferences', 'ShowPreferences');

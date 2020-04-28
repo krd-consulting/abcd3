@@ -107820,9 +107820,15 @@ var Request = /*#__PURE__*/function () {
     _classCallCheck(this, Request);
 
     this.setFields(fields);
+    this.setContentType('application/json');
   }
 
   _createClass(Request, [{
+    key: "setContentType",
+    value: function setContentType(contentType) {
+      this.contentType = contentType;
+    }
+  }, {
     key: "setFields",
     value: function setFields(fields) {
       this.fieldData = fields;
@@ -107875,7 +107881,11 @@ var Request = /*#__PURE__*/function () {
       var _this = this;
 
       return new Promise(function (resolve, reject) {
-        axios[request](url, _this.data()).then(function (response) {
+        axios[request](url, _this.data(), {
+          headers: {
+            'Content-Type': _this.contentType
+          }
+        }).then(function (response) {
           _this.onSuccess();
 
           resolve(response.data);

@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./resources/js/api/FormFieldRequest.js":
-/*!**********************************************!*\
-  !*** ./resources/js/api/FormFieldRequest.js ***!
-  \**********************************************/
+/***/ "./resources/js/api/AttachmentRequest.js":
+/*!***********************************************!*\
+  !*** ./resources/js/api/AttachmentRequest.js ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,33 +34,31 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var FormField = /*#__PURE__*/function (_Request) {
-  _inherits(FormField, _Request);
+var AttachmentRequest = /*#__PURE__*/function (_Request) {
+  _inherits(AttachmentRequest, _Request);
 
-  var _super = _createSuper(FormField);
+  var _super = _createSuper(AttachmentRequest);
 
-  function FormField() {
-    _classCallCheck(this, FormField);
+  function AttachmentRequest() {
+    _classCallCheck(this, AttachmentRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(FormField, [{
-    key: "retrieve",
-    value: function retrieve(form) {
-      return this.get("/api/forms/".concat(form, "/fields"));
-    }
-  }, {
-    key: "show",
-    value: function show(field) {
-      return this.get("api/form-fields/".concat(field));
-    }
+  _createClass(AttachmentRequest, [{
+    key: "store",
+    value: function store() {
+      return this.post("/api/attachments");
+    } // destroy(program, recordType, record, recordCase) {
+    //     return this.delete(`/api/programs/${program}/records/${recordType}/${record}/cases/${recordCase}`);
+    // }
+
   }]);
 
-  return FormField;
+  return AttachmentRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (FormField);
+/* harmony default export */ __webpack_exports__["default"] = (AttachmentRequest);
 
 /***/ })
 

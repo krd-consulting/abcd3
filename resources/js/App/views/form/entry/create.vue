@@ -120,6 +120,15 @@
                     </component>
 
                     <component
+                        v-else-if="field.type == 'FileField'"
+                        class="tw-my-8"
+                        @input="addFile($event.column_name, $event.value)"
+                        :field="field"
+                        :is="field.type"
+                        :key="field.id">
+                    </component>
+
+                    <component
                         v-else
                         class="tw-my-8"
                         v-model="entryData[field.column_name]"
@@ -239,6 +248,14 @@
         },
 
         methods: {
+            addFile(field, fileId) {
+                if(this.entryData[field] == null) {
+                    this.entryData[field] = [ fileId ];
+                } else {
+                    this.entryData[field].push(fileId);
+                }
+            },
+
             // TODO: Move to helpers
             getPrimaryData(record, fields) {
                 let remainingFields = [];
@@ -322,7 +339,7 @@
                             message: 'Form Entry Submitted!'
                         });
 
-                        window.location.reload();
+                        // window.location.reload();
                     })
                     .catch((error) => {
                         this.$message({

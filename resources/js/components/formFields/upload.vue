@@ -7,19 +7,17 @@
         </el-col>
 
         <el-col :span="10">
-          <el-upload 
-              action=""
-              :auto-upload="false"
-              :http-request="handleUpload"
-              :on-preview="handlePreview"
-              :on-remove="handleRemove"
-              :before-remove="beforeRemove"
-              multiple
-              :limit="field.settings.limit"
-              :on-exceed="handleExceed"
-              :file-list="fileList">
-              <el-button size="small" type="primary">Click to upload</el-button>
-              <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
+            <el-upload
+                action="/api/attachments"
+                :headers="{ 'X-CSRF-TOKEN': this.token }"
+                :on-success="handleSuccess"
+                :on-remove="handleRemove"
+                :before-remove="beforeRemove"
+                :limit="field.settings.limit"
+                :on-exceed="handleExceed"
+                :file-list="fileList">
+            <el-button size="small" type="primary">Click to upload</el-button>
+            <div slot="tip" class="el-upload__tip">jpg/png files with a size less than 500kb</div>
           </el-upload>
         </el-col>
       </el-row>
@@ -27,35 +25,38 @@
 </template>
 
 <script>
-export default {
-    data: () => {
-        return {
-            fileList: [],
+    import Request from '@/api/AttachmentRequest';
+
+    export default {
+        data: () => {
+            return {
+                request: new Request({}),
+                fileList: [],
+                token: window.axios.defaults.headers.common['X-CSRF-TOKEN']
+            }
+        },
+        props: {
+            field: Object
+        },
+        methods: {
+            handleSuccess(response, file, fileList) {
+                this.$emit('input', { column_name: this.field.column_name  , value: response.data.id});
+            },
+            handleRemove(file, fileList) {
+                this.request.destroy(file.response.data.id)
+                    .then((response) => {
+                        this.$message({
+                            type: 'success',
+                            message: 'Attachment removed.'
+                        });
+                    });
+            },
+            handleExceed(files, fileList) {
+                this.$message.warning(`The limit is ${this.field.settings.limit}, you selected ${files.length} files this time.`);
+            },
+            beforeRemove(file, fileList) {
+                return this.$confirm(`Cancel the transfer of ${ file.name } ?`);
+            },
         }
-    },
-    props: { 
-        field: Object
-    },
-    methods: {
-      handleUpload(file) {
-        console.log(file);
-      },
-      handleRemove(file, fileList) {
-        console.log(file, fileList);
-      },
-      handlePreview(file) {
-        console.log(file);
-      },
-      handleExceed(files, fileList) {
-        this.$message.warning(`The limit is 3, you selected ${files.length} files this time, add up to ${files.length + fileList.length} totally`);
-      },
-      beforeRemove(file, fileList) {
-        return this.$confirm(`Cancel the transfer of ${ file.name } ?`);
-      }
     }
-}
 </script>
-
-<style>
-
-</style>

@@ -37,7 +37,7 @@ class FormField extends Model
         'checkbox' => 'json',
         'date' => 'timestamp',
         'time' => 'time',
-        'file' => 'bigInteger'
+        'file' => 'json'
     ];
 
     protected $fieldTypes = [
@@ -110,7 +110,7 @@ class FormField extends Model
     }
 
     public function scopeFilter($query, $terms)
-    {   
+    {
         foreach($terms as $column=>$term) {
             $query->where($column, $term);
         }

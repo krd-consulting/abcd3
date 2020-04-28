@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\File;
+
 use Illuminate\Foundation\Http\FormRequest;
 
 use Carbon\Carbon;

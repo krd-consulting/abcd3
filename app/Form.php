@@ -121,13 +121,7 @@ class Form extends Model
                     $columnType = $field->column_type;
                     $columnName = $field->column_name;
 
-                    // add foreign key for file upload column
-                    if($field->type == 'file') {
-                        $table->$columnType($columnName)->unsigned()->nullable();
-                        $table->foreign($columnName)->references('id')->on('files');
-                    }else {
-                        $table->$columnType($columnName)->nullable();
-                    }
+                    $table->$columnType($columnName)->nullable();
 
                     // foreign keys
                     if(!empty($field->target_type)) {

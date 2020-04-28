@@ -4951,6 +4951,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5046,6 +5055,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     RecordPrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_14__["default"]
   },
   methods: {
+    addFile: function addFile(field, fileId) {
+      if (this.entryData[field] == null) {
+        this.entryData[field] = [fileId];
+      } else {
+        this.entryData[field].push(fileId);
+      }
+    },
     // TODO: Move to helpers
     getPrimaryData: function getPrimaryData(record, fields) {
       var remainingFields = [];
@@ -5111,9 +5127,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this4.$message({
           type: 'success',
           message: 'Form Entry Submitted!'
-        });
+        }); // window.location.reload();
 
-        window.location.reload();
       })["catch"](function (error) {
         _this4.$message({
           type: 'error',
@@ -11548,6 +11563,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_AttachmentRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/AttachmentRequest */ "./resources/js/api/AttachmentRequest.js");
 //
 //
 //
@@ -11574,29 +11590,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      fileList: []
+      request: new _api_AttachmentRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({}),
+      fileList: [],
+      token: window.axios.defaults.headers.common['X-CSRF-TOKEN']
     };
   },
   props: {
     field: Object
   },
   methods: {
-    handleUpload: function handleUpload(file) {
-      console.log(file);
+    handleSuccess: function handleSuccess(response, file, fileList) {
+      this.$emit('input', {
+        column_name: this.field.column_name,
+        value: response.data.id
+      });
     },
     handleRemove: function handleRemove(file, fileList) {
-      console.log(file, fileList);
-    },
-    handlePreview: function handlePreview(file) {
-      console.log(file);
+      var _this = this;
+
+      this.request.destroy(file.response.data.id).then(function (response) {
+        _this.$message({
+          type: 'success',
+          message: 'Attachment removed.'
+        });
+      });
     },
     handleExceed: function handleExceed(files, fileList) {
-      this.$message.warning("The limit is 3, you selected ".concat(files.length, " files this time, add up to ").concat(files.length + fileList.length, " totally"));
+      this.$message.warning("The limit is ".concat(this.field.settings.limit, ", you selected ").concat(files.length, " files this time."));
     },
     beforeRemove: function beforeRemove(file, fileList) {
       return this.$confirm("Cancel the transfer of ".concat(file.name, " ?"));
@@ -96626,6 +96650,21 @@ var render = function() {
                             }
                           }
                         })
+                      : field.type == "FileField"
+                      ? _c(field.type, {
+                          key: field.id,
+                          tag: "component",
+                          staticClass: "tw-my-8",
+                          attrs: { field: field },
+                          on: {
+                            input: function($event) {
+                              return _vm.addFile(
+                                $event.column_name,
+                                $event.value
+                              )
+                            }
+                          }
+                        })
                       : _c(field.type, {
                           key: field.id,
                           tag: "component",
@@ -103708,13 +103747,11 @@ var render = function() {
                 "el-upload",
                 {
                   attrs: {
-                    action: "",
-                    "auto-upload": false,
-                    "http-request": _vm.handleUpload,
-                    "on-preview": _vm.handlePreview,
+                    action: "/api/attachments",
+                    headers: { "X-CSRF-TOKEN": this.token },
+                    "on-success": _vm.handleSuccess,
                     "on-remove": _vm.handleRemove,
                     "before-remove": _vm.beforeRemove,
-                    multiple: "",
                     limit: _vm.field.settings.limit,
                     "on-exceed": _vm.handleExceed,
                     "file-list": _vm.fileList
@@ -122736,6 +122773,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./AttachmentRequest": [
+		"./resources/js/api/AttachmentRequest.js"
+	],
 	"./CasesRequest": [
 		"./resources/js/api/CasesRequest.js",
 		4
@@ -122850,6 +122890,70 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 };
 webpackAsyncContext.id = "./resources/js/api lazy recursive ^\\.\\/.*Request$";
 module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ "./resources/js/api/AttachmentRequest.js":
+/*!***********************************************!*\
+  !*** ./resources/js/api/AttachmentRequest.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var AttachmentRequest = /*#__PURE__*/function (_Request) {
+  _inherits(AttachmentRequest, _Request);
+
+  var _super = _createSuper(AttachmentRequest);
+
+  function AttachmentRequest() {
+    _classCallCheck(this, AttachmentRequest);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(AttachmentRequest, [{
+    key: "store",
+    value: function store() {
+      return this.post("/api/attachments");
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(attachment) {
+      return this["delete"]("/api/attachments/".concat(attachment));
+    }
+  }]);
+
+  return AttachmentRequest;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (AttachmentRequest);
 
 /***/ }),
 
@@ -127261,9 +127365,15 @@ var Request = /*#__PURE__*/function () {
     _classCallCheck(this, Request);
 
     this.setFields(fields);
+    this.setContentType('application/json');
   }
 
   _createClass(Request, [{
+    key: "setContentType",
+    value: function setContentType(contentType) {
+      this.contentType = contentType;
+    }
+  }, {
     key: "setFields",
     value: function setFields(fields) {
       this.fieldData = fields;
@@ -127316,7 +127426,11 @@ var Request = /*#__PURE__*/function () {
       var _this = this;
 
       return new Promise(function (resolve, reject) {
-        axios[request](url, _this.data()).then(function (response) {
+        axios[request](url, _this.data(), {
+          headers: {
+            'Content-Type': _this.contentType
+          }
+        }).then(function (response) {
           _this.onSuccess();
 
           resolve(response.data);

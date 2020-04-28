@@ -29,6 +29,11 @@ class Record extends Model
         'field_3_value',
     ];
 
+    public function attachments()
+    {
+        return $this->morphMany('App\Attachment', 'attachmentable');
+    }
+
     public function assignTeam($teamId)
     {
         $this->teams()->attach($teamId);

@@ -3,6 +3,12 @@ import Errors from './Errors.js';
 class Request {
     constructor(fields) {
         this.setFields(fields);
+        this.setContentType('application/json');
+    }
+
+    setContentType(contentType)
+    {
+        this.contentType = contentType;
     }
 
     setFields(fields) {
@@ -47,7 +53,11 @@ class Request {
 
     submit(request , url) {
         return new Promise((resolve, reject) => {
-            axios[request](url , this.data())
+            axios[request](url , this.data(), {
+                headers: {
+                    'Content-Type': this.contentType
+                }
+            })
             .then(response => {
                 this.onSuccess();
 
