@@ -56,7 +56,7 @@ class StoreFormEntry extends FormRequest
             'target_id'
                 => 'required|exists:' . (new $form->target_type->model)->getFormReferenceTable() . ',id',
             'team_id'
-                => 'required|exists:teams,id',
+                => 'exists:teams,id',
             'completed_at' => 'required|date'
         ];
 
