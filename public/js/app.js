@@ -4960,6 +4960,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5015,6 +5029,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       targetItems: [],
       entryData: {},
+      errors: {},
       value: '',
       inputName: '',
       dateCompleted: '',
@@ -5127,13 +5142,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this4.$message({
           type: 'success',
           message: 'Form Entry Submitted!'
-        }); // window.location.reload();
+        });
 
+        window.location.reload();
       })["catch"](function (error) {
         _this4.$message({
           type: 'error',
           message: 'You may have entered incorrect data.'
         });
+
+        _this4.errors = error.errors;
       });
     }
   },
@@ -96532,7 +96550,17 @@ var render = function() {
                               )
                             }),
                             1
-                          )
+                          ),
+                      _vm._v(" "),
+                      _vm.errors["target_id"]
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              { staticClass: "tw-text-red-500 tw-text-sm" },
+                              [_vm._v(_vm._s(_vm.errors["target_id"][0]))]
+                            )
+                          ])
+                        : _vm._e()
                     ],
                     1
                   )
@@ -96599,7 +96627,17 @@ var render = function() {
                           )
                         }),
                         1
-                      )
+                      ),
+                      _vm._v(" "),
+                      _vm.errors["team_id"]
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              { staticClass: "tw-text-red-500 tw-text-sm" },
+                              [_vm._v(_vm._s(_vm.errors["team_id"][0]))]
+                            )
+                          ])
+                        : _vm._e()
                     ],
                     1
                   )
@@ -96691,7 +96729,17 @@ var render = function() {
                           },
                           expression: "entryData.completed_at"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _vm.errors["completed_at"]
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              { staticClass: "tw-text-red-500 tw-text-sm" },
+                              [_vm._v(_vm._s(_vm.errors["completed_at"][0]))]
+                            )
+                          ])
+                        : _vm._e()
                     ],
                     1
                   )
@@ -96704,48 +96752,75 @@ var render = function() {
                   "div",
                   { key: field.id, staticClass: "tw-block tw-mr-1" },
                   [
-                    field.type == "MatrixField"
-                      ? _c(field.type, {
-                          key: field.id,
-                          tag: "component",
-                          staticClass: "tw-my-8",
-                          attrs: { field: field },
-                          on: {
-                            input: function($event) {
-                              _vm.entryData[$event.column_name] = $event.value
-                            }
-                          }
-                        })
-                      : field.type == "FileField"
-                      ? _c(field.type, {
-                          key: field.id,
-                          tag: "component",
-                          staticClass: "tw-my-8",
-                          attrs: { field: field },
-                          on: {
-                            input: function($event) {
-                              return _vm.addFile(
-                                $event.column_name,
-                                $event.value
-                              )
-                            }
-                          }
-                        })
-                      : _c(field.type, {
-                          key: field.id,
-                          tag: "component",
-                          staticClass: "tw-my-8",
-                          attrs: { field: field },
-                          model: {
-                            value: _vm.entryData[field.column_name],
-                            callback: function($$v) {
-                              _vm.$set(_vm.entryData, field.column_name, $$v)
-                            },
-                            expression: "entryData[field.column_name]"
-                          }
-                        })
-                  ],
-                  1
+                    _c(
+                      "div",
+                      [
+                        field.type == "MatrixField"
+                          ? _c(field.type, {
+                              key: field.id,
+                              tag: "component",
+                              attrs: { field: field },
+                              on: {
+                                input: function($event) {
+                                  _vm.entryData[$event.column_name] =
+                                    $event.value
+                                  _vm.errors[field.column_name] = null
+                                }
+                              }
+                            })
+                          : field.type == "FileField"
+                          ? _c(field.type, {
+                              key: field.id,
+                              tag: "component",
+                              attrs: { field: field },
+                              on: {
+                                input: function($event) {
+                                  _vm.addFile($event.column_name, $event.value)
+                                  _vm.errors[field.column_name] = null
+                                }
+                              }
+                            })
+                          : _c(field.type, {
+                              key: field.id,
+                              tag: "component",
+                              attrs: { field: field },
+                              on: {
+                                input: function($event) {
+                                  _vm.errors[field.column_name] = null
+                                }
+                              },
+                              model: {
+                                value: _vm.entryData[field.column_name],
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.entryData,
+                                    field.column_name,
+                                    $$v
+                                  )
+                                },
+                                expression: "entryData[field.column_name]"
+                              }
+                            })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.errors[field.column_name]
+                      ? _c(
+                          "div",
+                          { staticClass: "tw-grid tw-grid-cols-4 tw--mt-8" },
+                          [
+                            _c("span"),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              { staticClass: "tw-text-red-500 tw-text-sm" },
+                              [_vm._v(_vm._s(_vm.errors[field.column_name][0]))]
+                            )
+                          ]
+                        )
+                      : _vm._e()
+                  ]
                 )
               }),
               _vm._v(" "),

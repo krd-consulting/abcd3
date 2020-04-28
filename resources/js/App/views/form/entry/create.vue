@@ -50,6 +50,9 @@
                                 <record-primary-data :record="item" :fields="item.fields" />
                             </el-option>
                         </base-select>
+                        <div v-if="errors['target_id']">
+                            <span class="tw-text-red-500 tw-text-sm">{{ errors['target_id'][0] }}</span>
+                        </div>
 
                     </el-col>
                 </el-row>
@@ -75,6 +78,9 @@
                                 {{ team.name }}
                             </el-option>
                         </base-select>
+                        <div v-if="errors['team_id']">
+                            <span class="tw-text-red-500 tw-text-sm">{{ errors['team_id'][0] }}</span>
+                        </div>
                     </el-col>
                 </el-row>
 
@@ -105,38 +111,46 @@
                             placeholder=" "
                             :picker-options="pickerOptions">
                         </el-date-picker>
+                        <div v-if="errors['completed_at']">
+                            <span class="tw-text-red-500 tw-text-sm">{{ errors['completed_at'][0] }}</span>
+                        </div>
                     </el-col>
 
                 </el-row>
 
                 <div class="tw-block tw-mr-1" v-for="field in form.field_layout" :key="field.id">
-                    <component
-                        v-if="field.type == 'MatrixField'"
-                        class="tw-my-8"
-                        @input="entryData[$event.column_name] = $event.value"
-                        :field="field"
-                        :is="field.type"
-                        :key="field.id">
-                    </component>
+                    <div>
+                        <component
+                            v-if="field.type == 'MatrixField'"
+                            @input="entryData[$event.column_name] = $event.value; errors[field.column_name] = null"
+                            :field="field"
+                            :is="field.type"
+                            :key="field.id">
+                        </component>
 
-                    <component
-                        v-else-if="field.type == 'FileField'"
-                        class="tw-my-8"
-                        @input="addFile($event.column_name, $event.value)"
-                        :field="field"
-                        :is="field.type"
-                        :key="field.id">
-                    </component>
+                        <component
+                            v-else-if="field.type == 'FileField'"
+                            @input="addFile($event.column_name, $event.value); errors[field.column_name] = null"
+                            :field="field"
+                            :is="field.type"
+                            :key="field.id">
+                        </component>
 
-                    <component
-                        v-else
-                        class="tw-my-8"
-                        v-model="entryData[field.column_name]"
-                        :field="field"
-                        :is="field.type"
-                        :key="field.id">
-                    </component>
+                        <component
+                            v-else
+                            v-model="entryData[field.column_name]"
+                            @input="errors[field.column_name] = null"
+                            :field="field"
+                            :is="field.type"
+                            :key="field.id">
+                        </component>
+                    </div>
 
+
+                    <div v-if="errors[field.column_name]" class="tw-grid tw-grid-cols-4 tw--mt-8">
+                        <span></span>
+                        <span class="tw-text-red-500 tw-text-sm">{{ errors[field.column_name][0] }}</span>
+                    </div>
                 </div>
 
                 <br>
@@ -209,6 +223,7 @@
                 },
                 targetItems: [],
                 entryData: {},
+                errors: {},
                 value: '',
                 inputName: '',
                 dateCompleted: '',
@@ -339,13 +354,15 @@
                             message: 'Form Entry Submitted!'
                         });
 
-                        // window.location.reload();
+                        window.location.reload();
                     })
                     .catch((error) => {
                         this.$message({
                             type: 'error',
                             message: 'You may have entered incorrect data.'
                         });
+
+                        this.errors = error.errors;
                     });
             }
         },
