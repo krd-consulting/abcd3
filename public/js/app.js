@@ -4974,6 +4974,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -5029,7 +5030,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       targetItems: [],
       entryData: {},
-      errors: {},
       value: '',
       inputName: '',
       dateCompleted: '',
@@ -5154,7 +5154,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
 
         _this4.disableSubmit = false;
-        _this4.errors = error.errors;
       });
     }
   },
@@ -11122,6 +11121,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -11129,7 +11131,8 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   props: {
-    field: Object
+    field: Object,
+    errors: Array | Object
   }
 });
 
@@ -96520,7 +96523,9 @@ var render = function() {
                               },
                               on: {
                                 change: function($event) {
-                                  return _vm.request.errors.clear("team_id")
+                                  return _vm.entryRequest.errors.clear(
+                                    "target_id"
+                                  )
                                 }
                               },
                               model: {
@@ -96555,12 +96560,18 @@ var render = function() {
                             1
                           ),
                       _vm._v(" "),
-                      _vm.errors["target_id"]
+                      _vm.entryRequest.errors.has("target_id")
                         ? _c("div", [
                             _c(
                               "span",
                               { staticClass: "tw-text-red-500 tw-text-sm" },
-                              [_vm._v(_vm._s(_vm.errors["target_id"][0]))]
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.entryRequest.errors.get("target_id")[0]
+                                  )
+                                )
+                              ]
                             )
                           ])
                         : _vm._e()
@@ -96602,7 +96613,7 @@ var render = function() {
                           },
                           on: {
                             change: function($event) {
-                              return _vm.request.errors.clear("team_id")
+                              return _vm.entryRequest.errors.clear("team_id")
                             }
                           },
                           model: {
@@ -96632,12 +96643,18 @@ var render = function() {
                         1
                       ),
                       _vm._v(" "),
-                      _vm.errors["team_id"]
+                      _vm.entryRequest.errors.has("team_id")
                         ? _c("div", [
                             _c(
                               "span",
                               { staticClass: "tw-text-red-500 tw-text-sm" },
-                              [_vm._v(_vm._s(_vm.errors["team_id"][0]))]
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.entryRequest.errors.get("team_id")[0]
+                                  )
+                                )
+                              ]
                             )
                           ])
                         : _vm._e()
@@ -96725,6 +96742,11 @@ var render = function() {
                           placeholder: " ",
                           "picker-options": _vm.pickerOptions
                         },
+                        on: {
+                          input: function($event) {
+                            return _vm.entryRequest.errors.clear("completed_at")
+                          }
+                        },
                         model: {
                           value: _vm.entryData.completed_at,
                           callback: function($$v) {
@@ -96734,12 +96756,20 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm.errors["completed_at"]
+                      _vm.entryRequest.errors.has("completed_at")
                         ? _c("div", [
                             _c(
                               "span",
                               { staticClass: "tw-text-red-500 tw-text-sm" },
-                              [_vm._v(_vm._s(_vm.errors["completed_at"][0]))]
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.entryRequest.errors.get(
+                                      "completed_at"
+                                    )[0]
+                                  )
+                                )
+                              ]
                             )
                           ])
                         : _vm._e()
@@ -96762,12 +96792,17 @@ var render = function() {
                           ? _c(field.type, {
                               key: field.id,
                               tag: "component",
-                              attrs: { field: field },
+                              attrs: {
+                                errors: _vm.entryRequest.errors,
+                                field: field
+                              },
                               on: {
                                 input: function($event) {
                                   _vm.entryData[$event.column_name] =
                                     $event.value
-                                  _vm.errors[field.column_name] = null
+                                  _vm.entryRequest.errors.clear(
+                                    $event.column_name
+                                  )
                                 }
                               }
                             })
@@ -96779,7 +96814,9 @@ var render = function() {
                               on: {
                                 input: function($event) {
                                   _vm.addFile($event.column_name, $event.value)
-                                  _vm.errors[field.column_name] = null
+                                  _vm.entryRequest.errors.clear(
+                                    $event.column_name
+                                  )
                                 }
                               }
                             })
@@ -96789,7 +96826,9 @@ var render = function() {
                               attrs: { field: field },
                               on: {
                                 input: function($event) {
-                                  _vm.errors[field.column_name] = null
+                                  return _vm.entryRequest.errors.clear(
+                                    $event.column_name
+                                  )
                                 }
                               },
                               model: {
@@ -96808,7 +96847,7 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _vm.errors[field.column_name]
+                    _vm.entryRequest.errors.has(field.column_name)
                       ? _c(
                           "div",
                           { staticClass: "tw-grid tw-grid-cols-4 tw--mt-8" },
@@ -96818,7 +96857,15 @@ var render = function() {
                             _c(
                               "span",
                               { staticClass: "tw-text-red-500 tw-text-sm" },
-                              [_vm._v(_vm._s(_vm.errors[field.column_name][0]))]
+                              [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.entryRequest.errors.get(
+                                      field.column_name
+                                    )[0]
+                                  )
+                                )
+                              ]
                             )
                           ]
                         )
@@ -103243,8 +103290,23 @@ var render = function() {
                           _vm._v(
                             "\n                            " +
                               _vm._s(question.title) +
-                              "\n                        "
-                          )
+                              "\n                            "
+                          ),
+                          _vm.errors.has(question.column_name)
+                            ? _c("div", [
+                                _c(
+                                  "span",
+                                  { staticClass: "tw-text-red-500 tw-text-sm" },
+                                  [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.errors.get(question.column_name)[0]
+                                      )
+                                    )
+                                  ]
+                                )
+                              ])
+                            : _vm._e()
                         ]),
                         _vm._v(" "),
                         _vm._l(_vm.field.choices, function(response, index) {

@@ -41,7 +41,7 @@
                             :remote-method="retrieveFormTargetItems"
                             name="type"
                             placeholder=" "
-                            @change="request.errors.clear('team_id')">
+                            @change="entryRequest.errors.clear('target_id')">
                             <el-option
                                 v-for="(item, index) in targetItems"
                                 :key="index"
@@ -50,8 +50,8 @@
                                 <record-primary-data :record="item" :fields="item.fields" />
                             </el-option>
                         </base-select>
-                        <div v-if="errors['target_id']">
-                            <span class="tw-text-red-500 tw-text-sm">{{ errors['target_id'][0] }}</span>
+                        <div v-if="entryRequest.errors.has('target_id')">
+                            <span class="tw-text-red-500 tw-text-sm">{{ entryRequest.errors.get('target_id')[0] }}</span>
                         </div>
 
                     </el-col>
@@ -69,7 +69,7 @@
                             :remote-method="retrieveTeams"
                             name="type"
                             placeholder=" "
-                            @change="request.errors.clear('team_id')">
+                            @change="entryRequest.errors.clear('team_id')">
                             <el-option
                                 v-for="(team, index) in teams"
                                 :key="index"
@@ -78,8 +78,8 @@
                                 {{ team.name }}
                             </el-option>
                         </base-select>
-                        <div v-if="errors['team_id']">
-                            <span class="tw-text-red-500 tw-text-sm">{{ errors['team_id'][0] }}</span>
+                        <div v-if="entryRequest.errors.has('team_id')">
+                            <span class="tw-text-red-500 tw-text-sm">{{ entryRequest.errors.get('team_id')[0] }}</span>
                         </div>
                     </el-col>
                 </el-row>
@@ -109,10 +109,11 @@
                             v-model="entryData.completed_at"
                             type="date"
                             placeholder=" "
-                            :picker-options="pickerOptions">
+                            :picker-options="pickerOptions"
+                            @input="entryRequest.errors.clear('completed_at')">
                         </el-date-picker>
-                        <div v-if="errors['completed_at']">
-                            <span class="tw-text-red-500 tw-text-sm">{{ errors['completed_at'][0] }}</span>
+                        <div v-if="entryRequest.errors.has('completed_at')">
+                            <span class="tw-text-red-500 tw-text-sm">{{ entryRequest.errors.get('completed_at')[0] }}</span>
                         </div>
                     </el-col>
 
@@ -122,7 +123,8 @@
                     <div>
                         <component
                             v-if="field.type == 'MatrixField'"
-                            @input="entryData[$event.column_name] = $event.value; errors[field.column_name] = null"
+                            @input="entryData[$event.column_name] = $event.value; entryRequest.errors.clear($event.column_name)"
+                            :errors="entryRequest.errors"
                             :field="field"
                             :is="field.type"
                             :key="field.id">
@@ -130,7 +132,7 @@
 
                         <component
                             v-else-if="field.type == 'FileField'"
-                            @input="addFile($event.column_name, $event.value); errors[field.column_name] = null"
+                            @input="addFile($event.column_name, $event.value); entryRequest.errors.clear($event.column_name)"
                             :field="field"
                             :is="field.type"
                             :key="field.id">
@@ -139,17 +141,16 @@
                         <component
                             v-else
                             v-model="entryData[field.column_name]"
-                            @input="errors[field.column_name] = null"
+                            @input="entryRequest.errors.clear($event.column_name)"
                             :field="field"
                             :is="field.type"
                             :key="field.id">
                         </component>
                     </div>
 
-
-                    <div v-if="errors[field.column_name]" class="tw-grid tw-grid-cols-4 tw--mt-8">
+                    <div v-if="entryRequest.errors.has(field.column_name)" class="tw-grid tw-grid-cols-4 tw--mt-8">
                         <span></span>
-                        <span class="tw-text-red-500 tw-text-sm">{{ errors[field.column_name][0] }}</span>
+                        <span class="tw-text-red-500 tw-text-sm">{{ entryRequest.errors.get(field.column_name)[0] }}</span>
                     </div>
                 </div>
 
@@ -223,7 +224,6 @@
                 },
                 targetItems: [],
                 entryData: {},
-                errors: {},
                 value: '',
                 inputName: '',
                 dateCompleted: '',
@@ -366,8 +366,6 @@
                         });
 
                         this.disableSubmit = false;
-
-                        this.errors = error.errors;
                     });
             }
         },

@@ -48,11 +48,10 @@ class Form extends Model
         DB::transaction(function () use ($request) {
             $this->save();
 
-            // TODO: attach to user if scope is self
-
             // add form to team.
-            if(!empty($request->team_id))
+            if(!empty($request->team_id)) {
                 $this->teams()->attach([$request->team_id]);
+            }
 
             if(empty($request->validated()['fields']))
                 return;
