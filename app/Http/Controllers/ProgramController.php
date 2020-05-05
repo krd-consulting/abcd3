@@ -18,8 +18,13 @@ class ProgramController extends Controller
      */
     public function index()
     {
+        $programs = (new Program)->availableFor(auth()->user())->with('team');
+
+        $active = request('active') ?? true;
+        $programs->active($active);
+
         $perPage = request('perPage');
-        $programs = (new Program)->availableFor(auth()->user())->with('team')->paginate($perPage);
+        $programs = $programs->paginate($perPage);
 
         return (new Programs($programs));
     }
@@ -77,11 +82,12 @@ class ProgramController extends Controller
         $this->authorize('write', $program);
 
         // Update program when user is authorized.
-        $program->name = $request->input('name');
-        $program->description = $request->input('description');
-        $program->default_client_status_id = $request->input('default_client_status_id');
-        $program->case_client_status_id = $request->input('case_client_status_id');
-        $program->group_client_status_id = $request->input('group_client_status_id');
+        $program->name = $request->input('name') ?? $program->name;
+        $program->description = $request->input('description') ?? $program->description;
+        $program->default_client_status_id = $request->input('default_client_status_id') ?? $program->default_client_status_id;
+        $program->case_client_status_id = $request->input('case_client_status_id') ?? $program->case_client_status_id;
+        $program->group_client_status_id = $request->input('group_client_status_id') ?? $program->group_client_status_id;
+        $program->active = $request->input('active') ?? $program->active;
         $program->save();
 
         return $program;

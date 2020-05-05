@@ -4021,6 +4021,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -4109,6 +4110,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
+    },
+    showInactive: {
+      type: Boolean,
+      "default": false
     }
   },
   computed: {
@@ -7012,9 +7017,10 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/ProgramRequest */ "./resources/js/api/ProgramRequest.js");
-/* harmony import */ var _App_components_resourceList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/App/components/resourceList */ "./resources/js/App/components/resourceList.vue");
-/* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./create */ "./resources/js/App/views/program/create.vue");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./edit */ "./resources/js/App/views/program/edit.vue");
+/* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./methods */ "./resources/js/App/views/program/methods.js");
+/* harmony import */ var _App_components_resourceList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/App/components/resourceList */ "./resources/js/App/components/resourceList.vue");
+/* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./create */ "./resources/js/App/views/program/create.vue");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./edit */ "./resources/js/App/views/program/edit.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -7058,15 +7064,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    List: _App_components_resourceList__WEBPACK_IMPORTED_MODULE_1__["default"],
-    CreateProgram: _create__WEBPACK_IMPORTED_MODULE_2__["default"],
-    EditProgram: _edit__WEBPACK_IMPORTED_MODULE_3__["default"]
+    List: _App_components_resourceList__WEBPACK_IMPORTED_MODULE_2__["default"],
+    CreateProgram: _create__WEBPACK_IMPORTED_MODULE_3__["default"],
+    EditProgram: _edit__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   data: function data() {
     return {
@@ -7091,53 +7102,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     };
   },
-  methods: {
-    retrieve: function retrieve() {
-      var _this = this;
-
-      this.request.setFields({
-        params: _objectSpread({}, this.params)
-      });
-      this.request.retrieve().then(function (response) {
-        _this.programs = response.data;
-        _this.total = response.meta.total;
-      });
-    },
-    createProgram: function createProgram() {
-      this.create.active = true;
-    },
-    editProgram: function editProgram(program) {
-      this.edit.program = program;
-      this.edit.active = true;
-    },
-    confirmDelete: function confirmDelete(program) {
-      var _this2 = this;
-
-      this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
-        confirmButtonText: 'Delete',
-        cancelButtonText: 'Wait, no!',
-        type: 'warning'
-      }).then(function () {
-        _this2.deleteProgram(program).then(function () {
-          _this2.retrieve();
-
-          _this2.$message({
-            type: 'success',
-            message: 'Program was deleted.'
-          });
-        })["catch"](function (error) {
-          _this2.$message({
-            type: 'error',
-            message: error.message
-          });
-        });
-      });
-    },
-    deleteProgram: function deleteProgram(program) {
-      var request = new _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_0__["default"]();
-      return request.destroy(program);
+  methods: _objectSpread({}, _methods__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    retrieve: _methods__WEBPACK_IMPORTED_MODULE_1__["default"].index,
+    toggleInactive: function toggleInactive(showInactive) {
+      this.params.active = !showInactive;
+      this.params.page = 1;
+      this.retrieve();
     }
-  },
+  }),
   created: function created() {
     this.retrieve();
   }
@@ -94718,33 +94690,36 @@ var render = function() {
                         _vm.loading == false &&
                         _vm.hasAdd
                           ? _vm._t("empty-placeholder-add-button", [
-                              _c(
-                                "base-button",
-                                {
-                                  staticClass:
-                                    "tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.$emit("add")
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "span",
+                              !_vm.showInactive
+                                ? _c(
+                                    "base-button",
                                     {
-                                      staticClass: "tw-text-xs tw-align-middle"
+                                      staticClass:
+                                        "tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.$emit("add")
+                                        }
+                                      }
                                     },
                                     [
-                                      _vm._t(
-                                        "empty-placeholder-add-button-text",
-                                        [_vm._v("Add")]
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass:
+                                            "tw-text-xs tw-align-middle"
+                                        },
+                                        [
+                                          _vm._t(
+                                            "empty-placeholder-add-button-text",
+                                            [_vm._v("Add")]
+                                          )
+                                        ],
+                                        2
                                       )
-                                    ],
-                                    2
+                                    ]
                                   )
-                                ]
-                              )
+                                : _vm._e()
                             ])
                           : _vm._e()
                       ],
@@ -95266,7 +95241,10 @@ var render = function() {
                   {
                     on: {
                       change: function($event) {
-                        return _vm.$emit("show-inactive", $event)
+                        return _vm.$emit(
+                          "show-inactive",
+                          (_vm.showInactive = $event)
+                        )
                       }
                     }
                   },
@@ -99429,6 +99407,7 @@ var render = function() {
             "per-page": _vm.params.perPage,
             "has-add": "",
             "has-delete": "",
+            "has-disable": "",
             "has-list-columns": false,
             hasSearch: false,
             total: _vm.total
@@ -99440,9 +99419,12 @@ var render = function() {
             add: _vm.createProgram,
             edit: _vm.editProgram,
             delete: _vm.confirmDelete,
+            disable: _vm.confirmDisable,
+            enable: _vm.confirmEnable,
             "page-change": function($event) {
               return _vm.retrieve()
-            }
+            },
+            "show-inactive": _vm.toggleInactive
           },
           scopedSlots: _vm._u([
             {
@@ -121570,6 +121552,151 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_0d24c88a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/App/views/program/methods.js":
+/*!***************************************************!*\
+  !*** ./resources/js/App/views/program/methods.js ***!
+  \***************************************************/
+/*! exports provided: index, createProgram, editProgram, confirmDelete, deleteProgram, disable, confirmDisable, enable, confirmEnable, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "index", function() { return index; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createProgram", function() { return createProgram; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editProgram", function() { return editProgram; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "confirmDelete", function() { return confirmDelete; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteProgram", function() { return deleteProgram; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "disable", function() { return disable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "confirmDisable", function() { return confirmDisable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enable", function() { return enable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "confirmEnable", function() { return confirmEnable; });
+/* harmony import */ var _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/ProgramRequest */ "./resources/js/api/ProgramRequest.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+function index() {
+  var _this = this;
+
+  this.request.setFields({
+    params: _objectSpread({}, this.params)
+  });
+  this.request.retrieve().then(function (response) {
+    _this.programs = response.data;
+    _this.total = response.meta.total;
+  });
+}
+function createProgram() {
+  this.create.active = true;
+}
+function editProgram(program) {
+  this.edit.program = program;
+  this.edit.active = true;
+}
+function confirmDelete(program) {
+  var _this2 = this;
+
+  this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
+    confirmButtonText: 'Delete',
+    cancelButtonText: 'Wait, no!',
+    type: 'warning'
+  }).then(function () {
+    _this2.deleteProgram(program).then(function () {
+      _this2.retrieve();
+
+      _this2.$message({
+        type: 'success',
+        message: 'Program was deleted.'
+      });
+    })["catch"](function (error) {
+      _this2.$message({
+        type: 'error',
+        message: error.message
+      });
+    });
+  });
+}
+function deleteProgram(program) {
+  var request = new _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_0__["default"]();
+  return request.destroy(program);
+}
+function disable(program) {
+  var data = {
+    active: false
+  };
+  var request = new _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_0__["default"](data);
+  return request.update(program);
+}
+function confirmDisable(program) {
+  var _this3 = this;
+
+  this.$confirm('Are you sure you want to disable this program?', 'Disable Program', {
+    confirmButtonText: 'Disable',
+    cancelButtonText: 'Wait, no!',
+    type: 'warning'
+  }).then(function () {
+    _this3.disable(program).then(function () {
+      _this3.retrieve();
+
+      _this3.$message({
+        type: 'success',
+        message: 'Program is disabled.'
+      });
+    })["catch"](function (error) {
+      _this3.$message({
+        type: 'error',
+        message: error.message
+      });
+    });
+  });
+}
+function enable(program) {
+  var data = {
+    active: true
+  };
+  var request = new _api_ProgramRequest__WEBPACK_IMPORTED_MODULE_0__["default"](data);
+  return request.update(program);
+}
+function confirmEnable(program) {
+  var _this4 = this;
+
+  this.$confirm('Are you sure you want to enable this program?', 'Enable Program', {
+    confirmButtonText: 'Enable',
+    cancelButtonText: 'Wait, no!',
+    type: 'warning'
+  }).then(function () {
+    _this4.enable(program).then(function () {
+      _this4.retrieve();
+
+      _this4.$message({
+        type: 'success',
+        message: 'Program is enabled.'
+      });
+    })["catch"](function (error) {
+      _this4.$message({
+        type: 'error',
+        message: error.message
+      });
+    });
+  });
+}
+/* harmony default export */ __webpack_exports__["default"] = ({
+  index: index,
+  createProgram: createProgram,
+  editProgram: editProgram,
+  confirmDelete: confirmDelete,
+  deleteProgram: deleteProgram,
+  confirmDisable: confirmDisable,
+  disable: disable,
+  confirmEnable: confirmEnable,
+  enable: enable
+});
 
 /***/ }),
 

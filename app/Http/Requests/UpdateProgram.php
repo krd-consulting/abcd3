@@ -26,8 +26,9 @@ class UpdateProgram extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:programs,id',
+            'id' => 'exists:programs,id',
             'name' => [
+                    'sometimes',
                     'required',
 
                     // Check whether the program name already exists within the team (excludes the program being edited).
@@ -35,10 +36,11 @@ class UpdateProgram extends FormRequest
                         return $query->where('team_id', $this->team_id)->where('id', '!=', $this->id);
                     })
                 ],
-            'team_id' => 'required|exists:teams,id',
-            'default_client_status_id' => 'required|exists:client_statuses,id',
+            'team_id' => 'sometimes|required|exists:teams,id',
+            'default_client_status_id' => 'sometimes|required|exists:client_statuses,id',
             'case_client_status_id' => 'sometimes|nullable|exists:client_statuses,id',
-            'group_client_status_id' => 'sometimes|nullable|exists:client_statuses,id'
+            'group_client_status_id' => 'sometimes|nullable|exists:client_statuses,id',
+            'active' => 'sometimes|boolean'
         ];
     }
 }

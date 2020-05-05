@@ -24,6 +24,7 @@ class Program extends JsonResource
             'description' => $this->description,
             'team' => $this->team,
             'team_id' => $this->team->id,
+            'active' => $this->active,
             'default_client_status_id' => $this->default_client_status_id,
             'group_client_status_id' => $this->group_client_status_id,
             'program_status' => $this->whenPivotLoaded(

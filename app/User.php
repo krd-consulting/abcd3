@@ -151,7 +151,7 @@ class User extends Authenticatable implements Auditable
             $programs = $programs->limit($limit);
         }
 
-        return $programs;
+        return $programs->active(true);
     }
 
     public function availableGroups(?int $limit)

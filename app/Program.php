@@ -2,10 +2,7 @@
 
 namespace App;
 
-use App\Traits\Models\Search;
-use App\Traits\Models\Sort;
-
-use App\Model;
+use App\Entity;
 
 use App\Record;
 use App\RecordIdentity;
@@ -15,11 +12,8 @@ use App\Traits\Models\FormReference as FormReferenceTrait;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Program extends Model implements FormReference
+class Program extends Entity implements FormReference
 {
-    use SoftDeletes;
-    use Search;
-    use Sort;
     use FormReferenceTrait;
 
     private $recordType;

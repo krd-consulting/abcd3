@@ -3722,6 +3722,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -3810,6 +3811,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
+    },
+    showInactive: {
+      type: Boolean,
+      "default": false
     }
   },
   computed: {
@@ -87764,33 +87769,36 @@ var render = function() {
                         _vm.loading == false &&
                         _vm.hasAdd
                           ? _vm._t("empty-placeholder-add-button", [
-                              _c(
-                                "base-button",
-                                {
-                                  staticClass:
-                                    "tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none",
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.$emit("add")
-                                    }
-                                  }
-                                },
-                                [
-                                  _c(
-                                    "span",
+                              !_vm.showInactive
+                                ? _c(
+                                    "base-button",
                                     {
-                                      staticClass: "tw-text-xs tw-align-middle"
+                                      staticClass:
+                                        "tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none",
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.$emit("add")
+                                        }
+                                      }
                                     },
                                     [
-                                      _vm._t(
-                                        "empty-placeholder-add-button-text",
-                                        [_vm._v("Add")]
+                                      _c(
+                                        "span",
+                                        {
+                                          staticClass:
+                                            "tw-text-xs tw-align-middle"
+                                        },
+                                        [
+                                          _vm._t(
+                                            "empty-placeholder-add-button-text",
+                                            [_vm._v("Add")]
+                                          )
+                                        ],
+                                        2
                                       )
-                                    ],
-                                    2
+                                    ]
                                   )
-                                ]
-                              )
+                                : _vm._e()
                             ])
                           : _vm._e()
                       ],
@@ -88312,7 +88320,10 @@ var render = function() {
                   {
                     on: {
                       change: function($event) {
-                        return _vm.$emit("show-inactive", $event)
+                        return _vm.$emit(
+                          "show-inactive",
+                          (_vm.showInactive = $event)
+                        )
                       }
                     }
                   },

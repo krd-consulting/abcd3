@@ -15,12 +15,16 @@
             :per-page="params.perPage"
             has-add
             has-delete
+            has-disable
             :has-list-columns="false"
             :hasSearch="false"
             @add="createProgram"
             @edit="editProgram"
             @delete="confirmDelete"
+            @disable="confirmDisable"
+            @enable="confirmEnable"
             @page-change="retrieve()"
+            @show-inactive="toggleInactive"
             :total="total">
             <template slot="header-text">Programs</template>
             <template slot="options-add-text">Create Program</template>
@@ -37,6 +41,8 @@
 </template>
 <script>
     import Request from '@/api/ProgramRequest';
+
+    import methods from './methods';
 
     import List from '@/App/components/resourceList';
     import CreateProgram from './create';
@@ -74,56 +80,15 @@
         },
 
         methods: {
-            retrieve() {
-                this.request.setFields({
-                    params: {...this.params}
-                });
+            ...methods,
 
-                this.request.retrieve().then(response => {
-                    this.programs = response.data;
-                    this.total = response.meta.total;
-                });
-            },
+            retrieve: methods.index,
 
-            createProgram() {
-                this.create.active = true;
-            },
-
-            editProgram(program) {
-                this.edit.program = program;
-
-                this.edit.active = true;
-            },
-
-            confirmDelete(program) {
-                this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
-                    confirmButtonText: 'Delete',
-                    cancelButtonText: 'Wait, no!',
-                    type: 'warning'
-                }).then(() => {
-                    this.deleteProgram(program)
-                        .then(() => {
-                            this.retrieve();
-
-                            this.$message({
-                                type: 'success',
-                                message: 'Program was deleted.'
-                            });
-                        })
-                        .catch((error) => {
-                            this.$message({
-                                type: 'error',
-                                message: error.message
-                            });
-                        });
-                })
-            },
-
-            deleteProgram(program) {
-                let request = new Request();
-
-                return request.destroy(program);
-            },
+            toggleInactive(showInactive) {
+                this.params.active = !showInactive;
+                this.params.page = 1;
+                this.retrieve();
+            }
         },
 
         created() {

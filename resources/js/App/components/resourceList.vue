@@ -16,8 +16,9 @@
                             </slot>
                         </div>
                         <div>
-                            <slot v-if="total == 0 && search == '' && loading == false && hasAdd" name="empty-placeholder-add-button">
+                            <slot v-if="total == 0 && search == '' && loading == false && hasAdd " name="empty-placeholder-add-button">
                                 <base-button
+                                    v-if="!showInactive"
                                     class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none"
                                     @click="$emit('add')">
                                     <span class="tw-text-xs tw-align-middle">
@@ -174,7 +175,7 @@
                             <slot name="footer-options-manage-text">Manage Resources</slot>
                         </span>
                     </base-button>
-                    <base-checkbox @change="$emit('show-inactive', $event)">Only Show Inactive</base-checkbox>
+                    <base-checkbox @change="$emit('show-inactive', showInactive = $event)">Only Show Inactive</base-checkbox>
                 </slot>
             </template>
 
@@ -290,6 +291,11 @@
             tertiaryColumns: {
                 type: Array | Object,
                 default: () => { return [] }
+            },
+
+            showInactive: {
+                type: Boolean,
+                default: false
             }
 
         },
