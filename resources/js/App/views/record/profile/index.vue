@@ -5,11 +5,13 @@
             :record-id="edit.record"
             @update="retrieve"/>
 
-        <resource-profile 
+        <resource-profile
             :record="record"
             :fields="fields"
-            @edit="editRecord(record.id)" 
-            @delete="confirmDelete(record.id)">
+            @edit="editRecord(record.id)"
+            @disable="confirmDisable(record.type.slug, record.id)"
+            @delete="confirmDelete(record.id)"
+            @enable="confirmEnable(record.type.slug, record.id)">
             <template v-slot:main-information-container>
                 <div>
                     <div class="tw-inline-block tw-align-middle">
@@ -36,6 +38,8 @@
 </template>
 <script>
     import RecordRequest from '@/api/RecordRequest';
+
+    import methods from '../methods';
 
     import ResourceProfile from '@/App/components/resourceProfile';
     import ProfilePicture from '@/App/components/record/profilePicture';
@@ -66,7 +70,8 @@
                         name: '',
                         identity: {
                             name: ''
-                        }
+                        },
+                        slug: ''
                     }
                 },
                 request: new RecordRequest({}),
@@ -74,56 +79,9 @@
         },
 
         methods: {
-            retrieve() {
-                this.request.setFields({
-                    params: {...this.params}
-                });
+            ...methods,
 
-                this.request.show(this.$route.params.recordType, this.$route.params.record).then((response) => {
-
-
-                    this.record = response.data;
-                    this.fields = response.data.fields;
-                });
-            },
-
-            confirmDelete(record) {
-                this.$confirm('Are you sure you want to delete this record?', 'Delete Record', {
-                    confirmButtonText: 'Delete',
-                    cancelButtonText: 'Wait, no!',
-                    type: 'warning'
-                }).then(() => {
-                    this.deleteRecord(record)
-                        .then(() => {
-                            this.$emit('delete', record);
-
-                            this.$router.push(`/records/${this.record.type_slug}`);
-
-                            this.$message({
-                                type: 'success',
-                                message: 'Record was deleted.'
-                            });
-                        })
-                        .catch((error) => {
-                            this.$message({
-                                type: 'error',
-                                message: error.message
-                            });
-                        });
-                })
-            },
-
-            editRecord(record) {
-                this.edit.record = record;
-
-                this.edit.active = true;
-            },
-
-            deleteRecord(record) {
-                let request = new RecordRequest(record);
-
-                return request.destroy(this.$route.params.recordType, this.$route.params.record);
-            }
+            retrieve: methods.profile
         },
 
         created() {

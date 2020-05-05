@@ -18,6 +18,9 @@ class RecordTypeRecordController extends Controller
     {
         $records = $recordType->records();
 
+        $active = request('active') ?? true;
+        $records->active($active);
+
         // Search
         $search = request('search');
         $records = $records->search($search);

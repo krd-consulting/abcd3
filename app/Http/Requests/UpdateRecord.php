@@ -30,19 +30,20 @@ class UpdateRecord extends FormRequest
         return [
             'field_1_value' => $this->fieldRules()[$recordType->identity->field1->name],
             'field_2_value' => $this->fieldRules()[$recordType->identity->field2->name],
-            'field_3_value' => $this->fieldRules()[$recordType->identity->field3->name]
+            'field_3_value' => $this->fieldRules()[$recordType->identity->field3->name],
+            'active' => 'sometimes|boolean'
         ];
     }
 
     private function fieldRules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'business_name' => 'required',
-            'email_address' => 'required|email',
-            'contact_number' => 'required',
-            'birth_date' => 'required|date|before:tomorrow',
+            'first_name' => 'sometimes|required',
+            'last_name' => 'sometimes|required',
+            'business_name' => 'sometimes|required',
+            'email_address' => 'sometimes|required|email',
+            'contact_number' => 'sometimes|required',
+            'birth_date' => 'sometimes|required|date|before:tomorrow',
         ];
     }
 

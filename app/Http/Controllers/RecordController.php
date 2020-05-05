@@ -68,9 +68,10 @@ class RecordController extends Controller
         $this->authorize('write', $record);
 
         // Update record when user is authorized.
-        $record->field_1_value = $request->input('field_1_value');
-        $record->field_2_value = $request->input('field_2_value');
-        $record->field_3_value = $request->input('field_3_value');
+        $record->field_1_value = $request->input('field_1_value') ?? $record->field_1_value;
+        $record->field_2_value = $request->input('field_2_value') ?? $record->field_2_value;
+        $record->field_3_value = $request->input('field_3_value') ?? $record->field_3_value;
+        $record->active = $request->input('active') ?? $record->active;
         $record->save();
 
         return $record;

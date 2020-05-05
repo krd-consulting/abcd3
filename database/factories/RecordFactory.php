@@ -48,5 +48,6 @@ $factory->define(Record::class, function (Faker $faker) {
         'field_1_value' => $values[0],
         'field_2_value' => $values[1],
         'field_3_value' => $values[2],
+        'active' => true
     ];
 });

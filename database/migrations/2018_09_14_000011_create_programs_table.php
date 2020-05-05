@@ -21,6 +21,7 @@ class CreateProgramsTable extends Migration
             $table->integer('default_client_status_id')->unsigned();
             $table->integer('group_client_status_id')->unsigned()->nullable();
             $table->integer('case_client_status_id')->unsigned()->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
 

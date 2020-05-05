@@ -26,6 +26,7 @@ class CreateFormsTable extends Migration
             $table->schemalessAttributes('extra_data')->nullable();
             $table->schemalessAttributes('field_layout');
             $table->timestamp('disabled_at')->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->userstamps();
             $table->softDeletes();

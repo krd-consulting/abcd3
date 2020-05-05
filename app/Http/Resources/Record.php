@@ -27,6 +27,8 @@ class Record extends JsonResource
             'type_slug' => $this->record_type->slug,
             'type' => new RecordType($this->record_type),
 
+            'active' => $this->active,
+
             'program_status' => $this->whenPivotLoaded(
                 'program_record',
                 function () {

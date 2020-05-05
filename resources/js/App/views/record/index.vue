@@ -20,11 +20,15 @@
             :loading="loading"
             has-add
             has-delete
+            has-disable
             :has-list-columns="false"
             @add="createRecord"
             @edit="editRecord"
             @delete="confirmDelete(type.slug, $event)"
-            @page-change="retrieve()"
+            @disable="confirmDisable(type.slug, $event)"
+            @enable="confirmEnable(type.slug, $event)"
+            @page-change="retrieve();"
+            @show-inactive="toggleInactive"
             :total="total">
             <template slot="header-text">{{ type.name }}</template>
             <template slot="options-add-text">Add {{ type.name }}</template>
@@ -45,6 +49,8 @@
 </template>
 <script>
     import Request from '@/api/RecordRequest';
+
+    import methods from './methods';
 
     import List from '@/App/components/resourceList';
 
@@ -84,8 +90,10 @@
                     sortBy: 'field_1_value',
                     page: 1,
                     perPage: 10,
-                    search: ''
+                    search: '',
+                    active: true
                 },
+                inactivePage: 0,
                 total: 0,
                 type: {
                     name: ''
@@ -94,63 +102,16 @@
         },
 
         methods: {
-            retrieve(recordType = this.$route.params.recordType) {
-                this.loading = true;
 
-                this.request.setFields({
-                    params: {...this.params}
-                });
+            ...methods,
 
-                this.request.retrieve(recordType).then((response) => {
-                    this.fields = response.fields;
-                    this.records = response.data;
-                    this.total = response.meta.total;
-                    this.type = response.record_type;
+            retrieve: methods.index,
 
-                    this.loading = false;
-                });
-
-            },
-
-            createRecord() {
-                this.create.active = true;
-            },
-
-            editRecord(record) {
-                this.edit.record = record;
-
-                this.edit.active = true;
-            },
-
-            confirmDelete(recordType, record) {
-                this.$confirm('Are you sure you want to archive this record?', 'Archive Record', {
-                    confirmButtonText: 'Archive',
-                    cancelButtonText: 'Wait, no!',
-                    type: 'warning'
-                }).then(() => {
-                    this.deleteRecord(recordType, record)
-                        .then(() => {
-                            this.retrieve();
-
-                            this.$message({
-                                type: 'success',
-                                message: 'Record was deleted.'
-                            });
-                        })
-                        .catch((error) => {
-                            this.$message({
-                                type: 'error',
-                                message: error.message
-                            });
-                        });
-                })
-            },
-
-            deleteRecord(recordType, record) {
-                let request = new Request({});
-
-                return request.destroy(recordType, record);
-            },
+            toggleInactive(showInactive) {
+                this.params.active = !showInactive;
+                this.params.page = 1;
+                this.retrieve();
+            }
         },
 
         created() {

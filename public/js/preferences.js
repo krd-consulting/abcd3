@@ -3699,6 +3699,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3747,6 +3770,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": true
     },
     hasDelete: {
+      type: Boolean,
+      "default": false
+    },
+    hasDisable: {
       type: Boolean,
       "default": false
     },
@@ -88035,6 +88062,106 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _vm._t(
+                        "options-disable-button",
+                        [
+                          _vm.hasDisable && item.active
+                            ? _c(
+                                "base-button",
+                                {
+                                  staticClass:
+                                    "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$emit(
+                                        "disable",
+                                        item[_vm.resourceIdentifier]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "base-icon",
+                                    {
+                                      staticClass:
+                                        "tw-text-xs tw-mr-1 tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-disable-icon", [
+                                        _vm._v("visibility_off")
+                                      ])
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "tw-text-xs tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-disable-text", [
+                                        _vm._v("Disable")
+                                      ])
+                                    ],
+                                    2
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.hasDisable && !item.active
+                            ? _c(
+                                "base-button",
+                                {
+                                  staticClass:
+                                    "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$emit(
+                                        "enable",
+                                        item[_vm.resourceIdentifier]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "base-icon",
+                                    {
+                                      staticClass:
+                                        "tw-text-xs tw-mr-1 tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-disable-icon", [
+                                        _vm._v("visibility")
+                                      ])
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "tw-text-xs tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-disable-text", [
+                                        _vm._v("Enable")
+                                      ])
+                                    ],
+                                    2
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        { item: item }
+                      ),
+                      _vm._v(" "),
+                      _vm._t(
                         "options-remove-button",
                         [
                           _vm.hasRemove
@@ -88178,7 +88305,19 @@ var render = function() {
                       ],
                       1
                     )
-                  : _vm._e()
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "base-checkbox",
+                  {
+                    on: {
+                      change: function($event) {
+                        return _vm.$emit("show-inactive", $event)
+                      }
+                    }
+                  },
+                  [_vm._v("Only Show Inactive")]
+                )
               ])
             ],
             2

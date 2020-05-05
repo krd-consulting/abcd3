@@ -30,19 +30,18 @@ class UsersTableSeeder extends Seeder
         $rupert->password = bcrypt('secret');
         $rupert->remember_token = str_random(10);
         $rupert->save();
-        //$rupert->teams()->attach(Team::inRandomOrder()->first());
         $rupert->assignRole('Team Manager');
 
-        $ben = new User;
-        $ben->name = 'Benjamin Wozak';
-        $ben->email = 'ben@hellokrd.net';
-        $ben->password = bcrypt('secret');
-        $ben->remember_token = str_random(10);
-        $ben->save();
-        $ben->assignRole('Program Manager');
+        $isabel = new User;
+        $isabel->name = 'Isabel Everen';
+        $isabel->email = 'isabel@hellokrd.net';
+        $isabel->password = bcrypt('secret');
+        $isabel->remember_token = str_random(10);
+        $isabel->save();
+        $isabel->assignRole('Program Manager');
 
         $alanya = new User;
-        $alanya->name = 'Alanya Dallah';
+        $alanya->name = 'Alanya Dhalla';
         $alanya->email = 'alanya@hellokrd.net';
         $alanya->password = bcrypt('secret');
         $alanya->remember_token = str_random(10);

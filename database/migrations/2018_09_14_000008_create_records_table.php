@@ -21,6 +21,7 @@ class CreateRecordsTable extends Migration
             $table->string('field_1_value', 100);
             $table->string('field_2_value', 100);
             $table->string('field_3_value', 100);
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
 

@@ -3998,6 +3998,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -4046,6 +4069,10 @@ __webpack_require__.r(__webpack_exports__);
       "default": true
     },
     hasDelete: {
+      type: Boolean,
+      "default": false
+    },
+    hasDisable: {
       type: Boolean,
       "default": false
     },
@@ -4122,6 +4149,14 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _resourceProfileTabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./resourceProfileTabs */ "./resources/js/App/components/resourceProfileTabs.vue");
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -8247,12 +8282,13 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/RecordRequest */ "./resources/js/api/RecordRequest.js");
-/* harmony import */ var _App_components_resourceList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/App/components/resourceList */ "./resources/js/App/components/resourceList.vue");
-/* harmony import */ var _App_components_record_profilePicture__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/App/components/record/profilePicture */ "./resources/js/App/components/record/profilePicture.vue");
-/* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
-/* harmony import */ var _App_components_record_secondaryData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/App/components/record/secondaryData */ "./resources/js/App/components/record/secondaryData.vue");
-/* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./create */ "./resources/js/App/views/record/create.vue");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./edit */ "./resources/js/App/views/record/edit.vue");
+/* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./methods */ "./resources/js/App/views/record/methods.js");
+/* harmony import */ var _App_components_resourceList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/App/components/resourceList */ "./resources/js/App/components/resourceList.vue");
+/* harmony import */ var _App_components_record_profilePicture__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/App/components/record/profilePicture */ "./resources/js/App/components/record/profilePicture.vue");
+/* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
+/* harmony import */ var _App_components_record_secondaryData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/App/components/record/secondaryData */ "./resources/js/App/components/record/secondaryData.vue");
+/* harmony import */ var _create__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./create */ "./resources/js/App/views/record/create.vue");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./edit */ "./resources/js/App/views/record/edit.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -8304,6 +8340,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -8313,12 +8354,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    List: _App_components_resourceList__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ProfilePicture: _App_components_record_profilePicture__WEBPACK_IMPORTED_MODULE_2__["default"],
-    PrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_3__["default"],
-    SecondaryData: _App_components_record_secondaryData__WEBPACK_IMPORTED_MODULE_4__["default"],
-    CreateRecord: _create__WEBPACK_IMPORTED_MODULE_5__["default"],
-    EditRecord: _edit__WEBPACK_IMPORTED_MODULE_6__["default"]
+    List: _App_components_resourceList__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ProfilePicture: _App_components_record_profilePicture__WEBPACK_IMPORTED_MODULE_3__["default"],
+    PrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_4__["default"],
+    SecondaryData: _App_components_record_secondaryData__WEBPACK_IMPORTED_MODULE_5__["default"],
+    CreateRecord: _create__WEBPACK_IMPORTED_MODULE_6__["default"],
+    EditRecord: _edit__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
   data: function data() {
     return {
@@ -8338,66 +8379,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         sortBy: 'field_1_value',
         page: 1,
         perPage: 10,
-        search: ''
+        search: '',
+        active: true
       },
+      inactivePage: 0,
       total: 0,
       type: {
         name: ''
       }
     };
   },
-  methods: {
-    retrieve: function retrieve() {
-      var _this = this;
-
-      var recordType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$route.params.recordType;
-      this.loading = true;
-      this.request.setFields({
-        params: _objectSpread({}, this.params)
-      });
-      this.request.retrieve(recordType).then(function (response) {
-        _this.fields = response.fields;
-        _this.records = response.data;
-        _this.total = response.meta.total;
-        _this.type = response.record_type;
-        _this.loading = false;
-      });
-    },
-    createRecord: function createRecord() {
-      this.create.active = true;
-    },
-    editRecord: function editRecord(record) {
-      this.edit.record = record;
-      this.edit.active = true;
-    },
-    confirmDelete: function confirmDelete(recordType, record) {
-      var _this2 = this;
-
-      this.$confirm('Are you sure you want to archive this record?', 'Archive Record', {
-        confirmButtonText: 'Archive',
-        cancelButtonText: 'Wait, no!',
-        type: 'warning'
-      }).then(function () {
-        _this2.deleteRecord(recordType, record).then(function () {
-          _this2.retrieve();
-
-          _this2.$message({
-            type: 'success',
-            message: 'Record was deleted.'
-          });
-        })["catch"](function (error) {
-          _this2.$message({
-            type: 'error',
-            message: error.message
-          });
-        });
-      });
-    },
-    deleteRecord: function deleteRecord(recordType, record) {
-      var request = new _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
-      return request.destroy(recordType, record);
+  methods: _objectSpread({}, _methods__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    retrieve: _methods__WEBPACK_IMPORTED_MODULE_1__["default"].index,
+    toggleInactive: function toggleInactive(showInactive) {
+      this.params.active = !showInactive;
+      this.params.page = 1;
+      this.retrieve();
     }
-  },
+  }),
   created: function created() {
     this.retrieve();
   },
@@ -9069,11 +9068,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/RecordRequest */ "./resources/js/api/RecordRequest.js");
-/* harmony import */ var _App_components_resourceProfile__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/App/components/resourceProfile */ "./resources/js/App/components/resourceProfile.vue");
-/* harmony import */ var _App_components_record_profilePicture__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/App/components/record/profilePicture */ "./resources/js/App/components/record/profilePicture.vue");
-/* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
-/* harmony import */ var _App_components_record_secondaryData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/App/components/record/secondaryData */ "./resources/js/App/components/record/secondaryData.vue");
-/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../edit */ "./resources/js/App/views/record/edit.vue");
+/* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../methods */ "./resources/js/App/views/record/methods.js");
+/* harmony import */ var _App_components_resourceProfile__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/App/components/resourceProfile */ "./resources/js/App/components/resourceProfile.vue");
+/* harmony import */ var _App_components_record_profilePicture__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/App/components/record/profilePicture */ "./resources/js/App/components/record/profilePicture.vue");
+/* harmony import */ var _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/App/components/record/primaryData */ "./resources/js/App/components/record/primaryData.vue");
+/* harmony import */ var _App_components_record_secondaryData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/App/components/record/secondaryData */ "./resources/js/App/components/record/secondaryData.vue");
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../edit */ "./resources/js/App/views/record/edit.vue");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -9116,6 +9116,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+
 
 
 
@@ -9124,11 +9127,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    ResourceProfile: _App_components_resourceProfile__WEBPACK_IMPORTED_MODULE_1__["default"],
-    EditRecord: _edit__WEBPACK_IMPORTED_MODULE_5__["default"],
-    ProfilePicture: _App_components_record_profilePicture__WEBPACK_IMPORTED_MODULE_2__["default"],
-    PrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_3__["default"],
-    SecondaryData: _App_components_record_secondaryData__WEBPACK_IMPORTED_MODULE_4__["default"]
+    ResourceProfile: _App_components_resourceProfile__WEBPACK_IMPORTED_MODULE_2__["default"],
+    EditRecord: _edit__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ProfilePicture: _App_components_record_profilePicture__WEBPACK_IMPORTED_MODULE_3__["default"],
+    PrimaryData: _App_components_record_primaryData__WEBPACK_IMPORTED_MODULE_4__["default"],
+    SecondaryData: _App_components_record_secondaryData__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   data: function data() {
     return {
@@ -9142,58 +9145,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           name: '',
           identity: {
             name: ''
-          }
+          },
+          slug: ''
         }
       },
       request: new _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({})
     };
   },
-  methods: {
-    retrieve: function retrieve() {
-      var _this = this;
-
-      this.request.setFields({
-        params: _objectSpread({}, this.params)
-      });
-      this.request.show(this.$route.params.recordType, this.$route.params.record).then(function (response) {
-        _this.record = response.data;
-        _this.fields = response.data.fields;
-      });
-    },
-    confirmDelete: function confirmDelete(record) {
-      var _this2 = this;
-
-      this.$confirm('Are you sure you want to delete this record?', 'Delete Record', {
-        confirmButtonText: 'Delete',
-        cancelButtonText: 'Wait, no!',
-        type: 'warning'
-      }).then(function () {
-        _this2.deleteRecord(record).then(function () {
-          _this2.$emit('delete', record);
-
-          _this2.$router.push("/records/".concat(_this2.record.type_slug));
-
-          _this2.$message({
-            type: 'success',
-            message: 'Record was deleted.'
-          });
-        })["catch"](function (error) {
-          _this2.$message({
-            type: 'error',
-            message: error.message
-          });
-        });
-      });
-    },
-    editRecord: function editRecord(record) {
-      this.edit.record = record;
-      this.edit.active = true;
-    },
-    deleteRecord: function deleteRecord(record) {
-      var request = new _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__["default"](record);
-      return request.destroy(this.$route.params.recordType, this.$route.params.record);
-    }
-  },
+  methods: _objectSpread({}, _methods__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    retrieve: _methods__WEBPACK_IMPORTED_MODULE_1__["default"].profile
+  }),
   created: function created() {
     this.retrieve();
   }
@@ -95055,6 +95016,106 @@ var render = function() {
                       ),
                       _vm._v(" "),
                       _vm._t(
+                        "options-disable-button",
+                        [
+                          _vm.hasDisable && item.active
+                            ? _c(
+                                "base-button",
+                                {
+                                  staticClass:
+                                    "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$emit(
+                                        "disable",
+                                        item[_vm.resourceIdentifier]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "base-icon",
+                                    {
+                                      staticClass:
+                                        "tw-text-xs tw-mr-1 tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-disable-icon", [
+                                        _vm._v("visibility_off")
+                                      ])
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "tw-text-xs tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-disable-text", [
+                                        _vm._v("Disable")
+                                      ])
+                                    ],
+                                    2
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.hasDisable && !item.active
+                            ? _c(
+                                "base-button",
+                                {
+                                  staticClass:
+                                    "tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none",
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.$emit(
+                                        "enable",
+                                        item[_vm.resourceIdentifier]
+                                      )
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "base-icon",
+                                    {
+                                      staticClass:
+                                        "tw-text-xs tw-mr-1 tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-disable-icon", [
+                                        _vm._v("visibility")
+                                      ])
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "tw-text-xs tw-align-middle"
+                                    },
+                                    [
+                                      _vm._t("options-disable-text", [
+                                        _vm._v("Enable")
+                                      ])
+                                    ],
+                                    2
+                                  )
+                                ],
+                                1
+                              )
+                            : _vm._e()
+                        ],
+                        { item: item }
+                      ),
+                      _vm._v(" "),
+                      _vm._t(
                         "options-remove-button",
                         [
                           _vm.hasRemove
@@ -95198,7 +95259,19 @@ var render = function() {
                       ],
                       1
                     )
-                  : _vm._e()
+                  : _vm._e(),
+                _vm._v(" "),
+                _c(
+                  "base-checkbox",
+                  {
+                    on: {
+                      change: function($event) {
+                        return _vm.$emit("show-inactive", $event)
+                      }
+                    }
+                  },
+                  [_vm._v("Only Show Inactive")]
+                )
               ])
             ],
             2
@@ -95332,6 +95405,64 @@ var render = function() {
                       ],
                       1
                     ),
+                    _vm._v(" "),
+                    _vm.record.active
+                      ? _c(
+                          "base-button",
+                          {
+                            staticClass:
+                              "tw-py-2 tw-px-0 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                            on: {
+                              click: function($event) {
+                                return _vm.$emit("disable")
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "base-icon",
+                              {
+                                staticClass: "tw-text-xs tw-mr-1 tw-align-top"
+                              },
+                              [_vm._v("visibility_off")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              { staticClass: "tw-text-xs tw-align-middle" },
+                              [_vm._v("Disable")]
+                            )
+                          ],
+                          1
+                        )
+                      : _c(
+                          "base-button",
+                          {
+                            staticClass:
+                              "tw-py-2 tw-px-0 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none",
+                            on: {
+                              click: function($event) {
+                                return _vm.$emit("enable")
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "base-icon",
+                              {
+                                staticClass: "tw-text-xs tw-mr-1 tw-align-top"
+                              },
+                              [_vm._v("visibility")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              { staticClass: "tw-text-xs tw-align-middle" },
+                              [_vm._v("Enable")]
+                            )
+                          ],
+                          1
+                        ),
                     _vm._v(" "),
                     _c(
                       "base-button",
@@ -100617,6 +100748,7 @@ var render = function() {
             loading: _vm.loading,
             "has-add": "",
             "has-delete": "",
+            "has-disable": "",
             "has-list-columns": false,
             total: _vm.total
           },
@@ -100635,9 +100767,16 @@ var render = function() {
             delete: function($event) {
               return _vm.confirmDelete(_vm.type.slug, $event)
             },
+            disable: function($event) {
+              return _vm.confirmDisable(_vm.type.slug, $event)
+            },
+            enable: function($event) {
+              return _vm.confirmEnable(_vm.type.slug, $event)
+            },
             "page-change": function($event) {
               return _vm.retrieve()
-            }
+            },
+            "show-inactive": _vm.toggleInactive
           },
           scopedSlots: _vm._u([
             {
@@ -101186,8 +101325,14 @@ var render = function() {
           edit: function($event) {
             return _vm.editRecord(_vm.record.id)
           },
+          disable: function($event) {
+            return _vm.confirmDisable(_vm.record.type.slug, _vm.record.id)
+          },
           delete: function($event) {
             return _vm.confirmDelete(_vm.record.id)
+          },
+          enable: function($event) {
+            return _vm.confirmEnable(_vm.record.type.slug, _vm.record.id)
           }
         },
         scopedSlots: _vm._u([
@@ -122030,6 +122175,169 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_fe42be3e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/App/views/record/methods.js":
+/*!**************************************************!*\
+  !*** ./resources/js/App/views/record/methods.js ***!
+  \**************************************************/
+/*! exports provided: index, profile, createRecord, editRecord, confirmDelete, deleteRecord, disableRecord, confirmDisable, enableRecord, confirmEnable, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "index", function() { return index; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "profile", function() { return profile; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRecord", function() { return createRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editRecord", function() { return editRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "confirmDelete", function() { return confirmDelete; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteRecord", function() { return deleteRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "disableRecord", function() { return disableRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "confirmDisable", function() { return confirmDisable; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "enableRecord", function() { return enableRecord; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "confirmEnable", function() { return confirmEnable; });
+/* harmony import */ var _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/RecordRequest */ "./resources/js/api/RecordRequest.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+function index() {
+  var _this = this;
+
+  var recordType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.$route.params.recordType;
+  this.loading = true;
+  this.request.setFields({
+    params: _objectSpread({}, this.params)
+  });
+  this.request.retrieve(recordType).then(function (response) {
+    _this.fields = response.fields;
+    _this.records = response.data;
+    _this.total = response.meta.total;
+    _this.type = response.record_type;
+    _this.loading = false;
+  });
+}
+function profile() {
+  var _this2 = this;
+
+  this.request.setFields({
+    params: _objectSpread({}, this.params)
+  });
+  this.request.show(this.$route.params.recordType, this.$route.params.record).then(function (response) {
+    _this2.record = response.data;
+    _this2.fields = response.data.fields;
+  });
+}
+function createRecord() {
+  this.create.active = true;
+}
+function editRecord(record) {
+  this.edit.record = record;
+  this.edit.active = true;
+}
+function confirmDelete(recordType, record) {
+  var _this3 = this;
+
+  this.$confirm('Are you sure you want to archive this record?', 'Archive Record', {
+    confirmButtonText: 'Archive',
+    cancelButtonText: 'Wait, no!',
+    type: 'warning'
+  }).then(function () {
+    _this3.deleteRecord(recordType, record).then(function () {
+      _this3.retrieve();
+
+      _this3.$message({
+        type: 'success',
+        message: 'Record was deleted.'
+      });
+    })["catch"](function (error) {
+      _this3.$message({
+        type: 'error',
+        message: error.message
+      });
+    });
+  });
+}
+function deleteRecord(recordType, record) {
+  var request = new _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({});
+  return request.destroy(recordType, record);
+}
+function disableRecord(recordType, record) {
+  var newRecordData = {
+    active: false
+  };
+  var request = new _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__["default"](newRecordData);
+  return request.update(recordType, record);
+}
+function confirmDisable(recordType, record) {
+  var _this4 = this;
+
+  this.$confirm('Are you sure you want to disable this record?', 'Disable Record', {
+    confirmButtonText: 'Disable',
+    cancelButtonText: 'Wait, no!',
+    type: 'warning'
+  }).then(function () {
+    _this4.disableRecord(recordType, record).then(function () {
+      _this4.retrieve();
+
+      _this4.$message({
+        type: 'success',
+        message: 'Record is disabled.'
+      });
+    })["catch"](function (error) {
+      _this4.$message({
+        type: 'error',
+        message: error.message
+      });
+    });
+  });
+}
+function enableRecord(recordType, record) {
+  var newRecordData = {
+    active: true
+  };
+  var request = new _api_RecordRequest__WEBPACK_IMPORTED_MODULE_0__["default"](newRecordData);
+  return request.update(recordType, record);
+}
+function confirmEnable(recordType, record) {
+  var _this5 = this;
+
+  this.$confirm('Are you sure you want to enable this record?', 'Enable Record', {
+    confirmButtonText: 'Enable',
+    cancelButtonText: 'Wait, no!',
+    type: 'warning'
+  }).then(function () {
+    _this5.enableRecord(recordType, record).then(function () {
+      _this5.retrieve();
+
+      _this5.$message({
+        type: 'success',
+        message: 'Record is enabled.'
+      });
+    })["catch"](function (error) {
+      _this5.$message({
+        type: 'error',
+        message: error.message
+      });
+    });
+  });
+}
+/* harmony default export */ __webpack_exports__["default"] = ({
+  index: index,
+  profile: profile,
+  createRecord: createRecord,
+  editRecord: editRecord,
+  confirmDelete: confirmDelete,
+  deleteRecord: deleteRecord,
+  confirmDisable: confirmDisable,
+  disableRecord: disableRecord,
+  confirmEnable: confirmEnable,
+  enableRecord: enableRecord
+});
 
 /***/ }),
 

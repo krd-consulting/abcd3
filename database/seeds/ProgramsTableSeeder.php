@@ -24,6 +24,7 @@ class ProgramsTableSeeder extends Seeder
         $programOne->assignToTeam(
                 Team::where('name', 'Team One')->first()
             );
+        $programOne->active = true;
         $programOne->save();
 
         $programTwo = new Program;
@@ -35,6 +36,7 @@ class ProgramsTableSeeder extends Seeder
         $programTwo->assignToTeam(
                 Team::where('name', 'Team Two')->first()
             );
+        $programTwo->active = true;
         $programTwo->save();
     }
 }

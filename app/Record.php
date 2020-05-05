@@ -6,21 +6,14 @@ use App\Group;
 use App\RecordType;
 use App\Team;
 
-use App\Traits\Models\Search;
-use App\Traits\Models\Sort;
-
-use App\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Entity;
 
 use Staudenmeir\EloquentHasManyDeep\HasTableAlias;
 use AjCastro\EagerLoadPivotRelations\EagerLoadPivotTrait;
 
-class Record extends Model
+class Record extends Entity
 {
     use HasTableAlias;
-    use SoftDeletes;
-    use Search;
-    use Sort;
     use EagerLoadPivotTrait;
 
     protected $searchColumns = [

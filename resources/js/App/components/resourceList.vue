@@ -113,6 +113,28 @@
                                 </span>
                             </base-button>
                         </slot>
+                        <slot name="options-disable-button" :item="item">
+                            <base-button v-if="hasDisable && item.active"
+                                class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none"
+                                @click="$emit('disable', item[resourceIdentifier])">
+                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
+                                    <slot name="options-disable-icon">visibility_off</slot>
+                                </base-icon>
+                                <span class="tw-text-xs tw-align-middle">
+                                    <slot name="options-disable-text">Disable</slot>
+                                </span>
+                            </base-button>
+                            <base-button v-if="hasDisable && !item.active"
+                                class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none"
+                                @click="$emit('enable', item[resourceIdentifier])">
+                                <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
+                                    <slot name="options-disable-icon">visibility</slot>
+                                </base-icon>
+                                <span class="tw-text-xs tw-align-middle">
+                                    <slot name="options-disable-text">Enable</slot>
+                                </span>
+                            </base-button>
+                        </slot>
                         <slot name="options-remove-button" :item="item">
                             <base-button
                                 v-if="hasRemove"
@@ -152,6 +174,7 @@
                             <slot name="footer-options-manage-text">Manage Resources</slot>
                         </span>
                     </base-button>
+                    <base-checkbox @change="$emit('show-inactive', $event)">Only Show Inactive</base-checkbox>
                 </slot>
             </template>
 
@@ -220,6 +243,11 @@
             },
 
             hasDelete: {
+                type: Boolean,
+                default: false
+            },
+
+            hasDisable: {
                 type: Boolean,
                 default: false
             },

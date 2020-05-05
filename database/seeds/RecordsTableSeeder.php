@@ -28,6 +28,7 @@ class RecordsTableSeeder extends Seeder
         $roman->field_1_value = 'Roman';
         $roman->field_2_value = 'Katsnelson';
         $roman->field_3_value = 'roman@hellokrd.net';
+        $roman->active = true;
         $roman->user()->associate($user);
         $roman->save();
 
@@ -36,27 +37,30 @@ class RecordsTableSeeder extends Seeder
         $rupert->field_1_value = 'Rupert';
         $rupert->field_2_value = 'Amodia';
         $rupert->field_3_value = 'rupert@hellokrd.net';
+        $roman->active = true;
         $rupert->user()->associate(User::find(2));
         $rupert->save();
         $rupert->teams()->save(Team::inRandomOrder()->first());
 
-        $gui = new Record;
-        $gui->record_type_id = RecordType::where('name', 'Staff')->first()->id;
-        $gui->field_1_value = 'Gui';
-        $gui->field_2_value = 'Gramari';
-        $gui->field_3_value = 'gui@hellokrd.net';
-        $gui->user()->associate(User::find(3));
-        $gui->save();
-        $gui->teams()->save(Team::inRandomOrder()->first());
+        $isabel = new Record;
+        $isabel->record_type_id = RecordType::where('name', 'Staff')->first()->id;
+        $isabel->field_1_value = 'Isabel';
+        $isabel->field_2_value = 'Everen';
+        $isabel->field_3_value = 'isabel@hellokrd.net';
+        $isabel->active = true;
+        $isabel->user()->associate(User::find(3));
+        $isabel->save();
+        $isabel->teams()->save(Team::inRandomOrder()->first());
 
-        $scott = new Record;
-        $scott->record_type_id = RecordType::where('name', 'Staff')->first()->id;
-        $scott->field_1_value = 'Scott';
-        $scott->field_2_value = 'McCrae';
-        $scott->field_3_value = 'scott@hellokrd.net';
-        $scott->user()->associate(User::find(4));
-        $scott->save();
-        $scott->teams()->save(Team::inRandomOrder()->first());
+        $alanya = new Record;
+        $alanya->record_type_id = RecordType::where('name', 'Staff')->first()->id;
+        $alanya->field_1_value = 'Alanya';
+        $alanya->field_2_value = 'Dhalla';
+        $alanya->field_3_value = 'alanya@hellokrd.net';
+        $alanya->active = true;
+        $alanya->user()->associate(User::find(4));
+        $alanya->save();
+        $alanya->teams()->save(Team::inRandomOrder()->first());
 
         factory(Record::class, 500)
             ->create()
