@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Model;
+use App\Entity;
 
 use App\Scope;
 
@@ -15,10 +15,9 @@ use Spatie\SchemalessAttributes\SchemalessAttributes;
 use Wildside\Userstamps\Userstamps;
 
 
-class Form extends Model
+class Form extends Entity
 {
     use Userstamps;
-    use SoftDeletes;
 
     protected $searchColumns = [
         'name'

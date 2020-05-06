@@ -22,18 +22,20 @@ class UpdateForm extends FormRequest
         $target = explode('_', $this->target);
 
         $target_type_id = $target[0];
-        
+
         $target_id = NULL;
 
         if(isset($target[1])) {
             $target_id = $target[1];
         }
 
-        $this->merge([
-            'name' => $this->name,
-            'target_type_id' => $target_type_id,
-            'target_id' => $target_id,
-        ]);
+        if(isset($this->name) && isset($this->target_type_id)) {
+            $this->merge([
+                'name' => $this->name,
+                'target_type_id' => $target_type_id,
+                'target_id' => $target_id,
+            ]);
+        }
     }
 
     /**
@@ -44,15 +46,17 @@ class UpdateForm extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            'name' => 'sometimes|required',
             'description' => '',
             'type' => [
+                'sometimes',
                 'required',
                 Rule::in(config('app.form_types'))
             ],
-            'target_type_id' => 'required|exists:form_target_types,id',
-            'target_id' => 'nullable|exists:record_types,id',
-            'scope_id' => 'required|exists:scopes,id'
+            'target_type_id' => 'sometimes|required|exists:form_target_types,id',
+            'target_id' => 'sometimes|nullable|exists:record_types,id',
+            'scope_id' => 'sometimes|required|exists:scopes,id',
+            'active' => 'sometimes|boolean'
         ];
     }
 }

@@ -3,14 +3,17 @@
 
         <edit-group
             :active.sync="edit.active"
-            :group="edit.group"
+            :group-id="edit.group.id"
             @update="retrieve"/>
 
         <resource-profile
             :extra-information-path="`/programs/${group.program.id}`"
             :record-types="recordTypes"
+            :resource="group"
             @edit="editGroup(group)"
-            @delete="confirmDelete(group)">
+            @delete="confirmDelete(group.id)"
+            @disable="confirmDisable(group.id)"
+            @enable="confirmEnable(group.id)">
             <template v-slot:header>
                 {{ group.name }}
             </template>
@@ -29,6 +32,8 @@
 <script>
     import GroupRequest from '@/api/GroupRequest';
     import RecordTypeRequest from '@/api/RecordTypeRequest';
+
+    import methods from '../methods';
 
     import ResourceProfile from '@/App/components/resourceProfile';
     import EditGroup from '../edit';
@@ -77,16 +82,6 @@
                 this.$router.push({ name: 'group_profile_records', params:  {recordType}});
             },
 
-            retrieve() {
-                this.request.setFields({
-                    params: {...this.params}
-                });
-
-                this.request.show(this.$route.params.group).then((response) => {
-                    this.group = response.data;
-                });
-            },
-
             retrieveRecordTypes() {
                 const request = new RecordTypeRequest({});
 
@@ -95,41 +90,9 @@
                 });
             },
 
-            confirmDelete(group) {
-                this.$confirm('Are you sure you want to delete this group?', 'Delete Group', {
-                    confirmButtonText: 'Delete',
-                    cancelButtonText: 'Wait, no!',
-                    type: 'warning'
-                }).then(() => {
-                    this.deleteGroup(group)
-                        .then(() => {
-                            this.$router.push('/groups');
+            ...methods,
 
-                            this.$message({
-                                type: 'success',
-                                message: 'Group was deleted.'
-                            });
-                        })
-                        .catch((error) => {
-                            this.$message({
-                                type: 'error',
-                                message: error.message
-                            });
-                        });
-                })
-            },
-
-            editGroup(group) {
-                this.edit.group = group;
-
-                this.edit.active = true;
-            },
-
-            deleteGroup(group) {
-                let request = new GroupRequest({});
-
-                return request.destroy(group.id);
-            },
+            retrieve: methods.profile
         },
 
         created() {

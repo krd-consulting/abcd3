@@ -11,6 +11,16 @@ export function index() {
     });
 }
 
+export function profile(program = this.$route.params.program) {
+    this.request.setFields({
+        params: {...this.params}
+    });
+
+    this.request.show(program).then((response) => {
+        this.program = response.data;
+    });
+}
+
 export function createProgram() {
     this.create.active = true;
 }
@@ -121,6 +131,7 @@ export function confirmEnable(program) {
 
 export default {
     index,
+    profile,
     createProgram,
     editProgram,
     confirmDelete,

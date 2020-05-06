@@ -14,11 +14,8 @@ use App\Traits\Models\FormReference as FormReferenceTrait;
 use App\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Group extends Model implements FormReference
+class Group extends Entity implements FormReference
 {
-    use SoftDeletes;
-    use Search;
-    use Sort;
     use FormReferenceTrait;
 
     protected $appends = ['path'];
@@ -36,7 +33,7 @@ class Group extends Model implements FormReference
             ->withTimestamps();
     }
 
-    public function addRecord(Record $record) 
+    public function addRecord(Record $record)
     {
         $record->assignGroup($this);
     }

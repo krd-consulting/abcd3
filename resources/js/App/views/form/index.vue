@@ -13,11 +13,15 @@
             path-suffix="/new"
             has-add
             has-delete
+            has-disable
             :has-list-columns="false"
             :hasSearch="false"
             @edit="editForm"
             @page-change="retrieve()"
             @delete="confirmDelete"
+            @disable="confirmDisable"
+            @enable="confirmEnable"
+            @show-inactive="toggleInactive"
             :total="total">
             <template slot="header-text">Forms</template>
             <template slot="options-add">
@@ -35,7 +39,7 @@
             </template>
 
             <template slot="empty-placeholder-add-button">
-                <a href="/forms/create">
+                <a href="/forms/create" v-if="params.active">
                     <base-button
                         class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none">
                         <base-icon class="tw-text-sm tw-align-middle tw-mr-1">
@@ -102,6 +106,8 @@
 <script>
     import Request from '@/api/FormRequest';
 
+    import methods from './methods';
+
     import List from '@/App/components/resourceList';
     import EditForm from './edit';
 
@@ -124,6 +130,7 @@
                     sortBy: 'name',
                     page: 1,
                     perPage: 5,
+                    active: true
                 },
                 total: 0,
                 type: {
@@ -133,52 +140,15 @@
         },
 
         methods: {
-            editForm(form) {
-                this.edit.form = form;
+            ...methods,
 
-                this.edit.active = true;
-            },
+            retrieve: methods.index,
 
-            retrieve() {
-                this.request.setFields({
-                    params: {...this.params}
-                });
-
-                this.request.retrieve().then(response => {
-                    this.forms = response.data;
-                    this.total = response.meta.total;
-                });
-            },
-
-            confirmDelete(form) {
-                this.$confirm('Are you sure you want to delete this Form?', 'Delete Form', {
-                    confirmButtonText: 'Delete',
-                    cancelButtonText: 'Wait, no!',
-                    type: 'warning'
-                }).then(() => {
-                    this.deleteForm(form)
-                        .then(() => {
-                            this.retrieve();
-
-                            this.$message({
-                                type: 'success',
-                                message: 'Form was deleted.'
-                            });
-                        })
-                        .catch((error) => {
-                            this.$message({
-                                type: 'error',
-                                message: error.message
-                            });
-                        });
-                })
-            },
-
-            deleteForm(form) {
-                let request = new Request();
-
-                return request.destroy(form);
-            },
+            toggleInactive(showInactive) {
+                this.params.active = !showInactive;
+                this.params.page = 1;
+                this.retrieve();
+            }
         },
 
         created() {

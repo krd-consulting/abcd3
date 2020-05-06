@@ -11,8 +11,13 @@ class GroupController extends Controller
 {
     public function index()
     {
+        $groups = (new Group)->availableFor(auth()->user())->with('program');
+
+        $active = request('active') ?? true;
+        $groups->active($active);
+
         $perPage = request('perPage');
-        return (new Group())->availableFor(auth()->user())->with('program')->paginate($perPage);
+        return $groups->paginate($perPage);
     }
 
     public function show(Group $group)
@@ -64,8 +69,9 @@ class GroupController extends Controller
         $this->authorize('write', $group);
 
         // Update group when user is authorized.
-        $group->name = $request->input('name');
-        $group->description = $request->input('description');
+        $group->name = $request->input('name') ?? $group->name;
+        $group->description = $request->input('description') ?? $group->description;
+        $group->active  = $request->input('active') ?? $group->active;
         $group->save();
 
         return $group;

@@ -18,6 +18,9 @@ class FormController extends Controller
     {
 		$forms = new Form;
 
+        $active = request('active') ?? true;
+        $forms = $forms->active($active);
+
 		// Search
         $search = request('search');
         $forms = $forms->search($search);
@@ -80,12 +83,13 @@ class FormController extends Controller
     {
         // authorize
 
-        $form->name = $request->name;
-        $form->description = $request->description;
-        $form->type = $request->type;
-        $form->target_type_id = $request->target_type_id;
-        $form->target_id = $request->target_id;
-        $form->scope_id = $request->scope_id;
+        $form->name = $request->name ?? $form->name;
+        $form->description = $request->description ?? $form->description;
+        $form->type = $request->type ?? $form->type;
+        $form->target_type_id = $request->target_type_id ?? $form->target_type_id;
+        $form->target_id = $request->target_id ?? $form->target_id;
+        $form->scope_id = $request->scope_id ?? $form->scope_id;
+        $form->active = $request->active ?? $form->active;
         $form->save();
 
         return (new FormResource($form));

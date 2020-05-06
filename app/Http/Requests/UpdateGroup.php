@@ -28,6 +28,7 @@ class UpdateGroup extends FormRequest
     {
         return [
             'name' => [
+                    'sometimes',
                     'required',
 
                     // Check whether the group name already exists within the program (excludes the group being edited).
@@ -35,7 +36,8 @@ class UpdateGroup extends FormRequest
                         return $query->where('program_id', $this->program_id)->where('id', '!=', $this->id);
                     })
                 ],
-            'program_id' => 'required|exists:programs,id'
+            'program_id' => 'sometimes|required|exists:programs,id',
+            'active' => 'sometimes|boolean'
         ];
     }
 }

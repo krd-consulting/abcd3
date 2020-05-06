@@ -293,11 +293,6 @@
                 default: () => { return [] }
             },
 
-            showInactive: {
-                type: Boolean,
-                default: false
-            }
-
         },
 
         computed: {
@@ -315,7 +310,8 @@
         data() {
             return {
                 optionsWidth: '',
-                search: ''
+                search: '',
+                showInactive: false
             }
         },
 

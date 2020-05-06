@@ -15,12 +15,16 @@
             :per-page="params.perPage"
             has-add
             has-delete
+            has-disable
             :has-list-columns="false"
             :hasSearch="false"
             @add="createGroup"
             @edit="editGroup"
             @delete="confirmDelete"
+            @disable="confirmDisable"
+            @enable="confirmEnable"
             @page-change="retrieve()"
+            @show-inactive="toggleInactive"
             :total="total">
             <template slot="header-text">Groups</template>
             <template slot="options-add-text">Create Group</template>
@@ -37,6 +41,8 @@
 </template>
 <script>
     import Request from '@/api/GroupRequest';
+
+    import methods from './methods';
 
     import List from '@/App/components/resourceList';
     import CreateGroup from './create';
@@ -69,65 +75,24 @@
                     sortBy: 'field_1_value',
                     page: 1,
                     perPage: 5,
-                    search: ''
+                    search: '',
+                    active: true
                 },
+                showInactive: false,
                 total: 0,
             }
         },
 
         methods: {
-            retrieve() {
-                this.request.setFields({
-                    params: {...this.params}
-                });
+            ...methods,
 
-                this.request.retrieve().then(response => {
-                    this.groups = response.data;
-                    this.total = response.total;
+            retrieve: methods.index,
 
-                    console.log(this.total);
-                });
-            },
-
-            createGroup() {
-                this.create.active = true;
-            },
-
-            editGroup(group) {
-                this.edit.group = group;
-
-                this.edit.active = true;
-            },
-
-            confirmDelete(group) {
-                this.$confirm('Are you sure you want to delete this group?', 'Delete Group', {
-                    confirmButtonText: 'Delete',
-                    cancelButtonText: 'Wait, no!',
-                    type: 'warning'
-                }).then(() => {
-                    this.deleteGroup(group)
-                        .then(() => {
-                            this.retrieve();
-
-                            this.$message({
-                                type: 'success',
-                                message: 'Group was deleted.'
-                            });
-                        })
-                        .catch((error) => {
-                            this.$message({
-                                type: 'error',
-                                message: error.message
-                            });
-                        });
-                })
-            },
-
-            deleteGroup(group) {
-                let request = new Request();
-
-                return request.destroy(group);
-            },
+            toggleInactive(showInactive) {
+                this.params.active = !showInactive;
+                this.params.page = 1;
+                this.retrieve();
+            }
         },
 
         created() {

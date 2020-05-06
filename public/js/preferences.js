@@ -3811,10 +3811,6 @@ __webpack_require__.r(__webpack_exports__);
       "default": function _default() {
         return [];
       }
-    },
-    showInactive: {
-      type: Boolean,
-      "default": false
     }
   },
   computed: {
@@ -3827,7 +3823,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       optionsWidth: '',
-      search: ''
+      search: '',
+      showInactive: false
     };
   },
   methods: {

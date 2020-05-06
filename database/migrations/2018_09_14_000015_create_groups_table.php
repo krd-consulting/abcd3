@@ -20,7 +20,7 @@ class CreateGroupsTable extends Migration
             $table->bigInteger('program_id')->unsigned();
             $table->timestamp('start')->nullable();
             $table->timestamp('end')->nullable();
-            $table->boolean('active');
+            $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();
 

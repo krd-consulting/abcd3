@@ -8,8 +8,11 @@
         <resource-profile
             :extra-information-path="`/teams/${program.team.id}`"
             :record-types="recordTypes"
+            :resource="program"
             @edit="editProgram(program)"
-            @delete="confirmDelete(program)">
+            @delete="confirmDelete(program.id)"
+            @disable="confirmDisable(program.id)"
+            @enable="confirmEnable(program.id)">
             <template v-slot:header>
                 {{ program.name }}
             </template>
@@ -28,6 +31,8 @@
 <script>
     import ProgramRequest from '@/api/ProgramRequest';
     import RecordTypeRequest from '@/api/RecordTypeRequest';
+
+    import methods from '../methods';
 
     import ResourceProfile from '@/App/components/resourceProfile';
     import EditProgram from '../edit';
@@ -65,16 +70,6 @@
         },
 
         methods: {
-            retrieve(program = this.$route.params.program) {
-                this.request.setFields({
-                    params: {...this.params}
-                });
-
-                this.request.show(program).then((response) => {
-                    this.program = response.data;
-                });
-            },
-
             retrieveRecordTypes() {
                 const request = new RecordTypeRequest({});
 
@@ -83,41 +78,9 @@
                 });
             },
 
-            confirmDelete(program) {
-                this.$confirm('Are you sure you want to delete this program?', 'Delete Program', {
-                    confirmButtonText: 'Delete',
-                    cancelButtonText: 'Wait, no!',
-                    type: 'warning'
-                }).then(() => {
-                    this.deleteProgram(program)
-                        .then(() => {
-                            this.$router.push('/programs');
+            ...methods,
 
-                            this.$message({
-                                type: 'success',
-                                message: 'Program was deleted.'
-                            });
-                        })
-                        .catch((error) => {
-                            this.$message({
-                                type: 'error',
-                                message: error.message
-                            });
-                        });
-                })
-            },
-
-            editProgram(program) {
-                this.edit.program = program;
-
-                this.edit.active = true;
-            },
-
-            deleteProgram(program) {
-                let request = new ProgramRequest({});
-
-                return request.destroy(program.id);
-            },
+            retrieve: methods.profile
         },
 
         created() {
