@@ -6,7 +6,7 @@
             @update="retrieve"/>
 
         <resource-profile
-            :record="record"
+            :resource="record"
             :fields="fields"
             @edit="editRecord(record.id)"
             @disable="confirmDisable(record.type.slug, record.id)"

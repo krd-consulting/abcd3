@@ -51,7 +51,7 @@
                 </slot>
             </div>
             <div>
-                <router-view :resource="resource" :fields="fields"/>
+                <router-view :record="resource" :fields="fields"/>
             </div>
         </div>
     </div>
