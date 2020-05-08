@@ -47,6 +47,8 @@ class FormController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Form::class);
+
         return [
             'data' => [
                 'target_types' => $this->generateTargetTypes(),
