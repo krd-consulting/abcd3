@@ -129,31 +129,31 @@
             <!----------------------------   TODO: FIX THIS   ------------------------------->
             <div class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full" v-if="this.formData.scope_id !== 1 && this.formData.scope_id !== 6">
-                    <label class="tw-w-1/3">
-                        Team
+                    <label class="tw-w-1/3 tw-capitalize">
+                        {{ scope.name }}
                     </label>
                     <div class="tw-w-2/3">
                         <base-select
-                            v-model="formData.team_id"
+                            v-model="formData.owner_id"
                             filterable
                             remote
-                            :remote-method="retrieveTeams"
+                            :remote-method="retrieveOwners"
                             name="type"
                             placeholder=" "
-                            @change="request.errors.clear('team_id')">
+                            @change="request.errors.clear('owner_id')">
                             <el-option
-                                v-for="(team, index) in teams"
+                                v-for="(owner, index) in owners"
                                 :key="index"
-                                :label="team.name"
-                                :value="team.id">
-                                {{ team.name }}
+                                :label="owner.name"
+                                :value="owner.id">
+                                {{ owner.name }}
                             </el-option>
                         </base-select>
                     </div>
                 </div>
-                <div v-if="request.errors.has('team_id')" class="tw-flex tw-justify-end">
+                <div v-if="request.errors.has('owner_id')" class="tw-flex tw-justify-end">
                     <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red-500"></span>
+                        <span v-text="request.errors.get('owner_id')[0]" class="tw-text-xs tw-text-red-500"></span>
                     </div>
                 </div>
             </div>
@@ -173,6 +173,8 @@
 <script>
     import Request from '@/api/FormRequest';
     import TeamRequest from '@/api/TeamRequest';
+    import ProgramRequest from '@/api/ProgramRequest';
+    import GroupRequest from '@/api/GroupRequest';
 
     export default {
         inheritAttrs: false,
@@ -184,8 +186,7 @@
         data() {
             return {
                 request: new Request(),
-                teamRequest: new TeamRequest(),
-                teamRequestParams: {
+                ownerRequestParams: {
                     ascending: true,
                     sortBy: 'name',
                     page: 1,
@@ -203,7 +204,7 @@
                 targetTypes: [],
                 types: [],
                 scopes: [],
-                teams: [],
+                owners: [],
                 selectedType: null
             }
         },
@@ -222,27 +223,52 @@
 
                 return scopes.map((scope) => {
                     scope.label = labels[scope.name];
-                    console.log(scope);
                     return scope;
                 });
+            },
+
+            scope() {
+                const scope = this.scopes.filter((scope) => scope.id == this.formData.scope_id)[0];
+
+                if(scope == null) {
+                    return {
+                        name: ''
+                    };
+                }
+
+                return scope;
             }
         },
 
         methods: {
-            retrieveTeams(keywords) {
-                this.teamRequestParams.search = keywords;
+            ownerClass(scope) {
+                const classes = {
+                    'team': TeamRequest,
+                    'program': ProgramRequest,
+                    'group': GroupRequest
+                };
 
-                this.teamRequest.setFields({
-                    params: {...this.teamRequestParams }
+                return classes[scope];
+            },
+
+            retrieveOwners(keywords) {
+                this.ownerRequestParams.search = keywords;
+
+                const ownerClass = this.ownerClass(this.scope.name);
+
+                let ownerRequest = new ownerClass({});
+
+                ownerRequest.setFields({
+                    params: {...this.ownerRequestParams }
                 });
 
-                let getTeams = this.teamRequest.retrieve();
+                let getOwners = ownerRequest.retrieve();
 
-                getTeams.then(response => {
-                    this.teams = response.data;
+                getOwners.then(response => {
+                    this.owners = response.data;
                 });
 
-                return getTeams;
+                return getOwners;
             },
 
             close() {
@@ -267,7 +293,7 @@
             load() {
                 let request = new Request({});
 
-                this.retrieveTeams();
+                // this.retrieveTeams();
 
                 request.create().then((response) => {
                     this.targetTypes = response.data.target_types;

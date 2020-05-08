@@ -29,8 +29,8 @@ const app = new Vue({
     data: {
         collapseSidebar: true,
         loading: false,
-        initialize: { 
-            active: true 
+        initialize: {
+            active: true
         }
     },
     components: {
@@ -40,7 +40,7 @@ const app = new Vue({
     computed: {
         title: {
             get() { return this.$store.state.title },
-            set(title) { this.$store.commit('SET_TITLE', title) }, 
+            set(title) { this.$store.commit('SET_TITLE', title) },
         },
 
         description: {
@@ -48,9 +48,9 @@ const app = new Vue({
             set(description) { this.$store.commit('SET_DESCRIPTION', description) }
         },
 
-        team_id: {
-            get() { return this.$store.state.team_id },
-            set(team_id) { this.$store.commit('SET_TEAM_ID', team_id) }
+        owner_id: {
+            get() { return this.$store.state.owner_id },
+            set(owner_id) { this.$store.commit('SET_OWNER_ID', owner_id) }
         },
 
         scope_id: {
@@ -65,7 +65,7 @@ const app = new Vue({
 
         target: {
             get() { return this.$store.state.target },
-            set(target) { this.$store.commit('SET_TARGET', target) }, 
+            set(target) { this.$store.commit('SET_TARGET', target) },
         },
     },
 
@@ -73,8 +73,8 @@ const app = new Vue({
     	initializeForm(data) {
             this.title = data.name;
             this.description = data.description;
-            this.team_id = data.team_id;
-            this.scope_id = data.scope_id; 
+            this.owner_id = data.owner_id;
+            this.scope_id = data.scope_id;
             this.type = data.type;
             this.target = data.target;
         }

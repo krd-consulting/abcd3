@@ -5,8 +5,8 @@ export default {
     SET_DESCRIPTION : (state, description) => {
         state.description = description
     },
-    SET_TEAM_ID : (state, team) => {
-        state.team_id = team;
+    SET_OWNER_ID : (state, owner) => {
+        state.owner_id = owner;
     },
     SET_SCOPE_ID : (state, scope) => {
         state.scope_id = scope;

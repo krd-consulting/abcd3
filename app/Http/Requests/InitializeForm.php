@@ -61,7 +61,7 @@ class InitializeForm extends FormRequest
         return [
             'name' => 'required',
             'description' => '',
-            'team_id' => "sometimes|nullable|required_unless:scope_id,$universal,$self|exists:teams,id",
+            'owner_id' => "sometimes|nullable|required_unless:scope_id,$universal,$self",
             'type' => [
                 'required',
                 Rule::in(config('app.form_types'))

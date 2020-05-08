@@ -18,10 +18,12 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = (new Program)->availableFor(auth()->user())->with('team');
+        $programs = (new Program);
 
         $active = request('active') ?? true;
-        $programs->active($active);
+        $programs = $programs->active($active);
+
+        $programs = $programs->availableFor(auth()->user())->with('team');
 
         $perPage = request('perPage');
         $programs = $programs->paginate($perPage);

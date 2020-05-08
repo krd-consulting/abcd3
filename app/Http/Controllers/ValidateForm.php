@@ -29,7 +29,7 @@ class ValidateForm extends Controller
             'name' => $form->validated()['name'],
             'description' => $form->validated()['description'],
             'type' => $form->validated()['type'],
-            'team_id' => $form->validated()['team_id'],
+            'owner_id' => $form->validated()['owner_id'],
             'scope_id' => $form->validated()['scope_id'],
             'target' => $target
         ];

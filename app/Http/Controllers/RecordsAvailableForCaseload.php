@@ -23,7 +23,7 @@ class RecordsAvailableForCaseload extends Controller
         $ownRecords = [];
 
         if(!empty($record->user))
-            $ownRecords = $record->user->records->pluck('records.id');
+            $ownRecords = $record->user->records()->pluck('records.id');
 
         $caseload = $record
             ->cases()

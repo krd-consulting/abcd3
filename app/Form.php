@@ -47,9 +47,23 @@ class Form extends Entity
         DB::transaction(function () use ($request) {
             $this->save();
 
-            // add form to team.
-            if(!empty($request->team_id)) {
-                $this->teams()->attach([$request->team_id]);
+            // assign owner to form depending on scope
+            if(!empty($request->owner_id)) {
+
+                $value = Scope::find($request->scope_id)->value;
+
+                switch($value) {
+                    case 3: // Group
+                        $this->groups()->attach($request->owner_id);
+                        break;
+                    case 4: // Program
+                        $this->programs()->attach($request->owner_id);
+                        break;
+                    case 5: // Team
+                        $this->teams()->attach($request->owner_id);
+                        break;
+                }
+
             }
 
             if(empty($request->validated()['fields']))
@@ -251,9 +265,9 @@ class Form extends Entity
         $universal =
             (clone $query)
                 ->where('scope_id', Scope::where('name', config('auth.scopes.universal.name'))->first()->id);
-        $teams = (clone $query)->inTeams($user->availableTeams);
-        $programs = (clone $query)->inPrograms($user->availablePrograms);
-        $groups = (clone $query)->inGroups($user->availableGroups);
+        $teams = (clone $query)->inTeams($user->teams);
+        $programs = (clone $query)->inPrograms($user->programs);
+        $groups = (clone $query)->inGroups($user->groups);
         $self = (clone $query)->inSelf($user);
 
         $query =

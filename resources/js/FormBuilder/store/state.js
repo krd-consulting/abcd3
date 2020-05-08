@@ -1,7 +1,7 @@
 export default {
     title: 'Form Title',
     description: '',
-    team_id: '',
+    owner_id: '',
     scope_id: '',
     target: {
     	type: '',
@@ -10,6 +10,6 @@ export default {
     type: '',
     teams: [],
     date: '',
-    
+
     fields: []
 }

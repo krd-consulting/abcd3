@@ -4,14 +4,14 @@ export default {
     addField(field) {
         field.commit('ADD_FIELD')
     },
-    
+
     submitForm({ state }) {
         // console.log(state)
-        
+
         const formData = {
             name: state.title,
             description: state.description,
-            team_id: state.team_id,
+            owner_id: state.owner_id,
             scope_id: state.scope_id,
             type: state.type,
             target_type_id: state.target.type.id,
@@ -22,6 +22,6 @@ export default {
         const request = new Request(formData);
 
         return request.store();
-        
+
     }
 }

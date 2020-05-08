@@ -40,7 +40,7 @@ class StoreForm extends FormRequest
                 Rule::in(config('app.form_types'))
             ],
             'scope_id' => 'required|exists:scopes,id',
-            'team_id' => "sometimes|nullable|required_unless:scope_id,$universal,$self|exists:teams,id",
+            'owner_id' => "required_unless:scope_id,$universal,$self",
             'fields.*.type' => 'required',
             'fields.*.title' => 'required',
             'fields.*.reference_target_type_id' => 'nullable|exists:form_target_types,id',
