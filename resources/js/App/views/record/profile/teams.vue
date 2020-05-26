@@ -1,6 +1,6 @@
 <template>
     <div>
-        <add-team 
+        <add-team
             :active.sync="add.active" @close="retrieve()"/>
 
         <list
@@ -28,8 +28,8 @@
                 {{ team.name }}
             </template>
 
-            <template v-slot:list-item-secondary-data="{ item:team }">
-                
+            <template v-slot:list-item-secondary-data>
+
             </template>
         </list>
     </div>

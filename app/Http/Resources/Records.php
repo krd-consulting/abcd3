@@ -38,19 +38,14 @@ class Records extends ResourceCollection
      */
     public function with($request)
     {
-        if(empty($this->recordType))
-            return [];
+        $recordType = [];
+
+        if(!empty($this->recordType))
+            $recordType = new RecordTypeResource($this->recordType);
 
         return [
-            'record_type' => new RecordTypeResource($this->recordType),
-
-            // TODO: Remove n+1 query
-
-            'fields' => [
-                $this->recordType->identity->field1->name => 'field_1_value',
-                $this->recordType->identity->field2->name => 'field_2_value',
-                $this->recordType->identity->field3->name => 'field_3_value'
-            ]
+            'record_type' => $recordType,
+            'permissions' => $this->permissions()
         ];
     }
 
@@ -59,5 +54,12 @@ class Records extends ResourceCollection
         $this->recordType = $recordType;
 
         return $this;
+    }
+
+    public function permissions()
+    {
+        return [
+            'can_write' => auth()->user()->can('write', $this->resource)
+        ];
     }
 }

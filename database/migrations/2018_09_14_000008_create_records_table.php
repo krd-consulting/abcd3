@@ -19,8 +19,8 @@ class CreateRecordsTable extends Migration
             $table->integer('record_type_id')->unsigned();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('field_1_value', 100);
-            $table->string('field_2_value', 100);
-            $table->string('field_3_value', 100);
+            $table->string('field_2_value', 100)->nullable();
+            $table->string('field_3_value', 100)->nullable();
             $table->boolean('active')->default(true);
             $table->timestamps();
             $table->softDeletes();

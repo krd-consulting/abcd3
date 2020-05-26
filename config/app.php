@@ -258,7 +258,44 @@ return [
             'name' => 'Form Fields',
             'model' => 'App\FormField'
         ],
-        
+
+    ],
+
+    'record_fields' => [
+        [
+            'name' => 'First Name',
+            'slug' => 'first_name',
+            'type' => 'text'
+        ],
+        [
+            'name' => 'Last Name',
+            'slug' => 'last_name',
+            'type' => 'text'
+        ],
+
+        [
+            'name' => 'Email',
+            'slug' => 'email_address',
+            'type' => 'text'
+        ],
+
+        [
+            'name' => 'Contact Number',
+            'slug' => 'contact_number',
+            'type' => 'text'
+        ],
+
+        [
+            'name' => 'Birthdate',
+            'slug' => 'birth_date',
+            'type' => 'text'
+        ],
+
+        [
+            'name' => 'Name',
+            'slug' => 'name',
+            'type' => 'text'
+        ],
     ]
 
 ];

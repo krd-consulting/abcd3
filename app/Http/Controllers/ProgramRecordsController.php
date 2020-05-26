@@ -22,8 +22,7 @@ class ProgramRecordsController extends Controller
     public function index(Program $program, RecordType $recordType)
     {
         $records = $program
-            ->setRecordIdentity($recordType->identity)
-            ->records()
+            ->records($recordType->identity)
             ->withLatestProgramStatuses($recordType, $program)
             ->with('cases', 'groups')
             ->only($recordType);

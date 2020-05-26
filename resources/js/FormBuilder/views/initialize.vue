@@ -159,9 +159,9 @@
             </div>
         </form>
         <div slot="footer" class="tw-border-t tw-px-4 tw-py-4 tw-bg-gray-100 tw-rounded-b">
-            <a href="javascript:history.back()" class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-gray-700 tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue tw-text-xs">
+            <router-link to="/forms/" class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-gray-700 tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue tw-text-xs">
                 Nevermind
-            </a>
+            </router-link>
             <base-button
                 class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none"
                 @click="submit">
@@ -303,6 +303,7 @@
                     this.formData.type = this.types['static'];
                     this.formData.target = this.targetTypes[0].target;
                     this.formData.scope_id = this.scopes[0].id;
+                    this.$emit('update:active', true)
                 });
 
             },

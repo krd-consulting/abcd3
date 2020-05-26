@@ -1,7 +1,7 @@
 <template>
     <div id="formCreator">
         <el-container>
-            <el-card id="menu-container"> 
+            <el-card id="menu-container">
                 <form-menu id="menu"/>
             </el-card>
 
@@ -19,13 +19,14 @@
                             </menu-panel>
                         </template>
                     </nav-bar>
-                </el-header>   
+                </el-header>
 
                 <form-canvas :fields="fields" id="canvas"/>
-            
+
             </el-card>
-            
+
         </el-container>
+        <initialize :active.sync="initialize.active" @save="initializeForm"/>
     </div>
 </template>
 
@@ -35,6 +36,7 @@
     import FormMenu from '@/FormBuilder/components/menu/index.vue'
     import MenuPanel from '@/FormBuilder/components/menu/mobileMenu.vue'
     import NavBar from '@/FormBuilder/components/navbar.vue'
+    import Initialize from './initialize'
 
     export default {
         name: 'Form',
@@ -42,6 +44,9 @@
             return {
                 activeIndex: '1',
                 fields: [],
+                initialize: {
+                    active: false
+                }
             }
         },
 
@@ -50,7 +55,49 @@
             FormMenu,
             draggable,
             MenuPanel,
-            NavBar
+            NavBar,
+            Initialize
+        },
+        computed: {
+            title: {
+                get() { return this.$store.state.title },
+                set(title) { this.$store.commit('SET_TITLE', title) },
+            },
+
+            description: {
+                get() { return this.$store.state.description },
+                set(description) { this.$store.commit('SET_DESCRIPTION', description) }
+            },
+
+            owner_id: {
+                get() { return this.$store.state.owner_id },
+                set(owner_id) { this.$store.commit('SET_OWNER_ID', owner_id) }
+            },
+
+            scope_id: {
+                get() { return this.$store.state.scope_id },
+                set(scope_id) { this.$store.commit('SET_SCOPE_ID', scope_id) }
+            },
+
+            type: {
+                get() { return this.$store.state.type },
+                set(type) { this.$store.commit('SET_TYPE', type) }
+            },
+
+            target: {
+                get() { return this.$store.state.target },
+                set(target) { this.$store.commit('SET_TARGET', target) },
+            },
+        },
+        methods: {
+            initializeForm(data) {
+                this.title = data.name;
+                this.description = data.description;
+                this.owner_id = data.owner_id;
+                this.scope_id = data.scope_id;
+                this.type = data.type;
+                this.target = data.target;
+            }
         },
     }
 </script>
@@ -81,7 +128,7 @@
     }
     #menu-container {
         display: none;
-    } 
+    }
 }
 
 /* Desktop View */
@@ -92,7 +139,7 @@
         margin-right: 5%;
         min-width: 500px;
     }
-    
+
     .el-header {
         min-width: 500px;
     }
@@ -108,7 +155,7 @@
         margin-left: 5%;
         min-width: 300px;
         max-width: 450px;
-        max-height: 900px; 
+        max-height: 900px;
     }
     .float-right {
         float: right !important;

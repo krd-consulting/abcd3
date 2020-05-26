@@ -56,7 +56,7 @@ class FormTest extends TestCase
     }
 
     /** @test */
-    public function authorized_user_can_store_a_form_with_matrix()
+    public function authorized_user_can_store_a_universal_form_with_matrix()
     {
         $this->withoutExceptionHandling();
 
@@ -108,11 +108,6 @@ class FormTest extends TestCase
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('model_has_forms', [
-            'form_id' => $response->decodeResponseJson()['id'],
-            'model_id' => $team->id,
-            'model_type' => 'App\Team',
-        ]);
 
         $fields = [
             [
@@ -137,7 +132,7 @@ class FormTest extends TestCase
     }
 
     /** @test */
-    public function authorized_user_can_store_a_form_with_matrix_and_text()
+    public function authorized_user_can_store_a_universal_form_with_matrix_and_text()
     {
         $this->withoutExceptionHandling();
 
@@ -210,11 +205,6 @@ class FormTest extends TestCase
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('model_has_forms', [
-            'form_id' => $response->decodeResponseJson()['id'],
-            'model_id' => $team->id,
-            'model_type' => 'App\Team',
-        ]);
 
         $fields = [
             [
@@ -267,7 +257,7 @@ class FormTest extends TestCase
     }
 
     /** @test */
-    public function authorized_user_can_store_a_form_with_text()
+    public function authorized_user_can_store_a_universal_form_with_text()
     {
         $this->withoutExceptionHandling();
 
@@ -312,11 +302,6 @@ class FormTest extends TestCase
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('model_has_forms', [
-            'form_id' => $response->decodeResponseJson()['id'],
-            'model_id' => $team->id,
-            'model_type' => 'App\Team',
-        ]);
 
         $fields = [
             [
@@ -334,7 +319,7 @@ class FormTest extends TestCase
     }
 
     /** @test */
-    public function authorized_user_can_store_a_form_with_text_reference_text()
+    public function authorized_user_can_store_a_universal_form_with_text_reference_text()
     {
         $this->withoutExceptionHandling();
 
@@ -379,11 +364,6 @@ class FormTest extends TestCase
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('model_has_forms', [
-            'form_id' => $response->decodeResponseJson()['id'],
-            'model_id' => $team->id,
-            'model_type' => 'App\Team',
-        ]);
 
         $fields = [
             [
@@ -436,11 +416,6 @@ class FormTest extends TestCase
         ];
 
         $this->assertDatabaseHas('forms', $form);
-        $this->assertDatabaseHas('model_has_forms', [
-            'form_id' => $response->decodeResponseJson()['id'],
-            'model_id' => $team->id,
-            'model_type' => 'App\Team',
-        ]);
 
         $fields = [
             [

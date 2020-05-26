@@ -36,9 +36,9 @@ class StoreRecord extends FormRequest
         $recordType = RecordType::find($recordType);
 
         return [
-            'field_1_value' => $this->fieldRules()[$recordType->identity->field1->name],
-            'field_2_value' => $this->fieldRules()[$recordType->identity->field2->name],
-            'field_3_value' => $this->fieldRules()[$recordType->identity->field3->name],
+            'field_1_value' => $this->fieldRules()[$recordType->identity->field1->slug],
+            'field_2_value' => $this->fieldRules()[$recordType->identity->field2->slug ?? 'none'],
+            'field_3_value' => $this->fieldRules()[$recordType->identity->field3->slug ?? 'none'],
             'team_id' => 'required|exists:teams,id'
         ];
     }
@@ -48,10 +48,11 @@ class StoreRecord extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'business_name' => 'required',
+            'name' => 'required',
             'email_address' => 'required|email',
             'contact_number' => 'required',
             'birth_date' => 'required|date|before:tomorrow',
+            'none' => ''
         ];
     }
 

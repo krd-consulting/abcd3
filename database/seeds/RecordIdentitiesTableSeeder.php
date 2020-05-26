@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Field;
+use App\RecordField;
 use App\RecordIdentity;
 
 class RecordIdentitiesTableSeeder extends Seeder
@@ -14,14 +14,14 @@ class RecordIdentitiesTableSeeder extends Seeder
      */
     public function run()
     {
-        $firstName = Field::where('name', 'first_name')->first();
-        $lastName = Field::where('name', 'last_name')->first();
-        $business = Field::where('name', 'business_name')->first();
-        $email = Field::where('name', 'email_address')->first();
-        $contact = Field::where('name', 'contact_number')->first();
-        $birth_date = Field::where('name', 'birth_date')->first();
+        $firstName = RecordField::where('slug', 'first_name')->first();
+        $lastName = RecordField::where('slug', 'last_name')->first();
+        $name = RecordField::where('slug', 'name')->first();
+        $email = RecordField::where('slug', 'email_address')->first();
+        $contact = RecordField::where('slug', 'contact_number')->first();
+        $birth_date = RecordField::where('slug', 'birth_date')->first();
 
-        // Participants
+        // Clients
         $clients = new RecordIdentity;
         $clients->name = 'Client';
         $clients->field_1_id = $firstName->id;
@@ -45,13 +45,11 @@ class RecordIdentitiesTableSeeder extends Seeder
         $volunteers->field_3_id = $contact->id;
         $volunteers->save();
 
-        // External
-        $external = new RecordIdentity;
-        $external->name = 'External';
-        $external->field_1_id = $business->id;
-        $external->field_2_id = $email->id;
-        $external->field_3_id = $contact->id;
+        // Other
+        $other = new RecordIdentity;
+        $other->name = 'Other';
+        $other->field_1_id = $name->id;
 
-        $external->save();
+        $other->save();
     }
 }

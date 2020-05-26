@@ -23,6 +23,12 @@ import TeamProfileRecords from './views/team/profile/records';
 import FormList from './views/form';
 import FormEntryList from './views/form/entry/';
 import FormEntry from './views/form/entry/create';
+import FormPreview from '@/FormBuilder/views/formPreview.vue';
+import FormBuilder from '@/FormBuilder/views';
+import PreferencesRecords from '@/Preferences/views/record';
+import PreferencesRecordsCreate from '@/Preferences/views/record/create';
+import PreferencesRoles from '@/Preferences/views/role';
+import PreferencesPrograms from '@/Preferences/views/program';
 
 const routes = [
     {
@@ -79,14 +85,38 @@ const routes = [
     },
 
     {
+        path: '/forms/create/preview',
+        name: 'Form Preview',
+        component: FormPreview,
+    },
+    {
+        path: '/forms/create/',
+        name: 'NewForm',
+        component: FormBuilder
+    },
+    {
         path: '/forms/', component: FormList,
     },
     {
         path: '/forms/:form/new', component: FormEntry,
-    }, 
+    },
     {
         path: '/forms/:form', component: FormEntryList
-    }
+    },
+
+    { path: '/preferences', component: {template: '<h2>General</h2>'} },
+    {
+        path: '/preferences/records',
+        component: PreferencesRecords,
+        children: [
+            {
+                path: 'create',
+                component: PreferencesRecordsCreate
+            }
+        ]
+    },
+    { path: '/preferences/programs', component: PreferencesPrograms },
+    { path: '/preferences/roles', component: PreferencesRoles }
 ];
 
 const router = new VueRouter({

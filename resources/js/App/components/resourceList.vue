@@ -175,7 +175,7 @@
                             <slot name="footer-options-manage-text">Manage Resources</slot>
                         </span>
                     </base-button>
-                    <base-checkbox @change="$emit('show-inactive', showInactive = $event)">Only Show Inactive</base-checkbox>
+                    <base-checkbox @change="$emit('show-inactive', showInactive = $event)" class="only-show-inactive">Only Show Inactive</base-checkbox>
                 </slot>
             </template>
 
@@ -330,3 +330,11 @@
 
     }
 </script>
+
+<style lang="css">
+.only-show-inactive {
+    display: flex !important;
+    align-items: center !important;
+    margin: 16px 16px 16px auto !important;
+}
+</style>

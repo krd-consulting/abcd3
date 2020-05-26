@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-use App\Field;
+use App\RecordField;
 use App\Record;
 use App\RecordType;
 
@@ -10,13 +10,17 @@ $factory->define(Record::class, function (Faker $faker) {
     $recordType = RecordType::inRandomOrder()->first();
 
     $fields = array();
-    $values = array();
-    $fields[0] = Field::find($recordType->identity->field_1_id);
-    $fields[1] = Field::find($recordType->identity->field_2_id);
-    $fields[2] = Field::find($recordType->identity->field_3_id);
+    $values = array('', '', '');
+    $fields[0] = RecordField::find($recordType->identity->field_1_id);
+    $fields[1] = RecordField::find($recordType->identity->field_2_id) ?? null;
+    $fields[2] = RecordField::find($recordType->identity->field_3_id) ?? null;
 
     foreach($fields as $index=>$field) {
-        switch($field->name) {
+        if($field == null) {
+            continue;
+        }
+
+        switch($field->slug) {
             case 'first_name':
                 $values[$index] = $faker->firstName();
                 break;
@@ -37,8 +41,12 @@ $factory->define(Record::class, function (Faker $faker) {
                 $values[$index] = $faker->date;
                 break;
 
-            default:
+            case 'contact_number':
                 $values[$index] = $faker->phoneNumber;
+                break;
+
+            case 'name':
+                $values[$index] = $faker->firstName();
                 break;
         }
     }

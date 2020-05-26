@@ -67,7 +67,7 @@ label#remember {
 
 .el-tabs__item.is-active, .el-tabs__item:hover {
     color: #FBE4BB !important;
-   
+
 }
 .el-tabs__active-bar {
     /* background-color: #7a972b !important; */
@@ -156,7 +156,7 @@ a:hover {
 .main-sidebar-menu:not(.el-menu--collapse),
 .main-logo-container,
 .preferences-sidebar-menu:not(.el-menu--collapse) {
-    width: 276px; 
+    width: 400px;
 }
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Http\Resources\RecordType;
+use App\Http\Resources\Groups;
 use App\Traits\Resources\CountRelated;
 
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -22,41 +23,56 @@ class Record extends JsonResource
     {
         return [
             'id' => $this->id,
-
-            // TODO: Remove n+1 query
-            'type_slug' => $this->record_type->slug,
-            'type' => new RecordType($this->record_type),
-
             'active' => $this->active,
 
-            'program_status' => $this->whenPivotLoaded(
-                'program_record',
-                function () {
-                    if(!empty($this->program_statuses))
-                        return $this->program_statuses->first();
-                }
-            ),
-            'enrolled_at' => $this->whenPivotLoaded('program_record', function() {
-                return $this->pivot->enrolled_at;
-            }),
-
-            'cases_count' => $this->countRelated('cases'),
-
-            'groups_count' => $this->countRelated('groups'),
-
-            'path' => $this->path,
-
+            'field_values' => $this->record_field_values(),
             // TODO: Remove n+1 query
-            $this->record_type->identity->field1->name => $this->field_1_value,
-            $this->record_type->identity->field2->name => $this->field_2_value,
-            $this->record_type->identity->field3->name => $this->field_3_value,
-            'fields'=> [
-                $this->record_type->identity->field1->name => 'field_1_value',
-                $this->record_type->identity->field2->name => 'field_2_value',
-                $this->record_type->identity->field3->name => 'field_3_value'
+            'type' => new RecordType($this->record_type),
+
+            'pivot' => $this->pivot,
+
+            'relationships' => [
+                'cases_count' => $this->countRelated('cases'),
+                'groups_count' => $this->countRelated('groups'),
             ],
 
-            'editable' => auth()->user()->can('write', $this->resource)
+            'links' => $this->links(),
+
+            'permissions' => $this->permissions()
+        ];
+    }
+
+    public function record_field_values()
+    {
+        $values = array();
+
+        for($field = 1; $field <= 3; $field++) {
+            $column = 'field' . $field;
+            $recordColumn = 'field_' . $index . '_value';
+
+            if($this->record_type->identity->$column != null) {
+                $values[$this->record_type->identity->$column->slug] = $this->$recordColumn;
+            }
+        }
+
+        return $values;
+    }
+
+    public function permissions()
+    {
+        $canWrite = auth()->user()->can('write', $this->resource);
+
+        return [
+            'can_write' => $canWrite,
+            'can_edit' => $canWrite,
+            'can_delete' => $canWrite,
+        ];
+    }
+
+    public function links()
+    {
+        return [
+            'to' => $this->path
         ];
     }
 }

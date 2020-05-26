@@ -13,4 +13,9 @@ trait Active {
         return $query->where('active', $active);
     }
 
+    public function getActiveAttribute($value) : bool
+    {
+        return $value;
+    }
+
 }

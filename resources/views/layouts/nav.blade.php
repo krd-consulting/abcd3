@@ -1,5 +1,5 @@
-<el-header class="tw-bg-blue-500" v-if="!loading">
-    
+<el-header class="tw-bg-blue-500 tw-items-center tw-flex" v-if="!loading">
+
     <div class="tw-flex tw-flex-1 tw-justify-between">
         <!-- <div class="tw-w-1/2">
             <global-search></global-search>
@@ -13,20 +13,20 @@
                 </el-dropdown>
             </div>
             <div class="tw-inline-block tw-align-middle">
-                <base-menu mode="horizontal">
-                    <el-dropdown class="main-nav-dropdown tw-bg-transparent" trigger="click" placement="bottom-end">
-                        <span class="">
+                {{-- <base-menu mode="horizontal"> --}}
+                    <el-dropdown class="main-nav-dropdown" trigger="click" placement="bottom-end">
+                        <span>
                             <profile-picture class="tw-w-8 tw-h-8 tw-bg-green-200 tw-text-white" username="{{ Auth::user()->name }}"></profile-picture>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <a>
+                            <div class="tw-text-center tw-px-4">
                                 {{ Auth::user()->name }}
-                            </a>
+                            </div>
                             <el-dropdown-item>
-                                <a href="/preferences">
+                                <router-link to="/preferences">
                                     <base-icon class="tw-text-base tw-align-middle">settings</base-icon>
                                     <span class="tw-align-middle">Preferences</span>
-                                </a>
+                                </router-link>
                             </el-dropdown-item>
                             <el-dropdown-item>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="tw-hidden">
@@ -42,7 +42,7 @@
                             </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
-                </base-menu>
+                {{-- </base-menu> --}}
             </div>
         </div>
     </div>

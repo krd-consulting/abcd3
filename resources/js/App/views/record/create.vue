@@ -4,7 +4,7 @@
             <base-icon class="tw-align-middle">person_add</base-icon> Add {{ recordType.name }}
         </div>
         <form>
-            <div v-for="(field, fieldName) in fields" class="tw-mb-2">
+            <div v-for="(field, fieldName) in fields" :key="fieldName" class="tw-mb-2">
                 <div  class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5 tw-capitalize">
                         {{ fieldName.replace('_', ' ') }}

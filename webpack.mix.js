@@ -27,9 +27,7 @@ mix
         require('tailwindcss'),
     ])
     .js('resources/js/App', 'public/js/app.js')
-    .js('resources/js/Preferences', 'public/js/preferences.js')
-    .js('resources/js/FormBuilder', 'public/js/formbuilder.js');
-    
+
 
 if(mix.inProduction()) {
     mix.version();

@@ -8,6 +8,7 @@ use App\User;
 use App\Http\Requests\StoreRecord;
 use App\Http\Requests\UpdateRecord;
 use App\Http\Resources\Record as RecordResource;
+use App\Http\Resources\Teams as Teams;
 use App\Http\Resources\Records;
 
 use Illuminate\Http\Request;
@@ -33,7 +34,7 @@ class RecordController extends Controller
     {
         $this->authorize('create', Record::class);
 
-        return auth()->user()->availableTeams;
+        return (new Teams(auth()->user()->availableTeams));
     }
 
     public function store(RecordType $record, StoreRecord $request)

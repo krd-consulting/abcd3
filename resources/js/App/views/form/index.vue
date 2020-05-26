@@ -5,13 +5,14 @@
             :form-id="edit.form"
             @update="retrieve()"/>
 
+        <!-- :has-add="total > 0" -->
+
         <list
             :items="forms"
             :page.sync="params.page"
             :per-page="params.perPage"
-            :has-add="total > 0"
-            path-suffix="/new"
             has-add
+            path-suffix="/new"
             has-delete
             has-disable
             :has-list-columns="false"
@@ -25,7 +26,7 @@
             :total="total">
             <template slot="header-text">Forms</template>
             <template slot="options-add">
-                <a href="/forms/create">
+                <router-link to="/forms/create/">
                     <base-button
                         class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none">
                         <base-icon class="tw-text-sm tw-align-middle tw-mr-1">
@@ -35,11 +36,11 @@
                             <slot name="empty-placeholder-add-button-text">Create Form</slot>
                         </span>
                     </base-button>
-                </a>
+                </router-link>
             </template>
 
             <template slot="empty-placeholder-add-button">
-                <a href="/forms/create" v-if="params.active">
+                <router-link to="/forms/create" v-if="params.active">
                     <base-button
                         class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none">
                         <base-icon class="tw-text-sm tw-align-middle tw-mr-1">
@@ -49,7 +50,7 @@
                             <slot name="empty-placeholder-add-button-text">Create Form</slot>
                         </span>
                     </base-button>
-                </a>
+                </router-link>
             </template>
 
             <template v-slot:list-item-primary-data="{ item:form }">

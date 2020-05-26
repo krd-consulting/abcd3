@@ -6,9 +6,6 @@
                 <base-icon v-else>menu</base-icon>
             </el-menu-item>
         @endif
-        <!--<div class="tw-mx-2">
-            <global-search></global-search>
-        </div>-->
         <sidebar-list-item index="dashboard">
             <template slot="title">
                 <base-icon class="tw-text-xl tw-mr-2">dashboard</base-icon>
@@ -29,12 +26,12 @@
                 </sidebar-list-item>
             @endforeach
         </base-submenu>
-	
-	<sidebar-list-item index="/groups/">
+
+	   <sidebar-list-item index="/groups/">
             <base-icon class="tw-text-xl tw-mr-2">assignment</base-icon>
             <span slot="title" class="tw-text-gray-900">Groups</span>
         </sidebar-list-item>
-	
+
         <base-submenu index="/programs/">
             <template slot="title">
                 <base-icon class="tw-text-xl tw-mr-2">supervised_user_circle</base-icon>
@@ -80,5 +77,22 @@
             <base-icon class="tw-text-xl tw-mr-2">library_books</base-icon>
             <span slot="title" class="tw-text-gray-900">Forms</span>
         </sidebar-list-item>
+
+        <base-submenu index="/preferences/">
+            <template slot="title">
+                <base-icon class="tw-text-xl tw-mr-2">face</base-icon>
+                <span slot="title" class="tw-text-gray-900">System Administration</span>
+            </template>
+            <sidebar-list-item index="/preferences/">
+                General
+            </sidebar-list-item>
+            <sidebar-list-item index="/preferences/records">
+                Record Types
+            </sidebar-list-item>
+            <sidebar-list-item index="/preferences/roles">
+                Roles
+            </sidebar-list-item>
+        </base-submenu>
+
     </sidebar-list>
 </nav>

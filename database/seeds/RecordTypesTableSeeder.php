@@ -17,7 +17,7 @@ class RecordTypesTableSeeder extends Seeder
         $clientIdentity = RecordIdentity::where('name', 'Client')->first();
         $staffIdentity = RecordIdentity::where('name', 'Staff')->first();
         $volunteerIdentity = RecordIdentity::where('name', 'Volunteer')->first();
-        $externalIdentity = RecordIdentity::where('name', 'External')->first();
+        $otherIdentity = RecordIdentity::where('name', 'Other')->first();
 
         // Participants
         $participants = new RecordType;
@@ -41,10 +41,10 @@ class RecordTypesTableSeeder extends Seeder
         $volunteers->identity_id = $volunteerIdentity->id;
         $volunteers->save();
 
-        $funders = new RecordType;
-        $funders->name = 'Funders';
-        $funders->slug = 'funders';
-        $funders->identity_id = $externalIdentity->id;
-        $funders->save();
+        $meals = new RecordType;
+        $meals->name = 'Meals';
+        $meals->slug = 'meals';
+        $meals->identity_id = $otherIdentity->id;
+        $meals->save();
     }
 }

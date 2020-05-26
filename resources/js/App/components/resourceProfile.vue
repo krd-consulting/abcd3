@@ -24,17 +24,17 @@
                                 </span>
                             </router-link>
                         </slot>
-                        <div>
-                            <base-button @click="$emit('edit')" class="tw-py-2 tw-px-0 tw-mr-4 tw-text-gray-500 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-top">edit</base-icon>
+                        <div class="resource-profile-actions">
+                            <base-button @click="$emit('edit')" class="tw-py-2 tw-px-0 tw-text-gray-500 hover:tw-text-gray-800 hover:tw-bg-transparent tw-border-none">
+                                <base-icon class="tw-text-xs tw-mr-2 tw-align-top">edit</base-icon>
                                 <span class="tw-text-xs tw-align-middle">Edit</span>
                             </base-button>
                             <base-button v-if="resource.active" @click="$emit('disable')" class="tw-py-2 tw-px-0 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-top">visibility_off</base-icon>
+                                <base-icon class="tw-text-xs tw-mr-2 tw-align-top">visibility_off</base-icon>
                                 <span class="tw-text-xs tw-align-middle">Disable</span>
                             </base-button>
                             <base-button v-else @click="$emit('enable')" class="tw-py-2 tw-px-0 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none">
-                                <base-icon class="tw-text-xs tw-mr-1 tw-align-top">visibility</base-icon>
+                                <base-icon class="tw-text-xs tw-mr-2 tw-align-top">visibility</base-icon>
                                 <span class="tw-text-xs tw-align-middle">Enable</span>
                             </base-button>
                             <base-button @click="$emit('delete')" class="tw-py-2 tw-px-0 tw-text-gray-500 hover:tw-text-red-500 hover:tw-bg-transparent tw-border-none">
@@ -81,3 +81,11 @@
         }
     }
 </script>
+
+<style>
+.resource-profile-actions > .el-button > span {
+    display: flex;
+    align-items: center;
+    padding: 0 6px;
+}
+</style>

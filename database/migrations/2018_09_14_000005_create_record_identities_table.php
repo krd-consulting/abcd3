@@ -20,15 +20,15 @@ class CreateRecordIdentitiesTable extends Migration
 
             $table->integer('field_1_id')->unsigned();
 
-            $table->integer('field_2_id')->unsigned();
+            $table->integer('field_2_id')->unsigned()->nullable();
 
-            $table->integer('field_3_id')->unsigned();
+            $table->integer('field_3_id')->unsigned()->nullable();
 
             $table->timestamps();
 
-            $table->foreign('field_1_id')->references('id')->on('fields');
-            $table->foreign('field_2_id')->references('id')->on('fields');
-            $table->foreign('field_3_id')->references('id')->on('fields');
+            $table->foreign('field_1_id')->references('id')->on('record_fields');
+            $table->foreign('field_2_id')->references('id')->on('record_fields');
+            $table->foreign('field_3_id')->references('id')->on('record_fields');
         });
     }
 

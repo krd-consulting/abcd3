@@ -69,19 +69,12 @@ class Program extends Entity implements FormReference
         return $this->belongsTo('App\ClientStatus');
     }
 
-    public function setRecordIdentity(RecordIdentity $recordIdentity)
-    {
-        $this->recordIdentity = $recordIdentity;
-
-        return $this;
-    }
-
-    public function records()
+    public function records(RecordIdentity $recordIdentity = null)
     {
         $model = 'Record';
 
-        if(!empty($this->recordIdentity))
-            $model = $this->recordIdentity->model;
+        if(!empty($recordIdentity))
+            $model = $recordIdentity->model;
 
         return $this->belongsToMany("App\\$model", 'program_record', 'program_id' ,'record_id')
             ->withTimestamps()

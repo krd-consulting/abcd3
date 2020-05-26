@@ -18,7 +18,9 @@ class RecordType extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'slug' => $this->slug,
-            'identity' => $this->identity->name
+            'identity' => $this->identity->name,
+            'fields' => $this->fields,
+            'active' => $this->active
         ];
     }
 }

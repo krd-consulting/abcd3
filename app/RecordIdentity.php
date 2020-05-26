@@ -10,19 +10,19 @@ class RecordIdentity extends Model
         'Client' => 'Client',
         'Staff' => 'Record',
         'Volunteer' => 'Record',
-        'External' => 'Record'
+        'Other' => 'Record'
     ];
 
     public function field1() {
-        return $this->hasOne('App\Field', 'id', 'field_1_id');
+        return $this->hasOne('App\RecordField', 'id', 'field_1_id');
     }
 
     public function field2() {
-        return $this->hasOne('App\Field', 'id', 'field_2_id');
+        return $this->hasOne('App\RecordField', 'id', 'field_2_id');
     }
 
     public function field3() {
-        return $this->hasOne('App\Field', 'id', 'field_3_id');
+        return $this->hasOne('App\RecordField', 'id', 'field_3_id');
     }
 
     public function types() {
