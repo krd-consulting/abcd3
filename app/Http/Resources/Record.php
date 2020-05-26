@@ -46,8 +46,8 @@ class Record extends JsonResource
     {
         $values = array();
 
-        for($field = 1; $field <= 3; $field++) {
-            $column = 'field' . $field;
+        for($index = 1; $index <= 3; $index++) {
+            $column = 'field' . $index;
             $recordColumn = 'field_' . $index . '_value';
 
             if($this->record_type->identity->$column != null) {
