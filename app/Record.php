@@ -29,7 +29,7 @@ class Record extends Entity
 
     public function assignTeam($teamId)
     {
-        $this->teams()->attach($teamId);
+        $this->teams()->syncWithoutDetaching($teamId);
 
         return $this->load('teams');
     }

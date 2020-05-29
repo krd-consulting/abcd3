@@ -4,12 +4,12 @@ namespace Tests\Feature;
 
 use App\Permission;
 use App\Record;
+use App\RecordIdentity;
 use App\RecordType;
 use App\Role;
 use App\Scope;
 use App\Team;
 use App\User;
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -37,6 +37,15 @@ class StoreRecordTest extends TestCase
         return $user;
     }
 
+    private function other_record_type()
+    {
+        $identity = RecordIdentity::where('name', 'Other')->first();
+
+        $recordType = $identity->types()->first();
+
+        return $recordType;
+    }
+
     /**
      * @test storing a record with client identity.
      *
@@ -59,7 +68,7 @@ class StoreRecordTest extends TestCase
         $input = $record;
         $input['team_id'] = 1;
 
-        $response = $this->actingAs($user)->postJson('/api/records/participants', $input);
+        $response = $this->actingAs($user)->postJson("/api/records/participants", $input);
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('records', $record);
@@ -106,13 +115,14 @@ class StoreRecordTest extends TestCase
 
         $record = [
             'field_1_value' => 'Rice',
-            'record_type_id' => 4,
+            'record_type_id' => $this->other_record_type()->id,
         ];
 
         $input = $record;
         $input['team_id'] = 1;
 
-        $response = $this->actingAs($user)->postJson('/api/records/meals', $input);
+        $slug = $this->other_record_type()->slug;
+        $response = $this->actingAs($user)->postJson("/api/records/$slug", $input);
         $response->assertStatus(201);
 
         $this->assertDatabaseHas('records', $record);
@@ -131,13 +141,116 @@ class StoreRecordTest extends TestCase
 
         $record = [
             'field_1_value' => '',
-            'record_type_id' => 4,
+            'record_type_id' => $this->other_record_type()->id,
         ];
 
         $input = $record;
         $input['team_id'] = 1;
 
-        $response = $this->actingAs($user)->postJson('/api/records/meals', $input);
+        $slug = $this->other_record_type()->slug;
+        $response = $this->actingAs($user)->postJson("/api/records/$slug", $input);
         $response->assertStatus(422);
+    }
+
+    /**
+     * @test storing an existing record.
+     * Records of the same type and field values should be deduped.
+     * When the user creates an existing record but in a different team,
+     * the record should be added to the team.
+     *
+     *
+     * @return void
+     */
+
+    public function store_existing_record()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->create_authorized_user();
+
+        $record = [
+            'field_1_value' => 'Jake',
+            'field_2_value' => 'Peralta',
+            'field_3_value' => '1979-05-21',
+            'record_type_id' => 1,
+        ];
+
+        $input = $record;
+        $input['team_id'] = 1;
+
+        $response = $this->actingAs($user)->postJson('/api/records/participants', $input);
+        $response->assertStatus(201);
+
+        // Create same record, again.
+        $response = $this->actingAs($user)->postJson('/api/records/participants', $input);
+        // Should be 200 since, record is not recreated on the backend.
+        $response->assertStatus(200);
+
+        $query = Record::where('field_1_value', $record['field_1_value'])
+            ->where('field_2_value', $record['field_2_value'])
+            ->where('field_3_value', $record['field_3_value'])
+            ->where('record_type_id', $record['record_type_id']);
+
+        $this->assertEquals(1, $query->count());
+        $this->assertEquals(1, $query->first()->teams->count());
+
+        // Create same record but in different team.
+        $team = factory(Team::class)->create();
+        $input['team_id'] = $team->id;
+        $response = $this->actingAs($user)->postJson('/api/records/participants', $input);
+        $response->assertStatus(200);
+
+        $this->assertEquals(1, $query->count());
+        $this->assertEquals(2, $query->first()->teams->count());
+    }
+
+    /**
+     * @test storing an existing record of other identity.
+     *
+     *
+     * @return void
+     */
+
+    public function store_existing_other_record()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->create_authorized_user();
+
+        $record = [
+            'field_1_value' => 'Other',
+            'field_2_value' => null,
+            'field_3_value' => null,
+            'record_type_id' => $this->other_record_type()->id,
+        ];
+
+        $input = $record;
+        $input['team_id'] = 1;
+
+        $slug = $this->other_record_type()->slug;
+        $response = $this->actingAs($user)->postJson("/api/records/$slug", $input);
+        $response->assertStatus(201);
+
+        // Create same record, again.
+        $response = $this->actingAs($user)->postJson("/api/records/$slug", $input);
+        // Should be 200 since, record is not recreated on the backend.
+        $response->assertStatus(200);
+
+        $query = Record::where('field_1_value', $record['field_1_value'])
+            ->where('field_2_value', $record['field_2_value'])
+            ->where('field_3_value', $record['field_3_value'])
+            ->where('record_type_id', $record['record_type_id']);
+
+        $this->assertEquals(1, $query->count());
+        $this->assertEquals(1, $query->first()->teams->count());
+
+        // Create same record but in different team.
+        $team = factory(Team::class)->create();
+        $input['team_id'] = $team->id;
+        $response = $this->actingAs($user)->postJson("/api/records/$slug", $input);
+        $response->assertStatus(200);
+
+        $this->assertEquals(1, $query->count());
+        $this->assertEquals(2, $query->first()->teams->count());
     }
 }

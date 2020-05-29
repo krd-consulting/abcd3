@@ -37,17 +37,25 @@ class RecordController extends Controller
         return (new Teams(auth()->user()->availableTeams));
     }
 
-    public function store(RecordType $record, StoreRecord $request)
+    public function store(RecordType $recordType, StoreRecord $request)
     {
         $this->authorize('create', Record::class);
 
         // Store record when user is authorized.
         $record = new Record();
-        $record->field_1_value = $request->input('field_1_value');
-        $record->field_2_value = $request->input('field_2_value');
-        $record->field_3_value = $request->input('field_3_value');
-        $record->record_type_id = $request->input('record_type_id');
-        $record->save();
+
+        $record = $record->firstOrCreate(
+            [
+                'field_1_value' => $request->input('field_1_value'),
+                'field_2_value' => $request->input('field_2_value', null),
+                'field_3_value' => $request->input('field_3_value', null),
+                'record_type_id' => $request->input('record_type_id'),
+            ],
+            [
+                'active' => true
+            ]
+        );
+
         $record->assignTeam(
             $request->input('team_id')
         );

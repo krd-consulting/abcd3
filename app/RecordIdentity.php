@@ -26,7 +26,7 @@ class RecordIdentity extends Model
     }
 
     public function types() {
-        return $this->hasMany('App\RecordTypes');
+        return $this->hasMany('App\RecordType', 'identity_id');
     }
 
     public function getModelAttribute() {
