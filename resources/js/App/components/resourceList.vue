@@ -77,7 +77,7 @@
                 <list-item
                     v-for="(item, index) in items"
                     :key="index" class="tw-py-4 tw-px-4 hover:tw-bg-gray-100"
-                    :to="item.path + pathSuffix">
+                    :to="item.links.to + pathSuffix">
 
                     <template slot="image">
                         <slot name="list-item-image" :item="item"></slot>

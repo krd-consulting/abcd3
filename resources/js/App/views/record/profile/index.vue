@@ -15,11 +15,8 @@
             <template v-slot:main-information-container>
                 <div>
                     <div class="tw-inline-block tw-align-middle">
-                        <profile-picture class="tw-mr-2 tw-w-16 tw-h-16 tw-text-2xl" :record="record" :fields="fields" />
-                    </div>
-                    <div class="tw-inline-block tw-align-middle">
                         <h2>
-                            <primary-data class="tw-block tw-font-semibold tw-text-xl" :record="record" :fields="fields"/>
+                            <primary-data class="tw-block tw-font-semibold tw-text-xl" :record="record" />
                         </h2>
                         <p>
                             <secondary-data class="tw-text-sm" :record="record" :fields="fields"></secondary-data>

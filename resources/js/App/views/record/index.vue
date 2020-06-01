@@ -33,12 +33,8 @@
             <template slot="header-text">{{ type.name }}</template>
             <template slot="options-add-text">Add {{ type.name }}</template>
 
-            <template v-slot:list-item-image="{ item:record }">
-                <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-base" :record="record" :fields="fields"/>
-            </template>
-
             <template v-slot:list-item-primary-data="{ item:record }">
-                <primary-data class="tw-font-semibold" :record="record" :fields="fields"/>
+                <primary-data class="tw-font-semibold" :record="record"/>
             </template>
 
              <template v-slot:list-item-secondary-data="{ item:record }">

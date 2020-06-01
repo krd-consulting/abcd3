@@ -5,44 +5,20 @@
     export default {
         props: {
             record: Object,
-            fields: Object | Array
         },
 
         computed: {
             data() {
-                return this.group(this.parsedFields);
-            },
-
-            parsedFields() {
-                let fields = [];
-
-                if(this.fields == null) {
-                    return fields;
+                if(this.record.field_values == null) {
+                    return;
                 }
 
-                if('first_name' in this.fields)
-                    fields.push('first_name');
-
-                if('last_name' in this.fields)
-                    fields.push('last_name');
-
-                if('business_name' in this.fields)
-                    fields.push('business_name');
-
-                return fields;
+                if('first_name' in this.record.field_values && 'last_name' in this.record.field_values) {
+                    return `${this.record.field_values['first_name']} ${this.record.field_values['last_name']}`;
+                } else {
+                    return `${this.record.field_values['name']}`;
+                }
             },
         },
-
-        methods: {
-            group(fields) {
-                let data = '';
-
-                fields.forEach(field => {
-                    data += this.record[field] + ' ';
-                });
-
-                return data.trim();
-            }
-        }
     }
 </script>
