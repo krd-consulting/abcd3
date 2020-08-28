@@ -84,17 +84,29 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */,
-/* 1 */
+/******/ ({
+
+/***/ "./resources/js/Preferences/index.js":
+/*!*******************************************!*\
+  !*** ./resources/js/Preferences/index.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'D:\\Work\\xampp\\htdocs\\abcd\\resources\\js\\Preferences\\index.js'");
+
+/***/ }),
+
+/***/ 1:
 /*!****************************************!*\
   !*** multi ./resources/js/Preferences ***!
   \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-!(function webpackMissingModule() { var e = new Error("Cannot find module 'D:\\Work\\xampp\\htdocs\\abcd\\resources\\js\\Preferences'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+module.exports = __webpack_require__(/*! D:\Work\xampp\htdocs\abcd\resources\js\Preferences */"./resources/js/Preferences/index.js");
 
 
 /***/ })
-/******/ ]);
+
+/******/ });

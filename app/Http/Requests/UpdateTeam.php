@@ -24,8 +24,9 @@ class UpdateTeam extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|exists:teams,id',
-            'name' => 'required|unique:teams,name,' . $this->input('id'),
+            'id' => 'sometimes|exists:teams,id',
+            'name' => 'sometimes|unique:teams,name,' . $this->input('id'),
+            'active' => 'sometimes|boolean',
         ];
     }
 }

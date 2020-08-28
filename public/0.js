@@ -300,6 +300,189 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App/views/record/profile/addGroup.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/App/views/record/profile/addGroup.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _api_GroupsAvailableForRecordRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/api/GroupsAvailableForRecordRequest */ "./resources/js/api/GroupsAvailableForRecordRequest.js");
+/* harmony import */ var _api_RecordGroupsRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/api/RecordGroupsRequest */ "./resources/js/api/RecordGroupsRequest.js");
+/* harmony import */ var _App_components_transfer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/App/components/transfer */ "./resources/js/App/components/transfer.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Transfer: _App_components_transfer__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  props: {
+    active: Boolean,
+    recordId: {
+      type: Number | String,
+      "default": ''
+    },
+    recordType: {
+      type: String,
+      "default": ''
+    }
+  },
+  computed: {
+    record: function record() {
+      if (this.recordId === '') return this.$route.params.record;
+      return this.recordId;
+    },
+    type: function type() {
+      if (this.recordType === '') return this.$route.params.recordType;
+      return this.recordType;
+    }
+  },
+  data: function data() {
+    return {
+      groupsRequest: new _api_GroupsAvailableForRecordRequest__WEBPACK_IMPORTED_MODULE_0__["default"]({}),
+      recordGroupsRequest: new _api_RecordGroupsRequest__WEBPACK_IMPORTED_MODULE_1__["default"]({}),
+      selected: [],
+      notSelected: [],
+      selectedParams: {
+        ascending: true,
+        sortBy: 'id',
+        page: 1,
+        perPage: 10,
+        total: 0
+      },
+      notSelectedParams: {
+        ascending: true,
+        sortBy: 'id',
+        page: 1,
+        perPage: 10,
+        total: 0
+      }
+    };
+  },
+  methods: {
+    close: function close() {
+      this.$emit('update:active', false);
+      this.$emit('close');
+    },
+    loadSelected: function loadSelected() {
+      var _this = this;
+
+      this.recordGroupsRequest.setFields({
+        params: this.selectedParams
+      });
+      this.recordGroupsRequest.retrieve(this.type, this.record).then(function (response) {
+        _this.selected = response.data;
+        _this.selectedParams.total = response.meta.total;
+      });
+    },
+    loadNotSelected: function loadNotSelected() {
+      var _this2 = this;
+
+      this.groupsRequest.setFields({
+        params: this.notSelectedParams
+      });
+      this.groupsRequest.retrieve(this.type, this.record).then(function (response) {
+        _this2.notSelected = response.data;
+        _this2.notSelectedParams.total = response.meta.total;
+      });
+    },
+    open: function open() {
+      this.loadSelected();
+      this.loadNotSelected();
+    },
+    handleSelectedPageChange: function handleSelectedPageChange(page) {
+      this.selectedParams.page = page;
+      this.loadSelected();
+    },
+    handleNotSelectedPageChange: function handleNotSelectedPageChange(page) {
+      this.notSelectedParams.page = page;
+      this.loadNotSelected();
+    },
+    searchSelected: function searchSelected(search) {
+      this.selectedParams.search = search;
+      this.loadSelected();
+    },
+    searchNotSelected: function searchNotSelected(search) {
+      this.notSelectedParams.search = search;
+      this.loadNotSelected();
+    },
+    add: function add(id) {
+      var _this3 = this;
+
+      this.recordGroupsRequest.store(this.type, this.record, id).then(function (response) {
+        _this3.open();
+      })["catch"](function (error) {
+        _this3.$message({
+          type: 'error',
+          message: error.message
+        });
+      });
+    },
+    remove: function remove(id) {
+      var _this4 = this;
+
+      this.recordGroupsRequest.destroy(this.type, this.record, id).then(function (response) {
+        _this4.open();
+      })["catch"](function (error) {
+        _this4.$message({
+          type: 'error',
+          message: error.message
+        });
+      });
+    }
+  },
+  created: function created() {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App/components/programRecord/pivotDataStaff.vue?vue&type=template&id=4c44634b&":
 /*!***********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/App/components/programRecord/pivotDataStaff.vue?vue&type=template&id=4c44634b& ***!
@@ -588,6 +771,123 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App/views/record/profile/addGroup.vue?vue&type=template&id=27abbc76&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/App/views/record/profile/addGroup.vue?vue&type=template&id=27abbc76& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("transfer", {
+    attrs: {
+      active: _vm.active,
+      notSelected: _vm.notSelected,
+      selected: _vm.selected,
+      selectedParams: _vm.selectedParams,
+      notSelectedParams: _vm.notSelectedParams
+    },
+    on: {
+      "selected-page-change": _vm.handleSelectedPageChange,
+      "not-selected-page-change": _vm.handleNotSelectedPageChange,
+      "search-selected": _vm.searchSelected,
+      "search-not-selected": _vm.searchNotSelected,
+      add: _vm.add,
+      remove: _vm.remove,
+      open: _vm.open,
+      close: _vm.close
+    },
+    scopedSlots: _vm._u(
+      [
+        {
+          key: "title",
+          fn: function() {
+            return [_vm._t("title", [_vm._v("Manage Groups")])]
+          },
+          proxy: true
+        },
+        {
+          key: "caption",
+          fn: function() {
+            return [
+              _c("p", [
+                _vm._v(
+                  "Check available records to add them to the group or uncheck current records to remove them from the group."
+                )
+              ])
+            ]
+          },
+          proxy: true
+        },
+        {
+          key: "current-items-title",
+          fn: function() {
+            return [_vm._v("\n            Current Groups\n        ")]
+          },
+          proxy: true
+        },
+        {
+          key: "available-items-title",
+          fn: function() {
+            return [_vm._v("\n            Available Groups\n        ")]
+          },
+          proxy: true
+        },
+        {
+          key: "current-item-title",
+          fn: function(ref) {
+            var item = ref.item
+            return [_vm._v("\n            " + _vm._s(item.name) + "\n        ")]
+          }
+        },
+        {
+          key: "current-item-subtitle",
+          fn: function(ref) {
+            var item = ref.item
+            return undefined
+          }
+        },
+        {
+          key: "available-item-title",
+          fn: function(ref) {
+            var item = ref.item
+            return [_vm._v("\n            " + _vm._s(item.name) + "\n        ")]
+          }
+        },
+        {
+          key: "available-item-subtitle",
+          fn: function(ref) {
+            var item = ref.item
+            return undefined
+          }
+        },
+        {
+          key: "empty-available-items",
+          fn: function() {
+            return [_vm._v("\n            No more available groups.\n        ")]
+          },
+          proxy: true
+        }
+      ],
+      null,
+      true
+    )
+  })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./resources/js/App/components/programRecord/pivotDataStaff.vue":
 /*!**********************************************************************!*\
   !*** ./resources/js/App/components/programRecord/pivotDataStaff.vue ***!
@@ -726,6 +1026,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/App/views/record/profile/addGroup.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/App/views/record/profile/addGroup.vue ***!
+  \************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _addGroup_vue_vue_type_template_id_27abbc76___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addGroup.vue?vue&type=template&id=27abbc76& */ "./resources/js/App/views/record/profile/addGroup.vue?vue&type=template&id=27abbc76&");
+/* harmony import */ var _addGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addGroup.vue?vue&type=script&lang=js& */ "./resources/js/App/views/record/profile/addGroup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _addGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _addGroup_vue_vue_type_template_id_27abbc76___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _addGroup_vue_vue_type_template_id_27abbc76___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/App/views/record/profile/addGroup.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/App/views/record/profile/addGroup.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/App/views/record/profile/addGroup.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./addGroup.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App/views/record/profile/addGroup.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addGroup_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/App/views/record/profile/addGroup.vue?vue&type=template&id=27abbc76&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/App/views/record/profile/addGroup.vue?vue&type=template&id=27abbc76& ***!
+  \*******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addGroup_vue_vue_type_template_id_27abbc76___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./addGroup.vue?vue&type=template&id=27abbc76& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/App/views/record/profile/addGroup.vue?vue&type=template&id=27abbc76&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addGroup_vue_vue_type_template_id_27abbc76___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addGroup_vue_vue_type_template_id_27abbc76___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/api/CasesRequest.js":
 /*!******************************************!*\
   !*** ./resources/js/api/CasesRequest.js ***!
@@ -792,6 +1161,134 @@ var CasesRequest = /*#__PURE__*/function (_Request) {
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (CasesRequest);
+
+/***/ }),
+
+/***/ "./resources/js/api/GroupsAvailableForRecordRequest.js":
+/*!*************************************************************!*\
+  !*** ./resources/js/api/GroupsAvailableForRecordRequest.js ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var GroupsAvailableForRecordRequest = /*#__PURE__*/function (_Request) {
+  _inherits(GroupsAvailableForRecordRequest, _Request);
+
+  var _super = _createSuper(GroupsAvailableForRecordRequest);
+
+  function GroupsAvailableForRecordRequest() {
+    _classCallCheck(this, GroupsAvailableForRecordRequest);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(GroupsAvailableForRecordRequest, [{
+    key: "retrieve",
+    value: function retrieve(recordType, record) {
+      return this.get("/api/records/".concat(recordType, "/").concat(record, "/available-groups"));
+    }
+  }]);
+
+  return GroupsAvailableForRecordRequest;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (GroupsAvailableForRecordRequest);
+
+/***/ }),
+
+/***/ "./resources/js/api/RecordGroupsRequest.js":
+/*!*************************************************!*\
+  !*** ./resources/js/api/RecordGroupsRequest.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _core_Request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/Request */ "./resources/js/core/Request.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { return function () { var Super = _getPrototypeOf(Derived), result; if (_isNativeReflectConstruct()) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var RecordGroupsRequest = /*#__PURE__*/function (_Request) {
+  _inherits(RecordGroupsRequest, _Request);
+
+  var _super = _createSuper(RecordGroupsRequest);
+
+  function RecordGroupsRequest() {
+    _classCallCheck(this, RecordGroupsRequest);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(RecordGroupsRequest, [{
+    key: "retrieve",
+    value: function retrieve(recordType, record) {
+      return this.get("/api/records/".concat(recordType, "/").concat(record, "/groups"));
+    }
+  }, {
+    key: "store",
+    value: function store(recordType, record, group) {
+      return this.post("/api/records/".concat(recordType, "/").concat(record, "/groups/").concat(group));
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(recordType, record, group) {
+      return this["delete"]("/api/records/".concat(recordType, "/").concat(record, "/groups/").concat(group));
+    }
+  }]);
+
+  return RecordGroupsRequest;
+}(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (RecordGroupsRequest);
 
 /***/ }),
 

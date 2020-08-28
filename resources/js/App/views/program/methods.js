@@ -7,6 +7,7 @@ export function index() {
 
     this.request.retrieve().then(response => {
         this.programs = response.data;
+        this.fields = response.fields;
         this.total = response.meta.total;
     });
 }

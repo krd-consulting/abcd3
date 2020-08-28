@@ -16,5 +16,5 @@ trait Sort {
 
         return $query->orderBy($column, $ascending);
     }
-    
+
 }

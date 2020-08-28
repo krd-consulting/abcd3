@@ -6,7 +6,7 @@ class FormField extends Request {
     }
 
     show(field) {
-    	return this.get(`api/form-fields/${field}`);
+    	return this.get(`/api/form-fields/${field}`);
     }
 }
 

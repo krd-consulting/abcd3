@@ -24,7 +24,8 @@ class StoreTeam extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|unique:teams,name'
+            'name' => 'required|unique:teams,name',
+            'active' => 'sometimes|boolean'
         ];
     }
 }

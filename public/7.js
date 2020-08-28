@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ "./resources/js/api/RoleRequest.js":
-/*!*****************************************!*\
-  !*** ./resources/js/api/RoleRequest.js ***!
-  \*****************************************/
+/***/ "./resources/js/api/ProgramsAvailableForRecordRequest.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/api/ProgramsAvailableForRecordRequest.js ***!
+  \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,53 +34,28 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var RoleRequest = /*#__PURE__*/function (_Request) {
-  _inherits(RoleRequest, _Request);
+var ProgramsAvailableForRecordRequest = /*#__PURE__*/function (_Request) {
+  _inherits(ProgramsAvailableForRecordRequest, _Request);
 
-  var _super = _createSuper(RoleRequest);
+  var _super = _createSuper(ProgramsAvailableForRecordRequest);
 
-  function RoleRequest() {
-    _classCallCheck(this, RoleRequest);
+  function ProgramsAvailableForRecordRequest() {
+    _classCallCheck(this, ProgramsAvailableForRecordRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(RoleRequest, [{
+  _createClass(ProgramsAvailableForRecordRequest, [{
     key: "retrieve",
-    value: function retrieve() {
-      return this.get('/api/roles');
-    }
-  }, {
-    key: "create",
-    value: function create() {
-      return this.get('/api/roles/create');
-    }
-  }, {
-    key: "store",
-    value: function store() {
-      return this.post('/api/roles');
-    }
-  }, {
-    key: "edit",
-    value: function edit(role) {
-      return this.get("/api/roles/".concat(role, "/edit"));
-    }
-  }, {
-    key: "update",
-    value: function update(role) {
-      return this.patch("/api/roles/".concat(role));
-    }
-  }, {
-    key: "destroy",
-    value: function destroy(role) {
-      return this["delete"]("/api/roles/".concat(role));
+    value: function retrieve(recordType, record) {
+      return this.get("/api/records/".concat(recordType, "/").concat(record, "/available-programs"));
     }
   }]);
 
-  return RoleRequest;
+  return ProgramsAvailableForRecordRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RoleRequest);
+/* harmony default export */ __webpack_exports__["default"] = (ProgramsAvailableForRecordRequest);
 
 /***/ })
 

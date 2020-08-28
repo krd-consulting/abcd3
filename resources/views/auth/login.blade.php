@@ -1,90 +1,78 @@
 @extends('layouts.login')
 
 @section('content')
-
-<div class="tw-bg-gray-100 tw-flex tw-justify-around tw-items-stretch tw-h-screen">
-    <login-form inline-template old-email="{{ old('email') }}">
-        <div class="lg:tw-w-1/2 md:tw-w-3/4 tw-w-full xl:tw-px-12 tw-px-4 tw-flex tw-items-center">
-            <div class="tw-w-full lg:tw-pt-16 tw-pt-12 tw-pb-8 xl:tw-px-12 lg:tw-px-8 tw-px-4 tw-bg-white tw-rounded-lg tw-shadow tw-border-t-8 tw-border-orange-500">
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    @if ($errors->has('email'))
-                        <div 
-                            class="tw-rounded tw-py-2 tw-mb-4 tw-text-center tw-bg-red-200 
-                            tw-border tw-border-red-700">
-                            <span role="alert" class="tw-text-red-700 tw-text-sm">
-                            {{ $errors->first('email') }}
-                            </span>
-                        </div>
-                    @endif            
-                    <div>
-                        <div class="tw-flex tw-flex-wrap tw-items-center tw-w-full">
-                            <label class="md:tw-w-1/4 md:tw-block tw-hidden">
-                                Login 
-                            </label>
-                            <div class="md:tw-w-3/4 tw-w-full">
-                                <base-input
-                                        id="email"
-                                        v-model="email"
-                                        type="email"
-                                        class="
-                                            {{ $errors->has('email') ? ' is-invalid' : '' }}
-                                            tw-mb-2 tw-w-full tw-text-base
-                                            tw-placeholder-transparent
-                                            "
-                                        name="email" 
-                                        value="{{ old('email') }}"
-                                        placeholder="Login"
-                                        autocomplete="off"
-                                        required autofocus
-                                ></base-input>
-                            </div>
-                        </div>
+<login-form inline-template old-email="{{ old('email') }}">
+    <div class="tw-font-muli tw-relative">
+        <div class="tw-flex tw-h-screen tw-items-center">
+            <div class="tw-flex-1 tw-p-16 tw-h-full tw-flex tw-items-center tw-relative">
+                <img src="{{ asset('/images/meals-on-wheels.png') }}" alt="Meals on Wheels" class="tw-absolute tw-mt-16 tw-ml-16 tw-top-0 tw-left-0"/>
+                <div>
+                    <h1 class="tw-text-4xl tw-text-indigo-base tw-font-extrabold">
+                        Welcome to <span class="tw-text-4xl tw-text-orange-base text-normal">Meals on Wheels</span>
+                    </h1>
+                    <div class="tw-mt-5 tw-text-gray-dark">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non ipsum aliquam, pretium lectus vel, mollis nisl. Suspendisse iaculis erat in massa mollis, ut pulvinar erat consequat. Aliquam nec gravida massa.
                     </div>
-                    <div class="tw-mb-1">
-                        <div class="tw-flex tw-flex-wrap tw-items-center tw-w-full">
-                            <label class="md:tw-w-1/4 md:tw-block tw-hidden">
-                                Password 
-                            </label>
-                            <div class="md:tw-w-3/4 tw-w-full">
-                                <base-input
-                                        id="password"
-                                        v-model="password"
-                                        type="password"
-                                        class="
-                                                {{ $errors->has('password') ? ' is-invalid' : '' }}
-                                                tw-mb-2 tw-w-full tw-text-base
-                                            "
-                                        name="password"
-                                        placeholder="Password"
-                                        required
-                                        show-password
-                                ></base-input>
-                            </div>
-                        </div>
-                    </div>
-                    <base-button type="submit" class="tw-py-4 tw-w-full tm-mx-auto tw-mb-5 tw-center tw-text-base tw-text-white tw-font-semibold tw-bg-orange-400">
-                        {{ __('Log in') }}
-                    </base-button>
-                        
-                    <div class="tw-flex tw-justify-around tw-items-center tw-mb-4">
-                        <span>
-                            <base-checkbox
-                                name="remember"
-                                id="remember"
-                                {{ old('remember') ? 'checked' : '' }}
-                            >{{ __('Remember Me') }}</base-checkbox>
-                        </span>
-                    </div>
-                </form>
+                </div>
+            </div>
+            <img src="{{ asset('/images/eclipse.png') }}" class="login__eclipse" />
+        </div>
+        <div class="tw-absolute tw-right-0 tw-top-0 tw-bottom-0 tw-bg-indigo-lightest login__form-panel tw-flex tw-flex-col tw-px-10 tw-py-16">
+            <form method="POST" action="{{ route('login') }}" class="tw-flex-1 tw-flex tw-flex-col tw-justify-center">
+                @csrf
+                <div class="tw-text-2xl tw-text-black tw-font-bold tw-mb-10 tw-text-center">Enter your credentials to login</div>
+                <label for="email" class="tw-text-xs tw-text-gray-darkest tw-font-bold tw-mb-1">
+                    USERNAME
+                </label>
+                <base-input
+                    id="email"
+                    v-model="email"
+                    type="email"
+                    class="tw-w-full tw-text-sm {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                    name="email"
+                    value="{{ old('email') }}"
+                    autocomplete="off"
+                    required
+                    autofocus
+                ></base-input>
+                <label for="password" class="tw-text-xs tw-text-gray-darkest tw-font-bold tw-mb-1 tw-mt-5">
+                    PASSWORD
+                </label>
+                <base-input
+                    id="password"
+                    v-model="password"
+                    type="password"
+                    class="tw-w-full tw-text-sm {{ $errors->has('password') ? ' is-invalid' : '' }}"
+                    name="password"
+                    value="{{ old('password') }}"
+                    required
+                    show-password
+                ></base-input>
+                <div class="tw-mt-6 tw-flex tw-justify-between tw-items-center">
+                    <base-checkbox
+                        name="remember"
+                        id="remember"
+                        {{ old('remember') ? 'checked' : '' }}
+                        class="tw-text-sm tw-text-black tw-font-normal"
+                    >
+                        Remember me
+                    </base-checkbox>
+                    <base-link href="javascript:;">Forgotten password</base-link>
+                </div>
+                <base-button type="submit" class="tw-mt-6" >Login</base-button>
+                @if ($errors->has('email'))
+                    <div class="tw-mt-3 tw-text-center tw-text-red-base tw-text-xs">This username and password combination is not recognised.</div>
+                @endif
+            </form>
+            <div class="tw-flex tw-items-end">
+                <img src="{{ asset('/images/meals-on-wheels.png') }}" alt="Meals on Wheels" class="tw-w-20">
+                <div class="tw-ml-5 tw-text-xs tw-text-indigo-base">
+                    Powered by <b class="tw-text-xs">Meals on Wheels</b>
+                </div>
             </div>
         </div>
-    </login-form>
-    <div class="tw-hidden lg:tw-w-1/2 lg:tw-flex lg:tw-items-center tw-bg-white">
-        <img src="/images/splash.jpg"></img>
     </div>
-</div>
-
+</login-form>
 @endsection
 
 @section('scripts')

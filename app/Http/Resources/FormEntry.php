@@ -28,6 +28,10 @@ class FormEntry extends JsonResource
             $response['target'] = $target;
         }
 
+        $response['links'] = [
+          'to' => ''
+        ];
+
         return $response;
     }
 

@@ -9,34 +9,31 @@
             :program-id="edit.program"
             @update="retrieve()"/>
 
-        <list
+        <grid
+            :title="'Programs'"
             :items="programs"
+            :fields="fields"
             :page.sync="params.page"
+            :sortBy.sync="params.sortBy"
+            :ascending.sync="params.ascending"
             :per-page="params.perPage"
+            :search-terms.sync="params.search"
             has-add
             has-delete
-            has-disable
-            :has-list-columns="false"
-            :hasSearch="false"
             @add="createProgram"
             @edit="editProgram"
-            @delete="confirmDelete"
-            @disable="confirmDisable"
-            @enable="confirmEnable"
-            @page-change="retrieve()"
+            @delete="confirmDelete($event)"
+            @enable="confirmEnable($event)"
+            @params-change="retrieve();"
             @show-inactive="toggleInactive"
             :total="total">
-            <template slot="header-text">Programs</template>
-            <template slot="options-add-text">Create Program</template>
-
-            <template v-slot:list-item-primary-data="{ item:program }">
-                {{ program.name }}
+            <template v-slot:name="{ value, data }">
+              <router-link
+                :to="`${$route.path}/${data.id}`"
+                class="tw-font-bold tw-text-black hover:tw-text-black"
+              >{{ value }}</router-link>
             </template>
-
-             <template v-slot:list-item-secondary-data="{ item:program }">
-                <base-icon class="tw-text-xs align-middle">people</base-icon>{{ program.team.name }}
-            </template>
-        </list>
+        </grid>
     </div>
 </template>
 <script>
@@ -44,13 +41,13 @@
 
     import methods from './methods';
 
-    import List from '@/App/components/resourceList';
+    import Grid from '@/components/extendable/grid';
     import CreateProgram from './create';
     import EditProgram from './edit';
 
     export default {
         components: {
-            List,
+            Grid,
             CreateProgram,
             EditProgram
         },
@@ -65,10 +62,11 @@
                     program: ''
                 },
                 programs: [],
+                fields: [],
                 request: new Request({}),
                 params: {
                     ascending: true,
-                    sortBy: 'field_1_value',
+                    sortBy: 'name',
                     page: 1,
                     perPage: 5
                 },

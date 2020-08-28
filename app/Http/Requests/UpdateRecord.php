@@ -28,9 +28,9 @@ class UpdateRecord extends FormRequest
         $recordType = $this->route('recordType');
 
         return [
-            'field_1_value' => $this->fieldRules()[$recordType->identity->field1->name],
-            'field_2_value' => $this->fieldRules()[$recordType->identity->field2->name],
-            'field_3_value' => $this->fieldRules()[$recordType->identity->field3->name],
+            'field_1_value' => $this->fieldRules()[$recordType->identity->field1->slug],
+            'field_2_value' => $this->fieldRules()[$recordType->identity->field2->slug],
+            'field_3_value' => $this->fieldRules()[$recordType->identity->field3->slug],
             'active' => 'sometimes|boolean'
         ];
     }

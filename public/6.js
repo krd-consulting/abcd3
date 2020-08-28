@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./resources/js/api/RolePermissionRequest.js":
-/*!***************************************************!*\
-  !*** ./resources/js/api/RolePermissionRequest.js ***!
-  \***************************************************/
+/***/ "./resources/js/api/OrganisationSettingRequest.js":
+/*!********************************************************!*\
+  !*** ./resources/js/api/OrganisationSettingRequest.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,33 +34,33 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var RolePermissionRequest = /*#__PURE__*/function (_Request) {
-  _inherits(RolePermissionRequest, _Request);
+var OrganisationSettingRequest = /*#__PURE__*/function (_Request) {
+  _inherits(OrganisationSettingRequest, _Request);
 
-  var _super = _createSuper(RolePermissionRequest);
+  var _super = _createSuper(OrganisationSettingRequest);
 
-  function RolePermissionRequest() {
-    _classCallCheck(this, RolePermissionRequest);
+  function OrganisationSettingRequest() {
+    _classCallCheck(this, OrganisationSettingRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(RolePermissionRequest, [{
-    key: "store",
-    value: function store(role, permission) {
-      return this.post("/api/roles/".concat(role, "/permissions/").concat(permission));
+  _createClass(OrganisationSettingRequest, [{
+    key: "show",
+    value: function show() {
+      return this.get("/api/organisation-setting");
     }
   }, {
-    key: "destroy",
-    value: function destroy(role, permission) {
-      return this["delete"]("/api/roles/".concat(role, "/permissions/").concat(permission));
+    key: "update",
+    value: function update(form) {
+      return this.patch("/api/organisation-setting");
     }
   }]);
 
-  return RolePermissionRequest;
+  return OrganisationSettingRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RolePermissionRequest);
+/* harmony default export */ __webpack_exports__["default"] = (OrganisationSettingRequest);
 
 /***/ })
 

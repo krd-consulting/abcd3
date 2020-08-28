@@ -5,8 +5,17 @@ class Form extends Request {
         return this.get(`/api/forms`);
     }
 
+    retrieve() {
+      return this.get(`/api/forms`);
+    }
+
+
     show(form) {
         return this.get(`/api/forms/${form}`);
+    }
+
+    fieldDataF(form, field) {
+      return this.get(`/api/forms/${form}/field-data/${field}`);
     }
 
     create() {

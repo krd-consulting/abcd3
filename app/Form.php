@@ -43,6 +43,7 @@ class Form extends Entity
         $this->target_id = $request->target_id;
         $this->scope_id = $request->scope_id;
         $this->field_layout = $request->fields;
+        $this->active = TRUE;
 
         DB::transaction(function () use ($request) {
             $this->save();
@@ -74,11 +75,11 @@ class Form extends Entity
             $toBeFlattened = [];
 
             $fields = $fields->reject(function($field, $key) {
-                return $field['type'] == 'SectionDivider';
+                return $field['type'] == 'section_divider';
             });
 
             $fields->transform(function($field, $key) use (&$toBeRemoved, &$toBeFlattened) {
-                if($field['type'] != 'MatrixField'){
+                if($field['type'] != 'matrix_field'){
                     $columnName = $this->generateFieldColumnName($this->fieldNumber++);
 
                     $field['column_name'] = $columnName;

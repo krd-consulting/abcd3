@@ -14,7 +14,9 @@ class FormField extends Model
     use Search;
     use Sort;
 
-	protected $guarded = [];
+    protected $guarded = [];
+
+    protected $appends = ['target'];
 
     public $timestamps = false;
 
@@ -36,6 +38,7 @@ class FormField extends Model
         'radio' => 'string',
         'checkbox' => 'json',
         'date' => 'timestamp',
+        'datetime' => 'timestamp',
         'time' => 'time',
         'file' => 'json'
     ];
@@ -107,6 +110,14 @@ class FormField extends Model
 
 
         return $this->columnTypes[$this->type];
+    }
+
+    public function getTargetAttribute()
+    {
+      if(empty($this->reference_target_id))
+        return null;
+
+      return $this->reference_target_type;
     }
 
     public function scopeFilter($query, $terms)

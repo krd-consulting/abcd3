@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Group;
-use App\Team;
 use App\Http\Requests\StoreGroup;
 use App\Http\Requests\UpdateGroup;
+use App\Http\Resources\Groups;
+use App\Team;
 
 class GroupController extends Controller
 {
@@ -13,11 +14,17 @@ class GroupController extends Controller
     {
         $groups = (new Group)->availableFor(auth()->user())->with('program');
 
-        $active = request('active') ?? true;
-        $groups->active($active);
+        $ascending = request('ascending');
+        $sortBy = request('sortBy');
+
+        $groups->sort($sortBy, $ascending);
+
+        $groups->search(request('search'));
 
         $perPage = request('perPage');
-        return $groups->paginate($perPage);
+        $groups = $groups->paginate($perPage);
+
+        return new Groups($groups);
     }
 
     public function show(Group $group)

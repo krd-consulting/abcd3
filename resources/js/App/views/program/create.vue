@@ -5,102 +5,97 @@
         </div>
         <form>
             <div class="tw-mb-2">
-                <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5 tw-capitalize">
-                        Program Name
-                    </label>
-                    <div class="tw-w-2/3">
-                        <base-input
-                            v-model="programData['name']"
-                            name="name"
-                            @keydown.native="request.errors.clear($event.target.name)"/>
-                    </div>
-                </div>
-                <div v-if="request.errors.has('name')" class="tw-flex tw-justify-end">
-                    <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('name')[0]" class="tw-text-xs tw-text-red-500"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="tw-mb-2">
-                <div  class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5 tw-capitalize">
-                        Description
-                    </label>
-                    <div class="tw-w-2/3">
-                        <base-input
-                            v-model="programData['description']"
-                            name="description"
-                            @keydown.native="request.errors.clear($event.target.name)"/>
-                    </div>
-                </div>
-                <div v-if="request.errors.has('description')" class="tw-flex tw-justify-end">
-                    <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('description')[0]" class="tw-text-xs tw-text-red-500"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="tw-mb-2">
-                <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
-                        Team
-                    </label>
-                    <div class="tw-w-2/3">
-                        <base-select
-                            v-model="programData.team_id"
-                            name="team"
-                            placeholder="Select Team"
-                            @change="request.errors.clear('team_id')"
-                            :disabled="disableTeam">
-                            <el-option
-                                v-for="team in teams"
-                                :key="team.id"
-                                :label="team.name"
-                                :value="team.id">
-                                {{ team.name }}
-                            </el-option>
-                        </base-select>
-                    </div>
-                </div>
-                <div v-if="request.errors.has('team_id')" class="tw-flex tw-justify-end">
-                    <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('team_id')[0]" class="tw-text-xs tw-text-red-500"></span>
-                    </div>
-                </div>
+              <label>
+                  Program Name
+              </label>
+              <base-input
+                v-model="programData['name']"
+                name="name"
+                @keydown.native="request.errors.clear($event.target.name)"/>
+                <span
+                  v-if="request.errors.has('name')"
+                  v-text="request.errors.get('name')[0]"
+                  class="tw-text-xs tw-text-red-500"></span>
             </div>
             <div>
-                <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5">
-                        Default Status for Clients
-                    </label>
-                    <div class="tw-w-2/3">
-                        <base-select
-                            v-model="programData.default_client_status_id"
-                            name="team"
-                            placeholder="Select Default Status"
-                            @change="request.errors.clear('default_client_status_id')">
-                            <el-option
-                                v-for="status in statuses"
-                                :key="status.id"
-                                :label="status.name"
-                                :value="status.id">
-                                {{ status.name }}
-                            </el-option>
-                        </base-select>
-                    </div>
-                </div>
-                <div v-if="request.errors.has('default_client_status_id')" class="tw-flex tw-justify-end">
-                    <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('default_client_status_id')[0]" class="tw-text-xs tw-text-red-500"></span>
-                    </div>
-                </div>
+              <label>
+                  Volunteer Type
+              </label>
+              <base-select
+                  v-model="programData.volunteer_type"
+                  name="team"
+                  placeholder="Select Volunteer Type"
+                  @change="request.errors.clear('volunteer_type')">
+                  <el-option
+                      key="none"
+                      label="None"
+                      value="">
+                      None
+                  </el-option>
+                  <el-option
+                      v-for="type in volunteerTypes"
+                      :key="type.slug"
+                      :label="type.name"
+                      :value="type.slug">
+                      {{ type.name }}
+                  </el-option>
+              </base-select>
+              <span
+                v-if="request.errors.has('volunteer_type')"
+                v-text="request.errors.get('volunteer_type')[0]"
+                class="tw-text-xs tw-text-red-500"></span>
+            </div>
+            <div class="tw-mb-2">
+              <label>
+                  Team
+              </label>
+              <base-select
+                  v-model="programData.team_id"
+                  name="team"
+                  placeholder="Select Team"
+                  @change="request.errors.clear('team_id')"
+                  :disabled="disableTeam">
+                  <el-option
+                      v-for="team in teams"
+                      :key="team.id"
+                      :label="team.name"
+                      :value="team.id">
+                      {{ team.name }}
+                  </el-option>
+                </base-select>
+                <span
+                  v-if="request.errors.has('team_id')"
+                  v-text="request.errors.get('team_id')[0]"
+                  class="tw-text-xs tw-text-red-500"></span>
+            </div>
+            <div>
+              <label>
+                  When a client is added to this program
+              </label>
+              <base-select
+                  v-model="programData.default_client_status_id"
+                  name="team"
+                  placeholder="Set the client's status to..."
+                  @change="request.errors.clear('default_client_status_id')">
+                  <el-option
+                      v-for="status in statuses"
+                      :key="status.id"
+                      :label="`Set the client's status to ${status.name}`"
+                      :value="status.id">
+                      {{ status.name }}
+                  </el-option>
+              </base-select>
+              <span
+                v-if="request.errors.has('default_client_status_id')"
+                v-text="request.errors.get('default_client_status_id')[0]"
+                class="tw-text-xs tw-text-red-500"></span>
             </div>
         </form>
-        <div slot="footer" class="tw-border-t tw-px-4 tw-py-4 tw-bg-gray-100 tw-rounded-b">
+        <div slot="footer" class="tw-px-4 tw-py-4 tw-rounded-b">
             <base-button class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-gray-700 tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue" @click="close(false)">
                 <span class="tw-text-xs tw-align-middle">Nevermind</span>
             </base-button>
-            <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none" @click="store">
+            <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-indigo-base tw-text-white tw-font-bold tw-border-none" @click="store">
                 <span class="tw-text-xs tw-align-middle">OK</span>
             </base-button>
         </div>
@@ -129,10 +124,12 @@
                     name: '',
                     description: '',
                     team_id: '',
-                    default_client_status_id: ''
+                    default_client_status_id: '',
+                    volunteer_type: ''
                 },
                 teams: [],
-                statuses: []
+                statuses: [],
+                volunteerTypes: []
             }
         },
 
@@ -146,7 +143,8 @@
                     name: '',
                     description: '',
                     team_id: '',
-                    settings: { 
+                    volunteer_type: '',
+                    settings: {
                         default_client_status_id: ''
                     }
                 };
@@ -164,6 +162,7 @@
                 request.create().then((response) => {
                     this.teams = response.teams;
                     this.statuses = response.statuses;
+                    this.volunteerTypes = response.volunteer_types;
                 });
             },
 
@@ -186,7 +185,7 @@
         },
 
         created() {
-            
+
         }
     }
 </script>

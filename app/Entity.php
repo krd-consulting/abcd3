@@ -16,5 +16,4 @@ class Entity extends Model
     use SoftDeletes;
     use Search;
     use Sort;
-    use Active;
 }

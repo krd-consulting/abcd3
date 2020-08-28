@@ -18,12 +18,16 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        $programs = (new Program);
+        $programs = new Program();
 
-        $active = request('active') ?? true;
-        $programs = $programs->active($active);
+        // Sort per request.
+        $ascending = request('ascending');
+        $sortBy = request('sortBy');
+        $programs = $programs->sort($sortBy, $ascending);
 
         $programs = $programs->availableFor(auth()->user())->with('team');
+
+        $programs->search(request('search'));
 
         $perPage = request('perPage');
         $programs = $programs->paginate($perPage);
@@ -50,8 +54,9 @@ class ProgramController extends Controller
 
         $teams = auth()->user()->availableTeams;
         $statuses = ClientStatus::all();
+        $volunteer_types = config('app.program_volunteer_types');
 
-        return compact('teams', 'statuses');
+        return compact('teams', 'statuses', 'volunteer_types');
     }
 
     public function store(StoreProgram $request)

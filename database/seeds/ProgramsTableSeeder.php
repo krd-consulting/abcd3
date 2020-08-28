@@ -25,6 +25,7 @@ class ProgramsTableSeeder extends Seeder
                 Team::where('name', 'Team One')->first()
             );
         $programOne->active = true;
+        $programOne->volunteer_type = config('app.program_volunteer_types.one_to_one.slug');
         $programOne->save();
 
         $programTwo = new Program;
@@ -37,6 +38,7 @@ class ProgramsTableSeeder extends Seeder
                 Team::where('name', 'Team Two')->first()
             );
         $programTwo->active = true;
+        $programTwo->volunteer_type = config('app.program_volunteer_types.group.slug');
         $programTwo->save();
     }
 }

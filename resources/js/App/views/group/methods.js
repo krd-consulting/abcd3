@@ -7,7 +7,8 @@ export function index() {
 
     this.request.retrieve().then(response => {
         this.groups = response.data;
-        this.total = response.total;
+        this.fields = response.fields;
+        this.total = response.meta.total;
     });
 }
 

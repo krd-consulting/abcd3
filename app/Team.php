@@ -2,23 +2,18 @@
 
 namespace App;
 
-use App\Model;
+use App\Entity;
+use App\RecordType;
+use App\Traits\Models\Active;
 
-use App\Traits\Models\Search;
-use App\Traits\Models\Sort;
-
-use Illuminate\Database\Eloquent\SoftDeletes;
-
-class Team extends Model
+class Team extends Entity
 {
-    use SoftDeletes;
-    use Search;
-    use Sort;
+    use Active;
 
     protected $searchColumns = [
         'name',
     ];
-    
+
     public function records()
     {
         return $this->belongsToMany('App\Record');
@@ -54,5 +49,12 @@ class Team extends Model
             default:
                 return $user->teams();
         }
+    }
+
+    public function associateRecord(RecordType $recordType, Record $record)
+    {
+      $this->records()->attach($record);
+
+      return $record;
     }
 }

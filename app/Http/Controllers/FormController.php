@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Form;
 use App\FormTargetType;
 use App\Scope;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Resources\Form as FormResource;
 use App\Http\Resources\Forms;
@@ -18,8 +19,8 @@ class FormController extends Controller
     {
 		$forms = new Form;
 
-        $active = request('active') ?? true;
-        $forms = $forms->active($active);
+        // $active = request('active') ?? true;
+        // $forms = $forms->active($active);
 
 		// Search
         $search = request('search');
@@ -45,6 +46,11 @@ class FormController extends Controller
         return (new FormResource($form));
     }
 
+    public function fieldData(Form $form, $field)
+    {
+      return DB::table($form->table_name)->where($field, 'like', '%'.request('search').'%')->pluck($field);
+    }
+
     public function create()
     {
         $this->authorize('create', Form::class);
@@ -62,11 +68,10 @@ class FormController extends Controller
     {
         $this->authorize('create', Form::class);
 
-        $form = new Form;
-
+        $form = new Form();
         $form->createUsingRequest($request);
 
-        return $form;
+        return (new FormResource($form));
     }
 
     public function edit(Form $form)

@@ -2,14 +2,12 @@
 
 namespace App;
 
+use App\Contracts\FormReference;
 use App\Entity;
-
 use App\Record;
 use App\RecordIdentity;
-
-use App\Contracts\FormReference;
+use App\RecordType;
 use App\Traits\Models\FormReference as FormReferenceTrait;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Program extends Entity implements FormReference
@@ -171,5 +169,20 @@ class Program extends Entity implements FormReference
     public function assignToTeam($team)
     {
         return $this->team()->associate($team);
+    }
+
+    public function associateRecord(RecordType $recordType, Record $record)
+    {
+      $programRecord = $this->getRecordPivotModel($recordType);
+
+      $programRecord = new $programRecord();
+      $programRecord->createFrom($this, $record, true, null);
+
+      return $record;
+    }
+
+    private function getRecordPivotModel(RecordType $recordType)
+    {
+        return "App\Program" . $recordType->identity->model;
     }
 }

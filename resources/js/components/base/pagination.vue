@@ -1,12 +1,12 @@
 <template>
     <el-pagination
-        background
         v-bind="$attrs"
         :current-page="currentPage"
         :page-size="pageSize"
         :total="total"
+        layout="prev, pager, next"
+        :pager-count="5"
         @current-change="handleCurrentChange">
-        <slot name="pagination-info" :paginationInfo="paginationInfo">{{ paginationInfo }}</slot>
     </el-pagination>
 </template>
 <script>

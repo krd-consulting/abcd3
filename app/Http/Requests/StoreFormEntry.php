@@ -38,6 +38,18 @@ class StoreFormEntry extends FormRequest
                 $toBeMerged[$columnName]
                      = Carbon::parse($this->$columnName)->toDateTimeString();
             }
+            if($field->type == 'datetime') {
+                $columnName = $field->column_name;
+
+                $toBeMerged[$columnName]
+                     = Carbon::parse($this->$columnName)->toDateTimeString();
+            }
+            if($field->type == 'time') {
+                $columnName = $field->column_name;
+
+                $toBeMerged[$columnName]
+                     = Carbon::parse($this->$columnName)->toTimeString();
+            }
         }
 
         $this->merge($toBeMerged);

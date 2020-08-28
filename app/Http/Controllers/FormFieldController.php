@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Form;
+use App\FormField;
 
 class FormFieldController extends Controller
 {
@@ -30,5 +31,10 @@ class FormFieldController extends Controller
         $fields = $fields->paginate($perPage);
 
         return $fields;
+    }
+
+    public function show(FormField $field)
+    {
+      return $field;
     }
 }

@@ -2,16 +2,14 @@
 
 namespace App;
 
+use App\Contracts\FormReference;
+use App\Model;
 use App\Record;
-use App\User;
-
+use App\RecordType;
+use App\Traits\Models\FormReference as FormReferenceTrait;
 use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
-
-use App\Contracts\FormReference;
-use App\Traits\Models\FormReference as FormReferenceTrait;
-
-use App\Model;
+use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Group extends Entity implements FormReference
@@ -36,6 +34,13 @@ class Group extends Entity implements FormReference
     public function addRecord(Record $record)
     {
         $record->assignGroup($this);
+    }
+
+    public function associateRecord(RecordType $recordType, Record $record)
+    {
+      $this->addRecord($record);
+
+      return $record;
     }
 
     public function getPathAttribute()

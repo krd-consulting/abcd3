@@ -16,12 +16,68 @@ class Team extends JsonResource
     {
         return [
             'id' => $this->id,
+            'active' => $this->active,
             'name' => $this->name,
+            'display_value' => $this->name,
             'description' => $this->description,
+            'fields' => $this->fields(),
+            'profile_fields' => $this->profile_fields(),
             'available_record_types' => $this->available_record_types,
-            'path' => $this->path,
+            'links' => [
+                'to' => $this->path,
+            ],
+            'permissions' => $this->permissions(),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
+        ];
+    }
+
+    public function fields()
+    {
+        $fields = [
+          'name' => [
+            'value' => $this->name,
+            'slug' => 'name',
+            'name' => 'Name',
+            'key' => 'name'
+          ],
+          'description' => [
+            'value' => $this->description,
+            'slug' => 'description',
+            'name' => 'Description',
+            'key' => 'description'
+          ]
+        ];
+
+        return $fields;
+    }
+
+    public function profile_fields()
+    {
+        $fields[0] = $this->fields()['name'];
+
+        $fields[1] = [
+            'value' => '',
+        ];
+
+        return $fields;
+    }
+
+    public function permissions()
+    {
+        $canWrite = auth()->user()->can('write', $this->resource);
+
+        return [
+            'can_write' => $canWrite,
+            'can_edit' => $canWrite,
+            'can_delete' => $canWrite,
+        ];
+    }
+
+    public function links()
+    {
+        return [
+            'to' => $this->path
         ];
     }
 }

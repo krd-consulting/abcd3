@@ -1,159 +1,112 @@
 <template>
-    <div>
-        <edit-form
-            :active.sync="edit.active"
-            :form-id="edit.form"
-            @update="retrieve()"/>
-
-        <!-- :has-add="total > 0" -->
-
-        <list
-            :items="forms"
-            :page.sync="params.page"
-            :per-page="params.perPage"
-            has-add
-            path-suffix="/new"
-            has-delete
-            has-disable
-            :has-list-columns="false"
-            :hasSearch="false"
-            @edit="editForm"
-            @page-change="retrieve()"
-            @delete="confirmDelete"
-            @disable="confirmDisable"
-            @enable="confirmEnable"
-            @show-inactive="toggleInactive"
-            :total="total">
-            <template slot="header-text">Forms</template>
-            <template slot="options-add">
-                <router-link to="/forms/create/">
-                    <base-button
-                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none">
-                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">
-                            <slot name="empty-placeholder-add-button-icon">add</slot>
-                        </base-icon>
-                        <span class="tw-text-xs tw-align-middle">
-                            <slot name="empty-placeholder-add-button-text">Create Form</slot>
-                        </span>
-                    </base-button>
-                </router-link>
-            </template>
-
-            <template slot="empty-placeholder-add-button">
-                <router-link to="/forms/create" v-if="params.active">
-                    <base-button
-                        class="tw-py-2 tw-pl-2 tw-pr-4 tw-bg-blue-500 hover:tw-bg-transparent hover:tw-text-blue-500 tw-text-white tw-border-none">
-                        <base-icon class="tw-text-sm tw-align-middle tw-mr-1">
-                            <slot name="empty-placeholder-add-button-icon">add</slot>
-                        </base-icon>
-                        <span class="tw-text-xs tw-align-middle">
-                            <slot name="empty-placeholder-add-button-text">Create Form</slot>
-                        </span>
-                    </base-button>
-                </router-link>
-            </template>
-
-            <template v-slot:list-item-primary-data="{ item:form }">
-                {{ form.name }}
-            </template>
-            <template v-slot:list-item-secondary-data="{ item:form }">
-                About {{ form.target_name }}
-            </template>
-
-            <template v-slot:options-edit-button="{ item:form }">
-                <router-link :to="`${form.path}`"
-                    class="tw-py-2 tw-px-2 tw-text-gray-600 hover:tw-text-gray-800 tw-bg-transparent tw-border-none"
-                    @click="$emit('edit', item[resourceIdentifier])">
-                    <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
-                        remove_red_eye
-                    </base-icon>
-                    <span class="tw-text-xs tw-align-middle">
-                        View Data
-                    </span>
-                </router-link>
-            </template>
-
-            <template v-slot:options-remove-button="{ item:form }">
-                <el-dropdown :key="form.id" placement="bottom-end">
-                    <span class="tw-text-gray-600 tw-text-xs tw-align-middle">
-                        <base-icon class="tw-text-gray-600 tw-text-xs tw-mr-1 tw-align-middle">
-                            edit
-                        </base-icon>
-                        Edit Form
-                    </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item @click.native="editForm(form.id)">
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
-                                edit
-                            </base-icon>
-                            <span class="tw-text-xs tw-align-middle">
-                                Edit Form Information
-                            </span>
-                        </el-dropdown-item>
-                        <el-dropdown-item>
-                            <base-icon class="tw-text-xs tw-mr-1 tw-align-middle">
-                                edit
-                            </base-icon>
-                            <span class="tw-text-xs tw-align-middle">
-                                Edit Form Fields
-                            </span>
-                        </el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </template>
-        </list>
-    </div>
+  <div>
+    <create :active.sync="create.active" @save="retrieve()" />
+    <edit :active.sync="edit.active" :formId="edit.form" @update="retrieve()" />
+    <raw-grid
+      title="Forms"
+      :items="forms"
+      :fields="headers"
+      :page.sync="params.page"
+      :sortBy.sync="params.sortBy"
+      :ascending.sync="params.ascending"
+      :per-page="params.perPage"
+      :search-terms.sync="params.search"
+      :loading="loading"
+      has-add
+      addLabel="Create new form"
+      has-delete
+      :extra-actions="[{icon: 'fas fa-plus', label: 'Add Entry'}]"
+      @extra-action="handleExtraAction"
+      @add="createForm"
+      @edit="editForm"
+      @delete="confirmDelete($event)"
+      @params-change="retrieve();"
+      @show-inactive="toggleInactive"
+      :total="total"
+      v-if="!loading || items.length"
+    >
+      <template v-slot:active="{ value, data }">
+        <el-switch
+          :value="value"
+          :active-value="1"
+          :inactive-value="0"
+          @input="$event ? confirmEnable(data.id) : confirmDisable(data.id)"
+          active-text="Enabled"
+          inactive-text="Disabled"
+        ></el-switch>
+      </template>
+    </raw-grid>
+  </div>
 </template>
 <script>
-    import Request from '@/api/FormRequest';
+import Request from "@/api/FormRequest";
+import methods from "./methods";
+import rawGrid from "@/components/extendable/rawGrid";
+import create from "./create";
+import edit from "./edit";
+import { mapFields } from 'vuex-map-fields';
 
-    import methods from './methods';
+export default {
+  components: {
+    rawGrid,
+    create,
+    edit
+  },
+  computed: {
+    ...mapFields(["fields"])
+  },
+  data() {
+    return {
+      create: {
+        active: false
+      },
+      edit: {
+        active: false,
+        form: ""
+      },
+      headers: [
+        { key: "name", label: "Form name" },
+        { key: "target_name", label: "About" },
+        { key: "type", label: "Type" },
+        { key: "active", label: "Status" }
+      ],
+      forms: [],
+      loading: false,
+      request: new Request({}),
+      params: {
+        ascending: true,
+        sortBy: "name",
+        page: 1,
+        perPage: 5,
+        active: true
+      },
+      total: 0,
+      type: {
+        name: ""
+      }
+    };
+  },
 
-    import List from '@/App/components/resourceList';
-    import EditForm from './edit';
+  methods: {
+    ...methods,
 
-    export default {
-        components: {
-            List,
-            EditForm
-        },
+    retrieve: methods.index,
 
-        data() {
-            return {
-                edit: {
-                    active: false,
-                    form: ''
-                },
-                forms: [],
-                request: new Request({}),
-                params: {
-                    ascending: true,
-                    sortBy: 'name',
-                    page: 1,
-                    perPage: 5,
-                    active: true
-                },
-                total: 0,
-                type: {
-                    name: ''
-                },
-            }
-        },
+    toggleInactive(showInactive) {
+      this.params.active = !showInactive;
+      this.params.page = 1;
+      this.retrieve();
+    },
 
-        methods: {
-            ...methods,
-
-            retrieve: methods.index,
-
-            toggleInactive(showInactive) {
-                this.params.active = !showInactive;
-                this.params.page = 1;
-                this.retrieve();
-            }
-        },
-
-        created() {
-            this.retrieve();
-        }
+    handleExtraAction({itemId, actionIndex}) {
+      if (actionIndex === 0) {
+        this.$router.push(`/forms/${itemId}/new`);
+      }
     }
+  },
+
+  created() {
+    this.retrieve();
+  }
+};
 </script>

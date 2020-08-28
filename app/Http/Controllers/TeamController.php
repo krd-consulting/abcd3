@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
-    public function index() 
+    public function index()
     {
     	$teams = new Team;
 
@@ -56,7 +56,8 @@ class TeamController extends Controller
 
         $team = new Team();
         $team->name = $request->name;
-        $team->description = $request->description;
+        $team->description = $request->input('description', null);
+        $team->active = $request->input('active', true);
         $team->save();
 
         return (new TeamResource($team));
@@ -66,8 +67,9 @@ class TeamController extends Controller
     {
         $this->authorize('write', $team);
 
-        $team->name = $request->name;
-        $team->description = $request->description;
+        $team->name = $request->input('name', $team->name);
+        $team->description = $request->input('description', $team->description);
+        $team->active = $request->input('active', $team->active);
         $team->save();
 
         return (new TeamResource($team));

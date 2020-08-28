@@ -1,4 +1,4 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -12,23 +12,20 @@ const mix = require('laravel-mix');
  */
 
 mix.webpackConfig({
-   resolve: {
-       alias: {
-           "@": path.resolve(
-               __dirname,
-               "resources/js"
-           )
-       }
-   }
+    resolve: {
+        alias: {
+            "@": path.resolve(__dirname, "resources/js")
+        }
+    }
 });
 
-mix
-    .postCss('resources/css/app.css', 'public/css', [
-        require('tailwindcss'),
-    ])
-    .js('resources/js/App', 'public/js/app.js')
+mix.postCss("resources/css/app.css", "public/css", [require("tailwindcss")]).js(
+    "resources/js/App",
+    "public/js/app.js"
+);
 
+mix.browserSync("127.0.0.1:8000");
 
-if(mix.inProduction()) {
+if (mix.inProduction()) {
     mix.version();
 }

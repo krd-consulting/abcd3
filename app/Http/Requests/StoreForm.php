@@ -33,6 +33,7 @@ class StoreForm extends FormRequest
         return [
             'name' => 'required',
             'description' => '',
+            'target_type_id' => 'required',
             'target_type_id' => 'required|exists:form_target_types,id',
             'target_id' => 'nullable|exists:record_types,id',
             'type' => [

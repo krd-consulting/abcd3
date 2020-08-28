@@ -27,7 +27,15 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('*', function($view) use ($recordTypes, $programs) {
             if(Auth::check()) {
-                $view->with('recordTypes', $recordTypes::all());
+                // Get people record types.
+                $view->with('people', $recordTypes::whereHas('identity', function($query) {
+                    $query->where('name', '!=', 'Other');
+                })->get());
+
+                // Get other record types.
+                $view->with('other', $recordTypes::whereHas('identity', function($query) {
+                    $query->where('name', 'Other');
+                })->get());
 
                 $view->with(
                     'programs',

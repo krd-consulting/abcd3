@@ -18,6 +18,7 @@ class CreateProgramsTable extends Migration
             $table->string('name', 32);
             $table->text('description')->nullable();
             $table->bigInteger('team_id')->unsigned();
+            $table->text('volunteer_type')->nullable();
             $table->integer('default_client_status_id')->unsigned();
             $table->integer('group_client_status_id')->unsigned()->nullable();
             $table->integer('case_client_status_id')->unsigned()->nullable();

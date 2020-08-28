@@ -12,7 +12,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        
+
     <style>
         .item-text {
             color:  #feba1b;
@@ -25,11 +25,11 @@
             @section('main-sidebar')
             @show
 
-            <base-container>
+            <base-container class="tw-flex-col">
                 @section('main-nav')
                 @show
 
-                <el-main class="main">
+                <el-main class="main tw-flex-1">
                     @yield('content')
                 </el-main>
             </base-container>

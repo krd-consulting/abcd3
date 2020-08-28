@@ -34,6 +34,7 @@ class StoreProgram extends FormRequest
                         return $query->where('team_id', $this->team_id);
                     })
                 ],
+            'volunteer_type' => 'nullable',
             'team_id' => 'required|exists:teams,id',
             'default_client_status_id' => 'required|exists:client_statuses,id'
         ];

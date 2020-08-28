@@ -40,6 +40,10 @@ Route::prefix('api')
         Route::get('records/{recordType}/{record}/teams', 'RecordTeamsController@index');
         Route::get('records/{recordType}/{record}/available-teams', 'TeamsAvailableForRecord');
 
+        Route::get('records/{recordType}/{record}/collections/{collection}', 'RecordCollectionController@index');
+        Route::post('records/{recordType}/{record}/collections/{collection}/{item}', 'RecordCollectionController@store');
+        Route::get('records/{recordType}/{record}/collections/{collection}/available', 'RecordCollectionController@available');
+
         Route::get('programs/client-statuses', 'ClientStatusController@index');
         Route::get('programs/client-statuses/{status}/edit', 'ClientStatusController@edit');
         Route::post('programs/client-statuses', 'ClientStatusController@store');
@@ -94,12 +98,14 @@ Route::prefix('api')
         Route::get('forms/create', 'FormController@create');
         Route::get('forms/{form}', 'FormController@show');
         Route::get('forms/{form}/edit', 'FormController@edit');
+        Route::get('forms/{form}/field-data/{field}', 'FormController@fieldData');
         Route::post('forms/create', 'ValidateForm');
         Route::post('forms', 'FormController@store');
         Route::patch('forms/{form}', 'FormController@update');
         Route::delete('forms/{form}', 'FormController@destroy');
 
         Route::get('forms/{form}/fields', 'FormFieldController@index');
+        Route::get('form-fields/{field}', 'FormFieldController@show');
 
         Route::get('forms/{form}/entries', 'FormEntryController@index');
         Route::post('forms/{form}', 'FormEntryController@store');
@@ -114,6 +120,12 @@ Route::prefix('api')
         Route::get('attachments/{attachment}', 'AttachmentController@show');
         Route::post('attachments', 'AttachmentController@store');
         Route::delete('attachments/{attachment}', 'AttachmentController@destroy');
+
+        Route::get('collections', 'CollectionController@index');
+        Route::get('collections/{collection}', 'CollectionController@show');
+
+        Route::get('organisation-setting', 'OrganisationSettingController@show');
+        Route::post('organisation-setting', 'OrganisationSettingController@update');
 });
 
 Route::get('downloads/attachments/{attachment}', 'AttachmentController@download');

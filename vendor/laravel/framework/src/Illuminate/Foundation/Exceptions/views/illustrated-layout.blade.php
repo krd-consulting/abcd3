@@ -235,7 +235,7 @@
                 background-color: #64d5ca;
             }
 
-            .bg-blue-dark {
+            .bg-indigo-base {
                 background-color: #2779bd;
             }
 

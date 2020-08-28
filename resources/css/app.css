@@ -9,135 +9,313 @@
  *
  * @import "tailwindcss/preflight";
  */
-@import '~element-ui/lib/theme-chalk/index.css';
-@import '~element-ui/lib/theme-chalk/display.css';
+@import "~element-ui/lib/theme-chalk/index.css";
+@import "~element-ui/lib/theme-chalk/display.css";
+@import "~@fortawesome/fontawesome-free/css/all.css";
 
 @tailwind base;
 
-
-*,
-.el-input__inner,
-.el-tabs__item,
-.el-switch__label *{
-    @apply
-        tw-text-base;
+::placeholder {
+  @apply tw-text-sm tw-text-gray-dark !important;
 }
 
-@import url('https://rsms.me/inter/inter-ui.css');
+@import url("https://rsms.me/inter/inter-ui.css");
 
 label#remember {
-    margin-right: 5px !important;
+  margin-right: 5px !important;
 }
 
-#formCreator .el-card__body div.tw-mb-4 div.el-col-8 ,
+#formCreator .el-card__body div.tw-mb-4 div.el-col-8,
 .el-dialog__body div.tw-mb-2 label {
-   text-align: right;
-   padding-right: 15px;
-}
-.el-select-dropdown__item {
-    font-size: 1.125rem !important;
+  text-align: right;
+  padding-right: 15px;
 }
 
-.el-card__body, .el-card__body:hover {
-    font-size: 1.15em;
+.el-tabs__item {
+  @apply tw-text-indigo-darker !important;
 }
 
-.el-menu-item:hover {
-    color: #FBE4BB;
+.el-tabs__item.is-active,
+.el-tabs__item:hover {
+  @apply tw-text-indigo-base !important;
 }
 
-.el-menu-item.is-active {
-    color: #FEC644;
+.el-tabs__active-bar {
+  @apply tw-bg-indigo-base !important;
 }
 
-.el-date-picker__header {
-    padding: 12px;
-    margin: 0 !important;
-}
-
-.el-date-table td span {
-   width: 34px;
-   height: 34px;
-   line-height: 35px;
-}
-
-.el-date-picker__header, .el-dialog__header {
-	@apply tw-bg-orange-300;
+.el-tabs__item {
+    @apply tw-text-indigo-darker !important
 }
 
 .el-tabs__item.is-active, .el-tabs__item:hover {
-    color: #FBE4BB !important;
-
+    @apply tw-text-indigo-base !important
 }
+
 .el-tabs__active-bar {
-    /* background-color: #7a972b !important; */
-    background-color: #f19d06 !important;
+    @apply tw-bg-indigo-base !important
 }
 
-.el-switch__label * {
-    font-size: 16px !important;
+.el-card__body,
+.el-card__body:hover {
+  font-size: 1.15em;
 }
 
-.el-radio__label, .el-checkbox__label{
-    font-size: 18px !important;
+.el-menu-item {
+  @apply tw-bg-indigo-lightest tw-border-l-4 tw-border-transparent;
 }
 
-.el-dialog__header {
-    background-color: #2d607d !important;
-    color: white !important;
+.el-submenu__title:hover,
+.el-menu-item:hover,
+.el-submenu:hover {
+  @apply tw-bg-white;
 }
 
-.el-button+.el-button {
-    @apply
-        tw-m-0;
+.el-menu-item.is-active {
+  @apply tw-bg-white tw-border-indigo-base tw-text-indigo-base;
+}
+
+.el-submenu__icon-arrow {
+  @apply tw-text-indigo-darkest tw-text-xl tw-font-bold !important;
+  margin-top: -10px !important;
+}
+
+.el-date-table td span {
+  width: 34px;
+  height: 34px;
+  line-height: 35px;
+}
+
+.el-date-editor {
+  @apply tw-w-full !important;
+}
+
+.el-switch__label span {
+  @apply tw-text-sm tw-font-normal
+}
+
+.el-radio-button.is-active .el-radio-button__inner {
+  @apply tw-border-indigo-base tw-bg-indigo-base
+}
+
+.el-radio-button__inner:hover {
+  @apply tw-text-indigo-base
+}
+
+.el-radio-button.is-active el-radio-button__inner {
+  @apply tw-border-indigo-base tw-bg-indigo-base
+}
+
+.el-switch__label.is-active {
+  @apply tw-text-indigo-base
+}
+
+button:focus {
+  outline: none;
+}
+
+.el-message-box__status.el-icon-warning {
+  @apply tw-text-orange-base;
+}
+
+.el-dialog__headerbtn,
+.el-message-box__headerbtn {
+  @apply tw-top-0 tw-right-0 tw-mt-3 tw-mr-3;
+}
+
+.el-dialog__close,
+.el-message-box__close {
+  @apply tw-text-white !important;
+}
+
+.el-dialog__header,
+.el-message-box__header {
+  @apply tw-bg-indigo-darker tw-text-white tw-text-lg tw-py-5 tw-text-center !important;
+}
+
+.el-message-box__title {
+  @apply tw-text-white tw-text-lg tw-text-center !important;
+}
+
+.el-message-box {
+  @apply tw-border-none;
+  background: linear-gradient(0deg, white 60%, transparent 60%);
+}
+
+.el-button--primary {
+  @apply tw-border-indigo-base !important;
+}
+
+.el-message-box .el-button--default:not(.el-button--primary) {
+  @apply tw-bg-gray-lightest tw-text-indigo-darker tw-border-gray-lightest !important;
+}
+
+.el-pagination {
+  height: min-content !important;
+}
+
+.el-pagination .el-icon-arrow-left,
+.el-pagination .el-icon-arrow-right {
+  @apply tw-text-indigo-base tw-text-3xl tw-font-light !important;
+}
+
+.el-pagination .el-icon {
+  @apply tw-text-indigo-base !important;
+}
+
+.el-pagination button[disabled="disabled"] .el-icon {
+  @apply text-indigo-darker !important;
+}
+
+.el-button [class*="el-icon-"] + span {
+  margin-left: 0;
+}
+
+.el-pager .number {
+  @apply tw-text-sm tw-text-indigo-darker tw-bg-transparent tw-font-normal tw-mx-0 tw-px-0 tw-min-w-0 tw-w-6 !important;
+}
+
+.el-pager .number.active {
+  @apply tw-text-indigo-base tw-font-bold !important;
+}
+
+.el-button,
+.el-button:focus,
+.el-button:hover,
+.el-button.is-plain:hover {
+  @apply tw-bg-indigo-base tw-text-white tw-rounded-lg tw-box-border;
+}
+
+.el-button--outline,
+.el-button--outline:focus,
+.el-button--outline:hover {
+  @apply tw-border-indigo-base tw-text-indigo-base tw-bg-transparent;
+}
+
+.el-button--gray:not([disabled="disabled"]),
+.el-button--gray:focus:not([disabled="disabled"]),
+.el-button--gray:hover:not([disabled="disabled"]) {
+  @apply tw-bg-gray-lightest tw-text-indigo-base tw-border-gray-lightest !important;
+}
+
+.el-switch__core {
+  width: 51px !important;
+  border-radius: 18px;
+  height: 31px;
+}
+
+.el-switch.is-checked .el-switch__core {
+  @apply tw-border-indigo-base tw-bg-indigo-base;
+}
+
+.el-switch__core:after {
+  width: 27px;
+  height: 27px;
+}
+
+.el-switch.is-checked .el-switch__core::after {
+  left: 100%;
+  margin-left: -28px;
+}
+
+.el-button--small {
+  @apply tw-px-4 tw-py-2;
+}
+
+.el-button--small > span {
+  @apply tw-text-xs tw-font-semibold !important;
+}
+
+.el-link {
+  vertical-align: unset !important;
+}
+
+.el-link--inner,
+.el-link--inner:hover {
+  @apply tw-text-indigo-base tw-underline !important;
+}
+
+.el-link::after {
+  @apply tw-hidden;
+}
+
+/* .el-button:hover,
+.el-link:hover {
+    @apply tw-opacity-75;
+} */
+
+.el-input__inner {
+  @apply tw-text-sm tw-border-gray-lighter !important;
+}
+
+.el-input__inner[type="number"] {
+  @apply tw-pr-0 tw-w-16;
+}
+
+.el-radio-group label {
+  @apply tw-mb-0
+}
+
+.el-radio-group--full label {
+  @apply tw-flex-1
+}
+
+.el-radio-group--full label span {
+  @apply tw-w-full
+}
+
+.el-radio.is-checked .el-radio__label {
+  @apply tw-text-indigo-base
+}
+
+.el-radio__input.is-checked .el-radio__inner {
+  @apply tw-border-indigo-base tw-bg-indigo-base
+}
+
+.el-input--background .el-input__inner {
+  @apply tw-bg-gray-lightest;
 }
 
 .el-date-table th {
-    font-size: 14px !important;
+  font-size: 14px !important;
 }
 
 .el-dialog {
-    @apply
-        tw-rounded;
+  @apply tw-rounded;
 }
 
 .el-dialog__footer {
-    @apply
-        tw-p-0;
+  @apply tw-p-0;
 }
 
 .el-tabs .el-tabs__nav {
-    @apply
-        tw-py-2;
+  @apply tw-py-2;
 }
 
 .el-tabs__header {
-    @apply
-        tw-m-0;
+  @apply tw-m-0;
 }
 
 .el-tabs__header > div > div {
-    @apply tw-px-4;
+  @apply tw-px-4;
 }
 
 .vgt-inner-wrap {
-    @apply
-        tw-shadow;
+  @apply tw-shadow;
 }
 
 body {
-    @apply tw-text-base;
-    font-family: 'Inter UI', sans-serif;
-
+  @apply tw-text-base;
+  font-family: "Inter UI", sans-serif;
 }
 
 a {
-    text-decoration: none;
-    @apply tw-text-gray-800;
+  text-decoration: none;
+  @apply tw-text-gray-800;
 }
 
 a:hover {
-    @apply tw-text-blue-500 tw-no-underline;
+  @apply tw-text-blue-500 tw-no-underline;
 }
 
 /**
@@ -145,30 +323,24 @@ a:hover {
  *
  */
 
-.main {
-    @apply tw-bg-gray-100;
-}
 
 .main {
-    @apply tw-px-4;
+  @apply tw-px-4;
 }
 
 .main-sidebar-menu:not(.el-menu--collapse),
 .main-logo-container,
 .preferences-sidebar-menu:not(.el-menu--collapse) {
-    width: 400px;
+  width: 360px;
 }
-
 
 .base-table {
-    @apply
-        tw-w-full
-        tw-bg-white
+  @apply tw-w-full
+        tw-bg-white;
 }
 
-.base-table thead tr th{
-    @apply
-        tw-py-4
+.base-table thead tr th {
+  @apply tw-py-4
         tw-px-4
         tw-text-xs
         tw-uppercase
@@ -176,54 +348,130 @@ a:hover {
         tw-text-gray-700;
 }
 .base-table th {
-  padding: .75em 1.5em .75em .75em;
+  padding: 0.75em 1.5em 0.75em 0.75em;
   vertical-align: middle;
-  position: relative; }
+  position: relative;
+}
 
 .base-table th.sorting {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .base-table th.sorting:after {
-    content: '';
-    display: none;
-    position: absolute;
-    height: 0px;
-    width: 0px;
-    right: 6px;
-    top: 50%;
-    margin-top: -3px;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: 6px solid #3490DC;
+  content: "";
+  display: none;
+  position: absolute;
+  height: 0px;
+  width: 0px;
+  right: 6px;
+  top: 50%;
+  margin-top: -3px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #3490dc;
 }
 
-.base-table thead th.sorting-asc, .base-table thead th.sorting-desc {
-    @apply tw-text-gray-800;
+.base-table thead th.sorting-asc,
+.base-table thead th.sorting-desc {
+  @apply tw-text-gray-800;
 }
 
-.base-table thead th.sorting-asc:after, .base-table thead th.sorting-desc:after {
-    content: '';
-    display: block;
+.base-table thead th.sorting-asc:after,
+.base-table thead th.sorting-desc:after {
+  content: "";
+  display: block;
 }
 
 .base-table thead th.sorting-desc:after {
-    border-top: 6px solid #3490DC;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-bottom: none;
+  border-top: 6px solid #3490dc;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: none;
 }
 
 .base-table tr > td {
-    @apply
-        tw-py-4
+  @apply tw-py-4
         tw-px-4
         tw-border-b
         tw-border-gray-200;
 }
 
 .base-table tbody tr:last-child td {
-    @apply tw-border-none;
+  @apply tw-border-none;
+}
+
+.el-menu-item .fas,
+.el-submenu .fas {
+  @apply tw-text-indigo-darkest;
+}
+
+.el-submenu.is-opened .fas {
+  @apply tw-text-indigo-base !important;
+}
+
+.el-input.is-active .el-input__inner,
+.el-input__inner:focus {
+  @apply tw-border-indigo-base !important;
+}
+
+/* .el-input__suffix-inner {
+    @apply tw-text-indigo-base tw-mr-1;
+} */
+
+.el-checkbox {
+  @apply tw-flex tw-items-center;
+}
+
+label {
+  @apply tw-capitalize tw-text-gray-darkest tw-font-semibold tw-text-xs tw-mb-1;
+}
+
+.el-radio__inner:hover {
+  @apply tw-border-indigo-base
+}
+
+.field-error {
+  @apply tw-text-xs tw-text-red-base tw-mt-1;
+}
+
+.el-select, .el-autocomplete {
+  @apply tw-w-full;
+}
+
+.el-select-dropdown__item.selected {
+  @apply tw-text-indigo-base tw-font-semibold
+}
+
+el-select-dropdown__item {
+  @apply tw-text-sm;
+}
+
+.el-checkbox__input.is-checked + .el-checkbox__label {
+  @apply tw-text-black;
+}
+
+.el-checkbox__label {
+  margin-bottom: 2px;
+}
+
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-checkbox__input.is-indeterminate .el-checkbox__inner {
+  @apply tw-bg-indigo-base tw-border-indigo-base;
+}
+
+.el-checkbox__inner:hover,
+.el-checkbox__input.is-focus .el-checkbox__inner {
+  @apply tw-border-indigo-base;
+}
+
+.el-checkbox__inner {
+  @apply tw-w-6 tw-h-6 tw-border-2 tw-rounded;
+}
+
+.el-checkbox__inner::after {
+  width: 5px !important;
+  height: 12px !important;
+  left: 7px !important;
 }
 
 /**

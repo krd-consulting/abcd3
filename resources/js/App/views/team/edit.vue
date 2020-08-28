@@ -4,25 +4,21 @@
             <base-icon class="tw-align-middle">person_add</base-icon> Edit Team
         </div>
         <form>
-            <div class="tw-mb-2">
-                <div class="tw-flex tw-items-center tw-w-full">
-                    <label class="tw-w-1/5 tw-capitalize">
-                        Team Name
-                    </label>
-                    <div class="tw-w-2/3">
-                        <base-input
-                            v-model="newTeamData['name']"
-                            name="name"
-                            @keydown.native="request.errors.clear($event.target.name)"/>
-                    </div>
-                </div>
-                <div v-if="request.errors.has('name')" class="tw-flex tw-justify-end">
-                    <div class="tw-w-4/5 tw-py-2">
-                        <span v-text="request.errors.get('name')[0]" class="tw-text-xs tw-text-red"></span>
-                    </div>
-                </div>
+            <div>
+                <label>Team Name</label>
+                <base-input
+                    v-model="newTeamData.name"
+                    name="name"
+                    background
+                    @keydown.native="request.errors.clear($event.target.name)"
+                />
+                <div
+                    v-if="request.errors.has('name')"
+                    v-text="request.errors.get('name')[0]"
+                    class="field-error"
+                ></div>
             </div>
-            <div class="tw-mb-2">
+            <!-- <div class="tw-mb-2">
                 <div  class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5 tw-capitalize">
                         Description
@@ -39,15 +35,24 @@
                         <span v-text="request.errors.get('description')[0]" class="tw-text-xs tw-text-red"></span>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </form>
-        <div slot="footer" class="tw-border-t tw-px-4 tw-py-4 tw-bg-gray-100 tw-rounded-b">
-            <base-button class="tw-py-2 tw-pl-4 tw-bg-transparent tw-pr-4 tw-text-gray-700 tw-font-bold tw-border-none hover:tw-bg-transparent hover:tw-text-blue" @click="close(false)">
-                <span class="tw-text-xs tw-align-middle">Nevermind</span>
-            </base-button>
-            <base-button class="tw-py-2 tw-pl-4 tw-pr-4 tw-bg-blue-500 tw-text-white tw-font-bold tw-border-none" @click="store">
-                <span class="tw-text-xs tw-align-middle">OK</span>
-            </base-button>
+        <div slot="footer" class="tw-grid tw-grid-cols-2 tw-py-4 tw-px-4 tw-border-t tw-bg-gray-100 tw-rounded-b">
+            <div class="tw-text-left">
+                <div class="tw-py-2">
+                    <el-switch id="input_team_active" v-model="newTeamData.active" name="active">
+                    </el-switch>
+                    <label for="input_team_active">Enabled</label>
+                </div>
+            </div>
+            <div>
+                <base-button gray @click="close(false)">
+                    <span class="tw-text-xs tw-align-middle">Cancel</span>
+                </base-button>
+                <base-button @click="store">
+                        <span class="tw-text-xs tw-align-middle">Save</span>
+                </base-button>
+            </div>
         </div>
     </base-dialog>
 </template>
@@ -66,6 +71,7 @@
                 newTeamData: {
                     name: '',
                     description: '',
+                    active: false
                 },
             }
         },
@@ -76,17 +82,16 @@
 
                 this.request.errors.clear();
 
-                this.newTeamData = {
-                    id: '',
-                    name: '',
-                    description: '',
-                };
+                this.newTeamData.id = null;
+                this.newTeamData.name = null;
+                this.newTeamData.description = null;
             },
 
             initializeWithData(data) {
                 this.newTeamData.id = data.id;
                 this.newTeamData.name = data.name;
                 this.newTeamData.description = data.description;
+                this.newTeamData.active = data.active;
             },
 
             retrieve() {

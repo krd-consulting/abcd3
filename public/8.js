@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./resources/js/api/DownloadAttachmentRequest.js":
-/*!*******************************************************!*\
-  !*** ./resources/js/api/DownloadAttachmentRequest.js ***!
-  \*******************************************************/
+/***/ "./resources/js/api/RecordGroupsRequest.js":
+/*!*************************************************!*\
+  !*** ./resources/js/api/RecordGroupsRequest.js ***!
+  \*************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,28 +34,38 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var DownloadAttachmentRequest = /*#__PURE__*/function (_Request) {
-  _inherits(DownloadAttachmentRequest, _Request);
+var RecordGroupsRequest = /*#__PURE__*/function (_Request) {
+  _inherits(RecordGroupsRequest, _Request);
 
-  var _super = _createSuper(DownloadAttachmentRequest);
+  var _super = _createSuper(RecordGroupsRequest);
 
-  function DownloadAttachmentRequest() {
-    _classCallCheck(this, DownloadAttachmentRequest);
+  function RecordGroupsRequest() {
+    _classCallCheck(this, RecordGroupsRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(DownloadAttachmentRequest, [{
-    key: "show",
-    value: function show(attachment) {
-      return this.get("/api/downloads/attachments/".concat(attachment));
+  _createClass(RecordGroupsRequest, [{
+    key: "retrieve",
+    value: function retrieve(recordType, record) {
+      return this.get("/api/records/".concat(recordType, "/").concat(record, "/groups"));
+    }
+  }, {
+    key: "store",
+    value: function store(recordType, record, group) {
+      return this.post("/api/records/".concat(recordType, "/").concat(record, "/groups/").concat(group));
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(recordType, record, group) {
+      return this["delete"]("/api/records/".concat(recordType, "/").concat(record, "/groups/").concat(group));
     }
   }]);
 
-  return DownloadAttachmentRequest;
+  return RecordGroupsRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (AttachmentRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RecordGroupsRequest);
 
 /***/ })
 

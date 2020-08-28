@@ -1,13 +1,13 @@
-import Request from '@/api/RecordRequest';
+import Request from "@/api/RecordRequest";
 
 export function index(recordType = this.$route.params.recordType) {
     this.loading = true;
 
     this.request.setFields({
-        params: {...this.params}
+        params: { ...this.params }
     });
 
-    this.request.retrieve(recordType).then((response) => {
+    this.request.retrieve(recordType).then(response => {
         this.fields = response.fields;
         this.records = response.data;
         this.total = response.meta.total;
@@ -15,20 +15,20 @@ export function index(recordType = this.$route.params.recordType) {
 
         this.loading = false;
     });
-
 }
 
 export function profile() {
     this.request.setFields({
-        params: {...this.params}
+        params: { ...this.params }
     });
 
-    this.request.show(this.$route.params.recordType, this.$route.params.record).then((response) => {
-
-
-        this.record = response.data;
-        this.fields = response.data.fields;
-    });
+    this.request
+        .show(this.$route.params.recordType, this.$route.params.record)
+        .then(response => {
+            this.loading = false;
+            this.record = response.data;
+            this.fields = response.data.profile_fields;
+        });
 }
 
 export function createRecord() {
@@ -42,27 +42,31 @@ export function editRecord(record) {
 }
 
 export function confirmDelete(recordType, record) {
-    this.$confirm('Are you sure you want to archive this record?', 'Archive Record', {
-        confirmButtonText: 'Archive',
-        cancelButtonText: 'Wait, no!',
-        type: 'warning'
-    }).then(() => {
+    this.$confirm(
+        "Are you sure you want to archive this record?",
+        "Archive Record",
+        {
+            confirmButtonText: "Archive",
+            cancelButtonText: "Wait, no!",
+            type: "warning"
+        }
+    ).then(() => {
         this.deleteRecord(recordType, record)
             .then(() => {
                 this.retrieve();
 
                 this.$message({
-                    type: 'success',
-                    message: 'Record was deleted.'
+                    type: "success",
+                    message: "Record was deleted."
                 });
             })
-            .catch((error) => {
+            .catch(error => {
                 this.$message({
-                    type: 'error',
+                    type: "error",
                     message: error.message
                 });
             });
-    })
+    });
 }
 
 export function deleteRecord(recordType, record) {
@@ -82,27 +86,31 @@ export function disableRecord(recordType, record) {
 }
 
 export function confirmDisable(recordType, record) {
-    this.$confirm('Are you sure you want to disable this record?', 'Disable Record', {
-        confirmButtonText: 'Disable',
-        cancelButtonText: 'Wait, no!',
-        type: 'warning'
-    }).then(() => {
+    this.$confirm(
+        "Are you sure you want to disable this record?",
+        "Disable Record",
+        {
+            confirmButtonText: "Disable",
+            cancelButtonText: "Wait, no!",
+            type: "warning"
+        }
+    ).then(() => {
         this.disableRecord(recordType, record)
             .then(() => {
                 this.retrieve();
 
                 this.$message({
-                    type: 'success',
-                    message: 'Record is disabled.'
+                    type: "success",
+                    message: "Record is disabled."
                 });
             })
-            .catch((error) => {
+            .catch(error => {
                 this.$message({
-                    type: 'error',
+                    type: "error",
                     message: error.message
                 });
             });
-    })
+    });
 }
 
 export function enableRecord(recordType, record) {
@@ -116,27 +124,31 @@ export function enableRecord(recordType, record) {
 }
 
 export function confirmEnable(recordType, record) {
-    this.$confirm('Are you sure you want to enable this record?', 'Enable Record', {
-        confirmButtonText: 'Enable',
-        cancelButtonText: 'Wait, no!',
-        type: 'warning'
-    }).then(() => {
+    this.$confirm(
+        "Are you sure you want to enable this record?",
+        "Enable Record",
+        {
+            confirmButtonText: "Enable",
+            cancelButtonText: "Wait, no!",
+            type: "warning"
+        }
+    ).then(() => {
         this.enableRecord(recordType, record)
             .then(() => {
                 this.retrieve();
 
                 this.$message({
-                    type: 'success',
-                    message: 'Record is enabled.'
+                    type: "success",
+                    message: "Record is enabled."
                 });
             })
-            .catch((error) => {
+            .catch(error => {
                 this.$message({
-                    type: 'error',
+                    type: "error",
                     message: error.message
                 });
             });
-    })
+    });
 }
 
 export default {

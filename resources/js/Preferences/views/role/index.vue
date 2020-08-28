@@ -67,11 +67,13 @@
     import RolePermissionRequest from '@/api/RolePermissionRequest';
     import CreateRole from './create';
     import EditRole from './edit';
+    import ScopeTag from '@/components/scopeTag';
 
     export default {
         components: {
             CreateRole,
-            EditRole
+            EditRole,
+            ScopeTag
         },
         data() {
             return {

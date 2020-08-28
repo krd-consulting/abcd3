@@ -232,6 +232,19 @@ return [
         ]
     ],
 
+    'program_volunteer_types' => [
+      'one_to_one' => [
+        'name' => 'One-to-one',
+        'description' => '',
+        'slug' => 'one_to_one',
+      ],
+      'group' => [
+        'name' => 'Group',
+        'description' => '',
+        'slug' => 'group',
+      ]
+    ],
+
     'form_types' => [
         'static' => 'Static',
         'pre-post' => 'Pre-post'
@@ -258,43 +271,57 @@ return [
             'name' => 'Form Fields',
             'model' => 'App\FormField'
         ],
-
     ],
 
     'record_fields' => [
-        [
+        'first_name' => [
             'name' => 'First Name',
             'slug' => 'first_name',
             'type' => 'text'
         ],
-        [
+        'last_name' => [
             'name' => 'Last Name',
             'slug' => 'last_name',
             'type' => 'text'
         ],
 
-        [
+        'email_address' => [
             'name' => 'Email',
             'slug' => 'email_address',
             'type' => 'text'
         ],
 
-        [
+        'contact_number' => [
             'name' => 'Contact Number',
             'slug' => 'contact_number',
             'type' => 'text'
         ],
 
-        [
+        'birth_date' => [
             'name' => 'Birthdate',
             'slug' => 'birth_date',
             'type' => 'text'
         ],
 
-        [
+        'name' => [
             'name' => 'Name',
             'slug' => 'name',
             'type' => 'text'
+        ],
+    ],
+
+    'record_identities' => [
+        'client' => [
+            'name' => 'Client'
+        ],
+        'staff' => [
+            'name' => 'Staff'
+        ],
+        'Volunteer' => [
+            'name' => 'Volunteer'
+        ],
+        'other' => [
+            'name' => 'Other'
         ],
     ]
 

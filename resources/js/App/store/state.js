@@ -3,10 +3,7 @@ export default {
     description: '',
     owner_id: '',
     scope_id: '',
-    target: {
-    	type: '',
-    	id: 0
-    },
+    target: null,
     type: '',
     teams: [],
     date: '',
