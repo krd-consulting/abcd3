@@ -79,7 +79,7 @@ class Form extends Entity
             });
 
             $fields->transform(function($field, $key) use (&$toBeRemoved, &$toBeFlattened) {
-                if($field['type'] != 'matrix_field'){
+                if($field['type'] != 'MatrixField'){
                     $columnName = $this->generateFieldColumnName($this->fieldNumber++);
 
                     $field['column_name'] = $columnName;

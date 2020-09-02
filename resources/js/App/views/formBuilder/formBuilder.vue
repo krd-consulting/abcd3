@@ -149,7 +149,7 @@ export default {
           )
       };
 
-      this.submitting = true;
+      // this.submitting = true;
       const request = new Request(formData);
       await request.store();
       this.submitting = false;

@@ -79,40 +79,36 @@
             v-if="field.type === 'section_divider'"
             v-html="field.title"
           ></div>
-          <!-- <div class="tw-w-full tw-mt-4" v-else-if="field.type === 'MatrixField'">
-        <div class="tw-mb-2">
-          <label>{{ field.title }}</label>
-        </div>
-        <div class="tw-flex">
-          <div class="tw-w-24"></div>
-          <div
-            v-for="answer in field.settings.matrix_choices
-              .split('\n')
-              .filter(item => item)"
-            :key="answer"
-            class="tw-text-sm tw-w-24 tw-text-center"
-          >{{ answer }}</div>
-        </div>
-        <div
-          v-for="(question, index) in field.settings.matrix_questions
-            .split('\n')
-            .filter(item => item)"
-          :key="question"
-          class="tw-flex tw-items-center tw-bg-gray-lightest tw-mt-2 tw-py-2"
-        >
-          <div class="tw-text-sm tw-w-24 tw-text-center">{{ question }}</div>
-          <el-radio-group v-model="field.value[index]" class="without-label">
-            <el-radio
-              v-for="answer in field.settings.matrix_choices
-                .split('\n')
-                .filter(item => item)"
-              :key="answer"
-              :label="answer"
-              class="tw-w-24 tw-text-center tw-mr-0 tw-mb-0"
-            ></el-radio>
-          </el-radio-group>
-        </div>
-          </div>-->
+          <div class="tw-w-full tw-mt-4" v-else-if="field.type === 'MatrixField'">
+            <div class="tw-mb-2">
+              <label>{{ field.title }}</label>
+            </div>
+            <div class="tw-flex">
+              <div class="tw-w-24"></div>
+              <div
+                v-for="answer in field.settings.matrix_choices
+                  .split('\n')
+                  .filter(item => item)"
+                :key="answer"
+                class="tw-text-sm tw-w-24 tw-text-center"
+              >{{ answer }}</div>
+            </div>
+            <div
+              v-for="(question, index) in field.questions"
+              :key="index"
+              class="tw-flex tw-items-center tw-bg-gray-lightest tw-mt-2 tw-py-2"
+            >
+              <div class="tw-text-sm tw-w-24 tw-text-center">{{ question.title }}</div>
+              <el-radio-group v-model="entryData[question.column_name]" class="without-label">
+                <el-radio
+                  v-for="answer in field.choices"
+                  :key="answer"
+                  :label="answer"
+                  class="tw-w-24 tw-text-center tw-mr-0 tw-mb-0"
+                ></el-radio>
+              </el-radio-group>
+            </div>
+          </div>
           <div v-else class="tw-w-full tw-flex tw-mt-4">
             <label class="tw-mr-4 tw-w-1/4 tw-text-right tw-mt-3">{{ field.title }}</label>
             <base-input
