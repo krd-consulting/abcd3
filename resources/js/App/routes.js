@@ -17,7 +17,6 @@ import ProgramList from "./views/program";
 import ProgramProfile from "./views/program/profile";
 import ProgramProfileGroups from "./views/program/profile/groups";
 import ProgramProfileRecords from "./views/program/profile/records";
-import ProgramProfileSummary from "./views/program/profile/summary";
 import GroupList from "./views/group";
 import GroupProfile from "./views/group/profile";
 import GroupProfileSummary from "./views/group/profile/summary";
@@ -75,9 +74,9 @@ const routes = [
     component: ProgramProfile,
     children: [
       {
-        path: "",
-        name: "program_profile_summary",
-        component: ProgramProfileSummary
+        path: '',
+        name: "program_profile_records",
+        component: ProgramProfileRecords
       },
       {
         path: "groups",
@@ -85,10 +84,10 @@ const routes = [
         component: ProgramProfileGroups
       },
       {
-        path: "records/:recordType",
+        path: 'records',
         name: "program_profile_records",
         component: ProgramProfileRecords
-      }
+      },
     ]
   },
   {

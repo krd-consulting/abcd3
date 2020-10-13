@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[8],{
 
-/***/ "./resources/js/api/RecordGroupsRequest.js":
-/*!*************************************************!*\
-  !*** ./resources/js/api/RecordGroupsRequest.js ***!
-  \*************************************************/
+/***/ "./resources/js/api/TeamsAvailableForRecordRequest.js":
+/*!************************************************************!*\
+  !*** ./resources/js/api/TeamsAvailableForRecordRequest.js ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,38 +34,28 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var RecordGroupsRequest = /*#__PURE__*/function (_Request) {
-  _inherits(RecordGroupsRequest, _Request);
+var TeamsAvailableForRecordRequest = /*#__PURE__*/function (_Request) {
+  _inherits(TeamsAvailableForRecordRequest, _Request);
 
-  var _super = _createSuper(RecordGroupsRequest);
+  var _super = _createSuper(TeamsAvailableForRecordRequest);
 
-  function RecordGroupsRequest() {
-    _classCallCheck(this, RecordGroupsRequest);
+  function TeamsAvailableForRecordRequest() {
+    _classCallCheck(this, TeamsAvailableForRecordRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(RecordGroupsRequest, [{
+  _createClass(TeamsAvailableForRecordRequest, [{
     key: "retrieve",
     value: function retrieve(recordType, record) {
-      return this.get("/api/records/".concat(recordType, "/").concat(record, "/groups"));
-    }
-  }, {
-    key: "store",
-    value: function store(recordType, record, group) {
-      return this.post("/api/records/".concat(recordType, "/").concat(record, "/groups/").concat(group));
-    }
-  }, {
-    key: "destroy",
-    value: function destroy(recordType, record, group) {
-      return this["delete"]("/api/records/".concat(recordType, "/").concat(record, "/groups/").concat(group));
+      return this.get("/api/records/".concat(recordType, "/").concat(record, "/available-teams"));
     }
   }]);
 
-  return RecordGroupsRequest;
+  return TeamsAvailableForRecordRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RecordGroupsRequest);
+/* harmony default export */ __webpack_exports__["default"] = (TeamsAvailableForRecordRequest);
 
 /***/ })
 

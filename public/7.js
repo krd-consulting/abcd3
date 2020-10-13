@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[7],{
 
-/***/ "./resources/js/api/ProgramsAvailableForRecordRequest.js":
-/*!***************************************************************!*\
-  !*** ./resources/js/api/ProgramsAvailableForRecordRequest.js ***!
-  \***************************************************************/
+/***/ "./resources/js/api/RecordsAvailableForCaseloadRequest.js":
+/*!****************************************************************!*\
+  !*** ./resources/js/api/RecordsAvailableForCaseloadRequest.js ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,28 +34,40 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var ProgramsAvailableForRecordRequest = /*#__PURE__*/function (_Request) {
-  _inherits(ProgramsAvailableForRecordRequest, _Request);
+var RecordsAvailableForCaseloadRequest = /*#__PURE__*/function (_Request) {
+  _inherits(RecordsAvailableForCaseloadRequest, _Request);
 
-  var _super = _createSuper(ProgramsAvailableForRecordRequest);
+  var _super = _createSuper(RecordsAvailableForCaseloadRequest);
 
-  function ProgramsAvailableForRecordRequest() {
-    _classCallCheck(this, ProgramsAvailableForRecordRequest);
+  function RecordsAvailableForCaseloadRequest() {
+    _classCallCheck(this, RecordsAvailableForCaseloadRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(ProgramsAvailableForRecordRequest, [{
+  _createClass(RecordsAvailableForCaseloadRequest, [{
     key: "retrieve",
-    value: function retrieve(recordType, record) {
-      return this.get("/api/records/".concat(recordType, "/").concat(record, "/available-programs"));
-    }
+    value: function retrieve(program, recordType, record) {
+      return this.get("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record, "/available-cases"));
+    } // store() {
+    // 	return this.post(`/api/programs/client-statuses`);
+    // }
+    // edit(status) {
+    // 	return this.get(`/api/programs/client-statuses/${status}/edit`);
+    // }
+    // update(status) {
+    // 	return this.patch(`/api/programs/client-statuses/${status}`);
+    // }
+    // destroy(status) {
+    // 	return this.delete(`/api/programs/client-statuses/${status}`);
+    // }
+
   }]);
 
-  return ProgramsAvailableForRecordRequest;
+  return RecordsAvailableForCaseloadRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (ProgramsAvailableForRecordRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RecordsAvailableForCaseloadRequest);
 
 /***/ })
 

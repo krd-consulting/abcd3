@@ -13,6 +13,8 @@ class Records extends ResourceCollection
 
     public $collects = 'App\Http\Resources\Record';
 
+    private $pivots = [];
+
     protected $record_type;
 
     /**
@@ -52,9 +54,21 @@ class Records extends ResourceCollection
 
     public function as(RecordType $record_type)
     {
+        $this->setRecordType($record_type);
+
+        return $this;
+    }
+
+    public function setRecordType(RecordType $record_type)
+    {
         $this->record_type = $record_type;
 
         return $this;
+    }
+
+    public function getRecordType()
+    {
+        return $this->record_type;
     }
 
     public function fields()
@@ -65,17 +79,19 @@ class Records extends ResourceCollection
             $fields['name']['name'] = 'Name';
             $fields['name']['slug'] = 'name';
             $fields['name']['key'] = 'field_1_value';
+        } else {
+            $fields['full_name']['name'] = 'Full Name';
+            $fields['full_name']['slug'] = 'full_name';
+            $fields['full_name']['key'] = 'field_1_value';
 
-            return $fields;
+            $fields[$this->record_type->identity->field3->slug]['name'] = $this->record_type->identity->field3->name;
+            $fields[$this->record_type->identity->field3->slug]['slug'] = $this->record_type->identity->field3->slug;
+            $fields[$this->record_type->identity->field3->slug]['key'] = 'field_3_value';
         }
 
-        $fields['full_name']['name'] = 'Full Name';
-        $fields['full_name']['slug'] = 'full_name';
-        $fields['full_name']['key'] = 'field_1_value';
-
-        $fields[$this->record_type->identity->field3->slug]['name'] = $this->record_type->identity->field3->name;
-        $fields[$this->record_type->identity->field3->slug]['slug'] = $this->record_type->identity->field3->slug;
-        $fields[$this->record_type->identity->field3->slug]['key'] = 'field_3_value';
+        foreach($this->pivots as $pivot) {
+            $fields[$pivot['key']] = $pivot;
+        }
 
         return $fields;
     }
@@ -85,5 +101,21 @@ class Records extends ResourceCollection
         return [
             'can_write' => auth()->user()->can('write', $this->resource)
         ];
+    }
+
+    public function addPivot($pivot)
+    {
+      $this->pivots[$pivot['key']] = $pivot;
+
+      return $this;
+    }
+
+    public function addPivots($pivots)
+    {
+      foreach($pivots as $pivot) {
+        $this->addPivot($pivot);
+      }
+
+      return $this;
     }
 }

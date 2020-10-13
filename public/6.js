@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./resources/js/api/OrganisationSettingRequest.js":
-/*!********************************************************!*\
-  !*** ./resources/js/api/OrganisationSettingRequest.js ***!
-  \********************************************************/
+/***/ "./resources/js/api/RecordTeamsRequest.js":
+/*!************************************************!*\
+  !*** ./resources/js/api/RecordTeamsRequest.js ***!
+  \************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,33 +34,38 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var OrganisationSettingRequest = /*#__PURE__*/function (_Request) {
-  _inherits(OrganisationSettingRequest, _Request);
+var RecordTeamsRequest = /*#__PURE__*/function (_Request) {
+  _inherits(RecordTeamsRequest, _Request);
 
-  var _super = _createSuper(OrganisationSettingRequest);
+  var _super = _createSuper(RecordTeamsRequest);
 
-  function OrganisationSettingRequest() {
-    _classCallCheck(this, OrganisationSettingRequest);
+  function RecordTeamsRequest() {
+    _classCallCheck(this, RecordTeamsRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(OrganisationSettingRequest, [{
-    key: "show",
-    value: function show() {
-      return this.get("/api/organisation-setting");
+  _createClass(RecordTeamsRequest, [{
+    key: "retrieve",
+    value: function retrieve(recordType, record) {
+      return this.get("/api/records/".concat(recordType, "/").concat(record, "/teams"));
     }
   }, {
-    key: "update",
-    value: function update(form) {
-      return this.patch("/api/organisation-setting");
+    key: "store",
+    value: function store(recordType, record, team) {
+      return this.post("/api/records/".concat(recordType, "/").concat(record, "/teams/").concat(team));
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(recordType, record, team) {
+      return this["delete"]("/api/records/".concat(recordType, "/").concat(record, "/teams/").concat(team));
     }
   }]);
 
-  return OrganisationSettingRequest;
+  return RecordTeamsRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (OrganisationSettingRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RecordTeamsRequest);
 
 /***/ })
 

@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[13],{
 
-/***/ "./resources/js/api/CollectionRequest.js":
-/*!***********************************************!*\
-  !*** ./resources/js/api/CollectionRequest.js ***!
-  \***********************************************/
+/***/ "./resources/js/api/ProgramRecordsRequest.js":
+/*!***************************************************!*\
+  !*** ./resources/js/api/ProgramRecordsRequest.js ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,33 +34,48 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var CollectionRequest = /*#__PURE__*/function (_Request) {
-  _inherits(CollectionRequest, _Request);
+var ProgramRecordsRequest = /*#__PURE__*/function (_Request) {
+  _inherits(ProgramRecordsRequest, _Request);
 
-  var _super = _createSuper(CollectionRequest);
+  var _super = _createSuper(ProgramRecordsRequest);
 
-  function CollectionRequest() {
-    _classCallCheck(this, CollectionRequest);
+  function ProgramRecordsRequest() {
+    _classCallCheck(this, ProgramRecordsRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(CollectionRequest, [{
+  _createClass(ProgramRecordsRequest, [{
     key: "retrieve",
-    value: function retrieve() {
-      return this.get("/api/collections");
+    value: function retrieve(program, recordType) {
+      return this.get("/api/programs/".concat(program, "/records/").concat(recordType));
     }
   }, {
-    key: "show",
-    value: function show(collection) {
-      return this.get("/api/collections/".concat(collection));
+    key: "store",
+    value: function store(program, recordType, record) {
+      return this.post("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record));
+    }
+  }, {
+    key: "edit",
+    value: function edit(program, recordType, record) {
+      return this.get("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record, "/edit"));
+    }
+  }, {
+    key: "update",
+    value: function update(program, recordType, record) {
+      return this.patch("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record));
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(program, recordType, record) {
+      return this["delete"]("/api/programs/".concat(program, "/records/").concat(recordType, "/").concat(record));
     }
   }]);
 
-  return CollectionRequest;
+  return ProgramRecordsRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (CollectionRequest);
+/* harmony default export */ __webpack_exports__["default"] = (ProgramRecordsRequest);
 
 /***/ })
 

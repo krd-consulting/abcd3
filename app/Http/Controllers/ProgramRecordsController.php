@@ -9,7 +9,7 @@ use App\Record;
 use App\RecordType;
 use App\ClientStatus;
 
-use App\Http\Resources\Records;
+use App\Http\Resources\ProgramRecord\ProgramRecords as Records;
 
 use App\Http\Requests\StoreProgramRecord;
 use App\Http\Requests\UpdateProgramRecord;
@@ -23,8 +23,8 @@ class ProgramRecordsController extends Controller
     {
         $records = $program
             ->records($recordType->identity)
-            ->withLatestProgramStatuses($recordType, $program)
-            ->with('cases', 'groups')
+            // ->withLatestProgramStatuses($recordType, $program)
+            // ->with('cases', 'groups')
             ->only($recordType);
 
         $records = $records->availableFor(auth()->user());
@@ -42,7 +42,57 @@ class ProgramRecordsController extends Controller
         $perPage = request('perPage');
         $records = $records->paginate($perPage);
 
-        return (new Records($records))->as($recordType);
+        return $this->transform($records, $recordType);
+    }
+
+    private function transform($records, RecordType $recordType)
+    {
+        $map = [
+            'Client' => 'App\Http\Resources\ProgramRecord\ProgramClients',
+            'Staff' => 'App\Http\Resources\ProgramRecord\ProgramStaves',
+            'Volunteer' => 'App\Http\Resources\ProgramRecord\ProgramVolunteers',
+            'Other' => 'App\Http\Resources\ProgramRecord\ProgramOthers',
+        ];
+
+        $class = $map[$recordType->identity->name];
+
+        return (new $class($records))->as($recordType);
+    }
+
+    private function pivots(RecordType $recordType)
+    {
+        $enrolledAt = [
+            'name' => 'Enrolled At',
+            'key' => 'enrolled_at',
+            'slug' => 'enrolled_at'
+        ];
+
+        $map = [
+          'Client' => [
+              $enrolledAt,
+              [
+                  'name' => 'Status',
+                  'slug' => 'latest_status',
+                  'key' => 'latest_status'
+              ],
+              [
+                  'name' => 'Notes',
+                  'slug' => 'latest_status_notes',
+                  'key' => 'latest_status_notes'
+              ]
+          ],
+          'Staff' => [
+              $enrolledAt,
+          ],
+          'Volunteer' => [
+              $enrolledAt,
+          ],
+          'Other' => [
+              $enrolledAt,
+          ]
+        ];
+
+        return $map[$recordType->identity->name];
     }
 
     public function edit(Program $program, RecordType $recordType, Record $record)

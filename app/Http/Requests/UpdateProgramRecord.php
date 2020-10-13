@@ -24,7 +24,7 @@ class UpdateProgramRecord extends FormRequest
     public function rules()
     {
         return [
-            'status.id' => 'required|exists:client_statuses,id',
+            'status.id' => 'sometimes|required|exists:client_statuses,id',
             'enrolled_at' => 'required|date|before:tomorrow'
         ];
     }

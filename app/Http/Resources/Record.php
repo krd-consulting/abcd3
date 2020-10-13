@@ -66,24 +66,37 @@ class Record extends JsonResource
     {
         $fields = [];
 
+        $fields['full_name']['name'] = 'Full Name';
+        $fields['full_name']['slug'] = 'full_name';
+
         if($this->record_type->identity->name == config('app.record_identities.other.name')) {
             $fields['name']['value'] = $this->field_1_value;
             $fields['name']['name'] = 'Name';
             $fields['name']['slug'] = 'name';
             $fields['name']['key'] = 'field_1_value';
 
-            return $fields;
+            $fields['full_name']['value'] = $this->field_1_value;
+            $fields['full_name']['key'] = 'field_1_value';
+        } else {
+            $fields['full_name']['value'] = "$this->field_1_value $this->field_2_value";
+            $fields['full_name']['key'] = 'field_1_value';
+
+            $fields[$this->record_type->identity->field3->slug]['value'] = $this->field_3_value;
+            $fields[$this->record_type->identity->field3->slug]['name'] = $this->record_type->identity->field3->name;
+            $fields[$this->record_type->identity->field3->slug]['slug'] = $this->record_type->identity->field3->slug;
+            $fields[$this->record_type->identity->field3->slug]['key'] = 'field_3_value';
         }
 
-        $fields['full_name']['value'] = "$this->field_1_value $this->field_2_value";
-        $fields['full_name']['name'] = 'Full Name';
-        $fields['full_name']['slug'] = 'full_name';
-        $fields['full_name']['key'] = 'field_1_value';
+        // Dynamically include pivot data in this fields column.
+        if(isset($this->pivot->enrolled_at)) {
+          $fields['enrolled_at'] = [
+            'name' => 'Enrolled At',
+            'value' => $this->pivot->enrolled_at,
+            'slug' => 'enrolled_at',
+            'key' => 'enrolled_at'
+          ];
+        }
 
-        $fields[$this->record_type->identity->field3->slug]['value'] = $this->field_3_value;
-        $fields[$this->record_type->identity->field3->slug]['name'] = $this->record_type->identity->field3->name;
-        $fields[$this->record_type->identity->field3->slug]['slug'] = $this->record_type->identity->field3->slug;
-        $fields[$this->record_type->identity->field3->slug]['key'] = 'field_3_value';
 
         return $fields;
     }

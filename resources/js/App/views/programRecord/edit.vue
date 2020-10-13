@@ -1,10 +1,10 @@
 <template>
     <base-dialog :visible="active" @close="close" @open="open">
         <div slot="title">
-            <base-icon class="tw-align-middle">person_add</base-icon> Update <primary-data :record="record" :fields="record.fields"/>'s program status
+            <base-icon class="tw-align-middle">person_add</base-icon> Update program status of {{ record.display_value }}
         </div>
         <form>
-            <div class="tw-mb-2">
+            <div v-if="'status' in requestData" class="tw-mb-2">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5">
                         Status
@@ -51,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <div>
+            <div v-if="'notes' in requestData">
                 <div class="tw-flex tw-items-center tw-w-full">
                     <label class="tw-w-1/5 tw-capitalize">
                         Notes
@@ -87,6 +87,11 @@
     import StatusRequest from '@/api/ClientStatusRequest';
 
     import PrimaryData from '@/App/components/record/primaryData';
+
+    // This is a modal for editing program record pivot data.
+    // If a program client is edited in this modal, program client status field
+    // and status notes are shown in this modal and submitted to the backend.
+    // Otherwise, only the enrolled_at field is shown and submitted.
 
     export default {
         props: {
@@ -135,7 +140,7 @@
 
             open() {
                 this.retrieveRecord();
-                this.retrieveStatus();
+                this.retrieveStatuses();
                 this.retrieveProgramRecord();
             },
 
@@ -143,8 +148,13 @@
                 let request = new Request({});
 
                 request.edit(this.programId, this.recordType, this.recordId).then((response) => {
-                    this.requestData.status = response.data.latest_status.status;
-                    this.requestData.notes = response.data.latest_status.notes;
+                    if(response.data.latest_status) {
+                      this.requestData.status = response.data.latest_status.status;
+                      this.requestData.notes = response.data.latest_status.notes;
+                    } else {
+                      delete this.requestData.status;
+                      delete this.requestData.notes;
+                    }
                     this.requestData.enrolled_at = response.data.enrolled_at;
                 });
             },
@@ -157,9 +167,9 @@
                 });
             },
 
-            retrieveStatus() {
+            retrieveStatuses() {
                 let request = new StatusRequest({
-                    params: { 
+                    params: {
                         disabled: false
                     }
                 });

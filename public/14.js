@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[14],{
 
-/***/ "./resources/js/api/RecordCollectionRequest.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/api/RecordCollectionRequest.js ***!
-  \*****************************************************/
+/***/ "./resources/js/api/RecordsAvailableForProgramRequest.js":
+/*!***************************************************************!*\
+  !*** ./resources/js/api/RecordsAvailableForProgramRequest.js ***!
+  \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,28 +34,28 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var RecordCollectionRequest = /*#__PURE__*/function (_Request) {
-  _inherits(RecordCollectionRequest, _Request);
+var RecordsAvailableForProgramRequest = /*#__PURE__*/function (_Request) {
+  _inherits(RecordsAvailableForProgramRequest, _Request);
 
-  var _super = _createSuper(RecordCollectionRequest);
+  var _super = _createSuper(RecordsAvailableForProgramRequest);
 
-  function RecordCollectionRequest() {
-    _classCallCheck(this, RecordCollectionRequest);
+  function RecordsAvailableForProgramRequest() {
+    _classCallCheck(this, RecordsAvailableForProgramRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(RecordCollectionRequest, [{
+  _createClass(RecordsAvailableForProgramRequest, [{
     key: "retrieve",
-    value: function retrieve(recordType, record, collection) {
-      return this.get("/api/records/".concat(recordType, "/").concat(record, "/collections/").concat(collection));
+    value: function retrieve(program, recordType) {
+      return this.get("/api/programs/".concat(program, "/available-records/").concat(recordType));
     }
   }]);
 
-  return RecordCollectionRequest;
+  return RecordsAvailableForProgramRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RecordCollectionRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RecordsAvailableForProgramRequest);
 
 /***/ })
 

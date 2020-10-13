@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[5],{
 
-/***/ "./resources/js/api/GroupsAvailableForRecordRequest.js":
-/*!*************************************************************!*\
-  !*** ./resources/js/api/GroupsAvailableForRecordRequest.js ***!
-  \*************************************************************/
+/***/ "./resources/js/api/RecordProgramsRequest.js":
+/*!***************************************************!*\
+  !*** ./resources/js/api/RecordProgramsRequest.js ***!
+  \***************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,28 +34,38 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var GroupsAvailableForRecordRequest = /*#__PURE__*/function (_Request) {
-  _inherits(GroupsAvailableForRecordRequest, _Request);
+var RecordProgramsRequest = /*#__PURE__*/function (_Request) {
+  _inherits(RecordProgramsRequest, _Request);
 
-  var _super = _createSuper(GroupsAvailableForRecordRequest);
+  var _super = _createSuper(RecordProgramsRequest);
 
-  function GroupsAvailableForRecordRequest() {
-    _classCallCheck(this, GroupsAvailableForRecordRequest);
+  function RecordProgramsRequest() {
+    _classCallCheck(this, RecordProgramsRequest);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(GroupsAvailableForRecordRequest, [{
+  _createClass(RecordProgramsRequest, [{
     key: "retrieve",
     value: function retrieve(recordType, record) {
-      return this.get("/api/records/".concat(recordType, "/").concat(record, "/available-groups"));
+      return this.get("/api/records/".concat(recordType, "/").concat(record, "/programs"));
+    }
+  }, {
+    key: "store",
+    value: function store(recordType, record, program) {
+      return this.post("/api/records/".concat(recordType, "/").concat(record, "/programs/").concat(program));
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(recordType, record, program) {
+      return this["delete"]("/api/records/".concat(recordType, "/").concat(record, "/programs/").concat(program));
     }
   }]);
 
-  return GroupsAvailableForRecordRequest;
+  return RecordProgramsRequest;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (GroupsAvailableForRecordRequest);
+/* harmony default export */ __webpack_exports__["default"] = (RecordProgramsRequest);
 
 /***/ })
 
