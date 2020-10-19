@@ -262,7 +262,8 @@ class Form extends Entity
         return $this->belongsTo('App\Scope');
     }
 
-    public function scopeAvailableFor($query, $user) {
+    public function scopeAvailableFor($query, $user)
+    {
         $universal =
             (clone $query)
                 ->where('scope_id', Scope::where('name', config('auth.scopes.universal.name'))->first()->id);

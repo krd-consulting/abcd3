@@ -213,6 +213,21 @@ return [
 
     ],
 
+    'entity_types' => [
+        'record' => [
+          'model' => 'App\Record',
+          'slug' => 'records',
+        ],
+        'program' => [
+          'model' => 'App\Program',
+          'slug' => 'programs',
+        ],
+        'team' => [
+          'model' => 'App\Team',
+          'slug' => 'teams',
+        ],
+    ],
+
     'program_client_statuses' => [
         'waitlist' => [
             'name' => 'Waitlist',

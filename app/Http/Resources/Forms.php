@@ -18,4 +18,41 @@ class Forms extends ResourceCollection
     {
         return parent::toArray($request);
     }
+
+    public function with($request)
+    {
+
+        return [
+            'fields' => $this->fields(),
+            'permissions' => $this->permissions()
+        ];
+    }
+
+    public function fields()
+    {
+      return [
+        'name' => [
+          'name' => 'Form Name',
+          'slug' => 'name',
+          'key' => 'name',
+        ],
+        'about' => [
+          'name' => 'About',
+          'slug' => 'about',
+          'key' => 'team_id',
+        ],
+        'type' => [
+            'slug' => 'type',
+            'name' => 'Type',
+            'key' => 'type'
+          ],
+      ];
+    }
+
+    public function permissions()
+    {
+        return [
+            'can_write' => auth()->user()->can('write', $this->resource)
+        ];
+    }
 }

@@ -26,6 +26,11 @@ class Program extends Entity implements FormReference
         return $this->hasMany('App\Group');
     }
 
+    public function forms()
+    {
+        return $this->morphToMany('App\Form', 'model', 'model_has_forms')->withTimestamps();
+    }
+
     public function program_records()
     {
         return $this->hasMany('App\ProgramRecord');

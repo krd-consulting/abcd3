@@ -17,12 +17,12 @@ class FormController extends Controller
 {
     public function index()
     {
-		$forms = new Form;
+		    $forms = new Form;
 
         // $active = request('active') ?? true;
         // $forms = $forms->active($active);
 
-		// Search
+		    // Search
         $search = request('search');
         $forms = $forms->search($search);
 
@@ -48,7 +48,7 @@ class FormController extends Controller
 
     public function fieldData(Form $form, $field)
     {
-      return DB::table($form->table_name)->where($field, 'like', '%'.request('search').'%')->pluck($field);
+        return DB::table($form->table_name)->where($field, 'like', '%'.request('search').'%')->pluck($field);
     }
 
     public function create()

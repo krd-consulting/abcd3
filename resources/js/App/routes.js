@@ -15,6 +15,7 @@ import RecordProfileLinks from './views/record/profile/ProfileLinks';
 import RecordProfileDiets from './views/record/profile/ProfileDiets';
 import ProgramList from "./views/program";
 import ProgramProfile from "./views/program/profile";
+import ProgramProfileForms from "./views/program/profile/forms";
 import ProgramProfileGroups from "./views/program/profile/groups";
 import ProgramProfileRecords from "./views/program/profile/records";
 import GroupList from "./views/group";
@@ -77,6 +78,11 @@ const routes = [
         path: '',
         name: "program_profile_records",
         component: ProgramProfileRecords
+      },
+      {
+        path: 'forms',
+        name: "program_profile_forms",
+        component: ProgramProfileForms
       },
       {
         path: "groups",

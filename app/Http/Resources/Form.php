@@ -19,6 +19,7 @@ class Form extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'fields' => $this->fields(),
             'description' => $this->description,
             'active' => $this->active,
             'table_name' => $this->table_name,
@@ -37,5 +38,31 @@ class Form extends JsonResource
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by
         ];
+    }
+
+    public function fields()
+    {
+        $fields = [
+            'name' => [
+                'value' => $this->name,
+                'slug' => 'name',
+                'name' => 'Form Name',
+                'key' => 'name'
+            ],
+            'about' => [
+                'value' => $this->target != null ? $this->target->name : $this->target_type->name,
+                'name' => 'About',
+                'slug' => 'about',
+                'key' => 'team_id',
+            ],
+            'type' => [
+                'value' => $this->type,
+                'slug' => 'type',
+                'name' => 'Type',
+                'key' => 'type'
+              ],
+        ];
+
+        return $fields;
     }
 }

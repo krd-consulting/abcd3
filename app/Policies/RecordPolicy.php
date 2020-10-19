@@ -33,7 +33,7 @@ class RecordPolicy
 
     public function create(User $user)
     {
-        if(!$user->can('write records'))
+        if(!$user->hasPermissionTo('write records'))
             return false;
 
         return true;
@@ -41,7 +41,7 @@ class RecordPolicy
 
     public function write(User $user, Record $record)
     {
-        if(!$user->can('write records'))
+        if(!$user->hasPermissionTo('write records'))
             return false;
 
         if(!$user->hasScopeOfAtleast('case load'))

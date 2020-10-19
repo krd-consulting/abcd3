@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
-/***/ "./resources/js/api/RecordProgramsRequest.js":
-/*!***************************************************!*\
-  !*** ./resources/js/api/RecordProgramsRequest.js ***!
-  \***************************************************/
+/***/ "./resources/js/api/EntityTypeFormsRequest.js":
+/*!****************************************************!*\
+  !*** ./resources/js/api/EntityTypeFormsRequest.js ***!
+  \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -34,38 +34,28 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var RecordProgramsRequest = /*#__PURE__*/function (_Request) {
-  _inherits(RecordProgramsRequest, _Request);
+var EntityTypeForms = /*#__PURE__*/function (_Request) {
+  _inherits(EntityTypeForms, _Request);
 
-  var _super = _createSuper(RecordProgramsRequest);
+  var _super = _createSuper(EntityTypeForms);
 
-  function RecordProgramsRequest() {
-    _classCallCheck(this, RecordProgramsRequest);
+  function EntityTypeForms() {
+    _classCallCheck(this, EntityTypeForms);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(RecordProgramsRequest, [{
+  _createClass(EntityTypeForms, [{
     key: "retrieve",
-    value: function retrieve(recordType, record) {
-      return this.get("/api/records/".concat(recordType, "/").concat(record, "/programs"));
-    }
-  }, {
-    key: "store",
-    value: function store(recordType, record, program) {
-      return this.post("/api/records/".concat(recordType, "/").concat(record, "/programs/").concat(program));
-    }
-  }, {
-    key: "destroy",
-    value: function destroy(recordType, record, program) {
-      return this["delete"]("/api/records/".concat(recordType, "/").concat(record, "/programs/").concat(program));
+    value: function retrieve(entityType, id) {
+      return this.get("/api/forms/entity-types/".concat(entityType, "/").concat(id));
     }
   }]);
 
-  return RecordProgramsRequest;
+  return EntityTypeForms;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (RecordProgramsRequest);
+/* harmony default export */ __webpack_exports__["default"] = (EntityTypeForms);
 
 /***/ })
 

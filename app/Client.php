@@ -14,13 +14,13 @@ class Client extends Record
     {
     	parent::boot();
 
-    	static::addGlobalScope(function ($query) {
-    		$query->whereHas('record_type', function ($query) {
-    			$query->whereHas('identity', function ($query) {
-    				$query->where('name', 'Client');
-    			});
-    		});
-    	});
+    	// static::addGlobalScope(function ($query) {
+    	// 	$query->whereHas('record_type', function ($query) {
+    	// 		$query->whereHas('identity', function ($query) {
+    	// 			$query->where('name', 'Client');
+    	// 		});
+    	// 	});
+    	// });
     }
 
     public function program_statuses()
@@ -33,14 +33,14 @@ class Client extends Record
         );
     }
 
-    public function scopeWithLatestProgramStatuses($query, RecordType $recordType, Program $program)
+    public function scopeWithLatestProgramStatuses($query, $recordIdentity, Program $program)
     {
-        if($recordType->identity->model == 'Record')
+        if($recordIdentity->model == 'Record')
             return $query;
 
-        $recordStatusTable = 'program_' . strtolower($recordType->identity->model) . '_status';
+        $recordStatusTable = 'program_' . strtolower($recordIdentity->model) . '_status';
 
-        $model = 'App\\Program' . $recordType->identity->model . 'Status';
+        $model = 'App\\Program' . $recordIdentity->model . 'Status';
 
         $latestStatuses = $model::selectRaw(
             "program_record_id, MAX(created_at) as max_created_at"

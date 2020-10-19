@@ -99,7 +99,7 @@ class Records extends ResourceCollection
     public function permissions()
     {
         return [
-            'can_write' => auth()->user()->can('write', $this->resource)
+            'can_write' => auth()->user()->can('create', \App\Record::class)
         ];
     }
 
