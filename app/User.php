@@ -2,22 +2,20 @@
 
 namespace App;
 
+use App\Form;
+use App\Group;
+use App\Program;
+use App\ProgramRecord;
 use App\Record;
 use App\Role;
 use App\Scope;
-use App\Program;
-use App\Group;
-use App\ProgramRecord;
 use App\TeamRecord;
-
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+use Illuminate\Notifications\Notifiable;
+use OwenIt\Auditing\Auditable as HasAuditable;
+use OwenIt\Auditing\Contracts\Auditable;
 use Spatie\Permission\Traits\HasRoles;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
-
-use OwenIt\Auditing\Contracts\Auditable;
-use OwenIt\Auditing\Auditable as HasAuditable;
 
 class User extends Authenticatable implements Auditable
 {
@@ -102,7 +100,7 @@ class User extends Authenticatable implements Auditable
 
     public function forms()
     {
-        return $this->hasManyDeepFromRelations($this->records(), (new Record)->forms());
+        return $this->hasMany('App\Form', 'created_by');
     }
 
     public function availableTeams(?int $limit)
@@ -219,6 +217,17 @@ class User extends Authenticatable implements Auditable
 
     public function getScope() {
         return $this->scopes()->orderBy('value', 'desc')->first();
+    }
+
+    public function hasForm($form) : bool
+    {
+        if(is_a($form, Form::class))
+            return $this->hasForm($form->id);
+
+        return Form::inTeams($this->teams)->where('id', $form)->exists() ||
+        Form::inPrograms($this->programs)->where('id', $form)->exists() ||
+        Form::inGroups($this->groups)->where('id', $form)->exists() ||
+        Form::inSelf($this)->where('id', $form)->exists();
     }
 
     public function hasRecord($record) : bool

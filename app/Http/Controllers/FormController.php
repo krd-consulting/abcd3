@@ -43,6 +43,8 @@ class FormController extends Controller
 
     public function show(Form $form)
     {
+        $this->authorize('read', $form);
+
         return (new FormResource($form));
     }
 
@@ -141,7 +143,7 @@ class FormController extends Controller
     }
 
     public function destroy(Form $form) {
-        // TODO: Authorize deleting forms.
+        $this->authorize('write', $form);
 
         $form->delete();
     }

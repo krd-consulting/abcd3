@@ -11,7 +11,7 @@ class RolePolicy
 
     public function write(User $user)
     {
-        if($user->can('write roles'))
+        if($user->hasPermissionTo('write roles'))
             return true;
 
         return false;

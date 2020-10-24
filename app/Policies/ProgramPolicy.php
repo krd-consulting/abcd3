@@ -33,7 +33,7 @@ class ProgramPolicy
 
     public function create(User $user)
     {
-        if(!$user->can('write programs'))
+        if(!$user->hasPermissionTo('write programs'))
             return false;
 
         return true;
@@ -41,7 +41,7 @@ class ProgramPolicy
 
     public function write(User $user, Program $program)
     {
-        if(!$user->can('write programs'))
+        if(!$user->hasPermissionTo('write programs'))
             return false;
 
         if(!$user->hasScopeOfAtleast('case load'))

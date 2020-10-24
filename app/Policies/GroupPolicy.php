@@ -32,7 +32,7 @@ class GroupPolicy
 
     public function create(User $user)
     {
-        if(!$user->can('write groups'))
+        if(!$user->hasPermissionTo('write groups'))
             return false;
 
         return true;
@@ -40,7 +40,7 @@ class GroupPolicy
 
     public function write(User $user, Group $group)
     {
-        if(!$user->can('write groups'))
+        if(!$user->hasPermissionTo('write groups'))
             return false;
 
         if(!$user->hasScopeOfAtleast('case load'))

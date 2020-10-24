@@ -33,7 +33,7 @@ class TeamPolicy
 
     public function create(User $user)
     {
-        if(!$user->can(config('auth.permissions.write-teams.name')))
+        if(!$user->hasPermissionTo(config('auth.permissions.write-teams.name')))
             return false;
 
         return true;
@@ -41,7 +41,7 @@ class TeamPolicy
 
     public function write(User $user, Team $team)
     {
-        if(!$user->can(config('auth.permissions.write-teams.name')))
+        if(!$user->hasPermissionTo(config('auth.permissions.write-teams.name')))
             return false;
 
         if(!$user->hasScopeOfAtleast(config('auth.scopes.team.value')))

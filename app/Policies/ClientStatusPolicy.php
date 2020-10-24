@@ -11,7 +11,7 @@ class ClientStatusPolicy
 
     public function write(User $user)
     {
-        if($user->can('write client statuses'))
+        if($user->hasPermissionTo('write client statuses'))
             return true;
 
         return false;
