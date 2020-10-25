@@ -1,74 +1,75 @@
 <template>
-  <grid
-    title="Forms"
-    :items="items"
-    :fields="fieldArr"
-    has-add
-    :has-edit="false"
-    :has-bookmark="false"
-    :total="3"
-    :extra-actions="[{icon: 'fas fa-eye', label: 'Show entries'}, {icon: 'fas fa-plus', label: 'Add new entry'}]"
-  >
-    <template v-slot:form_name="{ value }">
-      <div class="tw-text-lg tw-font-semibold tw-underline">{{ value }}</div>
-    </template>
-    <template v-slot:history="{ data }">
-      <div>
-        <div class="tw-font-semibold">{{ data.fields.entry_count.value }} entries</div>
-        <div
-          class="tw-text-sm tw-text-indigo-darker"
-        >Last entry: {{ data.fields.last_entry.value | moment('MMM DD, YYYY') }}</div>
-      </div>
-    </template>
-  </grid>
+  <div>
+    <grid
+      title="Forms"
+      :items="forms"
+      :fields="fields"
+      :page.sync="params.page"
+      :sortBy.sync="params.sortBy"
+      :ascending.sync="params.ascending"
+      :per-page="params.perPage"
+      :search-terms.sync="params.search"
+      :loading="false"
+      @params-change="retrieve('records', $route.params.record);"
+      has-add
+      :has-edit="false"
+      :has-bookmark="false"
+      :total="total"
+      :extra-actions="[{icon: 'fas fa-eye', label: 'Show entries'}, {icon: 'fas fa-plus', label: 'Add new entry'}]"
+      @extra-action="handleExtraAction"
+    >
+    </grid>
+  </div>
 </template>
 
 <script>
-import fp from "lodash/fp";
-import grid from "@/components/extendable/grid";
+    import Grid from "@/components/extendable/grid";
 
-export default {
-  name: "ProfileForms",
-  components: {
-    grid
-  },
-  data() {
-    return {
-      items: fp.range(0, 3).map(id => ({
-        id,
-        fields: {
-          form_name: {
-            value: "Form name"
-          },
-          type: {
-            value: id % 2 === 0 ? "Static" : "Pre-post"
-          },
-          entry_count: {
-            value: 2
-          },
-          last_entry: {
-            value: "2020-01-31"
-          }
-        }
-      })),
-      fieldArr: [
-        {
-          key: "form_name",
-          slug: "form_name",
-          name: "Form name"
+    import Request from '@/api/EntityTypeFormsRequest';
+
+    export default {
+        components: {
+            Grid,
         },
-        {
-          key: "type",
-          slug: "type",
-          name: "Type"
+
+        data() {
+            return {
+                request: new Request({}),
+                forms: [],
+                fields: [],
+                params: {
+                    ascending: true,
+                    sortBy: 'name',
+                    page: 1,
+                    perPage: 10,
+                    search: ''
+                },
+                total: 0,
+            }
         },
-        {
-          key: "history",
-          slug: "history",
-          name: "History"
-        }
-      ]
-    };
-  }
-};
+
+        methods: {
+            retrieve(entity, id) {
+                this.request.setFields({
+                    params: {...this.params}
+                });
+
+                this.request.retrieve(entity, id).then((response) => {
+                    this.forms = response.data;
+                    this.fields = response.fields;
+                    this.total = response.meta.total;
+                });
+            },
+
+            handleExtraAction({itemId, actionIndex}) {
+              if (actionIndex === 1) {
+                this.$router.push(`/forms/${itemId}/new`);
+              }
+            }
+        },
+
+        created() {
+            this.retrieve('records', this.$route.params.record);
+        },
+    }
 </script>

@@ -253,6 +253,21 @@ class Form extends Entity
             ->withTimestamps();
     }
 
+    public function records()
+    {
+        return
+            $this
+            ->morphedByMany(
+                'App\Record',
+                'model',
+                'model_has_forms',
+                'form_id',
+                'model_id'
+            )
+            ->withTimestamps();
+    }
+
+
     protected function setTableName($id)
     {
         $this->table_name = 'form_' . str_pad($id, 3, '0', STR_PAD_LEFT);

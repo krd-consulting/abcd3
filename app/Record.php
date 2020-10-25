@@ -127,7 +127,7 @@ class Record extends Entity
 
     public function forms()
     {
-        return $this->belongsToMany('App\Form');
+        return $this->morphToMany('App\Form', 'model', 'model_has_forms')->withTimestamps();
     }
 
     public function user() {
