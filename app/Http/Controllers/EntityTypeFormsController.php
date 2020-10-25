@@ -10,12 +10,67 @@ class EntityTypeFormsController extends Controller
 {
     public function index(EntityType $entityType, $id)
     {
-        $forms = new \App\Form();
+        $relationships = [
+            0 => 'records',
+            1 => 'programs',
+            2 => 'teams',
+        ];
 
-        $forms = $forms->whereHas($entityType->slug, function($query) use ($entityType, $id) {
-            $query->where('model_type', '=', $entityType->model)
-              ->where('id', '=', $id);
-        });
+        $start = 0;
+        foreach($relationships as $relationship) {
+            if($relationship == $entityType->slug) {
+                break;
+            }
+            $start++;
+        }
+
+        $neededRelationships = array_slice($relationships, $start);
+
+        $queries = [];
+        // $forms = (new \App\Form());
+        // $forms = $forms->whereHas(
+        //     $entityType->slug,
+        //     function($query) use ($entityType, $id) {
+        //         $query->where('model_type', '=', $entityType->model)
+        //           ->where('id', '=', $id);
+        // });
+
+        $index = 0;
+        $mainEntityTypeSlug = $neededRelationships[$start];
+        $mainEntityType = EntityType::where('slug', $mainEntityTypeSlug)->first();
+        $mainEntity = (new $mainEntityType->model())->find($id);
+        // if(count($neededRelationships) > 1) {
+        //   $neededRelationships = array_slice($neededRelationships, $start + 1, -1);
+        // }
+        foreach($neededRelationships as $relationship) {
+
+            $type = EntityType::where('slug', $relationship)->first();
+
+            // get form ids
+            // 1. Get ids of related entity that might have forms
+            if($relationship == $mainEntityTypeSlug) {
+              $relatedIds = [$id];
+            } else {
+              $relatedIds = $mainEntity->$relationship()->availableFor(auth()->user())->pluck("$type->slug.id");
+            }
+
+            $queries[$index++] = (new \App\Form())->whereHas(
+                $relationship,
+                function($query) use ($type, $relatedIds) {
+                    $query->where('model_type', '=', $type->model)
+                        ->whereIn('id', $relatedIds);
+                }
+            );
+        }
+
+        // dd($queries);
+        // dd($queries[1]->get()->toArray());
+
+        $query = 0;
+        $forms = $queries[$query++]->availableFor(auth()->user());
+        while($query < $index) {
+          $forms->union($queries[$query++]);
+        }
 
         // Search
         $search = request('search');
@@ -25,8 +80,6 @@ class EntityTypeFormsController extends Controller
         $ascending = request('ascending');
         $sortBy = request('sortBy');
         $forms = $forms->sort($sortBy, $ascending);
-
-        $forms = $forms->availableFor(auth()->user());
 
         // Paginate per request.
         $perPage = request('perPage');
