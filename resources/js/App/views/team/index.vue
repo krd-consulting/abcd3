@@ -33,7 +33,7 @@
             >
               <template v-slot:name="{ value, data }">
                 <router-link
-                  :to="`${$route.path}/${data.id}`"
+                  :to="`${$route.path}${data.id}`"
                   class="tw-font-bold tw-text-black hover:tw-text-black"
                 >{{ value }}</router-link>
               </template>
