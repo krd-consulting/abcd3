@@ -36,12 +36,9 @@ class EntityTypeFormsController extends Controller
         // });
 
         $index = 0;
-        $mainEntityTypeSlug = $neededRelationships[$start];
+        $mainEntityTypeSlug = $neededRelationships[0];
         $mainEntityType = EntityType::where('slug', $mainEntityTypeSlug)->first();
         $mainEntity = (new $mainEntityType->model())->find($id);
-        // if(count($neededRelationships) > 1) {
-        //   $neededRelationships = array_slice($neededRelationships, $start + 1, -1);
-        // }
         foreach($neededRelationships as $relationship) {
 
             $type = EntityType::where('slug', $relationship)->first();
@@ -62,9 +59,6 @@ class EntityTypeFormsController extends Controller
                 }
             );
         }
-
-        // dd($queries);
-        // dd($queries[1]->get()->toArray());
 
         $query = 0;
         $forms = $queries[$query++]->availableFor(auth()->user());

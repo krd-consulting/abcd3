@@ -28,6 +28,7 @@ import TeamProfileSummary from "./views/team/profile/summary";
 import TeamProfilePrograms from "./views/team/profile/programs";
 import TeamProfileGroups from "./views/team/profile/groups";
 import TeamProfileRecords from "./views/team/profile/records";
+import TeamProfileForms from "./views/team/profile/forms";
 import FormList from "./views/form";
 import FormEntryList from "./views/form/entry/";
 import FormEntry from "./views/form/entry/create";
@@ -125,7 +126,7 @@ const routes = [
     component: TeamProfile,
     children: [
       {
-        path: "",
+        path: '',
         name: "team_profile_records",
         component: TeamProfileRecords
       },
@@ -138,6 +139,11 @@ const routes = [
         path: "groups",
         name: "team_profile_groups",
         component: TeamProfileGroups
+      },
+      {
+        path: 'forms',
+        name: "team_profile_forms",
+        component: TeamProfileForms
       },
       // {
       //   path: "records/:recordType",
