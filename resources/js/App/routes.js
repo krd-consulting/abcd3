@@ -124,7 +124,11 @@ const routes = [
     path: "/teams/:team",
     component: TeamProfile,
     children: [
-      { path: "", name: "team_profile_summary", component: TeamProfileSummary },
+      {
+        path: "",
+        name: "team_profile_records",
+        component: TeamProfileRecords
+      },
       {
         path: "programs",
         name: "team_profile_programs",
@@ -135,11 +139,11 @@ const routes = [
         name: "team_profile_groups",
         component: TeamProfileGroups
       },
-      {
-        path: "records/:recordType",
-        name: "team_profile_records",
-        component: TeamProfileRecords
-      }
+      // {
+      //   path: "records/:recordType",
+      //   name: "team_profile_records",
+      //   component: TeamProfileRecords
+      // }
     ]
   },
 

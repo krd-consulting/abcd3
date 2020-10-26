@@ -2,19 +2,48 @@
   <div>
     <edit-team :active.sync="edit.active" :team-id="team.id" @update="retrieve()" />
 
-    <resource-profile
-      :record-types="recordTypes"
-      @edit="editTeam(team)"
-      @delete="confirmDelete(team)"
-    >
-      <template v-slot:header>{{ team.name }}</template>
-      <template v-slot:subheader>{{ team.description }}</template>
-    </resource-profile>
+    <page-title :title="title" class="tw-px-8"></page-title>
+    <div class="tw-flex">
+      <info-card
+        icon="fas fa-calendar-plus"
+        title="3 orders"
+        description="Lorem ipsum dolor sit amet"
+        text-class="tw-text-orange-base"
+        bg-class="tw-bg-orange-lightest"
+      ></info-card>
+      <info-card
+        icon="fas fa-copy"
+        title="2 collections"
+        description="Lorem ipsum dolor sit amet"
+        text-class="tw-text-indigo-base"
+        bg-class="tw-bg-indigo-lightest"
+        class="tw-ml-5"
+      ></info-card>
+      <info-card
+        icon="fas fa-link"
+        title="15 links"
+        description="Lorem ipsum dolor sit amet"
+        text-class="tw-text-red-base"
+        bg-class="tw-bg-red-lightest"
+        class="tw-ml-5"
+      ></info-card>
+    </div>
+    <profile-tabs>
+      <el-tab-pane label="Records" name="team_profile_records"></el-tab-pane>
+      <el-tab-pane label="Forms" name="team_profile_forms"></el-tab-pane>
+      <el-tab-pane label="Jobs" name="team_profile_jobs"></el-tab-pane>
+    </profile-tabs>
+    <div class="tw-p-4">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 <script>
+import { profile } from '../methods';
 import TeamRequest from "@/api/TeamRequest";
 import RecordTypeRequest from "@/api/RecordTypeRequest";
+
+import ProfileTabs from "@/App/components/profileTabs";
 
 import ResourceProfile from "@/App/components/resourceProfile";
 import EditTeam from "../edit";
@@ -22,90 +51,38 @@ import EditTeam from "../edit";
 export default {
   components: {
     ResourceProfile,
-    EditTeam
+    EditTeam,
+    ProfileTabs
   },
 
   data() {
     return {
       team: {
-        name: "",
-        description: ""
+          name: '',
       },
       edit: {
-        active: false
+          active: false,
       },
       recordTypes: [],
       request: new TeamRequest({}),
-      total: 0,
       type: {
-        name: ""
-      }
-    };
+          name: ''
+      },
+    }
+  },
+
+  computed: {
+    title() {
+      return this.team.name;
+    }
   },
 
   methods: {
-    retrieve(team = this.$route.params.team) {
-      this.request.setFields({
-        params: { ...this.params }
-      });
-
-      this.request.show(team).then(response => {
-        this.team = response.data;
-      });
-    },
-
-    retrieveRecordTypes() {
-      const request = new RecordTypeRequest({});
-
-      request.retrieve().then(response => {
-        this.recordTypes = response.data;
-      });
-    },
-
-    confirmDelete(team) {
-      this.$confirm(
-        "Are you sure you want to delete this team?",
-        "Delete Team",
-        {
-          confirmButtonText: "Delete",
-          cancelButtonText: "Wait, no!",
-          type: "warning"
-        }
-      ).then(() => {
-        this.deleteTeam(team)
-          .then(() => {
-            this.$router.push("/teams");
-
-            this.$message({
-              type: "success",
-              message: "Team was deleted."
-            });
-          })
-          .catch(error => {
-            this.$message({
-              type: "error",
-              message: error.message
-            });
-          });
-      });
-    },
-
-    editTeam(team) {
-      this.edit.team = team;
-
-      this.edit.active = true;
-    },
-
-    deleteTeam(team) {
-      let request = new TeamRequest({});
-
-      return request.destroy(team.id);
-    }
+    retrieve: profile
   },
 
   created() {
     this.retrieve();
-    this.retrieveRecordTypes();
   },
 
   beforeRouteUpdate(to, from, next) {
