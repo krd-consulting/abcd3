@@ -91,6 +91,14 @@ class Program extends Entity implements FormReference
         return $this->belongsTo('App\Team');
     }
 
+    // Created to prevent EntityTypeFormsController::index
+    // from crashing as it assumes relationships
+    // between collections are plural.
+    public function teams()
+    {
+        return $this->team();
+    }
+
     public function getAvailableRecordTypesAttribute()
     {
         return $this->records->load('record_type')->pluck('record_type')->unique();

@@ -10,6 +10,17 @@ class EntityTypeFormsController extends Controller
 {
     public function index(EntityType $entityType, $id)
     {
+        // All forms directly associated to an entity
+        // is inherited by the next lower level entity (form scope still applies).
+        // For example, suppose staff member Jeff is in Program One.
+        // All forms in Program One (under the program-forms view) can be
+        // seen in the record-forms view of staff member Jeff's profile.
+        // Of course, if a self-scoped form made by another staff member
+        // is assigned to Program One, it shouldn't be seen under Jeff's profile.
+
+        // Assumes relationships between collections are plural.
+        // Entities from lowest to highest level hierarchy.
+        // TODO: populate this array using EntityType.
         $relationships = [
             0 => 'records',
             1 => 'programs',
@@ -27,30 +38,26 @@ class EntityTypeFormsController extends Controller
         $neededRelationships = array_slice($relationships, $start);
 
         $queries = [];
-        // $forms = (new \App\Form());
-        // $forms = $forms->whereHas(
-        //     $entityType->slug,
-        //     function($query) use ($entityType, $id) {
-        //         $query->where('model_type', '=', $entityType->model)
-        //           ->where('id', '=', $id);
-        // });
 
         $index = 0;
+        // We shall use mainEntity to get ids of related entities that
+        // might have forms associated to them.
         $mainEntityTypeSlug = $neededRelationships[0];
         $mainEntityType = EntityType::where('slug', $mainEntityTypeSlug)->first();
         $mainEntity = (new $mainEntityType->model())->find($id);
+
         foreach($neededRelationships as $relationship) {
 
             $type = EntityType::where('slug', $relationship)->first();
 
-            // get form ids
-            // 1. Get ids of related entity that might have forms
+            // Get ids of related entity that might have forms
             if($relationship == $mainEntityTypeSlug) {
               $relatedIds = [$id];
             } else {
               $relatedIds = $mainEntity->$relationship()->availableFor(auth()->user())->pluck("$type->slug.id");
             }
 
+            // Query for forms directly associated with the entity.
             $queries[$index++] = (new \App\Form())->whereHas(
                 $relationship,
                 function($query) use ($type, $relatedIds) {
