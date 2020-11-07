@@ -95,6 +95,8 @@ Route::prefix('api')
         Route::get('forms/fields/target_types/{targetType}', 'FormFieldTargetTypeController@show');
 
         Route::get('forms', 'FormController@index');
+        Route::get('forms/records/{record}', 'RecordFormsController@index');
+        Route::get('forms/collections/{collection}/{id}', 'CollectionFormsController@index');
         Route::get('forms/entity-types/{entityType}/{id}', 'EntityTypeFormsController@index');
         Route::get('forms/create', 'FormController@create');
         Route::get('forms/{form}', 'FormController@show');
