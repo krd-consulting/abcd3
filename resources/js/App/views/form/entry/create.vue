@@ -51,7 +51,7 @@
         </div>
         <div class="tw-flex tw-mt-4">
           <label class="tw-mr-4 tw-w-1/4 tw-text-right tw-mt-3">Team</label>
-          <el-select v-model="team" placeholder=" " remote :remote-method="retrieveTeams">
+          <el-select v-model="entryData.team_id" placeholder=" " remote :remote-method="retrieveTeams">
             <el-option v-for="team in teams" :key="team.id" :label="team.name" :value="team.id"></el-option>
           </el-select>
           <div class="tw-text-gray-light tw-text-xs tw-font-bold tw-ml-4 tw-mt-3">Required</div>
