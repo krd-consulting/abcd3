@@ -154,6 +154,7 @@ class Form extends Entity
                     }
                 }
 
+                $table->bigInteger('team_id')->unsigned();
                 $table->timestamp('completed_at')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
@@ -166,6 +167,8 @@ class Form extends Entity
                     ->foreign('target_id')
                     ->references($model->getFormReferenceField())
                     ->on($model->getFormReferenceTable());
+
+                $table->foreign('team_id')->references('id')->on('teams');
             });
         });
     }
