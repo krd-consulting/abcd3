@@ -1,72 +1,30 @@
 <template>
-    <list
-        :items="entries"
+    <div>
+      <grid
+        :title="form.name"
+        :items="teams"
+        :fields="fields"
         :page.sync="params.page"
+        :sortBy.sync="params.sortBy"
+        :ascending.sync="params.ascending"
         :per-page="params.perPage"
         :search-terms.sync="params.search"
-        :loading="false"
-        :has-list-columns="false"
-        @page-change="retrieveEntries()"
-        :total="total">
-        <template slot="header-text">{{ form.name }}</template>
-
-        <template slot="list">
-            <list-item
-                v-for="(entry, index) in entries"
-                :key="index"
-                :to="entry.target.path"
-                class="tw-cursor-pointer">
-                <template v-if="targetName == 'Record'">
-                    <template slot="image">
-                        <profile-picture class="tw-mr-2 tw-w-12 tw-h-12 tw-text-base" :record="entry.target" :fields="entry.target.fields"/>
-                    </template>
-
-                    <slot name="list-item-primary-data" :item="entry">
-                        <primary-data class="tw-font-semibold" :record="entry.target" :fields="entry.target.fields"/>
-                    </slot>
-
-                    <template slot="secondary-data">
-                        <secondary-data class="tw-text-xs tw-text-gray-600" :record="entry.target" :fields="entry.target.fields"/>
-                    </template>
-                </template>
-
-                <template v-if="targetName != 'Record'">
-                    <slot name="list-item-primary-data" :item="entry">
-                        {{ entry.target.name }}
-                    </slot>
-
-                    <template slot="secondary-data">
-                        {{ entry.target.secondary_data }}
-                    </template>
-                </template>
-
-                <template slot="bellows">
-                    <dl>
-                        <div v-for="(field, index) in fields" :key="index">
-                            <text-field
-                                v-if="field.type == 'text'"
-                                v-model="entry[field.column_name]"
-                                :field="field"
-                                class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
-                            </text-field>
-
-                            <file-field
-                                v-else-if="field.type == 'file'"
-                                v-model="entry[field.column_name]"
-                                :field="field"
-                                class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
-                            </file-field>
-
-                            <div v-else class="tw-grid tw-grid-cols-3 tw-p-4 even:tw-bg-gray-100">
-                                <dd class="tw-text-gray-600">{{ field.title }}</dd>
-                                <dt>{{ entry[field.column_name] }}</dt>
-                            </div>
-                        </div>
-                    </dl>
-                </template>
-            </list-item>
+        @params-change="retrieveTeams();"
+        :total="total"
+      >
+        <template v-slot:extra-columns-header>
+            <th>Required</th>
+            <th>Test</th>
+            <th>Test</th>
         </template>
-    </list>
+
+        <template v-slot:extra-columns-data>
+            <td>Test</td>
+            <td>Test</td>
+            <td>Test</td>
+        </template>
+      </grid>
+    </div>
 </template>
 <script>
     import Request from '@/api/FormRequest';
@@ -78,6 +36,7 @@
     import ProfilePicture from '@/App/components/record/profilePicture';
     import PrimaryData from '@/App/components/record/primaryData';
     import SecondaryData from '@/App/components/record/secondaryData';
+    import Grid from "@/components/extendable/grid";
 
     import TextField from '@/components/formEntryDataFields/text';
     import FileField from '@/components/formEntryDataFields/file';
@@ -92,7 +51,8 @@
             PrimaryData,
             SecondaryData,
             TextField,
-            FileField
+            FileField,
+            Grid
         },
 
         data() {
@@ -102,6 +62,7 @@
                 },
                 form: [],
                 entries: [],
+                teams: [],
                 fields: [],
                 targetType: '',
                 request: new Request({}),
@@ -115,6 +76,7 @@
                     search: ''
                 },
                 total: 0,
+                totalTeams: 0
             }
         },
 
@@ -132,6 +94,15 @@
             retrieve() {
                 this.request.show(this.$route.params.form).then(response => {
                     this.form = response.data;
+                    // not in .meta because backend api does not use a laravelapi resource
+                    this.totalTeams = response.total;
+                });
+            },
+
+            retrieveTeams() {
+              this.entriesRequest.teams(this.$route.params.form).then(response => {
+                    this.teams = response.data;
+                    this.fields = response.fields;
                 });
             },
 
@@ -149,14 +120,15 @@
 
             retrieveFields() {
                 this.fieldRequest.retrieve(this.$route.params.form).then(response => {
-                    this.fields = response.data;
-                    this.total = response.total;
+                    // this.fields = response.data;
+                    // this.total = response.total;
                 });
             },
         },
 
         created() {
             this.retrieve();
+            this.retrieveTeams();
             this.retrieveEntries();
             this.retrieveFields();
         }

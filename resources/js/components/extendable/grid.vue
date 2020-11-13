@@ -25,7 +25,6 @@
           <th
             v-for="(field, index) in fields"
             :key="field.slug"
-            class="tw-p-4 tw-text-left tw-text-white tw-font-normal tw-text-sm tw-uppercase tw-cursor-pointer"
             :class="{'tw-rounded-tl-lg': index === 0, 'tw-rounded-tr-lg': index === fields.length - 1 && !hasAction}"
             @click="field.key === sortBy ? changeAscending(!ascending) : changeSortBy(field.key)"
           >
@@ -36,18 +35,20 @@
               <i class="fas fa-sort-up" v-else></i>
             </span>
           </th>
+          <slot name="extra-columns-header"></slot>
           <th class="tw-rounded-tr-lg" v-if="hasAction"></th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in items" :key="item.id" class="tw-border-b tw-border-gray-lighter">
-          <td v-for="field in fields" :key="field.key" class="tw-p-4 tw-text-base">
+          <td v-for="field in fields" :key="field.key">
             <slot
               :name="field.slug"
               :value="item.fields[field.slug] && item.fields[field.slug].value"
               :data="item"
             >{{ item.fields[field.slug] && item.fields[field.slug].value }}</slot>
           </td>
+          <slot name="extra-columns-data"></slot>
           <td class="tw-w-1/12 tw-whitespace-no-wrap" v-if="hasAction">
             <grid-action
               v-if="hasEdit"
@@ -204,3 +205,12 @@ export default {
   }
 };
 </script>
+<style>
+  table thead tr th {
+    @apply tw-p-4 tw-text-left tw-text-white tw-font-normal tw-text-sm tw-uppercase tw-cursor-pointer;
+  }
+
+  table tbody tr td {
+    @apply tw-p-4 tw-text-base;
+  }
+</style>

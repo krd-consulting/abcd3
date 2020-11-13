@@ -7,29 +7,37 @@ use App\Form;
 use App\FormEntry;
 use App\Http\Requests\StoreFormEntry;
 use App\Http\Resources\FormEntries;
-
-use Illuminate\Http\Request;
-
+use App\Http\Resources\Teams;
+use App\Team;
 use Barryvdh\Debugbar\Facade as Debugbar;
+use Illuminate\Http\Request;
 
 class FormEntryController extends Controller
 {
   	public function index(Form $form)
   	{
-        $entry = new FormEntry;
+        $entry = new FormEntry();
         $entry->setTable($form->table_name);
 
         $entry->castFieldsToArray($form->fields()->whereIn('type', ['checkbox', 'file'])->pluck('column_name'));
 
+        $team = request('team');
         $perPage = request('perPage');
-        $entries = $entry->paginate($perPage);
+        $entries = $entry->where('team_id', $team)->paginate($perPage);
 
         $entries->load('target');
+        $entries->load('team');
 
         $entries = (new FormEntries($entries, $form->target_type));
 
         return $entries;
   	}
+
+    public function teams(Form $form)
+    {
+        $teams = $form->teams()->get();
+        return new Teams($teams);
+    }
 
     public function store(Form $form, StoreFormEntry $request)
     {

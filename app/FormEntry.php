@@ -64,7 +64,12 @@ class FormEntry extends Model
 
         $targetModel = (new $targetModel)->getFormReferenceClass();
 
-		return $this->belongsTo($targetModel);
+		    return $this->belongsTo($targetModel);
+    }
+
+    public function team()
+    {
+        return $this->belongsTo('App\Team');
     }
 
 }
