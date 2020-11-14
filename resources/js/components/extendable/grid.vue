@@ -40,55 +40,66 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="item in items" :key="item.id" class="tw-border-b tw-border-gray-lighter">
-          <td v-for="field in fields" :key="field.key">
-            <slot
-              :name="field.slug"
-              :value="item.fields[field.slug] && item.fields[field.slug].value"
-              :data="item"
-            >{{ item.fields[field.slug] && item.fields[field.slug].value }}</slot>
-          </td>
-          <slot name="extra-columns-data"></slot>
-          <td class="tw-w-1/12 tw-whitespace-no-wrap" v-if="hasAction">
-            <grid-action
-              v-if="hasEdit"
-              icon="fas fa-pen"
-              label="Edit"
-              @click="$emit('edit', item.id)"
-            ></grid-action>
-            <grid-action
-              v-if="hasDisable && item.active"
-              icon="fas fa-eye-slash"
-              label="Disable"
-              @click="$emit('disable', item.id)"
-            ></grid-action>
-            <grid-action
-              v-if="hasDisable && !item.active"
-              icon="fas fa-eye"
-              label="Enable"
-              @click="$emit('enable', item.id)"
-            ></grid-action>
-            <grid-action
-              v-if="hasRemove"
-              icon="fas fa-trash"
-              label="Remove"
-              @click="$emit('remove', item.id)"
-            ></grid-action>
-            <grid-action
-              v-if="hasDelete"
-              icon="fas fa-archive"
-              label="Archive"
-              @click="$emit('delete', item.id)"
-            ></grid-action>
-            <grid-action
-              v-for="(action, index) in extraActions"
-              :key="action.label"
-              :icon="action.icon"
-              :label="action.label"
-              @click="$emit('extra-action', {itemId: item.id, actionIndex: index})"
-            ></grid-action>
-          </td>
-        </tr>
+        <template v-for="item in items">
+          <tr :key="item.id" class="tw-border-b tw-border-gray-lighter">
+            <td v-for="field in fields" :key="field.key">
+              <slot
+                :name="field.slug"
+                :value="item.fields[field.slug] && item.fields[field.slug].value"
+                :data="item"
+              >{{ item.fields[field.slug] && item.fields[field.slug].value }}</slot>
+            </td>
+            <slot name="extra-columns-data"></slot>
+            <td class="tw-w-1/12 tw-whitespace-no-wrap" v-if="hasAction">
+              <grid-action
+                v-if="hasCollapsibleRows"
+                icon="fas fa-eye"
+                label="Show Collapsed Row"
+                @click="toggleCollapsibleRow(item.id); $emit('open-collapsible-row', item.id)"
+              ></grid-action>
+              <grid-action
+                v-if="hasEdit"
+                icon="fas fa-pen"
+                label="Edit"
+                @click="$emit('edit', item.id)"
+              ></grid-action>
+              <grid-action
+                v-if="hasDisable && item.active"
+                icon="fas fa-eye-slash"
+                label="Disable"
+                @click="$emit('disable', item.id)"
+              ></grid-action>
+              <grid-action
+                v-if="hasDisable && !item.active"
+                icon="fas fa-eye"
+                label="Enable"
+                @click="$emit('enable', item.id)"
+              ></grid-action>
+              <grid-action
+                v-if="hasRemove"
+                icon="fas fa-trash"
+                label="Remove"
+                @click="$emit('remove', item.id)"
+              ></grid-action>
+              <grid-action
+                v-if="hasDelete"
+                icon="fas fa-archive"
+                label="Archive"
+                @click="$emit('delete', item.id)"
+              ></grid-action>
+              <grid-action
+                v-for="(action, index) in extraActions"
+                :key="action.label"
+                :icon="action.icon"
+                :label="action.label"
+                @click="$emit('extra-action', {itemId: item.id, actionIndex: index})"
+              ></grid-action>
+            </td>
+          </tr>
+          <tr v-if="openedCollapsibleRow == item.id">
+            <slot name="collapsible-row"></slot>
+          </tr>
+        </template>
       </tbody>
     </table>
     <div v-if="total > 0 && perPage" class="tw-flex tw-justify-center tw-m-5">
@@ -135,6 +146,10 @@ export default {
       type: Boolean,
       default: false
     },
+    hasCollapsibleRows: {
+      type: Boolean,
+      default: false
+    },
     hasEdit: {
       type: Boolean,
       default: true
@@ -168,7 +183,12 @@ export default {
       default: true
     },
     sortBy: String,
-    ascending: Boolean
+    ascending: Boolean,
+  },
+  data() {
+    return {
+      openedCollapsibleRow: null,
+    }
   },
   computed: {
     hasAction() {
@@ -182,6 +202,14 @@ export default {
     }
   },
   methods: {
+    toggleCollapsibleRow(key) {
+      if(this.openedCollapsibleRow != key || this.openedCollapsibleRow == null) {
+        this.openedCollapsibleRow = key;
+      } else {
+        this.openedCollapsibleRow = null;
+      }
+    },
+
     handlePageChange(page) {
       this.$emit("update:page", page);
       this.$emit("params-change");

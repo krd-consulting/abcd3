@@ -10,18 +10,22 @@
         :per-page="params.perPage"
         :search-terms.sync="params.search"
         @params-change="retrieveTeams();"
+        :has-collapsible-rows="true"
+        @open-collapsible-row="retrieveEntries"
         :total="total"
       >
         <template v-slot:extra-columns-header>
-            <th>Required</th>
-            <th>Test</th>
-            <th>Test</th>
+          <th>Required</th>
         </template>
 
         <template v-slot:extra-columns-data>
-            <td>Test</td>
-            <td>Test</td>
-            <td>Test</td>
+          <td>&nbsp;</td>
+        </template>
+
+        <template v-slot:collapsible-row>
+          <td colspan="3" v-for="entry in entries" :key="entry.id">
+            {{ entry }}
+          </td>
         </template>
       </grid>
     </div>
@@ -73,7 +77,7 @@
                     sortBy: 'id',
                     page: 1,
                     perPage: 5,
-                    search: ''
+                    search: '',
                 },
                 total: 0,
                 totalTeams: 0
@@ -94,8 +98,6 @@
             retrieve() {
                 this.request.show(this.$route.params.form).then(response => {
                     this.form = response.data;
-                    // not in .meta because backend api does not use a laravelapi resource
-                    this.totalTeams = response.total;
                 });
             },
 
@@ -106,9 +108,12 @@
                 });
             },
 
-            retrieveEntries() {
+            retrieveEntries(team) {
                 this.entriesRequest.setFields({
-                    params: {...this.params}
+                    params: {
+                      ...this.params,
+                      team: team
+                    }
                 });
 
                 this.entriesRequest.retrieve(this.$route.params.form).then(response => {
