@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use App\Form;
 use App\FormTargetType;
-
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class FormEntries extends ResourceCollection
@@ -15,10 +15,13 @@ class FormEntries extends ResourceCollection
 
     protected $targetType;
 
-    public function __construct($resource, FormTargetType $targetType)
+    protected $fields;
+
+    public function __construct($resource, FormTargetType $targetType, Collection $fields)
     {
         parent::__construct($resource);
         $this->targetType = $targetType->name;
+        $this->fields = $fields;
     }
 
     /**
@@ -34,9 +37,28 @@ class FormEntries extends ResourceCollection
         ];
     }
 
-    public function with($request) {
+    public function with($request)
+    {
         return [
-            'target_type' => $this->targetType
+            'target_type' => $this->targetType,
+            'fields' => $this->fields(),
         ];
+    }
+
+    public function fields()
+    {
+        $fields = [];
+
+        $keyed = $this->fields->mapWithKeys(function ($field, $key) {
+          return [
+            $field['column_name'] => [
+              'name' => $field['title'],
+              'slug' => $field['column_name'],
+              'key' => $field['column_name'],
+            ]
+          ];
+        });
+
+        return $keyed->all();
     }
 }

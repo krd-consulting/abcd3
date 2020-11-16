@@ -27,8 +27,9 @@ class FormEntryController extends Controller
 
         $entries->load('target');
         $entries->load('team');
+        $entries->load('creator');
 
-        $entries = (new FormEntries($entries, $form->target_type));
+        $entries = (new FormEntries($entries, $form->target_type, $form->fields));
 
         return $entries;
   	}

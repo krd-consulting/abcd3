@@ -49,12 +49,12 @@
                 :data="item"
               >{{ item.fields[field.slug] && item.fields[field.slug].value }}</slot>
             </td>
-            <slot name="extra-columns-data"></slot>
+            <slot name="extra-columns-data" :data="item"></slot>
             <td class="tw-w-1/12 tw-whitespace-no-wrap" v-if="hasAction">
               <grid-action
                 v-if="hasCollapsibleRows"
                 icon="fas fa-eye"
-                label="Show Collapsed Row"
+                :label="openedCollapsibleRow == item.id ? `Hide ${rowTitle}` : `Show ${rowTitle}`"
                 @click="toggleCollapsibleRow(item.id); $emit('open-collapsible-row', item.id)"
               ></grid-action>
               <grid-action
@@ -97,7 +97,7 @@
             </td>
           </tr>
           <tr v-if="openedCollapsibleRow == item.id">
-            <slot name="collapsible-row"></slot>
+            <slot name="collapsible-row" :item="item"></slot>
           </tr>
         </template>
       </tbody>
@@ -130,6 +130,10 @@ export default {
   },
   props: {
     title: String,
+    rowTitle: {
+      type: String,
+      default: 'Row'
+    },
     fields: {
       type: Array | Object,
       default: () => []
@@ -194,6 +198,7 @@ export default {
     hasAction() {
       return (
         this.hasEdit ||
+        this.hasCollapsibleRows ||
         this.hasDisable ||
         this.hasRemove ||
         this.hasDelete ||
