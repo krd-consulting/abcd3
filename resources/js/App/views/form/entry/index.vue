@@ -17,10 +17,22 @@
       >
         <template v-slot:extra-columns-header>
           <th>Required</th>
+          <th>Frequency</th>
+          <th>History</th>
         </template>
 
         <template v-slot:extra-columns-data>
-          <td>&nbsp;</td>
+          <td>
+            <base-checkbox></base-checkbox>
+          </td>
+          <td>
+            <base-select></base-select>
+          </td>
+          <td>
+            <span class="tw-font-semibold">5 entries</span>
+            <br>
+            <span>Last entry: Yesterday</span>
+          </td>
         </template>
 
         <template v-slot:collapsible-row="{ item }">
