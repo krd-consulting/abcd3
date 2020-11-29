@@ -25,6 +25,12 @@
       :total="total"
       v-if="!loading || items.length"
     >
+      <template v-slot:name="{ value, data }">
+        <router-link
+          :to="`${$route.path}${data.id}`"
+          class="tw-font-bold tw-text-black hover:tw-text-black"
+        >{{ value }}</router-link>
+      </template>
       <template v-slot:active="{ value, data }">
         <el-switch
           :value="value"
