@@ -21645,19 +21645,19 @@ button:focus {
   height: min-content !important;
 }
 
-.el-pagination .el-icon-arrow-left,
-.el-pagination .el-icon-arrow-right {
-  color: #001489 !important;
-  font-size: 1.875rem !important;
-  font-weight: 300 !important;
+.el-pagination .btn-prev .el-icon-arrow-left,
+.el-pagination .btn-next .el-icon-arrow-right {
+  color: #001489;
+  font-size: 1.875rem;
+  font-weight: 300;
 }
 
 .el-pagination .el-icon {
-  color: #001489 !important;
+  color: #001489;
 }
 
 .el-pagination button[disabled="disabled"] .el-icon {
-  color: #71779B !important;
+  color: #71779B;
 }
 
 .el-button [class*="el-icon-"] + span {
@@ -21665,21 +21665,21 @@ button:focus {
 }
 
 .el-pager .number {
-  font-size: 0.875rem !important;
-  color: #71779B !important;
-  background-color: transparent !important;
-  font-weight: 400 !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  min-width: 0 !important;
-  width: 1.5rem !important;
+  font-size: 0.875rem;
+  color: #71779B;
+  background-color: transparent;
+  font-weight: 400;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  min-width: 0;
+  width: 1.5rem;
 }
 
 .el-pager .number.active {
-  color: #001489 !important;
-  font-weight: 700 !important;
+  color: #001489;
+  font-weight: 700;
 }
 
 .el-button,

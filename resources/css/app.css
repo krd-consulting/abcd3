@@ -154,17 +154,17 @@ button:focus {
   height: min-content !important;
 }
 
-.el-pagination .el-icon-arrow-left,
-.el-pagination .el-icon-arrow-right {
-  @apply tw-text-indigo-base tw-text-3xl tw-font-light !important;
+.el-pagination .btn-prev .el-icon-arrow-left,
+.el-pagination .btn-next .el-icon-arrow-right {
+  @apply tw-text-indigo-base tw-text-3xl tw-font-light;
 }
 
 .el-pagination .el-icon {
-  @apply tw-text-indigo-base !important;
+  @apply tw-text-indigo-base;
 }
 
 .el-pagination button[disabled="disabled"] .el-icon {
-  @apply text-indigo-darker !important;
+  @apply text-indigo-darker;
 }
 
 .el-button [class*="el-icon-"] + span {
@@ -172,11 +172,11 @@ button:focus {
 }
 
 .el-pager .number {
-  @apply tw-text-sm tw-text-indigo-darker tw-bg-transparent tw-font-normal tw-mx-0 tw-px-0 tw-min-w-0 tw-w-6 !important;
+  @apply tw-text-sm tw-text-indigo-darker tw-bg-transparent tw-font-normal tw-mx-0 tw-px-0 tw-min-w-0 tw-w-6;
 }
 
 .el-pager .number.active {
-  @apply tw-text-indigo-base tw-font-bold !important;
+  @apply tw-text-indigo-base tw-font-bold;
 }
 
 .el-button,

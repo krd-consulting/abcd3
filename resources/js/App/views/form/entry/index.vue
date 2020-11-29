@@ -38,6 +38,7 @@
                   </td>
                   <td class="tw-text-right">
                     <base-pagination
+                      class="pagination-white"
                       :current-page="params.page"
                       @current-change="handlePageChange($event); retrieveEntries(item.id)"
                       :page-size="params.perPage"
@@ -186,3 +187,26 @@
         }
     }
 </script>
+<style scoped>
+  td >>> .el-pagination .btn-next,
+  td >>> .el-pagination .btn-prev {
+    @apply tw-bg-indigo-darker tw-text-white;
+  }
+  td >>> .el-pagination button:disabled  {
+    @apply tw-bg-indigo-darker tw-text-white;
+  }
+  td >>> .el-pagination .el-pager .number{
+    @apply tw-text-gray-400;
+  }
+  td >>> .el-pagination .el-pager .number.active {
+    @apply tw-text-white;
+  }
+  td >>> .el-pagination .el-icon-arrow-right,
+  td >>> .el-pagination .el-icon-arrow-left {
+    @apply tw-text-white tw-text-3xl tw-font-light;
+  }
+  td >>> .el-pagination button:disabled .el-icon-arrow-right,
+  td >>> .el-pagination button:disabled .el-icon-arrow-left {
+    @apply tw-text-gray-400;
+  }
+</style>
