@@ -225,7 +225,8 @@ class Form extends Entity
                 'form_id',
                 'model_id'
             )
-            ->withTimestamps();
+            ->withTimestamps()
+            ->withPivot('required');
     }
 
     public function programs()
@@ -239,7 +240,8 @@ class Form extends Entity
                 'form_id',
                 'model_id'
             )
-            ->withTimestamps();
+            ->withTimestamps()
+            ->withPivot('required');
     }
 
     public function groups()
@@ -253,7 +255,8 @@ class Form extends Entity
                 'form_id',
                 'model_id'
             )
-            ->withTimestamps();
+            ->withTimestamps()
+            ->withPivot('required');
     }
 
     public function records()
@@ -267,7 +270,8 @@ class Form extends Entity
                 'form_id',
                 'model_id'
             )
-            ->withTimestamps();
+            ->withTimestamps()
+            ->withPivot('required');
     }
 
 

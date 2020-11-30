@@ -46,7 +46,7 @@ class Teams extends ResourceCollection
           'name' => 'Name',
           'slug' => 'name',
           'key' => 'name',
-        ]
+        ],
       ];
     }
 

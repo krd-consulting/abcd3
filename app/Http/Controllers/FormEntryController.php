@@ -11,6 +11,7 @@ use App\Http\Resources\Teams;
 use App\Team;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FormEntryController extends Controller
 {
@@ -23,6 +24,7 @@ class FormEntryController extends Controller
 
         $team = request('team');
         $perPage = request('perPage');
+        // TODO: only allow access if user has access to team supplied.
         $entries = $entry->where('team_id', $team)->paginate($perPage);
 
         $entries->load('target');
@@ -36,7 +38,26 @@ class FormEntryController extends Controller
 
     public function teams(Form $form)
     {
-        $teams = $form->teams()->get();
+        $entry = new FormEntry();
+        $entry->setTable($form->table_name);
+        $entries = $entry
+          ->select(
+            "$form->table_name.team_id",
+            DB::raw('count(*) as entry_count'),
+            DB::raw('MAX(created_at) as last_entry_created_at')
+          )
+          ->groupBy("$form->table_name.team_id")
+          ->orderBy("$form->table_name.team_id", 'ASC')
+          ->get();
+        $teams = $form->teams()->availableFor(auth()->user())->get();
+        $teams = $teams->map(function ($team, $key) use ($entries) {
+          $team['entries_history'] = [
+            'count' => $entries[$key]['entry_count'],
+            'last_entry_created_at' => $entries[$key]['last_entry_created_at'],
+          ];
+          return $team;
+        });
+
         return new Teams($teams);
     }
 

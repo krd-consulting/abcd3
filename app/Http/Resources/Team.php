@@ -20,6 +20,12 @@ class Team extends JsonResource
             'name' => $this->name,
             'display_value' => $this->name,
             'description' => $this->description,
+            'required_by_form' => $this->whenPivotLoaded('model_has_forms', function() {
+              return $this->pivot->required;
+            }),
+            'entries_history' => $this->whenPivotLoaded('model_has_forms', function() {
+              return $this->entries_history;
+            }),
             'fields' => $this->fields(),
             'profile_fields' => $this->profile_fields(),
             'available_record_types' => $this->available_record_types,
@@ -46,7 +52,15 @@ class Team extends JsonResource
             'slug' => 'description',
             'name' => 'Description',
             'key' => 'description'
-          ]
+          ],
+          'required_by_form' => $this->whenPivotLoaded('model_has_forms', function() {
+              return [
+                'value' => $this->pivot->required,
+                'slug' => 'required_by_form',
+                'name' => 'Required',
+                'key' => 'required_by_form'
+              ];
+            })
         ];
 
         return $fields;

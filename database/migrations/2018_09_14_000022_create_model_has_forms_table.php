@@ -17,6 +17,7 @@ class CreateModelHasFormsTable extends Migration
             $table->bigInteger('form_id')->unsigned();
             $table->bigInteger('model_id');
             $table->string('model_type');
+            $table->boolean('required');
             $table->timestamps();
 
             $table->foreign('form_id')->references('id')->on('forms');

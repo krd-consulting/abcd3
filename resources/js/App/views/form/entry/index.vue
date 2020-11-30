@@ -2,7 +2,7 @@
     <div>
       <grid
         :title="`${form.name} Entries`"
-        rowTitle="Entry"
+        rowTitle="Entries"
         :items="teams"
         :fields="fields"
         :sortBy.sync="params.sortBy"
@@ -21,17 +21,17 @@
           <th>History</th>
         </template>
 
-        <template v-slot:extra-columns-data>
+        <template v-slot:extra-columns-data="{ item }">
           <td>
-            <base-checkbox></base-checkbox>
+            <base-checkbox :checked="item.required_by_form"></base-checkbox>
           </td>
           <td>
             <base-select></base-select>
           </td>
           <td>
-            <span class="tw-font-semibold">5 entries</span>
+            <span class="tw-font-semibold">{{item.entries_history.count}} entries</span>
             <br>
-            <span>Last entry: Yesterday</span>
+            <span>Last Entry: {{item.entries_history.last_entry_created_at}}</span>
           </td>
         </template>
 

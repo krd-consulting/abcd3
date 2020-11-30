@@ -49,7 +49,7 @@
                 :data="item"
               >{{ item.fields[field.slug] && item.fields[field.slug].value }}</slot>
             </td>
-            <slot name="extra-columns-data" :data="item"></slot>
+            <slot name="extra-columns-data" :item="item"></slot>
             <td class="tw-w-1/12 tw-whitespace-no-wrap" v-if="hasAction">
               <grid-action
                 v-if="hasCollapsibleRows"
