@@ -8,6 +8,8 @@ use App\FormEntry;
 use App\Http\Requests\StoreFormEntry;
 use App\Http\Resources\FormEntries;
 use App\Http\Resources\Teams;
+use App\Record;
+use App\RecordType;
 use App\Team;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Illuminate\Http\Request;
@@ -91,6 +93,17 @@ class FormEntryController extends Controller
 
   		  $entry->fill($request->validated());
   		  $entry->save();
+
+        // Add form to team specified in entry.
+        $form->teams()->syncWithoutDetaching($request->input('team_id'));
+
+        // Add target entity (if it is a record) to team.
+        $targetEntity = (new $form->target_type->model);
+        if($targetEntity instanceof RecordType) {
+          Record::find($request->input('target_id'))
+            ->teams()
+            ->attach($request->input('team_id'));
+        }
 
   		  return [
   			   'data' => $entry
