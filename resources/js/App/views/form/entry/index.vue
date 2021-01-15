@@ -23,7 +23,7 @@
 
         <template v-slot:extra-columns-data="{ item }">
           <td>
-            <base-checkbox :checked="item.required_by_form"></base-checkbox>
+            <base-checkbox :checked="item.required_by_form == 1"></base-checkbox>
           </td>
           <td>
             <base-select></base-select>
@@ -77,6 +77,7 @@
                 <tr v-for="field in teamFields" :key="field.key">
                   <td class="tw-bg-indigo-lightest tw-font-semibold">{{ field.name }}</td>
                   <td class="tw-border-r" v-for="entry in entries" :key="entry.id">
+                    <!-- TODO: morph form entry fields -->
                     {{ entry[field.key] }}
                   </td>
                 </tr>
@@ -180,11 +181,17 @@
                     this.total = response.meta.total;
                     this.targetType = response.target_type;
                     this.teamFields = response.fields;
+
+                    this.retrieveFormFields();
                 });
             },
 
-            retrieveFields() {
-                this.fieldRequest.retrieve(this.$route.params.form);
+            retrieveFormFields() {
+                this.fieldRequest.retrieve(this.$route.params.form).then(response => {
+                  // Add field type to teamFields
+                  response.data.forEach(field =>
+                    this.teamFields[field.column_name]['type'] = field.type);
+                });
             },
 
             handlePageChange(page) {
@@ -195,7 +202,6 @@
         created() {
             this.retrieve();
             this.retrieveTeams();
-            this.retrieveFields();
         }
     }
 </script>

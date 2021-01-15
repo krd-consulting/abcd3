@@ -163,11 +163,7 @@
                   ></el-checkbox>
                 </el-checkbox-group>
               </div>
-              <div
-                v-else-if="
-              field.settings.options.split('\n').filter(item => item).length < 5
-            "
-              >
+              <div v-else-if="field.settings.options.split('\n').filter(item => item).length < 5">
                 <el-radio-group
                   v-model="entryData[field.column_name]"
                   class="tw-grid-cols-3 tw-grid tw-gap-4 tw-mt-2"
@@ -198,6 +194,14 @@
               class="tw-text-gray-light tw-text-xs tw-font-bold tw-ml-4 tw-mt-3"
               :class="{ 'tw-opacity-0': !field.settings.required }"
             >Required</div>
+            <component
+                v-if="field.type == 'FileField'"
+                class="tw-my-8"
+                @input="addFile($event.column_name, $event.value)"
+                :field="field"
+                :is="field.type"
+                :key="field.id">
+            </component>
           </div>
         </div>
         <div class="tw-flex tw-justify-end tw-mt-8">
