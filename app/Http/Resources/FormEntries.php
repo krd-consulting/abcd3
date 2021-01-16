@@ -17,9 +17,10 @@ class FormEntries extends ResourceCollection
 
     protected $fields;
 
-    public function __construct($resource, FormTargetType $targetType, Collection $fields)
+    public function __construct($resource, Form $form, FormTargetType $targetType, Collection $fields)
     {
         parent::__construct($resource);
+        $this->form = $form;
         $this->targetType = $targetType->name;
         $this->fields = $fields;
     }
@@ -55,6 +56,7 @@ class FormEntries extends ResourceCollection
               'name' => $field['title'],
               'slug' => $field['column_name'],
               'key' => $field['column_name'],
+              'type' => $field['type'],
             ]
           ];
         });

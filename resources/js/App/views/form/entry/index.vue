@@ -181,16 +181,6 @@
                     this.total = response.meta.total;
                     this.targetType = response.target_type;
                     this.teamFields = response.fields;
-
-                    this.retrieveFormFields();
-                });
-            },
-
-            retrieveFormFields() {
-                this.fieldRequest.retrieve(this.$route.params.form).then(response => {
-                  // Add field type to teamFields
-                  response.data.forEach(field =>
-                    this.teamFields[field.column_name]['type'] = field.type);
                 });
             },
 

@@ -128,6 +128,7 @@ class Form extends Entity
             Schema::create($this->table_name, function (Blueprint $table) use ($fields) {
                 $table->bigIncrements('id');
 
+                // TODO: make form types a constant property?
                 if($this->type == config('app.form_types.pre-post'))
                     $table->string('type');
 

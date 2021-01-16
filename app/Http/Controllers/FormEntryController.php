@@ -24,6 +24,19 @@ class FormEntryController extends Controller
 
         $entry->castFieldsToArray($form->fields()->whereIn('type', ['checkbox', 'file'])->pluck('column_name'));
 
+        // TODO: Morph field values
+        // Suppose field_1 is a field in $form,
+        // field_1 references a record
+        // field_1 should contain the following (in the json resonse):
+        // 'data' : {
+        //    ...,
+        //    'field_1': {
+        //      'value' : [ name of record ],
+        //      'links' : { 'to': [ link to record ] }
+        //    },
+        // if field_1 didn't reference a record, it should simply
+        // just have a blank links attribute.
+
         $team = request('team');
         $perPage = request('perPage');
         // TODO: only allow access if user has access to team supplied.
@@ -33,7 +46,7 @@ class FormEntryController extends Controller
         $entries->load('team');
         $entries->load('creator');
 
-        $entries = (new FormEntries($entries, $form->target_type, $form->fields));
+        $entries = (new FormEntries($entries, $form, $form->target_type, $form->fields));
 
         return $entries;
   	}
