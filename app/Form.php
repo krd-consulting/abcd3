@@ -53,15 +53,16 @@ class Form extends Entity
 
                 $value = Scope::find($request->scope_id)->value;
 
+                // TODO: change cases to be more flexible (i.e. 'case group:'')
                 switch($value) {
-                    case 3: // Group
-                        $this->groups()->attach($request->owner_id);
+                    case 3: // Add to Group
+                        $this->addToGroups([$request->owner_id]);
                         break;
-                    case 4: // Program
-                        $this->programs()->attach($request->owner_id);
+                    case 4: // Add to Program
+                        $this->addToPrograms([$request->owner_id]);
                         break;
-                    case 5: // Team
-                        $this->teams()->attach($request->owner_id);
+                    case 5: // Add to Team
+                        $this->addToTeams([$request->owner_id]);
                         break;
                 }
 
@@ -207,12 +208,12 @@ class Form extends Entity
 
     public function target_type()
     {
-    	return $this->belongsTo('App\FormTargetType');
+    	 return $this->belongsTo('App\FormTargetType');
     }
 
     public function target()
     {
-    	return $this->belongsTo($this->target_type->model);
+    	 return $this->belongsTo($this->target_type->model);
     }
 
     public function teams()
@@ -230,6 +231,19 @@ class Form extends Entity
             ->withPivot('required');
     }
 
+    /**
+     * Associate the current loaded form to the given teams.
+     * @param array $id team id(s)
+     * @param boolean $required determines if the form be should filled up
+     */
+    public function addToTeams($ids, $required = false)
+    {
+        // associate with teams
+        $this->teams()->syncWithoutDetaching(
+          array_fill_keys($ids, ['required' => $required])
+        );
+    }
+
     public function programs()
     {
         return
@@ -245,6 +259,19 @@ class Form extends Entity
             ->withPivot('required');
     }
 
+    /**
+     * Associate the current loaded form to the given programs.
+     * @param array $ids program id(s)
+     * @param boolean $required determines if the form be should filled up
+     */
+    public function addToPrograms($ids, $required = false)
+    {
+        // associate to programs
+        $this->programs()->syncWithoutDetaching(
+          array_fill_keys($ids, ['required' => $required])
+        );
+    }
+
     public function groups()
     {
         return
@@ -258,6 +285,19 @@ class Form extends Entity
             )
             ->withTimestamps()
             ->withPivot('required');
+    }
+
+    /**
+     * Associate the current loaded form to the given groups.
+     * @param array $ids group id(s)
+     * @param boolean $required determines if the form be should filled up
+     */
+    public function addToGroups($ids, $required = false)
+    {
+        // associate with groups
+        $this->groups()->syncWithoutDetaching(
+          array_fill_keys($ids, ['required' => $required])
+        );
     }
 
     public function records()
