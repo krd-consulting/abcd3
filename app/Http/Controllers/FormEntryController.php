@@ -109,7 +109,11 @@ class FormEntryController extends Controller
   		  $entry->save();
 
         // Add form to team specified in entry.
-        $form->teams()->syncWithoutDetaching($request->input('team_id'));
+        $form->teams()->syncWithoutDetaching([
+            $request->input('team_id') => [
+              'required' => false
+            ]
+        ]);
 
         // Add target entity (if it is a record) to team.
         $targetEntity = (new $form->target_type->model);

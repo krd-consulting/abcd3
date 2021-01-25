@@ -98,12 +98,12 @@ export default {
     //   }
     // };
     if (!this.target) {
-      this.$router.replace("/forms");
+      this.$router.replace("/forms/");
     }
   },
   methods: {
     goBack() {
-      this.$router.replace("/forms");
+      this.$router.replace("/forms/");
     },
     async saveForm() {
       const formData = {

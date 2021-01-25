@@ -6,7 +6,7 @@
       <div
         class="tw-w-full tw-flex tw-justify-end tw-py-2 tw-px-4 tw-border-b-2 tw-border-gray-base tw-mb-8"
       >
-        <base-button :disabled="disableSubmit" gray @click="$router.replace('/forms')">Discard</base-button>
+        <base-button :disabled="disableSubmit" gray @click="$router.replace('/forms/')">Discard</base-button>
         <base-button :disabled="disableSubmit" @click="submit(false)">Save form</base-button>
       </div>
       <div class="form-preview">
@@ -512,7 +512,7 @@ export default {
           if (createAnother) {
             window.location.reload();
           } else {
-            this.$router.replace("/forms");
+            this.$router.replace("/forms/");
           }
         })
         .catch(error => {
