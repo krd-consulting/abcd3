@@ -100,12 +100,3 @@ export default {
     created() {}
 };
 </script>
-<style>
-    .el-dialog {
-        @apply tw-w-1/3;
-    }
-
-    .el-switch.is-checked .el-switch__core {
-        @apply tw-bg-indigo-base tw-border-indigo-base;
-    }
-</style>

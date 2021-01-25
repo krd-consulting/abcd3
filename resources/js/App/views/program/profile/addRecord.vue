@@ -19,12 +19,6 @@
             <template v-slot:caption>
                 <p>Check available records to add them to the program or uncheck current records to remove them from the program.</p>
             </template>
-            <template v-slot:current-items-title>
-                Current Records
-            </template>
-            <template v-slot:available-items-title>
-                Available Records
-            </template>
             <template v-slot:current-item-title="{ item }">
                 <primary-data :record="item" :fields="fields"/>
             </template>
@@ -111,6 +105,7 @@
                 this.programRecordsRequest.retrieve(this.programId, this.recordType).then(response => {
                     this.selected = response.data;
                     this.selectedParams.total = response.meta.total;
+                    this.selected.total = this.selectedParams.total;
                     this.fields = response.fields;
                 });
             },

@@ -130,7 +130,7 @@ button:focus {
 
 .el-dialog__header,
 .el-message-box__header {
-  @apply tw-bg-indigo-darker tw-text-white tw-text-lg tw-py-5 tw-text-center !important;
+  @apply tw-bg-indigo-darker tw-text-white tw-text-lg tw-py-5 tw-text-center;
 }
 
 .el-message-box__title {
@@ -245,7 +245,11 @@ button:focus {
 } */
 
 .el-input__inner {
-  @apply tw-text-sm tw-border-gray-lighter !important;
+  @apply tw-text-sm tw-border-gray-lighter;
+}
+
+.transfer-search > .el-input__inner {
+  @apply tw-border-transparent;
 }
 
 .el-input__inner[type="number"] {

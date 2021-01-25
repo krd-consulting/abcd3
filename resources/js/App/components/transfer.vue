@@ -12,19 +12,21 @@
         </div>
         <div class="tw-flex tw-text-gray-800">
             <div class="tw-flex-1 tw-pr-2">
-                <div class="tw-border tw-border-blue-lighter tw-rounded tw-overflow-y-hidden" style="max-height: 300px;">
-                    <div class="tw-flex tw-justify-between tw-items-center tw-bg-blue-400est tw-text-blue-600 tw-py-2 tw-px-2 tw-rounded-t">
+                <div class="tw-border tw-border-blue-lighter tw-rounded tw-overflow-y-hidden">
+                    <div>
+                      <slot name="current-items-options">
+                          <base-input
+                              v-model="selectedParams.search"
+                              class="transfer-search"
+                              @input="searchSelected(selectedParams.search)"
+                              placeholder="Search">
+                              <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                          </base-input>
+                      </slot>
+                    </div>
+                    <div class="tw-flex tw-justify-between tw-items-center tw-px-2 tw-rounded-t">
                         <slot name="current-items-title">
-                            <span>Current Items</span>
-                        </slot>
-                        <slot name="current-items-options">
-                            <base-input
-                                v-model="selectedParams.search"
-                                @input="searchSelected(selectedParams.search)"
-                                class="tw-w-1/2"
-                                placeholder="Search">
-                                <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                            </base-input>
+                            <span>Your List ({{ selectedParams.total }})</span>
                         </slot>
                     </div>
                     <div class="tw-h-64 tw-overflow-y-auto">
@@ -33,9 +35,6 @@
                         </div>
                         <div v-for="item in selected" class="tw-py-2 tw-px-2 tw-border-b tw-border-blue-lighter">
                             <label class="tw-flex">
-                                <div class="tw-flex-initial">
-                                    <base-checkbox :value="true" @change="remove(item.id)"/>
-                                </div>
                                 <div class="tw-flex-1 tw-pl-2">
                                     <div>
                                         <span class="tw-text-base">
@@ -47,6 +46,9 @@
                                             <slot name="current-item-subtitle" :item="item"></slot>
                                         </span>
                                     </div>
+                                </div>
+                                <div class="tw-flex-initial">
+                                    <base-checkbox :value="true" @change="remove(item.id)"/>
                                 </div>
                             </label>
                         </div>
@@ -67,18 +69,20 @@
             </div>
             <div class="tw-flex-1 tw-pl-2">
                 <div class="tw-rounded tw-border tw-overflow-y-hidden" style="max-height: 300px;">
-                    <div class="tw-flex tw-justify-between tw-items-center tw-bg-gray-100 tw-text-gray-800 tw-py-2 tw-px-2 tw-rounded-t">
+                    <div>
+                      <slot name="available-items-options">
+                          <base-input
+                              v-model="notSelectedParams.search"
+                              @input="searchNotSelected(notSelectedParams.search)"
+                              class="transfer-search"
+                              placeholder="Search">
+                              <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                          </base-input>
+                      </slot>
+                    </div>
+                    <div class="tw-flex tw-justify-between tw-items-center tw-py-2 tw-px-2 tw-rounded-t">
                         <slot name="available-items-title">
-                            <span>Available Items</span>
-                        </slot>
-                        <slot name="available-items-options">
-                            <base-input
-                                v-model="notSelectedParams.search"
-                                @input="searchNotSelected(notSelectedParams.search)"
-                                class="tw-w-1/2"
-                                placeholder="Search">
-                                <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                            </base-input>
+                            <span>Available Options ({{ notSelectedParams.total }})</span>
                         </slot>
                     </div>
                     <div class="tw-h-64 tw-overflow-y-auto">
@@ -89,9 +93,6 @@
                         </div>
                         <div v-for="item in notSelected" class="tw-py-2 tw-px-2 tw-border-b">
                             <label class="tw-flex">
-                                <div class="tw-flex-initial">
-                                    <base-checkbox :value="false" @change="add(item.id)"/>
-                                </div>
                                 <div class="tw-flex-1 tw-pl-2">
                                     <div>
                                         <span class="tw-text-base">
@@ -103,6 +104,9 @@
                                             <slot name="available-item-subtitle" :item="item"></slot>
                                         </span>
                                     </div>
+                                </div>
+                                <div class="tw-flex-initial">
+                                    <base-checkbox :value="false" @change="add(item.id)"/>
                                 </div>
                             </label>
                         </div>
@@ -181,3 +185,18 @@
         }
     }
 </script>
+<!-- Not really working: -->
+<style scoped>
+    .el-dialog__header,
+    .el-message-box__header {
+      @apply tw-bg-indigo-darker tw-text-white tw-text-lg tw-py-5 tw-text-left;
+    }
+
+    .el-switch.is-checked .el-switch__core {
+        @apply tw-bg-indigo-base tw-border-indigo-base;
+    }
+
+    .transfer-search .el-input__inner {
+      @apply tw-border-transparent;
+    }
+</style>

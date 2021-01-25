@@ -21610,12 +21610,12 @@ button:focus {
 
 .el-dialog__header,
 .el-message-box__header {
-  background-color: #71779B !important;
-  color: #fff !important;
-  font-size: 1.125rem !important;
-  padding-top: 1.25rem !important;
-  padding-bottom: 1.25rem !important;
-  text-align: center !important;
+  background-color: #71779B;
+  color: #fff;
+  font-size: 1.125rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  text-align: center;
 }
 
 .el-message-box__title {
@@ -21761,8 +21761,12 @@ button:focus {
 } */
 
 .el-input__inner {
-  font-size: 0.875rem !important;
-  border-color: #E5E5E5 !important;
+  font-size: 0.875rem;
+  border-color: #E5E5E5;
+}
+
+.transfer-search > .el-input__inner {
+  border-color: transparent;
 }
 
 .el-input__inner[type="number"] {

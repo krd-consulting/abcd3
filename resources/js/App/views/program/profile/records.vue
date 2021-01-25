@@ -29,7 +29,7 @@
           </base-select>
 
           <div class="tw-col-start-4 tw-text-right">
-            <base-button>Link {{ selectedRecordType.name }}</base-button>
+            <base-button @click="addRecord">Link {{ selectedRecordType.name }}</base-button>
           </div>
         </div>
 
@@ -259,6 +259,8 @@
                 this.selectedRecordType = this.availableRecordTypes[0];
               });
             });
+
+            this.addRecord();
         },
     }
 </script>

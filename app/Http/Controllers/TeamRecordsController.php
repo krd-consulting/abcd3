@@ -40,7 +40,7 @@ class TeamRecordsController extends Controller
         $this->authorize('write', $record);
         $this->authorize('write', $team);
 
-        $team->records()->attach($record);
+        $team->records()->syncWithoutDetaching($record);
 
         return $record;
     }
@@ -66,7 +66,7 @@ class TeamRecordsController extends Controller
             $caseloadPrograms
                 ->exists(),
             422,
-            "Can't remove record from team. It belongs to a caseload in programs: " 
+            "Can't remove record from team. It belongs to a caseload in programs: "
             . $caseloadPrograms->get()->implode('pivot.program.name', ', ')
         );
 
