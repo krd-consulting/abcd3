@@ -156,8 +156,8 @@
                 });
 
                 request.store(
-                    this.$route.params.program,
-                    this.$route.params.recordType,
+                    this.programId,
+                    this.recordType,
                     id
                 ).then((response) => {
                     this.open();
@@ -171,8 +171,8 @@
 
             remove(id) {
                 this.programRecordsRequest.destroy(
-                    this.$route.params.program,
-                    this.$route.params.recordType,
+                    this.programId,
+                    this.recordType,
                     id
                 ).then((response) => {
                     this.open();
