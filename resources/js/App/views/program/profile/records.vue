@@ -259,8 +259,6 @@
                 this.selectedRecordType = this.availableRecordTypes[0];
               });
             });
-
-            this.addRecord();
         },
     }
 </script>
