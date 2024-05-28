@@ -23,9 +23,12 @@ class ProgramRecordsController extends Controller
     {
         $records = $program
             ->records($recordType->identity)
-            // ->withLatestProgramStatuses($recordType, $program)
-            // ->with('cases', 'groups')
+            ->withLatestProgramStatuses($recordType->identity, $program)
             ->only($recordType);
+            // join statuses latest status
+            // ->leftJoin('program_client_status', 'program_record.id', '=', 'program_client_status.program_record_id');
+
+        // return $records->get();
 
         // Search
         $search = request('search');
