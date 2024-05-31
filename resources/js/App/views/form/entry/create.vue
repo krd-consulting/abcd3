@@ -155,15 +155,13 @@
                   class="tw-grid-cols-3 tw-grid tw-gap-4 tw-mt-2"
                 >
                   <el-checkbox
-                    v-for="option in field.settings.options
-                  .split('\n')
-                  .filter(item => item)"
+                    v-for="option in field.settings.options.split('\n')"
                     :key="option"
                     :label="option"
                   ></el-checkbox>
                 </el-checkbox-group>
               </div>
-              <div v-else-if="field.settings.options.split('\n').filter(item => item).length < 5">
+              <div v-else-if="field.settings.options.split('\n').length < 5">
                 <el-radio-group
                   v-model="entryData[field.column_name]"
                   class="tw-grid-cols-3 tw-grid tw-gap-4 tw-mt-2"
@@ -257,7 +255,7 @@ export default {
         },
         target: {
           name: null
-        }
+        },
       },
       teamRequestParams: {
         ascending: true,
@@ -461,6 +459,14 @@ export default {
       return this.request.show(form).then(response => {
         this.form = response.data;
         console.log(this.form);
+
+        // add default values to entry data
+        this.entryData = this.form.field_layout.reduce((entries, field) => {
+            if(field.settings.single)
+              return (entries[field.column_name] = "", entries)
+            
+            return (entries[field.column_name] = [], entries)
+          }, {})
       });
     },
 
