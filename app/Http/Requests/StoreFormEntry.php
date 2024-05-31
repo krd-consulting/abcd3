@@ -22,7 +22,23 @@ class StoreFormEntry extends FormRequest
 
     protected function prepareForValidation()
     {
+        $this->castMultiValueFields();
         $this->castDateFields();
+    }
+
+    // Apparently, in order to store an array in the db, you need
+    // to serialize the value to json before saving (to a TEXT column).
+    protected function castMultiValueFields() {
+        $toBeMerged = [];
+
+        foreach($this->form->fields as $field) {
+            if(!$field->settings['single']) {
+                $columnName = $field->column_name;
+                $toBeMerged[$columnName] = json_encode($this->$columnName);
+            }
+        }
+
+        $this->merge($toBeMerged);
     }
 
     protected function castDateFields()

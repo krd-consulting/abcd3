@@ -98,6 +98,11 @@ class FormField extends Model
 
     public function getColumnTypeAttribute()
     {
+        // this allows a multi value field to store a php array (after being encoded as json)
+        if(!$this->settings['single']) {
+            return 'text';
+        }
+        
         if(
             $this->type == 'TextField' &&
             !empty($this->target_type) &&
