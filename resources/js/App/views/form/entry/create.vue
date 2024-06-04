@@ -195,7 +195,7 @@
             <component
                 v-if="field.type == 'FileField'"
                 class="tw-my-8"
-                @input="addFile($event.column_name, $event.value)"
+                @change="changeFiles($event.column_name, $event.value)"
                 :field="field"
                 :is="field.type"
                 :key="field.id">
@@ -431,12 +431,8 @@ export default {
       };
     },
 
-    addFile(field, fileId) {
-      if (this.entryData[field] == null) {
-        this.entryData[field] = [fileId];
-      } else {
-        this.entryData[field].push(fileId);
-      }
+    changeFiles(field, files) {
+      this.entryData[field] = [...files];
     },
 
     retrieveTeams(keywords) {
