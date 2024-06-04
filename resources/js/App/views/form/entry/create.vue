@@ -462,10 +462,10 @@ export default {
 
         // add default values to entry data
         this.entryData = this.form.field_layout.reduce((entries, field) => {
-            if(field.settings.single)
-              return (entries[field.column_name] = "", entries)
+            if(!field.settings.single || field.type === 'FileField')
+              return (entries[field.column_name] = [], entries)
             
-            return (entries[field.column_name] = [], entries)
+            return (entries[field.column_name] = "", entries)
           }, {})
       });
     },
