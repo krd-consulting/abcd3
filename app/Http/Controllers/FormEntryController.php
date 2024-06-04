@@ -10,6 +10,7 @@ use App\Http\Resources\FormEntries;
 use App\Http\Resources\Teams;
 use App\Record;
 use App\RecordType;
+use App\FieldTargetType;
 use App\Team;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Illuminate\Http\Request;
@@ -23,6 +24,17 @@ class FormEntryController extends Controller
         $entry->setTable($form->table_name);
 
         $entry->castFieldsToArray($form->fields()->whereIn('type', ['checkbox', 'file'])->pluck('column_name'));
+
+        $referencedFields = $form->fields()->whereNotNull('reference_target_type_id')->get();
+
+        foreach ($referencedFields as $field) {
+          $referredModel = FieldTargetType::find($field->reference_target_type_id)->model;
+          $object = new $referredModel;
+          $referredTable = $object->getTable();
+          $referredColumn = $object->getKeyName();
+          // TODO: problem is that referenced table columns conflict/replaced by form entry table.
+          $entry = $entry->leftJoin($referredTable, "$referredTable.$referredColumn", '=', "$form->table_name.$field->column_name");
+        }
 
         // TODO: Morph field values
         // Suppose field_1 is a field in $form,
@@ -40,11 +52,13 @@ class FormEntryController extends Controller
         $team = request('team');
         $perPage = request('perPage');
         // TODO: only allow access if user has access to team supplied.
-        $entries = $entry->where('team_id', $team)->paginate($perPage);
+        $entries = $entry->where("$form->table_name.team_id", $team)->paginate($perPage);
 
         $entries->load('target');
         $entries->load('team');
         $entries->load('creator');
+
+        return $entries;
 
         $entries = (new FormEntries($entries, $form, $form->target_type, $form->fields));
 
@@ -91,11 +105,11 @@ class FormEntryController extends Controller
                 continue;
             }
 
-            $attachmentIds = $request->input($field->column_name);
+            $attachmentPaths = $request->input($field->column_name);
             $attachments = [];
 
-            foreach($attachmentIds as $id) {
-                $attachments[] = Attachment::find($id);
+            foreach($attachmentPaths as $path) {
+                $attachments[] = Attachment::where('path', $path)->first();
             }
 
             $target = $form->target;

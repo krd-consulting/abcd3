@@ -32,7 +32,7 @@ class AttachmentController extends Controller
 
         return [
             'data' => [
-                'id' => (Attachment::saveFile(request()->file('file')))->id
+                'path' => (Attachment::saveFile(request()->file('file')))->path
             ]
         ];
     }

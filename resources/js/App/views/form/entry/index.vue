@@ -78,7 +78,16 @@
                   <td class="tw-bg-indigo-lightest tw-font-semibold">{{ field.name }}</td>
                   <td class="tw-border-r" v-for="entry in entries" :key="entry.id">
                     <!-- TODO: morph form entry fields -->
-                    {{ entry[field.key] }}
+                    <!-- case for file field -->
+                    <div v-if="field.type === 'file'">
+                      <a v-for="attachment in entry[field.key]" :href="`/${attachment}`" target="_blank">
+                        {{ attachment.split('/')[1] }}
+                      </a>
+                    </div>
+                    <!-- case for reference -->
+                    <div v-else>
+                      {{ entry[field.key] }}
+                    </div>
                   </td>
                 </tr>
               </tbody>
