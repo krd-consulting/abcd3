@@ -57,11 +57,13 @@ class FormEntry extends JsonResource
             $key = $field['slug'];
 
             $item[$key] = [
-                'raw_value' => $item[$key]
+                'raw_value' => $item[$key],
+                'value' => $item[$key]
             ];
 
             if(!$field['target_type']) continue;
 
+            // replace 'value' with referenced value if there is any
             $item[$key]['value'] = $item[$key.'_reference_value'];
             unset($item[$key.'_reference_value']);
             $item[$key]['secondary_value'] = $item[$key.'_reference_secondary_value'];
