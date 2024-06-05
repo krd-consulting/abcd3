@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Contracts\FormReference;
+use App\Contracts\FormFieldReference;
 use App\Model;
 use App\Record;
 use App\RecordType;
@@ -12,7 +13,7 @@ use App\Traits\Models\Sort;
 use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Group extends Entity implements FormReference
+class Group extends Entity implements FormReference, FormFieldReference
 {
     use FormReferenceTrait;
 
@@ -87,5 +88,13 @@ class Group extends Entity implements FormReference
         return $query->whereHas('records', function ($query) use ($records) {
                     return $query->whereIn('record_id', $records);
                 });
+    }
+
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn) {
+        return $formEntryQueryBuilder
+            ->leftJoin('groups', "groups.id", '=', "$formTable.$fieldColumn")
+            ->leftJoin('programs', 'programs.id' , '=', 'groups.program_id')
+            ->addSelect('groups.name as field_1_reference_value')
+            ->addSelect('programs.name as field_1_reference_secondary_value');
     }
 }
