@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Contracts\FormReference;
+use App\Contracts\FormFieldReference;
 use App\Entity;
 use App\Record;
 use App\RecordIdentity;
@@ -10,7 +11,7 @@ use App\RecordType;
 use App\Traits\Models\FormReference as FormReferenceTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Program extends Entity implements FormReference
+class Program extends Entity implements FormReference, FormFieldReference
 {
     use FormReferenceTrait;
 
@@ -197,5 +198,11 @@ class Program extends Entity implements FormReference
     private function getRecordPivotModel(RecordType $recordType)
     {
         return "App\Program" . $recordType->identity->model;
+    }
+
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn) {
+        return $formEntryQueryBuilder
+            ->leftJoin('programs', "programs.id", '=', "$formTable.$fieldColumn")
+            ->select("$formTable.*", 'programs.name as field_1_value');
     }
 }

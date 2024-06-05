@@ -27,15 +27,19 @@ class FormEntryController extends Controller
 
         $referencedFields = $form->fields()->whereNotNull('reference_target_type_id')->get();
 
+        // join references
         foreach ($referencedFields as $field) {
-          // $referredModel = FieldTargetType::find($field->reference_target_type_id)->model;
-          // $object = new $referredModel;
-          // $referredTable = $object->getTable();
+          $referredModel = FieldTargetType::find($field->reference_target_type_id)->model;
+          $object = new $referredModel;
+          $referredTable = $object->getTable();
           // $referredColumn = $object->getKeyName();
           // TODO: problem is that referenced table columns conflict/replaced by form entry table.
           // plan: create a contract for entities that can be referenced by a field to specify
           // which columns to rename and add to this query.
           // $entry = $entry->leftJoin($referredTable, "$referredTable.$referredColumn", '=', "$form->table_name.$field->column_name");
+          
+          // what if:
+          $entry = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name);
         }
 
         // TODO: Morph field values
