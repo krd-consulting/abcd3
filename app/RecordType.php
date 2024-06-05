@@ -5,13 +5,15 @@ namespace App;
 use App\Model;
 
 use App\Contracts\FormReference;
+use App\Contracts\FormFieldReference;
 use App\Traits\Models\Active;
 use App\Traits\Models\FormReference as FormReferenceTrait;
 use Illuminate\Contracts\Routing\UrlRoutable;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
+use Illuminate\Support\Facades\DB;
 
-class RecordType extends Model implements FormReference, UrlRoutable
+class RecordType extends Model implements FormReference, UrlRoutable, FormFieldReference
 {
     use HasSlug, FormReferenceTrait, Active;
 
@@ -84,5 +86,13 @@ class RecordType extends Model implements FormReference, UrlRoutable
     public function getFormReferenceClass()
     {
         return 'App\Record';
+    }
+
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn) {
+        return $formEntryQueryBuilder
+            ->leftJoin('records', "records.id", '=', "$formTable.$fieldColumn")
+            ->leftJoin('record_types', 'record_types.id' , '=', 'records.record_type_id')
+            ->addSelect(DB::Raw("CONCAT(records.field_1_value, ' ', records.field_2_value) as field_1_reference_value"))
+            ->addSelect('record_types.name as field_1_reference_secondary_value');
     }
 }

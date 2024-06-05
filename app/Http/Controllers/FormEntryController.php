@@ -32,29 +32,9 @@ class FormEntryController extends Controller
           $referredModel = FieldTargetType::find($field->reference_target_type_id)->model;
           $object = new $referredModel;
           $referredTable = $object->getTable();
-          // $referredColumn = $object->getKeyName();
-          // TODO: problem is that referenced table columns conflict/replaced by form entry table.
-          // plan: create a contract for entities that can be referenced by a field to specify
-          // which columns to rename and add to this query.
-          // $entry = $entry->leftJoin($referredTable, "$referredTable.$referredColumn", '=', "$form->table_name.$field->column_name");
-          
-          // what if:
           $entry = $entry->select("$form->table_name.*");
           $entry = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name);
         }
-
-        // TODO: Morph field values
-        // Suppose field_1 is a field in $form,
-        // field_1 references a record
-        // field_1 should contain the following (in the json resonse):
-        // 'data' : {
-        //    ...,
-        //    'field_1': {
-        //      'value' : [ name of record ],
-        //      'links' : { 'to': [ link to record ] }
-        //    },
-        // if field_1 didn't reference a record, it should simply
-        // just have a blank links attribute.
 
         $team = request('team');
         $perPage = request('perPage');

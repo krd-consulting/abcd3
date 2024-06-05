@@ -80,7 +80,7 @@
                     <!-- TODO: morph form entry fields -->
                     <!-- case for file field -->
                     <div v-if="field.type === 'file'">
-                      <a v-for="attachment in (entry[field.key].raw_value)" :href="`/${attachment}`" target="_blank">
+                      <a v-for="attachment in (entry[field.key].value)" :href="`/${attachment}`" target="_blank">
                         {{ attachment.split('/')[1] }}
                       </a>
                     </div>
