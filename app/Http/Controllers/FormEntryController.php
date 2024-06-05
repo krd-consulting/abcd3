@@ -39,6 +39,7 @@ class FormEntryController extends Controller
           // $entry = $entry->leftJoin($referredTable, "$referredTable.$referredColumn", '=', "$form->table_name.$field->column_name");
           
           // what if:
+          $entry = $entry->select("$form->table_name.*");
           $entry = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name);
         }
 
@@ -63,8 +64,14 @@ class FormEntryController extends Controller
         $entries->load('target');
         $entries->load('team');
         $entries->load('creator');
+        $form->load('fields.target_type');
 
-        $entries = (new FormEntries($entries, $form, $form->target_type, $form->fields));
+        $entries = (new FormEntries(
+          $entries, 
+          $form, 
+          $form->target_type, 
+          $form->fields
+        ));
 
         return $entries;
   	}

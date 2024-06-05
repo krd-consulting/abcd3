@@ -12,6 +12,8 @@ class FormEntry extends JsonResource
         'App\Group' => 'App\Http\Resources\FormEntry\Group'
     ];
 
+    private $formFields = null;
+
     /**
      * Transform the resource into an array.
      *
@@ -30,7 +32,11 @@ class FormEntry extends JsonResource
 
         $response['links'] = [
           'to' => ''
-        ];
+        ];        
+
+        if($this->formFields) {
+            $response = $this->formatFormFieldValues($response);
+        }
 
         return $response;
     }
@@ -44,5 +50,28 @@ class FormEntry extends JsonResource
 
             return (new $class($this->target));
         });
+    }
+
+    private function formatFormFieldValues($item) {
+        foreach($this->formFields as $field) {
+            $key = $field['slug'];
+
+            $item[$key] = [
+                'raw_value' => $item[$key]
+            ];
+
+            if(!$field['target_type']) continue;
+
+            $item[$key]['value'] = $item[$key.'_reference_value'];
+            unset($item[$key.'_reference_value']);
+            $item[$key]['secondary_value'] = $item[$key.'_reference_secondary_value'];
+            unset($item[$key.'_reference_secondary_value']);
+        }
+
+        return $item;
+    }
+
+    public function setFormFields($formFields) {
+        $this->formFields = $formFields;
     }
 }

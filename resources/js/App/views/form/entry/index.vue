@@ -84,9 +84,8 @@
                         {{ attachment.split('/')[1] }}
                       </a>
                     </div>
-                    <!-- case for reference -->
                     <div v-else>
-                      {{ entry[field.key] }}
+                      {{ entry[field.key].value }}
                     </div>
                   </td>
                 </tr>

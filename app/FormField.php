@@ -63,12 +63,12 @@ class FormField extends Model
 
     public function target_type()
     {
-    	return $this->belongsTo('App\FieldTargetType');
+    	return $this->belongsTo('App\FieldTargetType', 'reference_target_type_id');
     }
 
     public function target()
     {
-    	return $this->belongsTo($this->target_type->model);
+    	return $this->belongsTo($this->target_type->model, 'reference_target_id');
     }
 
     public function setTypeAttribute($value)

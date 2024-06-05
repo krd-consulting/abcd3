@@ -203,6 +203,8 @@ class Program extends Entity implements FormReference, FormFieldReference
     public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn) {
         return $formEntryQueryBuilder
             ->leftJoin('programs', "programs.id", '=', "$formTable.$fieldColumn")
-            ->select("$formTable.*", 'programs.name as field_1_value');
+            ->leftJoin('teams', 'teams.id' , '=', 'programs.team_id')
+            ->addSelect('programs.name as field_1_reference_value')
+            ->addSelect('teams.name as field_1_reference_secondary_value');
     }
 }
