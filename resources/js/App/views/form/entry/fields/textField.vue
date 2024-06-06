@@ -11,7 +11,7 @@
     remote
     :remote-method="retrieveFieldTargetItems"
     :name="fieldData.column_name"
-    :placeholder="`Select ${getTargetType(fieldData.reference_target_type_id).singular_name}`"
+    :placeholder="`Select from ${targetType.name}`"
   >
     <el-option
       v-for="(item, index) in fieldTargetItems"
@@ -33,7 +33,9 @@
 
     data() {
       return {
-        targetTypes: [],
+        targetType: {
+          name: 'database'
+        },
         fieldTargetItems: [],
       };
     },
@@ -52,32 +54,26 @@
           }
         });
 
-        request.retrieve(this.fieldData.reference_target_id).then(response => {
+        request.retrieve(this.fieldData.reference_target_type_id).then(response => {
           this.fieldTargetItems = response.data;
         });
       },
 
-      getTargetType(id) {
-        console.log(`target types:`);
-        console.log(this.targetTypes);
-
-        return this.targetTypes.filter(targetType => {
-          return targetType.id == id;
-        })[0];
-      },
-
-      retrieveTargetTypes() {
+      retrieveTargetType() {
         const request = new FormFieldTargetTypesRequest({});
 
-        request.retrieve().then(response => {
-          this.targetTypes =  response.data;
+        request.show(
+          this.fieldData.reference_target_type_id, 
+          this.fieldData.reference_target_id
+        ).then(response => {
+          this.targetType =  response.data;
         });
       },
 
     },
 
     created() {
-      this.retrieveTargetTypes();
+      this.retrieveTargetType();
     }
   }
 </script>

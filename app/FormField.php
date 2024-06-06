@@ -16,7 +16,7 @@ class FormField extends Model
 
     protected $guarded = [];
 
-    protected $appends = ['target'];
+    protected $appends = ['target', 'name'];
 
     public $timestamps = false;
 
@@ -123,6 +123,11 @@ class FormField extends Model
         return null;
 
       return $this->reference_target_type;
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->form->name . " :: $this->title";
     }
 
     public function scopeFilter($query, $terms)

@@ -19,8 +19,15 @@ class FormFieldTargetTypeController extends Controller
 
     public function show(FieldTargetType $targetType)
     {
-        return [
-            'data' => $targetType
+        $response = [
+            'data' => collect($targetType)
         ];
+
+        if(request('target_id')) {
+            $model = new $targetType->model;
+            $response['data']['name'] = $model::find(request('target_id'))->name;
+        }
+
+        return $response;
     }
 }
