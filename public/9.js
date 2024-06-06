@@ -1,8 +1,8 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[9],{
 
-/***/ "./resources/js/api/EntityTypeFormsRequest.js":
+/***/ "./resources/js/api/FormFieldValuesRequest.js":
 /*!****************************************************!*\
-  !*** ./resources/js/api/EntityTypeFormsRequest.js ***!
+  !*** ./resources/js/api/FormFieldValuesRequest.js ***!
   \****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -34,28 +34,28 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var EntityTypeForms = /*#__PURE__*/function (_Request) {
-  _inherits(EntityTypeForms, _Request);
+var FormFieldValues = /*#__PURE__*/function (_Request) {
+  _inherits(FormFieldValues, _Request);
 
-  var _super = _createSuper(EntityTypeForms);
+  var _super = _createSuper(FormFieldValues);
 
-  function EntityTypeForms() {
-    _classCallCheck(this, EntityTypeForms);
+  function FormFieldValues() {
+    _classCallCheck(this, FormFieldValues);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(EntityTypeForms, [{
+  _createClass(FormFieldValues, [{
     key: "retrieve",
-    value: function retrieve(entityType, id) {
-      return this.get("/api/forms/entity-types/".concat(entityType, "/").concat(id));
+    value: function retrieve(field) {
+      return this.get("/api/form-fields/".concat(field, "/values"));
     }
   }]);
 
-  return EntityTypeForms;
+  return FormFieldValues;
 }(_core_Request__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (EntityTypeForms);
+/* harmony default export */ __webpack_exports__["default"] = (FormFieldValues);
 
 /***/ })
 

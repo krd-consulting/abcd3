@@ -16,17 +16,18 @@
     <el-option
       v-for="(item, index) in fieldTargetItems"
       :key="index"
-      :label="item.value"
+      :label="item.label"
       :value="item.value"
     ></el-option>
   </el-select>
 </template>
 <script>
   import FormFieldTargetTypesRequest from "@/api/FormFieldTargetTypeRequest";
-  import FormFieldEntryRequest from "@/api/FormFieldEntryRequest";
+  import FormFieldValuesRequest from "@/api/FormFieldValuesRequest";
 
   export default {
     props: {
+      fieldId: '',
       fieldData: Object,
       value: ''
     },
@@ -46,7 +47,7 @@
         // what if
         // 1. give to endpoint: the field information
         // 2. give back right items
-        const request = new FormFieldEntryRequest();
+        const request = new FormFieldValuesRequest();
 
         request.setFields({
           params: {
@@ -54,7 +55,7 @@
           }
         });
 
-        request.retrieve(this.fieldData.reference_target_type_id).then(response => {
+        request.retrieve(this.fieldId).then(response => {
           this.fieldTargetItems = response.data;
         });
       },

@@ -117,7 +117,7 @@
               v-model="entryData[field.column_name]"
             ></base-input>
             <template v-if="field.type === 'TextField'">
-              <textField :field-data="field" v-model="entryData[field.column_name]"></textField>
+              <textField :field-id="fieldIds[field.column_name]" :field-data="field" v-model="entryData[field.column_name]"></textField>
             </template>
             <base-input
               type="textarea"
@@ -245,6 +245,7 @@ export default {
   data() {
     return {
       request: new Request({}),
+      fieldIds: [],
       formCompletedFor: "",
       entryRequest: new EntryRequest({}),
       teamRequest: new TeamRequest(),
@@ -463,6 +464,11 @@ export default {
             
             return (entries[field.column_name] = "", entries)
           }, {})
+        
+        //
+        this.fieldIds = this.form.form_fields.reduce((fields, field) => {
+          return (fields[field.column_name] = field.id, fields);
+        }, {});
       });
     },
 

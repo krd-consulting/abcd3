@@ -115,6 +115,7 @@ Route::prefix('api')
         Route::post('forms/{form}', 'FormEntryController@store');
 
         Route::get('form-fields/{field}/entries', 'FormFieldEntries');
+        Route::get('form-fields/{field}/values', 'FormFieldValues');
 
         Route::resource('roles', 'RoleController')->except('show');
 

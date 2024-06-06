@@ -200,11 +200,17 @@ class Program extends Entity implements FormReference, FormFieldReference
         return "App\Program" . $recordType->identity->model;
     }
 
-    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn) {
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId) {
         return $formEntryQueryBuilder
             ->leftJoin('programs', "programs.id", '=', "$formTable.$fieldColumn")
             ->leftJoin('teams', 'teams.id' , '=', 'programs.team_id')
             ->addSelect('programs.name as field_1_reference_value')
             ->addSelect('teams.name as field_1_reference_secondary_value');
+    }
+
+    public function getFormFieldReferenceValues() {
+        return $this
+            ->addSelect('programs.name as label')
+            ->addSelect('programs.id as value');
     }
 }

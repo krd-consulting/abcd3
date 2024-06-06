@@ -90,11 +90,17 @@ class Group extends Entity implements FormReference, FormFieldReference
                 });
     }
 
-    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn) {
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId) {
         return $formEntryQueryBuilder
             ->leftJoin('groups', "groups.id", '=', "$formTable.$fieldColumn")
             ->leftJoin('programs', 'programs.id' , '=', 'groups.program_id')
             ->addSelect('groups.name as field_1_reference_value')
             ->addSelect('programs.name as field_1_reference_secondary_value');
+    }
+
+    public function getFormFieldReferenceValues() {
+        return $this
+            ->addSelect('groups.name as label')
+            ->addSelect('groups.id as value');
     }
 }

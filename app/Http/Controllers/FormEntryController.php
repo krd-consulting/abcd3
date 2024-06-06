@@ -34,7 +34,7 @@ class FormEntryController extends Controller
           $object = new $referredModel;
           $referredTable = $object->getTable();
           $entry = $entry->select("$form->table_name.*");
-          $entry = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name);
+          $entry = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_type_id);
         }
 
         $team = request('team');

@@ -139,7 +139,19 @@ class FormField extends Model
         return $query;
     }
 
-    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn) {
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId) {
         return $formEntryQueryBuilder;
+    }
+
+    public function getFormFieldReferenceValues($targetId) {
+        $targetField = $this->find($targetId);
+        $formTable = $targetField->form->table_name;
+        $entries = new FormEntry();
+        $entries->setTable($formTable);
+        $entries = $entries
+            ->addSelect("$formTable.$targetField->column_name as label")
+            ->addSelect("$formTable.$targetField->column_name as value");
+
+        return $entries;
     }
 }

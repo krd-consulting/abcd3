@@ -20,6 +20,7 @@ class Form extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'fields' => $this->fields(),
+            'form_fields' => $this->fields,
             'description' => $this->description,
             'active' => $this->active,
             'table_name' => $this->table_name,
