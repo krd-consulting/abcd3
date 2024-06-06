@@ -16,18 +16,14 @@
     <el-option
       v-for="(item, index) in fieldTargetItems"
       :key="index"
-      :label="item.display_value"
-      :value="item.id"
+      :label="item.value"
+      :value="item.value"
     ></el-option>
   </el-select>
 </template>
 <script>
-  import TeamRequest from "@/api/TeamRequest";
-  import RecordRequest from "@/api/RecordRequest";
   import FormFieldTargetTypesRequest from "@/api/FormFieldTargetTypeRequest";
-  import FormFieldRequest from "@/api/FormFieldRequest";
-  import GroupRequest from "@/api/GroupRequest";
-  import ProgramRequest from "@/api/ProgramRequest";
+  import FormFieldEntryRequest from "@/api/FormFieldEntryRequest";
 
   export default {
     props: {
@@ -45,24 +41,19 @@
     methods: {
 
       retrieveFieldTargetItems(keywords, callback) {
-        const entity = this.getTargetType(this.fieldData.reference_target_type_id).singular_name;
+        // what if
+        // 1. give to endpoint: the field information
+        // 2. give back right items
+        const request = new FormFieldEntryRequest();
 
-        console.log('hello');
+        request.setFields({
+          params: {
+            search: keywords
+          }
+        });
 
-        console.log(entity);
-
-        import(`@/api/${entity}Request`).then(Request => {
-          const request = new Request.default({});
-
-          request.setFields({
-            params: {
-              search: keywords
-            }
-          });
-
-          request.retrieve(this.fieldData.reference_target_id).then(response => {
-            this.fieldTargetItems = response.data;
-          });
+        request.retrieve(this.fieldData.reference_target_id).then(response => {
+          this.fieldTargetItems = response.data;
         });
       },
 
