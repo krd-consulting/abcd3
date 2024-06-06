@@ -138,4 +138,8 @@ class FormField extends Model
 
         return $query;
     }
+
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn) {
+        return $formEntryQueryBuilder;
+    }
 }

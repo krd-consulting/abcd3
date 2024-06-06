@@ -27,6 +27,7 @@ class FormEntryController extends Controller
 
         $referencedFields = $form->fields()->whereNotNull('reference_target_type_id')->get();
 
+        // TODO: what to do when a referenced value has been deleted?
         // join references
         foreach ($referencedFields as $field) {
           $referredModel = FieldTargetType::find($field->reference_target_type_id)->model;

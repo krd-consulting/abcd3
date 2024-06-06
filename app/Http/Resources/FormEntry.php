@@ -61,7 +61,10 @@ class FormEntry extends JsonResource
                 'value' => $item[$key]
             ];
 
-            if(!$field['target_type']) continue;
+            // Fields that refer to to other Form fields dont generate 
+            // reference values at the query level.
+            // But, they still have a target type.
+            if(!$field['target_type'] || !isset($field[$key.'_reference_value'])) continue;
 
             // replace 'value' with referenced value if there is any
             $item[$key]['value'] = $item[$key.'_reference_value'];

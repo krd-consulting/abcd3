@@ -467,8 +467,8 @@ export default {
     },
 
     retrieveFormTargetItems(keywords, callback) {
-      import(`@/api/${this.targetName}Request`).then(foo => {
-        this.targetRequest = new foo.default({});
+      import(`@/api/${this.targetName}Request`).then(r => {
+        this.targetRequest = new r.default({});
 
         this.targetParams.search = keywords;
         let params = this.targetParams;
