@@ -145,12 +145,13 @@ class FormField extends Model implements FormFieldReference
         return $formEntryQueryBuilder;
     }
 
-    public function getFormFieldReferenceValues($targetId) {
+    public function getFormFieldReferenceValues($targetId, $keywords) {
         $targetField = $this->find($targetId);
         $formTable = $targetField->form->table_name;
         $entries = new FormEntry();
         $entries->setTable($formTable);
         $entries = $entries
+            ->search($keywords)
             ->addSelect("$formTable.$targetField->column_name as label")
             ->addSelect("$formTable.$targetField->column_name as value");
 

@@ -7,5 +7,5 @@ interface FormFieldReference
     // function that specify which fields to reference so that we can rename/alias them or
     public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId);
 
-    public function getFormFieldReferenceValues($targetId);
+    public function getFormFieldReferenceValues($targetId, $keywords);
 }

@@ -102,10 +102,9 @@ class RecordType extends Model implements FormReference, UrlRoutable, FormFieldR
             ->addSelect(DB::Raw("CONCAT('/records/', record_types.slug, '/', records.id) as $fieldColumn".'_reference_path'));
     }
 
-    public function getFormFieldReferenceValues($targetId) {
-        return $this
-            ->leftJoin('records', 'records.record_type_id', '=', 'record_types.id')
-            ->where('record_types.id', '=', $targetId)
+    public function getFormFieldReferenceValues($targetId, $keywords) {
+        return Record::search($keywords)
+            ->where('records.record_type_id', '=', $targetId)
             ->addSelect(DB::Raw("CONCAT(records.field_1_value, ' ', records.field_2_value) as label"))
             ->addSelect('records.id as value');
     }

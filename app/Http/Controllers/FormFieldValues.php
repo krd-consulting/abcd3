@@ -15,8 +15,9 @@ class FormFieldValues extends Controller
 
         // TODO: search
 
-        return [
-            'data' => $object->getFormFieldReferenceValues($field->reference_target_id)->get()
-        ];
+        return $object->getFormFieldReferenceValues(
+            $field->reference_target_id,
+            request('search')
+        )->paginate();
     }
 }

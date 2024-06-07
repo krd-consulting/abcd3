@@ -210,8 +210,9 @@ class Program extends Entity implements FormReference, FormFieldReference
             ->addSelect(DB::Raw("CONCAT('/programs/', programs.id) as $fieldColumn".'_reference_path'));
     }
 
-    public function getFormFieldReferenceValues($targetId) {
+    public function getFormFieldReferenceValues($targetId, $keywords) {
         return $this
+            ->search($keywords)
             ->addSelect('programs.name as label')
             ->addSelect('programs.id as value');
     }

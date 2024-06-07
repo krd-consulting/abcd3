@@ -100,8 +100,9 @@ class Group extends Entity implements FormReference, FormFieldReference
             ->addSelect(DB::Raw("CONCAT('/groups/', groups.id) as $fieldColumn".'_reference_path'));
     }
 
-    public function getFormFieldReferenceValues($targetId) {
+    public function getFormFieldReferenceValues($targetId, $keywords) {
         return $this
+            ->search($keywords)
             ->addSelect('groups.name as label')
             ->addSelect('groups.id as value');
     }
