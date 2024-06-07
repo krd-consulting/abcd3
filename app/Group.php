@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Contracts\FormReference;
+use App\Contracts\FormFieldReference;
 use App\Model;
 use App\Record;
 use App\RecordType;
@@ -11,8 +12,9 @@ use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
-class Group extends Entity implements FormReference
+class Group extends Entity implements FormReference, FormFieldReference
 {
     use FormReferenceTrait;
 
@@ -87,5 +89,21 @@ class Group extends Entity implements FormReference
         return $query->whereHas('records', function ($query) use ($records) {
                     return $query->whereIn('record_id', $records);
                 });
+    }
+
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId) {
+        return $formEntryQueryBuilder
+            ->leftJoin('groups', "groups.id", '=', "$formTable.$fieldColumn")
+            ->leftJoin('programs', 'programs.id' , '=', 'groups.program_id')
+            ->addSelect('groups.name as field_1_reference_value')
+            ->addSelect('programs.name as field_1_reference_secondary_value')
+            ->addSelect(DB::Raw("CONCAT('/groups/', groups.id) as $fieldColumn".'_reference_path'));
+    }
+
+    public function getFormFieldReferenceValues($targetId, $keywords) {
+        return $this
+            ->search($keywords)
+            ->addSelect('groups.name as label')
+            ->addSelect('groups.id as value');
     }
 }

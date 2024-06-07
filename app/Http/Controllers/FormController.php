@@ -45,6 +45,8 @@ class FormController extends Controller
     {
         $this->authorize('read', $form);
 
+        $form->load('fields');
+
         return (new FormResource($form));
     }
 

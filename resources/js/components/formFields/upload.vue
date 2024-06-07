@@ -40,15 +40,17 @@
         },
         methods: {
             handleSuccess(response, file, fileList) {
-                this.$emit('input', { column_name: this.field.column_name  , value: response.data.id});
+                this.$emit('change', { column_name: this.field.column_name  , value: [...(fileList.map(a => a.response.data.path))]});
             },
             handleRemove(file, fileList) {
-                this.request.destroy(file.response.data.id)
+                this.request.destroy(file.response.data.path)
                     .then((response) => {
                         this.$message({
                             type: 'success',
                             message: 'Attachment removed.'
                         });
+
+                        this.$emit('change', { column_name: this.field.column_name  , value: [...(fileList.map(a => a.response.data.path))]});
                     });
             },
             handleExceed(files, fileList) {

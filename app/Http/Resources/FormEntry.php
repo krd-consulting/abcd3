@@ -12,6 +12,8 @@ class FormEntry extends JsonResource
         'App\Group' => 'App\Http\Resources\FormEntry\Group'
     ];
 
+    private $formFields = null;
+
     /**
      * Transform the resource into an array.
      *
@@ -30,7 +32,11 @@ class FormEntry extends JsonResource
 
         $response['links'] = [
           'to' => ''
-        ];
+        ];        
+
+        if($this->formFields) {
+            $response = $this->formatFormFieldValues($response);
+        }
 
         return $response;
     }
@@ -44,5 +50,38 @@ class FormEntry extends JsonResource
 
             return (new $class($this->target));
         });
+    }
+
+    private function formatFormFieldValues($item) {
+        foreach($this->formFields as $field) {
+            $key = $field['slug'];
+
+            $item[$key] = [
+                'raw_value' => $item[$key],
+                'value' => $item[$key]
+            ];
+
+            // Fields that refer to to other Form fields dont generate 
+            // reference values at the query level.
+            // But, they still have a target type.
+            if(!$field['target_type'] || !isset($item[$key.'_reference_value'])) continue;
+
+            if(isset($item[$key.'_reference_path'])) {
+                $item[$key]['path'] = $item[$key.'_reference_path'];
+                unset($item[$key.'_reference_path']);
+            }
+
+            // replace 'value' with referenced value if there is any
+            $item[$key]['value'] = $item[$key.'_reference_value'];
+            unset($item[$key.'_reference_value']);
+            $item[$key]['secondary_value'] = $item[$key.'_reference_secondary_value'];
+            unset($item[$key.'_reference_secondary_value']);
+        }
+
+        return $item;
+    }
+
+    public function setFormFields($formFields) {
+        $this->formFields = $formFields;
     }
 }

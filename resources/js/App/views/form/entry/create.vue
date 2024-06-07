@@ -117,7 +117,7 @@
               v-model="entryData[field.column_name]"
             ></base-input>
             <template v-if="field.type === 'TextField'">
-              <textField :field-data="field" v-model="entryData[field.column_name]"></textField>
+              <textField :field-id="fieldIds[field.column_name]" :field-data="field" v-model="entryData[field.column_name]"></textField>
             </template>
             <base-input
               type="textarea"
@@ -195,7 +195,7 @@
             <component
                 v-if="field.type == 'FileField'"
                 class="tw-my-8"
-                @input="addFile($event.column_name, $event.value)"
+                @change="changeFiles($event.column_name, $event.value)"
                 :field="field"
                 :is="field.type"
                 :key="field.id">
@@ -245,6 +245,7 @@ export default {
   data() {
     return {
       request: new Request({}),
+      fieldIds: [],
       formCompletedFor: "",
       entryRequest: new EntryRequest({}),
       teamRequest: new TeamRequest(),
@@ -431,12 +432,8 @@ export default {
       };
     },
 
-    addFile(field, fileId) {
-      if (this.entryData[field] == null) {
-        this.entryData[field] = [fileId];
-      } else {
-        this.entryData[field].push(fileId);
-      }
+    changeFiles(field, files) {
+      this.entryData[field] = [...files];
     },
 
     retrieveTeams(keywords) {
@@ -462,17 +459,22 @@ export default {
 
         // add default values to entry data
         this.entryData = this.form.field_layout.reduce((entries, field) => {
-            if(field.settings.single)
-              return (entries[field.column_name] = "", entries)
+            if(!field.settings.single || field.type === 'FileField')
+              return (entries[field.column_name] = [], entries)
             
-            return (entries[field.column_name] = [], entries)
+            return (entries[field.column_name] = "", entries)
           }, {})
+        
+        //
+        this.fieldIds = this.form.form_fields.reduce((fields, field) => {
+          return (fields[field.column_name] = field.id, fields);
+        }, {});
       });
     },
 
     retrieveFormTargetItems(keywords, callback) {
-      import(`@/api/${this.targetName}Request`).then(foo => {
-        this.targetRequest = new foo.default({});
+      import(`@/api/${this.targetName}Request`).then(r => {
+        this.targetRequest = new r.default({});
 
         this.targetParams.search = keywords;
         let params = this.targetParams;

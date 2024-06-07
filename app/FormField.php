@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Contracts\FormFieldReference;
+
 use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 
@@ -9,14 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 use Spatie\SchemalessAttributes\SchemalessAttributes;
 
-class FormField extends Model
+class FormField extends Model implements FormFieldReference
 {
     use Search;
     use Sort;
 
     protected $guarded = [];
 
-    protected $appends = ['target'];
+    protected $appends = ['target', 'name'];
 
     public $timestamps = false;
 
@@ -63,12 +65,12 @@ class FormField extends Model
 
     public function target_type()
     {
-    	return $this->belongsTo('App\FieldTargetType');
+    	return $this->belongsTo('App\FieldTargetType', 'reference_target_type_id');
     }
 
     public function target()
     {
-    	return $this->belongsTo($this->target_type->model);
+    	return $this->belongsTo($this->target_type->model, 'reference_target_id');
     }
 
     public function setTypeAttribute($value)
@@ -125,6 +127,11 @@ class FormField extends Model
       return $this->reference_target_type;
     }
 
+    public function getNameAttribute()
+    {
+        return $this->form->name . " :: $this->title";
+    }
+
     public function scopeFilter($query, $terms)
     {
         foreach($terms as $column=>$term) {
@@ -132,5 +139,22 @@ class FormField extends Model
         }
 
         return $query;
+    }
+
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId) {
+        return $formEntryQueryBuilder;
+    }
+
+    public function getFormFieldReferenceValues($targetId, $keywords) {
+        $targetField = $this->find($targetId);
+        $formTable = $targetField->form->table_name;
+        $entries = new FormEntry();
+        $entries->setTable($formTable);
+        $entries = $entries
+            ->where($targetField->column_name, 'LIKE', '%' . $keywords . '%')
+            ->addSelect("$formTable.$targetField->column_name as label")
+            ->addSelect("$formTable.$targetField->column_name as value");
+
+        return $entries;
     }
 }

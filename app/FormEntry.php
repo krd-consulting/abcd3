@@ -72,4 +72,10 @@ class FormEntry extends Model
         return $this->belongsTo('App\Team');
     }
 
+    public function scopeAvailableFor($query, $scope) {
+        // TODO which entries are available to a user actually?
+
+        return $query;
+    }
+
 }

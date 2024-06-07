@@ -3,14 +3,16 @@
 namespace App;
 
 use App\Contracts\FormReference;
+use App\Contracts\FormFieldReference;
 use App\Entity;
 use App\Record;
 use App\RecordIdentity;
 use App\RecordType;
 use App\Traits\Models\FormReference as FormReferenceTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
-class Program extends Entity implements FormReference
+class Program extends Entity implements FormReference, FormFieldReference
 {
     use FormReferenceTrait;
 
@@ -197,5 +199,21 @@ class Program extends Entity implements FormReference
     private function getRecordPivotModel(RecordType $recordType)
     {
         return "App\Program" . $recordType->identity->model;
+    }
+
+    public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId) {
+        return $formEntryQueryBuilder
+            ->leftJoin('programs', "programs.id", '=', "$formTable.$fieldColumn")
+            ->leftJoin('teams', 'teams.id' , '=', 'programs.team_id')
+            ->addSelect("programs.name as $fieldColumn".'_reference_value')
+            ->addSelect("teams.name as $fieldColumn".'_reference_secondary_value')
+            ->addSelect(DB::Raw("CONCAT('/programs/', programs.id) as $fieldColumn".'_reference_path'));
+    }
+
+    public function getFormFieldReferenceValues($targetId, $keywords) {
+        return $this
+            ->search($keywords)
+            ->addSelect('programs.name as label')
+            ->addSelect('programs.id as value');
     }
 }

@@ -17,7 +17,11 @@ class FormEntries extends ResourceCollection
 
     protected $fields;
 
-    public function __construct($resource, Form $form, FormTargetType $targetType, Collection $fields)
+    public function __construct(
+        $resource,
+        Form $form,
+        FormTargetType $targetType,
+        Collection $fields)
     {
         parent::__construct($resource);
         $this->form = $form;
@@ -34,7 +38,7 @@ class FormEntries extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection
+            'data' => $this->addFormFieldReferences($this->collection)
         ];
     }
 
@@ -42,7 +46,7 @@ class FormEntries extends ResourceCollection
     {
         return [
             'target_type' => $this->targetType,
-            'fields' => $this->fields(),
+            'fields' => $this->fields()
         ];
     }
 
@@ -57,10 +61,20 @@ class FormEntries extends ResourceCollection
               'slug' => $field['column_name'],
               'key' => $field['column_name'],
               'type' => $field['type'],
+              'target_type' => $field['target_type'],
+              'target' => $field['target']
             ]
           ];
         });
 
         return $keyed->all();
+    }
+
+    private function addFormFieldReferences($collection) {
+        foreach($collection as $item) {
+            $item->setFormFields($this->fields());
+        }
+
+        return $collection;
     }
 }

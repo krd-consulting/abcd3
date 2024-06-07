@@ -11,33 +11,32 @@
     remote
     :remote-method="retrieveFieldTargetItems"
     :name="fieldData.column_name"
-    :placeholder="`Select ${getTargetType(fieldData.reference_target_type_id).singular_name}`"
+    :placeholder="`Select from ${targetType.name}`"
   >
     <el-option
       v-for="(item, index) in fieldTargetItems"
       :key="index"
-      :label="item.display_value"
-      :value="item.id"
+      :label="item.label"
+      :value="item.value"
     ></el-option>
   </el-select>
 </template>
 <script>
-  import TeamRequest from "@/api/TeamRequest";
-  import RecordRequest from "@/api/RecordRequest";
   import FormFieldTargetTypesRequest from "@/api/FormFieldTargetTypeRequest";
-  import FormFieldRequest from "@/api/FormFieldRequest";
-  import GroupRequest from "@/api/GroupRequest";
-  import ProgramRequest from "@/api/ProgramRequest";
+  import FormFieldValuesRequest from "@/api/FormFieldValuesRequest";
 
   export default {
     props: {
+      fieldId: '',
       fieldData: Object,
       value: ''
     },
 
     data() {
       return {
-        targetTypes: [],
+        targetType: {
+          name: 'database'
+        },
         fieldTargetItems: [],
       };
     },
@@ -45,48 +44,37 @@
     methods: {
 
       retrieveFieldTargetItems(keywords, callback) {
-        const entity = this.getTargetType(this.fieldData.reference_target_type_id).singular_name;
+        // what if
+        // 1. give to endpoint: the field information
+        // 2. give back right items
+        const request = new FormFieldValuesRequest();
 
-        console.log('hello');
+        request.setFields({
+          params: {
+            search: keywords
+          }
+        });
 
-        console.log(entity);
-
-        import(`@/api/${entity}Request`).then(Request => {
-          const request = new Request.default({});
-
-          request.setFields({
-            params: {
-              search: keywords
-            }
-          });
-
-          request.retrieve(this.fieldData.reference_target_id).then(response => {
-            this.fieldTargetItems = response.data;
-          });
+        request.retrieve(this.fieldId).then(response => {
+          this.fieldTargetItems = response.data;
         });
       },
 
-      getTargetType(id) {
-        console.log(`target types:`);
-        console.log(this.targetTypes);
-
-        return this.targetTypes.filter(targetType => {
-          return targetType.id == id;
-        })[0];
-      },
-
-      retrieveTargetTypes() {
+      retrieveTargetType() {
         const request = new FormFieldTargetTypesRequest({});
 
-        request.retrieve().then(response => {
-          this.targetTypes =  response.data;
+        request.show(
+          this.fieldData.reference_target_type_id, 
+          this.fieldData.reference_target_id
+        ).then(response => {
+          this.targetType =  response.data;
         });
       },
 
     },
 
     created() {
-      this.retrieveTargetTypes();
+      this.retrieveTargetType();
     }
   }
 </script>

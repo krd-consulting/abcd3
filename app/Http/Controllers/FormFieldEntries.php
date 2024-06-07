@@ -25,6 +25,7 @@ class FormFieldEntries extends Controller
 
         // Search
         $search = request('search');
+        $entries->searchColumns = [$field->column_name];
         $entries = $entries->search($search);
 
         // Sort per request.
