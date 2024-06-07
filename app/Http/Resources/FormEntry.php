@@ -66,6 +66,11 @@ class FormEntry extends JsonResource
             // But, they still have a target type.
             if(!$field['target_type'] || !isset($item[$key.'_reference_value'])) continue;
 
+            if(isset($item[$key.'_reference_path'])) {
+                $item[$key]['path'] = $item[$key.'_reference_path'];
+                unset($item[$key.'_reference_path']);
+            }
+
             // replace 'value' with referenced value if there is any
             $item[$key]['value'] = $item[$key.'_reference_value'];
             unset($item[$key.'_reference_value']);

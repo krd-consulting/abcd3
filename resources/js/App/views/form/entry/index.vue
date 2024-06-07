@@ -84,6 +84,9 @@
                         {{ attachment.split('/')[1] }}
                       </a>
                     </div>
+                    <div v-else-if="!!entry[field.key].path">
+                      <a :href="entry[field.key].path" target="_blank">{{ entry[field.key].value }}</a>
+                    </div>
                     <div v-else>
                       {{ entry[field.key].value }}
                     </div>

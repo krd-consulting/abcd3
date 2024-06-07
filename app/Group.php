@@ -12,6 +12,7 @@ use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Group extends Entity implements FormReference, FormFieldReference
 {
@@ -95,10 +96,11 @@ class Group extends Entity implements FormReference, FormFieldReference
             ->leftJoin('groups', "groups.id", '=', "$formTable.$fieldColumn")
             ->leftJoin('programs', 'programs.id' , '=', 'groups.program_id')
             ->addSelect('groups.name as field_1_reference_value')
-            ->addSelect('programs.name as field_1_reference_secondary_value');
+            ->addSelect('programs.name as field_1_reference_secondary_value')
+            ->addSelect(DB::Raw("CONCAT('/groups/', groups.id) as $fieldColumn".'_reference_path'));
     }
 
-    public function getFormFieldReferenceValues() {
+    public function getFormFieldReferenceValues($targetId) {
         return $this
             ->addSelect('groups.name as label')
             ->addSelect('groups.id as value');

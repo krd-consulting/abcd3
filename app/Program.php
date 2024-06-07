@@ -10,6 +10,7 @@ use App\RecordIdentity;
 use App\RecordType;
 use App\Traits\Models\FormReference as FormReferenceTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Program extends Entity implements FormReference, FormFieldReference
 {
@@ -204,11 +205,12 @@ class Program extends Entity implements FormReference, FormFieldReference
         return $formEntryQueryBuilder
             ->leftJoin('programs', "programs.id", '=', "$formTable.$fieldColumn")
             ->leftJoin('teams', 'teams.id' , '=', 'programs.team_id')
-            ->addSelect('programs.name as field_1_reference_value')
-            ->addSelect('teams.name as field_1_reference_secondary_value');
+            ->addSelect("programs.name as $fieldColumn".'_reference_value')
+            ->addSelect("teams.name as $fieldColumn".'_reference_secondary_value')
+            ->addSelect(DB::Raw("CONCAT('/programs/', programs.id) as $fieldColumn".'_reference_path'));
     }
 
-    public function getFormFieldReferenceValues() {
+    public function getFormFieldReferenceValues($targetId) {
         return $this
             ->addSelect('programs.name as label')
             ->addSelect('programs.id as value');

@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Contracts\FormFieldReference;
+
 use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 
@@ -9,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Spatie\SchemalessAttributes\SchemalessAttributes;
 
-class FormField extends Model
+class FormField extends Model implements FormFieldReference
 {
     use Search;
     use Sort;
