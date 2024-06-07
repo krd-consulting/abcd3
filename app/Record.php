@@ -185,7 +185,7 @@ class Record extends Entity
 
     public function scopeAvailableFor($query, $user) {
         $scope = $user->scope;
-
+        
         switch($scope) {
             case 'universal':
                 return $query;

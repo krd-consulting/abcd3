@@ -151,7 +151,7 @@ class FormField extends Model implements FormFieldReference
         $entries = new FormEntry();
         $entries->setTable($formTable);
         $entries = $entries
-            ->search($keywords)
+            ->where($targetField->column_name, 'LIKE', '%' . $keywords . '%')
             ->addSelect("$formTable.$targetField->column_name as label")
             ->addSelect("$formTable.$targetField->column_name as value");
 

@@ -18,6 +18,6 @@ class FormFieldValues extends Controller
         return $object->getFormFieldReferenceValues(
             $field->reference_target_id,
             request('search')
-        )->paginate();
+        )->availableFor(auth()->user())->paginate();
     }
 }
