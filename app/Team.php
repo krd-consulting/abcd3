@@ -47,7 +47,7 @@ class Team extends Entity
                 return $query;
 
             default:
-                return $user->teams();
+                return $query->whereIn('teams.id', $user->teams->pluck('id'));
         }
     }
 

@@ -224,10 +224,12 @@ class User extends Authenticatable implements Auditable
         if(is_a($form, Form::class))
             return $this->hasForm($form->id);
 
-        return Form::inTeams($this->teams)->where('id', $form)->exists() ||
-        Form::inPrograms($this->programs)->where('id', $form)->exists() ||
-        Form::inGroups($this->groups)->where('id', $form)->exists() ||
-        Form::inSelf($this)->where('id', $form)->exists();
+        return 
+            Form::where('scope_id', 6)->exists() ||
+            Form::inTeams($this->teams)->where('id', $form)->exists() ||
+            Form::inPrograms($this->programs)->where('id', $form)->exists() ||
+            Form::inGroups($this->groups)->where('id', $form)->exists() ||
+            Form::inSelf($this)->where('id', $form)->exists();
     }
 
     public function hasRecord($record) : bool

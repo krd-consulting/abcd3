@@ -69,13 +69,16 @@ class FormEntryController extends Controller
           )
           ->groupBy("$form->table_name.team_id")
           ->orderBy("$form->table_name.team_id", 'ASC')
-          ->get();
+          ->get()
+          ->keyBy('team_id');
         $teams = $form->teams()->availableFor(auth()->user())->get();
+
+        // return $teams;
 
         $teams = $teams->map(function ($team, $key) use ($entries) {
           $team['entries_history'] = [
-            'count' => $entries[$key]['entry_count'] ?? 0,
-            'last_entry_created_at' => $entries[$key]['last_entry_created_at'] ?? null,
+            'count' => $entries[$team['id']]['entry_count'] ?? 0,
+            'last_entry_created_at' => $entries[$team['id']]['last_entry_created_at'] ?? null,
           ];
           return $team;
         });
