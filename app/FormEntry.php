@@ -74,6 +74,7 @@ class FormEntry extends Model
 
     public function scopeAvailableFor($query, $scope) {
         // TODO which entries are available to a user actually?
+        $query = $query->whereIn('team_id', auth()->user()->teams->pluck('id'));
 
         return $query;
     }
