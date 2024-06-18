@@ -327,7 +327,6 @@ class Form extends Entity
 
     public function scopeAvailableFor($query, $user)
     {
-
         $universal =
             (clone $query)
                 ->where('scope_id', Scope::where('name', config('auth.scopes.universal.name'))->first()->id);
@@ -336,9 +335,7 @@ class Form extends Entity
         $groups = (clone $query)->inGroups($user->groups);
         $self = (clone $query)->inSelf($user);
 
-        $query =
-            $universal
-                ->union($teams)
+        $query = $universal->union($teams)
                 ->union($programs)
                 ->union($groups)
                 ->union($self);
