@@ -10,10 +10,19 @@ class EntityTypeFormsController extends Controller
 {
     public function index(EntityType $entityType, $id)
     {
+        // TODO: pass url params.
+
         if($entityType->model == config('app.entity_types.record.model')) {
             return redirect()->action(
                 'RecordFormsController@index',
-                ['record' => $id]
+                [
+                    'record' => $id,
+                    'search' => request('search'),
+                    'ascending' => request('ascending'),
+                    'sortBy' => request('sortBy'),
+                    'perPage' => request('perPage'),
+                    'page' => request('page')
+                ]
             );
         }
 

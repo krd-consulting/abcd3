@@ -2,57 +2,69 @@
 
 namespace App\Http\Controllers;
 
-use App\EntityType;
+use App\Collection;
 use App\Form;
+use App\FormTargetType;
 use App\Http\Resources\Forms;
 use App\Record;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RecordFormsController extends Controller
 {
 
     // Query for all forms associated to this record
-    // (form scopes still apply):
     // Forms in this record's programs
     // Forms in this record's teams
     // Forms directly assigned to this record
     public function index(Record $record)
     {
         // Assumes relationships between collections are plural.
-        // Entities from lowest to highest level hierarchy.
-        // TODO: populate this array using EntityType.
-        $neededRelationships = [
-            1 => 'programs',
-            2 => 'teams',
-        ];
+        $collections = Collection::all();
 
-        $index = 0;
-        $queries = [];
+        $forms = new Form();
 
-        // create forms query for each relationship
-        foreach($neededRelationships as $relationship) {
-            $type = EntityType::where('slug', $relationship)->first();
+        // select the right target type.
+        $forms = $forms
+            ->leftJoin(DB::Raw("(SELECT form_id, model_id, model_type FROM model_has_forms) as model_has_forms"), 'forms.id', '=', 'model_has_forms.form_id')
+            ->where('forms.target_type_id', '=', FormTargetType::where('name', '=', config('app.form_target_types.record.name'))->first()->id)
+            ->where('forms.target_id', '=', $record->record_type->id)
+            ->selectRaw("forms.*")
+            ->distinct();
 
-            $relatedIds = $record
-                ->$relationship()
-                ->availableFor(auth()->user())->pluck("$type->slug.id");
+        // grab all the forms per collection
+        $forms->where(function ($query) use ($collections, $record) {
+            $iteration = 0;
+            foreach($collections as $collection) {
+                $slug = $collection->slug;
 
-            // Query for forms directly associated with the entity.
-            $queries[$index++] = (new Form())->whereHas(
-                $relationship,
-                function($query) use ($type, $relatedIds) {
-                    $query->where('model_type', '=', $type->model)
-                        ->whereIn('id', $relatedIds);
+                // collections and records always have a many to many relationship?
+                // the dynamic collection's records() function may be well defined
+                // for this to work (depending on how many to many works in Laravel Eloquent)
+                $relationship = $record->belongsToMany($collection->model_type);
+
+                $ids = $relationship->get()->pluck('id');
+
+                // TODO: add extra layer of security for scope
+                // say a group scope form F is attached to a team T,
+                // F should only be viewable by users of F's groups
+                // so, for instance, they cant be viewed by users' in
+                // T unless they are a part of F's groups.
+                // maybe: minimum_scope_value for Collections?
+                if($iteration == 0) {
+                    $query
+                        ->whereIn('model_has_forms.model_id', $ids)
+                        ->where('model_has_forms.model_type', $collection->model_type);
+                } else {
+                    $query->orWhere(function ($query) use ($collection, $ids) {
+                        $query
+                            ->whereIn('model_has_forms.model_id', $ids)
+                            ->where('model_has_forms.model_type', $collection->model_type);
+                    });
                 }
-            );
-        }
-
-        // combine the queries
-        $query = 0;
-        $forms = $queries[$query++]->availableFor(auth()->user());
-        while($query < $index) {
-          $forms->union($queries[$query++]);
-        }
+                $iteration++;
+            }
+        });
 
         // Search
         $search = request('search');
@@ -63,6 +75,7 @@ class RecordFormsController extends Controller
         $sortBy = request('sortBy');
         $forms = $forms->sort($sortBy, $ascending);
 
+        // TODO: create custom paginator to solve inaccurate total?
         // Paginate per request.
         $perPage = request('perPage');
         $forms = $forms->paginate($perPage);
