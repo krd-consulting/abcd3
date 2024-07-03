@@ -26,6 +26,9 @@ class Record extends JsonResource
             'active' => $this->active,
 
             'display_value' => $this->fields()['full_name']['value'],
+            // We're using this API resource for transforming form entries
+            // about Records so this field is added adhoc:
+            'name' => $this->fields()['full_name']['value'],
 
             'field_values' => $this->record_field_values(),
             'fields' => $this->fields(),
