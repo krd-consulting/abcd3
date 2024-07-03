@@ -3,99 +3,19 @@
       <grid
         :title="`${form.name} Entries`"
         rowTitle="Entries"
-        :items="teams"
+        :items="entries"
         :fields="fields"
+        :page.sync="params.page"
         :sortBy.sync="params.sortBy"
         :ascending.sync="params.ascending"
+        :per-page="params.perPage"
         :search-terms.sync="params.search"
-        @params-change="retrieveTeams();"
-        :has-pagination="false"
+        @params-change="retrieveEntries"
+        :has-pagination="true"
         :has-edit="false"
-        :has-collapsible-rows="true"
-        @open-collapsible-row="retrieveEntries"
-        :total="totalTeams"
+        :total="total"
       >
-        <template v-slot:extra-columns-header>
-          <th>Required</th>
-          <th>Frequency</th>
-          <th>History</th>
-        </template>
-
-        <template v-slot:extra-columns-data="{ item }">
-          <td>
-            <base-checkbox :checked="item.required_by_form == 1"></base-checkbox>
-          </td>
-          <td>
-            <base-select></base-select>
-          </td>
-          <td>
-            <span class="tw-font-semibold">{{item.entries_history.count}} entries</span>
-            <br>
-            <span>Last Entry: {{item.entries_history.last_entry_created_at}}</span>
-          </td>
-        </template>
-
-        <template v-slot:collapsible-row="{ item }">
-          <td class="tw-p-0 tw-border-b" colspan="100%">
-            <table class="tw-w-full">
-              <thead>
-                <tr class="tw-py-4 tw-bg-indigo-darker">
-                  <td>&nbsp;</td>
-                  <td colspan="2">
-                    <base-input
-                      placeholder="Search..."
-                      class="tw-ml-auto tw-w-56"
-                      suffix-icon="fas fa-search"
-                    ></base-input>
-                  </td>
-                  <td class="tw-text-right">
-                    <base-pagination
-                      class="pagination-white"
-                      :current-page="params.page"
-                      @current-change="handlePageChange($event); retrieveEntries(item.id)"
-                      :page-size="params.perPage"
-                      :total="total"
-                    >
-                    </base-pagination>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="tw-bg-indigo-lightest">&nbsp;</td>
-                  <th class="tw-text-lg tw-text-black tw-text-semibold tw-normal-case tw-border-r" v-for="entry in entries" :key="entry.id">
-                    <div>
-                      {{ entry.target.display_value }}
-                    </div>
-                    <div class="tw-text-sm tw-text-gray-dark">
-                      <span>Entered by {{ entry.creator.name }}</span>
-                      <br>
-                      <span>On {{ entry.created_at }}</span>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="field in teamFields" :key="field.key">
-                  <td class="tw-bg-indigo-lightest tw-font-semibold">{{ field.name }}</td>
-                  <td class="tw-border-r" v-for="entry in entries" :key="entry.id">
-                    <!-- TODO: morph form entry fields -->
-                    <!-- case for file field -->
-                    <div v-if="field.type === 'file'">
-                      <a v-for="attachment in (entry[field.key].value)" :href="`/${attachment}`" target="_blank">
-                        {{ attachment.split('/')[1] }}
-                      </a>
-                    </div>
-                    <div v-else-if="!!entry[field.key].path">
-                      <a :href="entry[field.key].path" target="_blank">{{ entry[field.key].value }}</a>
-                    </div>
-                    <div v-else>
-                      {{ entry[field.key].value }}
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
-        </template>
+      
       </grid>
     </div>
 </template>
@@ -146,7 +66,7 @@
                     ascending: true,
                     sortBy: 'id',
                     page: 1,
-                    perPage: 3,
+                    perPage: 10,
                     search: '',
                 },
                 total: 0,
@@ -191,7 +111,7 @@
                     this.entries = response.data;
                     this.total = response.meta.total;
                     this.targetType = response.target_type;
-                    this.teamFields = response.fields;
+                    this.fields = response.fields;
                 });
             },
 
@@ -202,7 +122,7 @@
 
         created() {
             this.retrieve();
-            this.retrieveTeams();
+            this.retrieveEntries();
         }
     }
 </script>

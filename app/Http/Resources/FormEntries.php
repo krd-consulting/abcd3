@@ -50,7 +50,7 @@ class FormEntries extends ResourceCollection
         ];
     }
 
-    public function fields()
+    public function formFields()
     {
         $fields = [];
 
@@ -70,9 +70,27 @@ class FormEntries extends ResourceCollection
         return $keyed->all();
     }
 
+    public function fields()
+    {
+        $fields = [
+            'target' => [
+                'slug' => 'target',
+                'name' => 'Target',
+                'key' => 'target_id'
+            ],
+            'team' => [
+                'slug' => 'team',
+                'name' => 'Team',
+                'key' => 'team_id'
+            ]
+        ];
+
+        return $fields;
+    }
+
     private function addFormFieldReferences($collection) {
         foreach($collection as $item) {
-            $item->setFormFields($this->fields());
+            $item->setFormFields($this->formFields());
         }
 
         return $collection;

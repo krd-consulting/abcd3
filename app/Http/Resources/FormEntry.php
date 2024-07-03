@@ -24,21 +24,39 @@ class FormEntry extends JsonResource
     {
         $response = parent::toArray($request);
 
-        $target = $this->getTarget();
-
-        if(!empty($target)) {
-            $response['target'] = $target;
-        }
-
         $response['links'] = [
           'to' => ''
-        ];        
+        ];
+        
+        $target = $this->getTarget()->toArray($request);
+
+        $response['fields'] = $this->fields($target);
 
         if($this->formFields) {
             $response = $this->formatFormFieldValues($response);
         }
 
         return $response;
+    }
+
+    public function fields($target)
+    {
+        $fields = [
+          'target' => [
+            'value' => $target['name'],
+            'slug' => 'target',
+            'name' => 'Target',
+            'key' => 'target'
+          ],
+          'team' => [
+            'value' => $this->team->name,
+            'slug' => 'team',
+            'name' => 'Team',
+            'key' => 'team_id'
+          ]
+        ];
+
+        return $fields;
     }
 
     private function getTarget()
