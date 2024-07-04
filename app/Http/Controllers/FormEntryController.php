@@ -26,6 +26,7 @@ class FormEntryController extends Controller
         $entry->castFieldsToArray($form->fields()->whereIn('type', ['checkbox', 'file'])->pluck('column_name'));
 
         $referencedFields = $form->fields()->whereNotNull('reference_target_type_id')->get();
+        $newFields = [];
 
         // TODO: what to do when a referenced value has been deleted?
         // join references
@@ -34,11 +35,18 @@ class FormEntryController extends Controller
           $object = new $referredModel;
           $referredTable = $object->getTable();
           $entry = $entry->select("$form->table_name.*");
-          $entry = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_type_id);
+          $newFields = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_type_id);
         }
 
         $perPage = request('perPage');
-        $entries = $entry->availableFor(auth()->user())->paginate($perPage);
+        $entries = $entry->availableFor(auth()->user());
+
+        // Specify which fields to select to avoid joins replacing values for
+        // column names with same name
+        $entries->select($newFields);
+        $entries->addSelect("$form->table_name.*");
+        
+        $entries = $entries->paginate($perPage);
 
         $entries->load('target');
         $entries->load('team');

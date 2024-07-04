@@ -92,12 +92,18 @@ class Group extends Entity implements FormReference, FormFieldReference
     }
 
     public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId) {
-        return $formEntryQueryBuilder
+        $formEntryQueryBuilder
             ->leftJoin('groups', "groups.id", '=', "$formTable.$fieldColumn")
             ->leftJoin('programs', 'programs.id' , '=', 'groups.program_id')
             ->addSelect('groups.name as field_1_reference_value')
             ->addSelect('programs.name as field_1_reference_secondary_value')
             ->addSelect(DB::Raw("CONCAT('/groups/', groups.id) as $fieldColumn".'_reference_path'));
+        
+        return [
+            'groups.name as field_1_reference_value',
+            'programs.name as field_1_reference_secondary_value',
+            DB::Raw("CONCAT('/groups/', groups.id) as $fieldColumn".'_reference_path')
+        ];
     }
 
     public function getFormFieldReferenceValues($targetId, $keywords) {

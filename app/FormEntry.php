@@ -81,6 +81,8 @@ class FormEntry extends Model
     public function scopeAvailableFor($query, $user) {
         $formTargetTypeModel = $this->form()->target_type->model;
         $this->targetModel = (new $formTargetTypeModel())->getFormReferenceClass();
+        $targetModelTable = (new $formTargetTypeModel())->getFormReferenceTable();
+        $formTable = $this->getTable();
 
         $query->joinRelation('getTargetModelRelationship as target_model', function ($targetModelObject) use ($user) {
             $targetModelObject->availableFor($user);
