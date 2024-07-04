@@ -37,9 +37,7 @@ class FormEntryController extends Controller
           $entry = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_type_id);
         }
 
-        // $team = request('team');
         $perPage = request('perPage');
-        // TODO: only allow access if user has access to team supplied.
         $entries = $entry->availableFor(auth()->user())->paginate($perPage);
 
         $entries->load('target');

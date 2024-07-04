@@ -74,7 +74,7 @@ class FormEntry extends JsonResource
         foreach($this->formFields as $field) {
             $key = $field['slug'];
 
-            $item[$key] = [
+            $item['form_fields'][$key] = [
                 'raw_value' => $item[$key],
                 'value' => $item[$key]
             ];
@@ -85,14 +85,14 @@ class FormEntry extends JsonResource
             if(!$field['target_type'] || !isset($item[$key.'_reference_value'])) continue;
 
             if(isset($item[$key.'_reference_path'])) {
-                $item[$key]['path'] = $item[$key.'_reference_path'];
+                $item['form_fields'][$key]['path'] = $item[$key.'_reference_path'];
                 unset($item[$key.'_reference_path']);
             }
 
             // replace 'value' with referenced value if there is any
-            $item[$key]['value'] = $item[$key.'_reference_value'];
+            $item['form_fields'][$key]['value'] = $item[$key.'_reference_value'];
             unset($item[$key.'_reference_value']);
-            $item[$key]['secondary_value'] = $item[$key.'_reference_secondary_value'];
+            $item['form_fields'][$key]['secondary_value'] = $item[$key.'_reference_secondary_value'];
             unset($item[$key.'_reference_secondary_value']);
         }
 

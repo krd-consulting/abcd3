@@ -38,7 +38,8 @@ class FormEntries extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->addFormFieldReferences($this->collection)
+            'data' => $this->addFormFieldReferences($this->collection),
+            'form_fields' => $this->formFields()
         ];
     }
 
@@ -72,18 +73,9 @@ class FormEntries extends ResourceCollection
 
     public function fields()
     {
-        $fields = [
-            'target' => [
-                'slug' => 'target',
-                'name' => 'Target',
-                'key' => 'target_id'
-            ],
-            'team' => [
-                'slug' => 'team',
-                'name' => 'Team',
-                'key' => 'team_id'
-            ]
-        ];
+        // don't really need this since table for form entries is different from others
+        // (e.g records)
+        $fields = [];
 
         return $fields;
     }

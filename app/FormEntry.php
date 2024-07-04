@@ -86,9 +86,6 @@ class FormEntry extends Model
             $targetModelObject->availableFor($user);
         });
 
-        $table = $this->getTable();
-        $query->select("$table.*");
-
         return $query;
     }
 
