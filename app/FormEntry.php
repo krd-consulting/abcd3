@@ -25,6 +25,12 @@ class FormEntry extends Model
     	//'field_1' => 'array'
 	];
 
+    private $targetModel;
+
+    public function getTargetModelRelationship() {
+        return $this->belongsTo($this->targetModel, 'target_id', 'id');
+    }
+
     public function setCompletedAtAttribute($value)
 	{
 	    $this->attributes['completed_at'] = Carbon::parse($value)->toDateTimeString();
@@ -72,9 +78,15 @@ class FormEntry extends Model
         return $this->belongsTo('App\Team');
     }
 
-    public function scopeAvailableFor($query, $scope) {
-        // TODO which entries are available to a user actually?
-        $query = $query->whereIn('team_id', auth()->user()->teams->pluck('id'));
+    public function scopeAvailableFor($query, $user) {
+        $formTargetTypeModel = $this->form()->target_type->model;
+        $this->targetModel = (new $formTargetTypeModel())->getFormReferenceClass();
+        $targetModelTable = (new $formTargetTypeModel())->getFormReferenceTable();
+        $formTable = $this->getTable();
+
+        $query->joinRelation('getTargetModelRelationship as target_model', function ($targetModelObject) use ($user) {
+            $targetModelObject->availableFor($user);
+        });
 
         return $query;
     }

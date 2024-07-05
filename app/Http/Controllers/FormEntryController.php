@@ -15,6 +15,7 @@ use App\Team;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\RelationNotFoundException;
 
 class FormEntryController extends Controller
 {
@@ -26,6 +27,7 @@ class FormEntryController extends Controller
         $entry->castFieldsToArray($form->fields()->whereIn('type', ['checkbox', 'file'])->pluck('column_name'));
 
         $referencedFields = $form->fields()->whereNotNull('reference_target_type_id')->get();
+        $newFields = [];
 
         // TODO: what to do when a referenced value has been deleted?
         // join references
@@ -34,15 +36,22 @@ class FormEntryController extends Controller
           $object = new $referredModel;
           $referredTable = $object->getTable();
           $entry = $entry->select("$form->table_name.*");
-          $entry = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_type_id);
+          $newFields = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_type_id);
         }
 
-        $team = request('team');
         $perPage = request('perPage');
-        // TODO: only allow access if user has access to team supplied.
-        $entries = $entry->where("$form->table_name.team_id", $team)->paginate($perPage);
+        $entries = $entry->availableFor(auth()->user());
+
+        // Specify which fields to select to avoid joins replacing values for
+        // column names with same name
+        $entries->select($newFields);
+        $entries->addSelect("$form->table_name.*");
+        
+        $entries = $entries->paginate($perPage);
 
         $entries->load('target');
+        // Load record type to prevent duplicate n+1 queries
+        $this->loadRecordType($entries);
         $entries->load('team');
         $entries->load('creator');
         $form->load('fields.target_type');
@@ -56,6 +65,25 @@ class FormEntryController extends Controller
 
         return $entries;
   	}
+
+    private function loadRecordType($entries) {
+      // #hack
+      // could be done for other indirect relations
+      // but for now, record type (through a record target)
+      // is the only indirect relation we need.
+
+      $hasRecordType = true;
+      try {
+        $entries->load('target.record_type');
+      } catch(RelationNotFoundException $e) {
+        $hasRecordType = false;
+      }
+      if($hasRecordType) {
+        $entries->load('target.record_type');
+      } else {
+        $entries->load('target');
+      }
+    }
 
     public function teams(Form $form)
     {

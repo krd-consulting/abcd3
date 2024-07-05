@@ -24,21 +24,39 @@ class FormEntry extends JsonResource
     {
         $response = parent::toArray($request);
 
-        $target = $this->getTarget();
-
-        if(!empty($target)) {
-            $response['target'] = $target;
-        }
-
         $response['links'] = [
           'to' => ''
-        ];        
+        ];
+        
+        $target = $this->getTarget()->toArray($request);
+
+        $response['fields'] = $this->fields($target);
 
         if($this->formFields) {
             $response = $this->formatFormFieldValues($response);
         }
 
         return $response;
+    }
+
+    public function fields($target)
+    {
+        $fields = [
+          'target' => [
+            'value' => $target['name'],
+            'slug' => 'target',
+            'name' => 'Target',
+            'key' => 'target'
+          ],
+          'team' => [
+            'value' => $this->team->name,
+            'slug' => 'team',
+            'name' => 'Team',
+            'key' => 'team'
+          ]
+        ];
+
+        return $fields;
     }
 
     private function getTarget()
@@ -56,7 +74,7 @@ class FormEntry extends JsonResource
         foreach($this->formFields as $field) {
             $key = $field['slug'];
 
-            $item[$key] = [
+            $item['form_fields'][$key] = [
                 'raw_value' => $item[$key],
                 'value' => $item[$key]
             ];
@@ -67,14 +85,14 @@ class FormEntry extends JsonResource
             if(!$field['target_type'] || !isset($item[$key.'_reference_value'])) continue;
 
             if(isset($item[$key.'_reference_path'])) {
-                $item[$key]['path'] = $item[$key.'_reference_path'];
+                $item['form_fields'][$key]['path'] = $item[$key.'_reference_path'];
                 unset($item[$key.'_reference_path']);
             }
 
             // replace 'value' with referenced value if there is any
-            $item[$key]['value'] = $item[$key.'_reference_value'];
+            $item['form_fields'][$key]['value'] = $item[$key.'_reference_value'];
             unset($item[$key.'_reference_value']);
-            $item[$key]['secondary_value'] = $item[$key.'_reference_secondary_value'];
+            $item['form_fields'][$key]['secondary_value'] = $item[$key.'_reference_secondary_value'];
             unset($item[$key.'_reference_secondary_value']);
         }
 

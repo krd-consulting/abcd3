@@ -38,7 +38,8 @@ class FormEntries extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->addFormFieldReferences($this->collection)
+            'data' => $this->addFormFieldReferences($this->collection),
+            'form_fields' => $this->formFields()
         ];
     }
 
@@ -50,7 +51,7 @@ class FormEntries extends ResourceCollection
         ];
     }
 
-    public function fields()
+    public function formFields()
     {
         $fields = [];
 
@@ -70,9 +71,29 @@ class FormEntries extends ResourceCollection
         return $keyed->all();
     }
 
+    public function fields()
+    {
+        $fields = [
+            // commented out so that front end doesn't
+            // include this
+            // 'target' => [
+            //   'slug' => 'target',
+            //   'name' => 'About',
+            //   'key' => 'target'
+            // ],
+            'team' => [
+              'slug' => 'team',
+              'name' => 'Team',
+              'key' => 'team'
+            ]
+          ];
+
+        return $fields;
+    }
+
     private function addFormFieldReferences($collection) {
         foreach($collection as $item) {
-            $item->setFormFields($this->fields());
+            $item->setFormFields($this->formFields());
         }
 
         return $collection;

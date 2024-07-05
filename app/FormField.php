@@ -142,7 +142,7 @@ class FormField extends Model implements FormFieldReference
     }
 
     public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId) {
-        return $formEntryQueryBuilder;
+        return ["$formTable.$fieldColumn"];
     }
 
     public function getFormFieldReferenceValues($targetId, $keywords) {

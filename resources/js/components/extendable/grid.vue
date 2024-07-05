@@ -22,8 +22,8 @@
     <table class="tw-w-full">
       <thead>
         <tr class="tw-bg-indigo-darker">
+          <slot v-for="(field, index) in fields" :name="`${field.key}-th`" :field="field">
           <th
-            v-for="(field, index) in fields"
             :key="field.slug"
             :class="{'tw-rounded-tl-lg': index === 0, 'tw-rounded-tr-lg': index === fields.length - 1 && !hasAction}"
             @click="field.key === sortBy ? changeAscending(!ascending) : changeSortBy(field.key)"
@@ -35,10 +35,12 @@
               <i class="fas fa-sort-up" v-else></i>
             </span>
           </th>
+          </slot>
           <slot name="extra-columns-header"></slot>
           <th class="tw-rounded-tr-lg" v-if="hasAction"></th>
         </tr>
       </thead>
+      <slot name="table-body" :items="items">
       <tbody>
         <template v-for="item in items">
           <tr :key="item.id" class="tw-border-b tw-border-gray-lighter">
@@ -101,6 +103,7 @@
           </tr>
         </template>
       </tbody>
+      </slot>
     </table>
     <div v-if="total > 0 && perPage" class="tw-flex tw-justify-center tw-m-5">
       <slot name="pagination">

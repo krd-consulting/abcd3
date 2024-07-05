@@ -202,12 +202,18 @@ class Program extends Entity implements FormReference, FormFieldReference
     }
 
     public function attachFormFieldReference($formEntryQueryBuilder, $formTable, $fieldColumn, $targetId) {
-        return $formEntryQueryBuilder
+        $formEntryQueryBuilder
             ->leftJoin('programs', "programs.id", '=', "$formTable.$fieldColumn")
             ->leftJoin('teams', 'teams.id' , '=', 'programs.team_id')
             ->addSelect("programs.name as $fieldColumn".'_reference_value')
             ->addSelect("teams.name as $fieldColumn".'_reference_secondary_value')
             ->addSelect(DB::Raw("CONCAT('/programs/', programs.id) as $fieldColumn".'_reference_path'));
+    
+            return [
+                "programs.name as $fieldColumn".'_reference_value',
+                "teams.name as $fieldColumn".'_reference_secondary_value',
+                DB::Raw("CONCAT('/programs/', programs.id) as $fieldColumn".'_reference_path')
+            ];
     }
 
     public function getFormFieldReferenceValues($targetId, $keywords) {

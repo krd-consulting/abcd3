@@ -3,98 +3,78 @@
       <grid
         :title="`${form.name} Entries`"
         rowTitle="Entries"
-        :items="teams"
+        :items="entries"
         :fields="fields"
         :sortBy.sync="params.sortBy"
         :ascending.sync="params.ascending"
         :search-terms.sync="params.search"
-        @params-change="retrieveTeams();"
-        :has-pagination="false"
+        @params-change="retrieveEntries();"
+        :has-pagination="true"
         :has-edit="false"
-        :has-collapsible-rows="true"
-        @open-collapsible-row="retrieveEntries"
-        :total="totalTeams"
+        :has-add="true"
+        @add="$router.push(`${$route.params.form}/new`)"
+        :total="total"
       >
-        <template v-slot:extra-columns-header>
-          <th>Required</th>
-          <th>Frequency</th>
-          <th>History</th>
-        </template>
-
-        <template v-slot:extra-columns-data="{ item }">
-          <td>
-            <base-checkbox :checked="item.required_by_form == 1"></base-checkbox>
-          </td>
-          <td>
-            <base-select></base-select>
-          </td>
-          <td>
-            <span class="tw-font-semibold">{{item.entries_history.count}} entries</span>
-            <br>
-            <span>Last Entry: {{item.entries_history.last_entry_created_at}}</span>
-          </td>
-        </template>
-
-        <template v-slot:collapsible-row="{ item }">
-          <td class="tw-p-0 tw-border-b" colspan="100%">
-            <table class="tw-w-full">
-              <thead>
-                <tr class="tw-py-4 tw-bg-indigo-darker">
-                  <td>&nbsp;</td>
-                  <td colspan="2">
-                    <base-input
-                      placeholder="Search..."
-                      class="tw-ml-auto tw-w-56"
-                      suffix-icon="fas fa-search"
-                    ></base-input>
-                  </td>
-                  <td class="tw-text-right">
-                    <base-pagination
-                      class="pagination-white"
-                      :current-page="params.page"
-                      @current-change="handlePageChange($event); retrieveEntries(item.id)"
-                      :page-size="params.perPage"
-                      :total="total"
-                    >
-                    </base-pagination>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="tw-bg-indigo-lightest">&nbsp;</td>
-                  <th class="tw-text-lg tw-text-black tw-text-semibold tw-normal-case tw-border-r" v-for="entry in entries" :key="entry.id">
-                    <div>
-                      {{ entry.target.display_value }}
-                    </div>
-                    <div class="tw-text-sm tw-text-gray-dark">
-                      <span>Entered by {{ entry.creator.name }}</span>
-                      <br>
-                      <span>On {{ entry.created_at }}</span>
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr v-for="field in teamFields" :key="field.key">
-                  <td class="tw-bg-indigo-lightest tw-font-semibold">{{ field.name }}</td>
-                  <td class="tw-border-r" v-for="entry in entries" :key="entry.id">
-                    <!-- TODO: morph form entry fields -->
-                    <!-- case for file field -->
-                    <div v-if="field.type === 'file'">
-                      <a v-for="attachment in (entry[field.key].value)" :href="`/${attachment}`" target="_blank">
-                        {{ attachment.split('/')[1] }}
-                      </a>
-                    </div>
-                    <div v-else-if="!!entry[field.key].path">
-                      <a :href="entry[field.key].path" target="_blank">{{ entry[field.key].value }}</a>
-                    </div>
-                    <div v-else>
-                      {{ entry[field.key].value }}
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </td>
+      <template v-slot:entries-th="{ field }">
+        <th
+            :key="field.slug"
+            class="tw-rounded-tr-lg"
+            :colspan="entries.length"
+          >
+            <div class="tw-flex tw-justify-between tw-items-center">
+              <span>
+                {{ field.name }}
+              </span>
+              <base-pagination
+                  class="pagination-white"
+                  :current-page="params.page"
+                  @current-change="handlePageChange($event); retrieveEntries();"
+                  :page-size="params.perPage"
+                  :total="total"
+                ></base-pagination>
+            </div>
+        </th>
+      </template>
+      <template v-slot:table-body="{ items }">
+      <tbody>
+        <tr class="tw-border-b">
+            <td class="tw-bg-indigo-lightest">&nbsp;</td>
+            <td class="tw-text-lg tw-text-black tw-text-semibold tw-normal-case tw-border-r" v-for="entry in entries" :key="entry.id">
+              <div>
+                {{ entry.fields.target.value }}
+              </div>
+              <div class="tw-text-sm tw-text-gray-dark">
+                <span>Entered by {{ entry.creator.name }}</span>
+                <br>
+                <span>On {{ entry.created_at }}</span>
+              </div>
+            </td>
+          </tr>
+          <tr class="tw-border-b" v-for="field in formEntryFields" :key="field.key">
+            <td class="tw-bg-indigo-lightest tw-font-semibold">{{ field.name }}</td>
+            <td class="tw-border-r" v-for="entry in entries" :key="entry.id">
+              {{ entry.fields[field.key].value }}
+            </td>
+          </tr>
+          <tr class="tw-border-b" v-for="field in formFields" :key="field.key">
+            <td class="tw-bg-indigo-lightest tw-font-semibold">{{ field.name }}</td>
+            <td class="tw-border-r" v-for="entry in entries" :key="entry.id">
+              <!-- TODO: morph form entry fields -->
+              <!-- case for file field -->
+              <div v-if="field.type === 'file'">
+                <a v-for="attachment in (entry.form_fields[field.key].value)" :href="`/${attachment}`" target="_blank">
+                  {{ attachment.split('/')[1] }}
+                </a>
+              </div>
+              <div v-else-if="!!entry.form_fields[field.key].path">
+                <a :href="entry.form_fields[field.key].path" target="_blank">{{ entry.form_fields[field.key].value }}</a>
+              </div>
+              <div v-else>
+                {{ entry.form_fields[field.key].value }}
+              </div>
+            </td>
+          </tr>
+        </tbody>
         </template>
       </grid>
     </div>
@@ -136,21 +116,33 @@
                 form: [],
                 entries: [],
                 teams: [],
-                fields: [],
+                fields: [
+                  {
+                    slug: 'form_fields',
+                    key: 'form_fields',
+                    name: 'Form Fields'
+                  },
+                  {
+                    slug: 'entries',
+                    key: 'entries',
+                    name: 'Entries'
+                  }
+                ],
+                formEntryFields: [], // includes team field... just couldnt find a better name
+                formFields: [],
                 teamFields: [],
                 targetType: '',
                 request: new Request({}),
                 entriesRequest: new EntryRequest({}),
                 fieldRequest: new FieldRequest({}),
                 params: {
-                    ascending: true,
+                    ascending: false,
                     sortBy: 'id',
                     page: 1,
                     perPage: 3,
                     search: '',
                 },
-                total: 0,
-                totalTeams: 0
+                total: 0
             }
         },
 
@@ -161,6 +153,10 @@
 
             targetName() {
                 return targetTypes[this.targetType];
+            },
+
+            title() {
+              return `${this.form.name} Entries`;
             }
         },
 
@@ -171,19 +167,10 @@
                 });
             },
 
-            retrieveTeams() {
-              this.entriesRequest.teams(this.$route.params.form).then(response => {
-                    this.teams = response.data;
-                    this.fields = response.fields;
-                    this.totalTeams = this.teams.length;
-                });
-            },
-
-            retrieveEntries(team) {
+            retrieveEntries() {
                 this.entriesRequest.setFields({
                     params: {
-                      ...this.params,
-                      team: team
+                      ...this.params
                     }
                 });
 
@@ -191,7 +178,8 @@
                     this.entries = response.data;
                     this.total = response.meta.total;
                     this.targetType = response.target_type;
-                    this.teamFields = response.fields;
+                    this.formEntryFields = response.fields;
+                    this.formFields = response.form_fields;
                 });
             },
 
@@ -202,7 +190,7 @@
 
         created() {
             this.retrieve();
-            this.retrieveTeams();
+            this.retrieveEntries();
         }
     }
 </script>
