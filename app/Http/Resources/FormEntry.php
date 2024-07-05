@@ -52,7 +52,7 @@ class FormEntry extends JsonResource
             'value' => $this->team->name,
             'slug' => 'team',
             'name' => 'Team',
-            'key' => 'team_id'
+            'key' => 'team'
           ]
         ];
 

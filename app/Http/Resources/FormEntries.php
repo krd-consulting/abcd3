@@ -73,9 +73,20 @@ class FormEntries extends ResourceCollection
 
     public function fields()
     {
-        // don't really need this since table for form entries is different from others
-        // (e.g records)
-        $fields = [];
+        $fields = [
+            // commented out so that front end doesn't
+            // include this
+            // 'target' => [
+            //   'slug' => 'target',
+            //   'name' => 'About',
+            //   'key' => 'target'
+            // ],
+            'team' => [
+              'slug' => 'team',
+              'name' => 'Team',
+              'key' => 'team'
+            ]
+          ];
 
         return $fields;
     }

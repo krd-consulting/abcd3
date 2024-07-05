@@ -12,6 +12,7 @@
         :has-pagination="true"
         :has-edit="false"
         :has-add="true"
+        @add="$router.push(`${$route.params.form}/new`)"
         :total="total"
       >
       <template v-slot:entries-th="{ field }">
@@ -36,7 +37,7 @@
       </template>
       <template v-slot:table-body="{ items }">
       <tbody>
-        <tr>
+        <tr class="tw-border-b">
             <td class="tw-bg-indigo-lightest">&nbsp;</td>
             <td class="tw-text-lg tw-text-black tw-text-semibold tw-normal-case tw-border-r" v-for="entry in entries" :key="entry.id">
               <div>
@@ -49,7 +50,13 @@
               </div>
             </td>
           </tr>
-          <tr v-for="field in formFields" :key="field.key">
+          <tr class="tw-border-b" v-for="field in formEntryFields" :key="field.key">
+            <td class="tw-bg-indigo-lightest tw-font-semibold">{{ field.name }}</td>
+            <td class="tw-border-r" v-for="entry in entries" :key="entry.id">
+              {{ entry.fields[field.key].value }}
+            </td>
+          </tr>
+          <tr class="tw-border-b" v-for="field in formFields" :key="field.key">
             <td class="tw-bg-indigo-lightest tw-font-semibold">{{ field.name }}</td>
             <td class="tw-border-r" v-for="entry in entries" :key="entry.id">
               <!-- TODO: morph form entry fields -->
@@ -121,6 +128,7 @@
                     name: 'Entries'
                   }
                 ],
+                formEntryFields: [], // includes team field... just couldnt find a better name
                 formFields: [],
                 teamFields: [],
                 targetType: '',
@@ -170,6 +178,7 @@
                     this.entries = response.data;
                     this.total = response.meta.total;
                     this.targetType = response.target_type;
+                    this.formEntryFields = response.fields;
                     this.formFields = response.form_fields;
                 });
             },

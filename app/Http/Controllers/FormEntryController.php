@@ -15,6 +15,7 @@ use App\Team;
 use Barryvdh\Debugbar\Facade as Debugbar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\RelationNotFoundException;
 
 class FormEntryController extends Controller
 {
@@ -49,6 +50,8 @@ class FormEntryController extends Controller
         $entries = $entries->paginate($perPage);
 
         $entries->load('target');
+        // Load record type to prevent duplicate n+1 queries
+        $this->loadRecordType($entries);
         $entries->load('team');
         $entries->load('creator');
         $form->load('fields.target_type');
@@ -62,6 +65,25 @@ class FormEntryController extends Controller
 
         return $entries;
   	}
+
+    private function loadRecordType($entries) {
+      // #hack
+      // could be done for other indirect relations
+      // but for now, record type (through a record target)
+      // is the only indirect relation we need.
+
+      $hasRecordType = true;
+      try {
+        $entries->load('target.record_type');
+      } catch(RelationNotFoundException $e) {
+        $hasRecordType = false;
+      }
+      if($hasRecordType) {
+        $entries->load('target.record_type');
+      } else {
+        $entries->load('target');
+      }
+    }
 
     public function teams(Form $form)
     {
