@@ -150,6 +150,7 @@ class FormField extends Model implements FormFieldReference
         $formTable = $targetField->form->table_name;
         $entries = new FormEntry();
         $entries->setTable($formTable);
+
         $entries = $entries
             ->where($targetField->column_name, 'LIKE', '%' . $keywords . '%')
             ->addSelect("$formTable.$targetField->column_name as label")

@@ -191,15 +191,15 @@ class Record extends Entity
                 return $query;
 
             case 'team':
-                $teams = $user->teams;
+                $teams = $user->teams->pluck('id');
                 return $query->inTeams($teams);
 
             case 'program':
-                $programs = $user->programs;
+                $programs = $user->programs->pluck('id');
                 return $query->inPrograms($programs);
 
             case 'group':
-                $groups = $user->groups;
+                $groups = $user->groups->pluck('id');
                 return $query->inGroups($groups);
 
             case 'case load':
