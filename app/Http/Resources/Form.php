@@ -35,7 +35,9 @@ class Form extends JsonResource
             'target_type' => $this->target_type,
             'target_id' => $this->target_id,
             'target' => $this->target,
-            'entry_default_parent_entity' => $this->getEntryDefaultParentEntity(),
+            'entry_default_parent_entity' => $this->when($request->loadEntryDefaultParentEntity, function () use ($request) {
+                return $this->getEntryDefaultParentEntity($request->entryParentEntitySearch);
+            }),
             'target_name' => $this->target != null ? $this->target->name : $this->target_type->name,
             'field_layout' => $this->field_layout->all(),
             'path' => $this->path,
@@ -72,25 +74,35 @@ class Form extends JsonResource
         return $fields;
     }
 
-    protected function getEntryDefaultParentEntity() {
+    protected function getEntryDefaultParentEntity($keywords = '') {
         // TODO: scope classes?
         // each scope class has different behaviour
         // in the meantime...
         $entity = NULL;
         $options = [];
         $to = NULL;
+        $user = auth()->user();
+        $perPage = 10;
+        $pageName = 'entryParentEntityPage';
+
         switch($this->scope->name) {
             case config('auth.scopes.group.name'):
                 $entity = 'Group';
-                $values = url('/api/groups');
+                $values = Group::availableFor($user)
+                    ->search($keywords)
+                    ->paginate($perPage, ['*'], $pageName);
                 break;
             case config('auth.scopes.program.name'):
                 $entity = 'Program';
-                $values = url('/api/programs');
+                $values = Program::availableFor($user)
+                    ->search($keywords)
+                    ->paginate($perPage, ['*'], $pageName);
                 break;
             case config('auth.scopes.team.name'):
                 $entity = 'Team';
-                $values = url('/api/teams');
+                $values = Team::availableFor($user)
+                    ->search($keywords)
+                    ->paginate($perPage, ['*'], $pageName);
                 break;
             default:
                 $entity = NULL;
@@ -98,10 +110,7 @@ class Form extends JsonResource
 
         return [
             'name' => $entity,
-            // just give the links to the api???
-            'links' => [
-                'values' => $values
-            ]
+            'values' => $values
         ];
     }
 }
