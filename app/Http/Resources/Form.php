@@ -7,6 +7,7 @@ use App\Http\Resources\FormField;
 use App\Group;
 use App\Program;
 use App\Team;
+use App\Scope;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -35,8 +36,17 @@ class Form extends JsonResource
             'target_type' => $this->target_type,
             'target_id' => $this->target_id,
             'target' => $this->target,
-            'entry_default_parent_entity' => $this->when($request->loadEntryDefaultParentEntity, function () use ($request) {
+            // TODO
+            // 1. Generate list of entities (records and collections?) (based on scope)
+            // 2. Generate instances of entities (based on selected entity from #1)
+            // for getting instances --
+            // maybe something like: TeamScope::availableFormEntryParents($user, $form)
+            // or $scope->getAvailableParentsForFormEntry()
+            'default_parent_entity_for_entry' => $this->when($request->loadDefaultParentEntityForEntry, function () use ($request) {
                 return $this->getEntryDefaultParentEntity($request->entryParentEntitySearch);
+            }),
+            'possible_parent_entities_for_entry' => $this->when($request->loadDefaultParentEntityForEntry, function () use ($request) {
+                return $this->getPossibleParentEntitiesForEntry();
             }),
             'target_name' => $this->target != null ? $this->target->name : $this->target_type->name,
             'field_layout' => $this->field_layout->all(),
@@ -78,12 +88,14 @@ class Form extends JsonResource
         // TODO: scope classes?
         // each scope class has different behaviour
         // in the meantime...
+        // hard code a switch block for getting parent entity values
         $entity = NULL;
         $options = [];
         $to = NULL;
         $user = auth()->user();
         $perPage = 10;
         $pageName = 'entryParentEntityPage';
+        $values = [];
 
         switch($this->scope->name) {
             case config('auth.scopes.group.name'):
@@ -112,5 +124,25 @@ class Form extends JsonResource
             'name' => $entity,
             'values' => $values
         ];
+    }
+    
+    protected function getPossibleParentEntitiesForEntry() {
+        // what entity types can we choose from?
+        // it depends on the scope of the form
+        // if the form has universal scope, all entity types
+        // if the form has team scope: team, program, group, case load, self
+        // if the form has program scope: program, group, case load, self
+        // if the form has group scope: group, case load, self
+        // basically:
+        return Scope::where('value' , '<=', $this->scope->value)->get()->pluck('name');
+
+        // but for each entity type, they may differ in how they fetch entities.
+        // the scopes that are also collections have their own tables
+        // self just returns the user's records
+        // case load just fetches the cases table (more or less)
+        // $selectedScope -- given from request
+        // load object for $selectedScope: $scope
+        // $scope->getAvailableParentEntities($user)
+
     }
 }
