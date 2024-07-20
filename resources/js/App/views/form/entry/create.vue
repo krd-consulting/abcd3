@@ -50,9 +50,11 @@
           <div class="tw-text-gray-light tw-text-xs tw-font-bold tw-ml-4 tw-mt-3">Required</div>
         </div>
         <div class="tw-flex tw-mt-4">
-          <label class="tw-mr-4 tw-w-1/4 tw-text-right tw-mt-3">{{ form.entry_default_parent_entity.name }}</label>
-          <el-select v-model="entryData.team_id" placeholder=" " filterable remote :remote-method="(keywords) => retrieve($route.params.form, keywords)">
-            <el-option v-for="team in form.entry_default_parent_entity.values.data" :key="team.id" :label="team.name" :value="team.id"></el-option>
+          <el-select class="tw-mr-4 tw-w-1/4 tw-text-right" @change="retrieve($route.params.form, entryData.entity_type_id); entryData.parent_entity_id = null;" v-model="entryData.entity_type_id" placeholder="Select a collection to attach to">
+            <el-option v-for="entity in form.parent_entity_types" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
+          </el-select>
+          <el-select v-if="!!entryData.entity_type_id" v-model="entryData.parent_entity_id" placeholder=" " filterable remote :remote-method="(parentEntityKeywords) => retrieve($route.params.form, entryData.entity_type_id, parentEntityKeywords)">
+            <el-option v-for="entity in form.selected_parent_entity_type.values.data" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
           </el-select>
           <div class="tw-text-gray-light tw-text-xs tw-font-bold tw-ml-4 tw-mt-3">Required</div>
         </div>
@@ -251,7 +253,7 @@ export default {
       teamRequest: new TeamRequest(),
       team: "",
       form: {
-        entry_default_parent_entity: {
+        default_parent_entity_type: {
           name: null,
           values: []
         },
@@ -286,7 +288,9 @@ export default {
         search: ""
       },
       targetItems: [],
-      entryData: {},
+      entryData: {
+        entity_type_id: null
+      },
       value: "",
       inputName: "",
       dateCompleted: "",
@@ -457,25 +461,29 @@ export default {
       return getTeams;
     },
 
-    retrieve(form = this.$route.params.form, entryParentEntitySearchKeywords = '') {
+    retrieve(form = this.$route.params.form, entityTypeId = '', entryParentEntitySearchKeywords = '') {
       this.request.setFields({
         params: {
           entryParentEntitySearch: entryParentEntitySearchKeywords,
-          loadEntryDefaultParentEntity: 1
+          loadDefaultParentEntityType: 1,
+          loadParentEntityTypes: 1,
+          selectedParentEntityType: entityTypeId
         }
       });
       
       return this.request.show(form).then(response => {
         this.form = response.data;
-        console.log(this.form);
 
         // add default values to entry data
-        this.entryData = this.form.field_layout.reduce((entries, field) => {
+        this.entryData = {
+          ...this.entryData,
+          ...this.form.field_layout.reduce((entries, field) => {
             if(!field.settings.single || field.type === 'FileField')
               return (entries[field.column_name] = [], entries)
             
             return (entries[field.column_name] = "", entries)
           }, {})
+        }
         
         //
         this.fieldIds = this.form.form_fields.reduce((fields, field) => {
@@ -547,7 +555,9 @@ export default {
   },
 
   created() {
-    this.retrieve();
+    this.retrieve().then(() => {
+      this.entryData.entity_type_id = this.form.default_parent_entity_type.id;
+    });
     this.retrieveTeams();
     this.retrieveTargetTypes();
   }

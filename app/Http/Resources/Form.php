@@ -7,7 +7,8 @@ use App\Http\Resources\FormField;
 use App\Group;
 use App\Program;
 use App\Team;
-use App\Scope;
+use App\Collection as CollectionTable;
+use App\Scope\Scope;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -42,11 +43,15 @@ class Form extends JsonResource
             // for getting instances --
             // maybe something like: TeamScope::availableFormEntryParents($user, $form)
             // or $scope->getAvailableParentsForFormEntry()
-            'default_parent_entity_for_entry' => $this->when($request->loadDefaultParentEntityForEntry, function () use ($request) {
-                return $this->getEntryDefaultParentEntity($request->entryParentEntitySearch);
+            'default_parent_entity_type' => $this->when($request->loadParentEntityTypes, function () use ($request) {
+                return $this->getDefaultParentEntityType($request->parentEntitySearch);
             }),
-            'possible_parent_entities_for_entry' => $this->when($request->loadDefaultParentEntityForEntry, function () use ($request) {
-                return $this->getPossibleParentEntitiesForEntry();
+            // load the name and values for selected parent entity type in the request
+            'selected_parent_entity_type' => $this->when($request->loadParentEntityTypes, function () use ($request) {
+                return $this->getSelectedParentEntityType($request->selectedParentEntityType, $request->parentEntitySearch);
+            }),
+            'parent_entity_types' => $this->when($request->loadParentEntityTypes, function () use ($request) {
+                return $this->getParentEntityTypes();
             }),
             'target_name' => $this->target != null ? $this->target->name : $this->target_type->name,
             'field_layout' => $this->field_layout->all(),
@@ -84,65 +89,60 @@ class Form extends JsonResource
         return $fields;
     }
 
-    protected function getEntryDefaultParentEntity($keywords = '') {
-        // TODO: scope classes?
-        // each scope class has different behaviour
-        // in the meantime...
-        // hard code a switch block for getting parent entity values
+    protected function getDefaultParentEntityType($keywords = '') {
         $entity = NULL;
-        $options = [];
-        $to = NULL;
         $user = auth()->user();
         $perPage = 10;
-        $pageName = 'entryParentEntityPage';
+        $pageName = 'parentEntityTypePage';
         $values = [];
 
-        switch($this->scope->name) {
-            case config('auth.scopes.group.name'):
-                $entity = 'Group';
-                $values = Group::availableFor($user)
-                    ->search($keywords)
-                    ->paginate($perPage, ['*'], $pageName);
-                break;
-            case config('auth.scopes.program.name'):
-                $entity = 'Program';
-                $values = Program::availableFor($user)
-                    ->search($keywords)
-                    ->paginate($perPage, ['*'], $pageName);
-                break;
-            case config('auth.scopes.team.name'):
-                $entity = 'Team';
-                $values = Team::availableFor($user)
-                    ->search($keywords)
-                    ->paginate($perPage, ['*'], $pageName);
-                break;
-            default:
-                $entity = NULL;
+        $scope = new $this->scope->model_type;
+
+        if(!empty($entity = $scope->getCollectionTypeInstance())) {
+            $values = $entity->availableFor($user)
+                ->search($keywords)
+                ->paginate($perPage, ['*'], $pageName);
+        }
+
+        $collectionType = $scope->getCollectionType();
+
+        if(empty($collectionType)) {
+            return null;
         }
 
         return [
-            'name' => $entity,
+            'id' => $collectionType->id,
+            'name' => $collectionType->name,
             'values' => $values
         ];
     }
     
-    protected function getPossibleParentEntitiesForEntry() {
-        // what entity types can we choose from?
-        // it depends on the scope of the form
-        // if the form has universal scope, all entity types
-        // if the form has team scope: team, program, group, case load, self
-        // if the form has program scope: program, group, case load, self
-        // if the form has group scope: group, case load, self
-        // basically:
-        return Scope::where('value' , '<=', $this->scope->value)->get()->pluck('name');
+    protected function getParentEntityTypes() {
+        return Scope::getCollectionTypes($this->scope);
+    }
 
-        // but for each entity type, they may differ in how they fetch entities.
-        // the scopes that are also collections have their own tables
-        // self just returns the user's records
-        // case load just fetches the cases table (more or less)
-        // $selectedScope -- given from request
-        // load object for $selectedScope: $scope
-        // $scope->getAvailableParentEntities($user)
+    protected function getSelectedParentEntityType($entityType, $keywords = '') {
+        $collectionType = CollectionTable::find($entityType);
 
+        $entity = NULL;
+        $user = auth()->user();
+        $perPage = 10;
+        $pageName = 'parentEntityTypePage';
+        $values = [];
+
+        if(!empty($collectionType)) {
+            $entity = new $collectionType->model_type;
+            $values = $entity->availableFor($user)
+                ->search($keywords)
+                ->paginate($perPage, ['*'], $pageName);
+        } else {
+            return $this->getDefaultParentEntityType($keywords);
+        }
+
+        return [
+            'id' => $collectionType->id,
+            'name' => $collectionType->name,
+            'values' => $values
+        ];
     }
 }
