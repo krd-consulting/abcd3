@@ -50,12 +50,15 @@
           <div class="tw-text-gray-light tw-text-xs tw-font-bold tw-ml-4 tw-mt-3">Required</div>
         </div>
         <div class="tw-flex tw-mt-4">
-          <el-select class="tw-mr-4 tw-w-1/4 tw-text-right" @change="retrieve($route.params.form, entryData.entity_type_id); entryData.parent_entity_id = null;" v-model="entryData.entity_type_id" placeholder="Select a collection to attach to">
-            <el-option v-for="entity in form.parent_entity_types" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
-          </el-select>
-          <el-select v-if="!!entryData.entity_type_id" v-model="entryData.parent_entity_id" placeholder=" " filterable remote :remote-method="(parentEntityKeywords) => retrieve($route.params.form, entryData.entity_type_id, parentEntityKeywords)">
-            <el-option v-for="entity in form.selected_parent_entity_type.values.data" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
-          </el-select>
+          <label class="tw-mr-4 tw-w-1/4 tw-text-right tw-mt-3">Parent</label>
+          <div class="tw-full">
+            <el-select class="tw-text-right tw-full" @change="retrieve($route.params.form, entryData.entity_type_id); entryData.parent_entity_id = null;" v-model="entryData.entity_type_id" placeholder="Select a collection to attach to">
+              <el-option v-for="entity in form.parent_entity_types" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
+            </el-select>
+            <el-select :disabled="!entryData.entity_type_id" v-model="entryData.parent_entity_id" placeholder=" " filterable remote :remote-method="(parentEntityKeywords) => retrieve($route.params.form, entryData.entity_type_id, parentEntityKeywords)">
+              <el-option v-for="entity in form.selected_parent_entity_type.values?.data" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
+            </el-select>
+          </div>
           <div class="tw-text-gray-light tw-text-xs tw-font-bold tw-ml-4 tw-mt-3">Required</div>
         </div>
         <div class="tw-flex tw-mt-4">
