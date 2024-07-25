@@ -186,14 +186,16 @@ class Program extends Entity implements FormReference, FormFieldReference
         return $this->team()->associate($team);
     }
 
-    public function associateRecord(RecordType $recordType, Record $record)
+    public function associateRecord(Record $record)
     {
-      $programRecord = $this->getRecordPivotModel($recordType);
+        $recordType = $record->record_type;
 
-      $programRecord = new $programRecord();
-      $programRecord->createFrom($this, $record, true, null);
+        $programRecord = $this->getRecordPivotModel($recordType);
 
-      return $record;
+        $programRecord = new $programRecord();
+        $programRecord->createFrom($this, $record, true, null);
+
+        return $record;
     }
 
     private function getRecordPivotModel(RecordType $recordType)

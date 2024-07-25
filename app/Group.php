@@ -35,10 +35,11 @@ class Group extends Entity implements FormReference, FormFieldReference
 
     public function addRecord(Record $record)
     {
+        // TODO: remove assignGroup from Record
         $record->assignGroup($this);
     }
 
-    public function associateRecord(RecordType $recordType, Record $record)
+    public function associateRecord(Record $record)
     {
       $this->addRecord($record);
 

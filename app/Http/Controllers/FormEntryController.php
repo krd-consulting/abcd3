@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Attachment;
+use App\Collection as CollectionTable;
 use App\Form;
 use App\FormEntry;
 use App\Http\Requests\StoreFormEntry;
@@ -145,19 +146,22 @@ class FormEntryController extends Controller
   		  $entry->fill($request->validated());
   		  $entry->save();
 
-        // Add form to team specified in entry.
-        $form->teams()->syncWithoutDetaching([
-            $request->input('team_id') => [
-              'required' => false
-            ]
-        ]);
+        // TODO: Add form to collection specified (i.e. the parent entity) in entry.
+        $parentEntityType = CollectionTable::find($request->parent_entity_type_id);
+        $form->addParentEntity($parentEntityType, $request->parent_entity_id);
+        
+        // TODO: confirm with user if they want to do this
+        // perhaps do this on the front end level
+        
 
-        // Add target entity (if it is a record) to team.
-        $targetEntity = (new $form->target_type->model);
-        if($targetEntity instanceof RecordType) {
-          Record::find($request->input('target_id'))
-            ->teams()
-            ->attach($request->input('team_id'));
+        // Here, we're automatically adding a record to a collection (the parent entity of the form)
+        // other kinds of targets don't really have to be added to a collection
+        $targetEntityType = (new $form->target_type->model);
+        $scopeObject = new $form->scope->model_type;
+        $collectionTypeModel = $parentEntityType->model_type;
+        $collectionTypeObject = $collectionTypeModel::find($request->parent_entity_id);
+        if($targetEntityType instanceof RecordType) {
+          $collectionTypeObject->associateRecord(Record::find($request->input('target_id')));
         }
 
   		  return [

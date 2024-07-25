@@ -27,6 +27,9 @@ class Record extends Entity
         return $this->morphMany('App\Attachment', 'attachmentable');
     }
 
+    // TODO: This class (i.e. Records) doesn't have to know about Records being collected
+    // in collections
+
     public function assignTeam($teamId)
     {
         $this->teams()->syncWithoutDetaching($teamId);

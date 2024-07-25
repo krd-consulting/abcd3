@@ -83,8 +83,10 @@ class StoreFormEntry extends FormRequest
         $rules = [
             'target_id'
                 => 'required|exists:' . (new $form->target_type->model)->getFormReferenceTable() . ',id',
-            'team_id'
-                => 'exists:teams,id',
+            'parent_entity_type_id'
+                => 'required',    
+            'parent_entity_id'
+                => 'required',
             'completed_at' => 'required|date'
         ];
 

@@ -51,7 +51,7 @@ class Team extends Entity
         }
     }
 
-    public function associateRecord(RecordType $recordType, Record $record)
+    public function associateRecord(Record $record)
     {
       $this->records()->attach($record);
 

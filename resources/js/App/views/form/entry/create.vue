@@ -53,12 +53,12 @@
           <label class="tw-mr-4 tw-w-1/4 tw-text-right tw-mt-3">Attach entry to..</label>
           <div class="tw-flex tw-w-full">
             <div class="tw-flex-initial tw-mr-2">
-              <el-select class="tw-w-full" @change="retrieve($route.params.form, entryData.entity_type_id); entryData.parent_entity_id = null;" v-model="entryData.entity_type_id" placeholder="Select a collection">
+              <el-select class="tw-w-full" @change="retrieve($route.params.form, entryData.parent_entity_type_id); entryData.parent_entity_id = null;" v-model="entryData.parent_entity_type_id" placeholder="Select a collection">
                 <el-option v-for="entity in form.parent_entity_types" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
               </el-select>
             </div>
             <div class="tw-flex-auto">
-              <el-select class="tw-w-full" :disabled="!entryData.entity_type_id" v-model="entryData.parent_entity_id" placeholder=" " filterable remote :remote-method="(parentEntityKeywords) => retrieve($route.params.form, entryData.entity_type_id, parentEntityKeywords)">
+              <el-select class="tw-w-full" :disabled="!entryData.parent_entity_type_id" v-model="entryData.parent_entity_id" placeholder=" " filterable remote :remote-method="(parentEntityKeywords) => retrieve($route.params.form, entryData.parent_entity_type_id, parentEntityKeywords)">
                 <el-option v-for="entity in form.selected_parent_entity_type.values.data" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
               </el-select>
             </div>
@@ -296,7 +296,7 @@ export default {
       },
       targetItems: [],
       entryData: {
-        entity_type_id: null
+        parent_entity_type_id: null
       },
       value: "",
       inputName: "",
@@ -579,7 +579,7 @@ export default {
   created() {
     this.retrieve().then(() => {
       // select default parent entity type
-      this.entryData.entity_type_id = this.form.default_parent_entity_type.id;
+      this.entryData.parent_entity_type_id = this.form.default_parent_entity_type.id;
     });
     this.retrieveTeams();
     this.retrieveTargetTypes();
