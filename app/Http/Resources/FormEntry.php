@@ -48,11 +48,11 @@ class FormEntry extends JsonResource
             'name' => 'Target',
             'key' => 'target'
           ],
-          'team' => [
-            'value' => $this->team->name,
-            'slug' => 'team',
-            'name' => 'Team',
-            'key' => 'team'
+          'parent_entity' => [
+            'value' => $this->parent_entity_value,
+            'slug' => $this->parent_entity_type->slug,
+            'name' => $this->parent_entity_type->name,
+            'key' => 'parent_entity'
           ]
         ];
 

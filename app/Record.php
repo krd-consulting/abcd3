@@ -51,7 +51,7 @@ class Record extends Entity
 
         $this->teams()->syncWithoutDetaching($group->program->team->id);
 
-        $this->groups()->attach($group);
+        $this->groups()->syncWithoutDetaching($group);
     }
 
     public function assignCase(Record $case, Program $program)

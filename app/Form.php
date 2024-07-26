@@ -131,18 +131,18 @@ class Form extends Entity
                     $table->$columnType($columnName)->nullable();
 
                     // foreign keys
-                    if(!empty($field->target_type)) {
+                    // if(!empty($field->target_type)) {
 
-                        if($field->target_type->name != config('app.form_target_types.form_field.name')) {
-                            $class = $field->target_type->model;
-                            $model = new $class;
+                    //     if($field->target_type->name != config('app.form_target_types.form_field.name')) {
+                    //         $class = $field->target_type->model;
+                    //         $model = new $class;
 
-                            $table
-                                ->foreign($columnName)
-                                ->references($model->getFormReferenceField())
-                                ->on($model->getFormReferenceTable());
-                        }
-                    }
+                    //         $table
+                    //             ->foreign($columnName)
+                    //             ->references($model->getFormReferenceField())
+                    //             ->on($model->getFormReferenceTable());
+                    //     }
+                    // }
                 }
 
                 $table->bigInteger('parent_entity_id')->unsigned();
@@ -167,6 +167,13 @@ class Form extends Entity
 
     public function addParentEntity(Collection $entityType, $entityId) {
         $relationship = $this->belongsToMany('App\Form', 'model_has_forms', 'form_id', 'form_id')->withTimestamps();
+
+        $count = $relationship->where('id', $this->id)
+        ->where('model_type', $entityType->model_type)
+        ->where('model_id', $entityId)->count();
+
+        if($count > 0)
+            return;
 
         $relationship->attach($this->id, [
             'model_type' => $entityType->model_type,

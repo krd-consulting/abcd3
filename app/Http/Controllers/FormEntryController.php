@@ -40,22 +40,53 @@ class FormEntryController extends Controller
           $newFields = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_type_id);
         }
 
-        $perPage = request('perPage');
         $entries = $entry->availableFor(auth()->user());
+
+        $entries->select($newFields);
+        $entries->addSelect("$form->table_name.*");
+
+        // load parent entity value for each entry
+        $collections = CollectionTable::all();
+        foreach($collections as $collection) {
+          // TODO: format parent entity api value
+          // add raw value, path, and secondary value
+          // try to imitate how we do it for fields with referenced values
+          $collectionModel = new $collection->model_type;
+          $collectionTable = $collectionModel->getTable();
+          $entries = $entries->leftJoin($collectionTable, function($join) use ($entries, $form, $collection, $collectionTable) {
+            $entriesTable = $form->table_name;
+            $join->on("$entriesTable.parent_entity_id", '=', "$collectionTable.id")
+              ->where("$entriesTable.parent_entity_type_id", '=', $collection->id);
+          });
+        }
 
         // Specify which fields to select to avoid joins replacing values for
         // column names with same name
-        $entries->select($newFields);
-        $entries->addSelect("$form->table_name.*");
         
+
+        // TODO: Hack to select parent_entity_value
+        $entityValueColumns = [];
+        foreach($collections as $collection) {
+          $collectionModel = new $collection->model_type;
+          $entityValueColumns[] = "COALESCE(`{$collectionModel->getTable()}`.`name`, '')";
+        }
+        $entityValueColumns = implode(', ', $entityValueColumns);
+        $entries->addSelect(DB::raw("CONCAT($entityValueColumns) as parent_entity_value"));
+
+        $ascending = request('ascending');
+        $sortBy = request('sortBy');
+        $entries->sort($sortBy, $ascending);
+        
+        $perPage = request('perPage');
         $entries = $entries->paginate($perPage);
 
         $entries->load('target');
         // Load record type to prevent duplicate n+1 queries
         $this->loadRecordType($entries);
-        $entries->load('team');
+        $entries->load('parent_entity_type');
         $entries->load('creator');
         $form->load('fields.target_type');
+
 
         $entries = (new FormEntries(
           $entries, 

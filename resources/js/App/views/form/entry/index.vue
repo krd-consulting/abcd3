@@ -137,7 +137,7 @@
                 fieldRequest: new FieldRequest({}),
                 params: {
                     ascending: false,
-                    sortBy: 'id',
+                    sortBy: 'created_at',
                     page: 1,
                     perPage: 3,
                     search: '',
