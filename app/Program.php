@@ -4,17 +4,20 @@ namespace App;
 
 use App\Contracts\FormReference;
 use App\Contracts\FormFieldReference;
+use App\Contracts\FormEntryParentEntity;
+use App\Collection as CollectionTable;
 use App\Entity;
 use App\Record;
 use App\RecordIdentity;
 use App\RecordType;
 use App\Traits\Models\FormReference as FormReferenceTrait;
+use App\Traits\Models\FormEntryParentEntity as FormEntryParentEntityTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
-class Program extends Entity implements FormReference, FormFieldReference
+class Program extends Entity implements FormReference, FormFieldReference, FormEntryParentEntity
 {
-    use FormReferenceTrait;
+    use FormReferenceTrait, FormEntryParentEntityTrait;
 
     private $recordType;
 
@@ -223,5 +226,9 @@ class Program extends Entity implements FormReference, FormFieldReference
             ->search($keywords)
             ->addSelect('programs.name as label')
             ->addSelect('programs.id as value');
+    }
+
+    public function getTypeAsParentEntity() {
+        return CollectionTable::where('name', 'Program')->first();
     }
 }

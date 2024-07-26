@@ -49,7 +49,9 @@ class FormEntry extends JsonResource
             'key' => 'target'
           ],
           'parent_entity' => [
+            'raw_value' => $this->parent_entity_raw_value,
             'value' => $this->parent_entity_value,
+            'path' => $this->parent_entity_path,
             'slug' => $this->parent_entity_type->slug,
             'name' => $this->parent_entity_type->name,
             'key' => 'parent_entity'

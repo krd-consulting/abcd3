@@ -53,7 +53,12 @@
           <tr class="tw-border-b" v-for="field in formEntryFields" :key="field.key">
             <td class="tw-bg-indigo-lightest tw-font-semibold">{{ field.name }}</td>
             <td class="tw-border-r" v-for="entry in entries" :key="entry.id">
-              {{ entry.fields[field.key].value }}
+              <div v-if="!!entry.fields[field.key].path">
+                <a :href="entry.fields[field.key].path" target="_blank">{{ entry.fields[field.key].value }}</a>
+              </div>
+              <div v-else>
+                {{ entry.fields[field.key].value }}
+              </div>
             </td>
           </tr>
           <tr class="tw-border-b" v-for="field in formFields" :key="field.key">

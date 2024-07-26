@@ -46,32 +46,27 @@ class FormEntryController extends Controller
         $entries->addSelect("$form->table_name.*");
 
         // load parent entity value for each entry
-        $collections = CollectionTable::all();
-        foreach($collections as $collection) {
+        $collectionTypes = CollectionTable::all();
+        foreach($collectionTypes as $parentEntityType) {
           // TODO: format parent entity api value
           // add raw value, path, and secondary value
           // try to imitate how we do it for fields with referenced values
-          $collectionModel = new $collection->model_type;
-          $collectionTable = $collectionModel->getTable();
-          $entries = $entries->leftJoin($collectionTable, function($join) use ($entries, $form, $collection, $collectionTable) {
-            $entriesTable = $form->table_name;
-            $join->on("$entriesTable.parent_entity_id", '=', "$collectionTable.id")
-              ->where("$entriesTable.parent_entity_type_id", '=', $collection->id);
-          });
+          $parentEntityTypeModel = new $parentEntityType->model_type;
+          $parentEntityTypeModel->attachParentEntity($entries);
         }
 
-        // Specify which fields to select to avoid joins replacing values for
-        // column names with same name
-        
+        // include parent entity type columns
+        $entries->leftJoin('collections',
+          function($join) use ($entries) {
+            $entriesTable = $entries->getModel()->getTable();
 
-        // TODO: Hack to select parent_entity_value
-        $entityValueColumns = [];
-        foreach($collections as $collection) {
-          $collectionModel = new $collection->model_type;
-          $entityValueColumns[] = "COALESCE(`{$collectionModel->getTable()}`.`name`, '')";
-        }
-        $entityValueColumns = implode(', ', $entityValueColumns);
-        $entries->addSelect(DB::raw("CONCAT($entityValueColumns) as parent_entity_value"));
+            $join->on("$entriesTable.parent_entity_type_id", '=', "collections.id");
+        });
+        $this->selectParentEntityColumn($entries, 'id', 'raw_value');
+        $this->selectParentEntityColumn($entries, 'id', 'path', function($columns) use ($form) {
+          return "CONCAT('/', collections.slug, '/', $columns)";
+        });
+        $this->selectParentEntityColumn($entries, 'name');
 
         $ascending = request('ascending');
         $sortBy = request('sortBy');
@@ -97,6 +92,31 @@ class FormEntryController extends Controller
 
         return $entries;
   	}
+
+    private function selectParentEntityColumn(
+      $entries,
+      $parentEntityColumn,
+      $toColumn = 'value',
+      $concatFunction = NULL) {
+      // sort of a #hack to get the parent entity value
+      // we're joining all collections tables to the entries query
+      // and for every entry we know that only one of those tables will have a
+      // non-null value, we just concatenate that value with all other null values
+      // and we can get the value itself in one column
+      $collectionTypes = CollectionTable::all();
+      $columns = [];
+      foreach($collectionTypes as $collection) {
+        $collectionModel = new $collection->model_type;
+        $columns[] = "COALESCE(`{$collectionModel->getTable()}`.`$parentEntityColumn`, '')";
+      }
+      $columns = implode(', ', $columns);
+      if(is_null($concatFunction)) {
+        $concat = "CONCAT($columns)";
+      } else {
+        $concat = $concatFunction($columns);
+      }
+      $entries->addSelect(DB::raw("$concat as parent_entity_$toColumn"));
+    }
 
     private function loadRecordType($entries) {
       // #hack
