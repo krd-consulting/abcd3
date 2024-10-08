@@ -103,37 +103,37 @@ return [
         'self' => [
             'name' => 'self',
             'value' => '1',
-            'model_type' => 'App/Scope/SelfScope'
+            'model_type' => 'App\\Scope\\SelfScope'
         ],
 
         'case-load' => [
             'name' => 'case load',
             'value' => '2',
-            'model_type' => 'App/Scope/Caseload'
+            'model_type' => 'App\\Scope\\Caseload'
         ],
 
         'group' => [
             'name' => 'group',
             'value' => '3',
-            'model_type' => 'App/Scope/Group'
+            'model_type' => 'App\\Scope\\Group'
         ],
 
         'program' => [
             'name' => 'program',
             'value' => '4',
-            'model_type' => 'App/Scope/Program'
+            'model_type' => 'App\\Scope\\Program'
         ],
 
         'team' => [
             'name' => 'team',
             'value' => '5',
-            'model_type' => 'App/Scope/Team'
+            'model_type' => 'App\\Scope\\Team'
         ],
 
         'universal' => [
             'name' => 'universal',
             'value' => '6',
-            'model_type' => 'App/Scope/Universal'
+            'model_type' => 'App\\Scope\\Universal'
         ],
     ],
 
