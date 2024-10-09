@@ -37,7 +37,7 @@ class FormEntryController extends Controller
           $object = new $referredModel;
           $referredTable = $object->getTable();
           $entry = $entry->select("$form->table_name.*");
-          $newFields = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_type_id);
+          $newFields = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_id);
         }
 
         $entries = $entry->availableFor(auth()->user());
@@ -107,7 +107,8 @@ class FormEntryController extends Controller
       $columns = [];
       foreach($collectionTypes as $collection) {
         $collectionModel = new $collection->model_type;
-        $columns[] = "COALESCE(`{$collectionModel->getTable()}`.`$parentEntityColumn`, '')";
+        // using the alias from FormEntryParentEntity::attachParentEntity
+        $columns[] = "COALESCE(`{$collectionModel->getTable()}_as_parent_entity_table`.`$parentEntityColumn`, '')";
       }
       $columns = implode(', ', $columns);
       if(is_null($concatFunction)) {
