@@ -52,7 +52,7 @@ class RecordCollectionController extends Controller
       $this->authorize('write', $record);
       $this->authorize('write', $model);
 
-      return $model->associateRecord($recordType, $record);
+      return $model->associateRecord($record);
     }
 
     public function available(

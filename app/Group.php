@@ -4,19 +4,22 @@ namespace App;
 
 use App\Contracts\FormReference;
 use App\Contracts\FormFieldReference;
+use App\Contracts\FormEntryParentEntity;
+use App\Collection as CollectionTable;
 use App\Model;
 use App\Record;
 use App\RecordType;
 use App\Traits\Models\FormReference as FormReferenceTrait;
+use App\Traits\Models\FormEntryParentEntity as FormEntryParentEntityTrait;
 use App\Traits\Models\Search;
 use App\Traits\Models\Sort;
 use App\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 
-class Group extends Entity implements FormReference, FormFieldReference
+class Group extends Entity implements FormReference, FormFieldReference, FormEntryParentEntity
 {
-    use FormReferenceTrait;
+    use FormReferenceTrait, FormEntryParentEntityTrait;
 
     protected $appends = ['path'];
 
@@ -35,10 +38,11 @@ class Group extends Entity implements FormReference, FormFieldReference
 
     public function addRecord(Record $record)
     {
+        // TODO: remove assignGroup from Record
         $record->assignGroup($this);
     }
 
-    public function associateRecord(RecordType $recordType, Record $record)
+    public function associateRecord(Record $record)
     {
       $this->addRecord($record);
 
@@ -111,5 +115,9 @@ class Group extends Entity implements FormReference, FormFieldReference
             ->search($keywords)
             ->addSelect('groups.name as label')
             ->addSelect('groups.id as value');
+    }
+
+    public function getTypeAsParentEntity() {
+        return CollectionTable::where('name', 'Group')->first();
     }
 }

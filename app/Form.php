@@ -3,7 +3,7 @@
 namespace App;
 
 use App\Entity;
-
+use App\Collection;
 use App\Scope;
 
 use Illuminate\Support\Facades\DB;
@@ -51,21 +51,10 @@ class Form extends Entity
             // assign owner to form depending on scope
             if(!empty($request->owner_id)) {
 
-                $value = Scope::find($request->scope_id)->value;
-
-                // TODO: change cases to be more flexible (i.e. 'case group:'')
-                switch($value) {
-                    case 3: // Add to Group
-                        $this->addToGroups([$request->owner_id]);
-                        break;
-                    case 4: // Add to Program
-                        $this->addToPrograms([$request->owner_id]);
-                        break;
-                    case 5: // Add to Team
-                        $this->addToTeams([$request->owner_id]);
-                        break;
-                }
-
+                $scope = Scope::find($request->scope_id);
+                $model = new $scope->model_type;
+                $collectionType = (new $model)->getCollectionType();
+                $this->addParentEntity($collectionType, $request->owner_id);
             }
 
             if(empty($request->validated()['fields']))
@@ -142,21 +131,22 @@ class Form extends Entity
                     $table->$columnType($columnName)->nullable();
 
                     // foreign keys
-                    if(!empty($field->target_type)) {
+                    // if(!empty($field->target_type)) {
 
-                        if($field->target_type->name != config('app.form_target_types.form_field.name')) {
-                            $class = $field->target_type->model;
-                            $model = new $class;
+                    //     if($field->target_type->name != config('app.form_target_types.form_field.name')) {
+                    //         $class = $field->target_type->model;
+                    //         $model = new $class;
 
-                            $table
-                                ->foreign($columnName)
-                                ->references($model->getFormReferenceField())
-                                ->on($model->getFormReferenceTable());
-                        }
-                    }
+                    //         $table
+                    //             ->foreign($columnName)
+                    //             ->references($model->getFormReferenceField())
+                    //             ->on($model->getFormReferenceTable());
+                    //     }
+                    // }
                 }
 
-                $table->bigInteger('team_id')->unsigned();
+                $table->bigInteger('parent_entity_id')->unsigned();
+                $table->bigInteger('parent_entity_type_id')->unsigned();
                 $table->timestamp('completed_at')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
@@ -170,9 +160,26 @@ class Form extends Entity
                     ->references($model->getFormReferenceField())
                     ->on($model->getFormReferenceTable());
 
-                $table->foreign('team_id')->references('id')->on('teams');
+                $table->foreign('parent_entity_type_id')->references('id')->on('collections');
             });
         });
+    }
+
+    public function addParentEntity(Collection $entityType, $entityId) {
+        $relationship = $this->belongsToMany('App\Form', 'model_has_forms', 'form_id', 'form_id')->withTimestamps();
+
+        $count = $relationship->where('id', $this->id)
+        ->where('model_type', $entityType->model_type)
+        ->where('model_id', $entityId)->count();
+
+        if($count > 0)
+            return;
+
+        $relationship->attach($this->id, [
+            'model_type' => $entityType->model_type,
+            'model_id' => $entityId,
+            'required' => false
+        ]);
     }
 
     protected function generateFieldColumnName($fieldNumber)

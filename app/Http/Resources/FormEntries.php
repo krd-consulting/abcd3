@@ -81,10 +81,9 @@ class FormEntries extends ResourceCollection
             //   'name' => 'About',
             //   'key' => 'target'
             // ],
-            'team' => [
-              'slug' => 'team',
-              'name' => 'Team',
-              'key' => 'team'
+            'parent_entity' => [
+              'name' => 'Attached to...',
+              'key' => 'parent_entity'
             ]
           ];
 

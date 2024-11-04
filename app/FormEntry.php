@@ -26,7 +26,7 @@ class FormEntry extends Model
 	];
 
     private $targetModel;
-
+    
     public function getTargetModelRelationship() {
         return $this->belongsTo($this->targetModel, 'target_id', 'id');
     }
@@ -73,9 +73,9 @@ class FormEntry extends Model
 		    return $this->belongsTo($targetModel);
     }
 
-    public function team()
+    public function parent_entity_type()
     {
-        return $this->belongsTo('App\Team');
+        return $this->belongsTo('App\Collection');
     }
 
     public function scopeAvailableFor($query, $user) {

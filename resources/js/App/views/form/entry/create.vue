@@ -50,10 +50,19 @@
           <div class="tw-text-gray-light tw-text-xs tw-font-bold tw-ml-4 tw-mt-3">Required</div>
         </div>
         <div class="tw-flex tw-mt-4">
-          <label class="tw-mr-4 tw-w-1/4 tw-text-right tw-mt-3">Team</label>
-          <el-select v-model="entryData.team_id" placeholder=" " remote :remote-method="retrieveTeams">
-            <el-option v-for="team in teams" :key="team.id" :label="team.name" :value="team.id"></el-option>
-          </el-select>
+          <label class="tw-mr-4 tw-w-1/4 tw-text-right tw-mt-3">Attach entry to..</label>
+          <div class="tw-flex tw-w-full">
+            <div class="tw-flex-initial tw-mr-2">
+              <el-select class="tw-w-full" @change="retrieve($route.params.form, entryData.parent_entity_type_id); entryData.parent_entity_id = null;" v-model="entryData.parent_entity_type_id" placeholder="Select a collection">
+                <el-option v-for="entity in form.parent_entity_types" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
+              </el-select>
+            </div>
+            <div class="tw-flex-auto">
+              <el-select class="tw-w-full" :disabled="!entryData.parent_entity_type_id" v-model="entryData.parent_entity_id" placeholder=" " filterable remote :remote-method="(parentEntityKeywords) => retrieve($route.params.form, entryData.parent_entity_type_id, parentEntityKeywords)">
+                <el-option v-for="entity in form.selected_parent_entity_type.values.data" :key="entity.id" :label="entity.name" :value="entity.id"></el-option>
+              </el-select>
+            </div>
+          </div>
           <div class="tw-text-gray-light tw-text-xs tw-font-bold tw-ml-4 tw-mt-3">Required</div>
         </div>
         <div class="tw-flex tw-mt-4">
@@ -229,17 +238,11 @@ import SectionDivider from "@/components/formFields/sectionDivider.vue";
 import Request from "@/api/FormRequest";
 import EntryRequest from "@/api/FormEntryRequest";
 import TeamRequest from "@/api/TeamRequest";
-import RecordRequest from "@/api/RecordRequest";
 import RecordPrimaryData from "@/App/components/record/primaryData";
 import FormFieldTargetTypesRequest from "@/api/FormFieldTargetTypeRequest";
-import FormFieldRequest from "@/api/FormFieldRequest";
-import GroupRequest from "@/api/GroupRequest";
-import ProgramRequest from "@/api/ProgramRequest";
 
 import { targetTypes } from "@/helpers";
 import pluralize from "pluralize";
-import fp from "lodash/fp";
-import _ from "lodash";
 
 export default {
   data() {
@@ -251,12 +254,22 @@ export default {
       teamRequest: new TeamRequest(),
       team: "",
       form: {
+        default_parent_entity_type: {
+          id: null,
+          name: null,
+          values: []
+        },
         target_type: {
           name: null
         },
         target: {
           name: null
         },
+        selected_parent_entity_type: {
+          values: {
+            data: []
+          }
+        }
       },
       teamRequestParams: {
         ascending: true,
@@ -282,7 +295,9 @@ export default {
         search: ""
       },
       targetItems: [],
-      entryData: {},
+      entryData: {
+        parent_entity_type_id: null
+      },
       value: "",
       inputName: "",
       dateCompleted: "",
@@ -438,6 +453,7 @@ export default {
 
     retrieveTeams(keywords) {
       this.teamRequestParams.search = keywords;
+      this.teamRequestParams.loadEntry = keywords;
 
       this.teamRequest.setFields({
         params: { ...this.teamRequestParams }
@@ -452,18 +468,44 @@ export default {
       return getTeams;
     },
 
-    retrieve(form = this.$route.params.form) {
+    retrieve(form = this.$route.params.form, entityTypeId = '', entryParentEntitySearchKeywords = '') {
+      this.request.setFields({
+        params: {
+          entryParentEntitySearch: entryParentEntitySearchKeywords,
+          loadDefaultParentEntityType: 1,
+          loadParentEntityTypes: 1,
+          selectedParentEntityType: entityTypeId
+        }
+      });
+      
       return this.request.show(form).then(response => {
         this.form = response.data;
-        console.log(this.form);
+
+        // just suppresses some errors
+        if(!this.form.selected_parent_entity_type) {
+          this.form.default_parent_entity_type = {
+            id: null,
+            name: null,
+            values: []
+          };
+
+          this.form.selected_parent_entity_type = {
+            values: {
+              data: []
+            }
+          }
+        }
 
         // add default values to entry data
-        this.entryData = this.form.field_layout.reduce((entries, field) => {
+        this.entryData = {
+          ...this.entryData,
+          ...this.form.field_layout.reduce((entries, field) => {
             if(!field.settings.single || field.type === 'FileField')
               return (entries[field.column_name] = [], entries)
             
             return (entries[field.column_name] = "", entries)
           }, {})
+        }
         
         //
         this.fieldIds = this.form.form_fields.reduce((fields, field) => {
@@ -535,7 +577,10 @@ export default {
   },
 
   created() {
-    this.retrieve();
+    this.retrieve().then(() => {
+      // select default parent entity type
+      this.entryData.parent_entity_type_id = this.form.default_parent_entity_type.id;
+    });
     this.retrieveTeams();
     this.retrieveTargetTypes();
   }

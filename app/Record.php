@@ -27,6 +27,9 @@ class Record extends Entity
         return $this->morphMany('App\Attachment', 'attachmentable');
     }
 
+    // TODO: This class (i.e. Records) doesn't have to know about Records being collected
+    // in collections
+
     public function assignTeam($teamId)
     {
         $this->teams()->syncWithoutDetaching($teamId);
@@ -48,7 +51,7 @@ class Record extends Entity
 
         $this->teams()->syncWithoutDetaching($group->program->team->id);
 
-        $this->groups()->attach($group);
+        $this->groups()->syncWithoutDetaching($group);
     }
 
     public function assignCase(Record $case, Program $program)

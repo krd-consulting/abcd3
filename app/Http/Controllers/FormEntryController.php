@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Attachment;
+use App\Collection as CollectionTable;
 use App\Form;
 use App\FormEntry;
 use App\Http\Requests\StoreFormEntry;
@@ -36,25 +37,51 @@ class FormEntryController extends Controller
           $object = new $referredModel;
           $referredTable = $object->getTable();
           $entry = $entry->select("$form->table_name.*");
-          $newFields = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_type_id);
+          $newFields = $object->attachFormFieldReference($entry, $form->table_name, $field->column_name, $field->reference_target_id);
         }
 
-        $perPage = request('perPage');
         $entries = $entry->availableFor(auth()->user());
 
-        // Specify which fields to select to avoid joins replacing values for
-        // column names with same name
         $entries->select($newFields);
         $entries->addSelect("$form->table_name.*");
+
+        // load parent entity value for each entry
+        $collectionTypes = CollectionTable::all();
+        foreach($collectionTypes as $parentEntityType) {
+          // TODO: format parent entity api value
+          // add raw value, path, and secondary value
+          // try to imitate how we do it for fields with referenced values
+          $parentEntityTypeModel = new $parentEntityType->model_type;
+          $parentEntityTypeModel->attachParentEntity($entries);
+        }
+
+        // include parent entity type columns
+        $entries->leftJoin('collections',
+          function($join) use ($entries) {
+            $entriesTable = $entries->getModel()->getTable();
+
+            $join->on("$entriesTable.parent_entity_type_id", '=', "collections.id");
+        });
+        $this->selectParentEntityColumn($entries, 'id', 'raw_value');
+        $this->selectParentEntityColumn($entries, 'id', 'path', function($columns) use ($form) {
+          return "CONCAT('/', collections.slug, '/', $columns)";
+        });
+        $this->selectParentEntityColumn($entries, 'name');
+
+        $ascending = request('ascending');
+        $sortBy = request('sortBy');
+        $entries->sort($sortBy, $ascending);
         
+        $perPage = request('perPage');
         $entries = $entries->paginate($perPage);
 
         $entries->load('target');
         // Load record type to prevent duplicate n+1 queries
         $this->loadRecordType($entries);
-        $entries->load('team');
+        $entries->load('parent_entity_type');
         $entries->load('creator');
         $form->load('fields.target_type');
+
 
         $entries = (new FormEntries(
           $entries, 
@@ -65,6 +92,32 @@ class FormEntryController extends Controller
 
         return $entries;
   	}
+
+    private function selectParentEntityColumn(
+      $entries,
+      $parentEntityColumn,
+      $toColumn = 'value',
+      $concatFunction = NULL) {
+      // sort of a #hack to get the parent entity value
+      // we're joining all collections tables to the entries query
+      // and for every entry we know that only one of those tables will have a
+      // non-null value, we just concatenate that value with all other null values
+      // and we can get the value itself in one column
+      $collectionTypes = CollectionTable::all();
+      $columns = [];
+      foreach($collectionTypes as $collection) {
+        $collectionModel = new $collection->model_type;
+        // using the alias from FormEntryParentEntity::attachParentEntity
+        $columns[] = "COALESCE(`{$collectionModel->getTable()}_as_parent_entity_table`.`$parentEntityColumn`, '')";
+      }
+      $columns = implode(', ', $columns);
+      if(is_null($concatFunction)) {
+        $concat = "CONCAT($columns)";
+      } else {
+        $concat = $concatFunction($columns);
+      }
+      $entries->addSelect(DB::raw("$concat as parent_entity_$toColumn"));
+    }
 
     private function loadRecordType($entries) {
       // #hack
@@ -145,19 +198,22 @@ class FormEntryController extends Controller
   		  $entry->fill($request->validated());
   		  $entry->save();
 
-        // Add form to team specified in entry.
-        $form->teams()->syncWithoutDetaching([
-            $request->input('team_id') => [
-              'required' => false
-            ]
-        ]);
+        // TODO: Add form to collection specified (i.e. the parent entity) in entry.
+        $parentEntityType = CollectionTable::find($request->parent_entity_type_id);
+        $form->addParentEntity($parentEntityType, $request->parent_entity_id);
+        
+        // TODO: confirm with user if they want to do this
+        // perhaps do this on the front end level
+        
 
-        // Add target entity (if it is a record) to team.
-        $targetEntity = (new $form->target_type->model);
-        if($targetEntity instanceof RecordType) {
-          Record::find($request->input('target_id'))
-            ->teams()
-            ->attach($request->input('team_id'));
+        // Here, we're automatically adding a record to a collection (the parent entity of the form)
+        // other kinds of targets don't really have to be added to a collection
+        $targetEntityType = (new $form->target_type->model);
+        $scopeObject = new $form->scope->model_type;
+        $collectionTypeModel = $parentEntityType->model_type;
+        $collectionTypeObject = $collectionTypeModel::find($request->parent_entity_id);
+        if($targetEntityType instanceof RecordType) {
+          $collectionTypeObject->associateRecord(Record::find($request->input('target_id')));
         }
 
   		  return [
